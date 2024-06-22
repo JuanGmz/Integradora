@@ -48,27 +48,68 @@
         </div>
     </nav>
 
-    <div class="container mt-5 text-center">
+    <div class="container mt-3 text-center">
         <h1>Contacto</h1>
         <h3 class="mt-4 mb-5">Nos encantaría conocer tu experiencia! Escribenos a correo@ejemplo.com</h3>
 
         <div class="row d-flex justify-content-evenly">
-            <div class="col-3">
+            <div class="col col-lg-3">
+                <i class="fa-solid fa-phone fa-10x"></i>
                 <h3>Ventas Institucionales</h3>
+                <h4>correo@correo.com</h4>
             </div>
-            <div class="col-3">
+            <div class="col col-lg-3">
+                <i class="fa-solid fa-store fa-10x"></i>
                 <h3>Ventas Institucionales</h3>
+                <h4>correo@correo.com</h4>
             </div>
-            <div class="col-3">
+            <div class="col col-lg-3">
+                <i class="fa-solid fa-cart-shopping fa-10x"></i>
                 <h3>Ventas Institucionales</h3>
+                <h4>correo@correo.com</h4>
             </div>
-            <div class="col-3">
+            <div class="col col-lg-3">
+                <i class="fa-solid fa-envelope fa-10x"></i>
                 <h3>Ventas Institucionales</h3>
+                <h4>correo@correo.com</h4>
             </div>
         </div>
 
+        <div class="container mt-5">
+            <form>
+                <div class="col mb-4">
+                    <label for="nombre" class="form-label fs-3">Nombre</label>
+                    <input type="text" class="form-control large-font-input" id="nombre">
+                </div>
+                <div class="col mb-4">
+                    <label for="correo" class="form-label fs-3">Correo Electrónico</label>
+                    <input type="email" class="form-control large-font-input" id="correo">
+                </div>
+                <div class="col mb-4">
+                    <label for="telefonos" class="form-label fs-3">Número de telefóno</label>
+                    <input type="number" class="form-control large-font-input" id="telefono">
+                </div>
+                <label for="" class="form-label fs-3 mb-4">Comentarios</label>
+                <div class="form-floating">
+                    <textarea class="form-control large-font-input" placeholder="Leave a comment here" id="floatingTextarea2"
+                        style="height: 100px;"></textarea>
+                    <label for="floatingTextarea2">Comentarios</label>
+                </div>
+                <div class="col mt-5 text-center mb-4">
+                    <button type="submit" class="btn btn-primary fs-3">Enviar comentarios</button>
+                </div>
+            </form>
+        </div>
 
     </div>
+    </div>
+
+    <!--=== Enlaces de carga =====-->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="../js/onload.js"></script>
+
+    <!--=== Enlace de iconos ======-->
+    <script src="https://kit.fontawesome.com/b820f07375.js" crossorigin="anonymous"></script>
 
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -84,3 +84,6 @@ html{
 .log {
     height: 100vh;
 }
+.large-font-input {
+    font-size: 20px;
+}
