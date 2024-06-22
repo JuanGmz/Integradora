@@ -78,3 +78,10 @@ html{
 
 
 /* Barra de Navegación */
+.img-log{
+    height: 100vh;
+}
+.log {
+    position: inherit;
+    height: 100vh;
+}
