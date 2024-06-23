@@ -187,3 +187,12 @@ img nvarchar(100)not null,
 primary key(id_pm),
 foreign key (id_pm) references detalle_productos_menu(id_dpm)
 );
+
+-- Sistemma de Recompensas
+create table tarjetas(
+id_tarjeta int auto_increment not null,
+id_usuario int not null,
+progreso int,
+primary key(id_tarjeta),
+foreign key (id_usuario) references USUARIOS(id_usuario)
+);
