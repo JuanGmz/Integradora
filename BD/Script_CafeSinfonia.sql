@@ -48,5 +48,17 @@ foreign key (id_usuario) references usuarios(id_usuario),
 foreign key (id_domicilio) references domicilios(id_domicilio)
 );
 
-create table 
-
+create table bolsas_detalle (
+id_bolsa int auto_increment not null,
+id_categoria int,
+productor_finca nvarchar(150) not null,
+proceso nvarchar(100) not null,
+variedad nvarchar(200) not null,
+altura nvarchar(100) not null,
+aroma nvarchar(150) not null,
+acidez nvarchar(150) not null,
+sabor nvarchar(150) not null,
+cuerpo nvarchar(100) not null,
+primary key(id_bolsa),
+foreign key(id_categoria) references categorias(id_categoria)
+);
