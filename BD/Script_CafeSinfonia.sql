@@ -89,6 +89,7 @@ aroma nvarchar(150) not null,
 acidez nvarchar(150) not null,
 sabor nvarchar(150) not null,
 cuerpo nvarchar(100) not null,
+img nvarchar(100)not null,
 primary key(id_bolsa),
 foreign key(id_categoria) references categorias(id_categoria)
 );
@@ -150,6 +151,7 @@ hora_fin time not null,
 capacidad int not null,
 precio_boleto double not null, 
 disponibilidad int,
+img nvarchar(100)not null,
 primary key(id_evento),
 foreign key (id_lugar) references ubicacion_lugares(id_lugar),
 foreign key (id_categoria) references categorias(id_categorias)
@@ -174,6 +176,7 @@ id_dpm int auto_increment not null,
 id_categoria int not null, 
 nombre nvarchar(150) not null,
 descripcion nvarchar (300) not null,
+img nvarchar(100)not null,
 primary key(id_dpm),
 foreign key (id_categoria) references CATEGORIAS(id_categoria)
 );
@@ -183,7 +186,6 @@ id_pm int auto_increment not null,
 id_dpm int not null,
 medida nvarchar(100) not null,
 precio double not null,
-img nvarchar(100)not null,
 primary key(id_pm),
 foreign key (id_pm) references detalle_productos_menu(id_dpm)
 );
