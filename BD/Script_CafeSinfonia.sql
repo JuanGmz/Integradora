@@ -62,3 +62,13 @@ cuerpo nvarchar(100) not null,
 primary key(id_bolsa),
 foreign key(id_categoria) references categorias(id_categoria)
 );
+
+create table bolsas_cafe(
+id_bc int auto_increment not null,
+id_bolsa int not null,
+medida nvarchar(50)not null,
+precio double not null,
+stock int not null,
+primary key(id_bc),
+foreign key(id_bolsa) references bolsas_detalle(id_bolsa)
+);
