@@ -12,6 +12,14 @@ telefono nchar(10) not null,
 primary key(id_c)
 );
 
+create table blogs(
+id_blog int auto_increment not null,
+titulo nvarchar(100) not null,
+descripcion nvarchar(500),
+img nvarchar(100),
+primary key(id_blog)
+);
+
 create table usuarios(
 id_usuario int auto_increment not null,
 id_rol int not null,
