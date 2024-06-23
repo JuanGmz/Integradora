@@ -67,7 +67,7 @@ create table pedidos(
 id_pedido int auto_increment not null,
 id_usuario int not null,
 estatus enum('','','') not null,
-fecha_pedido datetime default current_timestamp,
+fecha_hora_pedido datetime default current_timestamp,
 id_domicilio int not null,
 envio nvarchar(150),
 costo_envio double,
@@ -145,7 +145,7 @@ tipo enum('','') not null, -- Si es gratuito o de pago
 descripcion nvarchar(200) not null,
 fecha_evento date not null,
 fecha_publicacion date not null,
-hora_inicio time not null,
+hora_inicio time not null, 
 hora_fin time not null,
 capacidad int not null,
 precio_boleto double not null, 
@@ -161,7 +161,7 @@ id_usuario int not null,
 id_evento int not null, 
 c_boletos int not null,
 monto_total double null,
-fecha datetime default current_timestamp,
+fecha_hora_reserva datetime default current_timestamp,
 estatus enum('','',''), -- Puede ser pendiente, y esas cosas.
 primary key(id_reserva),
 foreign key (id_usuario) references USUARIOS(id_usuario),
@@ -196,3 +196,33 @@ progreso int,
 primary key(id_tarjeta),
 foreign key (id_usuario) references USUARIOS(id_usuario)
 );
+
+create table asistencias(
+id_asistencia int auto_increment not null,
+id_tarjeta int not null,
+fecha_hora_asistencia datetime default current_timestamp,
+primary key(id_asistencia),
+foreign key (id_tarjeta) references tarjetas(id_tarjeta)
+);
+
+CREATE TABLE recompensas(
+id_recompensa int auto_increment not null,
+recompensa nvarchar(150) not null,
+condicion int not null,
+fecha_inicio date not null, 
+fecha_expiracion date not null,
+primary key (id_recompensa)
+);
+
+create table tarjeta_recompensas(
+id_tr int auto_increment not null,
+id_tarjeta int not null,
+id_recompensa int not null,
+canje boolean not null,
+primary key(id_tr),
+FOREIGN KEY (id_tarjeta) REFERENCES recompensas(id_tarjeta),
+FOREIGN KEY (id_recompensa) REFERENCES recompensas(id_recompensa)
+);
+
+
+
