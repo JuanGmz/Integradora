@@ -1,6 +1,13 @@
 create database cafe_sinfonia;
 
 use cafe_sinfonia;
+-- Otros
+create table CATEGORIAS(
+id_categoria int auto_increment not null,
+nombre nvarchar(100) not null,
+descripcion nvarchar(150),
+primary key(id_categoria)
+);
 
 create table contacto(
 id_c int auto_increment not null,
@@ -20,6 +27,7 @@ img nvarchar(100),
 primary key(id_blog)
 );
 
+-- Usuarios
 create table usuarios(
 id_usuario int auto_increment not null,
 id_rol int not null,
@@ -40,7 +48,7 @@ rol nvarchar(150),
 descripcion nvarchar(200),
 primary key(id_rol)
 );
-
+-- Ecommerce
 create table domicilios(
 id_domicilio int auto_increment not null,
 id_usuario int not null,
@@ -118,4 +126,31 @@ monto_total double, -- Actualizar el monto si se actualiza el precio de alguna b
 primary key(id_dp),
 foreign key (id_pedido) references pedidos(id_pedido),
 foreign key (id_bc) references bolsas(id_bc)
+);
+-- Eventos
+
+create table ubicacion_lugares(
+id_lugar int auto_increment not null,
+latitud double not null, 
+longitud double not null,
+primary key(id_lugar)
+);
+
+create table EVENTOS(
+id_evento int auto_increment not null,
+id_lugar int not null,
+id_categoria int not null,
+nombre nvarchar(100) not null,
+tipo enum('','') not null, -- Si es gratuito o de pago
+descripcion nvarchar(200) not null,
+fecha_evento date not null,
+fecha_publicacion date not null,
+hora_inicio time not null,
+hora_fin time not null,
+capacidad int not null,
+precio_boleto double not null, 
+disponibilidad int,
+primary key(id_evento),
+foreign key (id_lugar) references ubicacion_lugares(id_lugar),
+foreign key (id_categoria) references categorias(id_categorias)
 );
