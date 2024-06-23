@@ -2,6 +2,16 @@ create database cafe_sinfonia;
 
 use cafe_sinfonia;
 
+create table contacto(
+id_c int auto_increment not null,
+nombre nvarchar(150) not null,
+asunto varchar(150) not null,
+cometario varchar(300) not null,
+correo varchar(100) not null,
+telefono nchar(10) not null,
+primary key(id_c)
+);
+
 create table usuarios(
 id_usuario int auto_increment not null,
 id_rol int not null,
