@@ -154,3 +154,16 @@ primary key(id_evento),
 foreign key (id_lugar) references ubicacion_lugares(id_lugar),
 foreign key (id_categoria) references categorias(id_categorias)
 );
+
+create table eventos_reservas(
+id_reserva int auto_increment not null,
+id_usuario int not null, 
+id_evento int not null, 
+c_boletos int not null,
+monto_total double null,
+fecha datetime default current_timestamp,
+estatus enum('','',''), -- Puede ser pendiente, y esas cosas.
+primary key(id_reserva),
+foreign key (id_usuario) references USUARIOS(id_usuario),
+foreign key (id_evento) references EVENTOS(id_evento)
+);
