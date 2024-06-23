@@ -180,3 +180,9 @@ html {
 .large-font-input {
     font-size: 20px;
 }
+
+
+/* Footer */
+.bb {
+    border-bottom: solid 1px black;
+}
