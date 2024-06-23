@@ -167,3 +167,23 @@ primary key(id_reserva),
 foreign key (id_usuario) references USUARIOS(id_usuario),
 foreign key (id_evento) references EVENTOS(id_evento)
 );
+
+-- Productos del Menu 
+create table detalle_productos_menu(
+id_dpm int auto_increment not null,
+id_categoria int not null, 
+nombre nvarchar(150) not null,
+descripcion nvarchar (300) not null,
+primary key(id_dpm),
+foreign key (id_categoria) references CATEGORIAS(id_categoria)
+);
+
+create table productos_menu(
+id_pm int auto_increment not null,
+id_dpm int not null,
+medida nvarchar(100) not null,
+precio double not null,
+img nvarchar(100)not null,
+primary key(id_pm),
+foreign key (id_pm) references detalle_productos_menu(id_dpm)
+);
