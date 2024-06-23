@@ -89,7 +89,7 @@ unique(id_usuario, id_bc),
 foreign key (id_bc) references bolsas_cafe(id_bc),
 foreign key(id_usuario) references usuarios(id_usuario)
 );
---
+
 create table detalle_pedidos (
 id_dp int auto_increment not null,
 id_pedido int not null,
