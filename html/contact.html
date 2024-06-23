@@ -7,6 +7,12 @@
     <title>Contacto</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/index.css">
+    <style>
+        #map {
+            width: 100%;
+            height: 443px;
+        }
+    </style>
 </head>
 
 <body>
@@ -80,29 +86,44 @@
             </div>
 
             <div class="container mt-5">
-                <form class="shadow p-5 mb-5">
-                    <div class="col mb-4">
-                        <label for="nombre" class="form-label fs-3">Nombre</label>
-                        <input type="text" class="form-control large-font-input" id="nombre">
+                <div class="row">
+                    <div class="col-md-6 pb-5">
+                        <section>
+                            <h1 class="heading-1">Ubicacion</h1>
+                            <div id="map"></div>
+                            <!--=== Enlace de mapa ====-->
+                            <script src="../js/mapa.js"></script>
+                            <script
+                                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&callback=iniciarMap"></script>
+                        </section>
                     </div>
-                    <div class="col mb-4">
-                        <label for="correo" class="form-label fs-3">Correo Electrónico</label>
-                        <input type="email" class="form-control large-font-input" id="correo">
+                    <div class="col-md-6 pb-5">
+                        <form class="shadow p-3 rounded text-start">
+                            <h1 class="text-center">Contacto</h1>
+                            <div class="col mb-4">
+                                <label for="nombre" class="form-label fs-3">Nombre</label>
+                                <input type="text" class="form-control large-font-input" id="nombre">
+                            </div>
+                            <div class="col mb-4">
+                                <label for="correo" class="form-label fs-3">Correo Electrónico</label>
+                                <input type="email" class="form-control large-font-input" id="correo">
+                            </div>
+                            <div class="col mb-4">
+                                <label for="telefonos" class="form-label fs-3">Número de telefóno</label>
+                                <input type="number" class="form-control large-font-input" id="telefono">
+                            </div>
+                            <label for="" class="form-label fs-3 mb-4">Comentarios</label>
+                            <div class="form-floating">
+                                <textarea class="form-control large-font-input" placeholder="Leave a comment here"
+                                    id="floatingTextarea2" style="height: 100px;"></textarea>
+                                <label for="floatingTextarea2">Comentarios</label>
+                            </div>
+                            <div class="col mt-5 text-center mb-4">
+                                <button type="submit" class="btn btn-primary fs-3">Enviar comentarios</button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="col mb-4">
-                        <label for="telefonos" class="form-label fs-3">Número de telefóno</label>
-                        <input type="number" class="form-control large-font-input" id="telefono">
-                    </div>
-                    <label for="" class="form-label fs-3 mb-4">Comentarios</label>
-                    <div class="form-floating">
-                        <textarea class="form-control large-font-input" placeholder="Leave a comment here"
-                            id="floatingTextarea2" style="height: 100px;"></textarea>
-                        <label for="floatingTextarea2">Comentarios</label>
-                    </div>
-                    <div class="col mt-5 mb-4 text-end">
-                        <button type="submit" class="btn btn-primary fs-3">Enviar comentarios</button>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
     </main>
@@ -154,11 +175,9 @@
             </div>
         </div>
     </footer>
-
     <!--=== Enlaces de carga =====-->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="../js/onload.js"></script>
-
+    <script src="../js/onload.js"></script
     <!--=== Enlace de iconos ======-->
     <script src="https://kit.fontawesome.com/b820f07375.js" crossorigin="anonymous"></script>
 
