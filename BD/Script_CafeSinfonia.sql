@@ -1,3 +1,7 @@
+create database cafe_sinfonia;
+
+use cafe_sinfonia;
+
 create table usuarios(
 id_usuario int auto_increment not null,
 id_rol int not null,
@@ -84,4 +88,16 @@ primary key(id_carrito),
 unique(id_usuario, id_bc),
 foreign key (id_bc) references bolsas_cafe(id_bc),
 foreign key(id_usuario) references usuarios(id_usuario)
+);
+
+create table detalle_pedido (
+id_dp int auto_increment not null,
+id_pedido int not null,
+id_bc int not null,
+precio_unitario double not null,
+cantidad int not null,
+monto_total double, -- Actualizar el monto si se actualiza el precio de alguna bolsa.
+primary key(id_dp),
+foreign key (id_pedido) references pedidos(id_pedido),
+foreign key (id_bc) references bolsas(id_bc)
 );
