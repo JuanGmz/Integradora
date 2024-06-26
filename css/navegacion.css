@@ -1,0 +1,17 @@
+.accordion-item {
+    border: none;
+  }
+  .accordion-button {
+    border: none;
+    box-shadow: none;
+  }
+  .accordion-button:not(.collapsed) {
+    box-shadow: none;
+  }
+  .accordion-button::after {
+    display: none;
+  }
+  .accordion-body a {
+    color: gray;
+    
+  }
