@@ -28,8 +28,30 @@ create table blogs(
 );
 
 -- Usuarios
+create table personas(
+    id_persona int primary key auto_increment not null,
+    nombres nvarchar(100) not null,
+    apellido_paterno nvarchar(100) not null,
+    apellido_materno nvarchar(100) not null,
+)
+create table empleados(
+    id_empleado int primary key auto_increment not null,
+    id_persona int not null
+    FOREIGN KEY (id_persona) REFERENCES personas(id_persona) 
+)
+create table proveedores(
+    id_proveedor int primary key auto_increment not null,
+    id_persona int not null
+    FOREIGN KEY (id_persona) REFERENCES personas(id_persona)
+)
+create table cliente(
+    id_cliente int primary key auto_increment not null,
+    id_persona int not null
+    FOREIGN KEY (id_persona) REFERENCES personas(id_persona)
+)
+
 create table usuarios(
-    id_usuario int auto_increment not null,
+    id_usuario int primary key auto_increment not null,
     id_rol int not null,
     usuario nvarchar (100) not null,
     correo nvarchar(100) not null,
@@ -48,6 +70,13 @@ create table roles(
     descripcion nvarchar(200),
     primary key(id_rol)
 );
+CREATE TABLE USUARIOS_ROLES (
+    id_reg_UR int primary key auto_increment not null,
+    id_rol int not null,
+    id_usuario int not null,
+    foreign key (id_rol) references roles(id_rol),
+    foreign key (id_usuario) references usuarios(id_usuario)
+)
 
 -- Ecommerce
 create table domicilios(
@@ -67,7 +96,7 @@ create table domicilios(
 create table pedidos(
     id_pedido int auto_increment not null,
     id_usuario int not null,
-    estatus enum('','','') not null,
+    estatus enum('Pendiente','En proceso','Pagado') not null,
     fecha_hora_pedido datetime default current_timestamp,
     id_domicilio int not null,
     envio nvarchar(150),
@@ -165,7 +194,7 @@ create table eventos_reservas(
     c_boletos int not null,
     monto_total double null,
     fecha_hora_reserva datetime default current_timestamp,
-    estatus enum('','',''), -- Puede ser pendiente, y esas cosas.
+    estatus enum('Pendiente','En proceso','Pagado'), -- Puede ser pendiente, y esas cosas.
     primary key(id_reserva),
     foreign key (id_usuario) references USUARIOS(id_usuario),
     foreign key (id_evento) references EVENTOS(id_evento)
