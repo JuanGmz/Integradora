@@ -7,157 +7,141 @@
     <title>Blog admin</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/index.css">
-    <style>
-        .h100 {
-            height: 100%;
-        }
-    </style>
 </head>
 
 <body>
-    <div class="row">
-        <div class="col-lg-3">
-            <div class="bg-dark p-2 d-none d-lg-block">
-                <h4 class="text-center text-light">Administrar</h4>
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <i class="fa-solid fa-user fa-10x text-light"></i>
-                    </div>
-                </div>
-                <div class="accordion accordion-flush" id="accordionFlushExample">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed fw-bold bg-dark text-light fs-3" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-menu" aria-expanded="false"
-                                aria-controls="flush-menu">
-                                Menú
-                            </button>
-                        </h2>
-                        <div id="flush-menu" class="accordion-collapse collapse"
-                            data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body bg-dark-subtle">
-                                <div class="list-group">
-                                    <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-                                        Administrar Menú
-                                    </a>
-                                    <a href="#" class="list-group-item list-group-item-action">Ver Menú</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed fw-bold bg-dark text-light fs-3" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-events" aria-expanded="false"
-                                aria-controls="flush-events">
-                                Eventos
-                            </button>
-                        </h2>
-                        <div id="flush-events" class="accordion-collapse collapse"
-                            data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body bg-dark-subtle">
-                                <div class="list-group">
-                                    <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-                                        Administrar Eventos
-                                    </a>
-                                    <a href="#" class="list-group-item list-group-item-action">Administar
-                                        Reservas</a>
-                                    <a href="#" class="list-group-item list-group-item-action">Ver Eventos</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed fw-bold bg-dark text-light fs-3" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-ecommerce" aria-expanded="false"
-                                aria-controls="flush-ecommerce">
-                                E-Commerce
-                            </button>
-                        </h2>
-                        <div id="flush-ecommerce" class="accordion-collapse collapse"
-                            data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body bg-dark-subtle">
-                                <div class="list-group">
-                                    <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-                                        Administrar Pedidos
-                                    </a>
-                                    <a href="#" class="list-group-item list-group-item-action">Administrar
-                                        Productos</a>
-                                    <a href="#" class="list-group-item list-group-item-action">Ver E-Commerce</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed fw-bold bg-dark text-light fs-3" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-blog" aria-expanded="false"
-                                aria-controls="flush-blog">
-                                Blog
-                            </button>
-                        </h2>
-                        <div id="flush-blog" class="accordion-collapse collapse"
-                            data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body bg-dark-subtle">
-                                <div class="list-group">
-                                    <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-                                        Administrar Blog
-                                    </a>
-                                    <a href="#" class="list-group-item list-group-item-action">Ver Blog</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed fw-bold bg-dark text-light fs-3" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-rewards" aria-expanded="false"
-                                aria-controls="flush-rewards">
-                                Recompensas
-                            </button>
-                        </h2>
-                        <div id="flush-rewards" class="accordion-collapse collapse"
-                            data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body bg-dark-subtle">
-                                <div class="list-group">
-                                    <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-                                        Administrar Recompensas
-                                    </a>
-                                    <a href="#" class="list-group-item list-group-item-action">Ver Recompensas</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed fw-bold bg-dark text-light fs-3" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-categories" aria-expanded="false"
-                                aria-controls="flush-categories">
-                                Categorías
-                            </button>
-                        </h2>
-                        <div id="flush-categories" class="accordion-collapse collapse"
-                            data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body bg-dark-subtle">
-                                <div class="list-group">
-                                    <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-                                        Administrar Categorías
-                                    </a>
-                                </div>
-                            </div>
+    <div class="bg-dark p-2 d-none d-lg-block w-25 h-100 position-fixed">
+        <h4 class="text-center text-light m-3 fs-2 fw-bold">Administrar</h4>
+        <div class="row">
+            <div class="col-12 text-center">
+                <i class="fa-solid fa-user fa-10x text-light"></i>
+            </div>
+        </div>
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed fw-bold bg-dark text-light fs-3" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#flush-menu" aria-expanded="false"
+                        aria-controls="flush-menu">
+                        Menú
+                    </button>
+                </h2>
+                <div id="flush-menu" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body bg-dark-subtle">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                                Administrar Menú
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">Ver Menú</a>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-9">
-            <div class="p-4">
-                <h1>holaaaa</h1>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed fw-bold bg-dark text-light fs-3" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#flush-events" aria-expanded="false"
+                        aria-controls="flush-events">
+                        Eventos
+                    </button>
+                </h2>
+                <div id="flush-events" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body bg-dark-subtle">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                                Administrar Eventos
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">Administar
+                                Reservas</a>
+                            <a href="#" class="list-group-item list-group-item-action">Ver Eventos</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed fw-bold bg-dark text-light fs-3" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#flush-ecommerce" aria-expanded="false"
+                        aria-controls="flush-ecommerce">
+                        E-Commerce
+                    </button>
+                </h2>
+                <div id="flush-ecommerce" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body bg-dark-subtle">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                                Administrar Pedidos
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">Administrar
+                                Productos</a>
+                            <a href="#" class="list-group-item list-group-item-action">Ver E-Commerce</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed fw-bold bg-dark text-light fs-3" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#flush-blog" aria-expanded="false"
+                        aria-controls="flush-blog">
+                        Blog
+                    </button>
+                </h2>
+                <div id="flush-blog" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body bg-dark-subtle">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                                Administrar Blog
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">Ver Blog</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed fw-bold bg-dark text-light fs-3" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#flush-rewards" aria-expanded="false"
+                        aria-controls="flush-rewards">
+                        Recompensas
+                    </button>
+                </h2>
+                <div id="flush-rewards" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body bg-dark-subtle">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                                Administrar Recompensas
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">Ver Recompensas</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed fw-bold bg-dark text-light fs-3" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#flush-categories" aria-expanded="false"
+                        aria-controls="flush-categories">
+                        Categorías
+                    </button>
+                </h2>
+                <div id="flush-categories" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body bg-dark-subtle">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                                Administrar Categorías
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
+    <!-- Area de contenido -->
+    <div class="container-fluid float-end w-75">
+        
+    </div>
 
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
