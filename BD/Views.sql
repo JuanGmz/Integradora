@@ -1,7 +1,14 @@
 -- vistas de admin-menu
-select dpm.nombre as Producto dpm.img as Imagen,dpm.descripcion as Descripción, pm.precio as Precio, dpm.categoria as Categoría 
-from productos_menu as pm
-join detalle_productos_menu as dpm
-on dpm.id_dpm = pm.id_dpm
-join categorias as c
-on c.id_categoria = dpm.id_categoria
+SELECT 
+    dpm.nombre AS Producto, 
+    dpm.img AS Imagen,
+    dpm.descripcion AS Descripción,
+    pm.precio AS Precio, 
+    dpm.categoria AS Categoría 
+FROM 
+    productos_menu AS pm
+JOIN 
+    detalle_productos_menu AS dpm ON dpm.id_dpm = pm.id_dpm
+JOIN 
+    categorias AS c ON c.id_categoria = dpm.id_categoria
+;
