@@ -203,3 +203,6 @@ html {
     color: gray;
     
   }
+.navbar-toggler-icon {
+    color: #fff;
+}
