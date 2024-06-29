@@ -15,165 +15,211 @@
         <div class="row d-block d-lg-none border-black border-bottom border-3 bg-dark">
             <nav class="navbar navbar-expand-lg">
                 <div class="container-fluid">
-                    <a class="navbar-brand fw-bold text-light" href="adminInicio.html">Administar</a>
-                    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                    <a class="navbar-brand fw-bold text-light" href="adminInicio.html">Administrar</a>
+                    <button class="navbar-toggler border-0 text-light bg-dark" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon bg-light rounded p-2"></span>
+                        <span class="navbar-toggler-icon rounded p-2"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <div class="p-2">
                             <div class="accordion accordion-flush" id="accordionMobile">
                                 <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed fw-bold fs-3 bg-dark text-light"
+                                    <h2 class="accordion-header row">
+                                        <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light"
                                             type="button" data-bs-toggle="collapse" data-bs-target="#flush-inicio"
                                             aria-expanded="false" aria-controls="flush-inicio">
-                                            Inicio
+                                            <div class="col-8">
+                                                <i class="fa-solid fa-house-laptop me-3"></i>
+                                                Inicio
+                                            </div>
+                                            <div class="col-4 text-end">
+                                                <i class="fa-solid fa-chevron-down"></i>
+                                            </div>
                                         </button>
                                     </h2>
                                     <div id="flush-inicio" class="accordion-collapse collapse"
                                         data-bs-parent="#accordionMobile">
-                                        <div class="accordion-body bg-dark-subtle">
-                                            <div class="list-group">
-                                                <a href="adminInicio.html"
-                                                    class="list-group-item list-group-item-action" aria-current="true">
-                                                    NO se que va aquí
-                                                </a>
-                                            </div>
+                                        <div class="accordion-body bg-dark">
+                                            <a href="adminInicio.html"
+                                                class="fw-bold fs-5 ms-5 text-light text-decoration-none"
+                                                aria-current="true">
+                                                Componentes
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed fw-bold fs-3 bg-dark text-light"
+                                    <h2 class="accordion-header row">
+                                        <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light"
                                             type="button" data-bs-toggle="collapse" data-bs-target="#flush-menu"
                                             aria-expanded="false" aria-controls="flush-menu">
-                                            Menú
+                                            <div class="col-8">
+                                                <i class="fa-solid fa-table me-3"></i>
+                                                Menú
+                                            </div>
+                                            <div class="col-4 text-end">
+                                                <i class="fa-solid fa-chevron-down"></i>
+                                            </div>
                                         </button>
                                     </h2>
                                     <div id="flush-menu" class="accordion-collapse collapse"
                                         data-bs-parent="#accordionMobile">
-                                        <div class="accordion-body bg-dark-subtle">
-                                            <div class="list-group">
-                                                <a href="adminMenu.html" class="list-group-item list-group-item-action"
-                                                    aria-current="true">
-                                                    Administrar Menú
-                                                </a>
-                                                <a href="#" class="list-group-item list-group-item-action">Ver Menú</a>
-                                            </div>
+                                        <div class="accordion-body bg-dark">
+                                            <a href="adminMenu.html"
+                                                class="ms-5 text-light fw-bold fs-5 text-decoration-none"
+                                                aria-current="true">
+                                                Administrar Menú
+                                            </a>
+                                            <br><br>
+                                            <a href="#" class="ms-5 text-light fw-bold fs-5 text-decoration-none">Ver
+                                                Menú</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed fw-bold fs-3 bg-dark text-light"
+                                    <h2 class="accordion-header row">
+                                        <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light"
                                             type="button" data-bs-toggle="collapse" data-bs-target="#flush-events"
                                             aria-expanded="false" aria-controls="flush-events">
-                                            Eventos
+                                            <div class="col-8">
+                                                <i class="fa-solid fa-bullhorn me-3"></i>
+                                                Eventos
+                                            </div>
+                                            <div class="col-4 text-end">
+                                                <i class="fa-solid fa-chevron-down"></i>
+                                            </div>
                                         </button>
                                     </h2>
                                     <div id="flush-events" class="accordion-collapse collapse"
                                         data-bs-parent="#accordionMobile">
-                                        <div class="accordion-body bg-dark-subtle">
-                                            <div class="list-group">
-                                                <a href="adminEventos.html" class="list-group-item list-group-item-action"
-                                                    aria-current="true">
-                                                    Administrar Eventos
-                                                </a>
-                                                <a href="adminReservas.html" class="list-group-item list-group-item-action">Administar
-                                                    Reservas</a>
-                                                <a href="#" class="list-group-item list-group-item-action">Ver
-                                                    Eventos</a>
-                                            </div>
+                                        <div class="accordion-body bg-dark">
+                                            <a href="adminEventos.html"
+                                                class="text-light fw-bold fs-5 text-decoration-none ms-5"
+                                                aria-current="true">
+                                                Administrar Eventos
+                                            </a><br><br>
+                                            <a href="adminReservas.html"
+                                                class="text-light fw-bold fs-5 text-decoration-none ms-5">
+                                                Administar Reservas
+                                            </a><br><br>
+                                            <a href="#" class="text-light fw-bold fs-5 text-decoration-none ms-5">Ver
+                                                Eventos
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed fw-bold fs-3 bg-dark text-light"
+                                    <h2 class="accordion-header row">
+                                        <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light"
                                             type="button" data-bs-toggle="collapse" data-bs-target="#flush-ecommerce"
                                             aria-expanded="false" aria-controls="flush-ecommerce">
-                                            E-Commerce
+                                            <div class="col-8">
+                                                <i class="fa-solid fa-cart-arrow-down me-3"></i>
+                                                E-Commerce
+                                            </div>
+                                            <div class="col-4 text-end">
+                                                <i class="fa-solid fa-chevron-down"></i>
+                                            </div>
                                         </button>
                                     </h2>
                                     <div id="flush-ecommerce" class="accordion-collapse collapse"
                                         data-bs-parent="#accordionMobile">
-                                        <div class="accordion-body bg-dark-subtle">
-                                            <div class="list-group">
-                                                <a href="adminPedidos.html"
-                                                    class="list-group-item list-group-item-action" aria-current="true">
-                                                    Administrar Pedidos
-                                                </a>
-                                                <a href="adminProductosEcommerce.html"
-                                                    class="list-group-item list-group-item-action">Administrar
-                                                    Productos</a>
-                                                <a href="#" class="list-group-item list-group-item-action">Ver
-                                                    E-Commerce</a>
-                                            </div>
+                                        <div class="accordion-body bg-dark">
+                                            <a href="adminPedidos.html"
+                                                class="fw-bold fs-5 ms-5 text-light text-decoration-none"
+                                                aria-current="true">
+                                                Administrar Pedidos
+                                            </a><br><br>
+                                            <a href="adminProductosEcommerce.html"
+                                                class="fw-bold fs-4 ms-5 text-light text-decoration-none">
+                                                Administrar Productos
+                                            </a><br><br>
+                                            <a href="#" class="fw-bold fs-5 ms-5 text-light text-decoration-none">
+                                                Ver E-Commerce
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed fw-bold fs-3 bg-dark text-light"
+                                    <h2 class="accordion-header row">
+                                        <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light"
                                             type="button" data-bs-toggle="collapse" data-bs-target="#flush-blog"
                                             aria-expanded="false" aria-controls="flush-blog">
-                                            Blog
+                                            <div class="col-8">
+                                                <i class="fa-solid fa-blog me-3"></i>
+                                                Blog
+                                            </div>
+                                            <div class="col-4 text-end">
+                                                <i class="fa-solid fa-chevron-down"></i>
+                                            </div>
                                         </button>
                                     </h2>
                                     <div id="flush-blog" class="accordion-collapse collapse"
                                         data-bs-parent="#accordionMobile">
-                                        <div class="accordion-body bg-dark-subtle">
-                                            <div class="list-group">
-                                                <a href="adminBlog.html" class="list-group-item list-group-item-action"
-                                                    aria-current="true">
-                                                    Administrar Blog
-                                                </a>
-                                                <a href="#" class="list-group-item list-group-item-action">Ver Blog</a>
-                                            </div>
+                                        <div class="accordion-body bg-dark">
+                                            <a href="adminBlog.html"
+                                                class="fw-bold fs-5 ms-5 text-light text-decoration-none"
+                                                aria-current="true">
+                                                Administrar Blog
+                                            </a><br><br>
+                                            <a href="#" class="fw-bold fs-5 ms-5 text-light text-decoration-none">Ver
+                                                Blog
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed fw-bold fs-3 bg-dark text-light"
+                                    <h2 class="accordion-header row">
+                                        <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light"
                                             type="button" data-bs-toggle="collapse" data-bs-target="#flush-rewards"
                                             aria-expanded="false" aria-controls="flush-rewards">
-                                            Recompensas
+                                            <div class="col-8">
+                                                <i class="fa-solid fa-medal me-3"></i>
+                                                Recompensas
+                                            </div>
+                                            <div class="col-4 text-end">
+                                                <i class="fa-solid fa-chevron-down"></i>
+                                            </div>
                                         </button>
                                     </h2>
                                     <div id="flush-rewards" class="accordion-collapse collapse"
                                         data-bs-parent="#accordionMobile">
-                                        <div class="accordion-body bg-dark-subtle">
-                                            <div class="list-group">
-                                                <a href="adminRecompensas.html" class="list-group-item list-group-item-action"
-                                                    aria-current="true">
-                                                    Administrar Recompensas
-                                                </a>
-                                                <a href="#" class="list-group-item list-group-item-action">Ver
-                                                    Recompensas</a>
-                                            </div>
+                                        <div class="accordion-body bg-dark">
+                                            <a href="adminRecompensas.html"
+                                                class="fw-bold fs-5 ms-5 text-light text-decoration-none"
+                                                aria-current="true">
+                                                Administrar Recompensa
+                                            </a>
+                                            <br><br>
+                                            <a href="#" class="fw-bold fs-5 ms-5 text-light text-decoration-none">Ver
+                                                Recompensas
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed fw-bold fs-3 bg-dark text-light"
+                                    <h2 class="accordion-header row">
+                                        <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light"
                                             type="button" data-bs-toggle="collapse" data-bs-target="#flush-categories"
                                             aria-expanded="false" aria-controls="flush-categories">
-                                            Categorías
+                                            <div class="col-8">
+                                                <i class="fa-solid fa-list me-3"></i>
+                                                Categorías
+                                            </div>
+                                            <div class="col-4 text-end">
+                                                <i class="fa-solid fa-chevron-down"></i>
+                                            </div>
                                         </button>
                                     </h2>
                                     <div id="flush-categories" class="accordion-collapse collapse"
                                         data-bs-parent="#accordionFlushExample">
-                                        <div class="accordion-body bg-dark-subtle">
-                                            <div class="list-group">
-                                                <a href="adminCategorias.html" class="list-group-item list-group-item-action"
-                                                    aria-current="true">
-                                                    Administrar Categorías
-                                                </a>
-                                            </div>
+                                        <div class="accordion-body bg-dark">
+                                            <a href="adminCategorias.html"
+                                                class="fw-bold fs-5 ms-5 text-light text-decoration-none"
+                                                aria-current="true">
+                                                Administrar Categorías
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -195,151 +241,197 @@
                 </div>
                 <div class="accordion accordion-flush" id="accordionPc">
                     <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed fw-bold fs-3 bg-dark text-light"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#flush-inicio"
-                                aria-expanded="false" aria-controls="flush-inicio">
-                                Inicio
+                        <h2 class="accordion-header row">
+                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-inicio" aria-expanded="false"
+                                aria-controls="flush-inicio">
+                                <div class=" col-8">
+                                    <i class="fa-solid fa-house-laptop me-1"></i>
+                                    Inicio
+                                </div>
+                                <div class="col-4 text-end">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </div>
                             </button>
                         </h2>
-                        <div id="flush-inicio" class="accordion-collapse collapse"
-                            data-bs-parent="#accordionPc">
-                            <div class="accordion-body bg-dark-subtle">
-                                <div class="list-group">
-                                    <a href="adminInicio.html"
-                                        class="list-group-item list-group-item-action" aria-current="true">
-                                        NO se que va aquí
-                                    </a>
-                                </div>
+                        <div id="flush-inicio" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
+                            <div class="accordion-body bg-dark">
+                                <a href="adminInicio.html" class="fw-bold fs-5 ms-5 text-light text-decoration-none"
+                                    aria-current="true">
+                                    Componentes
+                                </a>
                             </div>
                         </div>
                     </div>
                     <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed fw-bold bg-dark text-light fs-3" type="button"
+                        <h2 class="accordion-header row">
+                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-menu" aria-expanded="false"
                                 aria-controls="flush-menu">
-                                Menú
+                                <div class="col-6">
+                                    <i class="fa-solid fa-table me-1"></i>
+                                    Menú
+                                </div>
+                                <div class="col-6 text-end">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </div>
                             </button>
                         </h2>
                         <div id="flush-menu" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
-                            <div class="accordion-body bg-dark-subtle">
-                                <div class="list-group">
-                                    <a href="adminMenu.html" class="list-group-item list-group-item-action" aria-current="true">
-                                        Administrar Menú
-                                    </a>
-                                    <a href="#" class="list-group-item list-group-item-action">Ver Menú</a>
-                                </div>
+                            <div class="accordion-body bg-dark">
+                                <a href="adminMenu.html" class="ms-5 text-light fw-bold fs-5 text-decoration-none"
+                                    aria-current="true">
+                                    Administrar Menú
+                                </a>
+                                <br><br>
+                                <a href="#" class="ms-5 text-light fw-bold fs-5 text-decoration-none">
+                                    Ver Menú
+                                </a>
                             </div>
                         </div>
                     </div>
                     <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed fw-bold bg-dark text-light fs-3" type="button"
+                        <h2 class="accordion-header row">
+                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-events" aria-expanded="false"
                                 aria-controls="flush-events">
-                                Eventos
+                                <div class="col-6">
+                                    <i class="fa-solid fa-bullhorn me-1"></i>
+                                    Eventos
+                                </div>
+                                <div class="col-6 text-end">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </div>
                             </button>
                         </h2>
                         <div id="flush-events" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
-                            <div class="accordion-body bg-dark-subtle">
-                                <div class="list-group">
-                                    <a href="adminEventos.html" class="list-group-item list-group-item-action" aria-current="true">
-                                        Administrar Eventos
-                                    </a>
-                                    <a href="adminReservas.html" class="list-group-item list-group-item-action">Administar
-                                        Reservas</a>
-                                    <a href="#" class="list-group-item list-group-item-action">Ver Eventos</a>
-                                </div>
+                            <div class="accordion-body bg-dark">
+                                <a href="adminEventos.html" class="text-light fw-bold fs-5 text-decoration-none ms-5"
+                                    aria-current="true">
+                                    Administrar Eventos
+                                </a><br><br>
+                                <a href="adminReservas.html" class="text-light fw-bold fs-5 text-decoration-none ms-5">
+                                    Administar Reservas
+                                </a><br><br>
+                                <a href="#" class="text-light fw-bold fs-5 text-decoration-none ms-5">
+                                    Ver Eventos
+                                </a>
                             </div>
                         </div>
                     </div>
                     <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed fw-bold bg-dark text-light fs-3" type="button"
+                        <h2 class="accordion-header row">
+                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-ecommerce" aria-expanded="false"
                                 aria-controls="flush-ecommerce">
-                                E-Commerce
+                                <div class="col-8">
+                                    <i class="fa-solid fa-cart-arrow-down me-1"></i>
+                                    E-Commerce
+                                </div>
+                                <div class="col-4 text-end">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </div>
                             </button>
                         </h2>
                         <div id="flush-ecommerce" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
-                            <div class="accordion-body bg-dark-subtle">
-                                <div class="list-group">
-                                    <a href="adminPedidos.html" class="list-group-item list-group-item-action"
-                                        aria-current="true">
-                                        Administrar Pedidos
-                                    </a>
-                                    <a href="adminProductosEcommerce.html"
-                                        class="list-group-item list-group-item-action">Administrar
-                                        Productos</a>
-                                    <a href="#" class="list-group-item list-group-item-action">Ver E-Commerce</a>
-                                </div>
+                            <div class="accordion-body bg-dark">
+                                <a href="adminPedidos.html" class="fw-bold fs-5 ms-5 text-light text-decoration-none"
+                                    aria-current="true">
+                                    Administrar Pedidos
+                                </a><br><br>
+                                <a href="adminProductosEcommerce.html"
+                                    class="fw-bold fs-5 ms-5 text-light text-decoration-none">
+                                    Administrar Productos
+                                </a><br><br>
+                                <a href="#" class="fw-bold fs-5 ms-5 text-light text-decoration-none">Ver
+                                    E-Commerce
+                                </a>
                             </div>
                         </div>
                     </div>
                     <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed fw-bold bg-dark text-light fs-3" type="button"
+                        <h2 class="accordion-header row">
+                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-blog" aria-expanded="false"
                                 aria-controls="flush-blog">
-                                Blog
+                                <div class="col-8">
+                                    <i class="fa-solid fa-blog me-1"></i>
+                                    Blog
+                                </div>
+                                <div class="col-4 text-end">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </div>
                             </button>
                         </h2>
                         <div id="flush-blog" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
-                            <div class="accordion-body bg-dark-subtle">
-                                <div class="list-group">
-                                    <a href="adminBlog.html" class="list-group-item list-group-item-action" aria-current="true">
-                                        Administrar Blog
-                                    </a>
-                                    <a href="#" class="list-group-item list-group-item-action">Ver Blog</a>
-                                </div>
+                            <div class="accordion-body bg-dark">
+                                <a href="adminBlog.html" class="fw-bold fs-5 ms-5 text-light text-decoration-none"
+                                    aria-current="true">
+                                    Administrar Blog
+                                </a><br><br>
+                                <a href="#" class="fw-bold fs-5 ms-5 text-light text-decoration-none">Ver
+                                    Blog
+                                </a>
                             </div>
                         </div>
                     </div>
                     <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed fw-bold bg-dark text-light fs-3" type="button"
+                        <h2 class="accordion-header row">
+                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-rewards" aria-expanded="false"
                                 aria-controls="flush-rewards">
-                                Recompensas
+                                <div class="col-8">
+                                    <i class="fa-solid fa-medal me-1"></i>
+                                    Recompensas
+                                </div>
+                                <div class="col-4 text-end">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </div>
                             </button>
                         </h2>
                         <div id="flush-rewards" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
-                            <div class="accordion-body bg-dark-subtle">
-                                <div class="list-group">
-                                    <a href="adminRecompensas.html" class="list-group-item list-group-item-action" aria-current="true">
-                                        Administrar Recompensas
-                                    </a>
-                                    <a href="#" class="list-group-item list-group-item-action">Ver Recompensas</a>
-                                </div>
+                            <div class="accordion-body bg-dark">
+                                <a href="adminRecompensas.html"
+                                    class="fw-bold fs-5 ms-5 text-light text-decoration-none" aria-current="true">
+                                    Administrar Recompensa
+                                </a>
+                                <br><br>
+                                <a href="#" class="fw-bold fs-5 ms-5 text-light text-decoration-none">Ver
+                                    Recompensas
+                                </a>
                             </div>
                         </div>
                     </div>
                     <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed fw-bold bg-dark text-light fs-3" type="button"
+                        <h2 class="accordion-header row">
+                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-categories" aria-expanded="false"
                                 aria-controls="flush-categories">
-                                Categorías
+                                <div class="col-8">
+                                    <i class="fa-solid fa-list me-1"></i>
+                                    Categorías
+                                </div>
+                                <div class="col-4 text-end">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </div>
                             </button>
                         </h2>
                         <div id="flush-categories" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
-                            <div class="accordion-body bg-dark-subtle">
-                                <div class="list-group">
-                                    <a href="adminCategorias.html" class="list-group-item list-group-item-action" aria-current="true">
-                                        Administrar Categorías
-                                    </a>
-                                </div>
+                            <div class="accordion-body bg-dark">
+                                <a href="adminCategorias.html" class="fw-bold fs-5 ms-5 text-light text-decoration-none"
+                                    aria-current="true">
+                                    Administrar Categorías
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Contenido -->
+            <!-- AQUI VA EL CONTENIDOOOOOOOO -->
             <div class="col-lg-9 offset-lg-3 p-3">
                 <div class="container-fluid">
-                    <h1 class="fw-bold">TITULO DE LA PAGINAAAAAAA</h1>
+                    <h1 class="fw-bold">Pedidos</h1>
                 </div>
                 <div class="container-fluid">
                     <div class="col bg-body-tertiary p-3 rounded">
@@ -364,8 +456,117 @@
                         </form>
                     </div>
                 </div>
+                <!-- TABLA DE PEDIDOS -->
+                <div class="container-fluid mt-5">
+                    <table class="table table-light table-striped text-center" border="1">
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col">Folio</th>
+                                <th scope="col">Usuario</th>
+                                <th scope="col" class="d-none d-lg-table-cell">Nombre</th>
+                                <th scope="col" class="d-none d-lg-table-cell">Fecha del Pedido</th>
+                                <th scope="col" class="d-none d-lg-table-cell">Estatus</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                            <tr style="line-height: 3;">
+                                <th scope="row">1</th>
+                                <td>juantrc</td>
+                                <td class="d-none d-lg-table-cell">Juan Alfredo Gómez González</td>
+                                <td class="d-none d-lg-table-cell">2024-06-29</td>
+                                <td class="d-none d-lg-table-cell">Pendiente</td>
+                                <td>
+                                    <!-- Botón que activa el modal de detalle del pedido -->
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#modalDetalles">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                    <!-- Modal de Detalles -->
+                                    <div class="modal fade" id="modalDetalles" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Detalles del
+                                                        Pedido</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <!-- Aquí va el contenido del modal -->
+                                                <div class="modal-body">
+                                                    <h5 class="text-start fw-bold">Aquí irá el folio del pedido</h5>
+                                                    <h5 class="text-start fw-bold">Fecha: <span class="fw-normal">Aquí irá la fecha en la que se realizó el pedido</span></h5>
+                                                    <h5 class="text-start fw-bold">Metódo de pago: <span class="fw-normal">Aquí irá el método de pago</span></h5>
+                                                    <h5 class="text-start fw-bold">Monto Total: <span class="fw-normal">Aquí irá el monto total del pedido</span></h5>
+                                                    <!-- Tabla de productos -->
+                                                    <table class="table table-light table-striped text-center"
+                                                        border="1">
+                                                        <thead class="table-dark">
+                                                            <th>Producto</th>
+                                                            <th>Cantidad</th>
+                                                            <th>Medida</th>
+                                                            <th>Precio</th>
+                                                        </thead>
+                                                        <tbody class="table-group-divider">
+                                                            <tr>
+                                                                <td>Bolsa1</td>
+                                                                <td>2</td>
+                                                                <td>1/4kg</td>
+                                                                <td>$85</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Bolsa1</td>
+                                                                <td>2</td>
+                                                                <td>1/4kg</td>
+                                                                <td>$85</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" data-bs-dismiss="modal"
+                                                        class="btn btn-primary">Cerrar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Botón que activa el modal de gestión del pedido -->
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#modalGestion">
+                                        <i class="fa-solid fa-bars"></i>
+                                    </button>
+                                    <!-- Modal de gestionar pedidos -->
+                                    <div class="modal fade" id="modalGestion" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Gestionar Pedido
+                                                    </h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <!-- Aquí va el contenido del modal -->
+                                                <div class="modal-body">
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Cancelar</button>
+                                                    <button type="button" class="btn btn-primary">Guardar
+                                                        Cambios</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <!-- AQUI VA EL CONTENIDO DE LA PAGINAAAAAAAAAAAA -->
         </div>
     </div>
 
