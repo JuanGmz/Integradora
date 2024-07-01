@@ -246,23 +246,27 @@
                                 data-bs-toggle="collapse" data-bs-target="#flush-inicio" aria-expanded="false"
                                 aria-controls="flush-inicio">
                                 <div class=" col-8">
-                                    <i class="fa-solid fa-house-laptop me-1"></i>
-                                    Inicio
+                                    <a href="adminInicio.html" class="text-light fw-bold text-decoration-none">
+                                        <i class="fa-solid fa-house-laptop me-1"></i>
+                                        Inicio
+                                    </a>
+
                                 </div>
-                                <div class="col-4 text-end">
-                                    <i class="fa-solid fa-chevron-down"></i>
-                                </div>
+
                             </button>
                         </h2>
-                        <div id="flush-inicio" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
-                            <div class="accordion-body bg-dark">
-                                <a href="adminInicio.html" class="fw-bold fs-6 ms-5 text-light text-decoration-none"
-                                    aria-current="true">
-                                    Componentes
-                                </a>
-                            </div>
-                        </div>
+
                     </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header row">
+                            <div class="collapsed fw-bold fs-3 bg-dark text-light p-3 ">
+                                Componentes
+                            </div>
+
+                        </div>
+
+                    </div>
+
                     <div class="accordion-item">
                         <h2 class="accordion-header row">
                             <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
@@ -464,16 +468,16 @@
                     </div>
                 </div>
 
-                <!-- Tabla de recompensas -->
+                <!-- Tabla de usuarios -->
                 <div class="container-fluid mt-5">
                     <table class="table table-light table-striped text-center" border="1">
                         <thead class="table-dark">
                             <tr>
-                                <th scope="col">ID</th>
+                                <th scope="col">Folio</th>
                                 <th scope="col">Usuario</th>
                                 <th scope="col">Correo</th>
                                 <th scope="col">Rol</th>
-                                <th scope="col">Acciones</th>
+
                             </tr>
                         </thead>
                         <tbody class="table-group-divider">
@@ -481,96 +485,13 @@
                                 <th scope="row">1</th>
                                 <td>Luis Felipe</td>
                                 <td>Luis@gmail.com</td>
-                                <td>Usuario</td>
-                                <td>
-
-
-                                    <!-- Botón que activa el modal de editar Usuarios -->
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#editarUsuario">
+                                <td>Usuario
+                                    <a href="">
                                         <i class="fa-solid fa-pen-to-square"></i>
-                                    </button>
-                                    <!-- Modal de editar la Usuarios -->
-                                    <div class="modal fade" id="editarUsuario" tabindex="-1"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <!-- Aquí va el titulo del modal -->
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Editar
-                                                        Usuarios</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
-                                                <!-- Aquí va el contenido del modal -->
-                                                <div class="modal-body text-start">
-                                                    <form>
-                                                        <div class="mb-3">
-                                                            <label for="editarUsuario" class="form-label">Editar
-                                                                nombre del usuarios</label>
-                                                            <input type="text" class="form-control" id="editarUsuario">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label for="editarCondicion" class="form-label">Editar
-                                                                correo del usuario</label>
-                                                            <div class="input-group mb-3">
-                                                                <span class="input-group-text"
-                                                                    id="basic-addon1">@</span>
-                                                                <input type="text" class="form-control"
-                                                                    placeholder="Username" aria-label="Username"
-                                                                    aria-describedby="basic-addon1">
-                                                            </div>
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label for="editarCondicion" class="form-label">Rol de
-                                                                usuario</label>
-                                                            <div class="d-flex flex-wrap">
-                                                                <div class="form-check me-3 align-items-center">
-                                                                    <input class="form-check-input mt-0" type="radio"
-                                                                        value="" id="roleAdmin">
-                                                                    <label class="form-check-label"
-                                                                        for="roleAdmin">Administrador</label>
-                                                                </div>
-                                                                <div class="form-check me-3 align-items-center">
-                                                                    <input class="form-check-input mt-0" type="radio"
-                                                                        value="" id="roleEditor">
-                                                                    <label class="form-check-label"
-                                                                        for="roleEditor">Editor</label>
-                                                                </div>
-                                                                <div class="form-check me-3 align-items-center">
-                                                                    <input class="form-check-input mt-0" type="radio"
-                                                                        value="" id="roleAuthor">
-                                                                    <label class="form-check-label"
-                                                                        for="roleAuthor">Autor</label>
-                                                                </div>
-                                                                <div class="form-check me-3 align-items-center">
-                                                                    <input class="form-check-input mt-0" type="radio"
-                                                                        value="" id="roleContributor">
-                                                                    <label class="form-check-label"
-                                                                        for="roleContributor">Colaborador</label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="mt-3 text-end">
-                                                            <button type="button" class="btn btn-primary"
-                                                                id="btn-agregar">Guardar Cambios</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Cerrar</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <a href="#" class="btn btn-small btn-danger"><i
-                                            class="fa-solid fa-trash-can"></i></a>
-
+                                    </a>
 
                                 </td>
+
                             </tr>
                         </tbody>
                     </table>
