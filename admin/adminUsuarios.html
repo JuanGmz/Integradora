@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Usuarios admin</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/index.css">
 </head>
@@ -30,23 +30,23 @@
                                             type="button" data-bs-toggle="collapse" data-bs-target="#flush-inicio"
                                             aria-expanded="false" aria-controls="flush-inicio">
                                             <div class="col-8">
-                                                <i class="fa-solid fa-house-laptop me-3"></i>
-                                                Inicio
+                                                <a href="adminInicio.html"
+                                                    class="text-light fw-bold text-decoration-none">
+                                                    <i class="fa-solid fa-house-laptop me-1"></i>
+                                                    Inicio
+                                                </a>
                                             </div>
-                                            <div class="col-4 text-end">
-                                                <i class="fa-solid fa-chevron-down"></i>
-                                            </div>
+
                                         </button>
                                     </h2>
-                                    <div id="flush-inicio" class="accordion-collapse collapse"
-                                        data-bs-parent="#accordionMobile">
-                                        <div class="accordion-body bg-dark">
-                                            <a href="adminInicio.html"
-                                                class="fw-bold fs-5 ms-5 text-light text-decoration-none"
-                                                aria-current="true">
+                                    <div class="accordion-item">
+                                        <div class="accordion-header row">
+                                            <div class="collapsed fw-bold fs-3 bg-dark text-light p-3 ">
                                                 Componentes
-                                            </a>
+                                            </div>
+
                                         </div>
+
                                     </div>
                                 </div>
                                 <div class="accordion-item">
@@ -449,7 +449,7 @@
                                     <option value="3">Rol</option>
                                 </select>
                             </div>
-                            
+
                             <div class="col-sm-6 col-lg-4">
                                 <label class="visually-hidden" for="inlineFormInputGroupUsername">Buscar</label>
                                 <div class="input-group">
