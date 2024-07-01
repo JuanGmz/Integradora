@@ -505,7 +505,6 @@
                     <div class="col-6 col-sm-6 col-lg-4">
                         <div class="d-inline-flex align-items-center">
                             <h5 class="me-2 text-nowrap">Ordenar por</h5>
-
                             <label class="visually-hidden" for="inlineFormSelectPref">Preference</label>
                             <select class="form-select w-auto me-1" id="inlineFormSelectPref" style="min-width: 300px;">
                                 <option selected></option>
@@ -518,12 +517,10 @@
                     </div>
                 </div>
 
-
                 <!-- TABLA Y FORMULARIO-->
                 <div class="container-fluid row">
                     <!-- Datos de la tabla-->
                     <div class="col-12 p-4">
-
                         <table class="table table-striped">
                             <thead class="bg-info table-dark">
                                 <tr>
@@ -598,58 +595,44 @@
                                         <a href="#" class="btn btn-small btn-danger"><i
                                                 class="fa-solid fa-trash-can"></i></a>
                                     </td>
-                                    
                                 </tr>
-
-
-
                             </tbody>
 
                             <!-- Modal de editar la recompensa -->
-                            <div class="modal fade" id="editarCategoria" tabindex="-1"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="editarCategoria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h1 class="modal-title fs-5" id="exampleModalLabel">Editar categoria</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <!-- Aquí va el contenido del modal -->
                                         <div class="modal-body">
                                             <form>
                                                 <div class="mb-3">
-                                                    <label for="categoria" class="form-label">Nuevo nombre de la
-                                                        categoria</label>
+                                                    <label for="categoria" class="form-label">Categoria</label>
                                                     <input type="text" class="form-control" id="categoria">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="condicion" class="form-label">Nueva Descripcion</label>
                                                     <div class="form-floating">
-                                                        <textarea class="form-control"
-                                                            placeholder="Leave a comment here" id="floatingTextarea2"
-                                                            style="height: 100px"></textarea>
-
+                                                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px">
+                                                        </textarea>
                                                     </div>
                                                 </div>
-
-
                                                 <div class="mt-3 text-end">
-                                                    <button type="button" class="btn btn-primary"
-                                                        id="btn-agregar">Aplicar cambios</button>
+                                                    <button type="button" class="btn btn-primary" id="btn-agregar">Aplicar cambios</button>
                                                 </div>
                                             </form>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" data-bs-dismiss="modal"
-                                                class="btn btn-secondary">Cerrar</button>
+                                            <button type="button" data-bs-dismiss="modal" class="btn btn-secondary">Cerrar</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </table>
                     </div>
-
                     <!-- Formulario-->
                     <form class="col-4 p-3" method="POST">
 
