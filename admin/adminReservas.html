@@ -439,10 +439,10 @@
                             <div class="col">
                                 <label class="visually-hidden" for="inlineFormSelectPref">Preference</label>
                                 <select class="form-select" id="inlineFormSelectPref">
-                                    <option selected>Filtrar Por</option>
                                     <option value="1">Folio</option>
-                                    <option value="2">Categoría</option>
-                                    <option value="3">Etc</option>
+                                    <option value="2">Usuario</option>
+                                    <option value="3">Nombre</option>
+                                    <option value="3">Numero telefono </option>
                                 </select>
                             </div>
                             <div class="col-6">
@@ -455,6 +455,66 @@
                             </div>
                         </form>
                     </div>
+                </div>
+                <div class="container-fluid mt-5">
+                    <table class="table table-light table-striped text-center" border="1">
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col">Folio</th>
+                                <th>Evento</th>
+                                <th scope="col">Cliente</th>
+                                <th scope="col">Usuario</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                            <tr style="line-height: 3;">
+                                <th scope="row">202401</th>
+                                <td>Concierto</td>
+                                <td>Tobias Gabriel Rodriguez Lujan</td>
+                                <td>totilote</td>
+                                <td>20/06/2024</td>
+                                <td>
+                                    <!-- Botón que activa el modal de editar Usuarios -->
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#detallereserva">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                    <!-- Modal de editar la Usuarios -->
+                                    <div class="modal fade" id="detallereserva" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <!-- Aquí va el titulo del modal -->
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Detalles reserva
+                                                    </h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <!-- Aquí va el contenido del modal -->
+                                                <div class="modal-body text-start">
+                                                    <div class="modal-body">
+                                                        <h5 class="text-start fw-bold mb-3">Aquí irá el folio del pedido</h5>
+                                                        <h5 class="text-start fw-bold mb-3">Cliente: <span class="fw-normal">Aquí irá el nombre del cliente que realizó el pedido</span></h5>
+                                                        <h5 class="text-start fw-bold mb-3">Fecha: <span class="fw-normal">Aquí irá la fecha en la que se realizó el pedido</span></h5>
+                                                        <h5 class="text-start fw-bold mb-3">Estatus: <span class="fw-normal">Aquí irá el estatus del pedido</span></h5>
+                                                        <h5 class="text-start fw-bold mb-3">Metódo de pago: <span class="fw-normal">Aquí irá el método de pago</span></h5>
+                                                        <h5 class="text-start fw-bold mb-3">Monto Total: <span class="fw-normal">Aquí irá el monto total del pedido</span></h5>
+                                                        <!-- Tabla de productos --> 
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Cerrar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
