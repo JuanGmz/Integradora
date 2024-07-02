@@ -1,3 +1,4 @@
+
 create database cafe_sinfonia;
 
 use cafe_sinfonia;
@@ -53,7 +54,7 @@ id_rol int not null,
 primary key(id_ru),
 foreign key (id_rol) references roles(id_rol),
 foreign key (id_usuario) references usuarios(id_usuario)
-)
+);
 
 create table personas(
     id_persona int auto_increment not null,
@@ -63,28 +64,28 @@ create table personas(
     apellido_materno nvarchar(100) not null,
     primary key(id_persona),
     foreign key (id_usuario) references usuarios(id_usuario)
-)
+);
 
 create table clientes(
     id_cliente int auto_increment not null,
     id_persona int not null,
     primary key(id_cliente),
     foreign key (id_persona) references personas(id_persona)
-)
+);
 
 create table empleados(
     id_empleado int auto_increment not null,
     id_persona int not null,
     primary key(id_empleado),
-    foreign key (id_persona) references personas(id_persona),
-)
+    foreign key (id_persona) references personas(id_persona)
+);
 
 create table proveedores(
     id_proveedor int auto_increment not null,
     id_persona int not null,
     primary key(id_proveedor),
     foreign key (id_persona) references personas(id_persona)
-)
+);
 
 
 -- Ecommerce
@@ -166,7 +167,7 @@ cantidad int not null,
 monto_total double, -- Actualizar el monto si se actualiza el precio de alguna bolsa.
 primary key(id_dp),
 foreign key (id_pedido) references pedidos(id_pedido),
-foreign key (id_bc) references bolsas(id_bc)
+foreign key (id_bc) references bolsas_cafe(id_bc)
 );
 -- Eventos
 
@@ -191,10 +192,10 @@ hora_fin time not null,
 capacidad int not null,
 precio_boleto double not null, 
 disponibilidad int,
-img_url nvarchar(100)not nugitll,
+img_url nvarchar(100)not null,
 primary key(id_evento),
 foreign key (id_lugar) references ubicacion_lugares(id_lugar),
-foreign key (id_categoria) references categorias(id_categorias)
+foreign key (id_categoria) references categorias(id_categoria)
 );
 
 create table eventos_reservas(
@@ -253,7 +254,7 @@ recompensa nvarchar(150) not null,
 condicion int not null,
 fecha_inicio date not null, 
 fecha_expiracion date not null,
-estatus enum('Activa','Inactiva') default 'Activa'
+estatus enum('Activa','Inactiva') default 'Activa',
 img_url nvarchar(100)not null,
 primary key (id_recompensa)
 );
@@ -264,7 +265,7 @@ id_tarjeta int not null,
 id_recompensa int not null,
 canje boolean default false not null,
 primary key(id_tr),
-FOREIGN KEY (id_tarjeta) REFERENCES recompensas(id_tarjeta),
+FOREIGN KEY (id_tarjeta) REFERENCES tarjetas(id_tarjeta),
 FOREIGN KEY (id_recompensa) REFERENCES recompensas(id_recompensa)
 );
 
