@@ -149,7 +149,7 @@ id_bc int not null,
 cantidad int not null, -- Actualizar cantidad si se agrega un producto ya existente en el carrito, y no agregar el mismo producto.
 monto_total double, -- Trigger para actualizar el monto total, y otro o en el mismo trigger que se actualize el monto si se actualiza el precio del producto.
 primary key(id_carrito),
-unique(id_usuario, id_bc),
+unique(id_cliente, id_bc),
 foreign key (id_bc) references bolsas_cafe(id_bc),
 foreign key(id_cliente) references clientes(id_cliente)
 );
