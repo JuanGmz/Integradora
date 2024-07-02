@@ -6,6 +6,7 @@ create table CATEGORIAS(
 id_categoria int auto_increment not null,
 nombre nvarchar(100) not null,
 descripcion nvarchar(150),
+tipo enum('Menu','Evento') not null,
 primary key(id_categoria)
 );
 
@@ -25,7 +26,7 @@ titulo nvarchar(100) not null,
 descripcion nvarchar(500),
 img_url nvarchar(100),
 tipo enum('Difusion','Blog') not null,
-primary key(id_blog)
+primary key(id_publicacion) 
 );
 
 -- Usuarios
@@ -34,9 +35,6 @@ id_usuario int auto_increment not null,
 usuario nvarchar (100) not null,
 correo nvarchar(100) not null,
 contraseña nvarchar(150)not null,
-nombres nvarchar(150) not null, 
-a_p nvarchar(100),
-a_m nvarchar(100),
 telefono nchar(10),
 primary key(id_usuario)
 );
@@ -77,10 +75,8 @@ create table clientes(
 create table empleados(
     id_empleado int auto_increment not null,
     id_persona int not null,
-    id_rol int not null,
     primary key(id_empleado),
     foreign key (id_persona) references personas(id_persona),
-    foreign key (id_rol) references roles(id_rol)
 )
 
 create table proveedores(
@@ -89,7 +85,6 @@ create table proveedores(
     primary key(id_proveedor),
     foreign key (id_persona) references personas(id_persona)
 )
-
 
 
 -- Ecommerce
@@ -103,6 +98,7 @@ codigo_postal nvarchar(10) not null,
 colonia nvarchar(150) not null,
 calle nvarchar(200) not null,
 telefono nchar(10) not null,
+documento_url nvarchar(100),
 primary key(id_domicilio),
 foreign key (id_usuario) references usuarios(id_usuario)
 );
