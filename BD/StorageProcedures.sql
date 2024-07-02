@@ -1,5 +1,6 @@
 
 -- Buscar determinada reserva por folio.
+-- CLIENTE | FOLIO RESERVA | ESTATUS | FECHA / HORA RESERVA | EVENTO | FECHA EVENTO
 delimiter //
 create procedure SP_BuscarAdminReserva(in folioreserva int)
 begin 
