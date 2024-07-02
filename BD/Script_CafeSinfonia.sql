@@ -19,18 +19,18 @@ telefono nchar(10) not null,
 primary key(id_c)
 );
 
-create table blogs(
-id_blog int auto_increment not null,
+create table publicaciones(
+id_publicacion int auto_increment not null,
 titulo nvarchar(100) not null,
 descripcion nvarchar(500),
-img nvarchar(100),
+img_url nvarchar(100),
+tipo enum('Difusion','Blog') not null,
 primary key(id_blog)
 );
 
 -- Usuarios
 create table usuarios(
 id_usuario int auto_increment not null,
-id_rol int not null,
 usuario nvarchar (100) not null,
 correo nvarchar(100) not null,
 contraseña nvarchar(150)not null,
@@ -38,8 +38,7 @@ nombres nvarchar(150) not null,
 a_p nvarchar(100),
 a_m nvarchar(100),
 telefono nchar(10),
-primary key(id_usuario),
-foreign key (id_rol) references roles(id_rol)
+primary key(id_usuario)
 );
 
 create table roles(
@@ -48,6 +47,51 @@ rol nvarchar(150),
 descripcion nvarchar(200),
 primary key(id_rol)
 );
+
+create table roles_usuarios(
+id_ru int not null,
+id_usuario int not null,
+id_rol int not null,
+primary key(id_ru),
+foreign key (id_rol) references roles(id_rol),
+foreign key (id_usuario) references usuarios(id_usuario)
+)
+
+create table personas(
+    id_persona int auto_increment not null,
+    id_usuario int not null,
+    nombres nvarchar(150) not null,
+    apellido_paterno nvarchar(100) not null,
+    apellido_materno nvarchar(100) not null,
+    primary key(id_persona),
+    foreign key (id_usuario) references usuarios(id_usuario)
+)
+
+create table clientes(
+    id_cliente int auto_increment not null,
+    id_persona int not null,
+    primary key(id_cliente),
+    foreign key (id_persona) references personas(id_persona)
+)
+
+create table empleados(
+    id_empleado int auto_increment not null,
+    id_persona int not null,
+    id_rol int not null,
+    primary key(id_empleado),
+    foreign key (id_persona) references personas(id_persona),
+    foreign key (id_rol) references roles(id_rol)
+)
+
+create table proveedores(
+    id_proveedor int auto_increment not null,
+    id_persona int not null,
+    primary key(id_proveedor),
+    foreign key (id_persona) references personas(id_persona)
+)
+
+
+
 -- Ecommerce
 create table domicilios(
 id_domicilio int auto_increment not null,
@@ -89,7 +133,7 @@ aroma nvarchar(150) not null,
 acidez nvarchar(150) not null,
 sabor nvarchar(150) not null,
 cuerpo nvarchar(100) not null,
-img nvarchar(100)not null,
+img_url nvarchar(100)not null,
 primary key(id_bolsa),
 foreign key(id_categoria) references categorias(id_categoria)
 );
