@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Pedidos admin</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/index.css">
 </head>
 
-<body;">
+<body>
     <div class="container-fluid h-100">
         <!-- navbar mobile -->
         <div class="row d-block d-lg-none border-black border-bottom border-3 bg-dark">
@@ -30,22 +30,21 @@
                                             type="button" data-bs-toggle="collapse" data-bs-target="#flush-inicio"
                                             aria-expanded="false" aria-controls="flush-inicio">
                                             <div class="col-8">
-                                                <i class="fa-solid fa-house-laptop me-3"></i>
-                                                Inicio
+
+                                                <a href="adminInicio.html"
+                                                    class="text-light fw-bold text-decoration-none">
+                                                    <i class="fa-solid fa-house-laptop me-1"></i>
+                                                    Inicio
+                                                </a>
                                             </div>
-                                            <div class="col-4 text-end">
-                                                <i class="fa-solid fa-chevron-down"></i>
-                                            </div>
+
                                         </button>
                                     </h2>
-                                    <div id="flush-inicio" class="accordion-collapse collapse"
-                                        data-bs-parent="#accordionMobile">
-                                        <div class="accordion-body bg-dark">
-                                            <a href="adminInicio.html"
-                                                class="fw-bold fs-5 ms-5 text-light text-decoration-none"
-                                                aria-current="true">
+                                    <div class="accordion-item">
+                                        <div class="accordion-header row">
+                                            <div class="collapsed fw-bold fs-3 bg-dark text-light p-3 ">
                                                 Componentes
-                                            </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -240,28 +239,15 @@
                     </div>
                 </div>
                 <div class="accordion accordion-flush" id="accordionPc">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-inicio" aria-expanded="false"
-                                aria-controls="flush-inicio">
-                                <div class=" col-8">
-                                    <i class="fa-solid fa-house-laptop me-1"></i>
-                                    Inicio
-                                </div>
-                                <div class="col-4 text-end">
-                                    <i class="fa-solid fa-chevron-down"></i>
-                                </div>
-                            </button>
-                        </h2>
-                        <div id="flush-inicio" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
-                            <div class="accordion-body bg-dark">
-                                <a href="adminInicio.html" class="fw-bold fs-6 ms-5 text-light text-decoration-none"
-                                    aria-current="true">
-                                    Componentes
-                                </a>
-                            </div>
-                        </div>
+                    <div class=" ms-2 fs-3 mt-4 mb-3">
+                        <a class="fw-bold bg-dark text-light text-decoration-none" href="adminInicio.html"
+                            aria-expanded="false">
+                            <i class="fa-solid fa-house-laptop"></i>
+                            Inicio
+                        </a>
+                    </div>
+                    <div class="fw-bold fs-5 ms-2 mb-3 bg-dark text-light">
+                        Componentes
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header row">
@@ -449,7 +435,9 @@
                             <div class="col-6">
                                 <label class="visually-hidden" for="inlineFormInputGroupUsername">Buscar</label>
                                 <div class="input-group">
-                                    <div class="input-group-text"><i class="fa fa-search"></i></div>
+                                    <div class="input-group-text">
+                                        <i class="fa fa-search"></i>
+                                    </div>
                                     <input type="text" class="form-control" id="inlineFormInputGroupUsername"
                                         placeholder="Buscar">
                                 </div>
@@ -489,19 +477,29 @@
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Detalles del
-                                                        Pedido</h1>
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                                        Detalles del Pedido
+                                                    </h1>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <!-- Aquí va el contenido del modal -->
                                                 <div class="modal-body">
-                                                    <h5 class="text-start fw-bold mb-3">Aquí irá el folio del pedido</h5>
-                                                    <h5 class="text-start fw-bold mb-3">Cliente: <span class="fw-normal">Aquí irá el nombre del cliente que realizó el pedido</span></h5>
-                                                    <h5 class="text-start fw-bold mb-3">Fecha: <span class="fw-normal">Aquí irá la fecha en la que se realizó el pedido</span></h5>
-                                                    <h5 class="text-start fw-bold mb-3">Estatus: <span class="fw-normal">Aquí irá el estatus del pedido</span></h5>
-                                                    <h5 class="text-start fw-bold mb-3">Metódo de pago: <span class="fw-normal">Aquí irá el método de pago</span></h5>
-                                                    <h5 class="text-start fw-bold mb-3">Monto Total: <span class="fw-normal">Aquí irá el monto total del pedido</span></h5>
+                                                    <h5 class="text-start fw-bold mb-3">Aquí irá el folio del pedido
+                                                    </h5>
+                                                    <h5 class="text-start fw-bold mb-3">Cliente: <span
+                                                            class="fw-normal">Aquí irá el nombre del cliente que realizó
+                                                            el pedido</span></h5>
+                                                    <h5 class="text-start fw-bold mb-3">Fecha: <span
+                                                            class="fw-normal">Aquí irá la fecha en la que se realizó el
+                                                            pedido</span></h5>
+                                                    <h5 class="text-start fw-bold mb-3">Estatus: <span
+                                                            class="fw-normal">Aquí irá el estatus del pedido</span></h5>
+                                                    <h5 class="text-start fw-bold mb-3">Metódo de pago: <span
+                                                            class="fw-normal">Aquí irá el método de pago</span></h5>
+                                                    <h5 class="text-start fw-bold mb-3">Monto Total: <span
+                                                            class="fw-normal">Aquí irá el monto total del pedido</span>
+                                                    </h5>
                                                     <!-- Tabla de productos -->
                                                     <table class="table table-light table-striped text-center mt-4"
                                                         border="1">
@@ -526,7 +524,6 @@
                                                             </tr>
                                                         </tbody>
                                                     </table>
-
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" data-bs-dismiss="modal"
@@ -547,26 +544,35 @@
                                             <div class="modal-content">
                                                 <!-- Aquí va el titulo del modal -->
                                                 <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Gestionar Pedido</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Gestionar Pedido
+                                                    </h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
                                                 </div>
                                                 <!-- Aquí va el contenido del modal -->
                                                 <div class="modal-body">
                                                     <form class="text-start">
                                                         <div class="mb-1">
                                                             <label for="envio" class="form-label fw-bold">Envío</label>
-                                                            <input type="text" class="form-control" id="envio" aria-describedby="emailHelp">
+                                                            <input type="text" class="form-control" id="envio"
+                                                                aria-describedby="emailHelp">
                                                         </div>
                                                         <div class="mb-1">
-                                                            <label for="costoEnvio" class="form-label fw-bold">Costo del Envío</label>
-                                                            <input type="number" class="form-control" id="costoEnvio" min="0">
+                                                            <label for="costoEnvio" class="form-label fw-bold">Costo del
+                                                                Envío</label>
+                                                            <input type="number" class="form-control" id="costoEnvio"
+                                                                min="0">
                                                         </div>
                                                         <div class="mb-1">
-                                                            <label for="fechaEnvio" class="form-label fw-bold">Fecha de entrega Estimada</label>
-                                                            <input type="date" class="form-control" id="fechaEnvio" min="0">
+                                                            <label for="fechaEnvio" class="form-label fw-bold">Fecha de
+                                                                entrega Estimada</label>
+                                                            <input type="date" class="form-control" id="fechaEnvio"
+                                                                min="0">
                                                         </div>
                                                         <div class="mb-1">
-                                                            <label for="estatusPedido" class="form-label fw-bold">Estatus del Pedido</label>
+                                                            <label for="estatusPedido"
+                                                                class="form-label fw-bold">Estatus
+                                                                del Pedido</label>
                                                             <select class="form-select p-2" id="estatusPedido">
                                                                 <option selected>Pendiente</option>
                                                                 <option value="1">Finalizado</option>
@@ -574,13 +580,16 @@
                                                             </select>
                                                         </div>
                                                         <div class="text-end mt-2">
-                                                            <button type="submit" class="btn btn-danger">Cancelar Pedido</button>
-                                                            <button type="submit" class="btn btn-primary">Guardar</button>
+                                                            <button type="submit" class="btn btn-danger">Cancelar
+                                                                Pedido</button>
+                                                            <button type="submit"
+                                                                class="btn btn-primary">Guardar</button>
                                                         </div>
                                                     </form>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Cerrar</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -596,6 +605,6 @@
 
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/b820f07375.js" crossorigin="anonymous"></script>
-    </body>
+</body>
 
 </html>
