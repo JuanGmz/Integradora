@@ -1,4 +1,4 @@
-
+ drop database cafe_sinfonia;
 create database cafe_sinfonia;
 
 use cafe_sinfonia;
@@ -87,7 +87,6 @@ create table proveedores(
     foreign key (id_persona) references personas(id_persona)
 );
 
-
 -- Ecommerce
 create table domicilios(
 id_domicilio int auto_increment not null,
@@ -100,7 +99,7 @@ colonia nvarchar(150) not null,
 calle nvarchar(200) not null,
 telefono nchar(10) not null,
 primary key(id_domicilio),
-foreign key (id_usuario) references usuarios(id_usuario)
+foreign key (id_cliente) references clientes(id_cliente)
 );
 
 create table pedidos(
