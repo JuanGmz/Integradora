@@ -98,7 +98,6 @@ codigo_postal nvarchar(10) not null,
 colonia nvarchar(150) not null,
 calle nvarchar(200) not null,
 telefono nchar(10) not null,
-documento_url nvarchar(100),
 primary key(id_domicilio),
 foreign key (id_usuario) references usuarios(id_usuario)
 );
@@ -106,13 +105,14 @@ foreign key (id_usuario) references usuarios(id_usuario)
 create table pedidos(
 id_pedido int auto_increment not null,
 id_usuario int not null,
-estatus enum('','','') not null,
+estatus enum('Pendiente','En proceso','Finalizado','Cancelado') default 'Pendiente' not null,
 fecha_hora_pedido datetime default current_timestamp,
 id_domicilio int not null,
 envio nvarchar(150),
 costo_envio double,
-metodo_pago nvarchar(100),
+metodo_pago enum('Transferencia Bancaria','Deposito Bancario','PayPal','Mercadopago','Oxxo','Tarjeta de Credito','Tarjeta de Debito','Otro') not null,
 fecha_entrega_estimada datetime,
+documento_url nvarchar(100),
 primary key(id_pedido),
 foreign key (id_usuario) references usuarios(id_usuario),
 foreign key (id_domicilio) references domicilios(id_domicilio)
@@ -191,7 +191,7 @@ hora_fin time not null,
 capacidad int not null,
 precio_boleto double not null, 
 disponibilidad int,
-img nvarchar(100)not null,
+img_url nvarchar(100)not null,
 primary key(id_evento),
 foreign key (id_lugar) references ubicacion_lugares(id_lugar),
 foreign key (id_categoria) references categorias(id_categorias)
@@ -199,14 +199,14 @@ foreign key (id_categoria) references categorias(id_categorias)
 
 create table eventos_reservas(
 id_reserva int auto_increment not null,
-id_usuario int not null, 
+id_cliente int not null, 
 id_evento int not null, 
 c_boletos int not null,
 monto_total double null,
 fecha_hora_reserva datetime default current_timestamp,
-estatus enum('','',''), -- Puede ser pendiente, y esas cosas.
+estatus enum('Pendiente','Cancelada','Apartada') default 'Pendiente', -- Puede ser pendiente, y esas cosas.
 primary key(id_reserva),
-foreign key (id_usuario) references USUARIOS(id_usuario),
+foreign key (id_cliente) references clientes(id_cliente),
 foreign key (id_evento) references EVENTOS(id_evento)
 );
 
@@ -216,7 +216,7 @@ id_dpm int auto_increment not null,
 id_categoria int not null, 
 nombre nvarchar(150) not null,
 descripcion nvarchar (300) not null,
-img nvarchar(100)not null,
+img_url nvarchar(100)not null,
 primary key(id_dpm),
 foreign key (id_categoria) references CATEGORIAS(id_categoria)
 );
@@ -233,10 +233,10 @@ foreign key (id_pm) references detalle_productos_menu(id_dpm)
 -- Sistemma de Recompensas
 create table tarjetas(
 id_tarjeta int auto_increment not null,
-id_usuario int not null,
+id_cliente int not null,
 progreso int,
 primary key(id_tarjeta),
-foreign key (id_usuario) references USUARIOS(id_usuario)
+foreign key (id_cliente) references clientes(id_cliente)
 );
 
 create table asistencias(
@@ -253,6 +253,8 @@ recompensa nvarchar(150) not null,
 condicion int not null,
 fecha_inicio date not null, 
 fecha_expiracion date not null,
+estatus enum('Activa','Inactiva') default 'Activa'
+img_url nvarchar(100)not null,
 primary key (id_recompensa)
 );
 
@@ -260,7 +262,7 @@ create table tarjeta_recompensas(
 id_tr int auto_increment not null,
 id_tarjeta int not null,
 id_recompensa int not null,
-canje boolean not null,
+canje boolean default false not null,
 primary key(id_tr),
 FOREIGN KEY (id_tarjeta) REFERENCES recompensas(id_tarjeta),
 FOREIGN KEY (id_recompensa) REFERENCES recompensas(id_recompensa)
