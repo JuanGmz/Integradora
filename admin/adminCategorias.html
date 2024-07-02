@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Inicio Admin</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/index.css">
 </head>
@@ -30,23 +30,24 @@
                                             type="button" data-bs-toggle="collapse" data-bs-target="#flush-inicio"
                                             aria-expanded="false" aria-controls="flush-inicio">
                                             <div class="col-8">
-                                                <i class="fa-solid fa-house-laptop me-3"></i>
-                                                Inicio
+
+                                                <a href="adminInicio.html"
+                                                    class="text-light fw-bold text-decoration-none">
+                                                    <i class="fa-solid fa-house-laptop me-1"></i>
+                                                    Inicio
+                                                </a>
                                             </div>
-                                            <div class="col-4 text-end">
-                                                <i class="fa-solid fa-chevron-down"></i>
-                                            </div>
+
                                         </button>
                                     </h2>
-                                    <div id="flush-inicio" class="accordion-collapse collapse"
-                                        data-bs-parent="#accordionMobile">
-                                        <div class="accordion-body bg-dark">
-                                            <a href="adminInicio.html"
-                                                class="fw-bold fs-5 ms-5 text-light text-decoration-none"
-                                                aria-current="true">
+                                    <div class="accordion-item">
+                                        <div class="accordion-header row">
+                                            <div class="collapsed fw-bold fs-3 bg-dark text-light p-3 ">
                                                 Componentes
-                                            </a>
+                                            </div>
+
                                         </div>
+
                                     </div>
                                 </div>
                                 <div class="accordion-item">
@@ -243,26 +244,30 @@
                     <div class="accordion-item">
                         <h2 class="accordion-header row">
                             <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-inicio" aria-expanded="false"
-                                aria-controls="flush-inicio">
+                                href="adminInicio.html" data-bs-toggle="collapse" data-bs-target="#flush-inicio"
+                                aria-expanded="false" aria-controls="flush-inicio">
                                 <div class=" col-8">
-                                    <i class="fa-solid fa-house-laptop me-1"></i>
-                                    Inicio
+                                    <a href="adminInicio.html" class="text-light fw-bold text-decoration-none">
+                                        <i class="fa-solid fa-house-laptop me-1"></i>
+                                        Inicio
+                                    </a>
+
                                 </div>
-                                <div class="col-4 text-end">
-                                    <i class="fa-solid fa-chevron-down"></i>
-                                </div>
+
                             </button>
                         </h2>
-                        <div id="flush-inicio" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
-                            <div class="accordion-body bg-dark">
-                                <a href="adminInicio.html" class="fw-bold fs-6 ms-5 text-light text-decoration-none"
-                                    aria-current="true">
-                                    Componentes
-                                </a>
-                            </div>
-                        </div>
+
                     </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header row">
+                            <div class="collapsed fw-bold fs-3 bg-dark text-light p-3 ">
+                                Componentes
+                            </div>
+
+                        </div>
+
+                    </div>
+
                     <div class="accordion-item">
                         <h2 class="accordion-header row">
                             <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
@@ -427,65 +432,63 @@
                     </div>
                 </div>
             </div>
-
             <!-- AQUI VA EL CONTENIDOOOOOOOO -->
             <div class="col-lg-9 offset-lg-3 p-3">
                 <div class="container-fluid">
-                    <h1 class="fw-bold">Categorías</h1>
+                    <h1 class="fw-bold">Categorias</h1>
                 </div>
-                <div class="container-fluid">
-                    <div class="col bg-body-tertiary p-3 rounded">
-                        <form class="row row-cols-lg-auto g-3 align-items-center">
-
-                            <div class="col-sm-6 col-lg-6">
-                                <label class="visually-hidden" for="inlineFormInputGroupUsername">Buscar</label>
-                                <div class="input-group">
-                                    <div class="input-group-text">
-                                        <i class="fa fa-search"></i>
-                                    </div>
-                                    <input type="text" class="form-control" id="inlineFormInputGroupUsername"
-                                        placeholder="Buscar">
+                <div class="container-fluid bg-body-tertiary p-3 rounded">
+                    <form class="row row-cols-lg-auto g-3 align-items-center">
+                        <div class="col-lg-4 col-sm-6">
+                            <label class="visually-hidden" for="seleccionarFiltrado">Preference</label>
+                            <select class="form-select" id="seleccionarFiltrado" name="seleccionarFiltrado">
+                                <option selected>Filtrar Por</option>
+                                <option value="1">Ascendiente</option>
+                                <option value="2">Descendiente</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-4 col-sm-6">
+                            <label class="visually-hidden" for="buscarCategoria">Buscar</label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class="fa fa-search"></i>
                                 </div>
+                                <input type="text" class="form-control" id="buscarCategoria" placeholder="Buscar">
                             </div>
-                            <div class="col-lg-4 ms-auto text-end text-md-start text-sm-start">
-                                <!-- Botón que activa el modal de agregar categoria-->
-                                <button type="button" class="btn btn-primary ms-auto" data-bs-toggle="modal"
+                        </div>
+                        <div class="col-lg-4 ms-auto">
+                            <div class="text-end">
+                                <!-- Botón para agregar nueva categoria -->
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#agregarCategoria">
                                     Agregar Categoría
                                 </button>
                             </div>
-                            <!-- Modal de Agregar categoria -->
+                            <!-- Modal para agregar Categoría -->
                             <div class="modal fade" id="agregarCategoria" tabindex="-1"
                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar categoria</h1>
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Categoría</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
                                         <!-- Aquí va el contenido del modal -->
                                         <div class="modal-body">
-                                            <form>
+                                            <form action="" method="POST">
                                                 <div class="mb-3">
-                                                    <label for="categoria" class="form-label">Nombre de la
-                                                        categoria</label>
-                                                    <input type="text" class="form-control" id="categoria">
+                                                    <label for="nombre" class="form-label">Nombre</label>
+                                                    <input type="text" class="form-control" id="nombre" name="nombre">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="condicion" class="form-label">Descripcion</label>
-                                                    <div class="form-floating">
-                                                        <textarea class="form-control"
-                                                            placeholder="Leave a comment here" id="floatingTextarea2"
-                                                            style="height: 100px"></textarea>
-
-                                                    </div>
+                                                    <label for="descripcion" class="form-label">Descripción</label>
+                                                    <textarea name="descripcion" id="descripcion" name="descripcion"
+                                                        class="form-control"></textarea>
                                                 </div>
-
-
-                                                <div class="mt-3 text-end">
-                                                    <button type="button" class="btn btn-primary"
-                                                        id="btn-agregar">Agregar categoria</button>
+                                                <div class="text-end">
+                                                    <button type="submit" class="btn btn-primary">Agregar
+                                                        Categoría</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -496,169 +499,102 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
-
-                    </div>
-
-                </div>
-                <div class="col me-5 p-4 ">
-                    <div class="col-6 col-sm-6 col-lg-4">
-                        <div class="d-inline-flex align-items-center">
-                            <h5 class="me-2 text-nowrap">Ordenar por</h5>
-
-                            <label class="visually-hidden" for="inlineFormSelectPref">Preference</label>
-                            <select class="form-select w-auto me-1" id="inlineFormSelectPref" style="min-width: 300px;">
-                                <option selected></option>
-                                <option value="1">Empezando por la A</option>
-                                <option value="2">Empezando por la Z</option>
-                                <option value="3">Etc</option>
-                            </select>
-
                         </div>
-                    </div>
+                    </form>
                 </div>
-
-
-                <!-- TABLA Y FORMULARIO-->
-                <div class="container-fluid row">
-                    <!-- Datos de la tabla-->
-                    <div class="col-12 p-4">
-
-                        <table class="table table-striped">
-                            <thead class="bg-info table-dark">
-                                <tr>
-                                    <th scope="col">Nombre</th>
-                                    <th scope="col">Descripción</th>
-                                    <th scope="col">Estado</th>
-                                    <th scope="col"></th>
-                                    
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Ejemplo</td>
-                                    <td>Ejemplo</td>
-                                    <td>
-                                        <div class="form-check form-switch mb-0">
-                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                            <label class="form-check-label" for="flexSwitchCheckDefault">Activar</label>
-                                        </div>
-                                    </td>
-                                    <td>
-
-                                       <!-- Botón que activa el modal de editar la categoria -->
-                                       <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                       data-bs-target="#editarCategoria">
-                                       <i class="fa-solid fa-pen-to-square"></i>
-                                   </button>
-                                        <a href="#" class="btn btn-small btn-danger me-1"><i
-                                                class="fa-solid fa-trash-can"></i></a>
-
-
-                                    </td>
-                                   
-                                </tr>
-                                <tr>
-                                    <!--Ejemplo 2-->
-                                    <td>Ejemplo 2</td>
-                                    <td>Ejemplo 2</td>
-                                    <td>
-                                        <div class="form-check form-switch mb-0">
-                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                            <label class="form-check-label" for="flexSwitchCheckDefault">Activar</label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <!-- Botón que activa el modal de editar la categoria -->
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                            data-bs-target="#editarCategoria">
-                                            <i class="fa-solid fa-pen-to-square"></i>
-                                        </button>
-                                        <a href="#" class="btn btn-small btn-danger"><i
-                                                class="fa-solid fa-trash-can"></i></a>
-                                    </td>
-                                    
-                                </tr>
-                                <tr>
-                                    <!--Ejemplo 3-->
-                                    <td>Ejemplo 2</td>
-                                    <td>Ejemplo 2</td>
-                                    <td>
-                                        <div class="form-check form-switch mb-0">
-                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                            <label class="form-check-label" for="flexSwitchCheckDefault">Activar</label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <!-- Botón que activa el modal de editar la categoria -->
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                            data-bs-target="#editarCategoria">
-                                            <i class="fa-solid fa-pen-to-square"></i>
-                                        </button>
-                                        <a href="#" class="btn btn-small btn-danger"><i
-                                                class="fa-solid fa-trash-can"></i></a>
-                                    </td>
-                                    
-                                </tr>
-
-
-
-                            </tbody>
-
-                            <!-- Modal de editar la recompensa -->
-                            <div class="modal fade" id="editarCategoria" tabindex="-1"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Editar categoria</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <!-- Aquí va el contenido del modal -->
-                                        <div class="modal-body">
-                                            <form>
-                                                <div class="mb-3">
-                                                    <label for="categoria" class="form-label">Nuevo nombre de la
-                                                        categoria</label>
-                                                    <input type="text" class="form-control" id="categoria">
+                <!-- TABLA DE CATEGORIAS -->
+                <div class="container-fluid mt-5">
+                    <table class="table table-light table-striped text-center" border="1">
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col" class="d-none d-lg-table-cell">Descripción</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                            <tr style="line-height: 3;">
+                                <th scope="row">Helado</th>
+                                <td class="d-none d-lg-table-cell">Solo cafés fríos</td>
+                                <td>
+                                    <!-- Botón que activa el modal de detalle de la categoria -->
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDetalles">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                    <!-- Modal de Detalles de la Categoría -->
+                                    <div class="modal fade" id="modalDetalles" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                                        Detalles de la Categoría
+                                                    </h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label for="condicion" class="form-label">Nueva Descripcion</label>
-                                                    <div class="form-floating">
-                                                        <textarea class="form-control"
-                                                            placeholder="Leave a comment here" id="floatingTextarea2"
-                                                            style="height: 100px"></textarea>
-
-                                                    </div>
+                                                <!-- Aquí va el contenido del modal -->
+                                                <div class="modal-body text-start">
+                                                    <h5 class="fw-bold">Nombre: <span class="fw-normal">Nombre de la Categoría</span></h5>
+                                                    <h5 class="fw-bold">Descripción: <span class="fw-normal">Descripción de la Categoría</span></h5>
+                                                    <h5 class="fw-bold">Estado: <span class="fw-normal">Estado de la Categoría</span></h5>
                                                 </div>
-
-
-                                                <div class="mt-3 text-end">
-                                                    <button type="button" class="btn btn-primary"
-                                                        id="btn-agregar">Aplicar cambios</button>
+                                                <div class="modal-footer">
+                                                    <button type="button" data-bs-dismiss="modal"
+                                                        class="btn btn-primary">Cerrar</button>
                                                 </div>
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" data-bs-dismiss="modal"
-                                                class="btn btn-secondary">Cerrar</button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </table>
-                    </div>
-
-                    <!-- Formulario-->
-                    <form class="col-4 p-3" method="POST">
-
-                    </form>
+                                    <!-- Botón que activa el modal de editar la categoría -->
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editarCategoria">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                    <!-- Modal de editar categoria -->
+                                    <div class="modal fade" id="editarCategoria" tabindex="-1" aria-labelledby="headerEditarCategoria" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <!-- Aquí va el titulo del modal -->
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="headerEditarCategoria">
+                                                        Editar Categoría
+                                                    </h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <!-- Aquí va el contenido del modal -->
+                                                <div class="modal-body">
+                                                    <form class="text-start">
+                                                        <div class="mb-1">
+                                                            <label for="editCategoria" class="form-label">Categoría</label>
+                                                            <input type="text" class="form-control" id="editCategoria" name="editCategoria" aria-describedby="emailHelp">
+                                                        </div>
+                                                        <div class="mb-1">
+                                                            <label for="costoEnvio" class="form-label">Descripción</label>
+                                                            <textarea name="editDescrip" id="editDescrip" name="editDescrip" class="form-control"></textarea>
+                                                        </div>
+                                                        <div class="text-end mt-2">
+                                                            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Botón para desactivar la categoría -->
+                                    <button type="button" class="btn btn-danger">
+                                        <i class="fa-solid fa-eye-slash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/b820f07375.js" crossorigin="anonymous"></script>
     </body>
