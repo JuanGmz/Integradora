@@ -440,6 +440,60 @@
                                         placeholder="Buscar">
                                 </div>
                             </div>
+                            <div class="ms-auto">
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                                    data-bs-target="#Modal">
+                                    Agregar producto
+                                </button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Blog
+                                                </h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <!-- Aqui va el contenido de el boton de agregar-->
+                                                <form>
+                                                    <div class="mb-3">
+                                                        <!-- Nombre -->
+                                                        <label for="nombreBlog" class="form-label">Agregar el
+                                                            Nombre
+                                                            del Blog</label>
+                                                        <input type="text" class="form-control" name="nAgregarBlog" id="nombreAgregarBlog" aria-describedby="emailHelp">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <!-- Descripcion -->
+                                                        <label for="descripcionBlog" class="form-label">Agregar
+                                                            la
+                                                            Descripción del Blog</label>
+                                                            <textarea name="dAgregarBlog" class="form-control" id="descripcionAgregarBlog" cols="60" rows="5"></textarea>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <!-- Subir foto -->
+                                                        <label for="imgBlog" class="form-label">Agregar la Imágen
+                                                            del
+                                                            Blog</label>
+                                                        <input type="file" name="iAgregarBlog" class="form-control" id="imgAgregarBlog">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <!-- Agregar categoria -->
+                                                        <label for="categAgregarBlog" class="form-label">Agregar la Imágen
+                                                            del
+                                                            Blog</label>
+                                                        <input type="file" name="categAgregarBlog" class="form-control" id="imgAgregarBlog">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -452,9 +506,9 @@
         <div class="container-fluid mt-3">
             <div class="row">
                 <!-- COLUMNA de los Blogs -->
-                <div class="col-sm-6 col-md-6 col-lg-4 mb-3 ">
+                <div class="col-sm-6 col-md-6 col-lg-4 mb-3 h">
                     <div class="card">
-                        <img src="../img/blog-1.jpg" class="card-img-top img-fluid" alt="...">
+                        <img src="../img/blog-1.jpg" class="card-img-top img-fluid object-fit-cover" alt="...">
                         <div class="card-body rounded-bottom bg-body-tertiary">
                             <h5 class="card-title fw-bold text-center">Café Premiere</h5>
                                 <!-- Botón para editar blog -->
@@ -468,7 +522,7 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Producto
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Blog
                                             </h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> <!-- por que hay 2 botones de cerrar -->
                                         </div>
@@ -479,21 +533,21 @@
                                                     <!-- Nombre -->
                                                     <label for="nombreBlog" class="form-label">Editar el
                                                         Nombre
-                                                        del Producto</label>
+                                                        del Blog</label>
                                                     <input type="text" class="form-control" name="nBlog" id="nombreBlog" aria-describedby="emailHelp">
                                                 </div>
                                                 <div class="mb-3">
                                                     <!-- Descripcion -->
                                                     <label for="descripcionBlog" class="form-label">Editar
                                                         la
-                                                        Descripción del blog</label>
+                                                        Descripción del Blog</label>
                                                         <textarea name="dBlog" class="form-control" id="descripcionBlog" cols="60" rows="5"></textarea>
                                                 </div>
                                                 <div class="mb-3">
                                                     <!-- Subir foto -->
                                                     <label for="imgBlog" class="form-label">Editar la Imágen
                                                         del
-                                                        Producto</label>
+                                                        Blog</label>
                                                     <input type="file" name="iBlog" class="form-control" id="imgBlog">
                                                 </div>
                                             </form>
