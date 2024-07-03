@@ -16,9 +16,7 @@ delimiter ;
 
 -- Procedo almacenado de Menu
 delimiter $$
-create procedure SP_AdmiMenu (
-    in Nombre varchar(50)
-)
+create procedure SP_AdmiMenu (in Nombre varchar(100))
 begin
 SELECT 
     dpm.nombre AS Producto, 
