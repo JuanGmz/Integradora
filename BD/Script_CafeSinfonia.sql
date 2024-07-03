@@ -34,7 +34,7 @@ create table usuarios(
 id_usuario int auto_increment not null,
 usuario nvarchar (100) not null,
 correo nvarchar(100) not null,
-contraseña nvarchar(150)not null,
+contraseña varbinary(150)not null,
 telefono nchar(10),
 primary key(id_usuario)
 );
