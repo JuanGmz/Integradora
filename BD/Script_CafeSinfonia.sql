@@ -1,4 +1,3 @@
-
 create database cafe_sinfonia;
 
 use cafe_sinfonia;
@@ -87,11 +86,10 @@ create table proveedores(
     foreign key (id_persona) references personas(id_persona)
 );
 
-
 -- Ecommerce
 create table domicilios(
 id_domicilio int auto_increment not null,
-id_usuario int not null,
+id_cliente int not null,
 referencia nvarchar(200) not null,
 estado nvarchar(100) not null,
 ciudad nvarchar(100) not null,
@@ -100,12 +98,12 @@ colonia nvarchar(150) not null,
 calle nvarchar(200) not null,
 telefono nchar(10) not null,
 primary key(id_domicilio),
-foreign key (id_usuario) references usuarios(id_usuario)
+foreign key (id_cliente) references clientes(id_cliente)
 );
 
 create table pedidos(
 id_pedido int auto_increment not null,
-id_usuario int not null,
+id_cliente int not null,
 estatus enum('Pendiente','En proceso','Finalizado','Cancelado') default 'Pendiente' not null,
 fecha_hora_pedido datetime default current_timestamp,
 id_domicilio int not null,
@@ -115,13 +113,12 @@ metodo_pago enum('Transferencia Bancaria','Deposito Bancario','PayPal','Mercadop
 fecha_entrega_estimada datetime,
 documento_url nvarchar(100),
 primary key(id_pedido),
-foreign key (id_usuario) references usuarios(id_usuario),
+foreign key (id_cliente) references clientes(id_cliente),
 foreign key (id_domicilio) references domicilios(id_domicilio)
 );
 
 create table bolsas_detalle (
 id_bolsa int auto_increment not null,
-id_categoria int,
 productor_finca nvarchar(150) not null,
 proceso nvarchar(100) not null,
 variedad nvarchar(200) not null,
@@ -131,8 +128,7 @@ acidez nvarchar(150) not null,
 sabor nvarchar(150) not null,
 cuerpo nvarchar(100) not null,
 img_url nvarchar(100)not null,
-primary key(id_bolsa),
-foreign key(id_categoria) references categorias(id_categoria)
+primary key(id_bolsa)
 );
 
 create table bolsas_cafe(
@@ -148,14 +144,14 @@ foreign key(id_bolsa) references bolsas_detalle(id_bolsa)
 
 create table carrito(
 id_carrito int auto_increment not null,
-id_usuario int not null,
+id_cliente int not null,
 id_bc int not null,
 cantidad int not null, -- Actualizar cantidad si se agrega un producto ya existente en el carrito, y no agregar el mismo producto.
 monto_total double, -- Trigger para actualizar el monto total, y otro o en el mismo trigger que se actualize el monto si se actualiza el precio del producto.
 primary key(id_carrito),
-unique(id_usuario, id_bc),
+unique(id_cliente, id_bc),
 foreign key (id_bc) references bolsas_cafe(id_bc),
-foreign key(id_usuario) references usuarios(id_usuario)
+foreign key(id_cliente) references clientes(id_cliente)
 );
 
 create table detalle_pedidos (
