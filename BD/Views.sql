@@ -15,8 +15,10 @@ create view view_AdminPedidosDetalles as
 -- Vista de Administrador Pedidos
 create view view_AdminPedidos as 
 select 
-	concat(p.nombres, '', p.apellido_paterno,'', p.apellido_materno) as CLIENTE, pd.id_pedido as 'FOLIO PEDIDO'
+	 concat(p.nombres, '', p.apellido_paterno,'', p.apellido_materno) as CLIENTE, pd.id_pedido as 'FOLIO PEDIDO', pd.estatus as ESTATUS, 
+     pd.fecha_hora_pedido as 'FECHA / HORA PEDIDO', dp.monto_total as 'MONTO TOTAL'
 from pedidos pd
 	join clientes c on c.id_cliente = pd.id_cliente
-    join personas p on p.id_persona = c.id_persona;
+    join personas p on p.id_persona = c.id_persona
+    join detalle_pedidos dp on pd.id_pedido = dp.id_pedido;
 
