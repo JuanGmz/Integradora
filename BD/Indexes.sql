@@ -41,5 +41,3 @@ CREATE INDEX idx_asistencias_id_tarjeta ON asistencias(id_tarjeta);
 -- Tablas tarjetas recompensas.
 CREATE INDEX idx_tarjeta_recompensas_id_tarjeta ON tarjeta_recompensas(id_tarjeta);
 CREATE INDEX idx_tarjeta_recompensas_id_recompensa ON tarjeta_recompensas(id_recompensa);
-
--- 
