@@ -4,15 +4,10 @@
     --primary-color: #c7a17a;
     --background-color: #f9f5f0;
     --dark-color: #151515;
-
 }
 
-
 html {
-    font-size: 65.5%;
     font-family: 'Poppins', sans-serif;
-
-
 }
 
 * {
@@ -56,6 +51,7 @@ html {
 .lds-ripple div:nth-child(2) {
   animation-delay: -0.5s;
 }
+
 @keyframes lds-ripple {
   0% {
     top: 36px;
@@ -188,4 +184,25 @@ html {
 }
 .bb:hover {
     color: aliceblue;
+}
+
+.accordion-item {
+    border: none;
+  }
+  .accordion-button {
+    border: none;
+    box-shadow: none;
+  }
+  .accordion-button:not(.collapsed) {
+    box-shadow: none;
+  }
+  .accordion-button::after {
+    display: none;
+  }
+  .accordion-body a {
+    color: gray;
+    
+  }
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }

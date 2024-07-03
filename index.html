@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/carga.css">
+
+    
 </head>
 
 <body>
@@ -19,9 +21,9 @@
         </div>
     </div>
 
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-lg">
         <div class="container-fluid">
-            <a class="navbar-brand fs-2" href="#">Sinfonía&Cultura</a>
+            <a class="navbar-brand fs-3" href="#">Sinfonía&Cultura</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
                 aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -29,34 +31,155 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active m-3 fs-4" aria-current="page" href="index.html">Inicio</a>
+                        <a class="nav-link active m-1 fs-5" aria-current="page" href="index.html">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active m-3 fs-4" aria-current="page" href="#">Menú</a>
+                        <a class="nav-link active m-1 fs-5" aria-current="page" href="./html/menu.html">Menú</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active m-3 fs-4" aria-current="page" href="#">Blog</a>
+                        <a class="nav-link active m-1 fs-5" aria-current="page" href="#">Blog</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active m-3 fs-4" aria-current="page" href="#">Comprar</a>
+                        <a class="nav-link active m-1 fs-5" aria-current="page" href="#">Comprar</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active m-3 fs-4" aria-current="page" href="#">Recompensas</a>
+                        <a class="nav-link active m-1 fs-5" aria-current="page" href="#">Recompensas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active m-3 fs-4" aria-current="page"
+                        <a class="nav-link active m-1 fs-5" aria-current="page"
                             href="../Integradora/html/contact.html">Contacto</a>
                     </li>
                 </ul>
-                <div class="row ms-1">
-                    <div class="col">
-                        <a href="./html/login.html" class="btn btn-primary fs-5">Ingresar</a>
-                        <a href="./html/createAccount.html" class="btn btn-primary fs-5 ms-3 me-3">Registrarse</a>
+                <div class="row">
+                    <div class="col-12">
+                        <a href="./html/login.html" class="btn btn-primary fs-6">Ingresar</a>
+                        <a href="./html/createAccount.html" class="btn btn-primary fs-6">Registrarse</a>
                     </div>
                 </div>
             </div>
         </div>
     </nav>
+
+    <main>
+        <!-- Carrousel -->
+        <div id="carousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="./img/imgcafe-5.jpg" class="d-block w-100" alt="img_carousel1">
+                </div>
+                <div class="carousel-item">
+                    <img src="./img/blog-2.jpg" class="d-block w-100" alt="img_carousel2">
+                </div>
+                <div class="carousel-item">
+                    <img src="./img/imgcafe-5.jpg" class="d-block w-100" alt="img_carousel3">
+                </div>
+            </div>
+        </div>
+
+        <!-- Productos -->
+        <div class="container mt-3">
+            <h3 class="text-center">Productos Recomendados</h3>
+            <div class="row">
+                <div class="col-lg-4 mb-3">
+                    <div class="card">
+                        <img src="./img/capuchino-1.jpg" class="card-img-top img-carousel" alt="producto1">
+                        <div class="card-body">
+                            <h5 class="card-title">Nombre Producto</h5>
+                            <p class="card-text">Descripción</p>
+                            <a href="#" class="btn btn-primary">Ver más detalles</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-3">
+                    <div class="card">
+                        <img src="./img/capuchino-1.jpg" class="card-img-top" alt="producto1">
+                        <div class="card-body">
+                            <h5 class="card-title">Nombre Producto</h5>
+                            <p class="card-text">Descripción</p>
+                            <a href="#" class="btn btn-primary">Ver más detalles</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-3">
+                    <div class="card">
+                        <img src="./img/capuchino-1.jpg" class="card-img-top" alt="producto1">
+                        <div class="card-body">
+                            <h5 class="card-title">Nombre Producto</h5>
+                            <p class="card-text">Descripción</p>
+                            <a href="#" class="btn btn-primary">Ver más detalles</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Eventos -->
+            <div class="card text-bg-dark h-50">
+                <img src="./img/imgcafe-4.jpg" class="card-img" alt="...">
+                <div class="card-img-overlay">
+                  <h5 class="card-title">NOMBRE EVENTO</h5>
+                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <p class="card-text"><small>Last updated 3 mins ago</small></p>
+                </div>
+              </div>
+
+        <!-- Blog -->
+        <div class="container">
+            <h3 class="text-center">Nuestro Blog</h3>
+            <div class="row">
+                <div class="col-lg-4 mb-3">
+                    <div class="card mb-3" style="max-width: 540px;">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="./img/imgcafe-1.jpg" class="img-fluid rounded-start" alt="blog1">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">El origen del café</h5>
+                                    <p class="card-text">Breve descripción del Blog</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-3">
+                    <div class="card mb-3" style="max-width: 540px;">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="./img/imgcafe-2.jpg" class="img-fluid rounded-start" alt="blog1">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">El origen del café</h5>
+                                    <p class="card-text">Breve descripción del Blog</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-3">
+                    <div class="card mb-3" style="max-width: 540px;">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="./img/imgcafe-3.jpg" class="img-fluid rounded-start" alt="blog1">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">El origen del café</h5>
+                                    <p class="card-text">Breve descripción del Blog</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Difusión -->
+        <div class="container">
+
+        </div>
+    </main>
 
 
     <!-- Footer -->

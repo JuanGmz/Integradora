@@ -7,43 +7,49 @@
     <title>Contacto</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/index.css">
+    <style>
+        #map {
+            width: 100%;
+            height: 443px;
+        }
+    </style>
 </head>
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary shadow">
             <div class="container-fluid">
-                <a class="navbar-brand fs-2" href="#">Sinfonía&Cultura</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
-                    aria-label="Toggle navigation">
+                <a class="navbar-brand fs-3" href="#">Sinfonía&Cultura</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
+                    aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active m-3 fs-4" aria-current="page" href="../index.html">Inicio</a>
+                            <a class="nav-link active m-1" aria-current="page" href="../index.html">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active m-3 fs-4" aria-current="page" href="#">Menú</a>
+                            <a class="nav-link active m-1" aria-current="page" href="#">Menú</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active m-3 fs-4" aria-current="page" href="#">Blog</a>
+                            <a class="nav-link active m-1" aria-current="page" href="#">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active m-3 fs-4" aria-current="page" href="#">Comprar</a>
+                            <a class="nav-link active m-1" aria-current="page" href="#">Comprar</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active m-3 fs-4" aria-current="page" href="#">Recompensas</a>
+                            <a class="nav-link active m-1" aria-current="page" href="#">Recompensas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active m-3 fs-4" aria-current="page" href="contact.html">Contacto</a>
+                            <a class="nav-link active m-1" aria-current="page"
+                                href="../Integradora/html/contact.html">Contacto</a>
                         </li>
                     </ul>
-                    <div class="row ms-1">
-                        <div class="col">
-                            <a href="login.html" class="btn btn-primary fs-5">Ingresar</a>
-                            <a href="createAccount.html" class="btn btn-primary fs-5 ms-3 me-3">Registrarse</a>
+                    <div class="row">
+                        <div class="col-12">
+                            <a href="login.html" class="btn btn-primary fs-6">Ingresar</a>
+                            <a href="createAccount.html" class="btn btn-primary fs-6">Registrarse</a>
                         </div>
                     </div>
                 </div>
@@ -53,56 +59,61 @@
 
     <main>
         <div class="container mt-3 text-center">
-            <h1>Contacto</h1>
+            <h1 class="fs-2">Contacto</h1>
             <h3 class="mt-4 mb-5">Nos encantaría conocer tu experiencia! Escribenos a correo@ejemplo.com</h3>
 
             <div class="row d-flex justify-content-evenly">
                 <div class="col col-lg-3">
-                    <i class="fa-solid fa-phone fa-10x"></i>
+                    <i class="fa-solid fa-phone fa-6x"></i>
                     <h3>Ventas Institucionales</h3>
                     <h4>correo@correo.com</h4>
                 </div>
                 <div class="col col-lg-3">
-                    <i class="fa-solid fa-store fa-10x"></i>
+                    <i class="fa-solid fa-store fa-6x"></i>
                     <h3>Ventas Institucionales</h3>
                     <h4>correo@correo.com</h4>
                 </div>
                 <div class="col col-lg-3">
-                    <i class="fa-solid fa-cart-shopping fa-10x"></i>
+                    <i class="fa-solid fa-cart-shopping fa-6x"></i>
                     <h3>Ventas Institucionales</h3>
                     <h4>correo@correo.com</h4>
                 </div>
                 <div class="col col-lg-3">
-                    <i class="fa-solid fa-envelope fa-10x"></i>
+                    <i class="fa-solid fa-envelope fa-6x"></i>
                     <h3>Ventas Institucionales</h3>
                     <h4>correo@correo.com</h4>
                 </div>
             </div>
 
             <div class="container mt-5">
-                <form class="shadow p-5 mb-5">
-                    <div class="col mb-4">
-                        <label for="nombre" class="form-label fs-3">Nombre</label>
-                        <input type="text" class="form-control large-font-input" id="nombre">
+                <div class="row">
+                    <div class="col pb-5">
+                        <form class="shadow p-3 rounded text-start">
+                            <h1 class="text-center fs-2">Contacto</h1>
+                            <div class="col mb-4">
+                                <label for="nombre" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="nombre">
+                            </div>
+                            <div class="col mb-4">
+                                <label for="correo" class="form-label">Correo Electrónico</label>
+                                <input type="email" class="form-control" id="correo">
+                            </div>
+                            <div class="col mb-4">
+                                <label for="telefonos" class="form-label">Número de telefóno</label>
+                                <input type="number" class="form-control" id="telefono">
+                            </div>
+                            <label for="" class="form-label mb-4">Comentarios</label>
+                            <div class="form-floating">
+                                <textarea class="form-control" placeholder="Leave a comment here"
+                                    id="floatingTextarea2" style="height: 100px;"></textarea>
+                                <label for="floatingTextarea2">Comentarios</label>
+                            </div>
+                            <div class="col mt-5 text-left mb-4">
+                                <button type="submit" class="btn btn-primary">Enviar comentarios</button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="col mb-4">
-                        <label for="correo" class="form-label fs-3">Correo Electrónico</label>
-                        <input type="email" class="form-control large-font-input" id="correo">
-                    </div>
-                    <div class="col mb-4">
-                        <label for="telefonos" class="form-label fs-3">Número de telefóno</label>
-                        <input type="number" class="form-control large-font-input" id="telefono">
-                    </div>
-                    <label for="" class="form-label fs-3 mb-4">Comentarios</label>
-                    <div class="form-floating">
-                        <textarea class="form-control large-font-input" placeholder="Leave a comment here"
-                            id="floatingTextarea2" style="height: 100px;"></textarea>
-                        <label for="floatingTextarea2">Comentarios</label>
-                    </div>
-                    <div class="col mt-5 mb-4 text-end">
-                        <button type="submit" class="btn btn-primary fs-3">Enviar comentarios</button>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
     </main>
@@ -154,12 +165,10 @@
             </div>
         </div>
     </footer>
-
     <!--=== Enlaces de carga =====-->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="../js/onload.js"></script>
-
-    <!--=== Enlace de iconos ======-->
+    <!-- === Enlace de iconos ====== -->
     <script src="https://kit.fontawesome.com/b820f07375.js" crossorigin="anonymous"></script>
 
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
