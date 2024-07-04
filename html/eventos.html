@@ -4,14 +4,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eventos</title>
+    <title>Blog</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/carga.css">
-
-
+    <link rel="stylesheet" href="../css/inicio.css">
+    <link rel="stylesheet" href="../css/index.css">
 </head>
 
-<body class="hidden">
+<body>
+
+    <!-- NavBar -->
+    <nav class="navbar navbar-expand-lg shadow-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand me-auto" href="../index.html">Logo</a>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Logo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="menu.html">Menú</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-lg-2" href="">Comprar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-lg-2" href="recompensas.html">Recompensas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-lg-2" href="eventos.html">Eventos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-lg-2" href="blog.html">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-lg-2" href="contact.html">Contacto</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <a href="login.html" class="login-button">Iniciar Sesión</a>
+            <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Contenido -->
+     <h1 class="text-center">Eventos</h1>
+    <div class="container sm">
+        <div class="row">
+            <!-- Blog -->
+            <h1 class="text-center">¿Cuál es la mejor café</h1>
+            <div class="col-lg-6">
+                <div class="card p-1 ">
+                    <img src="../img/blog-2.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 d-flex justify-content-center align-items-center flex-column" >
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                        Quis, veritatis itaque maiores voluptas voluptatem obcaecati 
+                       numquam consectetur? Voluptas alias ea quia, nisi delectus nulla velit vero repellat neque sapiente? Illo?</p>
+            </div>
+            <h1 class="text-center">¿Cuál es la mejor café</h1>
+            <div class="col-lg-6 d-flex justify-content-center align-items-center flex-column">
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Quis, veritatis itaque maiores voluptas voluptatem obcaecati
+                    numquam consectetur? Voluptas alias ea quia, nisi delectus nulla velit vero repellat neque sapiente?
+                    Illo?</p>
+            </div>
+            <div class="col-lg-6">
+                <div class="card p-1 text-end">
+                    <img src="../img/blog-2.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+     <footer>
+        <div class="container-fluid p-5 " style="background:#331a00;">
+            <h2 class="text-center text-light mb-5">Sinfonía&CaféCultura</h2>
+            <hr class="text-light">
+            <div class="container-fluid d-flex justify-content-center align-items-center flex-column p-4">
+                <div class="row m-3 text-center">
+                    <div class="col-3">
+                        <a href="https://www.facebook.com/SinfoniaCoffee">
+                            <i class="fa-brands fa-facebook text-light fa-2x text-center"></i>
+                        </a>
+                    </div>
+                    <div class="col-3">
+                        <a href="https://x.com/SinfoniaCoffee">
+                            <i class="fa-brands fa-twitter text-light fa-2x text-center"></i>
+                        </a>
+                    </div>
+                    <div class="col-3">
+                        <a href="https://www.instagram.com/sinfoniacoffee/">
+                            <i class="fa-brands fa-instagram text-light fa-2x text-center"></i>
+                        </a>
+                    </div>
+                    <div class="col-3">
+                        <i class="fa-brands fa-youtube text-light fa-2x text-center"></i>
+                    </div>
+                </div>
+                <div class="row m-3">
+                    <p class="text-center fw-bold text-light">Copyright © 2024 Sinfonía&CaféCultura</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/45ef8dbe96.js" crossorigin="anonymous"></script>
     <!--====== Carga =======-->
     <div class="centrado" id="onload">
         <div class="lds-ripple">
@@ -19,13 +130,7 @@
             <div></div>
         </div>
     </div>
-
-
-
-
-
-
-
+    </div>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
     <!--=== Enlaces de carga =====-->

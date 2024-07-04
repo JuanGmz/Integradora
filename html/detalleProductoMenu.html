@@ -7,55 +7,51 @@
     <title>Inicio</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/index.css">
-    <link rel="stylesheet" href="../css/carga.css">
+    <link rel="stylesheet" href="../css/inicio.css">
 </head>
 
 <body>
-    <!--====== Carga ===inicio====-->
-    <div class="centrado" id="onload">
-        <div class="lds-ripple">
-            <div></div>
-            <div></div>
-        </div>
-    </div>
-
-    <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-lg">
+    <!-- NavBar -->
+    <nav class="navbar navbar-expand-lg shadow-lg">
         <div class="container-fluid">
-            <a class="navbar-brand fs-3" href="#">Sinfonía&Cultura</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
-                aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active m-1 fs-5" aria-current="page" href="../index.html">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active m-1 fs-5" aria-current="page" href="../html/menu.html">Menú</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active m-1 fs-5" aria-current="page" href="#">Blog</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active m-1 fs-5" aria-current="page" href="#">Comprar</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active m-1 fs-5" aria-current="page" href="#">Recompensas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active m-1 fs-5" aria-current="page" href="contact.html">Contacto</a>
-                    </li>
-                </ul>
-                <div class="row">
-                    <div class="col-12">
-                        <a href="login.html" class="btn btn-primary fs-6">Ingresar</a>
-                        <a href="createAccount.html" class="btn btn-primary fs-6">Registrarse</a>
-                    </div>
+            <a class="navbar-brand me-auto" href="../index.html">Logo</a>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Logo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="menu.html">Menú</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-lg-2" href="">Comprar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-lg-2" href="recompensas.html">Recompensas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-lg-2" href="eventos.html">Eventos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-lg-2" href="blog.html">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-lg-2" href="contact.html">Contacto</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
+            <a href="login.html" class="login-button">Iniciar Sesión</a>
+            <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
         </div>
     </nav>
+    <!-- NavBar End -->
 
     <main>
         <div class="container-fluid p-3">
@@ -74,7 +70,8 @@
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <h2 class="card-title">Nombre del Producto Seleccionado</h2>
-                                    <p class="card-tex fs-5">Descripción del producto seleccionado, que tipo de leche, calorías etc</p>
+                                    <p class="card-tex fs-5">Descripción del producto seleccionado, que tipo de leche,
+                                        calorías etc</p>
                                     <p class="fw-bold">Otra medida con su respectivo $precio</p>
                                     <p class="fw-bold">Otra medida con su respectivo $precio</p>
                                     <p class="fw-bold">Otra medida con su respectivo $precio</p>
