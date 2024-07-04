@@ -7,53 +7,59 @@
     <title>Recuperar Contraseña</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/inicio.css">
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <!-- NavBar -->
+    <nav class="navbar navbar-expand-lg shadow-lg">
         <div class="container-fluid">
-            <a class="navbar-brand fs-2" href="#">Sinfonía&Cultura</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
-                aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active m-3 fs-4" aria-current="page" href="../index.html">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active m-3 fs-4" aria-current="page" href="#">Menú</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active m-3 fs-4" aria-current="page" href="#">Blog</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active m-3 fs-4" aria-current="page" href="#">Comprar</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active m-3 fs-4" aria-current="page" href="#">Recompensas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active m-3 fs-4" aria-current="page" href="contact.html">Contacto</a>
-                    </li>
-                </ul>
-                <div class="row ms-1">
-                    <div class="col">
-                        <a href="../html/login.html" class="btn btn-primary fs-5">Ingresar</a>
-                        <a href="../html/createAccount.html" class="btn btn-primary fs-5 ms-3 me-3">Registrarse</a>
-                    </div>
+            <a class="navbar-brand me-auto" href="../index.html">Logo</a>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Logo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="menu.html">Menú</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-lg-2" href="">Comprar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-lg-2" href="recompensas.html">Recompensas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-lg-2" href="eventos.html">Eventos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-lg-2" href="blog.html">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-lg-2" href="contact.html">Contacto</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
+            <a href="login.html" class="login-button">Iniciar Sesión</a>
+            <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
         </div>
     </nav>
+    <!-- NavBar End -->
 
     <div class="container-fluid">
         <div class="row log">
             <div class="col-lg-6 d-none d-lg-block">
                 <img src="../img/img-login.jpg" alt="" class="img-fluid img-log">
             </div>
-            <div class="bg-body-secondary col-lg-6 mt-md-0 d-lg-flex flex-column justify-content-center align-items-center">
+            <div
+                class="bg-body-secondary col-lg-6 mt-md-0 d-lg-flex flex-column justify-content-center align-items-center">
                 <h1 class="text-center mt-5 mt-lg-5">Recuperar Contraseña</h1>
                 <form class="row g-3 p-4 ps-lg-5">
                     <div class="row mt-4 mt-lg-5">
@@ -64,7 +70,8 @@
                     </div>
                     <div class="row mt-4 mt-lg-5">
                         <div class="col-12">
-                            <label for="inputEmail4" class="form-label fs-4">Vuelve a introducir tu correo electrónico</label>
+                            <label for="inputEmail4" class="form-label fs-4">Vuelve a introducir tu correo
+                                electrónico</label>
                             <input type="password" class="form-control p-2" id="inputEmail4">
                         </div>
                     </div>
