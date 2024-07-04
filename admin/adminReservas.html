@@ -466,20 +466,20 @@
                                 <td class="d-none d-lg-table-cell">Tributo a Lana del Rey </td>
                                 <td class="d-none d-lg-table-cell">2024-07-07</td>
                                 <td>
-                                    <!-- Botón que activa el modal de ver detalles de la recompensa, solo aparece en pantallas chicas -->
+                                    <!-- Botón que activa el modal de ver detalles de la reserva, solo aparece en pantallas chicas -->
                                     <button type="button" class="btn btn-primary d-sm-table-row d-lg-none"
-                                        data-bs-toggle="modal" data-bs-target="#detallesRecompensa">
+                                        data-bs-toggle="modal" data-bs-target="#detallesReserva">
                                         <i class="fa-solid fa-eye"></i>
                                     </button>
-                                    <!-- Modal de ver detalles de la recompensa -->
-                                    <div class="modal fade" id="detallesRecompensa" tabindex="-1"
+                                    <!-- Modal de ver detalles de la reserva -->
+                                    <div class="modal fade" id="detallesReserva" tabindex="-1"
                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <!-- Aquí va el titulo del modal -->
                                                 <div class="modal-header">
                                                     <h1 class="modal-title fs-5" id="exampleModalLabel">Detalles de la
-                                                        Recompensa</h1>
+                                                        Reserva</h1>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
@@ -509,18 +509,18 @@
                                     </div>
                                     <!-- Botón que activa el modal de editar la recompensa -->
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#editarRecompensa">
+                                        data-bs-target="#editarReserva">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </button>
                                     <!-- Modal de editar la recompensa -->
-                                    <div class="modal fade" id="editarRecompensa" tabindex="-1"
+                                    <div class="modal fade" id="editarReserva" tabindex="-1"
                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <!-- Aquí va el titulo del modal -->
                                                 <div class="modal-header">
                                                     <h1 class="modal-title fs-5" id="exampleModalLabel">Editar
-                                                        Recompensa</h1>
+                                                        Reserva</h1>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
@@ -529,9 +529,11 @@
                                                     <form>
                                                         <div class="mb-3">
                                                             <label for="editarRecompensa" class="form-label">Editar
-                                                                Recompensa</label>
-                                                            <input type="text" class="form-control"
-                                                                id="editarRecompensa">
+                                                                Estatus</label>
+                                                                <select name="op_adRes" class="form-select" id="inlineFormSelectPref">
+                                                                    <option value="1">Finalizado</option>
+                                                                    <option value="2">Usuario</option>
+                                                                </select>
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="editarCondicion" class="form-label">Editar
