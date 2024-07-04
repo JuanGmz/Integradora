@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recuperar Contraseña</title>
+    <title>Ingresar</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/inicio.css">
 </head>
 
-<body>
+<body style="background: url(../img/img-login.jpg); background-size: cover;">
     <!-- NavBar -->
     <nav class="navbar navbar-expand-lg shadow-lg">
         <div class="container-fluid">
@@ -53,38 +53,26 @@
     </nav>
     <!-- NavBar End -->
 
-    <div class="container-fluid">
-        <div class="row log">
-            <div class="col-lg-6 d-none d-lg-block">
-                <img src="../img/img-login.jpg" alt="" class="img-fluid img-log">
-            </div>
-            <div
-                class="bg-body-secondary col-lg-6 mt-md-0 d-lg-flex flex-column justify-content-center align-items-center">
-                <h1 class="text-center mt-5 mt-lg-5">Recuperar Contraseña</h1>
-                <form class="row g-3 p-4 ps-lg-5">
-                    <div class="row mt-4 mt-lg-5">
-                        <div class="col-12">
-                            <label for="inputEmail4" class="form-label fs-4">Introduce tu correo electrónico</label>
-                            <input type="email" class="form-control p-2" id="inputEmail4">
+    <section class="container-fluid">
+        <div class="containerimg d-flex align-items-center justify-content-center">
+            <div class="container">
+                <form method="post" action="" class="bg-light rounded p-5 shadow-lg mx-auto" style="max-width: 500px;">
+                    <div class="row">
+                        <div class="col-12 mb-3">
+                            <legend class="text-center fw-bold">Recuperar Contraseña</legend>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label for="email" class="form-label">Ingresa tu Correo Eléctronico</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="col-12 mt-3 mb-3 text-end">
+                            <a href="newPassword.html" type="submit" class="btn btn-primary w-100">Recuperar Contraseña</a>
                         </div>
                     </div>
-                    <div class="row mt-4 mt-lg-5">
-                        <div class="col-12">
-                            <label for="inputEmail4" class="form-label fs-4">Vuelve a introducir tu correo
-                                electrónico</label>
-                            <input type="password" class="form-control p-2" id="inputEmail4">
-                        </div>
-                    </div>
-                    <div class="row mt-5">
-                        <div class="col-12">
-                            <a href="./newPassword.html" class="btn btn-primary fs-4 ">Recuperar Contraseña</a>
-                        </div>
-                    </div>
-
                 </form>
             </div>
         </div>
-    </div>
+    </section>
 
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
