@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/inicio.css">
 </head>
 
 <body>
@@ -14,7 +14,7 @@
     <!-- NavBar -->
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand me-auto" href="#">Logo</a>
+            <a class="navbar-brand me-auto" href="index.html">Logo</a>
 
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
                 aria-labelledby="offcanvasNavbarLabel">
@@ -25,26 +25,25 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Menú</a>
+                            <a class="nav-link active" aria-current="page" href="html/menu.html">Menú</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="#">Comprar</a>
+                            <a class="nav-link mx-lg-2" href="html/">Comprar</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="#">Recompensas</a>
+                            <a class="nav-link mx-lg-2" href="html/recompensas.html">Recompensas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="#">Eventos</a>
+                            <a class="nav-link mx-lg-2" href="html/eventos.html">Eventos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="#">Blog</a>
+                            <a class="nav-link mx-lg-2" href="html/blog.html">Blog</a>
                         </li>
                     </ul>
                 </div>
             </div>
-            <a href="login.html" class="login-button">Iniciar Sesión</a>
-            <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <a href="html/login.html" class="login-button">Iniciar Sesión</a>
+            <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
@@ -53,7 +52,7 @@
 
     <section class="hero-section">
         <div class="containerimg d-flex align-items-center justify-content-center fs-1 text-white flex-column">
-            <h2>Sinfonía&Café</h2>
+            <h2>Sinfonía&CaféCultura</h2>
         </div>
     </section>
 
@@ -61,33 +60,33 @@
     <div class="container-fluid bg-dark p-3">
         <h3 class="text-center fw-bold text-light">Nuestros Productos</h3>
         <div class="row text-center">
-            <div class="col-lg-4 mt-3">
+            <div class="col-lg-4 col-6 mt-3">
                 <div class="card">
-                    <img src="img/capuchino-1.jpg" class="card-img-top" alt="...">
+                    <img src="img/capuchino-1.jpg" class="card-img-top img-fluid" alt="imgProducto">
                     <div class="card-body">
                         <h5 class="card-title">Café Perro</h5>
-                        <p class="card-text">Te hará explotar la cabeza</p>
-                        <a href="#" class="btn btn-primary">Ver más detalles</a>
+                        <p class="card-text d-none d-lg-block">El mejor</p>
+                        <a href="#" class="btn btn-primary">Ver más</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-6 mt-3">
+                <div class="card">
+                    <img src="img/capuchino-1.jpg" class="card-img-top img-fluid" alt="imgProducto">
+                    <div class="card-body">
+                        <h5 class="card-title">Café Perro</h5>
+                        <p class="card-text d-none d-lg-block">El mejor</p>
+                        <a href="#" class="btn btn-primary">Ver más</a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 mt-3">
                 <div class="card">
-                    <img src="img/capuchino-1.jpg" class="card-img-top" alt="...">
+                    <img src="img/capuchino-1.jpg" class="card-img-top img-fluid" alt="imgProducto">
                     <div class="card-body">
                         <h5 class="card-title">Café Perro</h5>
-                        <p class="card-text">Te hará explotar la cabeza</p>
-                        <a href="#" class="btn btn-primary">Ver más detalles</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 mt-3">
-                <div class="card">
-                    <img src="img/capuchino-1.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Café Perro</h5>
-                        <p class="card-text">Te hará explotar la cabeza</p>
-                        <a href="#" class="btn btn-primary">Ver más detalles</a>
+                        <p class="card-text d-none d-lg-block">El mejor</p>
+                        <a href="#" class="btn btn-primary">Ver más</a>
                     </div>
                 </div>
             </div>
@@ -106,10 +105,63 @@
                     </div>
                   </div>
             </div>
+            <div class="col-lg-6">
+                <div class="card mb-3">
+                    <img src="img/expreso-1.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                      <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                    </div>
+                  </div>
+            </div>
         </div>
     </div>
 
-
+    <footer>
+        <div class="container-fluid p-5 bg-dark">
+            <h2 class="text-center text-light">Sinfonía&CaféCultura</h2>
+            <div class="container-fluid d-flex justify-content-center align-items-center flex-column">
+                <div class="row m-3">
+                    <div class="col-lg-4 text-light p-sm-3">
+                        <h5 class="text-center">Quiénes Somos...</h5>
+                    </div>
+                    <div class="col-lg-4 text-light p-sm-3">
+                        <h5 class="text-center">Preguntas Frecuentes</h5>
+                    </div>
+                    <div class="col-lg-4 text-light p-sm-3">
+                        <a href="html/contact.html" class="text-decoration-none text-light"><h5 class="text-center">Contacto</h5></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="text-light">
+            <div class="container-fluid d-flex justify-content-center align-items-center flex-column p-4">
+                <div class="row m-3 text-center">
+                    <div class="col-3">
+                        <a href="https://www.facebook.com/SinfoniaCoffee">
+                            <i class="fa-brands fa-facebook text-light fa-2x text-center"></i>
+                        </a>
+                    </div>
+                    <div class="col-3">
+                        <a href="https://x.com/SinfoniaCoffee">
+                            <i class="fa-brands fa-twitter text-light fa-2x text-center"></i>
+                        </a>
+                    </div>
+                    <div class="col-3">
+                        <a href="https://www.instagram.com/sinfoniacoffee/">
+                            <i class="fa-brands fa-instagram text-light fa-2x text-center"></i>
+                        </a>
+                    </div>
+                    <div class="col-3">
+                        <i class="fa-brands fa-youtube text-light fa-2x text-center"></i>
+                    </div>
+                </div>
+                <div class="row m-3">
+                    <p class="text-center fw-bold text-light">Copyright © 2024 Sinfonía&CaféCultura</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/45ef8dbe96.js" crossorigin="anonymous"></script>
