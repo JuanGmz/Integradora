@@ -11,6 +11,8 @@
 
 <body>
 
+
+
     <!-- NavBar -->
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container-fluid">
@@ -43,18 +45,20 @@
                 </div>
             </div>
             <a href="html/login.html" class="login-button">Iniciar Sesión</a>
-            <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
     </nav>
-    <!-- NavBar End -->
 
+    <!-- NavBar End -->
     <section class="hero-section">
         <div class="containerimg d-flex align-items-center justify-content-center fs-1 text-white flex-column">
             <h2>Sinfonía&CaféCultura</h2>
         </div>
     </section>
+
 
     <!-- Sección de Productos -->
     <div class="container-fluid bg-dark p-3">
@@ -99,27 +103,64 @@
                 <div class="card mb-3">
                     <img src="img/expreso-1.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                      <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional content. This content is a little bit longer.</p>
+                        <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
                     </div>
-                  </div>
+                </div>
             </div>
             <div class="col-lg-6">
                 <div class="card mb-3">
                     <img src="img/expreso-1.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                      <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional content. This content is a little bit longer.</p>
+                        <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
                     </div>
-                  </div>
+                </div>
             </div>
         </div>
     </div>
 
+
+    <!-- Button Card-->
+    <button id="floatingButton" class="btn login-button position-fixed bottom-0 end-0 m-3 d-flex p-3 z-3" type="button"
+        data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+        <i class="fa-solid fa-cart-shopping fa-2x"></i>
+    </button>
+
+
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="p-3 fw-bold d-flex justify-content-center">
+            <h5 class="offcanvas-title fs-3 mx-auto" id="offcanvasRightLabel">
+                <i class="fa-solid fa-bag-shopping p-2"></i>
+                Carrito
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="d-flex justify-content-center fs-5">
+                <div class="text-center p-3">
+                    <p>Su Carrito esta vacio</p>
+
+                    <button class="btn btn-dark btn-lg ">Regresar a la tienda</button>
+
+                </div>
+            </div>
+        </div>
+        <!-- Footer personalizado -->
+        <div class="offcanvas-footer text-center p-3">
+            <button class="btn btn-dark btn-lg w-100">Continuar Compra</button>
+        </div>
+    </div>
+
+
+
     <footer>
-        <div class="container-fluid p-5 bg-dark">
+        <div class="container-fluid p-5 bg-dark ">
             <h2 class="text-center text-light">Sinfonía&CaféCultura</h2>
             <div class="container-fluid d-flex justify-content-center align-items-center flex-column">
                 <div class="row m-3">
@@ -130,7 +171,9 @@
                         <h5 class="text-center">Preguntas Frecuentes</h5>
                     </div>
                     <div class="col-lg-4 text-light p-sm-3">
-                        <a href="html/contact.html" class="text-decoration-none text-light"><h5 class="text-center">Contacto</h5></a>
+                        <a href="html/contact.html" class="text-decoration-none text-light">
+                            <h5 class="text-center">Contacto</h5>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -162,6 +205,8 @@
             </div>
         </div>
     </footer>
+
+
 
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/45ef8dbe96.js" crossorigin="anonymous"></script>
