@@ -427,12 +427,9 @@
                         <form class="row row-cols-lg-auto g-3 align-items-center">
                             <div class="col-sm-6 col-lg-4">
                                 <label class="visually-hidden" for="inlineFormSelectPref">Preference</label>
-                                <select class="form-select" id="inlineFormSelectPref">
-                                    <option selected>Filtrar Por</option>
-                                    <option value="1">Id</option>
-                                    <option value="2">Recompensa</option>
-                                    <option value="3">Fecha Inicio</option>
-                                    <option value="3">Fecha Fin</option>
+                                <select name="op_adRes" class="form-select" id="inlineFormSelectPref">
+                                    <option value="1">Folio</option>
+                                    <option value="2">Usuario</option>
                                 </select>
                             </div>
                             <div class="col-sm-6 col-lg-4">
@@ -451,20 +448,22 @@
                     <table class="table table-light table-striped text-center" border="1">
                         <thead class="table-dark">
                             <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Recompensa</th>
-                                <th scope="col" class="d-none d-lg-table-cell">Condición</th>
-                                <th scope="col" class="d-none d-lg-table-cell">Fecha Inicio</th>
-                                <th scope="col" class="d-none d-lg-table-cell">Fecha Fin</th>
+                                <th scope="col">Folio Reserva</th>
+                                <th scope="col">Cliente</th>
+                                <th scope="col" class="d-none d-lg-table-cell">Estatus</th>
+                                <th scope="col" class="d-none d-lg-table-cell">Fecha Reserva</th>
+                                <th scope="col" class="d-none d-lg-table-cell">Evento</th>
+                                <th scope="col" class="d-none d-lg-table-cell">Fecha Evento</th>
                                 <th scope="col">Acciones</th>
                             </tr>
                         </thead>
                         <tbody class="table-group-divider">
                             <tr style="line-height: 3;">
                                 <th scope="row">1</th>
-                                <td>Café Gratis</td>
-                                <td class="d-none d-lg-table-cell">5</td>
+                                <td>Tobias Gabriel Rodriguez Lujan</td>
+                                <td class="d-none d-lg-table-cell">Pendiente</td>
                                 <td class="d-none d-lg-table-cell">2024-06-30</td>
+                                <td class="d-none d-lg-table-cell">Tributo a Lana del Rey </td>
                                 <td class="d-none d-lg-table-cell">2024-07-07</td>
                                 <td>
                                     <!-- Botón que activa el modal de ver detalles de la recompensa, solo aparece en pantallas chicas -->
