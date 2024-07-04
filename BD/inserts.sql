@@ -110,7 +110,6 @@ INSERT INTO personas (id_usuario, nombres, apellido_paterno, apellido_materno) V
     ('Cómo Elegir el Café Perfecto para Ti', 'Guía para seleccionar el tipo de café que mejor se adapte a tus gustos y preferencias. Con tantas opciones disponibles, elegir el café perfecto puede ser una tarea abrumadora. En este artículo, te ayudamos a navegar por el mundo del café y a encontrar el que mejor se adapte a tus gustos. Discutimos las diferentes variedades de granos, los perfiles de sabor y las regiones de cultivo. También te damos consejos sobre cómo probar diferentes tipos de café y qué factores considerar al hacer tu elección. Ya seas un amante del café fuerte y robusto o prefieras algo más suave y afrutado, aquí encontrarás la guía que necesitas para tomar una decisión informada.', 'http://sinfoniacafe.com/img/elegir_cafe.jpg', 'Blog'),
     ('Tendencias en el Mundo del Café', 'Mantente al día con las últimas tendencias y novedades en la industria del café. El mundo del café está en constante evolución, con nuevas tendencias emergiendo cada año. En este artículo, exploramos las innovaciones más recientes en la industria del café, desde nuevas técnicas de preparación hasta las últimas modas en bebidas de café. Descubriremos cómo los avances tecnológicos están cambiando la forma en que cultivamos, procesamos y disfrutamos del café. También analizamos las tendencias de consumo y cómo están influyendo en la oferta de productos en las cafeterías. Mantente informado y descubre qué está de moda en el mundo del café.', 'http://sinfoniacafe.com/img/tendencias_cafe.jpg', 'Blog');
 
--- Asignar personas a la tabla clientes
 	INSERT INTO clientes (id_persona)
 SELECT id_persona FROM personas LIMIT 20;
 
@@ -121,8 +120,6 @@ SELECT id_persona FROM personas LIMIT 20, 10;
 -- Asignar personas a la tabla proveedores
 INSERT INTO proveedores (id_persona)
 SELECT id_persona FROM personas LIMIT 30, 10;
-
-
 
 INSERT INTO contacto (nombre, asunto, cometario, correo, telefono) VALUES
     ('Ana López', 'Consulta de productos', 'Me gustaría obtener más información sobre sus productos disponibles.', 'ana.lopez@gmail.com', '5551234567'),
@@ -156,7 +153,71 @@ INSERT INTO contacto (nombre, asunto, cometario, correo, telefono) VALUES
     ('Patricia Gutiérrez', 'Consulta de horarios', 'Necesito saber si abren los domingos y cuáles son sus horarios de atención.', 'patricia.gutierrez@yahoo.com', '5559012345'),
     ('Marcos Castro', 'Felicitación por servicio', 'Gracias por el excelente trato y la atención personalizada que recibí.', 'marcos.castro@hotmail.com', '5550123456');
 
-
+	INSERT INTO ubicacion_lugares (latitud, longitud) VALUES
+	(37.7749, -122.4194), -- San Francisco, CA, USA
+	(34.0522, -118.2437), -- Los Angeles, CA, USA
+	(40.7128, -74.0060),  -- New York, NY, USA
+	(51.5074, -0.1278),   -- London, UK
+	(48.8566, 2.3522),    -- Paris, France
+	(35.6895, 139.6917),  -- Tokyo, Japan
+	(55.7558, 37.6173),   -- Moscow, Russia
+	(-33.8688, 151.2093), -- Sydney, Australia
+	(39.9042, 116.4074),  -- Beijing, China
+	(19.4326, -99.1332),  -- Mexico City, Mexico
+	(-34.6037, -58.3816), -- Buenos Aires, Argentina
+	(52.5200, 13.4050),   -- Berlin, Germany
+	(40.4168, -3.7038),   -- Madrid, Spain
+	(41.9028, 12.4964),   -- Rome, Italy
+	(1.3521, 103.8198);   -- Singapore
+    
+    INSERT INTO CATEGORIAS (nombre, descripcion, tipo) VALUES
+('Menu Cafes', 'Categoría para el menú de cafes de sinfonia durante todo tipo de horarios', 'Menu'),
+('Conciertos', 'Categoría para eventos musicales', 'Evento'),
+('Teatro', 'Categoría para representaciones teatrales', 'Evento'),
+('Podcast en vivo', 'Categoría para conferencias y charlas', 'Evento'),
+('Talleres', 'Categoría para talleres y cursos', 'Evento'),
+('Ferias', 'Categoría para ferias comerciales y de productos', 'Evento'),
+('Festivales', 'Categoría para festivales culturales y musicales', 'Evento'),
+('Seminarios', 'Categoría para seminarios educativos', 'Evento'),
+('Cine', 'Categoría para proyecciones de películas', 'Evento');
+	
+    
+    INSERT INTO EVENTOS (id_lugar, id_categoria, nombre, tipo, descripcion, fecha_evento, fecha_publicacion, hora_inicio, hora_fin, capacidad, precio_boleto, disponibilidad, img_url) VALUES
+(1, 5, 'Taller de Cerámica', 'De Pago', 'Un taller para aprender las técnicas básicas de la cerámica.', '2024-07-15', '2024-07-01', '08:00:00', '10:00:00', 50, 15.00, 50, 'http://example.com/ceramica.jpg'),
+(2, 2, 'Concierto de Jazz', 'De Pago', 'Disfruta de una noche con los mejores músicos de jazz.', '2024-07-20', '2024-07-05', '19:00:00', '21:00:00', 200, 25.00, 200, 'http://example.com/jazz.jpg'),
+(3, 3, 'Obra de Teatro Clásica', 'De Pago', 'Una obra de teatro clásica para disfrutar con toda la familia.', '2024-07-22', '2024-07-07', '18:00:00', '20:00:00', 150, 20.00, 150, 'http://example.com/teatro.jpg'),
+(4, 4, 'Podcast en Vivo', 'Gratuito', 'Un podcast en vivo con interesantes invitados y temas de actualidad.', '2024-07-25', '2024-07-10', '17:00:00', '18:30:00', 100, 0.00, 100, 'http://example.com/podcast.jpg'),
+(5, 5, 'Taller de Pintura', 'De Pago', 'Un taller de pintura para todas las edades y niveles.', '2024-07-30', '2024-07-15', '10:00:00', '12:00:00', 30, 15.00, 30, 'http://example.com/taller_pintura.jpg'),
+(6, 6, 'Feria de Artesanías', 'Gratuito', 'Una feria con los mejores productos artesanales de la región.', '2024-08-05', '2024-07-20', '09:00:00', '18:00:00', 500, 0.00, 500, 'http://example.com/feria.jpg'),
+(7, 7, 'Festival de Música Indie', 'De Pago', 'Un festival con las mejores bandas de música indie.', '2024-08-10', '2024-07-25', '16:00:00', '23:00:00', 300, 30.00, 300, 'http://example.com/festival.jpg'),
+(8, 8, 'Seminario de Tecnología', 'Gratuito', 'Un seminario sobre las últimas tendencias en tecnología.', '2024-08-15', '2024-08-01', '09:00:00', '12:00:00', 200, 0.00, 200, 'http://example.com/seminario.jpg'),
+(9, 9, 'Proyección de Película Clásica', 'De Pago', 'Una proyección especial de una película clásica en un cine histórico.', '2024-08-20', '2024-08-05', '20:00:00', '22:00:00', 100, 12.00, 100, 'http://example.com/cine.jpg'),
+(10, 2, 'Concierto de Rock', 'De Pago', 'Una noche con las mejores bandas de rock de la ciudad.', '2024-08-25', '2024-08-10', '20:00:00', '23:00:00', 200, 30.00, 200, 'http://example.com/rock.jpg'),
+(11, 3, 'Obra de Teatro Moderna', 'De Pago', 'Una obra de teatro moderna y provocadora.', '2024-08-30', '2024-08-15', '19:00:00', '21:00:00', 150, 25.00, 150, 'http://example.com/teatro_moderno.jpg'),
+(12, 4, 'Podcast de Historia', 'Gratuito', 'Un podcast en vivo sobre los eventos históricos más interesantes.', '2024-09-05', '2024-08-20', '18:00:00', '19:30:00', 100, 0.00, 100, 'http://example.com/podcast_historia.jpg'),
+(13, 5, 'Taller de Fotografía', 'De Pago', 'Un taller para aprender las técnicas básicas de la fotografía.', '2024-09-10', '2024-08-25', '09:00:00', '12:00:00', 30, 20.00, 30, 'http://example.com/taller_fotografia.jpg'),
+(14, 6, 'Feria del Libro', 'Gratuito', 'Una feria con las mejores editoriales y autores.', '2024-09-15', '2024-09-01', '10:00:00', '18:00:00', 400, 0.00, 400, 'http://example.com/feria_libro.jpg'),
+(15, 7, 'Festival de Cine Independiente', 'De Pago', 'Un festival con las mejores películas del cine independiente.', '2024-09-20', '2024-09-05', '14:00:00', '23:00:00', 250, 40.00, 250, 'http://example.com/festival_cine.jpg'),
+(1, 8, 'Seminario de Salud', 'Gratuito', 'Un seminario sobre la salud y el bienestar.', '2024-09-25', '2024-09-10', '10:00:00', '13:00:00', 150, 0.00, 150, 'http://example.com/seminario_salud.jpg'),
+(2, 9, 'Proyección de Documental', 'De Pago', 'Una proyección especial de un documental aclamado.', '2024-09-30', '2024-09-15', '19:00:00', '21:00:00', 100, 15.00, 100, 'http://example.com/documental.jpg'),
+(3, 2, 'Concierto de Pop', 'De Pago', 'Una noche con las mejores canciones pop.', '2024-10-05', '2024-09-20', '20:00:00', '22:30:00', 200, 35.00, 200, 'http://example.com/pop.jpg'),
+(4, 3, 'Obra de Teatro Infantil', 'De Pago', 'Una obra de teatro para toda la familia.', '2024-10-10', '2024-09-25', '17:00:00', '18:30:00', 150, 18.00, 150, 'http://example.com/teatro_infantil.jpg'),
+(5, 4, 'Podcast de Ciencia', 'Gratuito', 'Un podcast en vivo sobre los últimos descubrimientos científicos.', '2024-10-15', '2024-10-01', '18:00:00', '19:30:00', 100, 0.00, 100, 'http://example.com/podcast_ciencia.jpg'),
+(6, 5, 'Taller de Cocina', 'De Pago', 'Un taller para aprender recetas fáciles y deliciosas.', '2024-10-20', '2024-10-05', '10:00:00', '13:00:00', 30, 25.00, 30, 'http://example.com/taller_cocina.jpg'),
+(7, 6, 'Feria de Emprendedores', 'Gratuito', 'Una feria para conocer nuevos emprendimientos y startups.', '2024-10-25', '2024-10-10', '09:00:00', '17:00:00', 300, 0.00, 300, 'http://example.com/feria_emprendedores.jpg'),
+(8, 7, 'Festival de Danza', 'De Pago', 'Un festival con las mejores compañías de danza.', '2024-10-30', '2024-10-15', '15:00:00', '21:00:00', 250, 45.00, 250, 'http://example.com/festival_danza.jpg'),
+(9, 8, 'Seminario de Marketing', 'Gratuito', 'Un seminario sobre las últimas tendencias en marketing.', '2024-11-05', '2024-10-20', '10:00:00', '12:00:00', 200, 0.00, 200, 'http://example.com/seminario_marketing.jpg'),
+(10, 9, 'Proyección de Película de Terror', 'De Pago', 'Una proyección especial de una película de terror clásica.', '2024-11-10', '2024-10-25', '20:00:00', '22:00:00', 100, 10.00, 100, 'http://example.com/terror.jpg'),
+(11, 4, 'Conferencia de Literatura', 'Gratuito', 'Una conferencia sobre los últimos trabajos literarios.', '2024-11-15', '2024-11-01', '09:00:00', '11:00:00', 100, 0.00, 100, 'http://example.com/conferencia_literatura.jpg'),
+(12, 2, 'Concierto de Música Clásica', 'De Pago', 'Una noche con los mejores músicos de música clásica.', '2024-11-20', '2024-11-05', '19:00:00', '21:30:00', 200, 50.00, 200, 'http://example.com/clasica.jpg'),
+(13, 3, 'Musical de Broadway', 'De Pago', 'Un espectáculo musical directamente desde Broadway.', '2024-11-25', '2024-11-10', '20:00:00', '22:30:00', 150, 60.00, 150, 'http://example.com/musical.jpg'),
+(14, 4, 'Podcast de Literatura', 'Gratuito', 'Un podcast en vivo sobre los mejores libros y autores.', '2024-11-30', '2024-11-15', '17:00:00', '18:30:00', 100, 0.00, 100, 'http://example.com/podcast_literatura.jpg'),
+(15, 5, 'Taller de Manualidades', 'De Pago', 'Un taller para aprender manualidades creativas.', '2024-12-05', '2024-11-20', '10:00:00', '12:00:00', 30, 20.00, 30, 'http://example.com/taller_manualidades.jpg');
+    
+    select * from eventos;
+    select * from categorias;
+    select * from ubicacion_lugares;
+	select * from contacto;
 	select * from clientes;
     select * from empleados;
     select * from proveedores;
