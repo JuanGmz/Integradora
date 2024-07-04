@@ -17,9 +17,7 @@
             <nav class="navbar navbar-expand-lg">
                 <div class="container-fluid">
                     <a class="navbar-brand fw-bold text-light" href="adminInicio.html">Administrar</a>
-                    <button class="navbar-toggler border-0 text-light bg-dark" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="navbar-toggler border-0 text-light bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon rounded p-2"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -27,13 +25,10 @@
                             <div class="accordion accordion-flush" id="accordionMobile">
                                 <div class="accordion-item">
                                     <h2 class="accordion-header row">
-                                        <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light"
-                                            type="button" data-bs-toggle="collapse" data-bs-target="#flush-inicio"
-                                            aria-expanded="false" aria-controls="flush-inicio">
+                                        <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-inicio" aria-expanded="false" aria-controls="flush-inicio">
                                             <div class="col-8">
 
-                                                <a href="adminInicio.html"
-                                                    class="text-light fw-bold text-decoration-none">
+                                                <a href="adminInicio.html" class="text-light fw-bold text-decoration-none">
                                                     <i class="fa-solid fa-house-laptop me-1"></i>
                                                     Inicio
                                                 </a>
@@ -51,9 +46,7 @@
                                 </div>
                                 <div class="accordion-item">
                                     <h2 class="accordion-header row">
-                                        <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light"
-                                            type="button" data-bs-toggle="collapse" data-bs-target="#flush-menu"
-                                            aria-expanded="false" aria-controls="flush-menu">
+                                        <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-menu" aria-expanded="false" aria-controls="flush-menu">
                                             <div class="col-8">
                                                 <i class="fa-solid fa-table me-3"></i>
                                                 Menú
@@ -63,12 +56,9 @@
                                             </div>
                                         </button>
                                     </h2>
-                                    <div id="flush-menu" class="accordion-collapse collapse"
-                                        data-bs-parent="#accordionMobile">
+                                    <div id="flush-menu" class="accordion-collapse collapse" data-bs-parent="#accordionMobile">
                                         <div class="accordion-body bg-dark">
-                                            <a href="adminMenu.html"
-                                                class="ms-5 text-light fw-bold fs-5 text-decoration-none"
-                                                aria-current="true">
+                                            <a href="adminMenu.html" class="ms-5 text-light fw-bold fs-5 text-decoration-none" aria-current="true">
                                                 Administrar Menú
                                             </a>
                                             <br><br>
@@ -79,9 +69,7 @@
                                 </div>
                                 <div class="accordion-item">
                                     <h2 class="accordion-header row">
-                                        <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light"
-                                            type="button" data-bs-toggle="collapse" data-bs-target="#flush-events"
-                                            aria-expanded="false" aria-controls="flush-events">
+                                        <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-events" aria-expanded="false" aria-controls="flush-events">
                                             <div class="col-8">
                                                 <i class="fa-solid fa-bullhorn me-3"></i>
                                                 Eventos
@@ -91,16 +79,12 @@
                                             </div>
                                         </button>
                                     </h2>
-                                    <div id="flush-events" class="accordion-collapse collapse"
-                                        data-bs-parent="#accordionMobile">
+                                    <div id="flush-events" class="accordion-collapse collapse" data-bs-parent="#accordionMobile">
                                         <div class="accordion-body bg-dark">
-                                            <a href="adminEventos.html"
-                                                class="text-light fw-bold fs-5 text-decoration-none ms-5"
-                                                aria-current="true">
+                                            <a href="adminEventos.html" class="text-light fw-bold fs-5 text-decoration-none ms-5" aria-current="true">
                                                 Administrar Eventos
                                             </a><br><br>
-                                            <a href="adminReservas.html"
-                                                class="text-light fw-bold fs-5 text-decoration-none ms-5">
+                                            <a href="adminReservas.html" class="text-light fw-bold fs-5 text-decoration-none ms-5">
                                                 Administar Reservas
                                             </a><br><br>
                                             <a href="#" class="text-light fw-bold fs-5 text-decoration-none ms-5">Ver
@@ -111,9 +95,7 @@
                                 </div>
                                 <div class="accordion-item">
                                     <h2 class="accordion-header row">
-                                        <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light"
-                                            type="button" data-bs-toggle="collapse" data-bs-target="#flush-ecommerce"
-                                            aria-expanded="false" aria-controls="flush-ecommerce">
+                                        <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-ecommerce" aria-expanded="false" aria-controls="flush-ecommerce">
                                             <div class="col-8">
                                                 <i class="fa-solid fa-cart-arrow-down me-3"></i>
                                                 E-Commerce
@@ -123,16 +105,12 @@
                                             </div>
                                         </button>
                                     </h2>
-                                    <div id="flush-ecommerce" class="accordion-collapse collapse"
-                                        data-bs-parent="#accordionMobile">
+                                    <div id="flush-ecommerce" class="accordion-collapse collapse" data-bs-parent="#accordionMobile">
                                         <div class="accordion-body bg-dark">
-                                            <a href="adminPedidos.html"
-                                                class="fw-bold fs-5 ms-5 text-light text-decoration-none"
-                                                aria-current="true">
+                                            <a href="adminPedidos.html" class="fw-bold fs-5 ms-5 text-light text-decoration-none" aria-current="true">
                                                 Administrar Pedidos
                                             </a><br><br>
-                                            <a href="adminProductosEcommerce.html"
-                                                class="fw-bold fs-4 ms-5 text-light text-decoration-none">
+                                            <a href="adminProductosEcommerce.html" class="fw-bold fs-4 ms-5 text-light text-decoration-none">
                                                 Administrar Productos
                                             </a><br><br>
                                             <a href="#" class="fw-bold fs-5 ms-5 text-light text-decoration-none">
@@ -143,9 +121,7 @@
                                 </div>
                                 <div class="accordion-item">
                                     <h2 class="accordion-header row">
-                                        <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light"
-                                            type="button" data-bs-toggle="collapse" data-bs-target="#flush-blog"
-                                            aria-expanded="false" aria-controls="flush-blog">
+                                        <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-blog" aria-expanded="false" aria-controls="flush-blog">
                                             <div class="col-8">
                                                 <i class="fa-solid fa-blog me-3"></i>
                                                 Blog
@@ -155,12 +131,9 @@
                                             </div>
                                         </button>
                                     </h2>
-                                    <div id="flush-blog" class="accordion-collapse collapse"
-                                        data-bs-parent="#accordionMobile">
+                                    <div id="flush-blog" class="accordion-collapse collapse" data-bs-parent="#accordionMobile">
                                         <div class="accordion-body bg-dark">
-                                            <a href="adminBlog.html"
-                                                class="fw-bold fs-5 ms-5 text-light text-decoration-none"
-                                                aria-current="true">
+                                            <a href="adminBlog.html" class="fw-bold fs-5 ms-5 text-light text-decoration-none" aria-current="true">
                                                 Administrar Blog
                                             </a><br><br>
                                             <a href="#" class="fw-bold fs-5 ms-5 text-light text-decoration-none">Ver
@@ -171,9 +144,7 @@
                                 </div>
                                 <div class="accordion-item">
                                     <h2 class="accordion-header row">
-                                        <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light"
-                                            type="button" data-bs-toggle="collapse" data-bs-target="#flush-rewards"
-                                            aria-expanded="false" aria-controls="flush-rewards">
+                                        <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-rewards" aria-expanded="false" aria-controls="flush-rewards">
                                             <div class="col-8">
                                                 <i class="fa-solid fa-medal me-3"></i>
                                                 Recompensas
@@ -183,12 +154,9 @@
                                             </div>
                                         </button>
                                     </h2>
-                                    <div id="flush-rewards" class="accordion-collapse collapse"
-                                        data-bs-parent="#accordionMobile">
+                                    <div id="flush-rewards" class="accordion-collapse collapse" data-bs-parent="#accordionMobile">
                                         <div class="accordion-body bg-dark">
-                                            <a href="adminRecompensas.html"
-                                                class="fw-bold fs-5 ms-5 text-light text-decoration-none"
-                                                aria-current="true">
+                                            <a href="adminRecompensas.html" class="fw-bold fs-5 ms-5 text-light text-decoration-none" aria-current="true">
                                                 Administrar Recompensa
                                             </a>
                                             <br><br>
@@ -200,9 +168,7 @@
                                 </div>
                                 <div class="accordion-item">
                                     <h2 class="accordion-header row">
-                                        <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light"
-                                            type="button" data-bs-toggle="collapse" data-bs-target="#flush-categories"
-                                            aria-expanded="false" aria-controls="flush-categories">
+                                        <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-categories" aria-expanded="false" aria-controls="flush-categories">
                                             <div class="col-8">
                                                 <i class="fa-solid fa-list me-3"></i>
                                                 Categorías
@@ -212,16 +178,17 @@
                                             </div>
                                         </button>
                                     </h2>
-                                    <div id="flush-categories" class="accordion-collapse collapse"
-                                        data-bs-parent="#accordionFlushExample">
+                                    <div id="flush-categories" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                                         <div class="accordion-body bg-dark">
-                                            <a href="adminCategorias.html"
-                                                class="fw-bold fs-5 ms-5 text-light text-decoration-none"
-                                                aria-current="true">
+                                            <a href="adminCategorias.html" class="fw-bold fs-5 ms-5 text-light text-decoration-none" aria-current="true">
                                                 Administrar Categorías
                                             </a>
                                         </div>
                                     </div>
+                                </div>
+                                <!-- boton regresar-->
+                                <div class="offcanvas-footer text-center p-4">
+                                    <a class="btn btn-light btn-lg w-100 collapsed fw-bold fs-4 text-dark" href="../index.html">Regresar</a>
                                 </div>
                             </div>
                         </div>
@@ -241,8 +208,7 @@
                 </div>
                 <div class="accordion accordion-flush" id="accordionPc">
                     <div class=" ms-2 fs-3 mt-4 mb-3">
-                        <a class="fw-bold bg-dark text-light text-decoration-none" href="adminInicio.html"
-                            aria-expanded="false">
+                        <a class="fw-bold bg-dark text-light text-decoration-none" href="adminInicio.html" aria-expanded="false">
                             <i class="fa-solid fa-house-laptop"></i>
                             Inicio
                         </a>
@@ -252,9 +218,7 @@
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-menu" aria-expanded="false"
-                                aria-controls="flush-menu">
+                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-menu" aria-expanded="false" aria-controls="flush-menu">
                                 <div class="col-6">
                                     <i class="fa-solid fa-table me-1"></i>
                                     Menú
@@ -266,8 +230,7 @@
                         </h2>
                         <div id="flush-menu" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
                             <div class="accordion-body bg-dark">
-                                <a href="adminMenu.html" class="ms-5 text-light fw-bold fs-6 text-decoration-none"
-                                    aria-current="true">
+                                <a href="adminMenu.html" class="ms-5 text-light fw-bold fs-6 text-decoration-none" aria-current="true">
                                     Administrar Menú
                                 </a>
                                 <br><br>
@@ -279,9 +242,7 @@
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-events" aria-expanded="false"
-                                aria-controls="flush-events">
+                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-events" aria-expanded="false" aria-controls="flush-events">
                                 <div class="col-6">
                                     <i class="fa-solid fa-bullhorn me-1"></i>
                                     Eventos
@@ -293,8 +254,7 @@
                         </h2>
                         <div id="flush-events" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
                             <div class="accordion-body bg-dark">
-                                <a href="adminEventos.html" class="text-light fw-bold fs-6 text-decoration-none ms-5"
-                                    aria-current="true">
+                                <a href="adminEventos.html" class="text-light fw-bold fs-6 text-decoration-none ms-5" aria-current="true">
                                     Administrar Eventos
                                 </a><br><br>
                                 <a href="adminReservas.html" class="text-light fw-bold fs-6 text-decoration-none ms-5">
@@ -308,9 +268,7 @@
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-ecommerce" aria-expanded="false"
-                                aria-controls="flush-ecommerce">
+                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-ecommerce" aria-expanded="false" aria-controls="flush-ecommerce">
                                 <div class="col-8">
                                     <i class="fa-solid fa-cart-arrow-down me-1"></i>
                                     E-Commerce
@@ -322,12 +280,10 @@
                         </h2>
                         <div id="flush-ecommerce" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
                             <div class="accordion-body bg-dark">
-                                <a href="adminPedidos.html" class="fw-bold fs-6 ms-5 text-light text-decoration-none"
-                                    aria-current="true">
+                                <a href="adminPedidos.html" class="fw-bold fs-6 ms-5 text-light text-decoration-none" aria-current="true">
                                     Administrar Pedidos
                                 </a><br><br>
-                                <a href="adminProductosEcommerce.html"
-                                    class="fw-bold fs-6 ms-5 text-light text-decoration-none">
+                                <a href="adminProductosEcommerce.html" class="fw-bold fs-6 ms-5 text-light text-decoration-none">
                                     Administrar Productos
                                 </a><br><br>
                                 <a href="#" class="fw-bold fs-6 ms-5 text-light text-decoration-none">Ver
@@ -338,9 +294,7 @@
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-blog" aria-expanded="false"
-                                aria-controls="flush-blog">
+                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-blog" aria-expanded="false" aria-controls="flush-blog">
                                 <div class="col-8">
                                     <i class="fa-solid fa-blog me-1"></i>
                                     Blog
@@ -352,8 +306,7 @@
                         </h2>
                         <div id="flush-blog" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
                             <div class="accordion-body bg-dark">
-                                <a href="adminBlog.html" class="fw-bold fs-6 ms-5 text-light text-decoration-none"
-                                    aria-current="true">
+                                <a href="adminBlog.html" class="fw-bold fs-6 ms-5 text-light text-decoration-none" aria-current="true">
                                     Administrar Blog
                                 </a><br><br>
                                 <a href="#" class="fw-bold fs-6 ms-5 text-light text-decoration-none">Ver
@@ -364,9 +317,7 @@
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-rewards" aria-expanded="false"
-                                aria-controls="flush-rewards">
+                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-rewards" aria-expanded="false" aria-controls="flush-rewards">
                                 <div class="col-8">
                                     <i class="fa-solid fa-medal me-1"></i>
                                     Recompensas
@@ -378,8 +329,7 @@
                         </h2>
                         <div id="flush-rewards" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
                             <div class="accordion-body bg-dark">
-                                <a href="adminRecompensas.html"
-                                    class="fw-bold fs-6 ms-5 text-light text-decoration-none" aria-current="true">
+                                <a href="adminRecompensas.html" class="fw-bold fs-6 ms-5 text-light text-decoration-none" aria-current="true">
                                     Administrar Recompensa
                                 </a>
                                 <br><br>
@@ -391,9 +341,7 @@
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-categories" aria-expanded="false"
-                                aria-controls="flush-categories">
+                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-categories" aria-expanded="false" aria-controls="flush-categories">
                                 <div class="col-8">
                                     <i class="fa-solid fa-list me-1"></i>
                                     Categorías
@@ -405,12 +353,15 @@
                         </h2>
                         <div id="flush-categories" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
                             <div class="accordion-body bg-dark">
-                                <a href="adminCategorias.html" class="fw-bold fs-6 ms-5 text-light text-decoration-none"
-                                    aria-current="true">
+                                <a href="adminCategorias.html" class="fw-bold fs-6 ms-5 text-light text-decoration-none" aria-current="true">
                                     Administrar Categorías
                                 </a>
                             </div>
                         </div>
+                    </div>
+                    <!-- boton regresar-->
+                    <div class="offcanvas-footer text-center p-4">
+                        <a class="btn btn-light btn-lg w-100 collapsed fw-bold fs-4 text-dark" href="../index.html">Regresar</a>
                     </div>
                 </div>
             </div>
@@ -423,7 +374,7 @@
                 </div>
                 <div class="container-fluid d-flex flex-column align-items-center justify-content-center h-100">
                     <?php
-                        
+
                     ?>
                 </div>
             </div>

@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/index.css">
-    <link rel="stylesheet" href="../css/scrollbar.css"> 
+    <link rel="stylesheet" href="../css/scrollbar.css">
     <title>Document</title>
 </head>
+
 <body>
     <div class="row d-block d-lg-none border-black border-bottom border-3 bg-dark">
         <nav class="navbar navbar-expand-lg">
@@ -27,14 +29,13 @@
                                         type="button" data-bs-toggle="collapse" data-bs-target="#flush-inicio"
                                         aria-expanded="false" aria-controls="flush-inicio">
                                         <div class="col-8">
-    
-                                            <a href="adminInicio.html"
-                                                class="text-light fw-bold text-decoration-none">
+
+                                            <a href="adminInicio.html" class="text-light fw-bold text-decoration-none">
                                                 <i class="fa-solid fa-house-laptop me-1"></i>
                                                 Inicio
                                             </a>
                                         </div>
-    
+
                                     </button>
                                 </h2>
                                 <div class="accordion-item">
@@ -219,13 +220,18 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- boton regresar-->
+                            <div class="offcanvas-footer text-center p-4">
+                                <a class="btn btn-light btn-lg w-100 collapsed fw-bold fs-4 text-dark"
+                                    href="../index.html">Regresar</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </nav>
     </div>
-    
+
     <div class="row">
         <!-- navbar pc -->
         <div class="contenedor col-lg-3 border-end border-black bg-dark h-100 position-fixed d-none d-lg-block">
@@ -237,7 +243,8 @@
             </div>
             <div class="accordion accordion-flush" id="accordionPc">
                 <div class=" ms-2 fs-3 mt-4 mb-3">
-                    <a class="fw-bold bg-dark text-light text-decoration-none" href="adminInicio.html" aria-expanded="false">
+                    <a class="fw-bold bg-dark text-light text-decoration-none" href="adminInicio.html"
+                        aria-expanded="false">
                         <i class="fa-solid fa-house-laptop"></i>
                         Inicio
                     </a>
@@ -373,8 +380,8 @@
                     </h2>
                     <div id="flush-rewards" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
                         <div class="accordion-body bg-dark">
-                            <a href="adminRecompensas.html"
-                                class="fw-bold fs-6 ms-5 text-light text-decoration-none" aria-current="true">
+                            <a href="adminRecompensas.html" class="fw-bold fs-6 ms-5 text-light text-decoration-none"
+                                aria-current="true">
                                 Administrar Recompensa
                             </a>
                             <br><br>
@@ -406,6 +413,11 @@
                             </a>
                         </div>
                     </div>
+                </div>
+                <!-- boton regresar-->
+                <div class="offcanvas-footer text-center p-4">
+                    <a class="btn btn-light btn-lg w-100 collapsed fw-bold fs-4 text-dark"
+                        href="../index.html">Regresar</a>
                 </div>
             </div>
         </div>
@@ -476,31 +488,44 @@
                                             <!-- Aquí va el contenido del modal -->
                                             <div class="modal-body text-start">
                                                 <div class="modal-body">
-                                                    <h5 class="text-start fw-bold mb-3">Aquí irá el folio del pedido</h5>
-                                                    <h5 class="text-start fw-bold mb-3">ID: <span class="fw-normal">Aquí irá el ID del comentador</span></h5>
-                                                    <h5 class="text-start fw-bold mb-3">Nombre: <span class="fw-normal">Aquí irá el Nombre del comentador</span></h5>
-                                                    <h5 class="text-start fw-bold mb-3">Asunto: <span class="fw-normal">Aquí irá el estatus del comentador</span></h5>
-                                                    <h5 class="text-start fw-bold mb-3">Comentario: <span class="fw-normal">Aquí irá el Comentario del comentador</span></h5>
-                                                    <h5 class="text-start fw-bold mb-3">Correo: <span class="fw-normal">Aquí irá el correo del comentador</span></h5>
-                                                    <h5 class="text-start fw-bold mb-3">Telefono: <span class="fw-normal">Aquí irá Telefono del comentador</span></h5>
-                                                    <!-- Tabla de productos --> 
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Cerrar</button>
+                                                    <h5 class="text-start fw-bold mb-3">Aquí irá el folio del pedido
+                                                    </h5>
+                                                    <h5 class="text-start fw-bold mb-3">ID: <span class="fw-normal">Aquí
+                                                            irá el ID del comentador</span></h5>
+                                                    <h5 class="text-start fw-bold mb-3">Nombre: <span
+                                                            class="fw-normal">Aquí irá el Nombre del comentador</span>
+                                                    </h5>
+                                                    <h5 class="text-start fw-bold mb-3">Asunto: <span
+                                                            class="fw-normal">Aquí irá el estatus del comentador</span>
+                                                    </h5>
+                                                    <h5 class="text-start fw-bold mb-3">Comentario: <span
+                                                            class="fw-normal">Aquí irá el Comentario del
+                                                            comentador</span></h5>
+                                                    <h5 class="text-start fw-bold mb-3">Correo: <span
+                                                            class="fw-normal">Aquí irá el correo del comentador</span>
+                                                    </h5>
+                                                    <h5 class="text-start fw-bold mb-3">Telefono: <span
+                                                            class="fw-normal">Aquí irá Telefono del comentador</span>
+                                                    </h5>
+                                                    <!-- Tabla de productos -->
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Cerrar</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                             </td>
                         </tr>
-                        
+
                     </tbody>
                 </table>
             </div>
         </div>
-    
-                    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-                    <script src="https://kit.fontawesome.com/b820f07375.js" crossorigin="anonymous"></script>
+
+        <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://kit.fontawesome.com/b820f07375.js" crossorigin="anonymous"></script>
 </body>
+
 </html>
