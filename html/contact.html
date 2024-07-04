@@ -61,22 +61,21 @@
                 <form method="post" action="" class="bg-light rounded p-5 shadow-lg mx-auto" style="max-width: 500px;">
                     <h1 class="text-center fs-2">Contacto</h1>
                     <div class="col mb-4">
-                        <label for="nombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="nombre">
+                        <label for="name" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="name" name="name">
                     </div>
                     <div class="col mb-4">
-                        <label for="correo" class="form-label">Correo Electrónico</label>
-                        <input type="email" class="form-control" id="correo">
+                        <label for="email" class="form-label">Correo Electrónico</label>
+                        <input type="email" class="form-control" id="correo" name="email">
                     </div>
                     <div class="col mb-4">
-                        <label for="telefonos" class="form-label">Número de telefóno</label>
-                        <input type="number" class="form-control" id="telefono">
+                        <label for="telefono" class="form-label">Número de telefóno</label>
+                        <input type="tel" class="form-control" id="telefono" name="telefono">
                     </div>
                     <label for="" class="form-label mb-4">Comentarios</label>
                     <div class="form-floating">
-                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
-                            style="height: 100px;"></textarea>
-                        <label for="floatingTextarea2">Comentarios</label>
+                        <textarea class="form-control" placeholder="Leave a comment here" id="coments" style="height: 100px;"></textarea>
+                        <label for="coments" name="coments">Comentarios</label>
                     </div>
                     <div class="col mt-5 text-end mb-4">
                         <button type="submit" class="btn btn-primary">Enviar comentarios</button>
