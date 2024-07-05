@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio Admin</title>
+    <title>Administracion Inicio</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/index.css">
-    <link rel="stylesheet" href="../css/scrollbar.css"> 
+    <link rel="stylesheet" href="../css/scrollbar.css">
 </head>
 
 <body>
+
     <div class="container-fluid h-100">
         <!-- navbar mobile -->
         <div class="row d-block d-lg-none border-black border-bottom border-3 bg-dark">
@@ -414,212 +415,139 @@
                     </div>
                 </div>
             </div>
+
             <!-- AQUI VA EL CONTENIDOOOOOOOO -->
             <div class="col-lg-9 offset-lg-3 p-3">
                 <!-- Título de la página -->
                 <div class="container-fluid d-flex justify-content-between align-items-center p-2 border-bottom">
-                    <h1 class="fw-bold">Inicio</h1>
+                    <h1 class="fw-bold">Administracion Inicio</h1>
                     <a class="text-decoration-none text-dark" href="../index.html">
                         <i class="fa-solid fa-house fa-2x ms-auto"></i>
                     </a>
                 </div>
-                
-                <div class="">
-                    <div class="p-3">
-                        <div class="container">
-                            <div class="d-flex flex-column align-items-center bg-dark-subtle p-3 rounded">
-                                <i class="fa-solid fa-user-tie fa-5x"></i>
-                                <h1 class="fw-bold">Bienvenido</h1>
+
+                 <!-- Apartado de Modificar Foto Inicio-->
+                <div class="container-fluid d-flex flex-column align-items-center justify-content-center h-100">
+                    <h2 class="fw-bold">Foto Inicio</h2>
+
+                   <!-- Botón de Modificar Foto Inicio -->
+                    <div>
+                        <!-- Button de Modificar Foto Inicio -->
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#Modal1">
+                        Modificar Foto
+                    </button>
+                    <!-- Modal de Modificar Foto Inicio-->
+                    <div class="modal fade" id="Modal1" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modificar Foto Inicio</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Aqui va el contenido de el boton de agregar-->
+                                    <form class="row g-3">
+                                        <div class="">
+                                            <label for="input-Foto" class="form-label">Foto</label>
+                                            <input type="file" class="form-control" id="input-Foto">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Cancelar</button>
+                                            <button type="button" class="btn btn-primary">Guardar</button>
+                                        </div>
+                                    </form>
+                                </div>
+
                             </div>
                         </div>
                     </div>
-                    <!-- Accesos Rápidos -->
-                    <div class="container text-center">
-                        <p class="border shadow rounded p-2 fs-4">
-                            Accesos Rápidos
-                        </p>
                     </div>
                 </div>
-                <!-- Tabla -->
-                <div class="table-responsive container">
-                    <table class="table table-borderless">
-                        <tbody>
-                            <!--Contenido-->
-                            <tr class="row">
-                                <!--1-->
-                                <td class="col col-lg-4 col-md-4 ">
-                                    <!--Accesos rapidos 1 roles-->
-                                    <div class="container mt-2 d-flex justify-content-center align-items-center">
-                                        <div class="" style="width: 18rem;">
-                                            <div class="card mb-3">
-                                                <a href=""
-                                                    class="btn btn-secondary d-flex align-items-center justify-content-center align-items-center justify-content-center"
-                                                    style="height: 180px;">
-                                                    <i class="fa-solid fa-user-tag fa-4x text-dark"></i>
-                                                </a>
-                                            </div>
-                                            <div class="card-body text-center">
-                                                <h5 class="card-title fw-bold">Roles</h5>
-                                            </div>
+
+                 <!-- Apartado de Modificar Productos-->
+                 <div class="d-flex flex-column align-items-center justify-content-center">
+                    <h2 class="fw-bold">Productos Inicio Visibles</h2>
+                    
+                   <!-- Botón de Modificar Foto Inicio -->
+                    <div>
+                        <!-- Button de Modificar Foto Inicio -->
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#Modal2">
+                        Modificar Productos
+                    </button>
+                    <!-- Modal de Modificar Foto Inicio-->
+                    <div class="modal fade" id="Modal2" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modificar Foto Inicio</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Aqui va el contenido de el boton de agregar-->
+                                    <form class="row g-3">
+                                        <div class="col">
+                                            <p class="text-center">Producto 1</p>
+                                            <label class="visually-hidden" for="inlineFormSelectPref">Preference</label>
+                                            <select class="form-select" id="inlineFormSelectPref">
+                                                <option selected>Producto</option>
+                                                <option value="1">Cafe Blaco</option>
+                                                <option value="2">Cafe Negro</option>
+                                                <option value="2">Cafe Elado</option>
+                                                <option value="2">Capuchino</option>
+                                            </select>
                                         </div>
-                                    </div>
-                                </td>
-                                <!--2-->
-                                <td class="col col-lg-4 col-md-4 ">
-                                    <!--Accesos rapidos 2 usuarios -->
-                                    <div class="container mt-2 d-flex justify-content-center align-items-center">
-                                        <div class="" style="width: 18rem;">
-                                            <div class="card mb-3">
-                                                <a href="adminUsuarios.html"
-                                                    class="btn btn-secondary d-flex align-items-center justify-content-center align-items-center justify-content-center"
-                                                    style="height: 180px;">
-                                                    <i class="fa-solid fa-users text-dark fa-4x"></i>
-                                                </a>
-                                            </div>
-                                            <div class="card-body text-center">
-                                                <h5 class="card-title fw-bold">Usuarios</h5>
-                                            </div>
+                                        <div class="col">
+                                            <p class="text-center">Producto 2</p>
+                                            <label class="visually-hidden" for="inlineFormSelectPref">Preference</label>
+                                            <select class="form-select" id="inlineFormSelectPref">
+                                                <option selected>Producto</option>
+                                                <option value="1">Cafe Blaco</option>
+                                                <option value="2">Cafe Negro</option>
+                                                <option value="2">Cafe Elado</option>
+                                                <option value="2">Capuchino</option>
+                                            </select>
                                         </div>
-                                    </div>
-                                </td>
-                                <!--3-->
-                                <td class="col col-lg-4 col-md-4 ">
-                                    <!--Accesos rapidos 3 Administracion Inicio -->
-                                    <div class="container mt-2 d-flex justify-content-center align-items-center">
-                                        <div class="" style="width: 18rem;">
-                                            <div class="card mb-3">
-                                                <a href="adminAdministrarInicio.html"
-                                                    class="btn btn-secondary d-flex align-items-center justify-content-center align-items-center justify-content-center"
-                                                    style="height: 180px;">
-                                                    <i class="fa-solid fa-house-laptop text-dark  fa-4x"></i>
-                                                    
-                                                </a>
-                                            </div>
-                                            <div class="card-body text-center">
-                                                <h5 class="card-title fw-bold">Administracion Inicio</h5>
-                                            </div>
+                                        <div class="col">
+                                            <p class="text-center">Producto 3</p>
+                                            <label class="visually-hidden" for="inlineFormSelectPref">Preference</label>
+                                            <select class="form-select" id="inlineFormSelectPref">
+                                                <option selected>Producto</option>
+                                                <option value="1">Cafe Blaco</option>
+                                                <option value="2">Cafe Negro</option>
+                                                <option value="2">Cafe Elado</option>
+                                                <option value="2">Capuchino</option>
+                                            </select>
                                         </div>
-                                    </div>
-                                </td>
-                                <!--4-->
-                                <td class="col col-lg-4 col-md-4 ">
-                                    <!--Accesos rapidos 4 pedidos -->
-                                    <div class="container mt-2 d-flex justify-content-center align-items-center">
-                                        <div class="" style="width: 18rem;">
-                                            <div class="card mb-3">
-                                                <a href="adminPedidos.html"
-                                                    class="btn btn-secondary d-flex align-items-center justify-content-center align-items-center justify-content-center"
-                                                    style="height: 180px;">
-                                                    <i class="fa-solid fa-basket-shopping fa-4x text-dark"></i>
-                                                </a>
-                                            </div>
-                                            <div class="card-body text-center">
-                                                <h5 class="card-title fw-bold">Pedidos</h5>
-                                            </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Cancelar</button>
+                                            <button type="button" class="btn btn-primary">Guardar</button>
                                         </div>
-                                    </div>
-                                </td>
-                                <!--5-->
-                                <td class="col col-lg-4 col-md-4 ">
-                                    <!--Accesos rapidos 4 categorias -->
-                                    <div class="container mt-2 d-flex justify-content-center align-items-center">
-                                        <div class="" style="width: 18rem;">
-                                            <div class="card mb-3">
-                                                <a href="adminCategorias.html"
-                                                    class="btn btn-secondary d-flex align-items-center justify-content-center align-items-center justify-content-center"
-                                                    style="height: 180px;">
-                                                    <i class="fa-solid fa-list fa-4x text-dark"></i>
-                                                </a>
-                                            </div>
-                                            <div class="card-body text-center">
-                                                <h5 class="card-title fw-bold">categorias</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <!--6-->
-                                <td class="col col-lg-4 col-md-4 ">
-                                    <!--Accesos rapidos 4 eventos -->
-                                    <div class="container mt-2 d-flex justify-content-center align-items-center">
-                                        <div class="" style="width: 18rem;">
-                                            <div class="card mb-3">
-                                                <a href="adminEventos.html"
-                                                    class="btn btn-secondary d-flex align-items-center justify-content-center align-items-center justify-content-center"
-                                                    style="height: 180px;">
-                                                    <i class="fa-solid fa-bell fa-4x text-dark"></i>
-                                                </a>
-                                            </div>
-                                            <div class="card-body text-center">
-                                                <h5 class="card-title fw-bold">Eventos</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <!--7-->
-                                <td class="col col-lg-4 col-md-4 ">
-                                    <!--Accesos rapidos 7 blog -->
-                                    <div class="container mt-2 d-flex justify-content-center align-items-center">
-                                        <div class="" style="width: 18rem;">
-                                            <div class="card mb-3">
-                                                <a href="adminBlog.html"
-                                                    class="btn btn-secondary d-flex align-items-center justify-content-center align-items-center justify-content-center"
-                                                    style="height: 180px;">
-                                                    <i class="fa-solid fa-newspaper fa-4x text-dark"></i>
-                                                </a>
-                                            </div>
-                                            <div class="card-body text-center">
-                                                <h5 class="card-title fw-bold">Blog</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <!--8-->
-                                <td class="col col-lg-4 col-md-4 ">
-                                    <!--Accesos rapidos 8 menu -->
-                                    <div class="container mt-2 d-flex justify-content-center align-items-center">
-                                        <div class="" style="width: 18rem;">
-                                            <div class="card mb-3">
-                                                <a href="adminMenu.html"
-                                                    class="btn btn-secondary d-flex align-items-center justify-content-center align-items-center justify-content-center"
-                                                    style="height: 180px;">
-                                                    <i class="fa-solid fa-store fa-4x text-dark"></i>
-                                                </a>
-                                            </div>
-                                            <div class="card-body text-center">
-                                                <h5 class="card-title fw-bold">Menú</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <!--9-->
-                                <td class="col col-lg-4 col-md-4 ">
-                                    <!--Accesos rapidos 8 Recompensas -->
-                                    <div class="container mt-2 d-flex justify-content-center align-items-center">
-                                        <div class="" style="width: 18rem;">
-                                            <div class="card mb-3">
-                                                <a href="adminRecompensas.html"
-                                                    class="btn btn-secondary d-flex align-items-center justify-content-center align-items-center justify-content-center"
-                                                    style="height: 180px;">
-                                                    <i class="fa-solid fa-gift fa-4x text-dark"></i>
-                                                </a>
-                                            </div>
-                                            <div class="card-body text-center">
-                                                <h5 class="card-title fw-bold">Recompensas</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    </div>
                 </div>
+
+
+                 
+
+                
             </div>
         </div>
-
     </div>
 
-    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://kit.fontawesome.com/b820f07375.js" crossorigin="anonymous"></script>
+
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/45ef8dbe96.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
