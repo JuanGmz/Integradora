@@ -1,4 +1,5 @@
 drop database if exists cafe_sinfonia;
+
 create database cafe_sinfonia;
 
 use cafe_sinfonia;
