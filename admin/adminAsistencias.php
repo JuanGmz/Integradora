@@ -417,9 +417,12 @@
 
             <!-- AQUI VA EL CONTENIDOOOOOOOO -->
             <div class="col-lg-9 offset-lg-3 p-3">
-                <!-- Titulo de la página -->
-                <div class="container-fluid">
-                    <h1 class="fw-bold">Registrar Asistencia</h1>
+                <!-- Título de la página -->
+                <div class="container-fluid d-flex justify-content-between align-items-center p-2 border-bottom">
+                    <h1 class="fw-bold">Registros de asistencias</h1>
+                    <a class="text-decoration-none text-dark" href="../index.html">
+                        <i class="fa-solid fa-house fa-2x ms-auto"></i>
+                    </a>
                 </div>
                 <div class="container-fluid d-flex flex-column align-items-center justify-content-center h-100">
                     <?php
