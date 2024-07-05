@@ -1,3 +1,4 @@
+drop database cafe_sinfonia;
 create database cafe_sinfonia;
 
 use cafe_sinfonia;
@@ -224,7 +225,7 @@ id_dpm int not null,
 medida nvarchar(100) not null,
 precio double not null,
 primary key(id_pm),
-foreign key (id_pm) references detalle_productos_menu(id_dpm)
+foreign key (id_dpm) references detalle_productos_menu(id_dpm)
 );
 
 -- Sistemma de Recompensas

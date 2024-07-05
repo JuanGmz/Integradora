@@ -214,15 +214,165 @@ INSERT INTO contacto (nombre, asunto, cometario, correo, telefono) VALUES
 (14, 4, 'Podcast de Literatura', 'Gratuito', 'Un podcast en vivo sobre los mejores libros y autores.', '2024-11-30', '2024-11-15', '17:00:00', '18:30:00', 100, 0.00, 100, 'http://example.com/podcast_literatura.jpg'),
 (15, 5, 'Taller de Manualidades', 'De Pago', 'Un taller para aprender manualidades creativas.', '2024-12-05', '2024-11-20', '10:00:00', '12:00:00', 30, 20.00, 30, 'http://example.com/taller_manualidades.jpg');
     
+    INSERT INTO domicilios (id_cliente, referencia, estado, ciudad, codigo_postal, colonia, calle, telefono) VALUES
+(1, 'Cerca del parque central', 'Nuevo León', 'Monterrey', '64000', 'Centro', 'Av. Constitución 123', '8112345678'),
+(2, 'Frente a la tienda de abarrotes', 'Jalisco', 'Guadalajara', '44100', 'Americana', 'Calle Hidalgo 456', '3312345678'),
+(3, 'A un lado del hospital general', 'Ciudad de México', 'CDMX', '06700', 'Roma Norte', 'Av. Álvaro Obregón 789', '5512345678'),
+(4, 'Atrás del centro comercial', 'Puebla', 'Puebla', '72000', 'Centro', 'Calle 5 de Mayo 101', '2221234567'),
+(5, 'Cerca del estadio de futbol', 'Nuevo León', 'Monterrey', '64000', 'Centro', 'Calle Colón 202', '8123456789'),
+(6, 'En frente de la plaza principal', 'Jalisco', 'Guadalajara', '44100', 'Americana', 'Calle Juárez 303', '3334567890'),
+(7, 'Cerca de la escuela primaria', 'Ciudad de México', 'CDMX', '06700', 'Roma Norte', 'Calle Insurgentes 404', '5545678901'),
+(8, 'Al lado del museo', 'Puebla', 'Puebla', '72000', 'Centro', 'Calle Reforma 505', '2234567890'),
+(9, 'Cerca del mercado municipal', 'Nuevo León', 'Monterrey', '64000', 'Centro', 'Calle Morelos 606', '8145678901'),
+(10, 'Atrás del teatro principal', 'Jalisco', 'Guadalajara', '44100', 'Americana', 'Calle Vallarta 707', '3345678901'),
+(11, 'A una cuadra del parque', 'Ciudad de México', 'CDMX', '06700', 'Roma Norte', 'Calle Hamburgo 808', '5556789012'),
+(12, 'Cerca de la universidad', 'Puebla', 'Puebla', '72000', 'Centro', 'Calle 16 de Septiembre 909', '2245678901'),
+(13, 'Frente al banco', 'Nuevo León', 'Monterrey', '64000', 'Centro', 'Calle Zaragoza 111', '8156789012'),
+(14, 'A un lado del cine', 'Jalisco', 'Guadalajara', '44100', 'Americana', 'Calle López Mateos 222', '3356789012'),
+(15, 'Cerca del hospital de niños', 'Ciudad de México', 'CDMX', '06700', 'Roma Norte', 'Calle Sonora 333', '5567890123'),
+(16, 'Frente al parque industrial', 'Puebla', 'Puebla', '72000', 'Centro', 'Calle 2 Norte 444', '2256789012'),
+(17, 'A una cuadra del museo de arte', 'Nuevo León', 'Monterrey', '64000', 'Centro', 'Calle Hidalgo 555', '8167890123'),
+(18, 'Cerca de la biblioteca central', 'Jalisco', 'Guadalajara', '44100', 'Americana', 'Calle Libertad 666', '3367890123'),
+(19, 'Frente a la estación de bomberos', 'Ciudad de México', 'CDMX', '06700', 'Roma Norte', 'Calle Durango 777', '5578901234'),
+(20, 'A un lado del parque ecológico', 'Puebla', 'Puebla', '72000', 'Centro', 'Calle 3 Sur 888', '2278901234'),
+(1, 'Cerca del centro deportivo', 'Nuevo León', 'Monterrey', '64000', 'Centro', 'Calle Garza Sada 999', '8189012345'),
+(2, 'Frente a la estación del metro', 'Jalisco', 'Guadalajara', '44100', 'Americana', 'Calle Américas 111', '3390123456'),
+(3, 'A un lado del centro médico', 'Ciudad de México', 'CDMX', '06700', 'Roma Norte', 'Calle Chapultepec 222', '5590123456'),
+(4, 'Atrás de la catedral', 'Puebla', 'Puebla', '72000', 'Centro', 'Calle 4 Poniente 333', '2290123456'),
+(5, 'Cerca de la terminal de autobuses', 'Nuevo León', 'Monterrey', '64000', 'Centro', 'Calle Pino Suárez 444', '8190123456');
+
+	INSERT INTO roles (rol, descripcion) VALUES
+('Administrador', 'Responsable de la administración general del sistema y tiene acceso a todos los sistemas'),
+('Administrador de eventos', 'Responable de el apartado de los productos'),
+('Administrador de punto de venta', 'Responable de el apartado de punto de venta'),
+('Administrador del Menu', 'Responable de el apartado del Menu'),
+('Administrador del recompensas', 'Responsable de el sistema de Tarjetas digitales'),
+('Administrador de Blogs', 'Encargado de el apartado de Blog'),
+('Administrador de Contactos', 'Responsable de el sistema de contactos'),
+('Cliente', 'Cliente estándar con acceso limitado a ciertas funciones'),
+('Provedor', 'Es aquel que prove materiales a la cafeteria tanto cafes como otros productos');
+
+	INSERT INTO roles_usuarios (id_ru, id_usuario, id_rol) VALUES
+(1, 1, 8),
+(2, 2, 8),
+(3, 3, 8),
+(4, 4, 8),
+(5, 5, 8),
+(6, 6, 8),
+(7, 7, 8),
+(8, 8, 8),
+(9, 9, 8),
+(10, 10, 8),
+(11, 11, 8),
+(12, 12, 8),
+(13, 13, 8),
+(14, 14, 8),
+(15, 15, 8),
+(16, 16, 8),
+(17, 17, 8),
+(18, 18, 8),
+(19, 19, 8),
+(20, 20, 8),
+(21, 21, 1),
+(22, 22, 1),
+(23, 23, 2),
+(24, 24, 3),
+(25, 25, 4),
+(26, 26, 5),
+(27, 27, 6),
+(28, 28, 7),
+(29, 29, 8),
+(30, 30, 9),
+(31, 31, 9),
+(32, 32, 9),
+(33, 33, 9),
+(34, 34, 9),
+(35, 35, 9),
+(36, 36, 9),
+(37, 37, 9),
+(38, 38, 9),
+(39, 39, 9),
+(40, 40, 9);
+
+
+INSERT INTO detalle_productos_menu (id_categoria, nombre, descripcion, img_url) VALUES
+(1, 'Café Americano', 'Café negro de granos seleccionados.', 'img/cafe_americano.jpg'),
+(1, 'Capuchino', 'Café expreso con leche espumada.', 'img/capuchino.jpg'),
+(1, 'Latte', 'Café con leche y un toque de espuma.', 'img/latte.jpg'),
+(1, 'Mocha', 'Café con chocolate y leche.', 'img/mocha.jpg'),
+(1, 'Espresso', 'Café concentrado en una pequeña taza.', 'img/espresso.jpg'),
+(1, 'Macchiato', 'Café expreso con un toque de espuma de leche.', 'img/macchiato.jpg'),
+(1, 'Flat White', 'Café con leche sedosa y cremosa.', 'img/flat_white.jpg'),
+(1, 'Café Vienés', 'Café con crema batida.', 'img/cafe_vienes.jpg'),
+(1, 'Café Irlandés', 'Café con whisky irlandés y crema.', 'img/cafe_irlandes.jpg'),
+(1, 'Café Turco', 'Café molido fino preparado a la manera tradicional turca.', 'img/cafe_turco.jpg'),
+(1, 'Té Chai Latte', 'Té con especias y leche.', 'img/te_chai_latte.jpg'),
+(1, 'Té Verde', 'Té verde antioxidante y refrescante.', 'img/te_verde.jpg'),
+(1, 'Té Negro', 'Té negro fuerte y revitalizante.', 'img/te_negro.jpg'),
+(1, 'Té de Hierbas', 'Mezcla de hierbas naturales para un té relajante.', 'img/te_hierbas.jpg'),
+(1, 'Té Oolong', 'Té semifermentado con un sabor único.', 'img/te_oolong.jpg'),
+(1, 'Matcha Latte', 'Té matcha con leche.', 'img/matcha_latte.jpg'),
+(1, 'Chocolate Caliente', 'Bebida de chocolate caliente y cremoso.', 'img/chocolate_caliente.jpg'),
+(1, 'Smoothie de Fresas', 'Batido de fresas frescas y yogur.', 'img/smoothie_fresas.jpg'),
+(1, 'Smoothie de Mango', 'Batido de mango tropical.', 'img/smoothie_mango.jpg'),
+(1, 'Smoothie de Plátano', 'Batido de plátano cremoso.', 'img/smoothie_platano.jpg');
+
+
+	INSERT INTO productos_menu (id_dpm, medida, precio) VALUES
+	(1, '14 Oz', 55.00),
+	(2, '14 Oz', 58.00),
+	(3, '14 Oz', 57.50),
+	(4, '14 Oz', 53.00),
+	(5, '14 Oz', 59.00),
+	(6, '14 Oz', 52.00),
+	(7, '14 Oz', 56.00),
+	(8, '14 Oz', 54.00),
+	(9, '14 Oz', 51.00),
+	(10, '14 Oz', 50.50),
+	(11, '14 Oz', 55.50),
+	(12, '14 Oz', 53.50),
+	(13, '14 Oz', 58.50),
+	(14, '14 Oz', 57.00),
+	(15, '14 Oz', 56.50),
+	(16, '14 Oz', 52.50),
+	(17, '14 Oz', 59.50),
+	(18, '14 Oz', 51.50),
+	(19, '14 Oz', 54.50),
+	(20, '14 Oz', 50.00),
+	(1, '16 Oz', 65.00),
+	(2, '16 Oz', 68.00),
+	(3, '16 Oz', 67.50),
+	(4, '16 Oz', 63.00),
+	(5, '16 Oz', 69.00),
+	(6, '16 Oz', 62.00),
+	(7, '16 Oz', 66.00),
+	(8, '16 Oz', 64.00),
+	(9, '16 Oz', 61.00),
+	(10, '16 Oz', 60.50),
+	(11, '16 Oz', 65.50),
+	(12, '16 Oz', 63.50),
+	(13, '16 Oz', 68.50),
+	(14, '16 Oz', 67.00),
+	(15, '16 Oz', 66.50),
+	(16, '16 Oz', 62.50),
+	(17, '16 Oz', 69.50),
+	(18, '16 Oz', 61.50),
+	(19, '16 Oz', 64.50),
+	(20, '16 Oz', 60.00);
+
     select * from eventos;
     select * from categorias;
     select * from ubicacion_lugares;
 	select * from contacto;
-	select * from clientes;
-    select * from empleados;
     select * from proveedores;
     select * from publicaciones;
     select * from personas;
+    select * from empleados;
+    select * from clientes;
     select * from usuarios;
-    
+    select * from domicilios;
+    select * from roles; 
+    select * from roles_usuarios; 
+    select * from detalle_productos_menu;
+    select * from productos_menu;
     
