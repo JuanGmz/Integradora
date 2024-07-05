@@ -417,8 +417,12 @@
 
             <div class="col-lg-9 offset-lg-3 p-3">
                 <!-- AQUI VA EL CONTENIDO DE LA PAGINAAAAAAAAAAAA -->
-                <div class="container-fluid">
+                <!-- Título de la página -->
+                <div class="container-fluid d-flex justify-content-between align-items-center p-2 border-bottom">
                     <h1 class="fw-bold">Eventos</h1>
+                    <a class="text-decoration-none text-dark" href="../index.html">
+                        <i class="fa-solid fa-house fa-2x ms-auto"></i>
+                    </a>
                 </div>
                 <div class="container-fluid">
                     <div class="col bg-gradient p-3 rounded shadow-lg">
@@ -573,7 +577,8 @@
                                                         <h1 class="modal-title fs-5" id="exampleModalLabel">
                                                             Editar Evento
                                                         </h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
                                                         <!-- Aqui va el contenido de el boton de agregar-->
@@ -582,17 +587,20 @@
                                                                 <label for="titulo" class="form-label">
                                                                     Editar Titulo del Evento
                                                                 </label>
-                                                                <input type="text" class="form-control" id="titulo" name="evento">
+                                                                <input type="text" class="form-control" id="titulo"
+                                                                    name="evento">
                                                             </div>
                                                             <div class="col-12 mb-3">
-                                                                <label for="descripcion"
-                                                                    class="form-label">Editar Descripción</label>
+                                                                <label for="descripcion" class="form-label">Editar
+                                                                    Descripción</label>
                                                                 <input type="text" class="form-control" id="descripcion"
                                                                     name="descripcion">
                                                             </div>
                                                             <div class="col-12 mb-3">
-                                                                <label for="img" class="form-label">Editar Imagen</label>
-                                                                <input type="file" class="form-control" id="img" name="imgEvento">
+                                                                <label for="img" class="form-label">Editar
+                                                                    Imagen</label>
+                                                                <input type="file" class="form-control" id="img"
+                                                                    name="imgEvento">
                                                             </div>
                                                             <div class="col-12 text-center">
                                                                 <h4 class="fw-bold">Fecha y Hora</h4>
@@ -601,7 +609,8 @@
                                                                 <label for="fecha" class="form-label">
                                                                     Editar Fecha del Evento
                                                                 </label>
-                                                                <input type="date" class="form-control" id="fecha" name="fechaEvento">
+                                                                <input type="date" class="form-control" id="fecha"
+                                                                    name="fechaEvento">
                                                             </div>
                                                             <!-- Pendiente -->
                                                             <div class="row">
@@ -609,13 +618,15 @@
                                                                     <label for="horaIni" class="form-label">
                                                                         Editar Hora de Inicio
                                                                     </label>
-                                                                    <input type="number" min="00:00:00" max="23:59:59" class="form-control" id="horaIni">
+                                                                    <input type="number" min="00:00:00" max="23:59:59"
+                                                                        class="form-control" id="horaIni">
                                                                 </div>
                                                                 <div class="col-6 mb-3">
                                                                     <label for="horaFin" class="form-label">
                                                                         Editar Hora de Fin
                                                                     </label>
-                                                                    <input type="number" min="00:00:00" max="23:59:59" class="form-control" id="horaFin">
+                                                                    <input type="number" min="00:00:00" max="23:59:59"
+                                                                        class="form-control" id="horaFin">
                                                                 </div>
                                                             </div>
                                                             <div class="col-12 text-center">
@@ -625,37 +636,48 @@
                                                                 <label for="lugar" class="form-label">
                                                                     Editar Nombre del Lugar
                                                                 </label>
-                                                                <input type="text" class="form-control" id="lugar" name="lugar">
+                                                                <input type="text" class="form-control" id="lugar"
+                                                                    name="lugar">
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-6 mb-3">
-                                                                    <label for="colonia" class="form-label">Editar Colonia</label>
-                                                                    <input type="text" class="form-control" id="colonia" name="colonia">
+                                                                    <label for="colonia" class="form-label">Editar
+                                                                        Colonia</label>
+                                                                    <input type="text" class="form-control" id="colonia"
+                                                                        name="colonia">
                                                                 </div>
                                                                 <div class="col-6 mb-3">
-                                                                    <label for="calle" class="form-label">Editar Calle</label>
-                                                                    <input type="text" class="form-control" id="calle" name="calle">
+                                                                    <label for="calle" class="form-label">Editar
+                                                                        Calle</label>
+                                                                    <input type="text" class="form-control" id="calle"
+                                                                        name="calle">
                                                                 </div>
                                                             </div>
                                                             <div class="col-12 mb-3 text-center">
                                                                 <h4 class="fw-bold">Costo del Evento</h4>
                                                             </div>
                                                             <div class="col-12 mb-3">
-                                                                <label for="costo" class="form-label">Editar Costo por boleto</label>
-                                                                <input type="number" min="0" class="form-control" id="costo" name="costo">
+                                                                <label for="costo" class="form-label">Editar Costo por
+                                                                    boleto</label>
+                                                                <input type="number" min="0" class="form-control"
+                                                                    id="costo" name="costo">
                                                             </div>
                                                             <div class="col-12 mb-3">
                                                                 <label for="cantidadBoletos" class="form-label">
                                                                     Editar Cantidad de boletos
                                                                 </label>
-                                                                <input type="number" min="0" max="100" class="form-control" id="cantidadBoletos" name="cantidadBoletos">
+                                                                <input type="number" min="0" max="100"
+                                                                    class="form-control" id="cantidadBoletos"
+                                                                    name="cantidadBoletos">
                                                             </div>
                                                             <div class="text-end mb-3">
-                                                                <button class="btn btn-primary" type="submit" id="btn-agregar">Actualizar</button>
+                                                                <button class="btn btn-primary" type="submit"
+                                                                    id="btn-agregar">Actualizar</button>
                                                             </div>
                                                         </form>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Cerrar</button>
                                                         </div>
                                                     </div>
                                                 </div>
