@@ -22,3 +22,7 @@ from pedidos pd
     join personas p on p.id_persona = c.id_persona
     join detalle_pedidos dp on pd.id_pedido = dp.id_pedido;
 
+create view view_AdminMenu as 
+select 
+ 
+from 
