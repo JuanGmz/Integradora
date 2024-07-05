@@ -1,4 +1,4 @@
-drop database cafe_sinfonia;
+drop database if exists cafe_sinfonia;
 create database cafe_sinfonia;
 
 use cafe_sinfonia;
@@ -102,6 +102,17 @@ primary key(id_domicilio),
 foreign key (id_cliente) references clientes(id_cliente)
 );
 
+CREATE TABLE comprobantes (
+    id_comprobante INT PRIMARY KEY AUTO_INCREMENT,
+    concepto VARCHAR(255),
+    referencia VARCHAR(255),
+    folio_operacion VARCHAR(255),
+    fecha DATE,
+    monto DECIMAL(10, 2),
+    banco_origen VARCHAR(255),
+    imagen_comprobante varchar(255),
+);
+
 create table pedidos(
 id_pedido int auto_increment not null,
 id_cliente int not null,
@@ -116,6 +127,14 @@ documento_url nvarchar(100),
 primary key(id_pedido),
 foreign key (id_cliente) references clientes(id_cliente),
 foreign key (id_domicilio) references domicilios(id_domicilio)
+);
+
+create table comprobantes_pedidos(
+    id_cp int auto_increment primary key,
+    id_comprobante int not null,
+    id_pedido int not null,
+    foreign key (id_comprobante) references comprobantes(id_comprobante),
+    foreign key (id_pedido) references pedidos(id_pedido)
 );
 
 create table bolsas_detalle (
@@ -206,6 +225,15 @@ estatus enum('Pendiente','Cancelada','Apartada') default 'Pendiente', -- Puede s
 primary key(id_reserva),
 foreign key (id_cliente) references clientes(id_cliente),
 foreign key (id_evento) references EVENTOS(id_evento)
+);
+
+create table comprobantes_reservas
+(
+ id_cr int auto_increment primary key,
+ id_comprobante int not null,
+ id_reserva int not null,
+ foreign key (id_comprobante) references comprobantes(id_comprobante),
+ foreign key (id_reserva) references eventos_reservas(id_reserva)
 );
 
 -- Productos del Menu 
