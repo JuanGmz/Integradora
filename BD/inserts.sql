@@ -173,21 +173,21 @@ INSERT INTO contacto (nombre, asunto, cometario, correo, telefono) VALUES
     
 	INSERT INTO CATEGORIAS (nombre, descripcion, tipo) VALUES
 ('Conciertos', 'Categoría para eventos musicales', 'Evento'),
-('Teatro', 'Categoría para representaciones teatrales', 'Evento'),
+('Teatro', 'Categoría para representaciones teatrales', 'Evento'), -- 1
 ('Podcast en vivo', 'Categoría para conferencias y charlas', 'Evento'),
 ('Talleres', 'Categoría para talleres y cursos', 'Evento'),
 ('Ferias', 'Categoría para ferias comerciales y de productos', 'Evento'),
-('Festivales', 'Categoría para festivales culturales y musicales', 'Evento'),
+('Festivales', 'Categoría para festivales culturales y musicales', 'Evento'), -- 5
 ('Seminarios', 'Categoría para seminarios educativos', 'Evento'),
 ('Cine', 'Categoría para proyecciones de películas', 'Evento'),
 ('Clasicos', 'Categoría para el menú de cafés clásicos durante todo tipo de horarios', 'Menu'),
 ('Los métodos de Jazz Band', 'Categoría para el menú de métodos de preparación de café con alma de jazz durante todo tipo de horarios', 'Menu'),
-('Metal Coffee', 'Categoría para el menú de cafés con influencias de la música metal', 'Menu'),
+('Metal Coffee', 'Categoría para el menú de cafés con influencias de la música metal', 'Menu'), -- 10
 ('Cool and Dark', 'Categoría para el menú de cafés oscuros y refrescantes', 'Menu'),
 ('Cold Brew', 'Categoría para el menú de cafés fríos y refrescantes', 'Menu'),
 ('Around The World', 'Categoría para el menú de cafés de diversas partes del mundo', 'Menu'),
 ('Sodas Italianas', 'Categoría para el menú de refrescos italianos', 'Menu'),
-('Frappes', 'Categoría para el menú de bebidas frappé', 'Menu'),
+('Frappes', 'Categoría para el menú de bebidas frappé', 'Menu'),  -- 15 
 ('Té y Tisanas', 'Categoría para el menú de tés y tisanas', 'Menu'),
 ('Sweet Blues', 'Categoría para el menú de cafés dulces con un toque de blues', 'Menu');
 
@@ -317,7 +317,7 @@ INSERT INTO detalle_productos_menu (id_categoria, nombre, descripcion, img_url) 
 (9, 'Latte', 'Café con leche y un toque de espuma.', 'img/latte.jpg'),
 (9, 'Mocha Latte', 'Latte con un toque de chocolate.', 'img/mocha_latte.jpg'),
 (9, 'Caramel Latte', 'Latte con un toque de caramelo.', 'img/caramel_latte.jpg'),
-(9, 'Dirty Chai Latte', 'Latte con chai y un shot de expreso.', 'img/dirty_chai_latte.jpg'),
+(9, 'Dirty Chai Latte', 'Latte con chai y un shot de expreso.', 'img/dirty_chai_latte.jpg'),   -- 10
 (10, 'V60/Dripper', 'Método de goteo para preparar café.', 'img/v60_dripper.jpg'),
 (10, 'Aeropress', 'Método de preparación de café por presión.', 'img/aeropress.jpg'),
 (10, 'Clever', 'Método de preparación de café por inmersión y goteo.', 'img/clever.jpg'),
@@ -325,10 +325,11 @@ INSERT INTO detalle_productos_menu (id_categoria, nombre, descripcion, img_url) 
 (10, 'Chemex', 'Método de goteo para preparar café con filtro especial.', 'img/chemex.jpg'),
 (10, 'Vandola', 'Método tradicional costarricense para preparar café.', 'img/vandola.jpg'),
 (10, 'Sifón Japonés', 'Método de preparación de café con vacío y presión.', 'img/sifon_japones.jpg'),
-(10, '', 'Método de preparación de café con vacío y presión.', 'img/sifon_japones.jpg');
+(12, 'SHAKERATTO', 'Bebida fría a base de espresso.', 'url_to_shakeratto_image'),
+(12, 'ICED LATTE', 'Bebida fría a base de espresso.', 'url_to_iced_latte_image'),
+(12, 'ESPRESSO TONIC', 'Bebida fría a base de espresso.', 'url_to_espresso_tonic_image');
 
-
-	INSERT INTO productos_menu (id_dpm, medida, precio) VALUES
+INSERT INTO productos_menu (id_dpm, medida, precio) VALUES
 (1, '1 Oz', 20.00),
 (1, '2 Oz', 25.00),
 (2, '3 Oz', 30.00),
@@ -359,8 +360,11 @@ INSERT INTO detalle_productos_menu (id_categoria, nombre, descripcion, img_url) 
 (16, '12 Oz', 50.00),
 (16, '16 Oz', 55.00),
 (17, '12 Oz', 50.00),
-(17, '16 Oz', 60.00);
-
+(17, '16 Oz', 60.00),
+(18, '14oz', 40.00),
+(18, '20oz', 50.00),
+(19, '14oz', 50.00),
+(19, '20oz', 60.00);
 
 
     select * from eventos;
