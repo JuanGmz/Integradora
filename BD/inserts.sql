@@ -1,4 +1,4 @@
-
+use cafe_sinfonia;
 -- Insertar datos en la tabla de usuarios
 INSERT INTO usuarios (usuario, correo, contraseña, telefono) VALUES
     ('john.doe', 'john.doe@gmail.com', UNHEX(MD5('Passw0rd!123')), '5551234567'),
@@ -153,7 +153,8 @@ INSERT INTO contacto (nombre, asunto, cometario, correo, telefono) VALUES
     ('Patricia Gutiérrez', 'Consulta de horarios', 'Necesito saber si abren los domingos y cuáles son sus horarios de atención.', 'patricia.gutierrez@yahoo.com', '5559012345'),
     ('Marcos Castro', 'Felicitación por servicio', 'Gracias por el excelente trato y la atención personalizada que recibí.', 'marcos.castro@hotmail.com', '5550123456');
 
-	INSERT INTO ubicacion_lugares (latitud, longitud) VALUES
+	INSERT INTO ubicacion_lugares (latitud, longitud) 
+    VALUES
 	(37.7749, -122.4194), -- San Francisco, CA, USA
 	(34.0522, -118.2437), -- Los Angeles, CA, USA
 	(40.7128, -74.0060),  -- New York, NY, USA
@@ -170,8 +171,7 @@ INSERT INTO contacto (nombre, asunto, cometario, correo, telefono) VALUES
 	(41.9028, 12.4964),   -- Rome, Italy
 	(1.3521, 103.8198);   -- Singapore
     
-    INSERT INTO CATEGORIAS (nombre, descripcion, tipo) VALUES
-('Menu Cafes', 'Categoría para el menú de cafes de sinfonia durante todo tipo de horarios', 'Menu'),
+	INSERT INTO CATEGORIAS (nombre, descripcion, tipo) VALUES
 ('Conciertos', 'Categoría para eventos musicales', 'Evento'),
 ('Teatro', 'Categoría para representaciones teatrales', 'Evento'),
 ('Podcast en vivo', 'Categoría para conferencias y charlas', 'Evento'),
@@ -179,7 +179,19 @@ INSERT INTO contacto (nombre, asunto, cometario, correo, telefono) VALUES
 ('Ferias', 'Categoría para ferias comerciales y de productos', 'Evento'),
 ('Festivales', 'Categoría para festivales culturales y musicales', 'Evento'),
 ('Seminarios', 'Categoría para seminarios educativos', 'Evento'),
-('Cine', 'Categoría para proyecciones de películas', 'Evento');
+('Cine', 'Categoría para proyecciones de películas', 'Evento'),
+('Clasicos', 'Categoría para el menú de cafés clásicos durante todo tipo de horarios', 'Menu'),
+('Los métodos de Jazz Band', 'Categoría para el menú de métodos de preparación de café con alma de jazz durante todo tipo de horarios', 'Menu'),
+('Metal Coffee', 'Categoría para el menú de cafés con influencias de la música metal', 'Menu'),
+('Cool and Dark', 'Categoría para el menú de cafés oscuros y refrescantes', 'Menu'),
+('Cold Brew', 'Categoría para el menú de cafés fríos y refrescantes', 'Menu'),
+('Around The World', 'Categoría para el menú de cafés de diversas partes del mundo', 'Menu'),
+('Sodas Italianas', 'Categoría para el menú de refrescos italianos', 'Menu'),
+('Frappes', 'Categoría para el menú de bebidas frappé', 'Menu'),
+('Té y Tisanas', 'Categoría para el menú de tés y tisanas', 'Menu'),
+('Sweet Blues', 'Categoría para el menú de cafés dulces con un toque de blues', 'Menu');
+
+
 	
     
     INSERT INTO EVENTOS (id_lugar, id_categoria, nombre, tipo, descripcion, fecha_evento, fecha_publicacion, hora_inicio, hora_fin, capacidad, precio_boleto, disponibilidad, img_url) VALUES
@@ -296,69 +308,60 @@ INSERT INTO contacto (nombre, asunto, cometario, correo, telefono) VALUES
 
 
 INSERT INTO detalle_productos_menu (id_categoria, nombre, descripcion, img_url) VALUES
-(1, 'Café Americano', 'Café negro de granos seleccionados.', 'img/cafe_americano.jpg'),
-(1, 'Capuchino', 'Café expreso con leche espumada.', 'img/capuchino.jpg'),
-(1, 'Latte', 'Café con leche y un toque de espuma.', 'img/latte.jpg'),
-(1, 'Mocha', 'Café con chocolate y leche.', 'img/mocha.jpg'),
-(1, 'Espresso', 'Café concentrado en una pequeña taza.', 'img/espresso.jpg'),
-(1, 'Macchiato', 'Café expreso con un toque de espuma de leche.', 'img/macchiato.jpg'),
-(1, 'Flat White', 'Café con leche sedosa y cremosa.', 'img/flat_white.jpg'),
-(1, 'Café Vienés', 'Café con crema batida.', 'img/cafe_vienes.jpg'),
-(1, 'Café Irlandés', 'Café con whisky irlandés y crema.', 'img/cafe_irlandes.jpg'),
-(1, 'Café Turco', 'Café molido fino preparado a la manera tradicional turca.', 'img/cafe_turco.jpg'),
-(1, 'Té Chai Latte', 'Té con especias y leche.', 'img/te_chai_latte.jpg'),
-(1, 'Té Verde', 'Té verde antioxidante y refrescante.', 'img/te_verde.jpg'),
-(1, 'Té Negro', 'Té negro fuerte y revitalizante.', 'img/te_negro.jpg'),
-(1, 'Té de Hierbas', 'Mezcla de hierbas naturales para un té relajante.', 'img/te_hierbas.jpg'),
-(1, 'Té Oolong', 'Té semifermentado con un sabor único.', 'img/te_oolong.jpg'),
-(1, 'Matcha Latte', 'Té matcha con leche.', 'img/matcha_latte.jpg'),
-(1, 'Chocolate Caliente', 'Bebida de chocolate caliente y cremoso.', 'img/chocolate_caliente.jpg'),
-(1, 'Smoothie de Fresas', 'Batido de fresas frescas y yogur.', 'img/smoothie_fresas.jpg'),
-(1, 'Smoothie de Mango', 'Batido de mango tropical.', 'img/smoothie_mango.jpg'),
-(1, 'Smoothie de Plátano', 'Batido de plátano cremoso.', 'img/smoothie_platano.jpg');
+(9, 'Espresso', 'Café concentrado en una pequeña taza, ideal para los amantes del café fuerte.', 'img/espresso.jpg'),
+(9, 'Cortado', 'Café expreso con un toque de leche caliente.', 'img/cortado.jpg'),
+(9, 'Macchiato', 'Café expreso con un toque de espuma de leche.', 'img/macchiato.jpg'),
+(9, 'Espresso Americano', 'Café negro diluido con agua caliente.', 'img/americano.jpg'),
+(9, 'Cappuccino', 'Café expreso con leche espumada, ideal para la mañana.', 'img/cappuccino.jpg'),
+(9, 'Mochaccino', 'Café expreso con leche, espuma y un toque de chocolate.', 'img/mochaccino.jpg'),
+(9, 'Latte', 'Café con leche y un toque de espuma.', 'img/latte.jpg'),
+(9, 'Mocha Latte', 'Latte con un toque de chocolate.', 'img/mocha_latte.jpg'),
+(9, 'Caramel Latte', 'Latte con un toque de caramelo.', 'img/caramel_latte.jpg'),
+(9, 'Dirty Chai Latte', 'Latte con chai y un shot de expreso.', 'img/dirty_chai_latte.jpg'),
+(10, 'V60/Dripper', 'Método de goteo para preparar café.', 'img/v60_dripper.jpg'),
+(10, 'Aeropress', 'Método de preparación de café por presión.', 'img/aeropress.jpg'),
+(10, 'Clever', 'Método de preparación de café por inmersión y goteo.', 'img/clever.jpg'),
+(10, 'Prensa Francesa', 'Método de preparación de café por inmersión.', 'img/prensa_francesa.jpg'),
+(10, 'Chemex', 'Método de goteo para preparar café con filtro especial.', 'img/chemex.jpg'),
+(10, 'Vandola', 'Método tradicional costarricense para preparar café.', 'img/vandola.jpg'),
+(10, 'Sifón Japonés', 'Método de preparación de café con vacío y presión.', 'img/sifon_japones.jpg'),
+(10, '', 'Método de preparación de café con vacío y presión.', 'img/sifon_japones.jpg');
 
 
 	INSERT INTO productos_menu (id_dpm, medida, precio) VALUES
-	(1, '14 Oz', 55.00),
-	(2, '14 Oz', 58.00),
-	(3, '14 Oz', 57.50),
-	(4, '14 Oz', 53.00),
-	(5, '14 Oz', 59.00),
-	(6, '14 Oz', 52.00),
-	(7, '14 Oz', 56.00),
-	(8, '14 Oz', 54.00),
-	(9, '14 Oz', 51.00),
-	(10, '14 Oz', 50.50),
-	(11, '14 Oz', 55.50),
-	(12, '14 Oz', 53.50),
-	(13, '14 Oz', 58.50),
-	(14, '14 Oz', 57.00),
-	(15, '14 Oz', 56.50),
-	(16, '14 Oz', 52.50),
-	(17, '14 Oz', 59.50),
-	(18, '14 Oz', 51.50),
-	(19, '14 Oz', 54.50),
-	(20, '14 Oz', 50.00),
-	(1, '16 Oz', 65.00),
-	(2, '16 Oz', 68.00),
-	(3, '16 Oz', 67.50),
-	(4, '16 Oz', 63.00),
-	(5, '16 Oz', 69.00),
-	(6, '16 Oz', 62.00),
-	(7, '16 Oz', 66.00),
-	(8, '16 Oz', 64.00),
-	(9, '16 Oz', 61.00),
-	(10, '16 Oz', 60.50),
-	(11, '16 Oz', 65.50),
-	(12, '16 Oz', 63.50),
-	(13, '16 Oz', 68.50),
-	(14, '16 Oz', 67.00),
-	(15, '16 Oz', 66.50),
-	(16, '16 Oz', 62.50),
-	(17, '16 Oz', 69.50),
-	(18, '16 Oz', 61.50),
-	(19, '16 Oz', 64.50),
-	(20, '16 Oz', 60.00);
+(1, '1 Oz', 20.00),
+(1, '2 Oz', 25.00),
+(2, '3 Oz', 30.00),
+(2, '4 Oz', 35.00),
+(3, '2 Oz', 25.00),
+(3, '4 Oz', 30.00),
+(4, '12 Oz', 40.00),
+(4, '16 Oz', 45.00),
+(5, '8 Oz', 40.00),
+(6, '8 Oz', 45.00),
+(7, '12 Oz', 50.00),
+(7, '16 Oz', 55.00),
+(8, '12 Oz', 55.00),
+(8, '16 Oz', 60.00),
+(9, '12 Oz', 55.00),
+(9, '16 Oz', 60.00),
+(10, '12 Oz', 60.00),
+(10, '16 Oz', 65.00),
+(11, '12 Oz', 40.00),
+(11, '16 Oz', 45.00),
+(12, '12 Oz', 40.00),
+(13, '12 Oz', 40.00),
+(13, '16 Oz', 45.00),
+(14, '12 Oz', 40.00),
+(14, '16 Oz', 45.00),
+(15, '12 Oz', 50.00),
+(15, '16 Oz', 55.00),
+(16, '12 Oz', 50.00),
+(16, '16 Oz', 55.00),
+(17, '12 Oz', 50.00),
+(17, '16 Oz', 60.00);
+
+
 
     select * from eventos;
     select * from categorias;
@@ -373,6 +376,7 @@ INSERT INTO detalle_productos_menu (id_categoria, nombre, descripcion, img_url) 
     select * from domicilios;
     select * from roles; 
     select * from roles_usuarios; 
-    select * from detalle_productos_menu;
-    select * from productos_menu;
+     detalle_productos_menu;
+     productos_menu;
+    
     
