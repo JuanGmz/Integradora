@@ -397,47 +397,83 @@
                                         placeholder="Buscar">
                                 </div>
                             </div>
+                            <div class="col">
+                                <!--Botón para buscar-->
+                                <button type="submit" class="btn btn-primary">Buscar</button>
+                            </div>
                             <div class="ms-auto text-end">
                                 <!--Botón para agregar producto -->
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregarProducto">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#agregarProducto">
                                     Agregar producto
                                 </button>
                             </div>
-                            <!-- Modal -->
-                            <div class="modal fade" id="agregarProducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Producto</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <!-- Aqui va el contenido de el boton de agregar-->
-                                            <form class="row">
-                                                <div class="col-12 mb-3">
-                                                    <label for="nombre" class="form-label">Nombre del Producto</label>
-                                                    <input type="text" class="form-control" id="nombre" name="nombre">
-                                                </div>
-                                                <div class="col-12 mb-3">
-                                                    <label for="descripcion" class="form-label">Descripción</label>
-                                                    <textarea class="form-control" id="descripcion" name="descripcion" rows="3"></textarea>
-                                                </div>
-                                                <div class="col-12 mb-3">
-                                                    <label for="imagen" class="form-label">Imagen</label>
-                                                    <input type="file" class="form-control" id="imagen" name="imagen">
-                                                </div>
-                                                <div class="row mt-3">
-                                                    <div class="col-12 text-end">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                                        <input type="submit" class="btn btn-primary"value="Agregar Producto">
+                        </form>
+                        <!-- Modal -->
+                        <div class="modal fade" id="agregarProducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Producto</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- Aqui va el contenido de el boton de agregar-->
+                                        <form method="post" action="../scripts/producto.php">
+                                            <div class="col-12 mb-3">
+                                                <label for="nombre" class="form-label">Nombre del Producto</label>
+                                                <input type="text" class="form-control" id="nombre" name="nombre" required>
+                                            </div>
+                                            <div class="col-12 mb-3">
+                                                <label for="descripcion" class="form-label">Descripción</label>
+                                                <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
+                                            </div>
+                                            <div class="col-12 mb-3">
+                                                <label for="imagen" class="form-label">Imagen</label>
+                                                <input type="file" class="form-control" id="imagen" name="imagen" required>
+                                            </div>
+                                            <div class="col-12 mb-3">
+                                                <label for="categoria" class="form-label">Categoría</label>
+                                                <select name="categoria" id="categoria" class="form-select" required>
+                                                    <option value="1">Comida</option>
+                                                    <option value="2">Bebidas</option>
+                                                    <option value="3">Postres</option>
+                                                </select>
+                                            </div>
+                                            <div id="medidas-container">
+                                                <div class="row">
+                                                    <div class="col-5 mb-3">
+                                                        <label for="precio" class="form-label">Precio</label>
+                                                        <input type="number" min="0" class="form-control" id="precio" name="precio" required>
+                                                    </div>
+                                                    <div class="col-5 mb-3">
+                                                        <label for="medida" class="form-label">Medida</label>
+                                                        <input type="text" class="form-control" id="medida" name="medida" required>
+                                                    </div>
+                                                    <div class="col-2 mb-3">
+                                                        <!-- Botón para eliminar medida -->
+                                                        <label for="medida" class="form-label">Borrar</label>
+                                                        <button class="btn btn-danger" onclick="borrarFila(this)">
+                                                            <i class="fa-solid fa-minus"></i>
+                                                        </button>
                                                     </div>
                                                 </div>
-                                            </form>
-                                        </div>
+                                            </div>
+                                            <!-- Botón para agregar otra medida -->
+                                            <button type="button" class="btn btn-primary" id="agregar-medida" onclick="agregarFila()">
+                                                <i class="fa-solid fa-plus"></i> Añadir Medida Extra
+                                            </button>
+                                            <div class="row mt-3">
+                                                <div class="col-12 text-end">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                    <input type="submit" class="btn btn-primary" value="Agregar Producto">
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
                 <hr>
@@ -462,16 +498,16 @@
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalImagen">
                                         <i class="fa-solid fa-image"></i>
                                     </button>
-                                     <!-- Modal de gestionar pedidos -->
-                                     <div class="modal fade" id="modalImagen" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                     <div class="modal-dialog">
-                                         <div class="modal-content">
-                                             <div class="modal-body">
-                                                 <img src="../img/blog-2.jpg" class="img-fluid" alt="Café">
-                                             </div>
-                                         </div>
-                                     </div>
-                                 </div>
+                                    <!-- Modal de gestionar pedidos -->
+                                    <div class="modal fade" id="modalImagen" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <img src="../img/blog-2.jpg" class="img-fluid" alt="Café">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
                                 <td>Exrpesso</td>
                                 <td class="d-none d-lg-table-cell">Café muy fuerte</td>
@@ -493,9 +529,14 @@
                                                 </div>
                                                 <!-- Aquí va el contenido del modal -->
                                                 <div class="modal-body">
-                                                    <h5 class="text-start fw-bold mb-3">Nombre: <span class="fw-normal">Aquí irá el Nombre del producto</span></h5>
-                                                    <h5 class="text-start fw-bold mb-3">Descripción: <span class="fw-normal">Aquí irá la descripción del producto</span></h5>
-                                                    <h5 class="text-start fw-bold mb-3">Categoría: <span class="fw-normal">Aquí irá la categoría del producto</span></h5>
+                                                    <h5 class="text-start fw-bold mb-3">Nombre: <span class="fw-normal">Aquí irá el Nombre del producto</span>
+                                                    </h5>
+                                                    <h5 class="text-start fw-bold mb-3">Descripción: 
+                                                        <span class="fw-normal">Aquí irá la descripción del producto</span>
+                                                    </h5>
+                                                    <h5 class="text-start fw-bold mb-3">Categoría: 
+                                                        <span class="fw-normal">Aquí irá la categoría del producto</span>
+                                                    </h5>
                                                     <!-- Tabla de productos -->
                                                     <table class="table table-light table-striped text-center mt-4" border="1">
                                                         <thead class="table-dark">
@@ -525,17 +566,66 @@
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </button>
                                     <!-- Modal de editar productos -->
-                                    <div class="modal fade" id="editarProducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade text-start p-0 m-0" id="editarProducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="line-height: 1;">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
-                                                <!-- Aquí va el titulo del modal -->
                                                 <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Producto</h1>
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Producto</h1>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
-                                                <!-- Aquí va el contenido del modal -->
                                                 <div class="modal-body">
-                                                    
+                                                    <!-- Aqui va el contenido de el boton de agregar-->
+                                                    <form method="post" action="">
+                                                        <div class="col-12 mb-3">
+                                                            <label for="nombre" class="form-label">Nombre del Producto</label>
+                                                            <input type="text" class="form-control" id="nombre" name="nombre" required>
+                                                        </div>
+                                                        <div class="col-12 mb-3">
+                                                            <label for="descripcion" class="form-label">Descripción</label>
+                                                            <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
+                                                        </div>
+                                                        <div class="col-12 mb-3">
+                                                            <label for="imagen" class="form-label">Imagen</label>
+                                                            <input type="file" class="form-control" id="imagen" name="imagen" required>
+                                                        </div>
+                                                        <div class="col-12 mb-3">
+                                                            <label for="categoria" class="form-label">Categoría</label>
+                                                            <select name="categoria" id="categoria" class="form-select" required>
+                                                                <option value="1">Comida</option>
+                                                                <option value="2">Bebidas</option>
+                                                                <option value="3">Postres</option>
+                                                            </select>
+                                                        </div>
+                                                        <div id="medidas-container-editar">
+                                                            <div class="row">
+                                                                <div class="col-5 mb-3">
+                                                                    <label for="precio" class="form-label">Precio</label>
+                                                                    <input type="number" min="0" class="form-control" id="precio" name="precio" required>
+                                                                </div>
+                                                                <div class="col-5 mb-3">
+                                                                    <label for="medida" class="form-label">Medida</label>
+                                                                    <input type="text" class="form-control" id="medida" name="medida" required>
+                                                                </div>
+                                                                <div class="col-2 mb-3">
+                                                                    <!-- Botón para eliminar medida -->
+                                                                    <label for="medida" class="form-label">Borrar</label>
+                                                                    <button class="btn btn-danger" onclick="borrarFila(this)">
+                                                                        <i class="fa-solid fa-minus"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Botón para agregar otra medida -->
+                                                        <button type="button" class="btn btn-primary" id="agregar-medida" onclick="agregarFilaEditar()">
+                                                            <i class="fa-solid fa-plus"></i> Añadir Medida Extra
+                                                        </button>
+                                                        <div class="row mt-3">
+                                                            <div class="col-12 text-end">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                                <input type="submit" class="btn btn-primary" value="Agregar Producto">
+                                                            </div>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -551,6 +641,7 @@
 
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/b820f07375.js" crossorigin="anonymous"></script>
+    <script src="../script/script.js"></script>
 </body>
 
 </html>
