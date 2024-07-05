@@ -4,7 +4,7 @@ class database
     private $pdo;
     private $user = "root";
     private $password = "";
-    private $server = "mysql:host=localhost;dbname=sinfonia";
+    private $server = "mysql:host=localhost;dbname=cafe_sinfonia";
 
     function contectarDB()
     {
