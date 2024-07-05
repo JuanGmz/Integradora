@@ -112,7 +112,7 @@ CREATE TABLE comprobantes (
     fecha DATE,
     monto DECIMAL(10, 2),
     banco_origen VARCHAR(255),
-    imagen_comprobante varchar(255),
+    imagen_comprobante varchar(255)
 );
 
 create table pedidos(
@@ -228,8 +228,7 @@ foreign key (id_cliente) references clientes(id_cliente),
 foreign key (id_evento) references EVENTOS(id_evento)
 );
 
-create table comprobantes_reservas
-(
+create table comprobantes_reservas(
  id_cr int auto_increment primary key,
  id_comprobante int not null,
  id_reserva int not null,
