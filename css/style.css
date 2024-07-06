@@ -1,0 +1,145 @@
+/* Variables */
+:root {
+    --obscuro: #60450e;
+    --primario: #C19B61;
+    --secundario: #C39681;
+    --terciario: #a18263;
+    --cuarto: #835d38;
+    --blanco: #FFFFFF;
+    --negro: #000000;
+    --negroclaro: #333333;
+    --color1: #bf9d60;
+    --color2: #f6e9e3;
+    --color3: #252525;
+    --color4: #e7d8c3;
+    --color5: #e8d6c2;
+    --color6: #f3ebdf;
+    --color7: #f4ecd0;
+    --color8: #e4ccb4;
+    --color9: #ccac8c;
+    --color10: #dbc09c;
+    --color11: #fbf9f6;
+    --color12: #1c2338;
+    --color13: #e4d4c3;  
+}
+
+/* Estilos globales */
+body {
+    font-family: 'MiFuentePersonalizada', sans-serif;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+@font-face {
+    font-family: 'MiFuentePersonalizada';
+    src: url('../fuentes/Afterglow-Regular.ttf') format('truetype');
+    /* Si tienes otros formatos, añádelos aquí */
+    /* src: url('fonts/mi_fuente.woff2') format('woff2'),
+           url('fonts/mi_fuente.woff') format('woff'),
+           url('fonts/mi_fuente.otf') format('opentype'); */
+}
+
+/* Estilos de la barra de navegación */
+.navbar-brand .logo {
+    /* Ajusta la altura según sea necesario */
+    height: 60px; 
+    width: auto;
+    /* Asegúrate de que la imagen se muestre como bloque dentro del enlace */
+    display: block; 
+}
+.login-button {
+    background-color: var(--negro);
+    color: var(--blanco);
+    font-size: 14px;
+    padding: 8px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    transform: 0.3s background-color;
+    cursor: pointer;
+}
+
+.login-button:hover {
+    background-color: var(--negroclaro);
+}
+
+.navbar {
+    background-color: var(--primario);
+    height: 80px;
+}
+
+.navbar-toggler {
+    border: none;
+    font-size: 1.25rem;
+}
+
+.navbar-toggler:focus,
+.btn-close:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+.nav-link {
+    color: var(--blanco);
+    font-weight: 500;
+    position: relative;
+}
+
+.nav-link:hover,
+.nav_link.active {
+    color: var(--blanco);
+}
+
+@media (min-width: 991px) {
+    .nav-link::before {
+        content: "";
+        bottom: 0;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 2px;
+        background-color: var(--obscuro);
+        visibility: hidden;
+        transition: 0.3s ease-in-out;
+    }
+
+    .nav-link:hover::before,
+    .nav-link.active::before {
+        width: 100%;
+        visibility: visible;
+    }
+}
+
+.navbar-brand {
+    font-weight: 500;
+    color: #835d38;
+    font-size: 24px;
+    transition: 0.3s color;
+}
+
+/* Scrollbar apartado de Administrador */
+/* Scroll */
+.contenedor {
+	padding: 20px;
+	background: #fff;
+	overflow: auto;
+	border-radius: 4px;
+}
+/* Scroll Personalizado */
+.contenedor::-webkit-scrollbar {
+	width: 7px;
+}
+.contenedor::-webkit-scrollbar-thumb {
+	background: #ffffff;
+	border-radius: 5px;
+}
+
+.social-media i:hover{
+    cursor: pointer;
+}
+.h1contact {
+    display: inline;
+    border-bottom: 5px solid var(--primario);
+}
