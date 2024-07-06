@@ -6,28 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/inicio.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-
-
-
     <!-- NavBar -->
-    <nav class="navbar navbar-expand-lg fixed-top">
+    <nav class="navbar navbar-expand-lg shadow-lg">
         <div class="container-fluid">
-            <a class="navbar-brand me-auto" href="index.html">Logo</a>
-
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
-                aria-labelledby="offcanvasNavbarLabel">
+            <a class="navbar-brand" href="index.html">
+                <img src="img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" lazy="loading">
+            </a>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="tituloOffcanvas">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Logo</h5>
+                    <h5 class="offcanvas-title" id="tituloOffcanvas">Sinfonía&CafeCultura</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="html/menu.html">Menú</a>
+                            <a class="nav-link" aria-current="page" href="html/menu.html">Menú</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link mx-lg-2" href="html/">Comprar</a>
@@ -47,125 +44,70 @@
                     </ul>
                 </div>
             </div>
-            <a href="html/login.html" class="login-button">Iniciar Sesión</a>
-            <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <a href="html/login.html" class="login-button ms-auto">Iniciar Sesión</a>
+            <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
     </nav>
 
-    <!-- NavBar End -->
-    <section class="hero-section">
-        <div class="containerimg d-flex align-items-center justify-content-center fs-1 text-white flex-column">
-            <h2>Sinfonía&CaféCultura</h2>
-        </div>
-    </section>
-
-
-    <!-- Sección de Productos -->
-    <div class="container-fluid bg-dark p-3">
-        <h3 class="text-center fw-bold text-light">Nuestros Productos</h3>
-        <div class="row text-center">
-            <div class="col-lg-4 col-6 mt-3">
-                <div class="card">
-                    <img src="img/capuchino-1.jpg" class="card-img-top img-fluid" alt="imgProducto">
-                    <div class="card-body">
-                        <h5 class="card-title">Café Perro</h5>
-                        <p class="card-text d-none d-lg-block">El mejor</p>
-                        <a href="#" class="btn btn-primary">Ver más</a>
+    <!-- Imágen Inicio -->
+    <div style="max-width: 100%;">
+        <div class="row p-0 m-0">
+            <div class="col-lg-8 m-0 p-0">
+                <img src="img/inicio.webp" class="img-fluid p-0 m-0" alt="imginicio" lazy="loading">
+            </div>
+            <div class="col-lg-4 d-flex flex-column justify-content-center align-items-center p-5" style="background: var(--color3);">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="text-light text-center" style="letter-spacing: 1px;">Prueba el mejor café de la ciudad</h1>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-4 col-6 mt-3">
-                <div class="card">
-                    <img src="img/capuchino-1.jpg" class="card-img-top img-fluid" alt="imgProducto">
-                    <div class="card-body">
-                        <h5 class="card-title">Café Perro</h5>
-                        <p class="card-text d-none d-lg-block">El mejor</p>
-                        <a href="#" class="btn btn-primary">Ver más</a>
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <h5 class="text-light">La mejor calidad para ti</h5>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-4 mt-3">
-                <div class="card">
-                    <img src="img/capuchino-1.jpg" class="card-img-top img-fluid" alt="imgProducto">
-                    <div class="card-body">
-                        <h5 class="card-title">Café Perro</h5>
-                        <p class="card-text d-none d-lg-block">El mejor</p>
-                        <a href="#" class="btn btn-primary">Ver más</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid bg-light mt-3">
-        <h3 class="text-center fw-bold">Eventos Próximos</h3>
-        <div class="row text-center">
-            <div class="col-lg-6">
-                <div class="card mb-3">
-                    <img src="img/expreso-1.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.</p>
-                        <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="card mb-3">
-                    <img src="img/expreso-1.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.</p>
-                        <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                <div class="row">
+                    <div class="col-12">
+                        <a href="html/menu.html" class="btn text-light shadow-lg" style="background: var(--primario);">Ver Menú</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-
-    <!-- Button Card-->
-    <button id="floatingButton" class="btn login-button position-fixed bottom-0 end-0 m-3 d-flex p-3 z-3" type="button"
-        data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+    <!-- Botón de Carrito -->
+    <button 
+        id="floatingButton" class="btn login-button position-fixed bottom-0 end-0 m-3 d-flex p-3 z-3" 
+        type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
+    >
         <i class="fa-solid fa-cart-shopping fa-2x"></i>
     </button>
-
-
-
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
         <div class="p-3 fw-bold d-flex justify-content-center">
             <h5 class="offcanvas-title fs-3 mx-auto" id="offcanvasRightLabel">
                 <i class="fa-solid fa-bag-shopping p-2"></i>
                 Carrito
             </h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            
         </div>
         <div class="offcanvas-body">
             <div class="d-flex justify-content-center fs-5">
                 <div class="text-center p-3">
                     <p>Su Carrito esta vacio</p>
-
-                    <button class="btn btn-dark btn-lg ">Regresar a la tienda</button>
-
+                    <button type="button" class="btn btn-dark" 
+                            data-bs-dismiss="offcanvas" aria-label="Close"
+                    >Regresar a la tienda</button>
                 </div>
             </div>
         </div>
-        <!-- Footer personalizado -->
-        <div class="offcanvas-footer text-center p-3">
-            <button class="btn btn-dark btn-lg w-100">Continuar Compra</button>
-        </div>
     </div>
 
-
-
-     <!-- Footer -->
-     <footer>
-        <div class="container-fluid p-5 " style="background:#331a00;">
-            <h2 class="text-center text-light mb-5">Sinfonía&CaféCultura</h2>
+    <!-- Footer -->
+    <footer>
+        <div class="container-fluid p-5 " style="background: var(--negroclaro);">
+            <h2 class="text-center text-light mb-5">SinfoníaCafé&Cultura</h2>
             <hr class="text-light">
             <div class="container-fluid d-flex justify-content-center align-items-center flex-column p-4">
                 <div class="row m-3 text-center">
@@ -189,7 +131,7 @@
                     </div>
                 </div>
                 <div class="row m-3">
-                    <p class="text-center fw-bold text-light">Copyright © 2024 Sinfonía&CaféCultura</p>
+                    <p class="text-center fw-bold text-light">Copyright © 2024 SinfoníaCafé&Cultura</p>
                 </div>
             </div>
         </div>
