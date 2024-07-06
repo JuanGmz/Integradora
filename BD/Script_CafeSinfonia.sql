@@ -1,6 +1,9 @@
+drop database if exists cafe_sinfonia;
+
 create database cafe_sinfonia;
 
 use cafe_sinfonia;
+
 -- Otros
 create table CATEGORIAS(
 id_categoria int auto_increment not null,
@@ -11,13 +14,13 @@ primary key(id_categoria)
 );
 
 create table contacto(
-    id_c int auto_increment not null,
-    nombre nvarchar(150) not null,
-    asunto varchar(150) not null,
-    cometario varchar(300) not null,
-    correo varchar(100) not null,
-    telefono nchar(10) not null,
-    primary key(id_c)
+id_c int auto_increment not null,
+nombre nvarchar(150) not null,
+asunto varchar(150) not null,
+cometario varchar(300) not null,
+correo varchar(100) not null,
+telefono nchar(10) not null,
+primary key(id_c)
 );
 
 create table publicaciones(
@@ -30,28 +33,6 @@ primary key(id_publicacion)
 );
 
 -- Usuarios
-create table personas(
-    id_persona int primary key auto_increment not null,
-    nombres nvarchar(100) not null,
-    apellido_paterno nvarchar(100) not null,
-    apellido_materno nvarchar(100) not null,
-)
-create table empleados(
-    id_empleado int primary key auto_increment not null,
-    id_persona int not null
-    FOREIGN KEY (id_persona) REFERENCES personas(id_persona) 
-)
-create table proveedores(
-    id_proveedor int primary key auto_increment not null,
-    id_persona int not null
-    FOREIGN KEY (id_persona) REFERENCES personas(id_persona)
-)
-create table cliente(
-    id_cliente int primary key auto_increment not null,
-    id_persona int not null
-    FOREIGN KEY (id_persona) REFERENCES personas(id_persona)
-)
-
 create table usuarios(
 id_usuario int auto_increment not null,
 usuario nvarchar (100) not null,
@@ -62,10 +43,10 @@ primary key(id_usuario)
 );
 
 create table roles(
-    id_rol int auto_increment not null,
-    rol nvarchar(150),
-    descripcion nvarchar(200),
-    primary key(id_rol)
+id_rol int auto_increment not null,
+rol nvarchar(150),
+descripcion nvarchar(200),
+primary key(id_rol)
 );
 
 create table roles_usuarios(
@@ -123,6 +104,17 @@ primary key(id_domicilio),
 foreign key (id_cliente) references clientes(id_cliente)
 );
 
+CREATE TABLE comprobantes (
+    id_comprobante INT PRIMARY KEY AUTO_INCREMENT,
+    concepto VARCHAR(255),
+    referencia VARCHAR(255),
+    folio_operacion VARCHAR(255),
+    fecha DATE,
+    monto DECIMAL(10, 2),
+    banco_origen VARCHAR(255),
+    imagen_comprobante varchar(255)
+);
+
 create table pedidos(
 id_pedido int auto_increment not null,
 id_cliente int not null,
@@ -131,12 +123,19 @@ fecha_hora_pedido datetime default current_timestamp,
 id_domicilio int not null,
 envio nvarchar(150),
 costo_envio double,
-metodo_pago enum('Transferencia Bancaria','Deposito Bancario','PayPal','Mercadopago','Oxxo','Tarjeta de Credito','Tarjeta de Debito','Otro') not null,
 fecha_entrega_estimada datetime,
 documento_url nvarchar(100),
 primary key(id_pedido),
 foreign key (id_cliente) references clientes(id_cliente),
 foreign key (id_domicilio) references domicilios(id_domicilio)
+);
+
+create table comprobantes_pedidos(
+    id_cp int auto_increment primary key,
+    id_comprobante int not null,
+    id_pedido int not null,
+    foreign key (id_comprobante) references comprobantes(id_comprobante),
+    foreign key (id_pedido) references pedidos(id_pedido)
 );
 
 create table bolsas_detalle (
@@ -154,13 +153,13 @@ primary key(id_bolsa)
 );
 
 create table bolsas_cafe(
-    id_bc int auto_increment not null,
-    id_bolsa int not null,
-    medida nvarchar(50)not null,
-    precio double not null,
-    stock int not null,
-    primary key(id_bc),
-    foreign key(id_bolsa) references bolsas_detalle(id_bolsa)
+id_bc int auto_increment not null,
+id_bolsa int not null,
+medida nvarchar(50)not null,
+precio double not null,
+stock int not null,
+primary key(id_bc),
+foreign key(id_bolsa) references bolsas_detalle(id_bolsa)
 );
 -- Trigger para actualizar el stock.
 
@@ -187,13 +186,13 @@ primary key(id_dp),
 foreign key (id_pedido) references pedidos(id_pedido),
 foreign key (id_bc) references bolsas_cafe(id_bc)
 );
-
 -- Eventos
+
 create table ubicacion_lugares(
-    id_lugar int auto_increment not null,
-    latitud double not null, 
-    longitud double not null,
-    primary key(id_lugar)
+id_lugar int auto_increment not null,
+latitud double not null, 
+longitud double not null,
+primary key(id_lugar)
 );
 
 create table EVENTOS(
@@ -229,6 +228,15 @@ foreign key (id_cliente) references clientes(id_cliente),
 foreign key (id_evento) references EVENTOS(id_evento)
 );
 
+create table comprobantes_reservas
+(
+ id_cr int auto_increment primary key,
+ id_comprobante int not null,
+ id_reserva int not null,
+ foreign key (id_comprobante) references comprobantes(id_comprobante),
+ foreign key (id_reserva) references eventos_reservas(id_reserva)
+);
+
 -- Productos del Menu 
 create table detalle_productos_menu(
 id_dpm int auto_increment not null,
@@ -241,12 +249,12 @@ foreign key (id_categoria) references CATEGORIAS(id_categoria)
 );
 
 create table productos_menu(
-    id_pm int auto_increment not null,
-    id_dpm int not null,
-    medida nvarchar(100) not null,
-    precio double not null,
-    primary key(id_pm),
-    foreign key (id_pm) references detalle_productos_menu(id_dpm)
+id_pm int auto_increment not null,
+id_dpm int not null,
+medida nvarchar(100) null,
+precio double not null,
+primary key(id_pm),
+foreign key (id_dpm) references detalle_productos_menu(id_dpm)
 );
 
 -- Sistemma de Recompensas
@@ -259,11 +267,11 @@ foreign key (id_cliente) references clientes(id_cliente)
 );
 
 create table asistencias(
-    id_asistencia int auto_increment not null,
-    id_tarjeta int not null,
-    fecha_hora_asistencia datetime default current_timestamp,
-    primary key(id_asistencia),
-    foreign key (id_tarjeta) references tarjetas(id_tarjeta)
+id_asistencia int auto_increment not null,
+id_tarjeta int not null,
+fecha_hora_asistencia datetime default current_timestamp,
+primary key(id_asistencia),
+foreign key (id_tarjeta) references tarjetas(id_tarjeta)
 );
 
 CREATE TABLE recompensas(
@@ -287,5 +295,47 @@ FOREIGN KEY (id_tarjeta) REFERENCES tarjetas(id_tarjeta),
 FOREIGN KEY (id_recompensa) REFERENCES recompensas(id_recompensa)
 );
 
+-- Indices en claves foraneas
+-- Indices en las claves foraneas para la aceleracion de la gestion de tablas ligadas con JOIN.
+-- Tabla roles usuarios.
+CREATE INDEX idx_roles_usuarios_id_usuario ON roles_usuarios(id_usuario);
+CREATE INDEX idx_roles_usuarios_id_rol ON roles_usuarios(id_rol);
 
+-- Tabla personas, empleados, clientes, proveedores.
+CREATE INDEX idx_personas_id_usuario ON personas(id_usuario);
+CREATE INDEX idx_clientes_id_persona ON clientes(id_persona);
+CREATE INDEX idx_empleados_id_persona ON empleados(id_persona);
+CREATE INDEX idx_proveedores_id_persona ON proveedores(id_persona);
+
+-- Tablas pedidos, domicilios.
+CREATE INDEX idx_domicilios_id_cliente ON domicilios(id_cliente);
+CREATE INDEX idx_pedidos_id_cliente ON pedidos(id_cliente);
+CREATE INDEX idx_pedidos_id_domicilio ON pedidos(id_domicilio);
+
+-- Tabla carrito.
+CREATE INDEX idx_carrito_id_cliente ON carrito(id_cliente);
+CREATE INDEX idx_carrito_id_bc ON carrito(id_bc);
+
+-- Tabla detalle pedidos.
+CREATE INDEX idx_detalle_pedidos_id_pedido ON detalle_pedidos(id_pedido);
+CREATE INDEX idx_detalle_pedidos_id_bc ON detalle_pedidos(id_bc);
+
+-- Tablas eventos.
+CREATE INDEX idx_eventos_id_lugar ON EVENTOS(id_lugar);
+CREATE INDEX idx_eventos_id_categoria ON EVENTOS(id_categoria);
+
+-- Tabla eventos reservas.
+CREATE INDEX idx_eventos_reservas_id_cliente ON eventos_reservas(id_cliente);
+CREATE INDEX idx_eventos_reservas_id_evento ON eventos_reservas(id_evento);
+
+-- Tabla productos_menu.
+CREATE INDEX idx_productos_menu_id_dpm ON productos_menu(id_dpm);
+
+-- Tabla tarjetas, asistencias.
+CREATE INDEX idx_tarjetas_id_cliente ON tarjetas(id_cliente);
+CREATE INDEX idx_asistencias_id_tarjeta ON asistencias(id_tarjeta);
+
+-- Tablas tarjetas recompensas.
+CREATE INDEX idx_tarjeta_recompensas_id_tarjeta ON tarjeta_recompensas(id_tarjeta);
+CREATE INDEX idx_tarjeta_recompensas_id_recompensa ON tarjeta_recompensas(id_recompensa);
 
