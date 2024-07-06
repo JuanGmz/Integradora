@@ -29,7 +29,7 @@ class database
         }
     }
     
-    function seleccionar($consulta)
+    function select($consulta)
     {
         try {
             $resultado = $this->pdo->query($consulta);

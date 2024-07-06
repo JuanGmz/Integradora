@@ -14,11 +14,11 @@
     <nav class="navbar navbar-expand-lg shadow-lg">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.html">
-                <img src="img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" lazy="loading">
+                <img src="img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
             </a>
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="tituloOffcanvas">
+            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="tituloOffcanvas">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="tituloOffcanvas">Sinfonía&CafeCultura</h5>
+                    <h5 class="offcanvas-title text-light" id="tituloOffcanvas">SinfoníaCafé&Cultura</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
@@ -27,7 +27,7 @@
                             <a class="nav-link" aria-current="page" href="html/menu.html">Menú</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="html/">Comprar</a>
+                            <a class="nav-link mx-lg-2" href="html/ecommerce.html">Comprar</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link mx-lg-2" href="html/recompensas.html">Recompensas</a>
@@ -52,7 +52,7 @@
         </div>
     </nav>
 
-    <!-- Imágen Inicio -->
+    <!-- Inicio -->
     <div style="max-width: 100%;">
         <div class="row p-0 m-0">
             <div class="col-lg-8 m-0 p-0">
@@ -81,29 +81,6 @@
         </div>
     </div>
 
-    <!-- Botón de Carrito -->
-    <button id="floatingButton" class="btn login-button position-fixed bottom-0 end-0 m-3 d-flex p-3 z-3" type="button"
-        data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-        <i class="fa-solid fa-cart-shopping fa-2x"></i>
-    </button>
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-        <div class="p-3 fw-bold d-flex justify-content-center">
-            <h5 class="offcanvas-title fs-3 mx-auto" id="offcanvasRightLabel">
-                <i class="fa-solid fa-bag-shopping p-2"></i>
-                Carrito
-            </h5>
-
-        </div>
-        <div class="offcanvas-body">
-            <div class="d-flex justify-content-center fs-5">
-                <div class="text-center p-3">
-                    <p>Su Carrito esta vacio</p>
-                    <button type="button" class="btn btn-dark" data-bs-dismiss="offcanvas" aria-label="Close">Regresar a
-                        la tienda</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Footer -->
     <footer>

@@ -26,6 +26,7 @@
 /* Estilos globales */
 body {
     font-family: 'MiFuentePersonalizada', sans-serif;
+
 }
 * {
     margin: 0;
@@ -35,10 +36,6 @@ body {
 @font-face {
     font-family: 'MiFuentePersonalizada';
     src: url('../fuentes/Afterglow-Regular.ttf') format('truetype');
-    /* Si tienes otros formatos, añádelos aquí */
-    /* src: url('fonts/mi_fuente.woff2') format('woff2'),
-           url('fonts/mi_fuente.woff') format('woff'),
-           url('fonts/mi_fuente.otf') format('opentype'); */
 }
 
 /* Estilos de la barra de navegación */
@@ -142,4 +139,53 @@ body {
 .h1contact {
     display: inline;
     border-bottom: 5px solid var(--primario);
+}
+
+/* Imagen Obscura */
+.darken-image {
+    filter: brightness(80%);
+}
+
+.btn-cafe{
+    background-color: var(--primario);
+    color: var(--blanco);
+    font-size: 14px;
+    padding: 8px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    transform: 0.3s background-color;
+    cursor: pointer;
+}
+
+.btn-cafe:hover {
+    background-color: var(--terciario);
+}
+.form-control-bb {
+    border: 0px;
+    border-bottom: 2px solid var(--primario);
+    border-radius: 0%;
+}
+
+/* Navbar admin */
+.navbar-collapse, .nvadmin {
+    background: var(--primario);
+}
+.accordion-item {
+    border: none;
+  }
+  .accordion-button {
+    border: none;
+    box-shadow: none;
+  }
+  .accordion-button:not(.collapsed) {
+    box-shadow: none;
+  }
+  .accordion-button::after {
+    display: none;
+  }
+  .accordion-body a {
+    color: gray;
+  }
+  .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }

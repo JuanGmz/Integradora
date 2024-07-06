@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog</title>
+    <title>Recompensas</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -51,12 +51,33 @@
         </div>
     </nav>
     <!-- NavBar End -->
-     
     <div class="container mb-5">
         <div class="text-center fw-bold fs-2 mt-5 mb-3">
-            <h1 class="h1contact">Blog</h1>
+            <h1 class="h1contact">Ecommerce</h1>
         </div>
     </div>
+
+        <!-- Botón de Carrito -->
+    <button id="floatingButton" class="btn btn-cafe position-fixed bottom-0 end-0 m-3 d-flex p-3 z-3 text-light fw-bold" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+        <i class="fa-solid fa-cart-shopping fa-2x"></i>
+    </button>
+    <div class="offcanvas offcanvas-end text-light" style="background: var(--primario);" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="mt-3 fw-bold d-flex justify-content-center">
+            <h5 class="offcanvas-title fs-3 mx-auto" id="offcanvasRightLabel">
+                <i class="fa-solid fa-bag-shopping"></i>
+            </h5>
+        </div>
+        <div class="offcanvas-body">
+            <div class="d-flex justify-content-center fs-5">
+                <div class="text-center">
+                    <p>Su Carrito esta vacio</p>
+                    <button type="button" class="btn btn-dark" data-bs-dismiss="offcanvas" aria-label="Close">Regresar a
+                        la tienda</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Footer -->
     <footer>
@@ -92,7 +113,7 @@
     </footer>
 
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://kit.fontawesome.com/45ef8dbe96.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/b820f07375.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

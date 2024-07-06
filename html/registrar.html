@@ -11,7 +11,7 @@
 
 <body style="background: var(--color5)">
     <!-- NavBar -->
-    <nav class="navbar navbar-expand-lg shadow-lg mb-lg-5">
+    <nav class="navbar navbar-expand-lg shadow-lg mb-lg-0 mt-lg-0">
         <div class="container-fluid">
             <a class="navbar-brand" href="../index.html">
                 <img src="../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
@@ -45,39 +45,51 @@
                 </div>
             </div>
             <a href="login.html" class="login-button ms-auto">Iniciar Sesión</a>
-            <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
     </nav>
     <!-- NavBar End -->
 
-    <div class="container bg-light rounded-3 mb-0 mb-lg-0">
+    <!-- Registrar -->
+    <div class="container-fluid bg-light rounded-3 mb-0">
         <div class="row">
             <div class="col-lg-6 p-0 m-0">
-                <img src="../img/login.webp" class="img-fluid h-100 rounded" alt="">
+                <img src="../img/registro.webp" class="img-fluid h-100 rounded" alt="">
             </div>
             <div class="col-lg-6 p-5">
                 <form action="" method="post" class="p-0 p-lg-5">
-                    <legend class="fw-bold fs-1">Iniciar Sesión</legend>
+                    <legend class="fw-bold fs-1">Crear Cuenta</legend>
                     <div class="row">
-                        <div class="col-12 mb-3">
+                        <div class="col-12 mb-2">
+                            <label for="nombres" class="form-label fs-5">Nombres</label>
+                            <input type="text" class="form-control form-control-bb" id="nombres" name="nombres" required>
+                        </div>
+                        <div class="row m-0 p-0">
+                            <div class="col-6 mb-2">
+                                <label for="aPaterno" class="form-label fs-5">Apellido Paterno</label>
+                                <input type="text" class="form-control form-control-bb" id="aPaterno" name="aPaterno" required>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <label for="aMaterno" class="form-label fs-5">Apellido Materno</label>
+                                <input type="text" class="form-control form-control-bb" id="aMaterno" name="aMaterno" required>
+                            </div>
+                        </div>  
+                        <div class="col-12 mb-2">
                             <label for="email" class="form-label fs-5">Email</label>
                             <input type="email" class="form-control form-control-bb" id="email" name="email" required>
                         </div>
-                        <div class="col-12 mb-3">
-                            <label for="password" class="form-label fs-5">Contraseña</label>
+                        <div class="col-12 mb-2">
+                            <label for="password" class="form-label fs-5">Crear Contraseña</label>
                             <input type="password" class="form-control form-control-bb" id="password" name="password" required>
                         </div>
-                        <div class="col-12 mb-3 text-end">
-                            <button type="submit" class="btn btn-cafe w-100 text-light fw-bold fs-5">Iniciar Sesión</button>
+                        <div class="col-12 mb-3">
+                            <label for="password2" class="form-label fs-5">Repetir Contraseña</label>
+                            <input type="password" class="form-control form-control-bb" id="password2" name="password2" required>
                         </div>
-                        <div class="col-12 mb-3 text-center">
-                            <a href="recuperar.html" class="text-decoration-none">Olvidaste tu contraseña?</a>
-                        </div>
-                        <div class="col-12 mb-3 text-center">
-                            <a href="registrar.html" class="text-decoration-none">¿No tienes una cuenta? Registrate</a>
+                        <div class="col-12 mb-2 text-end">
+                            <button type="submit" class="btn btn-cafe w-100 text-light fw-bold fs-5">Registrarse</button>
                         </div>
                     </div>
                 </form>
