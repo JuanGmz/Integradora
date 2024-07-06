@@ -506,7 +506,7 @@
                     ";
                     foreach ($tabla as $regi){
                         echo "<tr>
-                        <td>$regi->id_ppm</td>
+                        <td>$regi->id_dpm</td>
                         <td>$regi->id_categoria</td>
                         <td>$regi->nombre</td>
                         <td>$regi->descripcion</td>
