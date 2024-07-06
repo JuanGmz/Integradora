@@ -11,14 +11,14 @@
 
 <body style="background: var(--color5)">
     <!-- NavBar -->
-    <nav class="navbar navbar-expand-lg shadow-lg mb-lg-5">
+    <nav class="navbar navbar-expand-lg shadow-lg">
         <div class="container-fluid">
             <a class="navbar-brand" href="../index.html">
                 <img src="../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
             </a>
-            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura</h5>
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Logo</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
@@ -53,31 +53,43 @@
     </nav>
     <!-- NavBar End -->
 
-    <div class="container bg-light rounded-3 mb-0 mb-lg-0">
+    <div class="container-fluid bg-light rounded-3 mb-0">
         <div class="row">
             <div class="col-lg-6 p-0 m-0">
-                <img src="../img/login.webp" class="img-fluid h-100 rounded" alt="">
+                <img src="../img/registro.webp" class="img-fluid h-100 rounded" alt="">
             </div>
             <div class="col-lg-6 p-5">
                 <form action="" method="post" class="p-0 p-lg-5">
-                    <legend class="fw-bold fs-1">Iniciar Sesión</legend>
+                    <legend class="fw-bold fs-1">Crear Cuenta</legend>
                     <div class="row">
-                        <div class="col-12 mb-3">
+                        <div class="col-12 mb-2">
+                            <label for="nombres" class="form-label fs-5">Nombres</label>
+                            <input type="text" class="form-control form-control-bb" id="nombres" name="nombres">
+                        </div>
+                        <div class="row m-0 p-0">
+                            <div class="col-6 mb-2">
+                                <label for="aPaterno" class="form-label fs-5">Apellido Paterno</label>
+                                <input type="text" class="form-control form-control-bb" id="aPaterno" name="aPaterno">
+                            </div>
+                            <div class="col-6 mb-2">
+                                <label for="aMaterno" class="form-label fs-5">Apellido Materno</label>
+                                <input type="text" class="form-control form-control-bb" id="aMaterno" name="aMaterno">
+                            </div>
+                        </div>  
+                        <div class="col-12 mb-2">
                             <label for="email" class="form-label fs-5">Email</label>
                             <input type="email" class="form-control form-control-bb" id="email" name="email">
                         </div>
-                        <div class="col-12 mb-3">
-                            <label for="password" class="form-label fs-5">Contraseña</label>
+                        <div class="col-12 mb-2">
+                            <label for="password" class="form-label fs-5">Crear Contraseña</label>
                             <input type="password" class="form-control form-control-bb" id="password" name="password">
                         </div>
-                        <div class="col-12 mb-3 text-end">
-                            <button type="submit" class="btn btn-cafe w-100 text-light fw-bold fs-5">Iniciar Sesión</button>
+                        <div class="col-12 mb-3">
+                            <label for="password2" class="form-label fs-5">Repetir Contraseña</label>
+                            <input type="password" class="form-control form-control-bb" id="password2" name="password2">
                         </div>
-                        <div class="col-12 mb-3 text-center">
-                            <a href="recuperar.html" class="text-decoration-none">Olvidaste tu contraseña?</a>
-                        </div>
-                        <div class="col-12 mb-3 text-center">
-                            <a href="registrar.html" class="text-decoration-none">¿No tienes una cuenta? Registrate</a>
+                        <div class="col-12 mb-2 text-end">
+                            <button type="submit" class="btn btn-cafe w-100 text-light fw-bold fs-5">Registrarse</button>
                         </div>
                     </div>
                 </form>
