@@ -7,7 +7,7 @@
     <title>Inicio Admin</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/index.css">
-    <link rel="stylesheet" href="../css/scrollbar.css"> 
+    <link rel="stylesheet" href="../css/scrollbar.css">
 </head>
 
 <body;">
@@ -241,7 +241,8 @@
                 </div>
                 <div class="accordion accordion-flush" id="accordionPc">
                     <div class=" ms-2 fs-3 mt-4 mb-3">
-                        <a class="fw-bold bg-dark text-light text-decoration-none" href="adminInicio.html" aria-expanded="false">
+                        <a class="fw-bold bg-dark text-light text-decoration-none" href="adminInicio.html"
+                            aria-expanded="false">
                             <i class="fa-solid fa-house-laptop"></i>
                             Inicio
                         </a>
@@ -461,25 +462,50 @@
                                         </div>
                                         <!-- Aquí va el contenido del modal -->
                                         <div class="modal-body">
-                                            <form action="" method="POST">
-                                                <div class="mb-3">
-                                                    <label for="nombre" class="form-label">Nombre</label>
-                                                    <input type="text" class="form-control" id="nombre" name="nombre">
+                                            <form class="row g-3">
+                                                <div class="col-12">
+                                                    <label for="input-nombre" class="form-label">Nombre</label>
+                                                    <input type="text" class="form-control" id="input-nombre">
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label for="descripcion" class="form-label">Descripción</label>
-                                                    <textarea name="descripcion" id="descripcion" name="descripcion"
-                                                        class="form-control"></textarea>
+                                                <div class="col-12">
+                                                    <label for="input-descripcion"
+                                                        class="form-label">Descripción</label>
+                                                    <input type="text" class="form-control" id="input-descripcion">
                                                 </div>
-                                                <div class="text-end">
-                                                    <button type="submit" class="btn btn-primary">Agregar
-                                                        Categoría</button>
+                                                <div class="col-12">
+                                                    <label for="input-precio" class="form-label">Precio</label>
+                                                    <input type="text" class="form-control" id="input-precio">
+                                                </div>
+                                                <div class="col-12">
+                                                    <label for="input-Medida1" class="form-label">Medida 1</label>
+                                                    <input type="text" class="form-control" id="input-Medida1">
+                                                </div>
+                                                <div class="col-12">
+                                                    <label for="input-Medida2" class="form-label">Medida 2</label>
+                                                    <input type="text" class="form-control" id="input-Medid2">
+                                                </div>
+                                                <div>
+                                                    <label for="input-categoria" class="form-label">Categoría</label>
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                                            Categorías
+                                                        </button>
+                                                        <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item">Ice-coffe</a></li>
+                                                            <li><a class="dropdown-item">Metal-coffe</a></li>
+                                                            <li><a class="dropdown-item">Asia-coffe</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                    <label for="input-Foto" class="form-label">Foto</label>
+                                                    <input type="file" class="form-control" id="input-Foto">
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Cancelar</button>
+                                                    <button type="button" class="btn btn-primary">Guardar</button>
                                                 </div>
                                             </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" data-bs-dismiss="modal"
-                                                class="btn btn-secondary">Cerrar</button>
                                         </div>
                                     </div>
                                 </div>
@@ -489,10 +515,10 @@
                 </div>
                 <div class="container-fluid p-3">
                     <?php
-                    include("../conexion/conexion.php");
+                    include ("../conexion/conexion.php");
                     $conexion = new conexion();
                     $conexion->conectarBD();
-                    $consulta = "SELECT * FROM detalle_productos_menu";   
+                    $consulta = "SELECT * FROM detalle_productos_menu";
                     $tabla = $conexion->select($consulta);
                     echo "<table class='table table-dark table-striped'>
                     <tr>
@@ -504,7 +530,7 @@
                     </tr>
                     <tbody>
                     ";
-                    foreach ($tabla as $regi){
+                    foreach ($tabla as $regi) {
                         echo "<tr>
                         <td>$regi->id_dpm</td>
                         <td>$regi->id_categoria</td>
@@ -517,7 +543,7 @@
                     $conexion->cerrarBD();
                     ?>
                 </div>
-                
+
             </div>
         </div>
     </div>
