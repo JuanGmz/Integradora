@@ -364,19 +364,20 @@
                                         <form method="post" action="../scripts/producto.php">
                                             <div class="col-12 mb-3">
                                                 <label for="nombre" class="form-label">Nombre del Producto</label>
-                                                <input type="text" class="form-control" id="nombre" name="nombre" required>
+                                                <input type="text" maxlength="30" class="form-control" id="nombre" name="nombre" required>
                                             </div>
                                             <div class="col-12 mb-3">
                                                 <label for="descripcion" class="form-label">Descripción</label>
-                                                <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
+                                                <textarea class="form-control" maxlength="150" id="descripcion" name="descripcion" rows="3" required></textarea>
                                             </div>
                                             <div class="col-12 mb-3">
                                                 <label for="imagen" class="form-label">Imagen</label>
-                                                <input type="file" class="form-control" id="imagen" name="imagen" required>
+                                                <input type="file" class="form-control" id="imagen" name="imagen" accept='image/*' required>
                                             </div>
                                             <div class="col-12 mb-3">
                                                 <label for="categoria" class="form-label">Categoría</label>
                                                 <select name="categoria" id="categoria" class="form-select" required>
+                                                    <option selected disabled>Seleccionar Categoría</option>
                                                     <!-- Aqui va el select de categorías -->
                                                     <?php
                                                     include_once("../class/database.php");
@@ -401,11 +402,11 @@
                                                 <div class="row">
                                                     <div class="col-6 mb-3">
                                                         <label for="precio" class="form-label">Precio</label>
-                                                        <input type="decimal" min="0" class="form-control" id="precio" name="precio" required>
+                                                        <input type="number" min="0" class="form-control" id="precio" name="precio" required>
                                                     </div>
                                                     <div class="col-6 mb-3">
                                                         <label for="medida" class="form-label">Medida</label>
-                                                        <input type="text" class="form-control" id="medida" name="medida" required>
+                                                        <input type="text" maxlength="15" class="form-control" id="medida" name="medida" required>
                                                     </div>
                                                     <div class="ms-auto mt-3">
                                                         <div class="col-12 text-end">
@@ -423,8 +424,8 @@
                     </div>
                 </div>
                 <hr>
-                <!-- TABLA DE PEDIDOS -->
-                <div class="container-fluid mt-5">
+                <!-- TABLA DE PRODUCTO -->
+                <div class="container-fluid m-0 p-0 mt-5">
                     <?php
                     $conexion = new database();
                     $conexion->conectarDB();
@@ -444,21 +445,19 @@
                             <table class='table table-striped text-center'>
                             <thead class='table-dark'>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Imagen</th> 
                                     <th>Nombre</th>
                                     <th class='d-none d-lg-table-cell'>Descripción</th>
-                                    <th class='d-none d-lg-table-cell'>Categoría</th>
-                                    <th>Acciones</th>
+                                    <th colspan='2'>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody class='table-group-divider'>
                         ";
                     foreach ($tabla as $regi) {
                         echo "<tr>
-                                <td>$regi->id_dpm</td>
-                                <!-- Imagen -->
-                                <td>
+                                <td class='m-0 p-0'>$regi->nombre</td>
+                                <td class='m-0 p-0 d-none d-lg-table-cell'>$regi->descripcion</td>
+                                <td class='m-0 p-1 d-flex flex-row align-items-center justify-content-center gap-1'>
+                                    <!-- Imagen -->
                                     <!-- Botón que activa el modal de ver la imagen  -->
                                     <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#modalImagen_$regi->id_dpm'>
                                         <i class='fa-solid fa-image'></i>
@@ -467,20 +466,30 @@
                                     <div class='modal fade' id='modalImagen_$regi->id_dpm' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
                                         <div class='modal-dialog'>
                                             <div class='modal-content'>
-                                                <div class='modal-body'>
+                                                <div class='modal-body mb-3'>
                                                     <!-- Aquí se está mostrando la imagen -->
-                                                    <img src='../img/$regi->img_url' class='img-fluid' alt='imgproducto'>
+                                                    <form action='../scripts/editarImagen.php' method='POST'>
+                                                        <div class='col-12 mb-3'>
+                                                            <label for='imagen' class='form-label'>Imagen Actual</label><br>
+                                                            <img src='../img/" . htmlspecialchars($regi->img_url) . "' class='img-fluid' alt='Imagen Actual'><br>
+                                                                <small>Selecciona una nueva imagen para actualizar, si es necesario.</small>
+                                                            </div>
+                                                            <div class='col-12 mb-3'>
+                                                                <label for='imagen_nueva' class='form-label'>Selecciona una nueva imagen:</label>
+                                                                <input type='file' class='form-control' id='imagen_nueva' name='imagen_nueva' accept='image/*' required>
+                                                            </div>
+                                                            <input type='hidden' name='id_dpm' value='$regi->id_dpm'>
+                                                            <div class='col-12 mb-3 text-end'>
+                                                                <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
+                                                                <button type='submit' class='btn btn-primary'>Actualizar</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </td>
-                                <td>$regi->nombre</td>
-                                <td class='d-none d-lg-table-cell'>$regi->descripcion</td>
-                                <td class='d-none d-lg-table-cell'>$regi->categoria_nombre</td>
-                                
-                                <!-- Botón que activa el modal de ver detalles del producto -->
-                                <td>
+                                    <!-- Botón que activa el modal de ver detalles del producto -->
                                     <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#detalleProducto_$regi->id_dpm'>
                                         <i class='fa-solid fa-bars'></i>
                                     </button>
@@ -532,15 +541,15 @@
                                                                 <div class='row'>
                                                                     <div class='col-6'>
                                                                         <label class='form-label'>Medida extra</label>
-                                                                        <input type='text' name='medidaExtra' class='form-control'>
+                                                                        <input type='text' maxlength='15' name='medidaExtra' class='form-control' required>
                                                                     </div>
                                                                     <div class='col-6'>
                                                                         <label class='form-label'>Precio extra</label>
-                                                                        <input type='text' name='precioExtra' class='form-control'>
+                                                                        <input type='number' name='precioExtra' class='form-control' required>
                                                                         <input type='hidden' name='id_dpm' value='$regi->id_dpm'>
                                                                     </div>
                                                                     <div class='col-12 text-end mt-3'>
-                                                                        <button type='button' class='btn btn-secondary'                 data-bs-dismiss='modal'>Cerrar</button>
+                                                                        <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cerrar</button>
                                                                         <button type='submit' class='btn btn-primary'>Agregar</button>
                                                                     </div>
                                                                 </div>
@@ -576,16 +585,6 @@
                                                             <textarea class='form-control text-start' id='descripcion' name='descripcion' required>
                                                                 $regi->descripcion
                                                             </textarea>
-                                                        </div>
-                                                        <div class='col-12 mb-3'>
-                                                            <label for='imagen' class='form-label'>Imagen Actual</label><br>
-                                                            <img src='../img/" . htmlspecialchars($regi->img_url) . "' class='img-fluid' alt='Imagen Actual'><br>
-                                                            <small>Selecciona una nueva imagen para actualizar, si es necesario.</small>
-                                                        </div>
-
-                                                        <div class='col-12 mb-3'>
-                                                            <label for='imagen_nueva' class='form-label'>Selecciona una nueva imagen:</label>
-                                                            <input type='file' class='form-control' id='imagen_nueva' name='imagen_nueva' accept='image/*'>
                                                         </div>
                                                         <div class='col-12 mb-3'>
                                                             <label for='categoria' class='form-label'>Categoría</label>
