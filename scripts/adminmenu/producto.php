@@ -1,5 +1,5 @@
 <?php
-    include("../class/database.php");
+    include("../../class/database.php");
     $conexion = new Database();
     $conexion->conectarDB();
 
@@ -43,5 +43,5 @@
     $conexion->desconectarDB();
 
     // Redireccionar después de la inserción exitosa
-    header('Location: ../views/adminMenu.php');
+    header('Location: ../../views/adminMenu.php');
     exit;

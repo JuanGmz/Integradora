@@ -1,5 +1,5 @@
 <?php
-include_once("../class/database.php");
+include_once("../../class/database.php");
 $conexion = new Database();
 $conexion->conectarDB();
 
@@ -14,5 +14,5 @@ $stmt3->bindParam(':medidaExtra', $medidaExtra);
 $stmt3->bindParam(':precioExtra', $precioExtra);
 $stmt3->execute();
 
-header('Location: ../views/adminMenu.php');
+header('Location: ../../views/adminMenu.php');
 exit;

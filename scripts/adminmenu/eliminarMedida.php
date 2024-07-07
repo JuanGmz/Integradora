@@ -1,5 +1,5 @@
 <?php
-    include("../class/database.php");
+    include("../../class/database.php");
     $conexion = new Database();
     $conexion->conectarDB();
     $id_dpm = $_POST['id_dpm'];
@@ -18,5 +18,5 @@
     }
     $conexion->desconectarDB();
     
-    header('Location: ../views/adminMenu.php');
+    header('Location: ../../views/adminMenu.php');
     exit;

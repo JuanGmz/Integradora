@@ -1,6 +1,6 @@
 <?php
 
-include("../class/database.php");
+include("../../class/database.php");
 $conexion = new Database();
 $conexion->conectarDB();
 
@@ -16,5 +16,5 @@ if ($stmt->errorCode() !== '00000') {
     die("Error en la ejecución de la consulta: " . $errorInfo[2]);
 }
 $conexion->desconectarDB();
-header('Location: ../views/adminMenu.php');
+header('Location: ../../views/adminMenu.php');
 exit();

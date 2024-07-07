@@ -361,7 +361,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <!-- Aqui va el contenido de el boton de agregar-->
-                                        <form method="post" action="../scripts/producto.php">
+                                        <form method="post" action="../scripts/adminmenu/producto.php">
                                             <div class="col-12 mb-3">
                                                 <label for="nombre" class="form-label">Nombre del Producto</label>
                                                 <input type="text" maxlength="30" class="form-control" id="nombre" name="nombre" required>
@@ -377,7 +377,7 @@
                                             <div class="col-12 mb-3">
                                                 <label for="categoria" class="form-label">Categoría</label>
                                                 <select name="categoria" id="categoria" class="form-select" required>
-                                                    <option selected disabled>Seleccionar Categoría</option>
+                                                    <option value="" selected disabled>Seleccionar Categoría</option>
                                                     <!-- Aqui va el select de categorías -->
                                                     <?php
                                                     include_once("../class/database.php");
@@ -468,7 +468,7 @@
                                             <div class='modal-content'>
                                                 <div class='modal-body mb-3'>
                                                     <!-- Aquí se está mostrando la imagen -->
-                                                    <form action='../scripts/editarImagen.php' method='POST'>
+                                                    <form action='../scripts/adminmenu/editarImagen.php' method='POST'>
                                                         <div class='col-12 mb-3'>
                                                             <label for='imagen' class='form-label'>Imagen Actual</label><br>
                                                             <img src='../img/" . htmlspecialchars($regi->img_url) . "' class='img-fluid' alt='Imagen Actual'><br>
@@ -524,7 +524,7 @@
                                                                     <td>$medida_precio->medida</td>
                                                                     <td>$medida_precio->precio</td>
                                                                     <td>
-                                                                        <form action='../scripts/eliminarMedida.php' method='POST'>
+                                                                        <form action='../scripts/adminmenu/eliminarMedida.php' method='POST'>
                                                                             <input type='hidden' name='id_dpm' value='$regi->id_dpm'>
                                                                             <input type='hidden' name='medida' value='$medida_precio->medida'>
                                                                             <input type='hidden' name='precio' value='$medida_precio->precio'>
@@ -537,7 +537,7 @@
                                                     </table>
                                                     <div class='row'>
                                                         <div class='col-12'>
-                                                            <form class='text-start' action='../scripts/medidaextra.php' method='POST'>
+                                                            <form class='text-start' action='../scripts/adminmenu/medidaextra.php' method='POST'>
                                                                 <div class='row'>
                                                                     <div class='col-6'>
                                                                         <label class='form-label'>Medida extra</label>
@@ -574,7 +574,7 @@
                                                 </div>
                                                 <div class='modal-body'>
                                                     <!-- Aquí va el contenido del modal de editar -->
-                                                    <form method='post' action='../scripts/editarProducto.php'>
+                                                    <form method='post' action='../scripts/adminMenu/editarProducto.php'>
                                                     <input type='hidden' name='id_dpm' value='$regi->id_dpm'>
                                                         <div class='col-12 mb-3'>
                                                             <label for='nombre' class='form-label'>Nombre del Producto</label>
