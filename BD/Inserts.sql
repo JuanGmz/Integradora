@@ -589,10 +589,64 @@ INSERT INTO carrito (id_cliente, id_bc, cantidad, monto_total) VALUES
 (15, 6, 1, 480.00), -- Stock id_bc 6: 3
 (16, 7, 2, 160.00); -- Stock id_bc 7: 13
 
+-- Inserts de las tarjetas de fidelidad
+-- Inserts para tarjetas
+INSERT INTO tarjetas (id_cliente, progreso) VALUES
+    (1, 8),
+    (2, 12),
+    (3, 7),
+    (4, 15),
+    (5, 20),
+    (6, 18),
+    (7, 10),
+    (8, 14);
 
+-- Inserts para asistencias
+INSERT INTO asistencias (id_tarjeta, fecha_hora_asistencia) VALUES
+    (1, '2024-07-01 10:00:00'),
+    (2, '2024-07-01 11:30:00'),
+    (3, '2024-07-01 13:00:00'),
+    (4, '2024-07-02 09:00:00'),
+    (5, '2024-07-02 10:30:00'),
+    (6, '2024-07-02 11:45:00'),
+    (7, '2024-07-03 08:30:00'),
+    (8, '2024-07-03 10:00:00'),
+    (1, '2024-07-04 09:15:00'),
+    (2, '2024-07-04 10:45:00'),
+    (3, '2024-07-04 12:00:00'),
+    (4, '2024-07-05 08:45:00'),
+    (5, '2024-07-05 10:15:00'),
+    (6, '2024-07-05 11:30:00'),
+    (7, '2024-07-06 09:00:00'),
+    (8, '2024-07-06 10:30:00');
 
+-- Inserts para recompensas
+INSERT INTO recompensas (recompensa, condicion, fecha_inicio, fecha_expiracion, estatus, img_url) VALUES
+    ('Café gratis', 5, '2024-07-01', '2024-07-31', 'Activa', NULL),
+    ('Descuento', 10, '2024-07-01', '2024-08-31', 'Activa', NULL),
+    ('Dos bebidas gratis', 15, '2024-07-01', '2024-09-30', 'Activa', NULL);
 
+-- Inserts para tarjeta_recompensas
+INSERT INTO tarjeta_recompensas (id_tarjeta, id_recompensa, canje) VALUES
+    (1, 1, true),  -- progreso 8 >= 5
+    (2, 1, true),  -- progreso 12 >= 5
+    (3, 1, true),  -- progreso 7 >= 5
+    (4, 1, true),  -- progreso 15 >= 5
+    (5, 1, true),  -- progreso 20 >= 5
+    (6, 1, true),  -- progreso 18 >= 5
+    (7, 1, true),  -- progreso 10 >= 5
+    (8, 1, true),  -- progreso 14 >= 5
 
+    (2, 2, true),  -- progreso 12 >= 10
+    (4, 2, true),  -- progreso 15 >= 10
+    (5, 2, true),  -- progreso 20 >= 10
+    (6, 2, true),  -- progreso 18 >= 10
+    (7, 2, true),  -- progreso 10 >= 10
+    (8, 2, true),  -- progreso 14 >= 10
+
+    (4, 3, true),  -- progreso 15 >= 15
+    (5, 3, true),  -- progreso 20 >= 15
+    (6, 3, true);  -- progreso 18 >= 15
 
     select * from eventos;
     evento_reservas
