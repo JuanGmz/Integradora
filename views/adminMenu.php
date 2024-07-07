@@ -328,21 +328,17 @@
                 <hr>
                 <div class="container-fluid">
                     <div class="col bg-body-tertiary p-3 rounded shadow-lg">
-                        <form class="row row-cols-lg-auto g-3 align-items-center">
+                        <form method="post" action="../scripts/filtrarMenu.php" class="row row-cols-lg-auto g-3 align-items-center">
                             <div class="col">
-                                <label class="visually-hidden" for="inlineFormSelectPref">Preference</label>
-                                <select class="form-select" id="inlineFormSelectPref">
+                                <select class="form-select" id="filtrar">
                                     <option selected>Filtrar Por</option>
                                     <option value="1">Nombre</option>
                                     <option value="2">Categoría</option>
                                 </select>
                             </div>
                             <div class="col-6">
-                                <label class="visually-hidden" for="inlineFormInputGroupUsername">Buscar</label>
-                                <div class="input-group">
-                                    <div class="input-group-text"><i class="fa fa-search"></i></div>
-                                    <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Buscar">
-                                </div>
+                                <label class="visually-hidden" for="buscar">Buscar</label>
+                                <input type="text" class="form-control" id="buscar" placeholder="Buscar" name="buscar">
                             </div>
                             <div class="col">
                                 <!--Botón para buscar-->
@@ -381,38 +377,42 @@
                                             <div class="col-12 mb-3">
                                                 <label for="categoria" class="form-label">Categoría</label>
                                                 <select name="categoria" id="categoria" class="form-select" required>
-                                                    <option value="1">Comida</option>
-                                                    <option value="2">Bebidas</option>
-                                                    <option value="3">Postres</option>
+                                                    <!-- Aqui va el select de categorías -->
+                                                    <?php
+                                                    include_once("../class/database.php");
+                                                    $conexion = new Database();
+                                                    $conexion->conectarDB();
+                                                    $query = 'SELECT 
+                                                                    id_categoria,
+                                                                    nombre
+                                                                FROM 
+                                                                    categorias
+                                                                WHERE 
+                                                                    tipo = "menu"';
+                                                    $categorias = $conexion->select($query);
+                                                    foreach ($categorias as $categoria) {
+                                                        echo "<option value='{$categoria->id_categoria}'>{$categoria->nombre}</option>";
+                                                    }
+                                                    $conexion->desconectarDB();
+                                                    ?>
                                                 </select>
                                             </div>
                                             <div id="medidas-container">
                                                 <div class="row">
-                                                    <div class="col-5 mb-3">
+                                                    <div class="col-6 mb-3">
                                                         <label for="precio" class="form-label">Precio</label>
-                                                        <input type="number" min="0" class="form-control" id="precio" name="precio" required>
+                                                        <input type="decimal" min="0" class="form-control" id="precio" name="precio" required>
                                                     </div>
-                                                    <div class="col-5 mb-3">
+                                                    <div class="col-6 mb-3">
                                                         <label for="medida" class="form-label">Medida</label>
                                                         <input type="text" class="form-control" id="medida" name="medida" required>
                                                     </div>
-                                                    <div class="col-2 mb-3">
-                                                        <!-- Botón para eliminar medida -->
-                                                        <label for="medida" class="form-label">Borrar</label>
-                                                        <button class="btn btn-danger" onclick="borrarFila(this)">
-                                                            <i class="fa-solid fa-minus"></i>
-                                                        </button>
+                                                    <div class="ms-auto mt-3">
+                                                        <div class="col-12 text-end">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                            <input type="submit" class="btn btn-primary" value="Agregar Producto">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <!-- Botón para agregar otra medida -->
-                                            <button type="button" class="btn btn-primary" id="agregar-medida" onclick="agregarFila()">
-                                                <i class="fa-solid fa-plus"></i> Añadir Medida Extra
-                                            </button>
-                                            <div class="row mt-3">
-                                                <div class="col-12 text-end">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                                    <input type="submit" class="btn btn-primary" value="Agregar Producto">
                                                 </div>
                                             </div>
                                         </form>
@@ -426,20 +426,19 @@
                 <!-- TABLA DE PEDIDOS -->
                 <div class="container-fluid mt-5">
                     <?php
-                    include("../class/database.php");
                     $conexion = new database();
-                    $conexion->contectarDB();
+                    $conexion->conectarDB();
                     $consulta = "SELECT     
-                                dpm.id_dpm, 
-                                dpm.img_url, 
-                                dpm.nombre, 
-                                dpm.descripcion, 
-                                c.nombre
-                                FROM
-                                    detalle_productos_menu AS dpm
-                                JOIN
-                                    categorias AS c ON dpm.id_categoria = c.id_categoria
-                                ";
+                                        dpm.id_dpm, 
+                                        dpm.img_url, 
+                                        dpm.nombre, 
+                                        dpm.descripcion, 
+                                        c.nombre AS categoria_nombre
+                                    FROM
+                                        detalle_productos_menu AS dpm
+                                    JOIN
+                                        categorias AS c ON dpm.id_categoria = c.id_categoria
+                                    ";
                     $tabla = $conexion->select($consulta);
                     echo "
                             <table class='table table-striped text-center'>
@@ -449,161 +448,173 @@
                                     <th>Imagen</th> 
                                     <th>Nombre</th>
                                     <th class='d-none d-lg-table-cell'>Descripción</th>
-                                    <th class='d-none d-lg-table-cell'>Categoria</th>
+                                    <th class='d-none d-lg-table-cell'>Categoría</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
-                        <tbody class='table-group-divider'>
+                            <tbody class='table-group-divider'>
                         ";
                     foreach ($tabla as $regi) {
                         echo "<tr>
-                            <td>$regi->id_dpm</td>
-                            <!-- Imagen -->
-                            <td>
-                                <!-- Botón que activa el modal de ver la imagen  -->
-                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#modalImagen'>
-                                    <i class='fa-solid fa-image'></i>
+                                <td>$regi->id_dpm</td>
+                                <!-- Imagen -->
+                                <td>
+                                    <!-- Botón que activa el modal de ver la imagen  -->
+                                    <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#modalImagen_$regi->id_dpm'>
+                                        <i class='fa-solid fa-image'></i>
                                     </button>
-                                <!-- Modal de ver imagen -->
-                                <div class='modal fade' id='modalImagen' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
-                                    <div class='modal-dialog'>
-                                        <div class='modal-content'>
-                                            <div class='modal-body'>
-                                                <img src='$regi->img_url' class='img-fluid' alt='imgproducto'>
+                                    <!-- Modal de ver imagen -->
+                                    <div class='modal fade' id='modalImagen_$regi->id_dpm' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+                                        <div class='modal-dialog'>
+                                            <div class='modal-content'>
+                                                <div class='modal-body'>
+                                                    <!-- Aquí se está mostrando la imagen -->
+                                                    <img src='../img/$regi->img_url' class='img-fluid' alt='imgproducto'>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </td>
-                            <td>$regi->nombre</td>
-                            <td class='d-none d-lg-table-cell'>$regi->descripcion</td>
-                            <td class='d-none d-lg-table-cell'>$regi->nombre</td>
-                            
-                            <!-- Botón que activa el modal de editar el producto y ver más detalles del producto -->
-                            <td>
+                                </td>
+                                <td>$regi->nombre</td>
+                                <td class='d-none d-lg-table-cell'>$regi->descripcion</td>
+                                <td class='d-none d-lg-table-cell'>$regi->categoria_nombre</td>
+                                
                                 <!-- Botón que activa el modal de ver detalles del producto -->
-                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#detalleProducto'>
-                                    <i class='fa-solid fa-bars'></i>
-                                </button>
-                                 <div class='modal fade' id='detalleProducto' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
-                                    <div class='modal-dialog'>
-                                        <div class='modal-content'>
-                                            <div class='modal-header'>
-                                                <h1 class='modal-title fs-5' id='exampleModalLabel'>
-                                                    Detalles del Producto
-                                                </h1>
-                                                <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                                            </div>
-                                            <!-- Aquí va el contenido del modal -->
-                                            <div class='modal-body'>
-                                                <h5 class='text-start fw-bold mb-3'>Nombre: <span class='fw-normal'>Aquí irá el Nombre del producto</span>
-                                                </h5>
-                                                <h5 class='text-start fw-bold mb-3'>Descripción: 
-                                                    <span class='fw-normal'>Aquí irá la descripción del producto</span>
-                                                </h5>
-                                                <h5 class='text-start fw-bold mb-3'>Categoría: 
-                                                    <span class='fw-normal'>Aquí irá la categoría del producto</span>
-                                                </h5>
-                                                <!-- Tabla de productos -->
-                                                <table class='table table-light table-striped text-center mt-4' border='1'>
-                                                    <thead class='table-dark'>
-                                                        <th>Medida</th>
-                                                        <th>Precio</th>
-                                                    </thead>
-                                                    <tbody class='table-group-divider'>
-                                                        <tr>
-                                                            <td>250ml</td>
-                                                            <td>$60</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>500ml</td>
-                                                            <td>$75</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div class='modal-footer'>
-                                                <button type='button' data-bs-dismiss='modal' class='btn btn-secondary'>Cerrar</button>
+                                <td>
+                                    <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#detalleProducto_$regi->id_dpm'>
+                                        <i class='fa-solid fa-bars'></i>
+                                    </button>
+                                    <div class='modal fade' id='detalleProducto_$regi->id_dpm' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+                                        <div class='modal-dialog'>
+                                            <div class='modal-content'>
+                                                <div class='modal-header'>
+                                                    <h1 class='modal-title fs-5' id='exampleModalLabel'>Detalles del Producto</h1>
+                                                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                                </div>
+                                                <!-- Aquí va el contenido del modal -->
+                                                <div class='modal-body'>
+                                                    <h5 class='text-start fw-bold mb-3'>Nombre: <span class='fw-normal'>$regi->nombre</span></h5>
+                                                    <h5 class='text-start fw-bold mb-3'>Descripción: <span class='fw-normal'>$regi->descripcion</span></h5>
+                                                    <h5 class='text-start fw-bold mb-3'>Categoría: <span class='fw-normal'>$regi->categoria_nombre</span></h5>
+                                                    <!-- Tabla de productos -->
+                                                    <table class='table table-light table-striped text-center mt-4' border='1'>
+                                                        <thead class='table-dark'>
+                                                            <th>Medida</th>
+                                                            <th>Precio</th>
+                                                            <th>Acciones</th>
+                                                        </thead>
+                                                        <tbody class='table-group-divider'>";
+                                                        // Consulta de productos_menu relacionados con este detalle
+                                                        $query2 = 'SELECT medida, precio FROM productos_menu WHERE id_dpm = :id_dpm';
+                                                        $stmt2 = $conexion->prepare($query2);
+                                                        $stmt2->bindParam(':id_dpm', $regi->id_dpm);
+                                                        $stmt2->execute();
+                                                        $medidas = $stmt2->fetchAll(PDO::FETCH_OBJ);
+                                                        foreach ($medidas as $medida_precio) {
+                                                            echo "<tr>
+                                                                    <td>$medida_precio->medida</td>
+                                                                    <td>$medida_precio->precio</td>
+                                                                    <td>
+                                                                        <form action='../scripts/eliminarMedida.php' method='POST'>
+                                                                            <input type='hidden' name='id_dpm' value='$regi->id_dpm'>
+                                                                            <input type='hidden' name='medida' value='$medida_precio->medida'>
+                                                                            <input type='hidden' name='precio' value='$medida_precio->precio'>
+                                                                            <button type='submit' class='btn btn-danger'><i class='fa-solid fa-trash'></i></button>
+                                                                        </form>
+                                                                  </tr>";
+                                                        }
+                                                        echo "
+                                                        </tbody>
+                                                    </table>
+                                                    <div class='row'>
+                                                        <div class='col-12'>
+                                                            <form class='text-start' action='../scripts/medidaextra.php' method='POST'>
+                                                                <div class='row'>
+                                                                    <div class='col-6'>
+                                                                        <label class='form-label'>Medida extra</label>
+                                                                        <input type='text' name='medidaExtra' class='form-control'>
+                                                                    </div>
+                                                                    <div class='col-6'>
+                                                                        <label class='form-label'>Precio extra</label>
+                                                                        <input type='text' name='precioExtra' class='form-control'>
+                                                                        <input type='hidden' name='id_dpm' value='$regi->id_dpm'>
+                                                                    </div>
+                                                                    <div class='col-12 text-end mt-3'>
+                                                                        <button type='button' class='btn btn-secondary'                 data-bs-dismiss='modal'>Cerrar</button>
+                                                                        <button type='submit' class='btn btn-primary'>Agregar</button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>  
+                                                        </div>
+                                                    </div>       
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- Botón que activa el modal de editar el producto -->
-                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#editarProducto'>
-                                    <i class='fa-solid fa-pen-to-square'></i>
-                                </button>
-                                <!-- Modal de editar productos -->
-                                <div class='modal fade text-start p-0 m-0' id='editarProducto' tabindex='-1'aria-labelledby='exampleModalLabel' aria-hidden='true' style='line-height: 1;'>
-                                    <div class='modal-dialog'>
-                                        <div class='modal-content'>
-                                            <div class='modal-header'>
-                                                <h1 class='modal-title fs-5' id='exampleModalLabel'>Editar Producto</h1>
-                                                <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'><button>
-                                            </div>
-                                            <div class='modal-body'>
-                                                <!-- Aqui va el contenido de el boton de editar-->
-                                                <form method='post' action=''>
-                                                    <div class='col-12 mb-3'>
-                                                        <label for='nombre' class='form-label'>Nombre del Producto</label>
-                                                        <input type='text' class='form-control' id='nombre' name='nombre' required>
-                                                    </div>
-                                                    <div class='col-12 mb-3'>
-                                                        <label for='descripcion' class='form-label'>Descripción</label>
-                                                        <textarea class='form-control' id='descripcion' name='descripcion' rows='3'required></textarea>
-                                                    </div>
-                                                    <div class='col-12 mb-3'>
-                                                        <label for='imagen' class='form-label'>Imagen</label>
-                                                        <input type='file' class='form-control' id='imagen' name='imagen' required>
-                                                    </div>
-                                                    <div class='col-12 mb-3'>
-                                                        <label for='categoria' class='form-label'>Categoría</label>
-                                                        <select name='categoria' id='categoria' class='form-select' required>
-                                                            <option value='1'>Comida</option>
-                                                            <option value='2'>Bebidas</option>
-                                                            <option value='3'>Postres</option>
-                                                        </select>
-                                                    </div>
-                                                    <div id='medidas-container-editar'>
-                                                        <div class='row'>
-                                                            <div class='col-5 mb-3'>
-                                                                <label for='precio' class='form-label'>Precio</label>
-                                                                <input type='number' min='0' class='form-control' id='precio'name='precio' required>
-                                                            </div>
-                                                            <div class='col-5 mb-3'>
-                                                                <label for='medida' class='form-label'>Medida</label>
-                                                                <input type='text' class='form-control' id='medida' name='medida'required>
-                                                            </div>
-                                                            <div class='col-2 mb-3'>
-                                                                <!-- Botón para eliminar medida -->
-                                                                <label for='medida' class='form-label'>Borrar</label>
-                                                                <button class='btn btn-danger' onclick='borrarFila(this)'>
-                                                                    <i class='fa-solid fa-minus'></i>
-                                                                </button>
+
+                                    <!-- Botón que activa el modal de editar el producto -->
+                                    <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#editarProducto_$regi->id_dpm'>
+                                        <i class='fa-solid fa-pen-to-square'></i>
+                                    </button>
+                                    <div class='modal fade text-start p-0 m-0' id='editarProducto_$regi->id_dpm' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true' style='line-height: 1;'>
+                                        <div class='modal-dialog'>
+                                            <div class='modal-content'>
+                                                <div class='modal-header'>
+                                                    <h1 class='modal-title fs-5' id='exampleModalLabel'>Editar Producto</h1>
+                                                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                                </div>
+                                                <div class='modal-body'>
+                                                    <!-- Aquí va el contenido del modal de editar -->
+                                                    <form method='post' action='../scripts/editarProducto.php'>
+                                                    <input type='hidden' name='id_dpm' value='$regi->id_dpm'>
+                                                        <div class='col-12 mb-3'>
+                                                            <label for='nombre' class='form-label'>Nombre del Producto</label>
+                                                            <input value='$regi->nombre' type='text' class='form-control' id='nombre' name='nombre' required>
+                                                        </div>
+                                                        <div class='col-12 mb-3'>
+                                                            <label for='descripcion' class='form-label'>Descripción</label>
+                                                            <textarea class='form-control text-start' id='descripcion' name='descripcion' required>
+                                                                $regi->descripcion
+                                                            </textarea>
+                                                        </div>
+                                                        <div class='col-12 mb-3'>
+                                                            <label for='imagen' class='form-label'>Imagen Actual</label><br>
+                                                            <img src='../img/" . htmlspecialchars($regi->img_url) . "' class='img-fluid' alt='Imagen Actual'><br>
+                                                            <small>Selecciona una nueva imagen para actualizar, si es necesario.</small>
+                                                        </div>
+
+                                                        <div class='col-12 mb-3'>
+                                                            <label for='imagen_nueva' class='form-label'>Selecciona una nueva imagen:</label>
+                                                            <input type='file' class='form-control' id='imagen_nueva' name='imagen_nueva' accept='image/*'>
+                                                        </div>
+                                                        <div class='col-12 mb-3'>
+                                                            <label for='categoria' class='form-label'>Categoría</label>
+                                                            <select name='categoria' id='categoria' class='form-select' required>";
+                                                                foreach ($categorias as $categoria) {
+                                                                    echo "<option value='{$categoria->id_categoria}'>{$categoria->nombre}</option>";
+                                                                }
+                                                            echo"
+                                                            </select>
+                                                        </div>
+                                                        <div class='row mt-3'>
+                                                            <div class='col-12 text-end'>
+                                                                <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cerrar</button>
+                                                                <input type='submit' class='btn btn-primary' value='Guardar cambios'>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <!-- Botón para agregar otra medida -->
-                                                    <button type='button' class='btn btn-primary' id='agregar-medida'onclick='agregarFilaEditar()'>
-                                                            i class='fa-solid fa-plus'></i> Añadir Medida Extra
-                                                    </button>
-                                                    <div class='row mt-3'>
-                                                        <div class='col-12 text-end'>
-                                                            <button type='button' class='btn btn-secondary'data-bs-dismiss='modal'>Cerrar</button>
-                                                            <input type='submit' class='btn btn-primary' value='Agregar Producto'>
-                                                        </div>
-                                                    </div>
-                                                </form>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>";
+                                </td>
+                            </tr>";
                     }
                     echo "</tbody></table>";
                     $conexion->desconectarDB();
                     ?>
                 </div>
+
             </div>
         </div>
     </div>

@@ -6,7 +6,8 @@ class database
     private $password = "";
     private $server = "mysql:host=localhost;dbname=cafe_sinfonia";
 
-    function contectarDB()
+    // funcion para conectar
+    function conectarDB()
     {
         try 
         {
@@ -18,6 +19,7 @@ class database
         }
     }
 
+    // funcion para desconectar
     function desconectarDB()
     {
         try {
@@ -29,6 +31,7 @@ class database
         }
     }
     
+    // funcion para seleccionar
     function select($consulta)
     {
         try {
@@ -37,6 +40,15 @@ class database
             $fila = $resultado->fetchAll(PDO::FETCH_OBJ);
 
             return $fila;
+        } 
+        catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+    function prepare($consulta) {
+        try {
+            $stmt = $this->pdo->prepare($consulta);
+            return $stmt;
         } 
         catch (PDOException $e) {
             echo $e->getMessage();
