@@ -2,7 +2,6 @@
     include("../class/database.php");
     $conexion = new Database();
     $conexion->conectarDB();
-    
     $id_dpm = $_POST['id_dpm'];
     $medida = $_POST['medida'];
     $precio = $_POST['precio'];
@@ -18,5 +17,6 @@
         die("Error en la ejecución de la consulta: " . $errorInfo[2]);
     }
     $conexion->desconectarDB();
+    
     header('Location: ../views/adminMenu.php');
     exit;
