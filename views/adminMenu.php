@@ -380,21 +380,21 @@
                                                     <option value="" selected disabled>Seleccionar Categoría</option>
                                                     <!-- Aqui va el select de categorías -->
                                                     <?php
-                                                    include_once("../class/database.php");
-                                                    $conexion = new Database();
-                                                    $conexion->conectarDB();
-                                                    $query = 'SELECT 
-                                                                    id_categoria,
-                                                                    nombre
-                                                                FROM 
-                                                                    categorias
-                                                                WHERE 
-                                                                    tipo = "menu"';
-                                                    $categorias = $conexion->select($query);
-                                                    foreach ($categorias as $categoria) {
-                                                        echo "<option value='{$categoria->id_categoria}'>{$categoria->nombre}</option>";
-                                                    }
-                                                    $conexion->desconectarDB();
+                                                        include_once("../class/database.php");
+                                                        $conexion = new Database();
+                                                        $conexion->conectarDB();
+                                                        $query = 'SELECT 
+                                                                        id_categoria,
+                                                                        nombre
+                                                                    FROM 
+                                                                        categorias
+                                                                    WHERE 
+                                                                        tipo = "menu"';
+                                                        $categorias = $conexion->select($query);
+                                                        foreach ($categorias as $categoria) {
+                                                            echo "<option value='{$categoria->id_categoria}'>{$categoria->nombre}</option>";
+                                                        }
+                                                        $conexion->desconectarDB();
                                                     ?>
                                                 </select>
                                             </div>

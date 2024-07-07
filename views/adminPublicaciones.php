@@ -424,9 +424,9 @@
                         <i class="fa-solid fa-house fa-2x ms-auto"></i>
                     </a>
                 </div>
-                <div class="container-fluid">
-                    <div class="col bg-body-tertiary p-3 rounded">
-                        <form class="row row-cols-lg-auto g-3 align-items-center">
+                <div class="container-fluid m-0 p-0 mt-3">
+                    <div class="col bg-body-tertiary p-3 rounded shadow-lg">
+                        <form method="post" class="row row-cols-lg-auto g-3 align-items-center">
                             <div class="col">
                                 <label class="visually-hidden" for="inlineFormSelectPref">Preference</label>
                                 <select class="form-select" id="inlineFormSelectPref">
@@ -439,60 +439,75 @@
                             <div class="col-6">
                                 <label class="visually-hidden" for="inlineFormInputGroupUsername">Buscar</label>
                                 <div class="input-group">
-                                    <div class="input-group-text"><i class="fa fa-search"></i></div>
-                                    <input type="text" class="form-control" id="inlineFormInputGroupUsername"
-                                        placeholder="Buscar">
+                                    <div class="input-group-text">
+                                        <i class="fa fa-search"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Buscar">
                                 </div>
                             </div>
                             <div class="ms-auto">
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                                    data-bs-target="#Modal">
-                                    Agregar Blog
+                                <!-- Botón para agregar publicación -->
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalPublicacion">
+                                    Añadir Publicación
                                 </button>
                                 <!-- Modal -->
-                                <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                    aria-hidden="true">
+                                <div class="modal fade" id="modalPublicacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Blog
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                                    Añadir Publicación
                                                 </h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
                                                 <!-- Aqui va el contenido de el boton de agregar-->
-                                                <form>
+                                                <form method="post" action="../scripts/adminpublicaciones/agregarPublicacion.php">
                                                     <div class="mb-3">
                                                         <!-- Nombre -->
-                                                        <label for="nombreBlog" class="form-label">Agregar el
-                                                            Nombre
-                                                            del Blog</label>
-                                                        <input type="text" class="form-control" name="nAgregarBlog" id="nombreAgregarBlog" aria-describedby="emailHelp">
+                                                        <label for="publicacion" class="form-label">Titulo de la Publicación</label>
+                                                        <input type="text" class="form-control" name="titulo" id="tituloPublicacion" maxlength="40" required>
                                                     </div>
                                                     <div class="mb-3">
                                                         <!-- Descripcion -->
-                                                        <label for="descripcionBlog" class="form-label">Agregar
-                                                            la
-                                                            Descripción del Blog</label>
-                                                            <textarea name="dAgregarBlog" class="form-control" id="descripcionAgregarBlog" cols="60" rows="5"></textarea>
+                                                        <label for="descPublicacion" class="form-label">Descripción de la Publicación</label>
+                                                        <textarea name="descripcion" class="form-control" id="descPublicacion" cols="60" rows="5" maxlength="750"></textarea>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <!-- Subir foto -->
-                                                        <label for="imgBlog" class="form-label">Agregar la Imágen
-                                                            del
-                                                            Blog</label>
-                                                        <input type="file" name="iAgregarBlog" class="form-control" id="imgAgregarBlog">
+                                                        <!-- Imagen de la publicacion -->
+                                                        <label for="imgPublicacion" class="form-label">Seleccionar Imagen</label>
+                                                        <input type="file" name="imagen" class="form-control" id="imgPublicacion" accept="image/*" required>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <!-- Agregar categoria -->
-                                                        <label for="categAgregarBlog" class="form-label">Agregar la Imágen
-                                                            del
-                                                            Blog</label>
-                                                        <input type="text" name="categAgregarBlog" class="form-control" id="imgAgregarBlog">
+                                                        <!-- Seleccionar tipo de publicacion -->
+                                                        <label for="tipoPublicacion" class="form-label">Seleccionar tipo de publicación</label>
+                                                        <select type="text" name="tipo" class="form-control" id="tipoPublicacion" required>
+                                                            <option selected disabled value="">Seleccionar tipo de publicación</option>
+                                                            <?php
+                                                                include_once("../class/database.php");
+                                                                $conexion = new Database();
+                                                                $conexion->conectarDB();
+                                                                $query = 'SELECT 
+                                                                            id_tp,
+                                                                            tipo 
+                                                                          FROM 
+                                                                            tipo_publicacion';
+                                                                $t_publi = $conexion->select($query);
+                                                                foreach ($t_publi as $tipo) {
+                                                                    echo "<option value='{$tipo->id_tp}'>{$tipo->tipo}</option>";
+                                                                }
+                                                                $conexion->desconectarDB();
+                                                            ?>              
+                                                        </select>
+                                                    </div>
+                                                    <div class="mb-3 text-end">
+                                                        <!-- Botón de cerrar -->
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                        <!-- Botón para añadir publicacion -->
+                                                        <input type="submit" class="btn btn-primary" value="Añadir Publicación">
                                                     </div>
                                                 </form>
+
                                             </div>
                                         </div>
                                     </div>
@@ -501,205 +516,55 @@
                         </form>
                     </div>
                 </div>
+                <hr>
             </div>
         </div>
     </div>
     <!-- AQA EMPIEZA EL QUE ACOMODA EL GRID A LA DERECHA PARA QUE NO SE SUPERPONGA SOBRE "ADMINISTRAR" -->
     <div class="col-lg-9 offset-lg-3 p-3">
-
         <div class="container-fluid mt-3">
             <div class="row">
                 <!-- COLUMNA de los Blogs -->
-                <div class="col-sm-6 col-md-6 col-lg-4 mb-3 h">
-                    <div class="card">
-                        <img src="../img/blog-1.jpg" class="card-img-top img-fluid object-fit-cover" alt="...">
-                        <div class="card-body rounded-bottom bg-body-tertiary">
-                            <h5 class="card-title fw-bold text-center">Café Premiere</h5>
-                                <!-- Botón para editar blog -->
-                              <div class="text-end">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editarProducto">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </button>
-                              </div>
-                            <!-- Modal para editar el blog -->
-                            <div class="modal fade" id="editarProducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Blog
-                                            </h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> <!-- por que hay 2 botones de cerrar -->
-                                        </div>
-                                        <div class="modal-body">
-                                            <!-- Formulario para editar blog -->
-                                            <form>
-                                                <div class="mb-3">
-                                                    <!-- Nombre -->
-                                                    <label for="nombreBlog" class="form-label">Editar el
-                                                        Nombre
-                                                        del Blog</label>
-                                                    <input type="text" class="form-control" name="nBlog" id="nombreBlog" aria-describedby="emailHelp">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <!-- Descripcion -->
-                                                    <label for="descripcionBlog" class="form-label">Editar
-                                                        la
-                                                        Descripción del Blog</label>
-                                                        <textarea name="dBlog" class="form-control" id="descripcionBlog" cols="60" rows="5"></textarea>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <!-- Subir foto -->
-                                                    <label for="imgBlog" class="form-label">Editar la Imágen
-                                                        del
-                                                        Blog</label>
-                                                    <input type="file" name="iBlog" class="form-control" id="imgBlog">
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="submit" class="btn btn-primary">Guardar Cambios</button>                                              
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Blog repecticion -->
-                <div class="col-sm-6 col-md-6 col-lg-4  mb-3">
-                    <div class="card">
-                        <img src="../img/cafe-banco-1.jpg" class="card-img-top img-fluid" alt="...">
-                        <div class="card-body rounded-bottom bg-body-tertiary">
-                            <h5 class="card-title fw-bold text-center">Café Premiere</h5>
-                            <div class="text-end">
-                                <!-- Botón para editar Blog -->
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editarProducto">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </button>                                
-                            </div>
-                            <!-- Llamar modal de: "editar producto" -->
-                            <div class="modal fade" id="editarProducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Producto
-                                            </h1>
-                                            <button type="button" name="botonRep1" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- Blog repecticion -->
-                <div class="col-sm-6 col-md-6 col-lg-4 mb-3">
-                    <div class="card">
-                        <img src="../img/blog-2.jpg" class="card-img-top img-fluid" alt="...">
-                        <div class="card-body rounded-bottom bg-body-tertiary">
-                            <h5 class="card-title fw-bold text-center">Café Premiere</h5>
-                            <div class="text-end">
-                                <!-- Botón para editar Blog -->
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editarProducto">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </button>                                
-                            </div>
-                            <!-- Llamar modal de: "editar producto" -->
-                            <div class="modal fade" id="editarProducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Producto
-                                            </h1>
-                                            <button type="button" name="botonRep1" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Blog repecticion -->
-                <div class="col-sm-6 col-md-6 col-lg-4 mb-3">
-                    <div class="card">
-                        <img src="../img/cafe-banco-1.jpg" class="card-img-top img-fluid" alt="...">
-                        <div class="card-body rounded-bottom bg-body-tertiary">
-                            <h5 class="card-title fw-bold text-center">Café Premiere</h5>
-                            <div class="text-end">
-                                <!-- Botón para editar Blog -->
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editarProducto">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </button>                                
-                            </div>
-                            <!-- Llamar modal de: "editar producto" -->
-                            <div class="modal fade" id="editarProducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Producto
-                                            </h1>
-                                            <button type="button" name="botonRep1" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Blog repecticion -->
-                <div class="col-sm-6 col-md-6 col-lg-4 mb-3">
-                    <div class="card">
-                        <img src="../img/cafe-banco-1.jpg" class="card-img-top img-fluid" alt="...">
-                        <div class="card-body rounded-bottom bg-body-tertiary">
-                            <h5 class="card-title fw-bold text-center">Café Premiere</h5>
-                            <div class="text-end">
-                                <!-- Botón para editar Blog -->
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editarProducto">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </button>                                
-                            </div>
-                            <!-- Llamar modal de: "editar producto" -->
-                            <div class="modal fade" id="editarProducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Producto
-                                            </h1>
-                                            <button type="button" name="botonRep1" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Blog repecticion -->
-                <div class="col-sm-6 col-md-6 col-lg-4 mb-3">
-                    <div class="card">
-                        <img src="../img/cafe-banco-1.jpg" class="card-img-top img-fluid" alt="...">
-                        <div class="card-body rounded-bottom bg-body-tertiary">
-                            <h5 class="card-title fw-bold text-center">Café Premiere</h5>
-                            <div class="text-end">
-                                <!-- Botón para editar Blog -->
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editarProducto">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </button>                                
-                            </div>
-                            <!-- Llamar modal de: "editar producto" -->
-                            <div class="modal fade" id="editarProducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Producto
-                                            </h1>
-                                            <button type="button" name="botonRep1" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <table class="table table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">Título</th>
+                            <th scope="col">Tipo</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        <!-- Aqui van las publicaciones -->
+                        <?php
+                            include_once("../class/database.php");
+                            $conexion = new Database();
+                            $conexion->conectarDB();
+                            $query = 'SELECT
+                                            id_publicacion, 
+                                            p.titulo,
+                                            p.descripcion,
+                                            p.img_url,
+                                            tp.tipo
+                                        FROM 
+                                            publicaciones AS p
+                                        JOIN
+                                            tipo_publicacion AS tp ON p.tipo = tp.id_tp
+                                        ORDER BY
+                                            id_publicacion DESC';
+                            $publicaciones = $conexion->select($query);
+                            foreach ($publicaciones as $publicacion) {
+                                echo "<tr>
+                                        <td>{$publicacion->titulo}</td>
+                                        <td>{$publicacion->tipo}</td>
+                                        <td>
+                                            <a href='../scripts/adminpublicaciones/editarPublicacion.php?id={$publicacion->id_publicacion}'><i class='fa-solid fa-pen-to-square'></i></a>
+                                            <a href='../scripts/adminpublicaciones/eliminarPublicacion.php?id={$publicacion->id_publicacion}'><i class='fa-solid fa-trash'></i></a>
+                                        </td>
+                                    </tr>";
+                            }
+                        ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div> 
