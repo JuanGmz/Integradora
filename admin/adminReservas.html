@@ -7,7 +7,6 @@
     <title>Recompensa admin</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/index.css">
-    <link rel="stylesheet" href="../css/scrollbar.css">
 </head>
 
 <body>
@@ -417,33 +416,33 @@
 
             <!-- AQUI VA EL CONTENIDOOOOOOOO -->
             <div class="col-lg-9 offset-lg-3 p-3">
-              
-                 <!-- Título de la página -->
+
+                <!-- Título de la página -->
                 <div class="container-fluid d-flex justify-content-between align-items-center p-2 border-bottom">
                     <h1 class="fw-bold">Reservas</h1>
                     <a class="text-decoration-none text-dark" href="../index.html">
                         <i class="fa-solid fa-house fa-2x ms-auto"></i>
                     </a>
                 </div>
-                
+
                 <div class="container-fluid">
                     <div class="col bg-body-tertiary p-3 rounded">
                         <!-- Formulario para filtrar por -->
                         <form class="row row-cols-lg-auto g-3 align-items-center">
-                            <div class="col-sm-6 col-lg-4">
-                                <label class="visually-hidden" for="inlineFormSelectPref">Preference</label>
-                                <select name="op_adRes" class="form-select" id="inlineFormSelectPref">
-                                    <option value="1">Folio</option>
+                            <div class="col">
+                                <select class="form-select" id="filtrar">
+                                    <option selected>Filtrar Por</option>
+                                    <option value="1">Folio reserva</option>
                                     <option value="2">Usuario</option>
                                 </select>
                             </div>
-                            <div class="col-sm-6 col-lg-4">
-                                <label class="visually-hidden" for="inlineFormInputGroupUsername">Buscar</label>
-                                <div class="input-group">
-                                    <div class="input-group-text"><i class="fa fa-search"></i></div>
-                                    <input type="text" class="form-control" id="inlineFormInputGroupUsername"
-                                        placeholder="Buscar">
-                                </div>
+                            <div class="col-6">
+                                <label class="visually-hidden" for="buscar">Buscar</label>
+                                <input type="text" class="form-control" id="buscar" placeholder="Buscar" name="buscar">
+                            </div>
+                            <div class="col">
+                                <!--Botón para buscar-->
+                                <button type="submit" class="btn btn-primary">Buscar</button>
                             </div>
                         </form>
                     </div>
@@ -471,43 +470,39 @@
                                 <td class="d-none d-lg-table-cell">Tributo a Lana del Rey </td>
                                 <td class="d-none d-lg-table-cell">2024-07-07</td>
                                 <td>
-                                    <!-- Botón que activa el modal de ver detalles de la reserva, solo aparece en pantallas chicas -->
-                                    <button type="button" class="btn btn-primary d-sm-table-row d-lg-none"
-                                        data-bs-toggle="modal" data-bs-target="#detallesReserva">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#modalDetalles">
                                         <i class="fa-solid fa-eye"></i>
                                     </button>
-                                    <!-- Modal de ver detalles de la reserva -->
-                                    <div class="modal fade" id="detallesReserva" tabindex="-1"
+                                    <div class="modal fade" id="modalDetalles" tabindex="-1"
                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
-                                                <!-- Aquí va el titulo del modal -->
                                                 <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Detalles de la
-                                                        Reserva</h1>
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                                        Detalles de la Reserva
+                                                    </h1>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <!-- Aquí va el contenido del modal -->
-                                                <div class="modal-body text-start">
-                                                    <h5 class="fw-bold">ID de la recompensa: <span
-                                                            class="fw-normal">Aquí
-                                                            irá el ID de la recompensa</span>
+                                                <div class="modal-body">
+                                                    <h5 class="text-start fw-bold mb-3">Aquí irá el folio de la reserva
                                                     </h5>
-                                                    <h5 class="fw-bold">Recompensa: <span class="fw-normal">Aquí irá la
-                                                            recompensa</span></h5>
-                                                    <h5 class="fw-bold">Imágen: <span class="fw-normal">Aquí irá la
-                                                            imágen</span></h5>
-                                                    <h5 class="fw-bold">Condición: <span class="fw-normal">Aquí irá la
-                                                            condición</span></h5>
-                                                    <h5 class="fw-bold">Fecha Inicio: <span class="fw-normal">Aquí irá
-                                                            la fecha de inicio</span></h5>
-                                                    <h5 class="fw-bold">Fecha Fin: <span class="fw-normal">Aquí irá la
-                                                            fecha de fin</span></h5>
+                                                    <h5 class="text-start fw-bold mb-3">Cliente: <span
+                                                            class="fw-normal">Aquí irá el nombre del cliente que realizó
+                                                            la reserva</span></h5>
+                                                    <h5 class="text-start fw-bold mb-3">Fecha: <span
+                                                            class="fw-normal">Aquí irá la fecha en la que se realizó la reserva</span></h5>
+                                                    <h5 class="text-start fw-bold mb-3">Estatus: <span
+                                                            class="fw-normal">Aquí irá el estatus de la reserva</span></h5>
+                                                    <h5 class="text-start fw-bold mb-3">Monto Total: <span
+                                                            class="fw-normal">Aquí irá el monto total de la reserva</span>
+                                                    </h5>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Cerrar</button>
+                                                    <button type="button" data-bs-dismiss="modal"
+                                                        class="btn btn-primary">Cerrar</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -535,36 +530,18 @@
                                                         <div class="mb-3">
                                                             <label for="editarRecompensa" class="form-label">Editar
                                                                 Estatus</label>
-                                                                <select name="op_adRes" class="form-select" id="inlineFormSelectPref">
-                                                                    <option value="1">Finalizado</option>
-                                                                    <option value="2">Usuario</option>
-                                                                </select>
+                                                            <select name="op_adRes" class="form-select"
+                                                                id="inlineFormSelectPref">
+                                                                <option value="1">Finalizado</option>
+                                                                <option value="2">Usuario</option>
+                                                            </select>
                                                         </div>
                                                         <div class="mb-3">
-                                                            <label for="editarCondicion" class="form-label">Editar
-                                                                Condición</label>
-                                                            <input type="number" min="1" class="form-control"
-                                                                id="editarCondicion">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label for="editarImgRecompensa" class="form-label">Editar
-                                                                Imágen de la Recompensa</label>
-                                                            <input type="file" class="form-control"
+                                                            <label for="editarImgRecompensa" class="form-label">Adjuntar documento de envio</label>
+                                                            <input required type="file" class="form-control"
                                                                 id="editarImgRecompensa">
                                                         </div>
                                                         <div class="row">
-                                                            <div class="mb-3 col-6">
-                                                                <label for="editarFechaInicio" class="form-label">Editar
-                                                                    Fecha Inicio</label>
-                                                                <input type="date" class="form-control"
-                                                                    id="editarFechaInicio">
-                                                            </div>
-                                                            <div class="mb-3 col-6">
-                                                                <label for="editarFechaFin" class="form-label">Editar
-                                                                    Fecha Fin</label>
-                                                                <input type="date" class="form-control"
-                                                                    id="editarFechaFin">
-                                                            </div>
                                                         </div>
                                                         <div class="mt-3 text-end">
                                                             <button type="button" class="btn btn-primary"
@@ -590,6 +567,7 @@
 
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/b820f07375.js" crossorigin="anonymous"></script>
+    <script src="../script/script.js"></script>
 </body>
 
 </html>
