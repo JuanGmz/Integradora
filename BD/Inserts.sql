@@ -505,7 +505,97 @@ INSERT INTO detalle_productos_menu (id_categoria, nombre, descripcion, img_url) 
 (66, '', 70), -- Pastel Red Velvet
 (67, '', 40); -- Rollos de Canela con Glaseado
 
+
+INSERT INTO bolsas_detalle (
+    productor_finca,
+    proceso,
+    variedad,
+    altura,
+    aroma,
+    acidez,
+    sabor,
+    cuerpo,
+    img_url
+)
+VALUES
+('Eduardo Vital Díaz', 'Lavado', 'Marsellesa, San Román, Oro Azteca', '1,220 msnm', 'Cacao, Vainilla', 'Cítrica, brillante', 'Choc. Oscuro, Avellana', 'Alto - Denso', 'https://example.com/image.jpg'),
+('Finca La Joyita', 'Lavado', 'Caturra', '1,300 - 1,500 msnm', 'Cítrico, Floral', 'Brillante, Equilibrada', 'Miel, Manzana Verde, Durazno', 'Medio - Denso', '[https://www.booking.com/hotel/mx/la-joyita.html](https://www.booking.com/hotel/mx/la-joyita.html)'),
+('Finca El Injerto', 'Natural', 'Marsellesa, Bourbon', '1,350 - 1,550 msnm', 'Dulce de Leche, Nuez', 'Frutal Intensa', 'Almíbar, Naranja', 'Ligero', 'https://www.facebook.com/fincaelinjertocafe/');
+
+INSERT INTO bolsas_cafe (
+  id_bolsa,
+  medida,
+  precio,
+  stock
+)
+VALUES 
+(1, '1/4 Kg', 85, 10),
+(1, '1/2 Kg', 170, 5),
+(1, '1 Kg', 340, 2),
+(2, '250 g', 130, 20),
+(2, '500 g', 250, 15),
+(2, '1 Kg', 480, 10),
+(3,  '250 g', 80, 20),
+(3,  '500 g', 160, 15),
+(3,  '1 Kg', 320, 10);
+
+-- Stock disponible inicial:
+-- id_bc 1 (1/4 Kg) => 10 unidades
+-- id_bc 2 (1/2 Kg) => 5 unidades
+-- id_bc 3 (1 Kg) => 2 unidades
+-- id_bc 4 (250 g) => 20 unidades
+-- id_bc 5 (500 g) => 15 unidades
+-- id_bc 6 (1 Kg) => 10 unidades
+-- id_bc 7 (250 g) => 20 unidades
+-- id_bc 8 (500 g) => 15 unidades
+-- id_bc 9 (1 Kg) => 10 unidades
+-- Inserts para los primeros 10 clientes
+INSERT INTO carrito (id_cliente, id_bc, cantidad, monto_total) VALUES
+(1, 1, 1, 85.00),  -- Stock id_bc 1: 9
+(1, 2, 2, 340.00), -- Stock id_bc 2: 3
+(2, 1, 3, 255.00), -- Stock id_bc 1: 6
+(3, 4, 1, 130.00), -- Stock id_bc 4: 19
+(3, 7, 2, 160.00), -- Stock id_bc 7: 18
+(4, 1, 2, 170.00), -- Stock id_bc 1: 4
+(5, 7, 1, 80.00),  -- Stock id_bc 7: 17
+(6, 5, 2, 500.00), -- Stock id_bc 5: 13
+(7, 1, 1, 85.00),  -- Stock id_bc 1: 3
+(8, 8, 3, 480.00), -- Stock id_bc 8: 12
+(9, 5, 2, 500.00), -- Stock id_bc 5: 11
+(10, 1, 1, 85.00), -- Stock id_bc 1: 2
+(10, 5, 2, 500.00),-- Stock id_bc 5: 9
+(2, 8, 3, 480.00), -- Stock id_bc 8: 9
+(3, 1, 1, 85.00),  -- Stock id_bc 1: 1
+(4, 9, 2, 640.00), -- Stock id_bc 9: 8
+(5, 5, 1, 250.00), -- Stock id_bc 5: 8
+(6, 1, 1, 85.00),  -- Stock id_bc 1: 0
+(7, 5, 2, 500.00), -- Stock id_bc 5: 6
+(8, 5, 1, 250.00), -- Stock id_bc 5: 5
+-- Inserts para los clientes que sobran con más de un producto por carrito de compra
+(11, 5, 2, 500.00), -- Stock id_bc 5: 3
+(12, 7, 1, 80.00),  -- Stock id_bc 7: 16
+(13, 5, 2, 500.00), -- Stock id_bc 5: 1
+(14, 6, 3, 1440.00),-- Stock id_bc 6: 7
+(15, 7, 1, 80.00),  -- Stock id_bc 7: 15
+(16, 8, 3, 720.00), -- Stock id_bc 8: 6
+(17, 4, 1, 130.00), -- Stock id_bc 4: 18
+(18, 8, 2, 480.00), -- Stock id_bc 8: 4
+(19, 4, 1, 130.00), -- Stock id_bc 4: 17
+(20, 6, 3, 1440.00),-- Stock id_bc 6: 4
+(11, 8, 2, 480.00), -- Stock id_bc 8: 2
+(12, 4, 1, 130.00), -- Stock id_bc 4: 16
+(13, 8, 2, 480.00), -- Stock id_bc 8: 0
+(14, 4, 2, 260.00), -- Stock id_bc 4: 14
+(15, 6, 1, 480.00), -- Stock id_bc 6: 3
+(16, 7, 2, 160.00); -- Stock id_bc 7: 13
+
+
+
+
+
+
     select * from eventos;
+    evento_reservas
     select * from categorias;
     select * from ubicacion_lugares;
 	select * from contacto;
@@ -521,4 +611,7 @@ INSERT INTO detalle_productos_menu (id_categoria, nombre, descripcion, img_url) 
 	select * from detalle_productos_menu;
 	select * from productos_menu;
     
+    select * from bolsas_cafe;
+    select * from bolsas_detalle;
+    select * from carrito;
     
