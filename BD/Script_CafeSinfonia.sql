@@ -281,7 +281,7 @@ condicion int not null,
 fecha_inicio date not null, 
 fecha_expiracion date not null,
 estatus enum('Activa','Inactiva') default 'Activa',
-img_url nvarchar(100)not null,
+img_url nvarchar(100)null,
 primary key (id_recompensa)
 );
 
