@@ -85,7 +85,7 @@ INSERT INTO personas (id_usuario, nombres, apellido_paterno, apellido_materno) V
     (39, 'Harry', 'Thomas', 'Perez'),
     (40, 'Dante Raziel', 'Basurto', 'Saucedo');
     
-INSERT INTO publicaciones (titulo, descripcion, img_url, tipo) VALUES
+    INSERT INTO publicaciones (titulo, descripcion, img_url, tipo) VALUES
     -- Difusión
     ('Nueva Sinfonía de Sabores', '¡Descubre nuestro nuevo menú de temporada con sabores únicos que te harán viajar!', 'http://sinfoniacafe.com/img/nueva_sinfonia.jpg', 'Difusion'),
     ('Concierto de Jazz en Vivo', 'Este viernes, acompáñanos para una noche inolvidable de jazz en vivo con músicos locales.', 'http://sinfoniacafe.com/img/jazz_vivo.jpg', 'Difusion'),
@@ -110,7 +110,7 @@ INSERT INTO publicaciones (titulo, descripcion, img_url, tipo) VALUES
     ('Cómo Elegir el Café Perfecto para Ti', 'Guía para seleccionar el tipo de café que mejor se adapte a tus gustos y preferencias. Con tantas opciones disponibles, elegir el café perfecto puede ser una tarea abrumadora. En este artículo, te ayudamos a navegar por el mundo del café y a encontrar el que mejor se adapte a tus gustos. Discutimos las diferentes variedades de granos, los perfiles de sabor y las regiones de cultivo. También te damos consejos sobre cómo probar diferentes tipos de café y qué factores considerar al hacer tu elección. Ya seas un amante del café fuerte y robusto o prefieras algo más suave y afrutado, aquí encontrarás la guía que necesitas para tomar una decisión informada.', 'http://sinfoniacafe.com/img/elegir_cafe.jpg', 'Blog'),
     ('Tendencias en el Mundo del Café', 'Mantente al día con las últimas tendencias y novedades en la industria del café. El mundo del café está en constante evolución, con nuevas tendencias emergiendo cada año. En este artículo, exploramos las innovaciones más recientes en la industria del café, desde nuevas técnicas de preparación hasta las últimas modas en bebidas de café. Descubriremos cómo los avances tecnológicos están cambiando la forma en que cultivamos, procesamos y disfrutamos del café. También analizamos las tendencias de consumo y cómo están influyendo en la oferta de productos en las cafeterías. Mantente informado y descubre qué está de moda en el mundo del café.', 'http://sinfoniacafe.com/img/tendencias_cafe.jpg', 'Blog');
 
-INSERT INTO clientes (id_persona)
+	INSERT INTO clientes (id_persona)
 SELECT id_persona FROM personas LIMIT 20;
 
 -- Asignar personas a la tabla empleados
@@ -121,8 +121,40 @@ SELECT id_persona FROM personas LIMIT 20, 10;
 INSERT INTO proveedores (id_persona)
 SELECT id_persona FROM personas LIMIT 30, 10;
 
-INSERT INTO ubicacion_lugares (latitud, longitud) 
-VALUES
+INSERT INTO contacto (nombre, asunto, cometario, correo, telefono) VALUES
+    ('Ana López', 'Consulta de productos', 'Me gustaría obtener más información sobre sus productos disponibles.', 'ana.lopez@gmail.com', '5551234567'),
+    ('Pedro Martínez', 'Reclamación de servicio', 'No estoy satisfecho con el servicio recibido el día de hoy.', 'pedro.martinez@yahoo.com', '5552345678'),
+    ('María García', 'Solicitud de presupuesto', 'Quisiera un presupuesto detallado para el proyecto que estamos planeando.', 'maria.garcia@hotmail.com', '5553456789'),
+    ('Javier Rodríguez', 'Sugerencia para mejora', 'Tienen un excelente servicio, pero podrían mejorar la variedad de productos.', 'javier.rodriguez@gmail.com', '5554567890'),
+    ('Sara Fernández', 'Consulta de horarios', 'Necesito saber sus horarios de atención durante el fin de semana.', 'sara.fernandez@yahoo.com', '5555678901'),
+    ('Carlos Pérez', 'Felicitación por servicio', 'Excelente atención al cliente, los felicito por el buen servicio.', 'carlos.perez@hotmail.com', '5556789012'),
+    ('Laura Díaz', 'Solicitud de información', 'Estoy interesada en conocer más sobre sus servicios de entrega a domicilio.', 'laura.diaz@gmail.com', '5557890123'),
+    ('Daniel Ruiz', 'Problema con pedido', 'He recibido mi pedido incompleto, necesito una solución lo antes posible.', 'daniel.ruiz@yahoo.com', '5558901234'),
+    ('Lucía Sánchez', 'Reclamación por producto defectuoso', 'El producto que compré tiene un defecto de fabricación, necesito un reemplazo.', 'lucia.sanchez@hotmail.com', '5559012345'),
+    ('Pablo Gómez', 'Solicitud de catálogo', 'Por favor, envíenme su catálogo actualizado de productos.', 'pablo.gomez@gmail.com', '5550123456'),
+    ('Elena Castro', 'Consulta sobre promociones', 'Me gustaría saber si tienen alguna promoción vigente en productos de belleza.', 'elena.castro@yahoo.com', '5551234567'),
+    ('Miguel Fernández', 'Sugerencia para evento', 'Sugiero que organicen un evento de degustación de productos nuevos.', 'miguel.fernandez@hotmail.com', '5552345678'),
+    ('Carmen Moreno', 'Reclamación por atención', 'La atención recibida en su sucursal fue muy lenta y poco amable.', 'carmen.moreno@gmail.com', '5553456789'),
+    ('José Torres', 'Felicitación por servicio', 'Gracias por la excelente atención recibida durante mi última visita.', 'jose.torres@yahoo.com', '5554567890'),
+    ('Isabel Ruiz', 'Consulta de disponibilidad', '¿Tienen disponible el producto que vi en su página web?', 'isabel.ruiz@hotmail.com', '5555678901'),
+    ('Francisco Martín', 'Solicitud de presupuesto', 'Necesito un presupuesto para la renovación de mis muebles de oficina.', 'francisco.martin@gmail.com', '5556789012'),
+    ('Beatriz Serrano', 'Reclamación por producto dañado', 'El producto que compré llegó dañado, necesito un reembolso.', 'beatriz.serrano@yahoo.com', '5557890123'),
+    ('Antonio Pérez', 'Sugerencia para mejora', 'Sería bueno que ampliaran su variedad de productos orgánicos.', 'antonio.perez@hotmail.com', '5558901234'),
+    ('Manuela Jiménez', 'Consulta sobre garantía', '¿Cuál es el periodo de garantía de sus productos electrónicos?', 'manuela.jimenez@gmail.com', '5559012345'),
+    ('Jorge García', 'Reclamación por servicio técnico', 'El servicio técnico no pudo resolver el problema con mi electrodoméstico.', 'jorge.garcia@yahoo.com', '5550123456'),
+    ('Luisa Martínez', 'Consulta de precios', 'Quisiera conocer los precios de sus productos de jardinería.', 'luisa.martinez@hotmail.com', '5551234567'),
+    ('Raúl López', 'Solicitud de información', '¿Podrían proporcionarme información sobre sus cursos de cocina?', 'raul.lopez@gmail.com', '5552345678'),
+    ('Mónica Sánchez', 'Felicitación por servicio', 'Gracias por resolver mi problema de manera rápida y eficiente.', 'monica.sanchez@yahoo.com', '5553456789'),
+    ('Sergio Gómez', 'Consulta sobre características', 'Me gustaría saber más sobre las características técnicas de su nuevo producto.', 'sergio.gomez@hotmail.com', '5554567890'),
+    ('Natalia Torres', 'Reclamación por servicio de entrega', 'El servicio de entrega no cumplió con el horario acordado.', 'natalia.torres@gmail.com', '5555678901'),
+    ('Diego Vargas', 'Solicitud de muestras', '¿Podrían enviarme muestras de sus productos más vendidos?', 'diego.vargas@yahoo.com', '5556789012'),
+    ('Laura Ramírez', 'Reclamación por falta de stock', 'El producto que quería comprar no estaba disponible en su tienda.', 'laura.ramirez@hotmail.com', '5557890123'),
+    ('Roberto Méndez', 'Sugerencia para mejora', 'Sería útil que incluyeran una opción de compra rápida en su sitio web.', 'roberto.mendez@gmail.com', '5558901234'),
+    ('Patricia Gutiérrez', 'Consulta de horarios', 'Necesito saber si abren los domingos y cuáles son sus horarios de atención.', 'patricia.gutierrez@yahoo.com', '5559012345'),
+    ('Marcos Castro', 'Felicitación por servicio', 'Gracias por el excelente trato y la atención personalizada que recibí.', 'marcos.castro@hotmail.com', '5550123456');
+
+	INSERT INTO ubicacion_lugares (latitud, longitud) 
+    VALUES
 	(37.7749, -122.4194), -- San Francisco, CA, USA
 	(34.0522, -118.2437), -- Los Angeles, CA, USA
 	(40.7128, -74.0060),  -- New York, NY, USA
@@ -139,61 +171,60 @@ VALUES
 	(41.9028, 12.4964),   -- Rome, Italy
 	(1.3521, 103.8198);   -- Singapore
     
-INSERT INTO CATEGORIAS (nombre, descripcion, tipo) 
-VALUES
-    ('Conciertos', 'Categoría para eventos musicales', 'Evento'),-- 1
-    ('Teatro', 'Categoría para representaciones teatrales', 'Evento'), 
-    ('Podcast en vivo', 'Categoría para conferencias y charlas', 'Evento'),
-    ('Talleres', 'Categoría para talleres y cursos', 'Evento'),
-    ('Ferias', 'Categoría para ferias comerciales y de productos', 'Evento'),-- 5
-    ('Festivales', 'Categoría para festivales culturales y musicales', 'Evento'), 
-    ('Seminarios', 'Categoría para seminarios educativos', 'Evento'),
-    ('Cine', 'Categoría para proyecciones de películas', 'Evento'),
-    ('Clasicos', 'Categoría para el menú de cafés clásicos durante todo tipo de horarios', 'Menu'),
-    ('Los métodos de Jazz Band', 'Categoría para el menú de métodos de preparación de café con alma de jazz durante todo tipo de horarios', 'Menu'),-- 10
-    ('Metal Coffee', 'Categoría para el menú de cafés con influencias de la música metal', 'Menu'), 
-    ('Cool and Dark', 'Categoría para el menú de cafés oscuros y refrescantes', 'Menu'),
-    ('Cold Brew', 'Categoría para el menú de cafés fríos y refrescantes', 'Menu'),
-    ('Around The World', 'Categoría para el menú de cafés de diversas partes del mundo', 'Menu'),
-    ('Sodas Italianas', 'Categoría para el menú de refrescos italianos', 'Menu'), -- 15
-    ('Frappes', 'Categoría para el menú de bebidas frappé', 'Menu'),  
-    ('Té y Tisanas', 'Categoría para el menú de tés y tisanas', 'Menu'),
-    ('Sweet Blues', 'Categoría para el menú de cafés dulces con un toque de blues', 'Menu');
+	INSERT INTO CATEGORIAS (nombre, descripcion, tipo) VALUES
+('Conciertos', 'Categoría para eventos musicales', 'Evento'),-- 1
+('Teatro', 'Categoría para representaciones teatrales', 'Evento'), 
+('Podcast en vivo', 'Categoría para conferencias y charlas', 'Evento'),
+('Talleres', 'Categoría para talleres y cursos', 'Evento'),
+('Ferias', 'Categoría para ferias comerciales y de productos', 'Evento'),-- 5
+('Festivales', 'Categoría para festivales culturales y musicales', 'Evento'), 
+('Seminarios', 'Categoría para seminarios educativos', 'Evento'),
+('Cine', 'Categoría para proyecciones de películas', 'Evento'),
+('Clasicos', 'Categoría para el menú de cafés clásicos durante todo tipo de horarios', 'Menu'),
+('Los métodos de Jazz Band', 'Categoría para el menú de métodos de preparación de café con alma de jazz durante todo tipo de horarios', 'Menu'),-- 10
+('Metal Coffee', 'Categoría para el menú de cafés con influencias de la música metal', 'Menu'), 
+('Cool and Dark', 'Categoría para el menú de cafés oscuros y refrescantes', 'Menu'),
+('Cold Brew', 'Categoría para el menú de cafés fríos y refrescantes', 'Menu'),
+('Around The World', 'Categoría para el menú de cafés de diversas partes del mundo', 'Menu'),
+('Sodas Italianas', 'Categoría para el menú de refrescos italianos', 'Menu'), -- 15
+('Frappes', 'Categoría para el menú de bebidas frappé', 'Menu'),  
+('Té y Tisanas', 'Categoría para el menú de tés y tisanas', 'Menu'),
+('Sweet Blues', 'Categoría para el menú de cafés dulces con un toque de blues', 'Menu');
 
 
-	
-    
+
     INSERT INTO EVENTOS (id_lugar, id_categoria, nombre, tipo, descripcion, fecha_evento, fecha_publicacion, hora_inicio, hora_fin, capacidad, precio_boleto, disponibilidad, img_url) VALUES
 (1, 5, 'Taller de Cerámica', 'De Pago', 'Un taller para aprender las técnicas básicas de la cerámica.', '2024-07-15', '2024-07-01', '08:00:00', '10:00:00', 50, 15.00, 50, 'http://example.com/ceramica.jpg'),
 (2, 2, 'Concierto de Jazz', 'De Pago', 'Disfruta de una noche con los mejores músicos de jazz.', '2024-07-20', '2024-07-05', '19:00:00', '21:00:00', 200, 25.00, 200, 'http://example.com/jazz.jpg'),
 (3, 3, 'Obra de Teatro Clásica', 'De Pago', 'Una obra de teatro clásica para disfrutar con toda la familia.', '2024-07-22', '2024-07-07', '18:00:00', '20:00:00', 150, 20.00, 150, 'http://example.com/teatro.jpg'),
-(4, 4, 'Podcast en Vivo', 'Gratuito', 'Un podcast en vivo con interesantes invitados y temas de actualidad.', '2024-07-25', '2024-07-10', '17:00:00', '18:30:00', 100, 0.00, 100, 'http://example.com/podcast.jpg'),
+(4, 4, 'Podcast en Vivo', 'Gratuito', 'Un podcast en vivo con interesantes invitados y temas de actualidad.', '2024-07-25', '2024-07-10', '17:00:00', '18:30:00', 100, 5.00, 100, 'http://example.com/podcast.jpg'),
 (5, 5, 'Taller de Pintura', 'De Pago', 'Un taller de pintura para todas las edades y niveles.', '2024-07-30', '2024-07-15', '10:00:00', '12:00:00', 30, 15.00, 30, 'http://example.com/taller_pintura.jpg'),
-(6, 6, 'Feria de Artesanías', 'Gratuito', 'Una feria con los mejores productos artesanales de la región.', '2024-08-05', '2024-07-20', '09:00:00', '18:00:00', 500, 0.00, 500, 'http://example.com/feria.jpg'),
+(6, 6, 'Feria de Artesanías', 'Gratuito', 'Una feria con los mejores productos artesanales de la región.', '2024-08-05', '2024-07-20', '09:00:00', '18:00:00', 500, 5.00, 500, 'http://example.com/feria.jpg'),
 (7, 7, 'Festival de Música Indie', 'De Pago', 'Un festival con las mejores bandas de música indie.', '2024-08-10', '2024-07-25', '16:00:00', '23:00:00', 300, 30.00, 300, 'http://example.com/festival.jpg'),
-(8, 8, 'Seminario de Tecnología', 'Gratuito', 'Un seminario sobre las últimas tendencias en tecnología.', '2024-08-15', '2024-08-01', '09:00:00', '12:00:00', 200, 0.00, 200, 'http://example.com/seminario.jpg'),
+(8, 8, 'Seminario de Tecnología', 'Gratuito', 'Un seminario sobre las últimas tendencias en tecnología.', '2024-08-15', '2024-08-01', '09:00:00', '12:00:00', 200, 5.00, 200, 'http://example.com/seminario.jpg'),
 (9, 9, 'Proyección de Película Clásica', 'De Pago', 'Una proyección especial de una película clásica en un cine histórico.', '2024-08-20', '2024-08-05', '20:00:00', '22:00:00', 100, 12.00, 100, 'http://example.com/cine.jpg'),
 (10, 2, 'Concierto de Rock', 'De Pago', 'Una noche con las mejores bandas de rock de la ciudad.', '2024-08-25', '2024-08-10', '20:00:00', '23:00:00', 200, 30.00, 200, 'http://example.com/rock.jpg'),
 (11, 3, 'Obra de Teatro Moderna', 'De Pago', 'Una obra de teatro moderna y provocadora.', '2024-08-30', '2024-08-15', '19:00:00', '21:00:00', 150, 25.00, 150, 'http://example.com/teatro_moderno.jpg'),
-(12, 4, 'Podcast de Historia', 'Gratuito', 'Un podcast en vivo sobre los eventos históricos más interesantes.', '2024-09-05', '2024-08-20', '18:00:00', '19:30:00', 100, 0.00, 100, 'http://example.com/podcast_historia.jpg'),
+(12, 4, 'Podcast de Historia', 'Gratuito', 'Un podcast en vivo sobre los eventos históricos más interesantes.', '2024-09-05', '2024-08-20', '18:00:00', '19:30:00', 100, 5.00, 100, 'http://example.com/podcast_historia.jpg'),
 (13, 5, 'Taller de Fotografía', 'De Pago', 'Un taller para aprender las técnicas básicas de la fotografía.', '2024-09-10', '2024-08-25', '09:00:00', '12:00:00', 30, 20.00, 30, 'http://example.com/taller_fotografia.jpg'),
-(14, 6, 'Feria del Libro', 'Gratuito', 'Una feria con las mejores editoriales y autores.', '2024-09-15', '2024-09-01', '10:00:00', '18:00:00', 400, 0.00, 400, 'http://example.com/feria_libro.jpg'),
+(14, 6, 'Feria del Libro', 'Gratuito', 'Una feria con las mejores editoriales y autores.', '2024-09-15', '2024-09-01', '10:00:00', '18:00:00', 400, 5.00, 400, 'http://example.com/feria_libro.jpg'),
 (15, 7, 'Festival de Cine Independiente', 'De Pago', 'Un festival con las mejores películas del cine independiente.', '2024-09-20', '2024-09-05', '14:00:00', '23:00:00', 250, 40.00, 250, 'http://example.com/festival_cine.jpg'),
-(1, 8, 'Seminario de Salud', 'Gratuito', 'Un seminario sobre la salud y el bienestar.', '2024-09-25', '2024-09-10', '10:00:00', '13:00:00', 150, 0.00, 150, 'http://example.com/seminario_salud.jpg'),
+(1, 8, 'Seminario de Salud', 'Gratuito', 'Un seminario sobre la salud y el bienestar.', '2024-09-25', '2024-09-10', '10:00:00', '13:00:00', 150, 5.00, 150, 'http://example.com/seminario_salud.jpg'),
 (2, 9, 'Proyección de Documental', 'De Pago', 'Una proyección especial de un documental aclamado.', '2024-09-30', '2024-09-15', '19:00:00', '21:00:00', 100, 15.00, 100, 'http://example.com/documental.jpg'),
 (3, 2, 'Concierto de Pop', 'De Pago', 'Una noche con las mejores canciones pop.', '2024-10-05', '2024-09-20', '20:00:00', '22:30:00', 200, 35.00, 200, 'http://example.com/pop.jpg'),
 (4, 3, 'Obra de Teatro Infantil', 'De Pago', 'Una obra de teatro para toda la familia.', '2024-10-10', '2024-09-25', '17:00:00', '18:30:00', 150, 18.00, 150, 'http://example.com/teatro_infantil.jpg'),
-(5, 4, 'Podcast de Ciencia', 'Gratuito', 'Un podcast en vivo sobre los últimos descubrimientos científicos.', '2024-10-15', '2024-10-01', '18:00:00', '19:30:00', 100, 0.00, 100, 'http://example.com/podcast_ciencia.jpg'),
+(5, 4, 'Podcast de Ciencia', 'Gratuito', 'Un podcast en vivo sobre los últimos descubrimientos científicos.', '2024-10-15', '2024-10-01', '18:00:00', '19:30:00', 100, 5.00, 100, 'http://example.com/podcast_ciencia.jpg'),
 (6, 5, 'Taller de Cocina', 'De Pago', 'Un taller para aprender recetas fáciles y deliciosas.', '2024-10-20', '2024-10-05', '10:00:00', '13:00:00', 30, 25.00, 30, 'http://example.com/taller_cocina.jpg'),
-(7, 6, 'Feria de Emprendedores', 'Gratuito', 'Una feria para conocer nuevos emprendimientos y startups.', '2024-10-25', '2024-10-10', '09:00:00', '17:00:00', 300, 0.00, 300, 'http://example.com/feria_emprendedores.jpg'),
+(7, 6, 'Feria de Emprendedores', 'Gratuito', 'Una feria para conocer nuevos emprendimientos y startups.', '2024-10-25', '2024-10-10', '09:00:00', '17:00:00', 300, 5.00, 300, 'http://example.com/feria_emprendedores.jpg'),
 (8, 7, 'Festival de Danza', 'De Pago', 'Un festival con las mejores compañías de danza.', '2024-10-30', '2024-10-15', '15:00:00', '21:00:00', 250, 45.00, 250, 'http://example.com/festival_danza.jpg'),
-(9, 8, 'Seminario de Marketing', 'Gratuito', 'Un seminario sobre las últimas tendencias en marketing.', '2024-11-05', '2024-10-20', '10:00:00', '12:00:00', 200, 0.00, 200, 'http://example.com/seminario_marketing.jpg'),
+(9, 8, 'Seminario de Marketing', 'Gratuito', 'Un seminario sobre las últimas tendencias en marketing.', '2024-11-05', '2024-10-20', '10:00:00', '12:00:00', 200, 5.00, 200, 'http://example.com/seminario_marketing.jpg'),
 (10, 9, 'Proyección de Película de Terror', 'De Pago', 'Una proyección especial de una película de terror clásica.', '2024-11-10', '2024-10-25', '20:00:00', '22:00:00', 100, 10.00, 100, 'http://example.com/terror.jpg'),
-(11, 4, 'Conferencia de Literatura', 'Gratuito', 'Una conferencia sobre los últimos trabajos literarios.', '2024-11-15', '2024-11-01', '09:00:00', '11:00:00', 100, 0.00, 100, 'http://example.com/conferencia_literatura.jpg'),
+(11, 4, 'Conferencia de Literatura', 'Gratuito', 'Una conferencia sobre los últimos trabajos literarios.', '2024-11-15', '2024-11-01', '09:00:00', '11:00:00', 100, 5.00, 100, 'http://example.com/conferencia_literatura.jpg'),
 (12, 2, 'Concierto de Música Clásica', 'De Pago', 'Una noche con los mejores músicos de música clásica.', '2024-11-20', '2024-11-05', '19:00:00', '21:30:00', 200, 50.00, 200, 'http://example.com/clasica.jpg'),
 (13, 3, 'Musical de Broadway', 'De Pago', 'Un espectáculo musical directamente desde Broadway.', '2024-11-25', '2024-11-10', '20:00:00', '22:30:00', 150, 60.00, 150, 'http://example.com/musical.jpg'),
-(14, 4, 'Podcast de Literatura', 'Gratuito', 'Un podcast en vivo sobre los mejores libros y autores.', '2024-11-30', '2024-11-15', '17:00:00', '18:30:00', 100, 0.00, 100, 'http://example.com/podcast_literatura.jpg'),
+(14, 4, 'Podcast de Literatura', 'Gratuito', 'Un podcast en vivo sobre los mejores libros y autores.', '2024-11-30', '2024-11-15', '17:00:00', '18:30:00', 100, 5.00, 100, 'http://example.com/podcast_literatura.jpg'),
 (15, 5, 'Taller de Manualidades', 'De Pago', 'Un taller para aprender manualidades creativas.', '2024-12-05', '2024-11-20', '10:00:00', '12:00:00', 30, 20.00, 30, 'http://example.com/taller_manualidades.jpg');
+
     
     INSERT INTO domicilios (id_cliente, referencia, estado, ciudad, codigo_postal, colonia, calle, telefono) VALUES
 (1, 'Cerca del parque central', 'Nuevo León', 'Monterrey', '64000', 'Centro', 'Av. Constitución 123', '8112345678'),
@@ -558,6 +589,235 @@ INSERT INTO carrito (id_cliente, id_bc, cantidad, monto_total) VALUES
 (15, 6, 1, 480.00), -- Stock id_bc 6: 3
 (16, 7, 2, 160.00); -- Stock id_bc 7: 13
 
+INSERT INTO pedidos (id_cliente, estatus, fecha_hora_pedido, id_domicilio, envio, costo_envio, fecha_entrega_estimada, documento_url) VALUES
+(1, 'Finalizado', DATE_SUB(NOW(), INTERVAL 11 DAY) - INTERVAL 5 HOUR, 1, 'Motocicleta', 35.00, DATE_SUB(NOW(), INTERVAL 9 DAY) - INTERVAL 3 HOUR, 'http://example.com/doc1'),
+(2, 'Finalizado', DATE_SUB(NOW(), INTERVAL 10 DAY) - INTERVAL 2 HOUR, 2, 'Paquetería profesional', 60.00, DATE_SUB(NOW(), INTERVAL 8 DAY) - INTERVAL 1 HOUR, 'http://example.com/doc2'),
+(3, 'En proceso', DATE_SUB(NOW(), INTERVAL 9 DAY) - INTERVAL 6 HOUR, 3, 'Motocicleta', 35.00, DATE_SUB(NOW(), INTERVAL 6 DAY) - INTERVAL 4 HOUR, 'http://example.com/doc3'),
+(4, 'En proceso', DATE_SUB(NOW(), INTERVAL 8 DAY) - INTERVAL 3 HOUR, 4, 'Paquetería profesional', 60.00, DATE_SUB(NOW(), INTERVAL 5 DAY) - INTERVAL 2 HOUR, 'http://example.com/doc4'),
+(5, 'Pendiente', DATE_SUB(NOW(), INTERVAL 7 DAY) - INTERVAL 4 HOUR, 5, 'Motocicleta', 35.00, DATE_SUB(NOW(), INTERVAL 4 DAY) - INTERVAL 3 HOUR, 'http://example.com/doc5'),
+(6, 'Pendiente', DATE_SUB(NOW(), INTERVAL 6 DAY) - INTERVAL 1 HOUR, 6, 'Paquetería profesional', 60.00, DATE_SUB(NOW(), INTERVAL 3 DAY) - INTERVAL 5 HOUR, 'http://example.com/doc6'),
+(7, 'Pendiente', DATE_SUB(NOW(), INTERVAL 5 DAY) - INTERVAL 6 HOUR, 7, 'Motocicleta', 35.00, DATE_SUB(NOW(), INTERVAL 2 DAY) - INTERVAL 1 HOUR, 'http://example.com/doc7'),
+(8, 'En proceso', DATE_SUB(NOW(), INTERVAL 4 DAY) - INTERVAL 2 HOUR, 8, 'Paquetería profesional', 60.00, DATE_SUB(NOW(), INTERVAL 1 DAY) - INTERVAL 4 HOUR, 'http://example.com/doc8'),
+(9, 'En proceso', DATE_SUB(NOW(), INTERVAL 3 DAY) - INTERVAL 5 HOUR, 9, 'Motocicleta', 35.00, DATE_SUB(NOW(), INTERVAL 1 DAY) - INTERVAL 2 HOUR, 'http://example.com/doc9'),
+(10, 'Pendiente', DATE_SUB(NOW(), INTERVAL 2 DAY) - INTERVAL 3 HOUR, 10, 'Paquetería profesional', 60.00, NOW() - INTERVAL 1 HOUR, 'http://example.com/doc10'),
+(11, 'Pendiente', DATE_SUB(NOW(), INTERVAL 1 DAY) - INTERVAL 4 HOUR, 11, 'Motocicleta', 35.00, NOW() + INTERVAL 1 DAY - INTERVAL 2 HOUR, 'http://example.com/doc11'),
+(12, 'En proceso', DATE_SUB(NOW(), INTERVAL 3 DAY) - INTERVAL 6 HOUR, 12, 'Paquetería profesional', 60.00, NOW() + INTERVAL 2 DAY - INTERVAL 5 HOUR, 'http://example.com/doc12'),
+(13, 'Pendiente', DATE_SUB(NOW(), INTERVAL 2 DAY) - INTERVAL 5 HOUR, 13, 'Motocicleta', 35.00, NOW() + INTERVAL 1 DAY - INTERVAL 3 HOUR, 'http://example.com/doc13'),
+(14, 'En proceso', DATE_SUB(NOW(), INTERVAL 5 DAY) - INTERVAL 2 HOUR, 14, 'Paquetería profesional', 60.00, NOW() + INTERVAL 1 DAY - INTERVAL 4 HOUR, 'http://example.com/doc14'),
+(15, 'Pendiente', DATE_SUB(NOW(), INTERVAL 6 DAY) - INTERVAL 3 HOUR, 15, 'Motocicleta', 35.00, NOW() + INTERVAL 3 DAY - INTERVAL 1 HOUR, 'http://example.com/doc15'),
+(16, 'En proceso', DATE_SUB(NOW(), INTERVAL 4 DAY) - INTERVAL 1 HOUR, 16, 'Paquetería profesional', 60.00, NOW() + INTERVAL 4 DAY - INTERVAL 2 HOUR, 'http://example.com/doc16'),
+(17, 'Pendiente', DATE_SUB(NOW(), INTERVAL 2 DAY) - INTERVAL 6 HOUR, 17, 'Motocicleta', 35.00, NOW() + INTERVAL 2 DAY - INTERVAL 3 HOUR, 'http://example.com/doc17'),
+(18, 'En proceso', DATE_SUB(NOW(), INTERVAL 7 DAY) - INTERVAL 5 HOUR, 18, 'Paquetería profesional', 60.00, NOW() + INTERVAL 2 DAY - INTERVAL 1 HOUR, 'http://example.com/doc18'),
+(19, 'Cancelado', DATE_SUB(NOW(), INTERVAL 8 DAY) - INTERVAL 4 HOUR, 19, 'Motocicleta', 35.00, NOW() + INTERVAL 1 DAY - INTERVAL 3 HOUR, 'http://example.com/doc19'),
+(20, 'Cancelado', DATE_SUB(NOW(), INTERVAL 9 DAY) - INTERVAL 6 HOUR, 20, 'Paquetería profesional', 60.00, NOW() + INTERVAL 3 DAY - INTERVAL 2 HOUR, 'http://example.com/doc20');
+
+
+    INSERT INTO eventos_reservas (id_cliente, id_evento, c_boletos, monto_total, estatus, fecha_hora_reserva)
+VALUES
+    -- Reservas para el evento 1 (Taller de Cerámica)
+    (1, 1, 2, 30.00, 'Apartada', '2024-06-27 14:30:00'),
+    (2, 1, 3, 45.00, 'Pendiente', '2024-06-28 10:00:00'),
+    (3, 1, 1, 15.00, 'Pendiente', '2024-06-29 11:45:00'),
+
+    -- Reservas para el evento 2 (Concierto de Jazz)
+    (4, 2, 2, 50.00, 'Apartada', '2024-06-30 16:20:00'),
+    (5, 2, 4, 100.00, 'Pendiente', '2024-07-01 09:30:00'),
+
+    -- Reservas para el evento 3 (Obra de Teatro Clásica)
+    (6, 3, 2, 40.00, 'Pendiente', '2024-07-02 15:00:00'),
+    (7, 3, 3, 60.00, 'Apartada', '2024-07-03 18:00:00'),
+
+    -- Reservas para el evento 4 (Podcast en Vivo)
+    (8, 4, 1, 5.00, 'Apartada', '2024-07-04 12:45:00'),
+
+    -- Reservas para el evento 5 (Taller de Pintura)
+    (9, 5, 3, 45.00, 'Pendiente', '2024-07-04 08:30:00'),
+    (10, 5, 2, 30.00, 'Pendiente', '2024-07-03 14:00:00'),
+
+    -- Reservas para el evento 6 (Feria de Artesanías)
+    (11, 6, 5, 25.00, 'Apartada', '2024-07-02 11:00:00'),
+
+    -- Reservas para el evento 7 (Festival de Música Indie)
+    (12, 7, 2, 60.00, 'Pendiente', '2024-07-01 17:30:00'),
+
+    -- Reservas para el evento 8 (Seminario de Tecnología)
+    (13, 8, 1, 5.00, 'Apartada', '2024-06-30 19:15:00'),
+
+    -- Reservas para el evento 9 (Proyección de Película Clásica)
+    (14, 9, 2, 24.00, 'Pendiente', '2024-06-29 13:00:00'),
+
+    -- Reservas para el evento 10 (Concierto de Rock)
+    (15, 10, 3, 90.00, 'Pendiente', '2024-06-28 16:45:00'),
+
+    -- Reservas para el evento 11 (Obra de Teatro Moderna)
+    (16, 11, 2, 50.00, 'Apartada', '2024-06-27 10:20:00'),
+
+    -- Reservas para el evento 12 (Podcast de Historia)
+    (17, 12, 1, 5.00, 'Pendiente', '2024-06-26 14:00:00'),
+
+    -- Reservas para el evento 13 (Taller de Fotografía)
+    (18, 13, 2, 40.00, 'Pendiente', '2024-06-26 11:30:00'),
+
+    -- Reservas para el evento 14 (Feria del Libro)
+    (19, 14, 3, 15.00, 'Apartada', '2024-06-27 09:45:00'),
+
+    -- Reservas para el evento 15 (Festival de Cine Independiente)
+    (20, 15, 4, 160.00, 'Pendiente', '2024-06-28 18:00:00');
+
+INSERT INTO detalle_pedidos (id_pedido, id_bc, precio_unitario, cantidad, monto_total) VALUES
+(1, 1, 85.00, 1, 85.00),
+(1, 2, 170.00, 2, 340.00),
+(2, 1, 85.00, 3, 255.00),
+(3, 4, 130.00, 1, 130.00),
+(3, 7, 80.00, 2, 160.00),
+(4, 1, 85.00, 2, 170.00),
+(5, 7, 80.00, 1, 80.00),
+(6, 5, 250.00, 2, 500.00),
+(7, 1, 85.00, 1, 85.00),
+(8, 8, 160.00, 3, 480.00),
+(9, 5, 250.00, 2, 500.00),
+(10, 1, 85.00, 1, 85.00),
+(10, 5, 250.00, 2, 500.00),
+(2, 8, 160.00, 3, 480.00),
+(3, 1, 85.00, 1, 85.00),
+(4, 9, 320.00, 2, 640.00),
+(5, 5, 250.00, 1, 250.00),
+(6, 1, 85.00, 1, 85.00),
+(7, 5, 250.00, 2, 500.00),
+(8, 5, 250.00, 1, 250.00),
+(11, 5, 250.00, 2, 500.00),
+(12, 7, 80.00, 1, 80.00),
+(13, 5, 250.00, 2, 500.00),
+(14, 6, 480.00, 3, 1440.00),
+(15, 7, 80.00, 1, 80.00),
+(16, 8, 160.00, 3, 720.00),
+(17, 4, 130.00, 1, 130.00),
+(18, 8, 160.00, 2, 480.00),
+(19, 4, 130.00, 1, 130.00),
+(20, 6, 480.00, 3, 1440.00),
+(11, 8, 160.00, 2, 480.00),
+(12, 4, 130.00, 1, 130.00),
+(13, 8, 160.00, 2, 480.00),
+(14, 4, 130.00, 2, 260.00),
+(15, 6, 480.00, 1, 480.00),
+(16, 7, 80.00, 2, 160.00);
+
+
+/*
+-- Inserts para la tabla comprobantes
+INSERT INTO comprobantes (concepto, referencia, folio_operacion, fecha, monto, banco_origen, imagen_comprobante) VALUES
+('Pago de pedido finalizado', 'REF-2024-001', 'FOLIO-001', DATE_SUB(NOW(), INTERVAL 7 DAY) , 35.00, 'Bancomer', 'http://example.com/comprobante1.jpg'),
+('Pago de pedido finalizado', 'REF-2024-002', 'FOLIO-002', DATE_SUB(NOW(), INTERVAL 8 DAY) , 60.00, 'Santander', 'http://example.com/comprobante2.jpg'),
+('Pago de pedido en proceso', 'REF-2024-003', 'FOLIO-003', DATE_SUB(NOW(), INTERVAL 9 DAY) , 35.00, 'Banorte', 'http://example.com/comprobante3.jpg'),
+('Pago de pedido en proceso', 'REF-2024-004', 'FOLIO-004', DATE_SUB(NOW(), INTERVAL 4 DAY) , 60.00, 'HSBC', 'http://example.com/comprobante4.jpg'),
+('Pago de pedido en proceso', 'REF-2024-005', 'FOLIO-005', DATE_SUB(NOW(), INTERVAL 2 DAY) , 35.00, 'Bancomer', 'http://example.com/comprobante5.jpg'),
+('Pago de pedido en proceso', 'REF-2024-006', 'FOLIO-006', DATE_SUB(NOW(), INTERVAL 4 DAY) , 60.00, 'Santander', 'http://example.com/comprobante6.jpg'),
+('Pago de pedido apartado', 'REF-2024-007', 'FOLIO-007', DATE_SUB(NOW(), INTERVAL 3 DAY) , 35.00, 'Banorte', 'http://example.com/comprobante7.jpg'),
+('Pago de pedido apartado', 'REF-2024-008', 'FOLIO-008', DATE_SUB(NOW(), INTERVAL 6 DAY) , 60.00, 'HSBC', 'http://example.com/comprobante8.jpg'),
+('Pago de pedido apartado', 'REF-2024-009', 'FOLIO-009', DATE_SUB(NOW(), INTERVAL 5 DAY) , 35.00, 'Bancomer', 'http://example.com/comprobante9.jpg'),
+('Pago de pedido apartado', 'REF-2024-010', 'FOLIO-010', DATE_SUB(NOW(), INTERVAL 7 DAY) , 60.00, 'Santander', 'http://example.com/comprobante10.jpg'),
+('Pago de pedido apartado', 'REF-2024-011', 'FOLIO-011', DATE_SUB(NOW(), INTERVAL 6 DAY) , 35.00, 'Banorte', 'http://example.com/comprobante11.jpg'),
+('Pago de pedido apartado', 'REF-2024-012', 'FOLIO-012', DATE_SUB(NOW(), INTERVAL 9 DAY) , 60.00, 'HSBC', 'http://example.com/comprobante12.jpg'),
+('Pago de pedido apartado', 'REF-2024-013', 'FOLIO-013', DATE_SUB(NOW(), INTERVAL 5 DAY) , 35.00, 'Bancomer', 'http://example.com/comprobante13.jpg'),
+('Pago de pedido en proceso', 'REF-2024-014', 'FOLIO-014', DATE_SUB(NOW(), INTERVAL 4 DAY) , 60.00, 'Santander', 'http://example.com/comprobante14.jpg'),
+('Pago de pedido apartado', 'REF-2024-015', 'FOLIO-015', DATE_SUB(NOW(), INTERVAL 3 DAY) , 35.00, 'Banorte', 'http://example.com/comprobante15.jpg');
+
+INSERT INTO comprobantes_pedidos (id_comprobante, id_pedido)
+VALUES
+(1, 1),  -- Sustituir con los valores reales de id_comprobante e id_pedido
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 8),
+(6, 9),
+(7, 12),
+(8, 16),
+(9, 18),
+(10, 20);
+
+-- Inserts para comprobantes_reservas
+INSERT INTO comprobantes_reservas (id_comprobante, id_reserva)
+VALUES
+(11, 1),  
+(12, 3),
+(13, 7),
+(14, 8),
+(15, 11),
+(16, 15),
+(17, 16),
+(18, 18);
+*/-- Inserts para la tabla comprobantes_pedidos
+/*
+INSERT INTO comprobantes (concepto, referencia, folio_operacion, fecha, monto, banco_origen, imagen_comprobante)
+SELECT CONCAT('Concepto ', p.id_pedido) AS concepto,
+       CONCAT('Ref-', p.id_pedido) AS referencia,
+       CONCAT('Folio-', p.id_pedido) AS folio_operacion,
+       p.fecha_hora_pedido AS fecha,
+       p.costo_envio AS monto,
+       'Banco Ejemplo' AS banco_origen,
+       CONCAT('http://example.com/comprobante-', p.id_pedido, '.jpg') AS imagen_comprobante
+FROM pedidos p
+WHERE p.estatus IN ('Finalizado', 'En proceso', 'Apartada')
+
+UNION ALL
+
+SELECT CONCAT('Reserva Evento ', r.id_evento) AS concepto,
+       CONCAT('Ref-Evento-', r.id_evento) AS referencia,
+       CONCAT('Folio-Evento-', r.id_evento) AS folio_operacion,
+       r.fecha_hora_reserva AS fecha,
+       r.monto_total AS monto,
+       'Banco Ejemplo' AS banco_origen,
+       CONCAT('http://example.com/comprobante-evento-', r.id_evento, '.jpg') AS imagen_comprobante
+FROM eventos_reservas r
+WHERE r.estatus IN ('Finalizado', 'En proceso', 'Apartada');
+*/
+INSERT INTO comprobantes (concepto, referencia, folio_operacion, fecha, monto, banco_origen, imagen_comprobante)
+VALUES
+    ('Concepto 1', 'Ref-1', 'Folio-1', '2024-06-26', '35.00', 'Banco Ejemplo', 'http://example.com/comprobante-1.jpg'),
+    ('Concepto 2', 'Ref-2', 'Folio-2', '2024-06-27', '60.00', 'Banco Ejemplo', 'http://example.com/comprobante-2.jpg'),
+    ('Concepto 3', 'Ref-3', 'Folio-3', '2024-06-28', '35.00', 'Banco Ejemplo', 'http://example.com/comprobante-3.jpg'),
+    ('Concepto 4', 'Ref-4', 'Folio-4', '2024-06-29', '60.00', 'Banco Ejemplo', 'http://example.com/comprobante-4.jpg'),
+    ('Concepto 8', 'Ref-8', 'Folio-8', '2024-07-03', '60.00', 'Banco Ejemplo', 'http://example.com/comprobante-8.jpg'),
+    ('Concepto 9', 'Ref-9', 'Folio-9', '2024-07-04', '35.00', 'Banco Ejemplo', 'http://example.com/comprobante-9.jpg'),
+    ('Concepto 12', 'Ref-12', 'Folio-12', '2024-07-04', '60.00', 'Banco Ejemplo', 'http://example.com/comprobante-12.jpg'),
+    ('Concepto 14', 'Ref-14', 'Folio-14', '2024-07-02', '60.00', 'Banco Ejemplo', 'http://example.com/comprobante-14.jpg'),
+    ('Concepto 16', 'Ref-16', 'Folio-16', '2024-07-03', '60.00', 'Banco Ejemplo', 'http://example.com/comprobante-16.jpg'),
+    ('Concepto 18', 'Ref-18', 'Folio-18', '2024-06-30', '60.00', 'Banco Ejemplo', 'http://example.com/comprobante-18.jpg'),
+    ('Reserva Evento 1', 'Ref-Evento-1', 'Folio-Evento-1', '2024-06-27', '30.00', 'Banco Ejemplo', 'http://example.com/comprobante-evento-1.jpg'),
+    ('Reserva Evento 2', 'Ref-Evento-2', 'Folio-Evento-2', '2024-06-30', '50.00', 'Banco Ejemplo', 'http://example.com/comprobante-evento-2.jpg'),
+    ('Reserva Evento 3', 'Ref-Evento-3', 'Folio-Evento-3', '2024-07-03', '60.00', 'Banco Ejemplo', 'http://example.com/comprobante-evento-3.jpg'),
+    ('Reserva Evento 4', 'Ref-Evento-4', 'Folio-Evento-4', '2024-07-04', '5.00', 'Banco Ejemplo', 'http://example.com/comprobante-evento-4.jpg'),
+    ('Reserva Evento 6', 'Ref-Evento-6', 'Folio-Evento-6', '2024-07-02', '25.00', 'Banco Ejemplo', 'http://example.com/comprobante-evento-6.jpg'),
+    ('Reserva Evento 8', 'Ref-Evento-8', 'Folio-Evento-8', '2024-06-30', '5.00', 'Banco Ejemplo', 'http://example.com/comprobante-evento-8.jpg'),
+    ('Reserva Evento 11', 'Ref-Evento-11', 'Folio-Evento-11', '2024-06-27', '50.00', 'Banco Ejemplo', 'http://example.com/comprobante-evento-11.jpg'),
+    ('Reserva Evento 14', 'Ref-Evento-14', 'Folio-Evento-14', '2024-06-27', '15.00', 'Banco Ejemplo', 'http://example.com/comprobante-evento-14.jpg');
+
+
+INSERT INTO comprobantes_pedidos (id_comprobante, id_pedido)
+VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 8),
+(6, 9),
+(7, 12),
+(8, 14),
+(9, 15),
+(10, 17);
+
+-- Inserciones para comprobantes_reservas
+INSERT INTO comprobantes_reservas (id_comprobante, id_reserva)
+VALUES
+(11, 1),
+(12, 4),
+(13, 6),
+(14, 7),
+(15, 8),
+(16, 11),
+(17, 16),
+(18, 19);
+
 -- Inserts de las tarjetas de fidelidad
 -- Inserts para tarjetas
 INSERT INTO tarjetas (id_cliente, progreso) VALUES
@@ -617,8 +877,8 @@ INSERT INTO tarjeta_recompensas (id_tarjeta, id_recompensa, canje) VALUES
     (5, 3, true),  -- progreso 20 >= 15
     (6, 3, true);  -- progreso 18 >= 15
 
-    select * from eventos;
-    evento_reservas
+/ si funciono el script no le hagas caso a la tacha roja :)
+   
     select * from categorias;
     select * from ubicacion_lugares;
 	select * from contacto;
@@ -634,7 +894,19 @@ INSERT INTO tarjeta_recompensas (id_tarjeta, id_recompensa, canje) VALUES
 	select * from detalle_productos_menu;
 	select * from productos_menu;
     
+    
+    
     select * from bolsas_cafe;
     select * from bolsas_detalle;
     select * from carrito;
+
+    select * from detalle_pedidos;
+    select * from pedidos;
+    
+     select * from eventos;
+    select * from eventos_reservas;
+    
+    select * from comprobantes;
+    select * from comprobantes_pedidos;
+    select * from comprobantes_reservas;
     
