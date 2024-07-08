@@ -508,8 +508,7 @@ INSERT INTO detalle_productos_menu (id_categoria, nombre, descripcion, img_url) 
 
 INSERT INTO bolsas_detalle (
 	nombre,
-    año_cosecha_inicial,
-    año_cosecha_final,
+    años_cosecha,
     productor_finca,
     proceso,
     variedad,
@@ -914,4 +913,4 @@ INSERT INTO tarjeta_recompensas (id_tarjeta, id_recompensa, canje) VALUES
     select * from comprobantes_pedidos;
     select * from comprobantes_reservas;
 
--- a
+
