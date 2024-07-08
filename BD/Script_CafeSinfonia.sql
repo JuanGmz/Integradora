@@ -140,6 +140,8 @@ create table comprobantes_pedidos(
 
 create table bolsas_detalle (
 id_bolsa int auto_increment not null,
+nombre nvarchar(100) not null,
+años_cosecha nvarchar(100) not null,
 productor_finca nvarchar(150) not null,
 proceso nvarchar(100) not null,
 variedad nvarchar(200) not null,
@@ -148,6 +150,7 @@ aroma nvarchar(150) not null,
 acidez nvarchar(150) not null,
 sabor nvarchar(150) not null,
 cuerpo nvarchar(100) not null,
+puntaje_catacion tinyint not null,
 img_url nvarchar(100)not null,
 primary key(id_bolsa)
 );
@@ -281,7 +284,7 @@ condicion int not null,
 fecha_inicio date not null, 
 fecha_expiracion date not null,
 estatus enum('Activa','Inactiva') default 'Activa',
-img_url nvarchar(100)not null,
+img_url nvarchar(100)null,
 primary key (id_recompensa)
 );
 
