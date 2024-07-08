@@ -507,6 +507,9 @@ INSERT INTO detalle_productos_menu (id_categoria, nombre, descripcion, img_url) 
 
 
 INSERT INTO bolsas_detalle (
+	nombre,
+    año_cosecha_inicial,
+    año_cosecha_final,
     productor_finca,
     proceso,
     variedad,
@@ -515,12 +518,13 @@ INSERT INTO bolsas_detalle (
     acidez,
     sabor,
     cuerpo,
+    puntaje_catacion,
     img_url
 )
 VALUES
-('Eduardo Vital Díaz', 'Lavado', 'Marsellesa, San Román, Oro Azteca', '1,220 msnm', 'Cacao, Vainilla', 'Cítrica, brillante', 'Choc. Oscuro, Avellana', 'Alto - Denso', 'https://example.com/image.jpg'),
-('Finca La Joyita', 'Lavado', 'Caturra', '1,300 - 1,500 msnm', 'Cítrico, Floral', 'Brillante, Equilibrada', 'Miel, Manzana Verde, Durazno', 'Medio - Denso', '[https://www.booking.com/hotel/mx/la-joyita.html](https://www.booking.com/hotel/mx/la-joyita.html)'),
-('Finca El Injerto', 'Natural', 'Marsellesa, Bourbon', '1,350 - 1,550 msnm', 'Dulce de Leche, Nuez', 'Frutal Intensa', 'Almíbar, Naranja', 'Ligero', 'https://www.facebook.com/fincaelinjertocafe/');
+('Texin Veracruz','2023 - 2024','Eduardo Vital Díaz', 'Lavado', 'Marsellesa, San Román, Oro Azteca', '1,220 msnm', 'Cacao, Vainilla', 'Cítrica, brillante', 'Choc. Oscuro, Avellana', 'Alto - Denso',85, 'https://example.com/image.jpg'),
+('Jaltenango Chiapas','2023 - 2024','Finca Santa María', 'Lavado', 'Caturra', '1,300 - 1,500 msnm', 'Cítrico, Floral', 'Brillante, Equilibrada', 'Miel, Manzana Verde, Durazno', 'Medio - Denso',86.5, '[https://www.booking.com/hotel/mx/la-joyita.html](https://www.booking.com/hotel/mx/la-joyita.html)'),
+('Jaltenango Chiapas','2023 - 2024','Finca Santa María', 'Natural', 'Marsellesa, Bourbon', '1,350 - 1,450 msnm', 'Dulce de Leche, Nuez', 'Frutal Intensa', 'Almíbar, Naranja', 'Ligero',84, 'https://www.facebook.com/fincaelinjertocafe/');
 
 INSERT INTO bolsas_cafe (
   id_bolsa,
@@ -877,7 +881,7 @@ INSERT INTO tarjeta_recompensas (id_tarjeta, id_recompensa, canje) VALUES
     (5, 3, true),  -- progreso 20 >= 15
     (6, 3, true);  -- progreso 18 >= 15
 
-/ si funciono el script no le hagas caso a la tacha roja :)
+/ si funciono el script, no le hagas caso a la tacha roja :)
    
     select * from categorias;
     select * from ubicacion_lugares;
@@ -909,4 +913,4 @@ INSERT INTO tarjeta_recompensas (id_tarjeta, id_recompensa, canje) VALUES
     select * from comprobantes;
     select * from comprobantes_pedidos;
     select * from comprobantes_reservas;
-    
+
