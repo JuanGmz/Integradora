@@ -63,5 +63,22 @@ delimiter ;
 -- LLamar el procedimiento almacenado para insertar productos en el carrito.
 call SP_Insert_Update_Carrito(1, 4, 1);
 
+-- BUSCAR PRODUCTOS EN LAS BOLSAS
+DELIMITER $$
+
+CREATE PROCEDURE Buscar_bolsas (
+    IN nombre NVARCHAR(100)
+)
+BEGIN
+    SELECT distinct bd.id_bolsa, bd.nombre, bd.años_cosecha, bd.productor_finca, bd.proceso, bd.variedad, bd.altura, 
+           bd.aroma, bd.acidez, bd.sabor, bd.cuerpo, bd.puntaje_catacion, bd.img_url,
+           bc.medida, bc.precio, bc.stock
+    FROM bolsas_detalle bd
+	JOIN bolsas_cafe bc ON bd.id_bolsa = bc.id_bolsa
+    WHERE bd.nombre LIKE CONCAT('%', nombre, '%');
+END $$
+
+DELIMITER ;
+
 
 
