@@ -140,6 +140,9 @@ create table comprobantes_pedidos(
 
 create table bolsas_detalle (
 id_bolsa int auto_increment not null,
+nombre nvarchar(100) not null,
+año_cosecha_inicial nchar(4) not null,
+año_cosecha_final nchar(4) not null,
 productor_finca nvarchar(150) not null,
 proceso nvarchar(100) not null,
 variedad nvarchar(200) not null,
@@ -148,6 +151,7 @@ aroma nvarchar(150) not null,
 acidez nvarchar(150) not null,
 sabor nvarchar(150) not null,
 cuerpo nvarchar(100) not null,
+puntaje_catacion tinyint not null,
 img_url nvarchar(100)not null,
 primary key(id_bolsa)
 );
@@ -228,7 +232,8 @@ foreign key (id_cliente) references clientes(id_cliente),
 foreign key (id_evento) references EVENTOS(id_evento)
 );
 
-create table comprobantes_reservas(
+create table comprobantes_reservas
+(
  id_cr int auto_increment primary key,
  id_comprobante int not null,
  id_reserva int not null,
@@ -250,7 +255,7 @@ foreign key (id_categoria) references CATEGORIAS(id_categoria)
 create table productos_menu(
 id_pm int auto_increment not null,
 id_dpm int not null,
-medida nvarchar(100) not null,
+medida nvarchar(100) null,
 precio double not null,
 primary key(id_pm),
 foreign key (id_dpm) references detalle_productos_menu(id_dpm)
@@ -280,7 +285,7 @@ condicion int not null,
 fecha_inicio date not null, 
 fecha_expiracion date not null,
 estatus enum('Activa','Inactiva') default 'Activa',
-img_url nvarchar(100)not null,
+img_url nvarchar(100)null,
 primary key (id_recompensa)
 );
 
