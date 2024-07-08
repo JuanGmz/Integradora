@@ -35,3 +35,33 @@ where nombre=dpm.nombre;
 end $$
 delimiter ;
 
+-- Procedimiento almacenado para insertar productos en el carrito.
+delimiter //
+create procedure SP_Insert_Update_Carrito(
+in p_id_cliente int,
+in p_id_bc int,
+in p_cantidad int
+)
+begin 
+declare existe_bolsa int;
+
+select c.id_bc into existe_bolsa
+from carrito c 
+where c.id_cliente = p_id_cliente  and c.id_bc = p_id_bc;
+
+if existe_bolsa > 0 then 
+	update carrito c set c.cantidad = c.cantidad + p_cantidad, monto_total = (select ((cantidad+p_cantidad)*bc.precio) from bolsas_cafe bc join carrito c on c.id_bc = bc.id_bc  where bc.id_bc = p_id_bc  and c.id_cliente = p_id_cliente)
+	where c.id_cliente = p_id_cliente and c.id_bc = p_id_bc;
+else 
+	insert into carrito(id_cliente, id_bc, cantidad, monto_total)
+	values (p_id_cliente,p_id_bc,p_cantidad, p_cantidad * (select precio from bolsas_cafe bc where bc.id_bc = p_id_bc) );
+end if;
+
+end //
+delimiter ;
+
+-- LLamar el procedimiento almacenado para insertar productos en el carrito.
+call SP_Insert_Update_Carrito(1, 4, 1);
+
+
+
