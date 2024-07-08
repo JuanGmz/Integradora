@@ -914,3 +914,4 @@ INSERT INTO tarjeta_recompensas (id_tarjeta, id_recompensa, canje) VALUES
     select * from comprobantes_pedidos;
     select * from comprobantes_reservas;
 
+-- a

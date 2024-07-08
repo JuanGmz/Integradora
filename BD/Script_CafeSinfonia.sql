@@ -165,7 +165,7 @@ primary key(id_bc),
 foreign key(id_bolsa) references bolsas_detalle(id_bolsa)
 );
 -- Trigger para actualizar el stock.
-
+ -- a
 create table carrito(
 id_carrito int auto_increment not null,
 id_cliente int not null,
