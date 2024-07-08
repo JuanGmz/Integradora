@@ -514,8 +514,8 @@
                                                         </thead>
                                                         <tbody class='table-group-divider'>";
                                                         // Consulta de productos_menu relacionados con este detalle
-                                                        $query2 = 'SELECT medida, precio FROM productos_menu WHERE id_dpm = :id_dpm';
-                                                        $conexion->execute($query2);
+                                                        $query2 = 'SELECT medida, precio FROM productos_menu WHERE id_dpm = ' . $regi->id_dpm;
+                                                        $medidas = $conexion->select($query2);
                                                         foreach ($medidas as $medida_precio) {
                                                             echo "<tr>
                                                                     <td>$medida_precio->medida</td>
