@@ -141,8 +141,7 @@ create table comprobantes_pedidos(
 create table bolsas_detalle (
 id_bolsa int auto_increment not null,
 nombre nvarchar(100) not null,
-año_cosecha_inicial nchar(4) not null,
-año_cosecha_final nchar(4) not null,
+años_cosecha nvarchar(100) not null,
 productor_finca nvarchar(150) not null,
 proceso nvarchar(100) not null,
 variedad nvarchar(200) not null,

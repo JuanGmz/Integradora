@@ -522,9 +522,9 @@ INSERT INTO bolsas_detalle (
     img_url
 )
 VALUES
-('Texin Veracruz','2023','2024','Eduardo Vital Díaz', 'Lavado', 'Marsellesa, San Román, Oro Azteca', '1,220 msnm', 'Cacao, Vainilla', 'Cítrica, brillante', 'Choc. Oscuro, Avellana', 'Alto - Denso',85, 'https://example.com/image.jpg'),
-('Jaltenango Chiapas','2023','2024','Finca Santa María', 'Lavado', 'Caturra', '1,300 - 1,500 msnm', 'Cítrico, Floral', 'Brillante, Equilibrada', 'Miel, Manzana Verde, Durazno', 'Medio - Denso',86.5, '[https://www.booking.com/hotel/mx/la-joyita.html](https://www.booking.com/hotel/mx/la-joyita.html)'),
-('Jaltenango Chiapas','2023','2024','Finca Santa María', 'Natural', 'Marsellesa, Bourbon', '1,350 - 1,450 msnm', 'Dulce de Leche, Nuez', 'Frutal Intensa', 'Almíbar, Naranja', 'Ligero',84, 'https://www.facebook.com/fincaelinjertocafe/');
+('Texin Veracruz','2023 - 2024','Eduardo Vital Díaz', 'Lavado', 'Marsellesa, San Román, Oro Azteca', '1,220 msnm', 'Cacao, Vainilla', 'Cítrica, brillante', 'Choc. Oscuro, Avellana', 'Alto - Denso',85, 'https://example.com/image.jpg'),
+('Jaltenango Chiapas','2023 - 2024','Finca Santa María', 'Lavado', 'Caturra', '1,300 - 1,500 msnm', 'Cítrico, Floral', 'Brillante, Equilibrada', 'Miel, Manzana Verde, Durazno', 'Medio - Denso',86.5, '[https://www.booking.com/hotel/mx/la-joyita.html](https://www.booking.com/hotel/mx/la-joyita.html)'),
+('Jaltenango Chiapas','2023 - 2024','Finca Santa María', 'Natural', 'Marsellesa, Bourbon', '1,350 - 1,450 msnm', 'Dulce de Leche, Nuez', 'Frutal Intensa', 'Almíbar, Naranja', 'Ligero',84, 'https://www.facebook.com/fincaelinjertocafe/');
 
 INSERT INTO bolsas_cafe (
   id_bolsa,
