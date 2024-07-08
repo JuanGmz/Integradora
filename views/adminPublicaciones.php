@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/scrollbar.css">
     <title>Document</title>
 </head>
@@ -191,12 +191,12 @@
         </nav>
     </div>
 
-    <div class="row">
+    <div class="row m-0 p-0">
         <!-- navbar pc -->
-        <div class="contenedor col-lg-3 border-end border-black bg-dark h-100 position-fixed d-none d-lg-block">
+        <div class="contenedor col-lg-3 m-0 p-0 border-end border-black bg-dark h-100 position-fixed d-none d-lg-block">
             <h4 class="text-center text-light m-3 fs-2 fw-bold">Administrar</h4>
             <div class="row">
-                <div class="col-12 text-center">
+                <div class="col-12 text-center m-0">
                     <i class="fa-solid fa-user fa-10x text-light"></i>
                 </div>
             </div>
@@ -451,6 +451,95 @@
                 </div>
             </div>
             <hr>
+            <div class="container-fluid m-0 p-0">
+                <div class="row m-0 p-0">
+                    <table class="table table-striped text-center" border="1">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Título</th>
+                                <th class="d-none d-lg-table-cell">Descripción</th>
+                                <th>Tipo</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                        <?php
+                            include_once '../class/database.php';
+                            $conexion = new Database();
+                            $conexion->conectarDB();
+                            $query = 'SELECT id_publicacion, titulo, descripcion, img_url, tipo FROM publicaciones';
+                            $publicaciones = $conexion->select($query);
+                            foreach ($publicaciones as $publicacion) {
+                                echo "
+                                    <tr>
+                                        <td>{$publicacion->titulo}</td>
+                                        <td class='d-none d-lg-table-cell'>{$publicacion->descripcion}</td>
+                                        <td>{$publicacion->tipo}</td>
+                                        <td>
+                                            <!-- Botón para ver imagen de la publicación -->
+                                            <button class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#imagen_{$publicacion->id_publicacion}'>
+                                                <i class='fa-solid fa-image'></i>
+                                            </button>
+                                            <!-- Modal de ver imagen de la publicación -->
+                                            <div class='modal fade' id='imagen_{$publicacion->id_publicacion}' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+                                                <div class='modal-dialog'>
+                                                    <div class='modal-content'>
+                                                        <div class='modal-header'>
+                                                            <h1 class='modal-title fs-5' id='exampleModalLabel'>{$publicacion->titulo}</h1>
+                                                            <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                                        </div>
+                                                        <div class='modal-body'>
+                                                            <img src='../{$publicacion->img_url}' class='img-fluid'>
+
+                                                            <form action='../scripts/adminpublicaciones/editarPublicacion.php' method='post'>
+                                                                <input type='hidden' name='id_publicacion' value='{$publicacion->id_publicacion}'>
+                                                                <button type='submit' class='btn btn-primary'>Actualizar Imagen</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Botón para ver detalles de la publicación -->
+                                            <button class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#publicacion{$publicacion->id_publicacion}'>
+                                                <i class='fa-solid fa-bars'></i>
+                                            </button>
+                                            <!-- Modal de ver detalles de la publicación -->
+                                            <div class='modal fade' id='publicacion{$publicacion->id_publicacion}' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+                                                <div class='modal-dialog'>
+                                                    <div class='modal-content'>
+                                                        <div class='modal-header'>
+                                                            <h1 class='modal-title fs-5' id='exampleModalLabel'>{$publicacion->titulo}</h1>
+                                                            <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                                        </div>
+                                                        <div class='modal-body'>
+                                                            <img src='../img/login.webp' style='width: 100%; height: 100%;'>
+                                                            <p class='text-center fs-4 fw-bold'>Descripción: <span class='fw-normal'>{$publicacion->descripcion}</span></p>
+                                                        </div>
+                                                        <div class='modal-footer'>
+                                                            <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cerrar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Botón para editar la publicación -->
+                                            <button class='btn btn-primary' data-bs-toggle='modal' 
+                                                    data-bs-target='#publicacion{$publicacion->id_publicacion}'
+                                            >
+                                                <i class='fa fa-pen-to-square'></i>
+                                            </button>
+
+
+
+                                        </td>
+                                    </tr>
+                                ";
+                            }
+                            $conexion->desconectarDB();
+                        ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 

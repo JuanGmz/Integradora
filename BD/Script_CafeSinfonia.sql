@@ -13,16 +13,6 @@ tipo enum('Menu','Evento') not null,
 primary key(id_categoria)
 );
 
-create table contacto(
-id_c int auto_increment not null,
-nombre nvarchar(150) not null,
-asunto varchar(150) not null,
-cometario varchar(300) not null,
-correo varchar(100) not null,
-telefono nchar(10) not null,
-primary key(id_c)
-);
-
 create table publicaciones(
 id_publicacion int auto_increment not null,
 titulo nvarchar(100) not null,
@@ -165,7 +155,7 @@ primary key(id_bc),
 foreign key(id_bolsa) references bolsas_detalle(id_bolsa)
 );
 -- Trigger para actualizar el stock.
-
+ -- a
 create table carrito(
 id_carrito int auto_increment not null,
 id_cliente int not null,

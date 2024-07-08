@@ -25,3 +25,6 @@
 
     header('Location: ../../views/adminPublicaciones.php');
     exit;
+
+
+    
