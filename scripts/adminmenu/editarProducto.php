@@ -10,7 +10,7 @@
     $categoria = $_POST['categoria'];
 
     $query = 'UPDATE detalle_productos_menu SET nombre = :nombre, descripcion = :descripcion, id_categoria = :categoria WHERE id_dpm = :id_dpm';
-    $stmt = $conexion->prepare($query);
+    $conexion->execute($query);
     $stmt->bindParam(':nombre', $nombre);
     $stmt->bindParam(':descripcion', $descripcion);
     $stmt->bindParam(':categoria', $categoria);

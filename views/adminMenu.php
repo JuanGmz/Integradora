@@ -515,10 +515,7 @@
                                                         <tbody class='table-group-divider'>";
                                                         // Consulta de productos_menu relacionados con este detalle
                                                         $query2 = 'SELECT medida, precio FROM productos_menu WHERE id_dpm = :id_dpm';
-                                                        $stmt2 = $conexion->prepare($query2);
-                                                        $stmt2->bindParam(':id_dpm', $regi->id_dpm);
-                                                        $stmt2->execute();
-                                                        $medidas = $stmt2->fetchAll(PDO::FETCH_OBJ);
+                                                        $conexion->execute($query2);
                                                         foreach ($medidas as $medida_precio) {
                                                             echo "<tr>
                                                                     <td>$medida_precio->medida</td>

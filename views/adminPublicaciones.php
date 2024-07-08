@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <div class="row d-block d-lg-none border-black border-bottom border-3 bg-dark">
+    <div class="row m-0 p-0 d-block d-lg-none border-black border-bottom border-3 bg-dark">
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
                 <a class="navbar-brand fw-bold text-light" href="adminInicio.html">Administrar</a>
@@ -31,7 +31,6 @@
                                                 Inicio
                                             </a>
                                         </div>
-
                                     </button>
                                 </h2>
                                 <div class="accordion-item">
@@ -395,7 +394,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Publicación</h1>
+                                    <h3 class="modal-title fw-bold" id="exampleModalLabel">Agregar Publicación</h3>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
@@ -424,17 +423,18 @@
                                                 <select name="tipo" id="tipo" class="form-select" required>
                                                     <option selected disabled value="">Seleccionar Tipo de Publicación</option>
                                                     <?php
-                                                    include_once '../class/database.php';
-                                                    $conexion = new Database();
-                                                    $conexion->conectarDB();
+                                                        include_once '../class/database.php';
+                                                        $conexion = new Database();
+                                                        $conexion->conectarDB();
 
-                                                    $query = 'SELECT DISTINCT tipo FROM publicaciones';
-                                                    $t_publicaciones = $conexion->select($query);
-                                                    foreach ($t_publicaciones as $t_publicacion) {
-                                                        echo "<option value='{$t_publicacion->tipo}'>{$t_publicacion->tipo}</option>";
-                                                    }
+                                                        $query = 'SELECT DISTINCT tipo FROM publicaciones';
+                                                        $t_publicaciones = $conexion->select($query);
+                                                        foreach($t_publicaciones as $t_publicacion){
+                                                            echo "<option value='{$t_publicacion->tipo}'>{$t_publicacion->tipo}</option>";
+                                                        }
 
-                                                    $conexion->desconectarDB();
+
+                                                        $conexion->desconectarDB();
                                                     ?>
                                                 </select>
                                             </div>
@@ -457,8 +457,7 @@
                         <thead class="table-dark">
                             <tr>
                                 <th>Título</th>
-                                <th class="d-none d-lg-table-cell">Descripción</th>
-                                <th>Tipo</th>
+                                <th class="d-none d-lg-table-cell">Tipo</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -467,15 +466,14 @@
                             include_once '../class/database.php';
                             $conexion = new Database();
                             $conexion->conectarDB();
-                            $query = 'SELECT id_publicacion, titulo, descripcion, img_url, tipo FROM publicaciones';
+                            $query = 'SELECT id_publicacion, titulo, descripcion, img_url, tipo, fecha FROM publicaciones ORDER BY titulo ASC';
                             $publicaciones = $conexion->select($query);
                             foreach ($publicaciones as $publicacion) {
                                 echo "
                                     <tr>
-                                        <td>{$publicacion->titulo}</td>
-                                        <td class='d-none d-lg-table-cell'>{$publicacion->descripcion}</td>
-                                        <td>{$publicacion->tipo}</td>
-                                        <td>
+                                        <td class='m-0 p-0'>{$publicacion->titulo}</td>
+                                        <td class='d-none d-lg-table-cell'>{$publicacion->tipo}</td>
+                                        <td class='m-0 d-flex flex-row justify-content-center gap-1'>
                                             <!-- Botón para ver imagen de la publicación -->
                                             <button class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#imagen_{$publicacion->id_publicacion}'>
                                                 <i class='fa-solid fa-image'></i>
@@ -489,11 +487,22 @@
                                                             <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                                                         </div>
                                                         <div class='modal-body'>
-                                                            <img src='../{$publicacion->img_url}' class='img-fluid'>
-
-                                                            <form action='../scripts/adminpublicaciones/editarPublicacion.php' method='post'>
-                                                                <input type='hidden' name='id_publicacion' value='{$publicacion->id_publicacion}'>
-                                                                <button type='submit' class='btn btn-primary'>Actualizar Imagen</button>
+                                                            <form action='../scripts/adminpublicaciones/editarImagen.php' method='post'>
+                                                                <div class='col-12 mb-3'>
+                                                                    <label for='imagen' class='form-label'>Imagen Actual</label><br>
+                                                                    <img src='../img/" .$publicacion->img_url. "' class='img-fluid rounded' alt='Imagen Actual'><br>
+                                                                    <small>Selecciona una nueva imagen para actualizar, si es necesario.</small>
+                                                                </div>
+                                                                <div class='col-12 mb-3'>
+                                                                    <label for='imagen_nueva' class='form-label'>Selecciona una nueva imagen:</label>
+                                                                    <input type='file' class='form-control' id='imagen_nueva' name='imagen_nueva' accept='image/*' required>
+                                                                </div>
+                                                                <input type='hidden' name='id_publicacion' value='$publicacion->id_publicacion'>
+                                                                <div class='col-12 mb-3 text-end'>
+                                                                    <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
+                                                                    <button type='submit' class='btn btn-primary'>Actualizar</button>
+                                                                </div>
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -507,12 +516,14 @@
                                                 <div class='modal-dialog'>
                                                     <div class='modal-content'>
                                                         <div class='modal-header'>
-                                                            <h1 class='modal-title fs-5' id='exampleModalLabel'>{$publicacion->titulo}</h1>
+                                                            <h3 class='modal-title fw-bold' id='exampleModalLabel'>Detalles de la Publicación</h3>
                                                             <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                                                         </div>
-                                                        <div class='modal-body'>
-                                                            <img src='../img/login.webp' style='width: 100%; height: 100%;'>
-                                                            <p class='text-center fs-4 fw-bold'>Descripción: <span class='fw-normal'>{$publicacion->descripcion}</span></p>
+                                                        <div class='modal-body text-start'>
+                                                            <h4 class='fw-bold'>Titulo de la Publicación: <span class='fw-normal fs-5'>{$publicacion->titulo}</span></h4>
+                                                            <h4 class='fw-bold'>Descripción: <span class='fw-normal fs-5'>{$publicacion->descripcion}</span></h4>
+                                                            <h4 class='fw-bold'>Tipo: <span class='fw-normal fs-5'>{$publicacion->tipo}</span></h4>
+                                                            <h4 class='fw-bold'>Fecha: <span class='fw-normal fs-5'>{$publicacion->fecha}</span></h4>
                                                         </div>
                                                         <div class='modal-footer'>
                                                             <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cerrar</button>
@@ -523,13 +534,54 @@
 
                                             <!-- Botón para editar la publicación -->
                                             <button class='btn btn-primary' data-bs-toggle='modal' 
-                                                    data-bs-target='#publicacion{$publicacion->id_publicacion}'
+                                                    data-bs-target='#editarPublicacion{$publicacion->id_publicacion}'
                                             >
                                                 <i class='fa fa-pen-to-square'></i>
                                             </button>
-
-
-
+                                            <!-- Modal para editar la publicación -->
+                                            <div class='modal fade' id='editarPublicacion{$publicacion->id_publicacion}' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+                                                <div class='modal-dialog'>
+                                                    <div class='modal-content'>
+                                                        <div class='modal-header'>
+                                                            <h3 class='modal-title fw-bold' id='exampleModalLabel'>Editar Publicación</h3>
+                                                            <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                                        </div>
+                                                        <div class='modal-body text-start'>
+                                                            <form action='../scripts/adminpublicaciones/editarPublicacion.php' method='post'>
+                                                                <div class='col-12 mb-3'>
+                                                                    <label for='titulo' class='form-label'>Título de la Publicación</label>
+                                                                    <input class='form-control' id='titulo' name='titulo' maxlength='50' required value='$publicacion->titulo'>
+                                                                </div>  
+                                                                <div class='col-12 mb-3'>
+                                                                    <label for='descripcion' class='form-label'>Descripción de la Publicación</label>
+                                                                    <textarea class='form-control' id='descripcion' name='descripcion' maxlength='750' required>$publicacion->descripcion</textarea>
+                                                                </div>
+                                                                <div class='col-12 mb-3'>
+                                                                    <label for='tipo' class='form-label'>Tipo de Publicación</label>
+                                                                    <select name='tipo' id='tipo' class='form-select' required>
+                                                                        <option selected disabled value=''>Seleccionar Tipo de Publicación</option>"; ?>
+                                                                        <?php
+                                                                            $conexion = new Database();
+                                                                            $conexion->conectarDB();
+                        
+                                                                            $query = 'SELECT DISTINCT tipo FROM publicaciones';
+                                                                            $t_publicaciones = $conexion->select($query);
+                                                                            foreach($t_publicaciones as $t_publicacion){
+                                                                                echo "<option value='{$t_publicacion->tipo}'>{$t_publicacion->tipo}</option>";
+                                                                            }
+                        
+                                                                            $conexion->desconectarDB();
+                                                                        echo "
+                                                                <input type='hidden' name='id_publicacion' value='$publicacion->id_publicacion'>
+                                                                <div class='col-12 mt-3 text-end'>
+                                                                    <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
+                                                                    <button type='submit' class='btn btn-primary'>Actualizar</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 ";

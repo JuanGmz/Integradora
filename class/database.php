@@ -45,10 +45,9 @@ class database
             echo $e->getMessage();
         }
     }
-    function prepare($consulta) {
+    function execute($consulta) {
         try {
-            $stmt = $this->pdo->prepare($consulta);
-            return $stmt;
+            $this->pdo->query($consulta);
         } 
         catch (PDOException $e) {
             echo $e->getMessage();
