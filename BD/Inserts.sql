@@ -914,3 +914,14 @@ INSERT INTO tarjeta_recompensas (id_tarjeta, id_recompensa, canje) VALUES
     select * from comprobantes_reservas;
 
 
+delimiter $$
+create procedure buscar_evento_nombre(
+in nom_evento nvarchar (150)
+) 
+begin
+	SELECT eventos.nombre as nombre_del_evento, eventos.tipo, eventos
+    FROM eventos 
+    JOIN detalle_productos_menu dpm ON pm.id_dpm = dpm.id_dpm
+    WHERE dpm.nombre LIKE CONCAT('%', p_nombre_producto, '%');
+end $$
+delimiter ;
