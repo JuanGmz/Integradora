@@ -476,7 +476,8 @@
                                                 </div>
                                                 <div class="col-12 mb-3">
                                                     <label for="img" class="form-label">Imagen</label>
-                                                    <input type="file" class="form-control" id="img" name="imgEvento">
+                                                    <input type="file" class="form-control" id="img" name="imgEvento"
+                                                        required>
                                                 </div>
                                                 <div class="col-12 text-center">
                                                     <h4 class="fw-bold">Fecha y Hora</h4>
@@ -491,12 +492,12 @@
                                                     <div class="col-6 mb-3">
                                                         <label for="horaIni" class="form-label">Hora de Inicio</label>
                                                         <input type="number" min="00:00:00" max="23:59:59"
-                                                            class="form-control" id="horaIni">
+                                                            class="form-control" id="horaIni" name="horaIni">
                                                     </div>
                                                     <div class="col-6 mb-3">
                                                         <label for="horaFin" class="form-label">Hora de Fin</label>
                                                         <input type="number" min="00:00:00" max="23:59:59"
-                                                            class="form-control" id="horaFin">
+                                                            class="form-control" id="horaFin" name="horaFin">
                                                     </div>
                                                 </div>
                                                 <div class="col-12 text-center">
@@ -525,6 +526,22 @@
                                                     <input type="number" min="0" class="form-control" id="costo"
                                                         name="costo">
                                                 </div>
+                                                <div>
+                                                    <label for="categoria" class="form-label">CATEGORIA</label><br>
+                                                    <select name="categoria" id="">
+                                                        <?php
+                                                        include ("../class/database.php");
+                                                        $db = new Database();
+                                                        $db->conectarDB();
+                                                        $consulta = "SELECT categorias.id_categoria, categorias.nombre
+                                                         FROM categorias WHERE tipo = 'evento'";
+                                                        $tabla=$db->select($consulta);
+                                                        foreach ($tabla as $categoria) {
+                                                            echo "<option value='".$categoria->id_categoria.">".$categoria->nombre."</option>";
+                                                        }
+                                                        ?>  
+                                                    </select>
+                                                </div>
                                                 <div class="col-12 mb-3">
                                                     <label for="cantidadBoletos" class="form-label">Cantidad de
                                                         boletos</label>
@@ -550,189 +567,10 @@
                 </div>
 
                 <!-- Aqui se mostrarán los eventos -->
-                <div class="container-fluid mt-3">
-                    <div class="row">
-                        <!-- Evento 1 -->
-                        <div class="col-lg-4 mb-3">
-                            <div class="card shadow-lg border-0">
-                                <div class="card-body">
-                                    <img src="../img/img-login.jpg" class="img-fluid" alt="imgEvento">
-                                    <div class="row mt-3">
-                                        <div class="col-12 text-center">
-                                            <h4>Nombre del Evento</h4>
-                                        </div>
-                                        <div class="col-12 text-center">
-                                            <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                data-bs-target="#editarEvento">
-                                                <i class="fa-regular fa-pen-to-square"></i>
-                                            </button>
-                                        </div>
-                                        <!-- Modal Editar Evento -->
-                                        <div class="modal fade" id="editarEvento" tabindex="-1"
-                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                                            Editar Evento
-                                                        </h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <!-- Aqui va el contenido de el boton de agregar-->
-                                                        <form class="row g-3" method="" action="">
-                                                            <div class="col-12 mb-3">
-                                                                <label for="titulo" class="form-label">
-                                                                    Editar Titulo del Evento
-                                                                </label>
-                                                                <input type="text" class="form-control" id="titulo"
-                                                                    name="evento">
-                                                            </div>
-                                                            <div class="col-12 mb-3">
-                                                                <label for="descripcion" class="form-label">Editar
-                                                                    Descripción</label>
-                                                                <input type="text" class="form-control" id="descripcion"
-                                                                    name="descripcion">
-                                                            </div>
-                                                            <div class="col-12 mb-3">
-                                                                <label for="img" class="form-label">Editar
-                                                                    Imagen</label>
-                                                                <input type="file" class="form-control" id="img"
-                                                                    name="imgEvento">
-                                                            </div>
-                                                            <div class="col-12 text-center">
-                                                                <h4 class="fw-bold">Fecha y Hora</h4>
-                                                            </div>
-                                                            <div class="col-12 mb-3">
-                                                                <label for="fecha" class="form-label">
-                                                                    Editar Fecha del Evento
-                                                                </label>
-                                                                <input type="date" class="form-control" id="fecha"
-                                                                    name="fechaEvento">
-                                                            </div>
-                                                            <!-- Pendiente -->
-                                                            <div class="row">
-                                                                <div class="col-6 mb-3">
-                                                                    <label for="horaIni" class="form-label">
-                                                                        Editar Hora de Inicio
-                                                                    </label>
-                                                                    <input type="number" min="00:00:00" max="23:59:59"
-                                                                        class="form-control" id="horaIni">
-                                                                </div>
-                                                                <div class="col-6 mb-3">
-                                                                    <label for="horaFin" class="form-label">
-                                                                        Editar Hora de Fin
-                                                                    </label>
-                                                                    <input type="number" min="00:00:00" max="23:59:59"
-                                                                        class="form-control" id="horaFin">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-12 text-center">
-                                                                <h4 class="fw-bold">Ubicación</h4>
-                                                            </div>
-                                                            <div class="col-12 mb-3">
-                                                                <label for="lugar" class="form-label">
-                                                                    Editar Nombre del Lugar
-                                                                </label>
-                                                                <input type="text" class="form-control" id="lugar"
-                                                                    name="lugar">
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-6 mb-3">
-                                                                    <label for="colonia" class="form-label">Editar
-                                                                        Colonia</label>
-                                                                    <input type="text" class="form-control" id="colonia"
-                                                                        name="colonia">
-                                                                </div>
-                                                                <div class="col-6 mb-3">
-                                                                    <label for="calle" class="form-label">Editar
-                                                                        Calle</label>
-                                                                    <input type="text" class="form-control" id="calle"
-                                                                        name="calle">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-12 mb-3 text-center">
-                                                                <h4 class="fw-bold">Costo del Evento</h4>
-                                                            </div>
-                                                            <div class="col-12 mb-3">
-                                                                <label for="costo" class="form-label">Editar Costo por
-                                                                    boleto</label>
-                                                                <input type="number" min="0" class="form-control"
-                                                                    id="costo" name="costo">
-                                                            </div>
-                                                            <div class="col-12 mb-3">
-                                                                <label for="cantidadBoletos" class="form-label">
-                                                                    Editar Cantidad de boletos
-                                                                </label>
-                                                                <input type="number" min="0" max="100"
-                                                                    class="form-control" id="cantidadBoletos"
-                                                                    name="cantidadBoletos">
-                                                            </div>
-                                                            <div class="text-end mb-3">
-                                                                <button class="btn btn-primary" type="submit"
-                                                                    id="btn-agregar">Actualizar</button>
-                                                            </div>
-                                                        </form>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                data-bs-dismiss="modal">Cerrar</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Evento 2 -->
-                        <div class="col-lg-4 mb-3">
-                            <div class="card shadow-lg border-0">
-                                <div class="card-body">
-                                    <img src="../img/img-login.jpg" class="img-fluid" alt="imgEvento">
-                                    <div class="row mt-3">
-                                        <div class="col-12 text-center">
-                                            <h4>Nombre del Evento</h4>
-                                        </div>
-                                        <div class="col-12 text-center">
-                                            <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                data-bs-target="#editarEvento">
-                                                <i class="fa-regular fa-pen-to-square"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Evento 3 -->
-                        <div class="col-lg-4 mb-3">
-                            <div class="card shadow-lg border-0">
-                                <div class="card-body">
-                                    <img src="../img/img-login.jpg" class="img-fluid" alt="imgEvento">
-                                    <div class="row mt-3">
-                                        <div class="col-12 text-center">
-                                            <h4>Nombre del Evento</h4>
-                                        </div>
-                                        <div class="col-12 text-center">
-                                            <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                data-bs-target="#editarEvento">
-                                                <i class="fa-regular fa-pen-to-square"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
-
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/b820f07375.js" crossorigin="anonymous"></script>
 </body>
