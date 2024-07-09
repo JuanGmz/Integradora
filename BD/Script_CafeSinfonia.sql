@@ -40,7 +40,7 @@ primary key(id_rol)
 );
 
 create table roles_usuarios(
-id_ru int not null,
+id_ru int auto_increment not null,
 id_usuario int not null,
 id_rol int not null,
 primary key(id_ru),
@@ -114,7 +114,6 @@ estatus enum('Pendiente','En proceso','Finalizado','Cancelado') default 'Pendien
 fecha_hora_pedido datetime default current_timestamp,
 envio nvarchar(150),
 monto_total double,
-metodo_de_pago nvarchar(100),
 guia_de_envio nvarchar(100),
 documento_url nvarchar(100),
 primary key(id_pedido),
@@ -160,24 +159,24 @@ foreign key(id_bolsa) references bolsas_cafe(id_bolsa)
 create table carrito(
 id_carrito int auto_increment not null,
 id_cliente int not null,
-id_bc int not null,
+id_dbc int not null,
 cantidad int not null, -- Actualizar cantidad si se agrega un producto ya existente en el carrito, y no agregar el mismo producto.
 monto double, -- Trigger para actualizar el monto total, y otro o en el mismo trigger que se actualize el monto si se actualiza el precio del producto.
 primary key(id_carrito),
-unique(id_cliente, id_bc),
-foreign key (id_bc) references bolsas_cafe(id_bc),
+unique(id_cliente, id_dbc),
+foreign key (id_dbc) references detalle_bc(id_dbc),
 foreign key(id_cliente) references clientes(id_cliente)
 );
 
 create table detalle_pedidos (
 id_dp int auto_increment not null,
 id_pedido int not null,
-id_bc int not null,
+id_dbc int not null,
 precio_unitario double not null,
 cantidad int not null, -- Actualizar el monto si se actualiza el precio de alguna bolsa.
 primary key(id_dp),
 foreign key (id_pedido) references pedidos(id_pedido),
-foreign key (id_dbc) references bolsas_cafe(id_dbc)
+foreign key (id_dbc) references detalle_bc(id_dbc)
 );
 -- Eventos
 
@@ -276,12 +275,73 @@ id_cr int auto_increment not null,
 id_cliente int not null,
 id_recompensa int not null,
 canje boolean default false not null,
-estatus enum('Activa','Inactiva') default 'Activa',;
+estatus enum('Activa','Inactiva') default 'Activa',
 progreso int default 0,
 primary key(id_cr),
 FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente),
 FOREIGN KEY (id_recompensa) REFERENCES recompensas(id_recompensa)
 );
+
+INSERT INTO roles (rol, descripcion) VALUES 
+('empleado', 'Empleado del café sinfonía'),
+('cliente', 'Cliente del café sinfonía'),
+('proveedor', 'Proveedor del café sinfonía');
+
+
+INSERT INTO usuarios (usuario, correo, contraseña, telefono) VALUES 
+('juanperez', 'juan.perez@example.com', MD5('password1'), '8712345678'),
+('marialopez', 'maria.lopez@example.com', MD5('password2'), '8712345679'),
+('carloshernandez', 'carlos.hernandez@example.com', MD5('password3'), '8712345680'),
+('anamartinez', 'ana.martinez@example.com', MD5('password4'), '8712345681'),
+('luisgonzalez', 'luis.gonzalez@example.com', MD5('password5'), '8712345682'),
+('laurasanchez', 'laura.sanchez@example.com', MD5('password6'), '8712345683'),
+('joseramirez', 'jose.ramirez@example.com', MD5('password7'), '8712345684'),
+('rosatorres', 'rosa.torres@example.com', MD5('password8'), '8712345685'),
+('miguelreyes', 'miguel.reyes@example.com', MD5('password9'), '8712345686'),
+('luisacruz', 'luisa.cruz@example.com', MD5('password10'), '8712345687'),
+('jorgeflores', 'jorge.flores@example.com', MD5('password11'), '8712345688'),
+('isabelgomez', 'isabel.gomez@example.com', MD5('password12'), '8712345689'),
+('pedrodiaz', 'pedro.diaz@example.com', MD5('password13'), '8712345690'),
+('carmenmorales', 'carmen.morales@example.com', MD5('password14'), '8712345691'),
+('ricardoortiz', 'ricardo.ortiz@example.com', MD5('password15'), '8712345692'),
+('sofiasilva', 'sofia.silva@example.com', MD5('password16'), '8712345693'),
+('fernandoromero', 'fernando.romero@example.com', MD5('password17'), '8712345694'),
+('patriciarojas', 'patricia.rojas@example.com', MD5('password18'), '8712345695'),
+('robertovazquez', 'roberto.vazquez@example.com', MD5('password19'), '8712345696'),
+('gabrielamendoza', 'gabriela.mendoza@example.com', MD5('password20'), '8712345697');
+
+INSERT INTO roles_usuarios (id_usuario, id_rol)
+VALUES
+(1, 1),  -- Juan Perez
+(2, 1),  -- Maria Lopez
+(3, 1),  -- Carlos Hernandez
+(4, 1),  -- Ana Martinez
+(5, 1);  -- Luis Gonzalez
+
+INSERT INTO personas (id_usuario, nombres, apellido_paterno, apellido_materno) VALUES 
+(1, 'Juan', 'Perez', 'Garcia'),
+(2, 'Maria', 'Lopez', 'Martinez'),
+(3, 'Carlos', 'Hernandez', 'Sanchez'),
+(4, 'Ana', 'Martinez', 'Rodriguez'),
+(5, 'Luis', 'Gonzalez', 'Lopez'),
+(6, 'Laura', 'Sanchez', 'Perez'),
+(7, 'Jose', 'Ramirez', 'Hernandez'),
+(8, 'Rosa', 'Torres', 'Gonzalez'),
+(9, 'Miguel', 'Reyes', 'Sanchez'),
+(10, 'Luisa', 'Cruz', 'Ramirez'),
+(11, 'Jorge', 'Flores', 'Torres'),
+(12, 'Isabel', 'Gomez', 'Reyes'),
+(13, 'Pedro', 'Diaz', 'Cruz'),
+(14, 'Carmen', 'Morales', 'Flores'),
+(15, 'Ricardo', 'Ortiz', 'Gomez'),
+(16, 'Sofia', 'Silva', 'Diaz'),
+(17, 'Fernando', 'Romero', 'Morales'),
+(18, 'Patricia', 'Rojas', 'Ortiz'),
+(19, 'Roberto', 'Vazquez', 'Silva'),
+(20, 'Gabriela', 'Mendoza', 'Romero');
+
+
+
 
 -- Indices en claves foraneas
 -- Indices en las claves foraneas para la aceleracion de la gestion de tablas ligadas con JOIN.
@@ -304,11 +364,11 @@ CREATE INDEX idx_pedidos_id_domicilio ON pedidos(id_domicilio);
 
 -- Tabla carrito
 CREATE INDEX idx_carrito_id_cliente ON carrito(id_cliente);
-CREATE INDEX idx_carrito_id_bc ON carrito(id_bc);
+CREATE INDEX idx_carrito_id_bc ON carrito(id_dbc);
 
 -- Tabla detalle_pedidos
 CREATE INDEX idx_detalle_pedidos_id_pedido ON detalle_pedidos(id_pedido);
-CREATE INDEX idx_detalle_pedidos_id_bc ON detalle_pedidos(id_bc);
+CREATE INDEX idx_detalle_pedidos_id_bc ON detalle_pedidos(id_dbc);
 
 -- Tabla EVENTOS
 CREATE INDEX idx_eventos_id_lugar ON EVENTOS(id_lugar);
