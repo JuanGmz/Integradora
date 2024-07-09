@@ -16,48 +16,23 @@ delimiter ;
 
 -- Procedo almacenado de Menu
 delimiter $$
-create procedure SP_AdmiMenu (in Nombre varchar(100))
+create procedure SP_Buscarxcategoria_menu (in p_categoria varchar(100))
 begin
 SELECT 
-    dpm.nombre AS Producto, 
-    dpm.img AS Imagen,
-    dpm.descripcion AS Descripción,
+    pm.nombre AS Producto, 
+    pm.img_url AS Imagen,
+    pm.descripcion AS Descripción,
     pm.precio AS Precio, 
-    dpm.categoria AS Categoría 
+    pm.categoria AS Categoría 
 FROM 
     productos_menu AS pm
 JOIN 
-    detalle_productos_menu AS dpm ON dpm.id_dpm = pm.id_dpm
+    detalle_productos_menu AS dpm ON dpm.id_pm = pm.id_pm
 JOIN 
-    categorias AS c ON c.id_categoria = dpm.id_categoria
+    categorias AS c ON c.id_categoria = pm.id_categoria
 
 where nombre=dpm.nombre;
 end $$
-delimiter ;
-
--- Procedimiento almacenado para insertar productos en el carrito.
-delimiter //
-create procedure SP_Insert_Update_Carrito(
-in p_id_cliente int,
-in p_id_bc int,
-in p_cantidad int
-)
-begin 
-declare existe_bolsa int;
-
-select c.id_bc into existe_bolsa
-from carrito c 
-where c.id_cliente = p_id_cliente  and c.id_bc = p_id_bc;
-
-if existe_bolsa > 0 then 
-	update carrito c set c.cantidad = c.cantidad + p_cantidad, monto_total = (select ((cantidad+p_cantidad)*bc.precio) from bolsas_cafe bc join carrito c on c.id_bc = bc.id_bc  where bc.id_bc = p_id_bc  and c.id_cliente = p_id_cliente)
-	where c.id_cliente = p_id_cliente and c.id_bc = p_id_bc;
-else 
-	insert into carrito(id_cliente, id_bc, cantidad, monto_total)
-	values (p_id_cliente,p_id_bc,p_cantidad, p_cantidad * (select precio from bolsas_cafe bc where bc.id_bc = p_id_bc) );
-end if;
-
-end //
 delimiter ;
 
 -- LLamar el procedimiento almacenado para insertar productos en el carrito.

@@ -53,3 +53,28 @@ end //
 delimiter ;
 
 select * from cliente;
+
+-- Trigger para encripar automaticamente.
+DELIMITER //
+CREATE TRIGGER before_insert_usuarios
+BEFORE INSERT ON usuarios
+FOR EACH ROW
+BEGIN
+    SET NEW.password = MD5(NEW.password);
+END; //
+DELIMITER ;
+
+-- Trigger para encriptar cuando se actualiza  una password.
+DELIMITER //
+
+CREATE TRIGGER before_update_usuarios
+BEFORE UPDATE ON usuarios
+FOR EACH ROW
+BEGIN
+    IF NEW.password != OLD.password THEN
+        SET NEW.password = MD5(NEW.password);
+    END IF;
+END; //
+
+DELIMITER ;
+
