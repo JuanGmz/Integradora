@@ -109,6 +109,7 @@ create table pedidos(
 id_pedido int auto_increment not null,
 id_cliente int not null,
 id_domicilio int not null,
+metodo_de_pago enum(,'Transferencia') default 'Transferencia',
 estatus enum('Pendiente','En proceso','Finalizado','Cancelado') default 'Pendiente' not null,
 fecha_hora_pedido datetime default current_timestamp,
 envio nvarchar(150),
@@ -141,7 +142,7 @@ aroma nvarchar(150) not null,
 acidez nvarchar(150) not null,
 sabor nvarchar(150) not null,
 cuerpo nvarchar(100) not null,
-puntaje_catacion tinyint not null,
+puntaje_catacion double not null,
 img_url nvarchar(100)not null,
 primary key(id_bolsa)
 );
@@ -156,7 +157,6 @@ primary key(id_dbc),
 foreign key(id_bolsa) references bolsas_cafe(id_bolsa)
 );
 -- Trigger para actualizar el stock.
- -- a
 create table carrito(
 id_carrito int auto_increment not null,
 id_cliente int not null,
