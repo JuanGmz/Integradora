@@ -34,29 +34,22 @@ END$$
 DELIMITER ;
 
 delimiter //
-create procedure sp_validacion_cantidad_carrito(
-in p_id_cliente int,
-in p_id_bc int,
-in p_cantidad int
-)
+create trigger adsa
+after insert on pedidos
+for each row
 begin 
-declare existe_bolsa int;
 
-select c.id_bc into existe_bolsa
-from carrito c where c.id_cliente = p_id_cliente  and c.id_bc = p_id_bc;
+describe carrito;
+describe detalle_pedidos;
 
-if existe_bolsa > 0 then 
-	update carrito c set c.cantidad = c.cantidad + p_cantidad, monto_total = (cantidad + p_cantidad) * (select precio from bolsas_cafe bc where bc.id_bc = p_id_bc )
-	where c.id_cliente = p_id_cliente and c.id_bc = p_id_bc;
-else 
-	insert into carrito(id_cliente, id_bc, cantidad, monto_total)
-	values (p_id_cliente,p_id_bc,p_cantidad, p_cantidad * (select precio from bolsas_cafe bc where bc.id_bc = p_id_bc) );
-end if;
+select c.id_bc, c.cantidad, bc.precio,c.monto_total
+from carrito c
+join bolsas_cafe bc on bc.id_bc = c.id_bc
+where c.id_cliente = 1;
+
+select * from detalle_pedidos;
 
 end //
 delimiter ;
 
-call sp_validacion_cantidad_carrito(1, 1, 1);
-
-
-select * from carrito c where c.id_cliente = 1;
+select * from cliente;
