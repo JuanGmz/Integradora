@@ -109,7 +109,7 @@ create table pedidos(
 id_pedido int auto_increment not null,
 id_cliente int not null,
 id_domicilio int not null,
-metodo_de_pago enum(,'Transferencia') default 'Transferencia',
+metodo_de_pago enum('Transferencia') default 'Transferencia',
 estatus enum('Pendiente','En proceso','Finalizado','Cancelado') default 'Pendiente' not null,
 fecha_hora_pedido datetime default current_timestamp,
 envio nvarchar(150),
