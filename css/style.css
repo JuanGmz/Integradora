@@ -25,6 +25,7 @@
 
 }
 
+
 /* Estilos globales */
 body {
     font-family: 'MiFuentePersonalizada', sans-serif;
@@ -39,6 +40,16 @@ body {
     font-family: 'MiFuentePersonalizada';
     src: url('../fuentes/Afterglow-Regular.ttf') format('truetype');
 }
+/*  Elimiar formato de links */
+a {
+    color: inherit; /* Puedes cambiar esto al color que prefieras */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none; /* Asegura que también al pasar el ratón no se subraye */
+}
+
 
 /* Estilos de la barra de navegación */
 .navbar-brand .logo {
@@ -190,4 +201,75 @@ body {
   }
   .navbar-toggler-icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/*SECCION DE CARDS*/
+.container-features {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Espacio entre las tarjetas */
+    padding: 20px 0;
+}
+.card-feature {
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+    width: 250px; /* Ancho máximo de cada tarjeta */
+    
+}
+.card-feature i {
+    font-size: 3rem; /* Tamaño grande para los iconos */
+    margin-bottom: 10px; /* Espacio debajo del icono */
+    color: var(--terciario); /* Color café para los iconos */
+}
+.facture-content {
+    line-height: 1.5;
+}
+/* story-section */
+
+.story-section {
+    text-align: center;
+    margin: 20px;
+}
+.story-section img {
+    width: 100%;
+    height: auto;
+}
+/* E-COMMERCE */
+.product-card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease-in-out;
+}
+.product-card:hover {
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+.product-card img {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.product-card-body {
+    padding: 15px;
+}
+.product-card-footer {
+    background-color: #fff;
+    border-top: none;
+    padding: 10px 15px;
+}
+.promo-section {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+.promo-section img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+.promo-section .btn {
+    background-color: #d1a07e;
+    border: none;
+    margin-top: 20px;
 }
