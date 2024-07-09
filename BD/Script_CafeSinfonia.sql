@@ -108,12 +108,13 @@ CREATE TABLE comprobantes (
 create table pedidos(
 id_pedido int auto_increment not null,
 id_cliente int not null,
+id_domicilio int not null,
 estatus enum('Pendiente','En proceso','Finalizado','Cancelado') default 'Pendiente' not null,
 fecha_hora_pedido datetime default current_timestamp,
-id_domicilio int not null,
 envio nvarchar(150),
-costo_envio double,
-fecha_entrega_estimada datetime,
+monto_total double,
+metodo_de_pago nvarchar(100),
+guia_de_envio nvarchar(100),
 documento_url nvarchar(100),
 primary key(id_pedido),
 foreign key (id_cliente) references clientes(id_cliente),
@@ -128,7 +129,7 @@ create table comprobantes_pedidos(
     foreign key (id_pedido) references pedidos(id_pedido)
 );
 
-create table bolsas_detalle (
+create table bolsas_cafe (
 id_bolsa int auto_increment not null,
 nombre nvarchar(100) not null,
 años_cosecha nvarchar(100) not null,
@@ -145,14 +146,14 @@ img_url nvarchar(100)not null,
 primary key(id_bolsa)
 );
 
-create table bolsas_cafe(
-id_bc int auto_increment not null,
+create table detalle_bc(
+id_dbc int auto_increment not null,
 id_bolsa int not null,
 medida nvarchar(50)not null,
 precio double not null,
 stock int not null,
-primary key(id_bc),
-foreign key(id_bolsa) references bolsas_detalle(id_bolsa)
+primary key(id_dbc),
+foreign key(id_bolsa) references bolsas_cafe(id_bolsa)
 );
 -- Trigger para actualizar el stock.
  -- a
@@ -161,7 +162,7 @@ id_carrito int auto_increment not null,
 id_cliente int not null,
 id_bc int not null,
 cantidad int not null, -- Actualizar cantidad si se agrega un producto ya existente en el carrito, y no agregar el mismo producto.
-monto_total double, -- Trigger para actualizar el monto total, y otro o en el mismo trigger que se actualize el monto si se actualiza el precio del producto.
+monto double, -- Trigger para actualizar el monto total, y otro o en el mismo trigger que se actualize el monto si se actualiza el precio del producto.
 primary key(id_carrito),
 unique(id_cliente, id_bc),
 foreign key (id_bc) references bolsas_cafe(id_bc),
@@ -173,11 +174,10 @@ id_dp int auto_increment not null,
 id_pedido int not null,
 id_bc int not null,
 precio_unitario double not null,
-cantidad int not null,
-monto_total double, -- Actualizar el monto si se actualiza el precio de alguna bolsa.
+cantidad int not null, -- Actualizar el monto si se actualiza el precio de alguna bolsa.
 primary key(id_dp),
 foreign key (id_pedido) references pedidos(id_pedido),
-foreign key (id_bc) references bolsas_cafe(id_bc)
+foreign key (id_dbc) references bolsas_cafe(id_dbc)
 );
 -- Eventos
 
@@ -196,13 +196,13 @@ nombre nvarchar(100) not null,
 tipo enum('Gratuito','De Pago') not null,
 descripcion nvarchar(200) not null,
 fecha_evento date not null,
-fecha_publicacion date not null,
 hora_inicio time not null,      
 hora_fin time not null,
 capacidad int not null,
 precio_boleto double not null, 
 disponibilidad int,
 img_url nvarchar(100)not null,
+fecha_publicacion date not null,
 primary key(id_evento),
 foreign key (id_lugar) references ubicacion_lugares(id_lugar),
 foreign key (id_categoria) references categorias(id_categoria)
@@ -213,7 +213,7 @@ id_reserva int auto_increment not null,
 id_cliente int not null, 
 id_evento int not null, 
 c_boletos int not null,
-monto_total double null,
+monto_total double,
 fecha_hora_reserva datetime default current_timestamp,
 estatus enum('Pendiente','Cancelada','Apartada') default 'Pendiente', -- Puede ser pendiente, y esas cosas.
 primary key(id_reserva),
@@ -231,40 +231,33 @@ create table comprobantes_reservas
 );
 
 -- Productos del Menu 
-create table detalle_productos_menu(
-id_dpm int auto_increment not null,
+create table productos_menu(
+id_pm int auto_increment not null,
 id_categoria int not null, 
 nombre nvarchar(150) not null,
 descripcion nvarchar (300) not null,
 img_url nvarchar(100)not null,
-primary key(id_dpm),
+primary key(id_pm),
 foreign key (id_categoria) references CATEGORIAS(id_categoria)
 );
 
-create table productos_menu(
-id_pm int auto_increment not null,
-id_dpm int not null,
-medida nvarchar(100) null,
+create table detalle_productos_menu(
+id_dpm int auto_increment not null,
+id_pm int not null,
+medida nvarchar(100),
 precio double not null,
-primary key(id_pm),
-foreign key (id_dpm) references detalle_productos_menu(id_dpm)
+primary key(id_dpm),
+foreign key (id_pm) references productos_menu(id_pm)
 );
 
 -- Sistemma de Recompensas
-create table tarjetas(
-id_tarjeta int auto_increment not null,
-id_cliente int not null,
-progreso int,
-primary key(id_tarjeta),
-foreign key (id_cliente) references clientes(id_cliente)
-);
 
 create table asistencias(
 id_asistencia int auto_increment not null,
-id_tarjeta int not null,
+id_cliente int not null,
 fecha_hora_asistencia datetime default current_timestamp,
 primary key(id_asistencia),
-foreign key (id_tarjeta) references tarjetas(id_tarjeta)
+foreign key (id_cliente) references clientes(id_cliente)
 );
 
 CREATE TABLE recompensas(
@@ -278,13 +271,15 @@ img_url nvarchar(100)null,
 primary key (id_recompensa)
 );
 
-create table tarjeta_recompensas(
-id_tr int auto_increment not null,
-id_tarjeta int not null,
+create table clientes_recompensas(
+id_cr int auto_increment not null,
+id_cliente int not null,
 id_recompensa int not null,
 canje boolean default false not null,
-primary key(id_tr),
-FOREIGN KEY (id_tarjeta) REFERENCES tarjetas(id_tarjeta),
+estatus enum('Activa','Inactiva') default 'Activa',;
+progreso int default 0,
+primary key(id_cr),
+FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente),
 FOREIGN KEY (id_recompensa) REFERENCES recompensas(id_recompensa)
 );
 
