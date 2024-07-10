@@ -168,6 +168,7 @@ a:hover {
     filter: brightness(80%);
 }
 
+/* Boton CAFE */
 .btn-cafe {
     background-color: var(--primario);
     color: var(--blanco);
@@ -182,6 +183,29 @@ a:hover {
 .btn-cafe:hover {
     background-color: var(--terciario);
 }
+
+/* Boton CATEGORIAS */
+.btn-categorias {
+    background-color: var(--color10);
+    color: var(--color12);
+    font-size: 14px;
+    padding: 8px 20px;
+    border: none; /* Eliminates border */
+    text-decoration: none;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.btn-categorias:hover,
+.btn-categorias.active {
+    background-color: var(--obscuro);
+    color: var(--blanco);
+}
+
+.btn-categorias:focus {
+    box-shadow: none;
+}
+
 
 .form-control-bb {
     border: 0px;
@@ -227,6 +251,9 @@ a:hover {
     gap: 20px;
     /* Espacio entre las tarjetas */
     padding: 20px 0;
+    text-align: center;
+    padding: 20px;
+    margin: 10px;
 }
 
 .card-feature {
@@ -249,6 +276,11 @@ a:hover {
 
 .facture-content {
     line-height: 1.5;
+}
+.facture-content span {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
 }
 
 /* story-section */

@@ -57,7 +57,7 @@
     <div style="max-width: 100%;">
         <div class="row p-0 m-0">
             <div class="col-lg-8 m-0 p-0">
-                <img src="img/inicio.webp" class="img-fluid p-0 m-0" alt="imginicio" lazy="loading">
+                <img src="img/sinfo.webp" class="img-fluid p-0 m-0" alt="imginicio" lazy="loading">
             </div>
             <div class="col-lg-4 d-flex flex-column justify-content-center align-items-center p-5"
                 style="background: var(--color3);">
@@ -112,21 +112,21 @@
             </div>
             <div class="col-lg-6">
                 <div class="container">
-                    <div class="row story-section">
+                    <div class="row story-section justify-content-center d-flex">
 
-                        <div class="col-md-8">
-                            <div class="row">
-                                <div class="col-md-6 mb-4 col-2">
-                                    <img src="./img/inicio.webp" alt="Coffee Image 1">
+                        <div class="col-md-8 col-12 col-sm-8 ">
+                            <div class="row justify-content-center d-flex">
+                                <div class="col-md-6 mb-4 col-4 col-sm-5">
+                                    <img src="./img/cafes/cafe7.webp" alt="Coffee Image 1">
                                 </div>
-                                <div class="col-md-6 mb-4 col-2">
-                                    <img src="./img/inicio.webp" alt="Coffee Image 2">
+                                <div class="col-md-6 mb-4 col-4 col-sm-5">
+                                    <img src="./img/cafes/cafe9.webp" alt="Coffee Image 4">
                                 </div>
-                                <div class="col-md-6 mb-4 col-2">
-                                    <img src="./img/inicio.webp" alt="Coffee Image 3">
+                                <div class="col-md-6 mb-4 col-4 col-sm-5">
+                                    <img src="./img/cafes/cafe4.webp" alt="Coffee Image 3">
                                 </div>
-                                <div class="col-md-6 mb-4 col-2">
-                                    <img src="./img/inicio.webp" alt="Coffee Image 4">
+                                <div class="col-md-6 mb-4 col-4 col-sm-5">
+                                    <img src="./img/cafes/cafe8.webp" alt="Coffee Image 4">
                                 </div>
                             </div>
                         </div>
@@ -138,151 +138,134 @@
 
             <!-- Menu especial para ti -->
             <div class="container p-1">
+
                 <div class="col-12 text-center ">
                     <h1 class="fw-bold text-center" style="letter-spacing: 1px;">Menu especial para ti</h1>
                 </div>
-
+                <!--botónes de categorias-->
                 <div class="d-flex justify-content-center p-5">
                     <ul class="nav nav-tabs flex-wrap justify-content-center" id="menuTabs" role="tablist"
                         style="border-bottom: none;">
                         <li class="mx-3 nav-item col-5 col-md-4 col-lg-auto mb-2 mb-lg-0 " role="presentation">
-                            <!--Barra caliente-->
-                            <button class="btn-cafe nav-link active w-100" id="barra-caliente-tab" data-bs-toggle="tab"
-                                data-bs-target="#barra-caliente" type="button" role="tab" aria-controls="barra-caliente"
-                                aria-selected="true">Barra Caliente</button>
+                            <!--Clasicos-->
+                            <button class="btn-categorias   active w-100" id="clasicos-tab" data-bs-toggle="tab"
+                                data-bs-target="#clasicos" type="button" role="tab" aria-controls="clasicos"
+                                aria-selected="true">Clasicos</button>
                         </li>
                         <li class="mx-3 nav-item col-5 col-md-4 col-lg-auto mb-2 mb-lg-0" role="presentation">
-                            <!--Barra fria-->
-                            <button class="btn-cafe nav-link w-100" id="barra-fria-tab" data-bs-toggle="tab"
-                                data-bs-target="#barra-fria" type="button" role="tab" aria-controls="barra-fria"
-                                aria-selected="false">Barra Fría</button>
+                            <!--Cool and Dark-->
+                            <button class=" btn-categorias   w-100" id="Cool-tab" data-bs-toggle="tab"
+                                data-bs-target="#Cool" type="button" role="tab" aria-controls="Cool"
+                                aria-selected="false">Cool and Dark</button>
                         </li>
                         <li class="mx-3 nav-item col-5 col-md-4 col-lg-auto mb-2 mb-lg-0" role="presentation">
-                            <!--Alimentos-->
-                            <button class=" btn-cafe nav-link w-100" id="alimentos-tab" data-bs-toggle="tab"
-                                data-bs-target="#alimentos" type="button" role="tab" aria-controls="alimentos"
-                                aria-selected="false">Alimentos</button>
+                            <!--Around The World-->
+                            <button class=" btn-categorias  w-100" id="Around-tab" data-bs-toggle="tab"
+                                data-bs-target="#Around" type="button" role="tab" aria-controls="Around"
+                                aria-selected="false">Around The World</button>
                         </li>
                         <li class="mx-3 nav-item col-5 col-md-4 col-lg-auto mb-2 mb-lg-0" role="presentation">
-                            <!--Repostería-->
-                            <button class=" btn-cafe nav-link w-100" id="reposteria-tab" data-bs-toggle="tab"
-                                data-bs-target="#reposteria" type="button" role="tab" aria-controls="reposteria"
-                                aria-selected="false">Repostería</button>
-                        </li>
-                        <li class="mx-3 nav-item col-5 col-md-4 col-lg-auto mb-2 mb-lg-0" role="presentation">
-                            <!--Expendio de cafe-->
-                            <button class=" btn-cafe nav-link w-100" id="expendedio-tab" data-bs-toggle="tab"
-                                data-bs-target="#expendedio" type="button" role="tab" aria-controls="expendedio"
-                                aria-selected="false">Expendio de Café</button>
+                            <!--Frappes-->
+                            <button class=" btn-categorias   w-100" id="Frappes-tab" data-bs-toggle="tab"
+                                data-bs-target="#Frappes" type="button" role="tab" aria-controls="Frappes"
+                                aria-selected="false">Frappes</button>
                         </li>
                     </ul>
                 </div>
+                <!-- Contenido de las categorias -->
                 <div class="tab-content col-12" id="menuTabsContent">
-                    <!--Contenido para Barra caliente -->
-                    <div class="tab-pane fade show active" id="barra-caliente" role="tabpanel"
-                        aria-labelledby="barra-caliente-tab">
+                    <!--Contenido para Clasicos -->
+                    <div class="tab-pane fade show active" id="clasicos" role="tabpanel" aria-labelledby="clasicos-tab">
+                        <div class="row justify-content-center mb-5">
+                            <div class="col-12 col-md-8 d-flex align-items-center">
+                                <div class="d-flex flex-wrap w-100">
+                                    <div class="col-12 col-md-6 p-2">
+                                        <img src="./img/cafes/cafe11.webp" class="card-img-top img-fluid" alt="..."
+                                            style="height: 300px; object-fit: cover;">
+                                    </div>
+                                    <div class="col-12 col-md-6 p-2 d-flex flex-column p-5">
+                                        <h5 class="fw-bold mb-3" style="letter-spacing: 1px;">Menu Clasicos</h5>
+                                        <p class="text-dark-emphasis mb-4">Explora nuestro Menú Clásico de Café, donde
+                                            cada taza es una experiencia única y reconfortante. Desde el espresso
+                                            intenso hasta el cappuccino cremoso, cada bebida se prepara con gran
+                                            atención al detalle para ofrecerte el mejor sabor y aroma.</p>
+                                        <a href="html/menu.html" class="btn text-light shadow-lg align-self-start"
+                                            style="background: var(--primario);">Ver Menú</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="Cool" role="tabpanel" aria-labelledby="Cool-tab">
+                        <!-- Contenido para Cool and Dark -->
+                        <div class="row justify-content-center mb-5">
+                            <div class="col-12 col-md-8 d-flex align-items-center">
+                                <div class="d-flex flex-wrap w-100">
+                                    <div class="col-12 col-md-6 p-2">
+                                        <img src="./img/cafes/cafe12.webp" class="card-img-top img-fluid" alt="..."
+                                            style="height: 300px; object-fit: cover;">
+                                    </div>
+                                    <div class="col-12 col-md-6 p-2 d-flex flex-column p-5">
+                                        <h5 class="fw-bold mb-3" style="letter-spacing: 1px;">Menu Cool and Dark</h5>
+                                        <p class="text-dark-emphasis mb-4">Déjate cautivar por nuestro exclusivo Menú
+                                            Cool and Dark de Café, donde cada sorbo es una experiencia de sabor intensa
+                                            y sofisticada. Disfruta de una selección de bebidas que combinan el rico
+                                            aroma del café con notas profundas y indulgentes</p>
+                                        <a href="html/menu.html" class="btn text-light shadow-lg align-self-start"
+                                            style="background: var(--primario);">Ver Menú</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="Around" role="tabpanel" aria-labelledby="Around-tab">
+                        <!-- Contenido para Around The World -->
+                        <div class="row justify-content-center mb-5">
+                            <div class="col-12 col-md-8 d-flex align-items-center">
+                                <div class="d-flex flex-wrap w-100">
+                                    <div class="col-12 col-md-6 p-2">
+                                        <img src="./img/cafes/cafe3.webp" class="card-img-top img-fluid" alt="..."
+                                            style="height: 300px; object-fit: cover;">
+                                    </div>
+                                    <div class="col-12 col-md-6 p-2 d-flex flex-column p-5">
+                                        <h5 class="fw-bold mb-3" style="letter-spacing: 1px;">Around The World</h5>
+                                        <p class="text-dark-emphasis mb-4">Embárcate en un viaje culinario con nuestro
+                                            Menú Around The World, donde cada plato te transporta a sabores únicos y
+                                            exóticos de diferentes rincones del mundo. Descubre una variedad de delicias
+                                            internacionales cuidadosamente seleccionadas para satisfacer tu curiosidad
+                                            gastronómica</p>
+                                        <a href="html/menu.html" class="btn text-light shadow-lg align-self-start"
+                                            style="background: var(--primario);">Ver Menú</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="Frappes" role="tabpanel" aria-labelledby="Frappes-tab">
+                        <!-- Contenido para frappes -->
+                        <div class="row justify-content-center mb-5">
+                            <div class="col-12 col-md-8 d-flex align-items-center">
+                                <div class="d-flex flex-wrap w-100">
+                                    <div class="col-12 col-md-6 p-2">
+                                        <img src="./img/cafes/cafe6.webp" class="card-img-top img-fluid" alt="..."
+                                            style="height: 300px; object-fit: cover;">
+                                    </div>
+                                    <div class="col-12 col-md-6 p-2 d-flex flex-column p-5">
+                                        <h5 class="fw-bold mb-3" style="letter-spacing: 1px;">Frappes</h5>
+                                        <p class="text-dark-emphasis mb-4">Descubre nuestro irresistible menú de
+                                            frappés, donde cada sorbo es una fusión perfecta de café, cremosidad y
+                                            refrescante hielo. Desde los clásicos frappés de café y vainilla hasta los
+                                            exóticos sabores como coco y caramelo salado, cada opción está diseñada para
+                                            deleitar tus sentidos y refrescar tu día con un toque de indulgencia.</p>
+                                        <a href="html/menu.html" class="btn text-light shadow-lg align-self-start"
+                                            style="background: var(--primario);">Ver Menú</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                        <div class="row justify-content-center mb-5">
-                            <div class="col-12 col-md-8 d-flex align-items-center">
-                                <div class="d-flex flex-wrap w-100">
-                                    <div class="col-12 col-md-6 p-2">
-                                        <img src="../img/inicio.webp" class="card-img-top img-fluid" alt="..."
-                                            style="height: 300px; object-fit: cover;">
-                                    </div>
-                                    <div class="col-12 col-md-6 p-2 d-flex flex-column p-5">
-                                        <h5 class="fw-bold mb-3" style="letter-spacing: 1px;">Barra Caliente</h5>
-                                        <p class="text-dark-emphasis mb-4">Para esos momentos de cálidos apapachos,
-                                            disfruta de la variedad de bebidas calientes que ofrecemos.</p>
-                                        <a href="html/menu.html" class="btn text-light shadow-lg align-self-start"
-                                            style="background: var(--primario);">Ver Menú</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="barra-fria" role="tabpanel" aria-labelledby="barra-fria-tab">
-                        <!-- Contenido para Barra Fría -->
-                        <div class="row justify-content-center mb-5">
-                            <div class="col-12 col-md-8 d-flex align-items-center">
-                                <div class="d-flex flex-wrap w-100">
-                                    <div class="col-12 col-md-6 p-2">
-                                        <img src="../img/inicio.webp" class="card-img-top img-fluid" alt="..."
-                                            style="height: 300px; object-fit: cover;">
-                                    </div>
-                                    <div class="col-12 col-md-6 p-2 d-flex flex-column p-5">
-                                        <h5 class="fw-bold mb-3" style="letter-spacing: 1px;">Barra Fría</h5>
-                                        <p class="text-dark-emphasis mb-4">Refresca tu día con nuestras bebidas
-                                            frías y
-                                            deliciosas.</p>
-                                        <a href="html/menu.html" class="btn text-light shadow-lg align-self-start"
-                                            style="background: var(--primario);">Ver Menú</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="alimentos" role="tabpanel" aria-labelledby="alimentos-tab">
-                        <!-- Contenido para Alimentos -->
-                        <div class="row justify-content-center mb-5">
-                            <div class="col-12 col-md-8 d-flex align-items-center">
-                                <div class="d-flex flex-wrap w-100">
-                                    <div class="col-12 col-md-6 p-2">
-                                        <img src="../img/inicio.webp" class="card-img-top img-fluid" alt="..."
-                                            style="height: 300px; object-fit: cover;">
-                                    </div>
-                                    <div class="col-12 col-md-6 p-2 d-flex flex-column p-5">
-                                        <h5 class="fw-bold mb-3" style="letter-spacing: 1px;">Alimentos</h5>
-                                        <p class="text-dark-emphasis mb-4">Disfruta de nuestra variedad de alimentos
-                                            deliciosos.</p>
-                                        <a href="html/menu.html" class="btn text-light shadow-lg align-self-start"
-                                            style="background: var(--primario);">Ver Menú</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="reposteria" role="tabpanel" aria-labelledby="reposteria-tab">
-                        <!-- Contenido para Repostería -->
-                        <div class="row justify-content-center mb-5">
-                            <div class="col-12 col-md-8 d-flex align-items-center">
-                                <div class="d-flex flex-wrap w-100">
-                                    <div class="col-12 col-md-6 p-2">
-                                        <img src="../img/inicio.webp" class="card-img-top img-fluid" alt="..."
-                                            style="height: 300px; object-fit: cover;">
-                                    </div>
-                                    <div class="col-12 col-md-6 p-2 d-flex flex-column p-5">
-                                        <h5 class="fw-bold mb-3" style="letter-spacing: 1px;">Repostería</h5>
-                                        <p class="text-dark-emphasis mb-4">Endulza tu día con nuestra deliciosa
-                                            repostería.</p>
-                                        <a href="html/menu.html" class="btn text-light shadow-lg align-self-start"
-                                            style="background: var(--primario);">Ver Menú</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="expendedio" role="tabpanel" aria-labelledby="expendedio-tab">
-                        <!-- Contenido para Expendio de Café -->
-                        <div class="row justify-content-center mb-5">
-                            <div class="col-12 col-md-8 d-flex align-items-center">
-                                <div class="d-flex flex-wrap w-100">
-                                    <div class="col-12 col-md-6 p-2">
-                                        <img src="../img/inicio.webp" class="card-img-top img-fluid" alt="..."
-                                            style="height: 300px; object-fit: cover;">
-                                    </div>
-                                    <div class="col-12 col-md-6 p-2 d-flex flex-column p-5">
-                                        <h5 class="fw-bold mb-3" style="letter-spacing: 1px;">Expendio de Café</h5>
-                                        <p class="text-dark-emphasis mb-4">Lleva a casa los mejores granos de café.
-                                        </p>
-                                        <a href="html/menu.html" class="btn text-light shadow-lg align-self-start"
-                                            style="background: var(--primario);">Ver Menú</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-
 
             </div>
 
@@ -290,21 +273,28 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h1 class="fw-bold text-center" style="letter-spacing: 1px;">Servicios a tu medida</h1>
+                        <h1 class="fw-bold text-center p-2" style="letter-spacing: 1px;">Servicios a tu medida</h1>
                     </div>
                 </div>
-                <section class="conteiner container-features">
-                    <a href="">
+                <!--seccion de servicios-->
+                <section class="container d-flex justify-content-center ">
+
+                    <!-- Envio a tu Servicio-->
+                    <div class="col-5 col-sm-5 col-md-4 d-flex justify-content-center ">
+
                         <div class="card-feature">
-                            <i class="fa-solid fa-plane-up"></i>
+                            <i class="fa-solid fa-truck"></i>
                             <div class="facture-content">
-                                <span>Envio gratuito a nivel mundial</span>
+                                <span>Envio a tu Servicio</span>
                                 <p>En pedido superior a $150</p>
                             </div>
                         </div>
-                    </a>
 
-                    <a href="">
+                    </div>
+
+                    <!-- Tarjeta regalo especial-->
+                    <div class="col-5 col-sm-5 col-md-4 d-flex justify-content-center ">
+
                         <div class="card-feature">
                             <i class="fa-solid fa-gift"></i>
                             <div class="facture-content">
@@ -312,31 +302,34 @@
                                 <p>Ofrece bonos especiales</p>
                             </div>
                         </div>
-                    </a>
 
-                    <a href="">
+                    </div>
+
+                    <!-- Servicio al cliente-->
+                    <div class="col-5 col-sm-5 col-md-4 d-flex justify-content-center ">
 
                         <div class="card-feature">
-
                             <i class="fa-solid fa-headset"></i>
                             <div class="facture-content">
                                 <span>Servicio al cliente 24/7</span>
-                                <p>Llamenos 24/7 al 871-456-7870</p>
+                                <p>Llamenos 24/7 al 871-454-7870</p>
                             </div>
                         </div>
-                    </a>
+
+                    </div>
+
                 </section>
             </div>
 
             <!-- E-Commerce-->
             <div class="container my-5">
-                <div class="col-12 text-center ">
+                <div class="col-12 text-center p-2">
                     <h1 class="fw-bold text-center" style="letter-spacing: 1px;">E-Commerce</h1>
                 </div>
-                <div class="row">
-                    <div class="col-md-4 mb-4">
+                <div class="row justify-content-center align-items-center d-flex">
+                    <div class="col-8 col-sm-9 col-md-4 mb-4">
                         <div class="card product-card">
-                            <img src="./img/inicio.webp" class="card-img-top" alt="Cappucino">
+                            <img src="./img/cafes/bolsa1.webp" class="card-img-top" alt="Cappucino">
                             <div class="card-body product-card-body">
                                 <h5 class="card-title fw-bold " style="letter-spacing: 1px;">Cappucino</h5>
                                 <p class="card-text">Hot Cappucino</p>
@@ -348,9 +341,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 mb-4">
+                    <div class="col-8 col-sm-9 col-md-4 mb-4">
                         <div class="card product-card">
-                            <img src="./img/inicio.webp" class="card-img-top" alt="Moccacino">
+                            <img src="./img/cafes/bolsa1.webp" class="card-img-top" alt="Moccacino">
                             <div class="card-body product-card-body">
                                 <h5 class="card-title fw-bold " style="letter-spacing: 1px;">Moccacino</h5>
                                 <p class="card-text">Hot Moccacino</p>
@@ -362,9 +355,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 mb-4">
+                    <div class="col-8 col-sm-9 col-md-4 mb-4">
                         <div class="card product-card">
-                            <img src="./img/inicio.webp" class="card-img-top" alt="Waffle Ice Cream">
+                            <img src="./img/cafes/bolsa1.webp" class="card-img-top" alt="Waffle Ice Cream">
                             <div class="card-body product-card-body">
                                 <h5 class="card-title fw-bold" style="letter-spacing: 1px;">Waffle Ice Cream</h5>
                                 <p class="card-text">Waffle with Ice Cream</p>
@@ -386,105 +379,36 @@
                 <div class="col-12 text-center ">
                     <h1 class="fw-bold text-center" style="letter-spacing: 1px;">Blog</h1>
                 </div>
-            </div>    
+            </div>
 
             <!-- Conocenos-->
             <div class="container my-5">
                 <div class="col-12 text-center ">
                     <h1 class="fw-bold text-center" style="letter-spacing: 1px;">Conocenos</h1>
                 </div>
+                <!-- Carousel -->
                 <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
+                        <!-- primer seccion-->
                         <div class="carousel-item active">
                             <div class="row">
+                                <!-- imagen 1 -->
                                 <div class="col-4 col-md-2">
-                                    <div class="carousel-item-wrapper">
-                                        <img src="./img/inicio.webp" class="d-block w-100" alt="...">
-                                        <div class="overlay">
-                                            <i class="fa-brands fa-facebook"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-4 col-md-2">
-                                    <div class="carousel-item-wrapper">
-                                        <img src="./img/inicio.webp" class="d-block w-100" alt="...">
-                                        <div class="overlay">
-                                            <i class="fa-brands fa-facebook"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-4 col-md-2">
-                                    <div class="carousel-item-wrapper">
-                                        <img src="./img/inicio.webp" class="d-block w-100" alt="...">
-                                        <div class="overlay">
-                                            <i class="fa-brands fa-facebook"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-4 col-md-2 d-none d-md-block">
-                                    <div class="carousel-item-wrapper">
-                                        <img src="./img/inicio.webp" class="d-block w-100" alt="...">
-                                        <div class="overlay">
-                                            <i class="fa-brands fa-facebook"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-4 col-md-2 d-none d-md-block">
-                                    <div class="carousel-item-wrapper">
-                                        <img src="./img/inicio.webp" class="d-block w-100" alt="...">
-                                        <div class="overlay">
-                                            <i class="fa-brands fa-facebook"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-4 col-md-2 d-none d-lg-block">
-                                    <div class="carousel-item-wrapper">
-                                        <img src="./img/inicio.webp" class="d-block w-100" alt="...">
-                                        <div class="overlay">
-                                            <i class="fa-brands fa-facebook"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="row">
-                                <div class="col-4 col-md-2">
-                                    <div class="carousel-item-wrapper">
-                                        <img src="./img/login.webp" class="d-block w-100" alt="...">
-                                        <div class="overlay">
-                                            <i class="fa-brands fa-facebook"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-4 col-md-2">
-                                    <div class="carousel-item-wrapper">
-                                        <img src="./img/login.webp" class="d-block w-100" alt="...">
-                                        <div class="overlay">
-                                            <i class="fa-brands fa-facebook"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-4 col-md-2">
-                                    <div class="carousel-item-wrapper">
-                                        <img src="./img/login.webp" class="d-block w-100" alt="...">
-                                        <div class="overlay">
-                                            <i class="fa-brands fa-facebook"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-4 col-md-2 d-none d-md-block">
-                                    <div class="carousel-item-wrapper">
-                                        <img src="./img/inicio.webp" class="d-block w-100" alt="...">
-                                        <div class="overlay">
-                                            <i class="fa-brands fa-facebook"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-4 col-md-2 d-none d-md-block">
-                                    <a href="">
+                                    <a href=" https://www.facebook.com/sinfoniacafeycultura">
                                         <div class="carousel-item-wrapper">
-                                            <img src="./img/inicio.webp" class="d-block w-100" alt="...">
+                                            <img src="./img/cafes/cafe1.webp" class="d-block w-100" alt="...">
+                                            <div class="overlay">
+                                                <i class="fa-brands fa-facebook"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!-- imagen 2 -->
+                                <div class="col-4 col-md-2">
+                                    <a
+                                        href="https://www.facebook.com/photo.php?fbid=1098191388477112&set=pb.100048587835727.-2207520000&type=3">
+                                        <div class="carousel-item-wrapper">
+                                            <img src="./img/cafes/cafe2.webp" class="d-block w-100" alt="...">
                                             <div class="overlay">
                                                 <i class="fa-brands fa-facebook"></i>
                                             </div>
@@ -492,13 +416,139 @@
                                     </a>
 
                                 </div>
-                                <div class="col-4 col-md-2 d-none d-lg-block">
-                                    <div class="carousel-item-wrapper">
-                                        <img src="./img/inicio.webp" class="d-block w-100" alt="...">
-                                        <div class="overlay">
-                                            <i class="fa-brands fa-facebook"></i>
+                                <!-- imagen 3 -->
+                                <div class="col-4 col-md-2">
+                                    <a
+                                        href="https://www.facebook.com/photo.php?fbid=1089403459355905&set=pb.100048587835727.-2207520000&type=3">
+                                        <div class="carousel-item-wrapper">
+                                            <img src="./img/cafes/cafe3.webp" class="d-block w-100" alt="...">
+                                            <div class="overlay">
+                                                <i class="fa-brands fa-facebook"></i>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </a>
+                                </div>
+                                <!-- imagen 4 -->
+                                <div class="col-4 col-md-2 d-none d-md-block">
+                                    <a
+                                        href="https://www.facebook.com/photo.php?fbid=1088035302826054&set=pb.100048587835727.-2207520000&type=3">
+                                        <div class="carousel-item-wrapper">
+                                            <img src="./img/cafes/cafe4.webp" class="d-block w-100" alt="...">
+                                            <div class="overlay">
+                                                <i class="fa-brands fa-facebook"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                </div>
+                                <!-- imagen 5 -->
+                                <div class="col-4 col-md-2 d-none d-md-block">
+                                    <a
+                                        href="https://www.facebook.com/photo.php?fbid=1083951893234395&set=pb.100048587835727.-2207520000&type=3">
+                                        <div class="carousel-item-wrapper">
+                                            <img src="./img/cafes/cafe5.webp" class="d-block w-100" alt="...">
+                                            <div class="overlay">
+                                                <i class="fa-brands fa-facebook"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                </div>
+                                <!-- imagen 6 -->
+                                <div class="col-4 col-md-2 d-none d-md-block">
+                                    <a
+                                        href="https://www.facebook.com/photo.php?fbid=1081126390183612&set=pb.100048587835727.-2207520000&type=3">
+                                        <div class="carousel-item-wrapper">
+                                            <img src="./img/cafes/cafe6.webp" class="d-block w-100" alt="...">
+                                            <div class="overlay">
+                                                <i class="fa-brands fa-facebook"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- segunda seccion-->
+                        <div class="carousel-item">
+                            <div class="row ">
+                                <!-- imagen 7 -->
+                                <div class="col-4 col-md-2">
+                                    <a
+                                        href="https://www.facebook.com/photo.php?fbid=1075046007458317&set=pb.100048587835727.-2207520000&type=3">
+                                        <div class="carousel-item-wrapper">
+                                            <img src="./img/cafes/cafe7.webp" class="d-block w-100" alt="...">
+                                            <div class="overlay">
+                                                <i class="fa-brands fa-facebook"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                </div>
+                                <!-- imagen 8 -->
+                                <div class="col-4 col-md-2">
+                                    <a
+                                        href="https://www.facebook.com/photo.php?fbid=789497972679790&set=pb.100048587835727.-2207520000&type=3">
+                                        <div class="carousel-item-wrapper">
+                                            <img src="./img/cafes/cafe8.webp" class="d-block w-100" alt="...">
+                                            <div class="overlay">
+                                                <i class="fa-brands fa-facebook"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                </div>
+                                <!-- imagen 9 -->
+                                <div class="col-4 col-md-2">
+                                    <a
+                                        href="https://www.facebook.com/photo.php?fbid=1021787422784176&set=pb.100048587835727.-2207520000&type=3">
+                                        <div class="carousel-item-wrapper">
+                                            <img src="./img/cafes/cafe9.webp" class="d-block w-100" alt="...">
+                                            <div class="overlay">
+                                                <i class="fa-brands fa-facebook"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                </div>
+                                <!-- imagen 10 -->
+                                <div class="col-4 col-md-2 d-none d-md-block">
+                                    <a
+                                        href="https://www.facebook.com/photo.php?fbid=1013628096933442&set=pb.100048587835727.-2207520000&type=3">
+                                        <div class="carousel-item-wrapper">
+                                            <img src="./img/cafes/cafe10.webp" class="d-block w-100" alt="...">
+                                            <div class="overlay">
+                                                <i class="fa-brands fa-facebook"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                </div>
+                                <!-- imagen 11 -->
+                                <div class="col-4 col-md-2 d-none d-md-block">
+                                    <a
+                                        href="https://www.facebook.com/photo.php?fbid=999156661713919&set=pb.100048587835727.-2207520000&type=3">
+                                        <div class="carousel-item-wrapper">
+                                            <img src="./img/cafes/cafe11.webp" class="d-block w-100" alt="...">
+                                            <div class="overlay">
+                                                <i class="fa-brands fa-facebook"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                </div>
+                                <!-- imagen 12 -->
+                                <div class="col-4 col-md-2 d-none d-md-block d-lg-block">
+                                    <a
+                                        href="https://www.facebook.com/photo.php?fbid=728966215399633&set=pb.100048587835727.-2207520000&type=3">
+                                        <div class="carousel-item-wrapper">
+                                            <img src="./img/cafes/cafe13.webp" class="d-block w-100" alt="...">
+                                            <div class="overlay">
+                                                <i class="fa-brands fa-facebook"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+
                                 </div>
                             </div>
                         </div>
@@ -515,21 +565,16 @@
                     </button>
                 </div>
 
-
-
             </div>
 
         </div>
-
     </div>
-
 
     <!-- Botón de Carrito -->
     <button id="floatingButton" class="btn btn-cafe position-fixed bottom-0 end-0 m-3 d-flex p-3 z-3 text-light fw-bold"
         type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
         <i class="fa-solid fa-cart-shopping fa-2x"></i>
     </button>
-    <!-- offcanvas Carrito -->
     <div class="offcanvas offcanvas-end text-light" style="background: var(--primario);" tabindex="-1"
         id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
         <div class="mt-3 fw-bold d-flex justify-content-center">
