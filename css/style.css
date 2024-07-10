@@ -55,7 +55,12 @@ a:hover {
     /* Asegura que también al pasar el ratón no se subraye */
 }
 
-
+/* Estilos para las imágenes */
+.coffee-image {
+    height: 400px; /* Altura deseada para todas las imágenes */
+    width: 100%; /* Ancho del contenedor */
+    object-fit: cover; /* Ajuste para cubrir el contenedor manteniendo la relación de aspecto */
+}
 /* Estilos de la barra de navegación */
 .navbar-brand .logo {
     /* Ajusta la altura según sea necesario */
