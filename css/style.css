@@ -343,7 +343,7 @@ a:hover {
     margin-top: 20px;
 }
 
-/* imagenes de blog */
+/* imagenes de conocenos */
 
 .carousel-item img {
     max-height: 200px;
@@ -441,4 +441,39 @@ a:hover {
 }
 .subscription-btn:hover {
     background-color: #b58359; /* Color del botón al pasar el cursor */
+}
+
+/* Apartado de blog */
+.blog-card {
+    background-color: var(--color6);
+    color: rgb(0, 0, 0);
+    border: none;
+    transition: transform 0.3s;
+}
+.blog-card:hover {
+    transform: scale(1.05);
+}
+.blog-card img {
+    height: 300px;
+    object-fit: cover;
+}
+.blog-card .card-body {
+    padding: 1rem;
+}
+.blog-card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+.blog-card-subtitle {
+    color: #d4a373;
+    margin-bottom: 0.5rem;
+}
+.blog-card-text {
+    font-size: 0.875rem;
+    color: #aaa;
+}
+.blog-card-link {
+    color: #d4a373;
+    text-decoration: none;
+    font-weight: bold;
 }
