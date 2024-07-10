@@ -430,10 +430,10 @@
                     $conexion = new database();
                     $conexion->conectarDB();
                     $consulta = "SELECT     
-                                        dpm.id_pm, 
-                                        dpm.img_url, 
-                                        dpm.nombre, 
-                                        dpm.descripcion, 
+                                        pm.id_pm, 
+                                        pm.img_url, 
+                                        pm.nombre, 
+                                        pm.descripcion, 
                                         c.nombre AS categoria_nombre
                                     FROM
                                         productos_menu AS pm

@@ -34,22 +34,12 @@ END $$
 
 DELIMITER ;
 
--- Procedimiento para filtrar los productos del menu
-DELIMITER //
-CREATE PROCEDURE listar_productos_menu(IN categoria INT)
-BEGIN
-	SELECT     
-		pm.id_pm, 
-        pm.img_url, 
-        pm.nombre, 
-        pm.descripcion, 
-        c.nombre AS categoria_nombre
-	FROM
-		productos_menu AS pm
-	JOIN
-		categorias AS c ON pm.id_categoria = c.id_categoria
-	WHERE
-		c.id_Categoria = categoria AND c.tipo = 'Menu';
-END//
-DELIMITER ;
+insert into asistencias (id_cliente)
+value (5);
+
+select * from clientes;
+
+select * from clientes_recompensas where id_cliente = 5;
+
+select * from recompensas;
 

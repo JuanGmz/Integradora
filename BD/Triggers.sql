@@ -64,9 +64,8 @@ BEGIN
 END; //
 DELIMITER ;
 
--- Trigger para encriptar cuando se actualiza  una password.
+-- Trigger para encriptar cuando se actualiza una password.
 DELIMITER //
-
 CREATE TRIGGER before_update_usuarios
 BEFORE UPDATE ON usuarios
 FOR EACH ROW
@@ -75,6 +74,20 @@ BEGIN
         SET NEW.password = MD5(NEW.password);
     END IF;
 END; //
-
 DELIMITER ;
+
+insert into asistencias (id_cliente)
+values (5);
+
+select * from asistencias where id_cliente = 5;
+
+select * from clientes_recompensas cr join recompensas r on r.id_recompensa = cr.id_recompensa  where cr.id_cliente = 5;
+
+INSERT INTO recompensas (recompensa, condicion, fecha_inicio, fecha_expiracion, img_url) VALUES
+('un pastel', 7, '2024-07-10', '2024-12-10', 'img/descuento_cafe.jpg');
+
+select * from recompensas where id_recompensa = last_insert_id();
+
+select * from clientes_recompensas cr
+join recompensas r on r.id_recompensa = cr.id_recompensa where cr.id_cliente = 5 ;
 
