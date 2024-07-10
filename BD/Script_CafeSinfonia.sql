@@ -32,6 +32,27 @@ telefono nchar(10),
 primary key(id_usuario)
 );
 
+-- Trigger para encripar automaticamente.
+DELIMITER //
+CREATE TRIGGER before_insert_usuarios
+BEFORE INSERT ON usuarios
+FOR EACH ROW
+BEGIN
+    SET NEW.contraseña = MD5(NEW.contraseña);
+END; //
+DELIMITER ;
+-- Trigger para encriptar cuando se actualiza  una password.
+DELIMITER //
+CREATE TRIGGER before_update_usuarios
+BEFORE UPDATE ON usuarios
+FOR EACH ROW
+BEGIN
+    IF NEW.contraseña != OLD.contraseña THEN
+        SET NEW.contraseña = MD5(NEW.contraseña);
+    END IF;
+END; //
+DELIMITER ;
+
 create table roles(
 id_rol int auto_increment not null,
 rol nvarchar(150),
@@ -181,10 +202,14 @@ foreign key (id_dbc) references detalle_bc(id_dbc)
 -- Eventos
 
 create table ubicacion_lugares(
-id_lugar int auto_increment not null,
-latitud double not null, 
-longitud double not null,
-primary key(id_lugar)
+id_lugar INT AUTO_INCREMENT PRIMARY KEY,
+nombre NVARCHAR(100) NOT NULL,
+ciudad NVARCHAR(100) NOT NULL,
+estado NVARCHAR(100) NOT NULL,
+codigo_postal NVARCHAR(10),
+calle nvarchar(100), 
+colonia nvarchar(100),
+descripcion NVARCHAR(255)
 );
 
 create table EVENTOS(
@@ -240,6 +265,7 @@ primary key(id_pm),
 foreign key (id_categoria) references CATEGORIAS(id_categoria)
 );
 
+
 create table detalle_productos_menu(
 id_dpm int auto_increment not null,
 id_pm int not null,
@@ -281,6 +307,33 @@ primary key(id_cr),
 FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente),
 FOREIGN KEY (id_recompensa) REFERENCES recompensas(id_recompensa)
 );
+
+-- Procedimientos Almacenados
+
+-- Procedimiento almacenado para insertar productos en el carrito.
+delimiter //
+create procedure SP_Insert_Update_Carrito(
+in p_id_cliente int,
+in p_id_bc int,
+in p_cantidad int
+)
+begin 
+declare existe_bolsa int;
+
+select c.id_bc into existe_bolsa
+from carrito c 
+where c.id_cliente = p_id_cliente  and c.id_bc = p_id_bc;
+
+if existe_bolsa > 0 then 
+	update carrito c set c.cantidad = c.cantidad + p_cantidad, monto_total = (select ((cantidad+p_cantidad)*bc.precio) from bolsas_cafe bc join carrito c on c.id_bc = bc.id_bc  where bc.id_bc = p_id_bc  and c.id_cliente = p_id_cliente)
+	where c.id_cliente = p_id_cliente and c.id_bc = p_id_bc;
+else 
+	insert into carrito(id_cliente, id_bc, cantidad, monto_total)
+	values (p_id_cliente,p_id_bc,p_cantidad, p_cantidad * (select precio from bolsas_cafe bc where bc.id_bc = p_id_bc) );
+end if;
+
+end //
+delimiter ;
 
 INSERT INTO publicaciones (titulo, descripcion, img_url, tipo)
 VALUES
@@ -618,11 +671,11 @@ VALUES
 (13, 'Patricia Rojas', 'Coahuila', 'Torreón', '27170', 'Villa Florida', 'Boulevard de las Rosas #3839', '8712345695'),
 (14, 'Roberto Vazquez', 'Coahuila', 'Torreón', '27180', 'Los Ángeles', 'Calle de los Sauces #4041', '8712345696');
 
-INSERT INTO ubicacion_lugares (latitud, longitud)
-VALUES
-(25.540484705675055, -103.46118767170404),
-(25.53989636512453, -103.46155889684215),
-(25.540186767350228, -103.45238403323752);
+INSERT INTO ubicacion_lugares (nombre, ciudad, estado, descripcion)
+VALUES 
+('Cafetería Sinfonía Café', 'Torreón', 'Coahuila', 'Cafetería acogedora con ambiente musical.'),
+('Teatro Nazas', 'Torreón', 'Coahuila', 'Teatro emblemático de la ciudad, conocido por sus eventos culturales.'),
+('Teatro Isauro Martínez', 'Torreón', 'Coahuila', 'Teatro histórico y culturalmente importante en Torreón.');
 
 INSERT INTO EVENTOS (
     id_lugar, id_categoria, nombre, tipo, descripcion, fecha_evento, 
