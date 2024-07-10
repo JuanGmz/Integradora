@@ -29,6 +29,7 @@
 /* Estilos globales */
 body {
     font-family: 'MiFuentePersonalizada', sans-serif;
+    background: var(--color5);
 
 }
 

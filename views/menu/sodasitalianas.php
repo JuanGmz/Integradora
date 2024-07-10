@@ -81,9 +81,9 @@
 
                 foreach ($sItalianas as $sItaliana) {
                     echo "
-                        <div class='col-6 col-lg-3'>
-                            <div class='card border-0'>
-                                <img src='../../img/cafes/{$sItaliana->img_url}' class='card-img-top rounded-5' alt='bebidas'>
+                        <div class='col-6 col-lg-3 mb-3'>
+                            <div class='card border-0' style='background: var(--color5);'>
+                                <img src='../../img/cafes/{$sItaliana->img_url}' class='card-img-top rounded-5' alt='sodaitaliana" . $sItaliana->id_pm . "'>
                                 <div class='card-body'>
                                     <h5 class='card-title fw-bold text-center'>{$sItaliana->nombre}</h5>
                                 </div>

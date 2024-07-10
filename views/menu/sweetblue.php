@@ -75,15 +75,15 @@
 
                 $query = "CALL listar_productos_menu('Sweet Blues')";
 
-                $sBluees = $db->select($query);
+                $sBlues = $db->select($query);
 
-                foreach ($sBluees as $sBluee) {
+                foreach ($sBlues as $sBlue) {
                     echo "
-                        <div class='col-6 col-lg-3'>
-                            <div class='card border-0'>
-                                <img src='../../img/cafes/{$sBluee->img_url}' class='card-img-top rounded-5' alt='bebidas'>
+                        <div class='col-6 col-lg-3 mb-3'>
+                            <div class='card border-0' style='background: var(--color5);'>
+                                <img src='../../img/cafes/{$sBlue->img_url}' class='card-img-top rounded-5' alt='sweetblue" . $sBlue->id_pm . "'>
                                 <div class='card-body'>
-                                    <h5 class='card-title fw-bold text-center'>{$sBluee->nombre}</h5>
+                                    <h5 class='card-title fw-bold text-center'>{$sBlue->nombre}</h5>
                                 </div>
                             </div>
                         </div>

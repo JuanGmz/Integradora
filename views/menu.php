@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../css/style.css">
 </head>
 
-<body>
+<body style="background: var(--color5);">
     <!-- NavBar -->
     <nav class="navbar navbar-expand-lg shadow-lg mb-lg-5">
         <div class="container-fluid">
@@ -63,9 +63,19 @@
 
         <div class="row mb-3">
             <div class="col-6 col-lg-3">
+                <a href="menu/aroundtheworld.php">
+                    <div class="card border-0" style="background: var(--color5)">
+                        <img src="../img/cafes/bolsa1.webp" class="card-img-top rounded-5" alt="aroundtheworld">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold text-center">Around The World</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-6 col-lg-3">
                 <a href="menu/clasicos.php">
-                    <div class="card border-0">
-                        <img src="../img/cafes/bolsa1.webp" class="card-img-top rounded-5" alt="bebidas">
+                    <div class="card border-0" style="background: var(--color5)">
+                        <img src="../img/cafes/bolsa1.webp" class="card-img-top rounded-5" alt="clasicos">
                         <div class="card-body">
                             <h5 class="card-title fw-bold text-center">Clásicos</h5>
                         </div>
@@ -73,29 +83,19 @@
                 </a>
             </div>
             <div class="col-6 col-lg-3">
-                <a href="menu/jazzband.php">
-                    <div class="card border-0">
-                        <img src="../img/cafes/bolsa1.webp" class="card-img-top rounded-5" alt="bebidas">
+                <a href="menu/coldbrew.php">
+                    <div class="card border-0" style="background: var(--color5)">
+                        <img src="../img/cafes/coldbrew.webp" class="card-img-top rounded-5" alt="coldbrew">
                         <div class="card-body">
-                            <h5 class="card-title fw-bold text-center">Jazz Band</h5>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-6 col-lg-3">
-                <a href="menu/metalcoffee.php">
-                    <div class="card border-0">
-                        <img src="../img/cafes/bolsa1.webp" class="card-img-top rounded-5" alt="bebidas">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold text-center">Metal Coffe</h5>
+                            <h5 class="card-title fw-bold text-center">Cold Brew</h5>
                         </div>
                     </div>
                 </a>
             </div>
             <div class="col-6 col-lg-3">
                 <a href="menu/coolanddark.php">
-                    <div class="card border-0">
-                        <img src="../img/cafes/bolsa1.webp" class="card-img-top rounded-5" alt="bebidas">
+                    <div class="card border-0" style="background: var(--color5)">
+                        <img src="../img/cafes/bolsa1.webp" class="card-img-top rounded-5" alt="coolanddark">
                         <div class="card-body">
                             <h5 class="card-title fw-bold text-center">Cool And Dark</h5>
                         </div>
@@ -105,51 +105,52 @@
         </div>
         <div class="row mb-3">
             <div class="col-6 col-lg-3">
-                <a href="menu/coldbrew.php">
-                    <div class="card border-0">
-                        <img src="../img/cafes/bolsa1.webp" class="card-img-top rounded-5" alt="bebidas">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold text-center">Cold Brew</h5>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-6 col-lg-3">
-                <a href="menu/aroundtheworld.php">
-                    <div class="card border-0">
-                        <img src="../img/cafes/bolsa1.webp" class="card-img-top rounded-5" alt="bebidas">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold text-center">Around The World</h5>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-6 col-lg-3">
-                <a href="menu/sodasitalianas.php">
-                    <div class="card border-0">
-                        <img src="../img/cafes/bolsa1.webp" class="card-img-top rounded-5" alt="bebidas">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold text-center">Sodas Italianas</h5>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-6 col-lg-3">
                 <a href="menu/frappes.php">
-                    <div class="card border-0">
-                        <img src="../img/cafes/bolsa1.webp" class="card-img-top rounded-5" alt="bebidas">
+                    <div class="card border-0" style="background: var(--color5);">
+                        <img src="../img/cafes/frappes.webp" class="card-img-top rounded-5" alt="frappes">
                         <div class="card-body">
                             <h5 class="card-title fw-bold text-center">Frappes</h5>
                         </div>
                     </div>
                 </a>
             </div>
+            <div class="col-6 col-lg-3">
+                <a href="menu/jazzband.php">
+                    <div class="card border-0" style="background: var(--color5)">
+                        <img src="../img/cafes/bolsa1.webp" class="card-img-top rounded-5" alt="jazzband">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold text-center">Jazz Band</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-6 col-lg-3">
+                <a href="menu/metalcoffee.php">
+                    <div class="card border-0" style="background: var(--color5)">
+                        <img src="../img/cafes/bolsa1.webp" class="card-img-top rounded-5" alt="metalcoffee">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold text-center">Metal Coffe</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-6 col-lg-3">
+                <a href="menu/sodasitalianas.php">
+                    <div class="card border-0" style="background: var(--color5)">
+                        <img src="../img/cafes/bolsa1.webp" class="card-img-top rounded-5" alt="sodasitalianas">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold text-center">Sodas Italianas</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
         </div>
         <div class="row mb-3">
             <div class="col-6 col-lg-3">
                 <a href="menu/tetisanas.php">
-                    <div class="card border-0">
-                        <img src="../img/cafes/bolsa1.webp" class="card-img-top rounded-5" alt="bebidas">
+                    <div class="card border-0" style="background: var(--color5)">
+                        <img src="../img/cafes/bolsa1.webp" class="card-img-top rounded-5" alt="teytisanas">
                         <div class="card-body">
                             <h5 class="card-title fw-bold text-center">Té y Tisanas</h5>
                         </div>
@@ -165,8 +166,8 @@
         <div class="row mb-3">
             <div class="col-6 col-lg-3">
                 <a href="menu/sweetblue.php">
-                    <div class="card border-0">
-                        <img src="../img/cafes/bolsa1.webp" class="card-img-top rounded-5" alt="bebidas">
+                    <div class="card border-0" style="background: var(--color5)">
+                        <img src="../img/cafes/bolsa1.webp" class="card-img-top rounded-5" alt="sweetblue">
                         <div class="card-body">
                             <h5 class="card-title fw-bold text-center">Sweet Blue</h5>
                         </div>
