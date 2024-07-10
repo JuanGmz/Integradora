@@ -148,7 +148,7 @@
 
 
     <!-- Footer -->
-    <footer>
+    <footer class="footer">
         <div class="container-fluid p-5 " style="background: var(--negroclaro);">
             <h2 class="text-center text-light mb-5">SinfoníaCafé&Cultura</h2>
             <hr class="text-light">
