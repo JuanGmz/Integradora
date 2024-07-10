@@ -265,7 +265,6 @@ primary key(id_pm),
 foreign key (id_categoria) references CATEGORIAS(id_categoria)
 );
 
-
 create table detalle_productos_menu(
 id_dpm int auto_increment not null,
 id_pm int not null,
@@ -291,24 +290,108 @@ recompensa nvarchar(150) not null,
 condicion int not null,
 fecha_inicio date not null, 
 fecha_expiracion date not null,
-estatus enum('Activa','Inactiva') default 'Activa',
+estatus enum('Activa','Inactiva'),
 img_url nvarchar(100)null,
 primary key (id_recompensa)
 );
+
+-- Define el campo de estatus al momento de ingresar una nueva recompensa.
+DELIMITER //
+CREATE TRIGGER before_insert_actualizar_estatus_recompensa
+BEFORE INSERT ON recompensas
+FOR EACH ROW
+BEGIN
+    IF curdate() >= new.fecha_inicio and curdate() < new.fecha_expiracion  THEN
+         SET NEW.estatus = 'Activa';
+    ELSE
+        SET NEW.estatus = 'Inactiva';
+    END IF;
+END//
+DELIMITER ;
+
+-- Trigger para marcar una asistencia a la recompensa correspondiente cada ves que se inserte una nueva 
+-- asistencia.
+DELIMITER //
+CREATE TRIGGER actualizar_progreso_asistencias
+AFTER INSERT ON asistencias
+FOR EACH ROW
+BEGIN
+    UPDATE clientes_recompensas cr
+    JOIN recompensas r ON cr.id_recompensa = r.id_recompensa
+    SET cr.progreso = cr.progreso + 1
+    WHERE cr.id_cliente = NEW.id_cliente
+    AND NEW.fecha_hora_asistencia BETWEEN r.fecha_inicio AND r.fecha_expiracion;
+END //
+DELIMITER ;
+
+-- Habilitar el "Event Scheduler" a nivel global en el servidor. 
+SET GLOBAL event_scheduler = ON;
+
+-- Evento para cambiar el estatus de la recompensa a activa cuando la fecha actual este dentro
+--  del rango de la recompensa.
+delimiter //
+create event actualizar_estatus_recompensas_Activa
+on schedule every 1 day
+starts TIMESTAMP(CURDATE() + INTERVAL 1 DAY, '00:00:00')
+do 
+begin 
+update recompensas
+set estatus = 'Activa'
+where curdate() between fecha_inicio and fecha_expiracion and  estatus = 'Inactiva';
+end //
+delimiter ;
+
+-- Evento para cambiar los estatus de las recompensas a inactiva cuando expiren.
+delimiter //
+create event actualizar_estatus_recompensas
+on schedule every 1 day
+starts TIMESTAMP(CURDATE() + INTERVAL 1 DAY, '00:00:00')
+do 
+begin 
+    UPDATE recompensas
+    SET estatus = 'Inactiva'
+    WHERE fecha_expiracion < CURDATE() AND estatus = 'Activa';
+end //
+delimiter ;
 
 create table clientes_recompensas(
 id_cr int auto_increment not null,
 id_cliente int not null,
 id_recompensa int not null,
 canje boolean default false not null,
-estatus enum('Activa','Inactiva') default 'Activa',
 progreso int default 0,
 primary key(id_cr),
 FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente),
 FOREIGN KEY (id_recompensa) REFERENCES recompensas(id_recompensa)
 );
 
--- Procedimientos Almacenados
+-- Procedimiento almacenado para canjear recompensa.
+DELIMITER //
+CREATE PROCEDURE SP_canjear_recompensa(
+in p_id_cr int
+)
+BEGIN
+    DECLARE v_canje_existente BOOLEAN;
+    
+    -- Verificar si el canje ya existe para evitar canjes duplicados
+    SELECT COUNT(*) INTO v_canje_existente
+    FROM clientes_recompensas
+    WHERE id_cr = p_id_cr AND canje = true;
+
+    IF v_canje_existente THEN
+        -- Informar que la recompensa ya ha sido canjeada
+        SELECT 'La recompensa ya ha sido canjeada previamente.' AS mensaje;
+    ELSE
+        -- Marcar la recompensa como canjeada
+        UPDATE clientes_recompensas
+        SET canje = true
+        WHERE id_cr = p_id_cr;
+        -- Mensaje de éxito
+        SELECT 'Recompensa canjeada correctamente.' AS mensaje;
+    END IF;
+    
+END //
+DELIMITER ;
 
 -- Procedimiento almacenado para insertar productos en el carrito.
 delimiter //
@@ -731,12 +814,12 @@ VALUES
 (3,  '1 Kg', 320, 10);
 
 -- Inserción de recompensas
-INSERT INTO recompensas (recompensa, condicion, fecha_inicio, fecha_expiracion, estatus, img_url) VALUES
-('10% de descuento en café', 5, '2024-07-10', '2024-08-10', 'Activa', 'img/descuento_cafe.jpg'),
-('Bebida gratis al comprar un pastel', 10, '2024-07-10', '2024-08-10', 'Activa', 'img/bebida_gratis.jpg'),
-('Taza conmemorativa gratis', 15, '2024-07-10', '2024-08-10', 'Activa', 'img/taza_conmemorativa.jpg'),
-('Acceso a evento exclusivo', 20, '2024-07-10', '2024-08-10', 'Activa', 'img/evento_exclusivo.jpg'),
-('Descuento del 20% en tu próxima compra', 25, '2024-07-10', '2024-08-10', 'Activa', 'img/descuento_proxima.jpg');
+INSERT INTO recompensas (recompensa, condicion, fecha_inicio, fecha_expiracion, img_url) VALUES
+('10% de descuento en café', 5, '2024-07-9', '2024-07-10', 'img/descuento_cafe.jpg'),
+('Bebida gratis al comprar un pastel', 10, '2024-07-9', '2024-07-11', 'img/bebida_gratis.jpg'),
+('Taza conmemorativa gratis', 15, '2024-07-9', '2024-07-12', 'img/taza_conmemorativa.jpg'),
+('Acceso a evento exclusivo', 20, '2024-07-10', '2024-07-10', 'img/evento_exclusivo.jpg'),
+('Descuento del 20% en tu próxima compra', 25, '2024-07-10', '2024-07-11', 'img/descuento_proxima.jpg');
 
 -- Insertar asociaciones entre todos los clientes y las recompensas activas
 INSERT INTO clientes_recompensas (id_cliente, id_recompensa)
@@ -745,7 +828,6 @@ FROM clientes c
 CROSS JOIN recompensas r
 WHERE r.estatus = 'Activa';
 
-select * from clientes_recompensas;
 -- Indices en claves foraneas
 -- Indices en las claves foraneas para la aceleracion de la gestion de tablas ligadas con JOIN.
 -- Tabla roles_usuarios

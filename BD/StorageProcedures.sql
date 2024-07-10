@@ -55,5 +55,12 @@ END $$
 
 DELIMITER ;
 
+insert into asistencias (id_cliente)
+value (5);
 
+select * from clientes;
+
+select * from clientes_recompensas where id_cliente = 5;
+
+select * from recompensas;
 
