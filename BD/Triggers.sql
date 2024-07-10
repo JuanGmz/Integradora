@@ -89,29 +89,5 @@ INSERT INTO recompensas (recompensa, condicion, fecha_inicio, fecha_expiracion, 
 select * from recompensas where id_recompensa = last_insert_id();
 
 select * from clientes_recompensas cr
- where cr.id_cliente = 5 and cr.estatus = 'Activa';
-
--- Este sirve
-drop trigger actualizar_progreso_asistencias;
-
--- Trigger para marcar una asistencia a la recompensa correspondiente cada ves que se inserte una nueva 
--- asistencia.
-DELIMITER //
-CREATE TRIGGER actualizar_progreso_asistencias
-AFTER INSERT ON asistencias
-FOR EACH ROW
-BEGIN
-    
- UPDATE clientes_recompensas cr
- JOIN recompensas r ON cr.id_recompensa = r.id_recompensa
- SET cr.progreso = cr.progreso + 1
- WHERE cr.id_cliente = NEW.id_cliente
- AND fecha_hora_aistencia between r.fecha_inicio and r.fecha_expiracion;
-      
-END //
-delimiter ;
-
-select * from asistencias;
-
-
+join recompensas r on r.id_recompensa = cr.id_recompensa where cr.id_cliente = 5 ;
 

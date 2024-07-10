@@ -324,6 +324,54 @@ BEGIN
 END //
 DELIMITER ;
 
+-- Asignar recompensas activas a un nuevo cliente.
+delimiter //
+create trigger after_insert_cliente 
+after insert on clientes 
+for each row 
+begin
+ -- Insertar recompensas activas para el nuevo cliente
+    INSERT INTO clientes_recompensas (id_cliente, id_recompensa)
+    SELECT new.id_cliente, r.id_recompensa
+    FROM recompensas r
+    WHERE r.estatus = 'Activa';
+end // 
+delimiter ;
+
+-- Trigger para asignar recompensas a los clientes al agregar recompensas.
+delimiter //
+create trigger after_insert_recompensa
+after insert on recompensas
+for each row
+begin
+    -- Verificar si la recompensa insertada tiene estatus 'Activa'
+    if new.estatus = 'Activa' then
+        -- Insertar la nueva recompensa activa para todos los clientes
+        insert into clientes_recompensas (id_cliente, id_recompensa)
+        select c.id_cliente, new.id_recompensa
+        from clientes c;
+    end if;
+end //
+delimiter ;
+
+-- Crear el trigger después de actualizar el estatus de una recompensa asignar recompensa a clientes.
+delimiter //
+create trigger after_update_recompensa
+after update on recompensas
+for each row
+begin
+    -- Verificar si el estatus de la recompensa cambió a 'Activa'
+    if new.estatus = 'Activa' and old.estatus != 'Activa' then
+        -- Insertar la recompensa activa para todos los clientes
+        insert into clientes_recompensas (id_cliente, id_recompensa)
+        select c.id_cliente, new.id_recompensa
+        from clientes c;
+    end if;
+end //
+delimiter ;
+
+
+
 -- Habilitar el "Event Scheduler" a nivel global en el servidor. 
 SET GLOBAL event_scheduler = ON;
 
@@ -822,11 +870,7 @@ INSERT INTO recompensas (recompensa, condicion, fecha_inicio, fecha_expiracion, 
 ('Descuento del 20% en tu próxima compra', 25, '2024-07-10', '2024-07-11', 'img/descuento_proxima.jpg');
 
 -- Insertar asociaciones entre todos los clientes y las recompensas activas
-INSERT INTO clientes_recompensas (id_cliente, id_recompensa)
-SELECT c.id_cliente, r.id_recompensa
-FROM clientes c
-CROSS JOIN recompensas r
-WHERE r.estatus = 'Activa';
+
 
 -- Indices en claves foraneas
 -- Indices en las claves foraneas para la aceleracion de la gestion de tablas ligadas con JOIN.
