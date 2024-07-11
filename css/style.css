@@ -255,12 +255,8 @@ a:hover {
 .container-features {
     display: flex;
     justify-content: center;
-    gap: 20px;
     /* Espacio entre las tarjetas */
-    padding: 20px 0;
     text-align: center;
-    padding: 20px;
-    margin: 10px;
 }
 
 .card-feature {
