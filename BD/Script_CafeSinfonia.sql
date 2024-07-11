@@ -131,7 +131,7 @@ id_pedido int auto_increment not null,
 id_cliente int not null,
 id_domicilio int not null,
 metodo_de_pago enum('Transferencia') default 'Transferencia',
-estatus enum('Pendiente','En proceso','Finalizado','Cancelado') default 'Pendiente' not null,
+estatus enum('Pendiente','Finalizado','Cancelado') default 'Pendiente' not null,
 fecha_hora_pedido datetime default current_timestamp,
 envio nvarchar(150),
 monto_total double,
@@ -320,7 +320,8 @@ BEGIN
     JOIN recompensas r ON cr.id_recompensa = r.id_recompensa
     SET cr.progreso = cr.progreso + 1
     WHERE cr.id_cliente = NEW.id_cliente
-    AND NEW.fecha_hora_asistencia BETWEEN r.fecha_inicio AND r.fecha_expiracion;
+    AND NEW.fecha_hora_asistencia >= fecha_inicio and NEW.fecha_hora_asistencia < r.fecha_expiracion
+    and cr.progreso < r.condicion;
 END //
 DELIMITER ;
 
@@ -370,8 +371,6 @@ begin
 end //
 delimiter ;
 
-
-
 -- Habilitar el "Event Scheduler" a nivel global en el servidor. 
 SET GLOBAL event_scheduler = ON;
 
@@ -385,9 +384,40 @@ do
 begin 
 update recompensas
 set estatus = 'Activa'
-where curdate() between fecha_inicio and fecha_expiracion and  estatus = 'Inactiva';
+where curdate() >= fecha_inicio and curdate() < fecha_expiracion and  estatus = 'Inactiva';
 end //
 delimiter ;
+
+DELIMITER //
+
+CREATE PROCEDURE SP_actualizar_periodo_recompensa(
+    IN p_id_recompensa INT,
+    IN p_fecha_inicio DATE,
+    IN p_fecha_expiracion DATE
+)
+BEGIN
+    -- Actualizar las fechas de inicio y expiración
+    if p_fecha_inicio > p_fecha_expiracion then
+		select 'Periodo incorrecto.' as mensaje;
+    else
+    UPDATE recompensas
+    SET fecha_inicio = p_fecha_inicio,
+        fecha_expiracion = p_fecha_expiracion
+    WHERE id_recompensa = p_id_recompensa;
+     -- Actualizar el estatus si la fecha actual esta dentro del periodo de la recompensa.
+		IF CURDATE() >= p_fecha_inicio and curdate() < p_fecha_expiracion THEN
+			UPDATE recompensas
+			SET estatus = 'Activa'
+			WHERE id_recompensa = p_id_recompensa;
+		ELSE 
+			UPDATE recompensas
+			SET estatus = 'Inactiva'
+			WHERE id_recompensa = p_id_recompensa;
+		END IF;
+	end if;
+    
+END //
+DELIMITER ;
 
 -- Evento para cambiar los estatus de las recompensas a inactiva cuando expiren.
 delimiter //
@@ -419,24 +449,41 @@ CREATE PROCEDURE SP_canjear_recompensa(
 in p_id_cr int
 )
 BEGIN
-    DECLARE v_canje_existente BOOLEAN;
+    DECLARE v_canje_existente BOOLEAN default false;
+    DECLARE v_progreso int default 0;
+    DECLARE v_condicion int default 0;
     
     -- Verificar si el canje ya existe para evitar canjes duplicados
-    SELECT COUNT(*) INTO v_canje_existente
-    FROM clientes_recompensas
-    WHERE id_cr = p_id_cr AND canje = true;
-
+    SELECT cr.canje 
+    INTO v_canje_existente
+    FROM clientes_recompensas cr
+    join recompensas r on r.id_recompensa = cr.id_recompensa
+    WHERE cr.id_cr = p_id_cr AND canje = true;
+    
     IF v_canje_existente THEN
-        -- Informar que la recompensa ya ha sido canjeada
+        -- Informar que la recompensa ya ha sido canjeada.
         SELECT 'La recompensa ya ha sido canjeada previamente.' AS mensaje;
-    ELSE
+    ELSE 
+		-- Obtener el progreso y condicion de la recompensa.
+		SELECT r.condicion, cr.progreso 
+        INTO v_condicion, v_progreso
+		FROM clientes_recompensas cr
+		join recompensas r on r.id_recompensa = cr.id_recompensa
+		WHERE cr.id_cr = p_id_cr;
+        
+        if  v_progreso < v_condicion then
+        -- Informar que la no se cumple la condicion de la recompensa.
+		SELECT 'No cumple con la condicion de la recompensa.' as mensaje;
+        
+		ELSE
         -- Marcar la recompensa como canjeada
         UPDATE clientes_recompensas
         SET canje = true
         WHERE id_cr = p_id_cr;
         -- Mensaje de éxito
         SELECT 'Recompensa canjeada correctamente.' AS mensaje;
-    END IF;
+		END IF;
+	END IF;
     
 END //
 DELIMITER ;
@@ -465,6 +512,20 @@ end if;
 
 end //
 delimiter ;
+
+-- Vistas 
+
+-- Vista para recompensas que se mostraran en el apartado correspondiente(recompensas) segun el cliente que este iniciado sesion.
+create view view_clientes_recompensas as 
+select cr.id_cr as canje_id,
+id_cliente,
+ r.recompensa,
+ concat(cr.progreso,' | ', r.condicion) as asistencias_completadas,
+ cr.canje,
+CONCAT(DATE_FORMAT(r.fecha_inicio, '%d/%m/%Y'), ' - ', DATE_FORMAT(r.fecha_expiracion, '%d/%m/%Y')) AS periodo
+from clientes_recompensas cr
+join recompensas r on r.id_recompensa = cr.id_recompensa 
+where r.estatus = 'Activa';
 
 INSERT INTO publicaciones (titulo, descripcion, img_url, tipo)
 VALUES
