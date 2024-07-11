@@ -76,18 +76,22 @@ BEGIN
 END; //
 DELIMITER ;
 
+select * from asistencias where id_cliente = 5;
+
+INSERT INTO recompensas (recompensa, condicion, fecha_inicio, fecha_expiracion, img_url) VALUES
+('un pastel', 7, '2024-07-11', '2024-12-12', 'img/descuento_cafe.jpg');
+
+describe pedidos;
+
+call SP_canjear_recompensa(5);
+
+select * from recompensas;
+
 insert into asistencias (id_cliente)
 values (5);
 
-select * from asistencias where id_cliente = 5;
+call SP_actualizar_periodo_recompensa(6,'2024-02-10','2024-1-12');
 
-select * from clientes_recompensas cr join recompensas r on r.id_recompensa = cr.id_recompensa  where cr.id_cliente = 5;
-
-INSERT INTO recompensas (recompensa, condicion, fecha_inicio, fecha_expiracion, img_url) VALUES
-('un pastel', 7, '2024-07-10', '2024-12-10', 'img/descuento_cafe.jpg');
-
-select * from recompensas where id_recompensa = last_insert_id();
-
-select * from clientes_recompensas cr
-join recompensas r on r.id_recompensa = cr.id_recompensa where cr.id_cliente = 5 ;
-
+select recompensa, asistencias_completadas,canje, periodo 
+from view_clientes_recompensas 
+where id_cliente = 5;

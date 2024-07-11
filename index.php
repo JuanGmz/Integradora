@@ -427,54 +427,54 @@
                     <h1 class="fw-bold text-center" style="letter-spacing: 1px;">Blog</h1>
                 </div>
 
-                <div class="row g-4">
-                    <!-- Blog Card 1 -->
-                    <div class="col-md-4">
-                        <div class="card blog-card">
-                            <img src="./img/cafes/lugar1.webp" class="card-img-top" alt="Image 1">
-                            <div class="card-body">
-                                <h5 class="blog-card-title">MAKE IT SIMPLE</h5>
-                                <h6 class="blog-card-subtitle mb-2 text-muted">by Jane Doe / Competition / 23.02.2016
-                                </h6>
-                                <p class="blog-card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    Aenean feugiat dictum lacus, ut hendrerit mi pulvinar vel. Fusce id nibh at neque
-                                    eleifend tristique...</p>
-                                <a href="#" class="blog-card-link">READ MORE →</a>
-                            </div>
+                <div class="row g-4 ">
+                <!-- Blog Card 1 -->
+                <div class="col-md-4 col-12 col-sm-6">
+                    <div class="card blog-card">
+                        <img src="./img/cafes/lugar1.webp" class="card-img-top" alt="Image 1">
+                        <div class="card-body">
+                            <h5 class="blog-card-title">MAKE IT SIMPLE</h5>
+                            <h6 class="blog-card-subtitle mb-2 text-muted">by Jane Doe / Competition / 23.02.2016
+                            </h6>
+                            <p class="blog-card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                Aenean feugiat dictum lacus, ut hendrerit mi pulvinar vel. Fusce id nibh at neque
+                                eleifend tristique...</p>
+                                <a href="#" class="blog-card-link">READ MORE <i class="fa-solid fa-arrow-right"></i></a>
                         </div>
                     </div>
-                    <!-- Blog Card 2 -->
-                    <div class="col-md-4">
-                        <div class="card blog-card">
-                            <img src="./img/cafes/cafe8.webp" class="card-img-top" alt="Image 2">
-                            <div class="card-body">
-                                <h5 class="blog-card-title">COFFEE SHOP</h5>
-                                <h6 class="blog-card-subtitle mb-2 text-muted">by Jane Doe / Competition / 23.01.2017
-                                </h6>
-                                <p class="blog-card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    Aenean feugiat dictum lacus, ut hendrerit mi pulvinar vel. Fusce id nibh at neque
-                                    eleifend tristique...</p>
-                                <a href="#" class="blog-card-link">READ MORE →</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Blog Card 3 -->
-                    <div class="col-md-4">
-                        <div class="card blog-card">
-                            <img src="./img/cafes/cafe4.webp" class="card-img-top" alt="Image 3">
-                            <div class="card-body">
-                                <h5 class="blog-card-title">COFFEE BAR</h5>
-                                <h6 class="blog-card-subtitle mb-2 text-muted">by Jane Doe / Competition / 23.01.2017
-                                </h6>
-                                <p class="blog-card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    Aenean feugiat dictum lacus, ut hendrerit mi pulvinar vel. Fusce id nibh at neque
-                                    eleifend tristique...</p>
-                                <a href="#" class="blog-card-link">READ MORE →</a>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
+                <!-- Blog Card 2 -->
+                <div class="col-md-4 col-12 col-sm-6">
+                    <div class="card blog-card">
+                        <img src="./img/cafes/cafe8.webp" class="card-img-top" alt="Image 2">
+                        <div class="card-body">
+                            <h5 class="blog-card-title">COFFEE SHOP</h5>
+                            <h6 class="blog-card-subtitle mb-2 text-muted">by Jane Doe / Competition / 23.01.2017
+                            </h6>
+                            <p class="blog-card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                Aenean feugiat dictum lacus, ut hendrerit mi pulvinar vel. Fusce id nibh at neque
+                                eleifend tristique...</p>
+                                <a href="#" class="blog-card-link">READ MORE <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Blog Card 3 -->
+                <div class="col-md-4 col-12 col-sm-6">
+                    <div class="card blog-card">
+                        <img src="./img/cafes/cafe4.webp" class="card-img-top" alt="Image 3">
+                        <div class="card-body">
+                            <h5 class="blog-card-title">COFFEE BAR</h5>
+                            <h6 class="blog-card-subtitle mb-2 text-muted">by Jane Doe / Competition / 23.01.2017
+                            </h6>
+                            <p class="blog-card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                Aenean feugiat dictum lacus, ut hendrerit mi pulvinar vel. Fusce id nibh at neque
+                                eleifend tristique...</p>
+                                <a href="#" class="blog-card-link">READ MORE <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
             </div>
 
 
