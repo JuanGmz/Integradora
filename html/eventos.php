@@ -79,8 +79,8 @@
                         $tru = "true";
                         $active = "active";
                         foreach ($categorias as $categoria) {
-                            echo "<li class='nav-item mx-3 nav-item col-5 col-sm-5 col-md-4 col-lg-auto mb-2 mb-lg-0 ' role='presentation'>";
-                            echo "<a data-mdb-tab-init class='btn-categorias  $active' id='ex1-tabs-{$categoria->id_categoria}' href='#ex1-tabs-{$categoria->id_categoria}' role='tab' aria-controls='ex1-tabs-{$categoria->id_categoria}' aria-selected='$tru'>{$categoria->nombre}</a>";
+                            echo "<li class='mx-3 nav-item col-5 col-sm-5 col-md-4 col-lg-auto mb-2 mb-lg-0  ' role='presentation'>";
+                            echo "<a data-mdb-tab-init class='btn-toolbar btn-cafe w-100 text-center justify-content-center' id='ex1-tabs-{$categoria->id_categoria}' href='#ex1-tabs-{$categoria->id_categoria}' role='tab' aria-controls='ex1-tabs-{$categoria->id_categoria}' aria-selected='$tru'>{$categoria->nombre}</a>";
                             echo "</li>";
                             $tru = "false";
                             $active = "";
