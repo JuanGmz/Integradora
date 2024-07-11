@@ -154,11 +154,27 @@
                         </li>
                         <li class="nav-item  mb-2 col-6 col-sm-6 col-md-4 col-lg-3  " role="presentation">
                             <!--Around The World-->
+<<<<<<< HEAD
                             <button class=" btn-categorias  w-100" id="Around-tab" data-bs-toggle="tab" data-bs-target="#Around" type="button" role="tab" aria-controls="Around" aria-selected="false">Around The World</button>
+=======
+                            <button class=" btn-categorias  w-100" id="Around-tab" data-bs-toggle="tab"
+                                data-bs-target="#Around" type="button" role="tab" aria-controls="Around"
+                                aria-selected="false">
+                                Around The World
+                            </button>
+>>>>>>> 01eaf5de0f11099f966cbbf8316e0c64312aa1ce
                         </li>
                         <li class="nav-item  mb-2 col-6 col-sm-6 col-md-4 col-lg-3  " role="presentation">
                             <!--Frappes-->
+<<<<<<< HEAD
                             <button class=" btn-categorias   w-100" id="Frappes-tab" data-bs-toggle="tab" data-bs-target="#Frappes" type="button" role="tab" aria-controls="Frappes" aria-selected="false">Frappes</button>
+=======
+                            <button class=" btn-categorias   w-100" id="Frappes-tab" data-bs-toggle="tab"
+                                data-bs-target="#Frappes" type="button" role="tab" aria-controls="Frappes"
+                                aria-selected="false">
+                                Frappes
+                            </button>
+>>>>>>> 01eaf5de0f11099f966cbbf8316e0c64312aa1ce
                         </li>
                         
                     </ul>
@@ -179,7 +195,15 @@
                                             cada taza es una experiencia única y reconfortante. Desde el espresso
                                             intenso hasta el cappuccino cremoso, cada bebida se prepara con gran
                                             atención al detalle para ofrecerte el mejor sabor y aroma.</p>
+<<<<<<< HEAD
                                         <a href="html/menu.html" class="btn text-light shadow-lg align-self-start col-12 col-sm-12 col-md-6 col-lg-6" style="background: var(--primario);">Ver Menú</a>
+=======
+                                        <a href="html/menu.html"
+                                            class="btn text-light shadow-lg align-self-start col-12 col-sm-12 col-md-6 col-lg-6"
+                                            style="background: var(--primario);">
+                                            Ver Menú
+                                        </a>
+>>>>>>> 01eaf5de0f11099f966cbbf8316e0c64312aa1ce
                                     </div>
                                 </div>
                             </div>

@@ -376,7 +376,8 @@
                                 data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
                                 Agregar Producto
                             </button>
-                            <a href="../index.php" class="text-decoration-none"><i class="fa-solid fa-house fa-2x"></i></a>
+                            <a href="../index.php" class="text-decoration-none"><i
+                                    class="fa-solid fa-house fa-2x"></i></a>
                         </div>
                     </div>
                 </div>
@@ -390,14 +391,15 @@
                                             <option selected disabled value="">Seleccionar Categoria</option>
                                             <!-- Aqui va el select de categorías -->
                                             <?php
-                                                include_once('../class/database.php');
+                                                include_once ('../class/database.php');
                                                 $db = new Database();
                                                 $db->conectarDB();
 
-                                                $query= "SELECT id_categoria, nombre FROM categorias WHERE tipo = 'Menu'";
+                                                $query = "SELECT id_categoria, nombre FROM categorias WHERE tipo = 'Menu'";
                                                 $categorias = $db->select($query);
-                                                foreach($categorias as $categoria){
-                                                    echo "<option value='{$categoria->id_categoria}'>{$categoria->nombre}</option>";
+                                                foreach ($categorias as $categoria) {
+                                                    $selected = (isset($_POST['categoria']) && $_POST['categoria'] == $categoria->id_categoria) ? 'selected' : '';
+                                                    echo "<option value='".htmlspecialchars($categoria->id_categoria)."' $selected>".htmlspecialchars($categoria->nombre)."</option>";
                                                 }
                                             ?>
                                         </select>
@@ -409,6 +411,58 @@
                             </form>
                         </div>
                     </div>
+                </div>
+                <div class="row mt-3 p-4 m-0">
+                    <?php
+                    if (isset($_POST["categoria"])) {
+                        include_once ('../class/database.php');
+                        $db = new Database();
+                        $db->conectarDB();
+                        extract($_POST);
+                            echo "<table class='table table-striped table-hover table-dark text-center'>
+                                    <thead>
+                                        <tr>
+                                            <th scope='col'>Nombre</th>
+                                            <th scope='col'>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                <tbody class='table-group-divider table-light'>";
+                            $query = "SELECT * FROM productos_menu WHERE id_categoria = $categoria";
+                            $productos = $db->select($query);
+                            foreach ($productos as $producto) {
+                                echo "
+                                    <tr>
+                                    <td>$producto->nombre</td>
+                                        <td class='d-flex flex-row align-items-center justify-content-center gap-1'>
+                                            <!-- Imagen -->
+                                            <!-- Botón que activa el modal de ver la imagen  -->
+                                            <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#modalImagen_$producto->id_pm'>
+                                                <i class='fa-solid fa-image'></i>
+                                            </button>
+                                            <!-- Modal de ver imagen -->
+                                            <div class='modal fade' id='modalImagen_$producto->id_pm' tabindex='-1' aria-labelledby='modalImagenLabel' aria-hidden='true'>
+                                                <div class='modal-dialog modal-dialog-centered modal-dialog-scrollable'>
+                                                    <div class='modal-content'>
+                                                        <div class='modal-header'>
+                                                            <h5 class='modal-title' id='modalImagenLabel'>$producto->nombre</h5>
+                                                            <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                                        </div>
+                                                        <div class='modal-body'>
+                                                            <img src='$producto->img_url' class='img-fluid' alt='img'>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>";
+                            }
+                            echo "</tbody></table>";
+                        }
+                        else {
+                            echo "<div class='alert alert-warning' role='alert'>Selecciona una categoria</div>";
+                        }
+                    ?>
+
                 </div>
             </div>
         </div>
