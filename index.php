@@ -165,13 +165,17 @@
                             <!--Around The World-->
                             <button class=" btn-categorias  w-100" id="Around-tab" data-bs-toggle="tab"
                                 data-bs-target="#Around" type="button" role="tab" aria-controls="Around"
-                                aria-selected="false">Around The World</button>
+                                aria-selected="false">
+                                Around The World
+                            </button>
                         </li>
                         <li class="mx-3 nav-item col-5 col-sm-5 col-md-4 col-lg-auto mb-2 mb-lg-0" role="presentation">
                             <!--Frappes-->
                             <button class=" btn-categorias   w-100" id="Frappes-tab" data-bs-toggle="tab"
                                 data-bs-target="#Frappes" type="button" role="tab" aria-controls="Frappes"
-                                aria-selected="false">Frappes</button>
+                                aria-selected="false">
+                                Frappes
+                            </button>
                         </li>
                     </ul>
                 </div>
@@ -195,7 +199,9 @@
                                             atención al detalle para ofrecerte el mejor sabor y aroma.</p>
                                         <a href="html/menu.html"
                                             class="btn text-light shadow-lg align-self-start col-12 col-sm-12 col-md-6 col-lg-6"
-                                            style="background: var(--primario);">Ver Menú</a>
+                                            style="background: var(--primario);">
+                                            Ver Menú
+                                        </a>
                                     </div>
                                 </div>
                             </div>
