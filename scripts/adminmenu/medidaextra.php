@@ -5,7 +5,7 @@ $conexion->conectarDB();
 
 extract($_POST);
 
-$query3 = "INSERT INTO productos_menu(id_dpm, medida, precio) VALUES ($id_dpm, '$medidaExtra', '$precioExtra')";
+$query3 = "INSERT INTO detalle_productos_menu(id_pm, medida, precio) VALUES ($id_pm, '$medidaExtra', '$precioExtra')";
 
 $conexion->execute($query3);
 

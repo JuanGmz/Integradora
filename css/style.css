@@ -29,6 +29,7 @@
 /* Estilos globales */
 body {
     font-family: 'MiFuentePersonalizada', sans-serif;
+    background: var(--color5);
 
 }
 
@@ -55,6 +56,12 @@ a:hover {
     /* Asegura que también al pasar el ratón no se subraye */
 }
 
+/* Estilos para las imágenes */
+.coffee-image {
+    height: 400px; /* Altura deseada para todas las imágenes */
+    width: 100%; /* Ancho del contenedor */
+    object-fit: cover; /* Ajuste para cubrir el contenedor manteniendo la relación de aspecto */
+}
 
 /* Estilos de la barra de navegación */
 .navbar-brand .logo {
@@ -249,12 +256,8 @@ a:hover {
 .container-features {
     display: flex;
     justify-content: center;
-    gap: 20px;
     /* Espacio entre las tarjetas */
-    padding: 20px 0;
     text-align: center;
-    padding: 20px;
-    margin: 10px;
 }
 
 .card-feature {
@@ -476,4 +479,48 @@ a:hover {
     color: #d4a373;
     text-decoration: none;
     font-weight: bold;
+}
+/*------------------------------- Blog----------------------------------*/
+
+.blog-card-link {
+    color: var(--color3); /* Color inicial del enlace */
+    text-decoration: none; /* Sin subrayado */
+    transition: color 0.3s, transform 0.3s; /* Transición suave */
+}
+
+.blog-card-link:hover {
+    color: var(--cuarto); /* Color del enlace al hacer hover */
+    transform: translateX(5px); /* Mueve el enlace 5px hacia la derecha */
+}
+
+.blog-card-link i {
+    transition: transform 0.3s; /* Transición suave para el ícono */
+}
+
+.blog-card-link:hover i {
+    transform: translateX(5px); /* Mueve el ícono 5px hacia la derecha */
+}
+
+/*--- paginación ---*/
+.custom-page-item {
+    margin: 0 5px; /* Añade margen entre los elementos de paginación */
+}
+
+.custom-page-link {
+    color: var(--color1); /* Color de texto */
+    background-color: var(--color13); /* Color de fondo */
+    border: 1px solid var(--color13); /* Borde */
+    padding: 10px 20px; /* Espaciado interno */
+    transition: all 0.3s; /* Efecto de transición */
+}
+
+.custom-page-link:hover {
+    background-color: var(--obscuro); /* Color de fondo al pasar el mouse */
+    color: #fff; /* Color de texto al pasar el mouse */
+}
+
+.page-item.active .custom-page-link {
+    background-color: var(--cuarto); /* Color de fondo del elemento activo */
+    color: #fff; /* Color de texto del elemento activo */
+    border-color: var(--cuarto); /* Color del borde del elemento activo */
 }

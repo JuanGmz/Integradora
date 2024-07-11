@@ -4,20 +4,28 @@ class database
     private $pdo;
     private $user = "root";
     private $password = "";
-    private $server = "mysql:host=localhost;dbname=cafe_sinfonia";
+    private $server = "localhost";
+    private $dbname = "cafe_sinfonia";
 
     // funcion para conectar
     function conectarDB()
     {
         try 
         {
-            $this->pdo = new PDO($this->server, $this->user, $this->password);
+            $dsn = "mysql:host={$this->server};dbname={$this->dbname};";
+            $this->pdo = new PDO($dsn, $this->user, $this->password);
+            // Establecer el modo de error de PDO a excepció
         } 
         catch (PDOException $e) 
         {
             echo $e->getMessage();
         }
+
     }
+        // Método opcional para obtener la conexión PDO
+        public function getConnection() {
+            return $this->pdo;
+        }
 
     // funcion para desconectar
     function desconectarDB()

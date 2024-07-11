@@ -6,7 +6,7 @@ $conexion->conectarDB();
 
 extract($_POST);
 
-$query = "UPDATE detalle_productos_menu SET img_url = '$imagen_nueva' WHERE id_dpm = '$id_dpm'";
+$query = "UPDATE productos_menu SET img_url = '$imagen_nueva' WHERE id_pm = $id_pm";
 $conexion->execute($query);
 
 $conexion->desconectarDB();

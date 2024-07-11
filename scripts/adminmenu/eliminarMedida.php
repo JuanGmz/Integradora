@@ -5,7 +5,7 @@
 
     extract($_POST);
 
-    $query = "DELETE FROM productos_menu WHERE id_dpm = '$id_dpm' AND medida = '$medida' AND precio = '$precio'";
+    $query = "DELETE FROM detalle_productos_menu WHERE id_pm = '$id_pm' AND medida = '$medida' AND precio = '$precio'";
 
     $conexion->execute($query);
 

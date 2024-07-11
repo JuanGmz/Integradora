@@ -14,27 +14,6 @@ from eventos_reservas er
 end //
 delimiter ;
 
--- Procedo almacenado de Menu
-delimiter $$
-create procedure SP_Buscarxcategoria_menu (in p_categoria varchar(100))
-begin
-SELECT 
-    pm.nombre AS Producto, 
-    pm.img_url AS Imagen,
-    pm.descripcion AS Descripción,
-    pm.precio AS Precio, 
-    pm.categoria AS Categoría 
-FROM 
-    productos_menu AS pm
-JOIN 
-    detalle_productos_menu AS dpm ON dpm.id_pm = pm.id_pm
-JOIN 
-    categorias AS c ON c.id_categoria = pm.id_categoria
-
-where nombre=dpm.nombre;
-end $$
-delimiter ;
-
 -- LLamar el procedimiento almacenado para insertar productos en el carrito.
 call SP_Insert_Update_Carrito(1, 4, 1);
 

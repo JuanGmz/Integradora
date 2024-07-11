@@ -6,7 +6,7 @@
 
     extract($_POST);
 
-    $query = "UPDATE detalle_productos_menu SET nombre = '$nombre', descripcion = '$descripcion', id_categoria = $categoria WHERE id_dpm = $id_dpm";
+    $query = "UPDATE productos_menu SET nombre = '$nombre', descripcion = '$descripcion', id_categoria = $categoria WHERE id_pm = $id_pm";
     $conexion->execute($query);
 
     $conexion->desconectarDB();

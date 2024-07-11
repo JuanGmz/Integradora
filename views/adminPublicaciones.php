@@ -433,7 +433,6 @@
                                                             echo "<option value='{$t_publicacion->tipo}'>{$t_publicacion->tipo}</option>";
                                                         }
 
-
                                                         $conexion->desconectarDB();
                                                     ?>
                                                 </select>

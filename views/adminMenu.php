@@ -430,15 +430,15 @@
                     $conexion = new database();
                     $conexion->conectarDB();
                     $consulta = "SELECT     
-                                        dpm.id_dpm, 
-                                        dpm.img_url, 
-                                        dpm.nombre, 
-                                        dpm.descripcion, 
+                                        pm.id_pm, 
+                                        pm.img_url, 
+                                        pm.nombre, 
+                                        pm.descripcion, 
                                         c.nombre AS categoria_nombre
                                     FROM
-                                        detalle_productos_menu AS dpm
+                                        productos_menu AS pm
                                     JOIN
-                                        categorias AS c ON dpm.id_categoria = c.id_categoria
+                                        categorias AS c ON pm.id_categoria = c.id_categoria
                                     ";
                     $tabla = $conexion->select($consulta);
                     echo "
@@ -459,11 +459,11 @@
                                 <td class='m-0 p-1 d-flex flex-row align-items-center justify-content-center gap-1'>
                                     <!-- Imagen -->
                                     <!-- Botón que activa el modal de ver la imagen  -->
-                                    <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#modalImagen_$regi->id_dpm'>
+                                    <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#modalImagen_$regi->id_pm'>
                                         <i class='fa-solid fa-image'></i>
                                     </button>
                                     <!-- Modal de ver imagen -->
-                                    <div class='modal fade' id='modalImagen_$regi->id_dpm' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+                                    <div class='modal fade' id='modalImagen_$regi->id_pm' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
                                         <div class='modal-dialog'>
                                             <div class='modal-content'>
                                                 <div class='modal-body mb-3'>
@@ -478,7 +478,7 @@
                                                                 <label for='imagen_nueva' class='form-label'>Selecciona una nueva imagen:</label>
                                                                 <input type='file' class='form-control' id='imagen_nueva' name='imagen_nueva' accept='image/*' required>
                                                             </div>
-                                                            <input type='hidden' name='id_dpm' value='$regi->id_dpm'>
+                                                            <input type='hidden' name='id_pm' value='$regi->id_pm'>
                                                             <div class='col-12 mb-3 text-end'>
                                                                 <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
                                                                 <button type='submit' class='btn btn-primary'>Actualizar</button>
@@ -490,10 +490,10 @@
                                         </div>
                                     </div>
                                     <!-- Botón que activa el modal de ver detalles del producto -->
-                                    <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#detalleProducto_$regi->id_dpm'>
+                                    <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#detalleProducto_$regi->id_pm'>
                                         <i class='fa-solid fa-bars'></i>
                                     </button>
-                                    <div class='modal fade' id='detalleProducto_$regi->id_dpm' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+                                    <div class='modal fade' id='detalleProducto_$regi->id_pm' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
                                         <div class='modal-dialog'>
                                             <div class='modal-content'>
                                                 <div class='modal-header'>
@@ -514,7 +514,7 @@
                                                         </thead>
                                                         <tbody class='table-group-divider'>";
                                                         // Consulta de productos_menu relacionados con este detalle
-                                                        $query2 = 'SELECT medida, precio FROM productos_menu WHERE id_dpm = ' . $regi->id_dpm;
+                                                        $query2 = 'SELECT medida, precio FROM detalle_productos_menu WHERE id_pm = ' . $regi->id_pm;
                                                         $medidas = $conexion->select($query2);
                                                         foreach ($medidas as $medida_precio) {
                                                             echo "<tr>
@@ -522,7 +522,7 @@
                                                                     <td>$medida_precio->precio</td>
                                                                     <td>
                                                                         <form action='../scripts/adminmenu/eliminarMedida.php' method='POST'>
-                                                                            <input type='hidden' name='id_dpm' value='$regi->id_dpm'>
+                                                                            <input type='hidden' name='id_pm' value='$regi->id_pm'>
                                                                             <input type='hidden' name='medida' value='$medida_precio->medida'>
                                                                             <input type='hidden' name='precio' value='$medida_precio->precio'>
                                                                             <button type='submit' class='btn btn-danger'><i class='fa-solid fa-trash'></i></button>
@@ -543,7 +543,7 @@
                                                                     <div class='col-6'>
                                                                         <label class='form-label'>Precio extra</label>
                                                                         <input type='number' name='precioExtra' class='form-control' required>
-                                                                        <input type='hidden' name='id_dpm' value='$regi->id_dpm'>
+                                                                        <input type='hidden' name='id_pm' value='$regi->id_pm'>
                                                                     </div>
                                                                     <div class='col-12 text-end mt-3'>
                                                                         <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cerrar</button>
@@ -559,10 +559,10 @@
                                     </div>
 
                                     <!-- Botón que activa el modal de editar el producto -->
-                                    <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#editarProducto_$regi->id_dpm'>
+                                    <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#editarProducto_$regi->id_pm'>
                                         <i class='fa-solid fa-pen-to-square'></i>
                                     </button>
-                                    <div class='modal fade text-start p-0 m-0' id='editarProducto_$regi->id_dpm' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true' style='line-height: 1;'>
+                                    <div class='modal fade text-start p-0 m-0' id='editarProducto_$regi->id_pm' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true' style='line-height: 1;'>
                                         <div class='modal-dialog'>
                                             <div class='modal-content'>
                                                 <div class='modal-header'>
@@ -572,7 +572,7 @@
                                                 <div class='modal-body'>
                                                     <!-- Aquí va el contenido del modal de editar -->
                                                     <form method='post' action='../scripts/adminMenu/editarProducto.php'>
-                                                    <input type='hidden' name='id_dpm' value='$regi->id_dpm'>
+                                                    <input type='hidden' name='id_pm' value='$regi->id_pm'>
                                                         <div class='col-12 mb-3'>
                                                             <label for='nombre' class='form-label'>Nombre del Producto</label>
                                                             <input value='$regi->nombre' type='text' class='form-control' id='nombre' name='nombre' required>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>SínfoniaCafé&Cultura</title>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -13,7 +13,7 @@
     <!-- NavBar -->
     <nav class="navbar navbar-expand-lg shadow-lg">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="index.php">
                 <img src="./img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
             </a>
             <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar"
@@ -25,7 +25,7 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="html/menu.html">Menú</a>
+                            <a class="nav-link" aria-current="page" href="views/menu.php">Menú</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link mx-lg-2" href="html/ecommerce.html">Comprar</a>
@@ -74,7 +74,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <a href="html/menu.html" class="btn text-light shadow-lg"
+                        <a href="views/menu.php" class="btn text-light shadow-lg"
                             style="background: var(--primario);">Ver Menú</a>
                     </div>
                 </div>
@@ -89,23 +89,25 @@
 
             <!--Introducción-->
 
-            <div class="col-lg-6">
-                <div class="container-fluid d-flex flex-column justify-content-center align-items-center p-5">
+            <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center">
+                <div class="container-fluid p-5">
                     <div class="row">
                         <div class="col-12">
-                            <h1 class="fw-bold text-center" style="letter-spacing: 1px;">SinfoníaCafé&Cultura</h1>
+                            <h1 class="fw-bold text-center">SinfoníaCafé&Cultura</h1>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12 text-center p-2">
-                            <p class="text-light text-dark p-3" style="letter-spacing: 1px;">
+                            <p class="text-light text-dark p-3">
                                 La mejor manera de preparar tu cafe
                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus provident ex
                                 impedit
                                 facere, aut earum sapiente voluptate officia soluta explicabo quaerat nihil officiis
                                 commodi animi. In deserunt culpa provident pariatur.
                             </p>
-                            <a href="#" class="login-button">Ver mas</a>
+                            <div class="col-12 col-lg-3">
+                                <a href="#" class="btn btn-cafe w-100">Ver mas</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -113,20 +115,22 @@
             <div class="col-lg-6">
                 <div class="container">
                     <div class="row story-section justify-content-center d-flex">
-
-                        <div class="col-md-8 col-12 col-sm-8 ">
+                        <div class="col-md-8 col-12 col-sm-8">
                             <div class="row justify-content-center d-flex">
                                 <div class="col-md-6 mb-4 col-4 col-sm-5">
-                                    <img src="./img/cafes/cafe7.webp" alt="Coffee Image 1">
+                                    <img src="./img/cafes/cafe7.webp" alt="Coffee Image 1" class="img-thumbnail">
                                 </div>
                                 <div class="col-md-6 mb-4 col-4 col-sm-5">
-                                    <img src="./img/cafes/cafe9.webp" alt="Coffee Image 4">
+                                    <img src="./img/cafes/cafe9.webp" alt="Coffee Image 2" class="img-thumbnail">
                                 </div>
-                                <div class="col-md-6 mb-4 col-4 col-sm-5">
-                                    <img src="./img/cafes/cafe4.webp" alt="Coffee Image 3">
+
+                            </div>
+                            <div class="row justify-content-center d-flex">
+                                <div class="col-md-6 mb-4 col-4 col-sm-5 ">
+                                    <img src="./img/cafes/muñeco1.webp" alt="Coffee Image 3" class="img-thumbnail">
                                 </div>
-                                <div class="col-md-6 mb-4 col-4 col-sm-5">
-                                    <img src="./img/cafes/cafe8.webp" alt="Coffee Image 4">
+                                <div class="col-md-6 mb-4 col-4 row-cols-sm-5">
+                                    <img src="./img/cafes/dino2.webp" alt="Coffee Image 4" class="img-thumbnail">
                                 </div>
                             </div>
                         </div>
@@ -138,9 +142,8 @@
 
             <!-- Menu especial para ti -->
             <div class="container p-3 bagr-cafe2">
-
                 <div class="col-12 text-center ">
-                    <h1 class="fw-bold text-center" style="letter-spacing: 1px;">Menu especial para ti</h1>
+                    <h1 class="fw-bold text-center">Menu especial para ti</h1>
                 </div>
                 <!--botónes de categorias-->
                 <div class="d-flex justify-content-center p-4">
@@ -265,72 +268,72 @@
 
                                         <a href="html/menu.html"
                                             class="btn text-light shadow-lg align-self-start col-12 col-sm-12 col-md-6 col-lg-6"
-                                            style="background: var(--primario);">Ver Menú</a>
-
-
+                                            style="background: var(--primario);">
+                                            Ver Menú
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
-
             </div>
 
             <!-- Selectores-->
             <div class="container ">
                 <div class="row">
                     <div class="col-12">
-                        <h1 class="fw-bold text-center p-2" style="letter-spacing: 1px;">Servicios a tu medida</h1>
+                        <h1 class="fw-bold text-center mt-3">Servicios a tu medida</h1>
                     </div>
                 </div>
                 <!--seccion de servicios-->
-                <section class="container d-flex justify-content-center ">
-
-                    <!-- Envio a tu Servicio-->
-                    <div class="col-5 col-sm-5 col-md-4 d-flex justify-content-center ">
-
-                        <div class="card-feature">
-                            <i class="fa-solid fa-truck"></i>
-                            <div class="facture-content">
-                                <span>Envio a tu Servicio</span>
-                                <p>En pedido superior a $150</p>
+                <section class="container m-0 p-0 d-flex justify-content-center">
+                    <div class="row">
+                        <!-- Envio a tu Servicio-->
+                        <div class="col-6 col-lg-4 m-0 p-0">
+                            <div class="card-feature">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <i class="fa-solid fa-truck"></i>
+                                    </div>
+                                    <div class="col-12">
+                                        <span>Envio a tu Servicio</span>
+                                        <p>En pedido superior a $150</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
-                    </div>
-
-                    <!-- Tarjeta regalo especial-->
-                    <div class="col-5 col-sm-5 col-md-4 d-flex justify-content-center ">
-                        <a href="./html/recompensas.html">
-                            <div class="card-feature">
-                                <i class="fa-solid fa-gift"></i>
-                                <div class="facture-content">
-                                    <span>Recompensas especial</span>
-                                    <p>Ofrece bonos especiales</p>
+                        <!-- Tarjeta regalo especial-->
+                        <div class="col-6 col-lg-4 m-0 p-0">
+                            <a href="./html/recompensas.html">
+                                <div class="card-feature">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <i class="fa-solid fa-gift"></i>
+                                        </div>
+                                        <div class="col-12">
+                                            <span>Recompensas especial</span>
+                                            <p>Ofrece bonos especiales</p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
-
-
-                    </div>
-
-                    <!-- Servicio al cliente-->
-                    <div class="col-5 col-sm-5 col-md-4 d-flex justify-content-center ">
-                        <a href="./html/contact.html">
-                            <div class="card-feature">
-                                <i class="fa-solid fa-headset"></i>
-                                <div class="facture-content">
-                                    <span>Servicio al cliente 24/7</span>
-                                    <p>Llamenos 24/7 al 871-454-7870</p>
+                            </a>
+                        </div>
+                        <!-- Servicio al cliente-->
+                        <div class="col-6 col-lg-4 m-0 p-0">
+                            <a href="./html/contact.html">
+                                <div class="card-feature row m-0 p-0">
+                                    <div class="col-12 m-0 p-0">
+                                        <i class="fa-solid fa-headset"></i>
+                                    </div>
+                                    <div class="col-12">
+                                        <span>Servicio al cliente 24/7</span>
+                                        <p>Llamenos 24/7 al 871-454-7870</p>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
-
-
+                            </a>
+                        </div>
                     </div>
-
                 </section>
             </div>
 
@@ -343,7 +346,7 @@
 
                     <div class="col-7 col-sm-6 col-md-3 p-sm-3 d-flex justify-content-center p-3 ">
                         <div class="card product-card">
-                            <img src="./img/cafes/bolsa1.webp" class="card-img-top" alt="Cappucino">
+                            <img src="./img/cafes/bolsa2.webp" class="card-img-top coffee-image" alt="Cappucino">
                             <div class="card-body product-card-body">
                                 <h5 class="card-title fw-bold " style="letter-spacing: 1px;">Cappucino</h5>
                                 <p class="card-text">Hot Cappucino</p>
@@ -357,7 +360,7 @@
                     </div>
                     <div class="col-7 col-sm-6 col-md-3 p-sm-3 d-flex justify-content-center p-3">
                         <div class="card product-card">
-                            <img src="./img/cafes/bolsa1.webp" class="card-img-top" alt="Moccacino">
+                            <img src="./img/cafes/bolsa1.webp" class="card-img-top coffee-image" alt="Moccacino">
                             <div class="card-body product-card-body">
                                 <h5 class="card-title fw-bold " style="letter-spacing: 1px;">Moccacino</h5>
                                 <p class="card-text">Hot Moccacino</p>
@@ -371,7 +374,7 @@
                     </div>
                     <div class="col-7 col-sm-6 col-md-3 p-sm-3 d-flex justify-content-center p-3">
                         <div class="card product-card">
-                            <img src="./img/cafes/bolsa1.webp" class="card-img-top" alt="Waffle Ice Cream">
+                            <img src="./img/cafes/bolsa3.webp" class="card-img-topc coffee-image" alt="Waffle Ice Cream">
                             <div class="card-body product-card-body">
                                 <h5 class="card-title fw-bold" style="letter-spacing: 1px;">Waffle Ice Cream</h5>
                                 <p class="card-text">Waffle with Ice Cream</p>
@@ -386,7 +389,7 @@
                     </div>
                     <div class="col-7 col-sm-6 col-md-3 p-sm-3 d-flex justify-content-center p-3">
                         <div class="card product-card">
-                            <img src="./img/cafes/bolsa1.webp" class="card-img-top" alt="Waffle Ice Cream">
+                            <img src="./img/cafes/bolsa1.webp" class="card-img-top coffee-image" alt="Waffle Ice Cream">
                             <div class="card-body product-card-body">
                                 <h5 class="card-title fw-bold" style="letter-spacing: 1px;">Waffle Ice Cream</h5>
                                 <p class="card-text">Waffle with Ice Cream</p>
@@ -418,54 +421,54 @@
                     <h1 class="fw-bold text-center" style="letter-spacing: 1px;">Blog</h1>
                 </div>
 
-                <div class="row g-4">
-                    <!-- Blog Card 1 -->
-                    <div class="col-md-4">
-                        <div class="card blog-card">
-                            <img src="./img/cafes/lugar1.webp" class="card-img-top" alt="Image 1">
-                            <div class="card-body">
-                                <h5 class="blog-card-title">MAKE IT SIMPLE</h5>
-                                <h6 class="blog-card-subtitle mb-2 text-muted">by Jane Doe / Competition / 23.02.2016
-                                </h6>
-                                <p class="blog-card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    Aenean feugiat dictum lacus, ut hendrerit mi pulvinar vel. Fusce id nibh at neque
-                                    eleifend tristique...</p>
-                                <a href="#" class="blog-card-link">READ MORE →</a>
-                            </div>
+                <div class="row g-4 ">
+                <!-- Blog Card 1 -->
+                <div class="col-md-4 col-12 col-sm-6">
+                    <div class="card blog-card">
+                        <img src="./img/cafes/lugar1.webp" class="card-img-top" alt="Image 1">
+                        <div class="card-body">
+                            <h5 class="blog-card-title">MAKE IT SIMPLE</h5>
+                            <h6 class="blog-card-subtitle mb-2 text-muted">by Jane Doe / Competition / 23.02.2016
+                            </h6>
+                            <p class="blog-card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                Aenean feugiat dictum lacus, ut hendrerit mi pulvinar vel. Fusce id nibh at neque
+                                eleifend tristique...</p>
+                                <a href="#" class="blog-card-link">READ MORE <i class="fa-solid fa-arrow-right"></i></a>
                         </div>
                     </div>
-                    <!-- Blog Card 2 -->
-                    <div class="col-md-4">
-                        <div class="card blog-card">
-                            <img src="./img/cafes/cafe8.webp" class="card-img-top" alt="Image 2">
-                            <div class="card-body">
-                                <h5 class="blog-card-title">COFFEE SHOP</h5>
-                                <h6 class="blog-card-subtitle mb-2 text-muted">by Jane Doe / Competition / 23.01.2017
-                                </h6>
-                                <p class="blog-card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    Aenean feugiat dictum lacus, ut hendrerit mi pulvinar vel. Fusce id nibh at neque
-                                    eleifend tristique...</p>
-                                <a href="#" class="blog-card-link">READ MORE →</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Blog Card 3 -->
-                    <div class="col-md-4">
-                        <div class="card blog-card">
-                            <img src="./img/cafes/cafe4.webp" class="card-img-top" alt="Image 3">
-                            <div class="card-body">
-                                <h5 class="blog-card-title">COFFEE BAR</h5>
-                                <h6 class="blog-card-subtitle mb-2 text-muted">by Jane Doe / Competition / 23.01.2017
-                                </h6>
-                                <p class="blog-card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    Aenean feugiat dictum lacus, ut hendrerit mi pulvinar vel. Fusce id nibh at neque
-                                    eleifend tristique...</p>
-                                <a href="#" class="blog-card-link">READ MORE →</a>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
+                <!-- Blog Card 2 -->
+                <div class="col-md-4 col-12 col-sm-6">
+                    <div class="card blog-card">
+                        <img src="./img/cafes/cafe8.webp" class="card-img-top" alt="Image 2">
+                        <div class="card-body">
+                            <h5 class="blog-card-title">COFFEE SHOP</h5>
+                            <h6 class="blog-card-subtitle mb-2 text-muted">by Jane Doe / Competition / 23.01.2017
+                            </h6>
+                            <p class="blog-card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                Aenean feugiat dictum lacus, ut hendrerit mi pulvinar vel. Fusce id nibh at neque
+                                eleifend tristique...</p>
+                                <a href="#" class="blog-card-link">READ MORE <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Blog Card 3 -->
+                <div class="col-md-4 col-12 col-sm-6">
+                    <div class="card blog-card">
+                        <img src="./img/cafes/cafe4.webp" class="card-img-top" alt="Image 3">
+                        <div class="card-body">
+                            <h5 class="blog-card-title">COFFEE BAR</h5>
+                            <h6 class="blog-card-subtitle mb-2 text-muted">by Jane Doe / Competition / 23.01.2017
+                            </h6>
+                            <p class="blog-card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                Aenean feugiat dictum lacus, ut hendrerit mi pulvinar vel. Fusce id nibh at neque
+                                eleifend tristique...</p>
+                                <a href="#" class="blog-card-link">READ MORE <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
             </div>
 
 
@@ -657,30 +660,6 @@
 
         </div>
     </div>
-
-    <!-- Botón de Carrito -->
-    <button id="floatingButton" class="btn btn-cafe position-fixed bottom-0 end-0 m-3 d-flex p-3 z-3 text-light fw-bold"
-        type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-        <i class="fa-solid fa-cart-shopping fa-2x"></i>
-    </button>
-    <div class="offcanvas offcanvas-end text-light" style="background: var(--primario);" tabindex="-1"
-        id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-        <div class="mt-3 fw-bold d-flex justify-content-center">
-            <h5 class="offcanvas-title fs-3 mx-auto" id="offcanvasRightLabel">
-                <i class="fa-solid fa-bag-shopping"></i>
-            </h5>
-        </div>
-        <div class="offcanvas-body">
-            <div class="d-flex justify-content-center fs-5">
-                <div class="text-center">
-                    <p>Su Carrito esta vacio</p>
-                    <button type="button" class="btn btn-dark" data-bs-dismiss="offcanvas" aria-label="Close">Regresar a
-                        la tienda</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Footer -->
     <footer>
         <div class="container-fluid p-5 " style="background: var(--negroclaro);">
             <h2 class="text-center text-light mb-5">SinfoníaCafé&Cultura</h2>

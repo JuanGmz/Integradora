@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio</title>
-    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <title>Menú</title>
+    <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/style.css">
 </head>
 
 <body>
@@ -14,9 +14,10 @@
     <nav class="navbar navbar-expand-lg shadow-lg mb-lg-5">
         <div class="container-fluid">
             <a class="navbar-brand" href="../index.html">
-                <img src="../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
+                <img src="../../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
             </a>
-            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -24,7 +25,7 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="menu.html">Menú</a>
+                            <a class="nav-link" aria-current="page" href="../menu.php">Menú</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link mx-lg-2" href="ecommerce.html">Comprar</a>
@@ -45,16 +46,51 @@
                 </div>
             </div>
             <a href="login.html" class="login-button ms-auto">Iniciar Sesión</a>
-            <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
     </nav>
-    
     <!-- NavBar End -->
+
     <div class="container mb-5">
-        <div class="text-center fw-bold fs-2 mt-5 mb-3">
-            <h1 class="h1contact">Menu</h1>
+
+        <!-- Breadcrumbs -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mt-4">
+                <li class="breadcrumb-item"><a href="../menu.php">Menú</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Frappes</li>
+            </ol>
+        </nav>
+        <!-- Titulo -->
+        <h1>Frappes</h1>
+        <hr>
+
+        <div class="row mb-3">
+            <?php
+                include_once("../../class/database.php");
+                $db = new Database();
+                $db->conectarDB();
+
+                $query = "CALL listar_productos_menu('Frappes')";
+
+                $frappes = $db->select($query);
+
+                foreach ($frappes as $frappe) {
+                    echo "
+                        <div class='col-6 col-lg-3 mb-3'>
+                            <div class='card border-0' style='background: var(--color5);'>
+                                <img src='../../img/cafes/{$frappe->img_url}' class='card-img-top rounded-5' alt='frappe" . $frappe->id_pm . "'>
+                                <div class='card-body'>
+                                    <h5 class='card-title fw-bold text-center'>{$frappe->nombre}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    ";
+                }
+            ?>
+
         </div>
     </div>
 
@@ -91,7 +127,7 @@
         </div>
     </footer>
 
-    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/b820f07375.js" crossorigin="anonymous"></script>
 </body>
 
