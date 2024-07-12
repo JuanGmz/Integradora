@@ -534,3 +534,7 @@ a:hover {
     color: #fff; /* Color de texto del elemento activo */
     border-color: var(--cuarto); /* Color del borde del elemento activo */
 }
+
+.bg-dark{
+    background-color:  rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+}
