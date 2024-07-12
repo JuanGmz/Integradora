@@ -7,16 +7,27 @@ $db->conectarDB();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     extract($_POST);
 
-    $consulta = "UPDATE EVENTOS SET  
-   id_lugar = '$lugar', id_categoria = '$categoria', nombre = '$evento',tipo = '$tipo', descripcion = '$descripcion', fecha_evento = '$fechaEvento', hora_inicio = '$horaIni', hora_fin = '$horaFin', capacidad = '$cap', precio_boleto = '$costo', disponibilidad = '$cap', img_url = '$imgEvento', fecha_publicacion = '$fechaPub'";
+    // Asegúrate de que id_evento es un número entero
+    $id_evento = intval($id_evento);
 
-    if ($db->execute($consulta)) {
-        echo "Edicion exitosa.";
-    } else {
-        echo "Error al Editar evento.";
-    }
+    // Construir la consulta de actualización
+    $consulta = "UPDATE EVENTOS SET  
+        nombre = '$titulo',
+        tipo = '$tipo', 
+        descripcion = '$descripcion',
+        fecha_evento = '$fecha', 
+        hora_inicio = '$horainicio', 
+        hora_fin = '$horafin',
+        capacidad = '$cap', 
+        precio_boleto = '$costo', 
+        disponibilidad = '$cap', 
+        img_url = '$imagen',
+        fecha_publicacion = '$fechaPub'
+        WHERE id_evento = '$id_evento'";
+    $db->execute($consulta);
+
+    header("location: ../views/adminEventos.php");
 }
 
 $db->desconectarDB();
-header("location: ../views/adminEventos.php");
 ?>
