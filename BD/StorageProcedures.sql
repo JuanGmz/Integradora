@@ -226,3 +226,23 @@ select * from personas;
 select * from clientes;
 select * from roles_usuarios;
 select * from roles;  
+
+-- filtrar productos del menu
+DELIMITER //
+CREATE PROCEDURE listar_productos_menu(IN categoria VARCHAR(60))
+BEGIN
+	SELECT
+		pm.id_pm,
+		pm.nombre,
+        pm.descripcion,
+        pm.img_url
+	FROM
+		productos_menu AS pm
+	JOIN
+		categorias AS c ON pm.id_categoria = c.id_categoria
+	WHERE
+		c.nombre = categoria
+	ORDER BY 
+		pm.nombre ASC;
+END//
+DELIMITER ;

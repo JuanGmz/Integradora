@@ -13,7 +13,7 @@
     <!-- NavBar -->
     <nav class="navbar navbar-expand-lg shadow-lg mb-lg-5">
         <div class="container-fluid">
-            <a class="navbar-brand" href="../index.html">
+            <a class="navbar-brand" href="../index.php">
                 <img src="../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
             </a>
             <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
@@ -24,27 +24,27 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="menu.html">Menú</a>
+                            <a class="nav-link" aria-current="page" href="menu.php">Menú</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="ecommerce.html">Comprar</a>
+                            <a class="nav-link mx-lg-2" href="ecommerce.php">Comprar</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="recompensas.html">Recompensas</a>
+                            <a class="nav-link mx-lg-2" href="recompensas.php">Recompensas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="eventos.html">Eventos</a>
+                            <a class="nav-link mx-lg-2" href="eventos.php">Eventos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="blog.html">Blog</a>
+                            <a class="nav-link mx-lg-2" href="publicaciones.php">Publicaciones</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="contact.html">Contacto</a>
+                            <a class="nav-link mx-lg-2" href="contact.php">Contacto</a>
                         </li>
                     </ul>
                 </div>
             </div>
-            <a href="login.html" class="login-button ms-auto">Iniciar Sesión</a>
+            <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
             <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -74,10 +74,10 @@
                             <button type="submit" class="btn btn-cafe w-100 text-light fw-bold fs-5">Iniciar Sesión</button>
                         </div>
                         <div class="col-12 mb-3 text-center">
-                            <a href="recuperar.html" class="text-decoration-none">Olvidaste tu contraseña?</a>
+                            <a href="recuperar.php" class="text-decoration-none">Olvidaste tu contraseña?</a>
                         </div>
                         <div class="col-12 mb-3 text-center">
-                            <a href="registrar.html" class="text-decoration-none">¿No tienes una cuenta? Registrate</a>
+                            <a href="registrar.php" class="text-decoration-none">¿No tienes una cuenta? Registrate</a>
                         </div>
                     </div>
                 </form>

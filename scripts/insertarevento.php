@@ -19,4 +19,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 $db->desconectarDB();
 header("location: ../views/adminEventos.php");
-?>

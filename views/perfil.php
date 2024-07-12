@@ -14,7 +14,7 @@
     <!-- NavBar -->
     <nav class="navbar navbar-expand-lg shadow-lg mb-lg-5">
         <div class="container-fluid">
-            <a class="navbar-brand" href="../index.html">
+            <a class="navbar-brand" href="../index.php">
                 <img src="../../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
             </a>
             <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
@@ -28,19 +28,19 @@
                             <a class="nav-link" aria-current="page" href="../menu.php">Menú</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="ecommerce.html">Comprar</a>
+                            <a class="nav-link mx-lg-2" href="ecommerce.php">Comprar</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="recompensas.html">Recompensas</a>
+                            <a class="nav-link mx-lg-2" href="recompensas.php">Recompensas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="eventos.html">Eventos</a>
+                            <a class="nav-link mx-lg-2" href="eventos.php">Eventos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="blog.html">Blog</a>
+                            <a class="nav-link mx-lg-2" href="publicaciones.php">Publicaciones</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="contact.html">Contacto</a>
+                            <a class="nav-link mx-lg-2" href="contact.php">Contacto</a>
                         </li>
                         <div class="justify-content-end d-flex p-2 ">
                             <div class="dropdown ">
