@@ -471,6 +471,25 @@ a:hover {
     text-decoration: none;
     font-weight: bold;
 }
+/*Apartado de imagenes de Publicaciones*/
+.card-img-top {
+    height: 200px; /* Altura deseada para todas las imágenes */
+    object-fit: cover; /* Ajuste para cubrir el contenedor manteniendo la relación de aspecto */
+}
+.blog-card {
+    height: 100%; /* Altura completa para el card */
+}
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.blog-card-title {
+    font-size: 1.25rem;
+}
+.blog-card-text {
+    font-size: 0.9rem;
+}
 /*------------------------------- Blog----------------------------------*/
 
 .blog-card-link {
