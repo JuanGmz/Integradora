@@ -14,7 +14,7 @@
         <!-- navbar mobile -->
         <div class="row bg-dark d-block d-lg-none">
             <div class="collapse m-0 p-0" id="navbarToggleExternalContent" data-bs-theme="dark">
-                <div class="bg-dark p-4">
+                <div class="bg-dark p-4 pb-1">
                     <h5 class="text-body-emphasis h4">Administrar</h5>
                 </div>
                 <div class="accordion accordion-flush" id="accordionMobile">
@@ -175,13 +175,19 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
+                    <!-- Botón para volver atras -->
+                    <button class="btn btn-dark">
+                        <a href="../index.php" class="text-decoration-none">
+                            <i class="fa-solid fa-house text-light fa-2x"></i>
+                        </a>
+                    </button>
                 </div>
             </nav>
         </div>
 
         <div class="row">
             <!-- navbar pc -->
-            <div class="col-lg-3 border-end border-black bg-dark h-100 position-fixed d-none d-lg-block">
+            <div class="col-lg-3 bg-dark h-100 position-fixed d-none d-lg-block">
                 <h4 class="text-center text-light m-3 fs-2 fw-bold">Administrar</h4>
                 <div class="row">
                     <div class="col-12 text-center">
@@ -330,15 +336,15 @@
 
             <div class="col-lg-9 offset-lg-3 p-0">
                 <!-- AQUI VA EL CONTENIDO DE LA PAGINAAAAAAAAAAAA -->
-                <div class="container p-0 m-0 bg-light">
+                <div class="row p-0 m-0 bg-dark">
                     <div class="row p-3 m-0 shadow-lg">
                         <div class="col-3">
-                            <h1>Pedidos</h1>
+                            <h1 class="text-light fw-bold">Pedidos</h1>
                         </div>
                         <div class="col-9 d-flex justify-content-end align-items-center gap-3">
                             <!-- Botón para volver atras -->
-                            <a href="../index.php" class="text-decoration-none">
-                                <i class="fa-solid fa-house fa-2x"></i>
+                            <a href="../index.php" class="text-decoration-none d-none d-lg-block">
+                                <i class="fa-solid fa-house fa-2x text-light"></i>
                             </a>
                         </div>
                     </div>

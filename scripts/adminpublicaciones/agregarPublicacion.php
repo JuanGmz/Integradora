@@ -22,8 +22,6 @@
         $query = "INSERT INTO publicaciones(titulo, descripcion, img_url, tipo) VALUES ('$titulo', '$descripcion', '$nombreImagen', '$tipo')";
         $conexion->execute($query);
 
-        $conexion->execute($consulta);
-
     } else {
         echo "Error al subir la imagen.";
     }
