@@ -154,6 +154,7 @@
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
+                    <h1 class="fw-bold text-light pt-2 me-auto">Reservas</h1>
                     <!-- Botón para volver atras -->
                     <button class="btn btn-dark">
                         <a href="../index.php" class="text-decoration-none">
@@ -299,11 +300,11 @@
             <div class="col-lg-9 offset-lg-3 p-0">
                 <!-- AQUI VA EL CONTENIDO DE LA PAGINAAAAAAAAAAAA -->
                 <div class="row p-0 m-0 bg-dark">
-                    <div class="row p-3 m-0 shadow-lg">
-                        <div class="col-6 col-lg-7">
-                            <h1 class="text-light fw-bold">Productos E-Commerce</h1>
+                    <div class="row p-3 m-0 shadow-lg bg-dark d-none d-lg-flex">
+                        <div class="col-6">
+                            <h1 class="fw-bold text-light d-none d-lg-block">Reservas</h1>
                         </div>
-                        <div class="col-6 col-lg-5 d-flex justify-content-end align-items-center gap-3">
+                        <div class="col-3 col-lg-6 d-flex justify-content-end align-items-center">
                             <!-- Botón para volver atras -->
                             <a href="../index.php" class="text-decoration-none d-none d-lg-block">
                                 <i class="fa-solid fa-house fa-2x text-light"></i>

@@ -175,6 +175,7 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
+                    <h1 class="fw-bold text-light pt-2 me-auto">Pedidos</h1>
                     <!-- Botón para volver atras -->
                     <button class="btn btn-dark">
                         <a href="../index.php" class="text-decoration-none">
@@ -337,7 +338,7 @@
             <div class="col-lg-9 offset-lg-3 p-0">
                 <!-- AQUI VA EL CONTENIDO DE LA PAGINAAAAAAAAAAAA -->
                 <div class="row p-0 m-0 bg-dark">
-                    <div class="row p-3 m-0 shadow-lg">
+                    <div class="row p-3 m-0 shadow-lg d-none d-lg-flex">
                         <div class="col-3">
                             <h1 class="text-light fw-bold">Pedidos</h1>
                         </div>

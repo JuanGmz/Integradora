@@ -154,6 +154,7 @@
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
+                    <h1 class="fw-bold text-light pt-2 me-auto">Productos</h1>
                     <!-- Botón para volver atras -->
                     <button class="btn btn-dark">
                         <a href="../index.php" class="text-decoration-none">
@@ -299,11 +300,11 @@
             <div class="col-lg-9 offset-lg-3 p-0">
                 <!-- AQUI VA EL CONTENIDO DE LA PAGINAAAAAAAAAAAA -->
                 <div class="row p-0 m-0 bg-dark">
-                    <div class="row p-3 m-0 shadow-lg">
-                        <div class="col-6 col-lg-7">
-                            <h1 class="text-light fw-bold">Productos E-Commerce</h1>
+                    <div class="row p-3 m-0 shadow-lg bg-dark d-none d-lg-flex">
+                        <div class="col-3">
+                            <h1 class="fw-bold text-light d-none d-lg-block">Productos</h1>
                         </div>
-                        <div class="col-6 col-lg-5 d-flex justify-content-end align-items-center gap-3">
+                        <div class="col-6 col-lg-9 d-flex justify-content-end align-items-center gap-3">
                             <!-- Aquí va el botón del modal para registrar productos -->
                             <div class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregarProducto">
                                 Agregar Producto
@@ -315,7 +316,21 @@
                         </div>
                     </div>
                 </div>
-                <div class="shadow-lg bg-light container p-3">
+                <!-- Modal para agregar publicación -->
+                <div class="modal fade" id="agregarProducto" tabindex="-1" aria-labelledby="agregarProducto" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="agregarProducto">Agregar Producto</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="shadow-lg bg-light row p-0 m-0 p-3">
                     <div class="row m-1">
                         <div class="col-12">
                             <form method="post">
@@ -338,8 +353,12 @@
                     </div>
                 </div>
                 <div class="row mt-3 p-4 m-0">
+                    <div class="d-lg-none w-100 mb-3 m-0 p-0">
+                        <button type="button" class="btn w-100 btn-primary shadow-lg" data-bs-toggle="modal" data-bs-target="#agregarProducto">
+                            <i class="fa-solid fa-plus fa-2x"></i>
+                        </button>
+                    </div>
                     <!-- Tabla de productos AQUI -->
-                    
                 </div>
             </div>
         </div>
