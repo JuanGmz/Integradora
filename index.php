@@ -58,15 +58,15 @@
                 <img src="img/sinfo.webp" class="img-fluid p-0 m-0" alt="imginicio" lazy="loading">
             </div>
             <div class="col-lg-4 d-flex flex-column justify-content-center align-items-center p-5" style="background: var(--color3);">
-                <div class="row">
+                <div class="row ">
                     <div class="col-12">
                         <h1 class="text-light text-center" style="letter-spacing: 1px;">Prueba el mejor café de la
                             ciudad</h1>
                     </div>
                 </div>
-                <div class="row mb-3 p-2">
-                    <div class="col-12">
-                        <h5 class="text-light">La mejor calidad para ti</h5>
+                <div class="row mb-3 p-2 ">
+                    <div class="col-12 d-flex justify-content-center">
+                        <h5 class="text-light text-center">La mejor calidad para ti</h5>
                     </div>
                 </div>
                 <div class="row">
@@ -88,7 +88,7 @@
             <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center">
                 <div class="container-fluid p-5 ">
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-12 d-flex justify-content-center">
                             <h1 class="fw-bold text-center">SinfoníaCafé&Cultura</h1>
                         </div>
                     </div>
