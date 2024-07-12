@@ -586,7 +586,7 @@
                             echo "</tbody></table>";
                         }
                     } else {
-                        echo "<div class='alert alert-danger' role='alert'>Selecciona una categoria</div>";
+                        echo "<div class='alert alert-danger' role='alert'>Seleccione una categoria</div>";
                     }
                     ?>
                 </div>

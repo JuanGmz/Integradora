@@ -1,3 +1,9 @@
+<?php
+    include_once("../class/database.php");
+    $db = new Database();
+    $db->conectarDB();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -154,13 +160,17 @@
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
+                    <!-- Botón para volver atras -->
+                    <a href="../index.php" class="text-decoration-none">
+                        <i class="fa-solid fa-house text-light fa-2x"></i>
+                    </a>
                 </div>
             </nav>
         </div>
 
         <div class="row">
             <!-- navbar pc -->
-            <div class="col-lg-3 border-end border-black bg-dark h-100 position-fixed d-none d-lg-block">
+            <div class="col-lg-3 bg-dark h-100 position-fixed d-none d-lg-block">
                 <h4 class="text-center text-light m-3 fs-2 fw-bold">Administrar</h4>
                 <div class="row">
                     <div class="col-12 text-center">
@@ -293,15 +303,65 @@
             <div class="col-lg-9 offset-lg-3 p-0">
                 <!-- AQUI VA EL CONTENIDO DE LA PAGINAAAAAAAAAAAA -->
                 <div class="container p-0 m-0 bg-light">
-                    <div class="row p-3 m-0 shadow-lg">
-                        <div class="col-3">
-                            <h1>Publicaciones</h1>
+                    <div class="row p-3 m-0 shadow-lg bg-dark">
+                        <div class="col-3 m-0 p-0">
+                            <h1 class="fw-bold text-light">Publicaciones</h1>
                         </div>
-                        <div class="col-9 d-flex justify-content-end align-items-center gap-3">
+                        <div class="col-9 d-flex justify-content-end align-items-center gap-1 gap-lg-3">
                             <!-- Aquí va el botón del modal para registrar publicaciones -->
+                            <!-- Botón para agregar -->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregarPublicacion">
+                                Agregar Publicación
+                            </button>
+                            <!-- Modal para agregar publicación -->
+                            <div class="modal fade" id="agregarPublicacion" tabindex="-1" aria-labelledby="agregarPublicacionLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="agregarPublicacionLabel">Agregar Publicación</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form method="post" action="../scripts/adminpublicaciones/agregarPublicacion.php" enctype="multipart/form-data">
+                                                <div class="mb-3">
+                                                    <label for="titulo" class="form-label">Título</label>
+                                                    <input type="text" class="form-control" id="titulo" name="titulo" maxlength="60" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="descripcion" class="form-label">Descripción</label>
+                                                    <textarea class="form-control" id="descripcion" name="descripcion" rows="3" maxlength="255" required></textarea>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="imagen" class="form-label">Imagen</label>
+                                                    <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="tipo" class="form-label">Tipo</label>
+                                                    <select name="tipo" id="tipo" class="form-select" required>
+                                                        <option selected disabled value="">Seleccionar Tipo</option>
+                                                        <!-- Aqui va el select de categorías -->
+                                                        <?php
+                                                            $queryTipo = "SELECT DISTINCT tipo FROM publicaciones";
+                                                            $tipos = $db->select($queryTipo);
+                                                            foreach ($tipos as $tipo) {
+                                                                echo "<option value='{$tipo->tipo}'>{$tipo->tipo}</option>";
+                                                            }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                                <div class="mt-3 text-end">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                    <!-- Botón para agregar -->
+                                                    <button type="submit" class="btn btn-primary">Agregar Publicación</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <!-- Botón para volver atras -->
-                            <a href="../index.php" class="text-decoration-none">
-                                <i class="fa-solid fa-house fa-2x"></i>
+                            <a href="../index.php" class="text-decoration-none d-none d-lg-block">
+                                <i class="fa-solid fa-house fa-2x text-light"></i>
                             </a>
                         </div>
                     </div>
@@ -312,11 +372,14 @@
                             <form method="post">
                                 <div class="row">
                                     <div class="col-8">
-                                        <select name="categoria" id="categoria" class="form-select">
-                                            <option selected disabled value="">Seleccionar Tipo de Publicación</option>
+                                        <select name="tipo" id="tipo" class="form-select">
+                                            <option selected disabled value="">Seleccionar Tipo</option>
                                             <!-- Aqui va el select de categorías -->
                                             <?php
-
+                                                foreach ($tipos as $tipo) {
+                                                    $selected = (isset($_POST['tipo']) && $_POST['tipo'] == $tipo->tipo) ? 'selected' : '';
+                                                    echo "<option value='{$tipo->tipo}' {$selected}>{$tipo->tipo}</option>";
+                                                }
                                             ?>
                                         </select>
                                     </div>
@@ -330,7 +393,40 @@
                 </div>
                 <div class="row mt-3 p-4 m-0">
                     <!-- Tabla de publicaciones AQUI -->
-                    
+                    <?php
+                        if (isset($_POST['tipo'])) {
+                            $query = "SELECT id_publicacion, titulo, tipo, img_url, descripcion FROM publicaciones WHERE tipo = '{$_POST['tipo']}'";
+                            $publicaciones = $db->select($query);
+                            if (empty($publicaciones)) {
+                                echo "<div class='alert alert-danger' role='alert'>No hay publicaciones registradas en este tipo de publicación.</div>";
+                            } else {
+                                echo "<table class='table table-striped table-hover table-dark text-center border-3 border-start border-bottom border-end border-black'>
+                                        <thead>
+                                            <tr>
+                                                <th scope='col'>Título</th>
+                                                <th scope='col' class='d-none d-lg-table-cell'>Descripción</th>
+                                                <th scope='col'>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class='table-light table-group-divider'>";
+                                foreach ($publicaciones as $publicacion) {
+                                    echo "<tr>
+                                            <td>{$publicacion->titulo}</td>
+                                            <td class='d-none d-lg-table-cell'>{$publicacion->descripcion}</td>
+                                            <td>
+                                               
+                                            </td>
+                                        </tr>";
+                                }
+                                echo "</tbody>
+                                    </table>";
+                            }
+                        } else {
+                            echo"<div class='alert alert-danger' role='alert'>
+                                Seleccione un tipo de publicación
+                            </div>";
+                        }
+                    ?>
                 </div>
             </div>
         </div>
