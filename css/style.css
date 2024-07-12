@@ -188,12 +188,13 @@ a:hover {
     padding: 8px 20px;
     border-radius: 10px;
     text-decoration: none;
-    transform: 0.3s background-color;
+    transition: all 0.3s ease-in-out;
     cursor: pointer;
 }
 
 .btn-cafe:hover {
-    background-color: var(--terciario);
+    background-color: var(--cuarto);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* Boton CATEGORIAS */
@@ -222,9 +223,24 @@ a:hover {
 
 .form-control-bb {
     border: 0px;
-    border-bottom: 2px solid var(--primario);
+    border-bottom: 2px solid var(--color12);
     border-radius: 0%;
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+
 }
+.form-control-bb:hover {
+    border-bottom: 2px solid var(--color1);
+    box-shadow: 0 5px 8px var(--cuarto);
+
+}
+
+.form-control-bb:focus {
+    border-bottom: 2px solid var(--color1);
+    box-shadow: 0 5px 8px var(--obscuro);
+    outline: none; /* Esto es opcional, pero ayuda a eliminar el borde azul por defecto */
+}
+
 
 /* Navbar admin */
 .navbar-collapse,
