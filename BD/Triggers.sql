@@ -95,3 +95,16 @@ call SP_actualizar_periodo_recompensa(6,'2024-02-10','2024-1-12');
 select recompensa, asistencias_completadas,canje, periodo 
 from view_clientes_recompensas 
 where id_cliente = 5;
+
+
+-- triger complementario para calcular el monto total de una reserva siempre que se haga un insert
+drop trigger if exists before_insert_reservas_monto;
+delimiter $$
+create trigger before_insert_reservas_monto
+before insert on eventos_reservas
+for each row
+begin 
+-- calculamos el monto total y lo envia al insert del procedimiento: SP_calcular_monto_boletos
+		set new.Monto_total = new.c_boletos*(select precio_boleto from eventos where new.id_evento = eventos.id_evento);
+end $$
+delimiter ;

@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -56,7 +55,7 @@
         <!-- NavBar End -->
         <div class="container mb-5">
             <div class="text-center fw-bold fs-2 mt-5 mb-3">
-                <h1 class="h1contact">Blog</h1>
+                <h1 class="h1contact">Publicaciones</h1>
             </div>
         </div>
 
@@ -71,7 +70,7 @@
                 $conexion->conectarDB();
 
                 // Configurar la paginación
-                $results_per_page = 6; // Número de resultados por página
+                $results_per_page = 9; // Número de resultados por página
                 $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
                 $page = max($page, 1); // Asegurar que la página sea al menos 1
 
@@ -100,14 +99,13 @@
                 <div class="container">
                     <div class="row g-4 p-3">
                         <?php foreach ($publicaciones as $publicacion) : ?>
-                            <div class='col-md-4 col-12 col-sm-6' style="height: 550px;">
-                                <div class='card blog-card'>
+                            <div class='col-md-4 col-12 col-sm-6'>
+                                <div class='card blog-card h-100'>
                                     <img src='<?php echo $publicacion->img_url; ?>' class='card-img-top' alt='Image'>
-                                    <div class='card-body ' style="height: 190px;">
+                                    <div class='card-body'>
                                         <h5 class='blog-card-title'><?php echo $publicacion->titulo; ?></h5>
                                         <h6 class='blog-card-subtitle mb-2 text-muted'>by Jane Doe / Competition / 23.02.2016</h6>
                                         <p class='blog-card-text'><?php echo $publicacion->descripcion; ?></p>
-                                        
                                     </div>
                                     <a href='#' class='blog-card-link p-3'>Mas detalles <i class='fa-solid fa-arrow-right'></i></a>
                                 </div>

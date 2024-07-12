@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrar Publicaciones</title>
+    <title>Administrar Asistencias</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -258,7 +258,7 @@
                         </h2>
                         <div id="flush-blog" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
                             <div class="accordion-body bg-dark">
-                                <a href="adminPublicaciones.php" class="fw-bold fs-6 ms-5 text-light text-decoration-none">
+                                <a href="adminBlog.php" class="fw-bold fs-6 ms-5 text-light text-decoration-none" aria-current="true">
                                     Administrar Publicaciones
                                 </a>
                             </div>
@@ -295,10 +295,10 @@
                 <div class="container p-0 m-0 bg-light">
                     <div class="row p-3 m-0 shadow-lg">
                         <div class="col-3">
-                            <h1>Publicaciones</h1>
+                            <h1>Asistencias</h1>
                         </div>
                         <div class="col-9 d-flex justify-content-end align-items-center gap-3">
-                            <!-- Aquí va el botón del modal para registrar publicaciones -->
+                            <!-- Aquí va el botón del modal para registrar asistencias -->
                             <!-- Botón para volver atras -->
                             <a href="../index.php" class="text-decoration-none">
                                 <i class="fa-solid fa-house fa-2x"></i>
@@ -306,30 +306,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="shadow-lg bg-light container p-3">
-                    <div class="row m-1">
-                        <div class="col-12">
-                            <form method="post">
-                                <div class="row">
-                                    <div class="col-8">
-                                        <select name="categoria" id="categoria" class="form-select">
-                                            <option selected disabled value="">Seleccionar Tipo de Publicación</option>
-                                            <!-- Aqui va el select de categorías -->
-                                            <?php
-
-                                            ?>
-                                        </select>
-                                    </div>
-                                    <div class="col-4">
-                                        <input type="submit" class="btn btn-primary w-100" value="Buscar">
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
                 <div class="row mt-3 p-4 m-0">
-                    <!-- Tabla de publicaciones AQUI -->
+                    <!-- Tabla de asistencias AQUI -->
                     
                 </div>
             </div>

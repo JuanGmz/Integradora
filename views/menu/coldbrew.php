@@ -82,7 +82,7 @@
                 foreach ($coldbrews as $coldbrew) {
                     echo "
                         <div class='col-6 col-lg-3 mb-3'>
-                            <div class='card border-0' style='background: var(--color5);'>
+                            <div class='card border-0' style='background: var(--color6);'>
                                 <img src='../../img/cafes/{$coldbrew->img_url}' class='card-img-top rounded-5' alt='coldbrew" . $coldbrew->id_pm . "'>
                                 <div class='card-body'>
                                     <h5 class='card-title fw-bold text-center'>{$coldbrew->nombre}</h5>

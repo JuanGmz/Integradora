@@ -80,7 +80,7 @@
                 foreach ($frappes as $frappe) {
                     echo "
                         <div class='col-6 col-lg-3 mb-3'>
-                            <div class='card border-0' style='background: var(--color5);'>
+                            <div class='card border-0' style='background: var(--color6);'>
                                 <img src='../../img/cafes/{$frappe->img_url}' class='card-img-top rounded-5' alt='frappe" . $frappe->id_pm . "'>
                                 <div class='card-body'>
                                     <h5 class='card-title fw-bold text-center'>{$frappe->nombre}</h5>
