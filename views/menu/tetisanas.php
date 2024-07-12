@@ -82,7 +82,7 @@
                 foreach ($tYtisanas as $tYtisana) {
                     echo "
                         <div class='col-6 col-lg-3 mb-3'>
-                            <div class='card border-0' style='background: var(--color5);'>
+                            <div class='card border-0' style='background: var(--color6);'>
                                 <img src='../../img/cafes/{$tYtisana->img_url}' class='card-img-top rounded-5'alt='teytisana" . $tYtisana->id_pm . "'>
                                 <div class='card-body'>
                                     <h5 class='card-title fw-bold text-center'>{$tYtisana->nombre}</h5>

@@ -1,15 +1,9 @@
-<?php
-    include_once("../class/database.php");
-    $db = new Database();
-    $db->conectarDB();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrar Publicaciones</title>
+    <title>Administrar Productos E-Commerce</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -160,7 +154,6 @@
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <h1 class="fw-bold text-light pt-2 me-auto">Publicaciones</h1>
                     <!-- Botón para volver atras -->
                     <button class="btn btn-dark">
                         <a href="../index.php" class="text-decoration-none">
@@ -306,16 +299,11 @@
             <div class="col-lg-9 offset-lg-3 p-0">
                 <!-- AQUI VA EL CONTENIDO DE LA PAGINAAAAAAAAAAAA -->
                 <div class="row p-0 m-0 bg-dark">
-                    <div class="row p-3 m-0 shadow-lg bg-dark d-none d-lg-flex">
-                        <div class="col-3">
-                            <h1 class="fw-bold text-light d-none d-lg-block">Publicaciones</h1>
+                    <div class="row p-3 m-0 shadow-lg">
+                        <div class="col-6 col-lg-7">
+                            <h1 class="text-light fw-bold">Productos E-Commerce</h1>
                         </div>
-                        <div class="col-9 d-flex justify-content-end align-items-center gap-1 gap-lg-3">
-                            <!-- Aquí va el botón del modal para registrar publicaciones -->
-                            <!-- Botón para agregar -->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregarPublicacion">
-                                Agregar Publicación
-                            </button>
+                        <div class="col-6 col-lg-5 d-flex justify-content-end align-items-center gap-3">
                             <!-- Botón para volver atras -->
                             <a href="../index.php" class="text-decoration-none d-none d-lg-block">
                                 <i class="fa-solid fa-house fa-2x text-light"></i>
@@ -323,66 +311,17 @@
                         </div>
                     </div>
                 </div>
-                <!-- Modal para agregar publicación -->
-                <div class="modal fade" id="agregarPublicacion" tabindex="-1" aria-labelledby="agregarPublicacionLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="agregarPublicacionLabel">Agregar Publicación</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form method="post" action="../scripts/adminpublicaciones/agregarPublicacion.php" enctype="multipart/form-data">
-                                    <div class="mb-3">
-                                        <label for="titulo" class="form-label">Título</label>
-                                        <input type="text" class="form-control" id="titulo" name="titulo" maxlength="60" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="descripcion" class="form-label">Descripción</label>
-                                        <textarea class="form-control" id="descripcion" name="descripcion" rows="3" maxlength="255" required></textarea>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="imagen" class="form-label">Imagen</label>
-                                        <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="tipo" class="form-label">Tipo</label>
-                                        <select name="tipo" id="tipo" class="form-select" required>
-                                            <option selected disabled value="">Seleccionar Tipo</option>
-                                            <!-- Aqui va el select de categorías -->
-                                            <?php
-                                                $queryTipo = "SELECT DISTINCT tipo FROM publicaciones";
-                                                $tipos = $db->select($queryTipo);
-                                                foreach ($tipos as $tipo) {
-                                                    echo "<option value='{$tipo->tipo}'>{$tipo->tipo}</option>";
-                                                }
-                                            ?>
-                                         </select>
-                                    </div>
-                                    <div class="mt-3 text-end">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <!-- Botón para agregar -->
-                                        <button type="submit" class="btn btn-primary">Agregar Publicación</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="shadow-lg bg-light row p-0 m-0 p-3">
+                <div class="shadow-lg bg-light container p-3">
                     <div class="row m-1">
                         <div class="col-12">
                             <form method="post">
                                 <div class="row">
                                     <div class="col-8">
-                                        <select name="tipo" id="tipo" class="form-select">
-                                            <option selected disabled value="">Seleccionar Tipo</option>
+                                        <select name="categoria" id="categoria" class="form-select">
+                                            <option selected disabled value="">Seleccionar ??????</option>
                                             <!-- Aqui va el select de categorías -->
                                             <?php
-                                                foreach ($tipos as $tipo) {
-                                                    $selected = (isset($_POST['tipo']) && $_POST['tipo'] == $tipo->tipo) ? 'selected' : '';
-                                                    echo "<option value='{$tipo->tipo}' {$selected}>{$tipo->tipo}</option>";
-                                                }
+
                                             ?>
                                         </select>
                                     </div>
@@ -394,81 +333,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mt-lg-3 p-3 p-lg-4 m-0">
-                    <div class="d-lg-none w-100 mb-3 m-0 p-0">
-                        <button type="button" class="btn w-100 btn-primary shadow-lg" data-bs-toggle="modal" data-bs-target="#agregarPublicacion">
-                            <i class="fa-solid fa-plus fa-2x"></i>
-                        </button>
-                    </div>
-                    <!-- Tabla de publicaciones AQUI -->
-                    <?php
-                        if (isset($_POST['tipo'])) {
-                            $query = "SELECT * FROM publicaciones WHERE tipo = '{$_POST['tipo']}'";
-                            $publicaciones = $db->select($query);
-                            if (empty($publicaciones)) {
-                                echo "<div class='alert alert-danger' role='alert'>No hay publicaciones registradas en este tipo de publicación.</div>";
-                            } else {
-                                echo "<table class='table table-striped table-hover table-dark text-center border-3 border-start border-bottom border-end border-black'>
-                                        <thead>
-                                            <tr>
-                                                <th scope='col'>Título</th>
-                                                <th scope='col' class='d-none d-lg-table-cell'>Descripción</th>
-                                                <th scope='col'>Acciones</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class='table-light table-group-divider'>";
-                                foreach ($publicaciones as $publicacion) {
-                                    echo "<tr>
-                                            <td>{$publicacion->titulo}</td>
-                                            <td class='d-none d-lg-table-cell'>{$publicacion->descripcion}</td>
-                                            <td>
-                                                <!-- Botón para ver y editar imágen -->
-                                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#imgPublicacion{$publicacion->id_publicacion}'>
-                                                    <i class='fa-solid fa-image'></i>
-                                                </button>
-                                                <!-- Modal para ver y editar imágen -->
-                                                <div class='modal fade' id='imgPublicacion{$publicacion->id_publicacion}' tabindex='-1' aria-labelledby='imgPublicacion{$publicacion->id_publicacion}Label' aria-hidden='true'>
-                                                    <div class='modal-dialog modal-dialog-centered'>
-                                                        <div class='modal-content'>
-                                                            <div class='modal-header'>
-                                                                <h5 class='modal-title' id='imgPublicacion{$publicacion->id_publicacion}Label'>{$publicacion->titulo}</h5>
-                                                                <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                                                            </div>
-                                                            <div class='modal-body mb-3'>
-                                                                <!-- Aquí se está mostrando la imagen -->
-                                                                <form action='../scripts/adminpublicaciones/editarImagen.php' method='POST' enctype='multipart/form-data'>
-                                                                    <div class='col-12 mb-3'>
-                                                                        <label for='imagen' class='form-label'>Imagen Actual</label><br>
-                                                                        <img src='../img/publicaciones/$publicacion->img_url' class='img-fluid' alt='imagen$publicacion->titulo'><br>
-                                                                            <small>Selecciona una nueva imagen para actualizar, si es necesario.</small>
-                                                                        </div>
-                                                                        <div class='col-12 mb-3'>
-                                                                            <label for='imagen_nueva' class='form-label'>Selecciona una nueva imagen</label>
-                                                                            <input type='file' class='form-control' id='imagen_nueva' name='imagen_nueva' accept='image/*' required>
-                                                                        </div>
-                                                                        <input type='hidden' name='id_publicacion' value='$publicacion->id_publicacion'>
-                                                                        <div class='col-12 mt-3 text-end'>
-                                                                            <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
-                                                                            <button type='submit' class='btn btn-primary'>Actualizar</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>";
-                                }
-                                echo "</tbody>
-                                    </table>";
-                            }
-                        } else {
-                            echo"<div class='alert alert-danger' role='alert'>
-                                Seleccione un tipo de publicación
-                            </div>";
-                        }
-                    ?>
+                <div class="row mt-3 p-4 m-0">
+                    <!-- Tabla de reservas AQUI -->
+                    
                 </div>
             </div>
         </div>

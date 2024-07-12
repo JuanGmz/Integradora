@@ -5,16 +5,29 @@
 
     extract($_POST);
 
-    // Primera consulta
-    $query1 = "INSERT INTO productos_menu(id_categoria, nombre, descripcion, img_url) VALUES ($categoria, '$nombre', '$descripcion', '$imagen')";
+    // Directorio donde se guardarán las imágenes
+    $subirDir = "../../img/menu/";
 
-    $conexion->execute($query1);
+    // Nombre del archivo subido
+    $nombreImagen = basename($_FILES['imagen']['name']);
 
-    // Segunda consulta
-    $query2 = "INSERT INTO detalle_productos_menu(id_pm, medida, precio) VALUES (LAST_INSERT_ID(), '$medida', $precio)";
+    // Ruta completa del archivo a ser guardado
+    $imagen = $subirDir . $nombreImagen;
 
-    $conexion->execute($query2);
+    // Mover el archivo subido a la carpeta de destino
+    if (move_uploaded_file($_FILES['imagen']['tmp_name'], $imagen)) {
+        // Primera consulta
+        $query1 = "INSERT INTO productos_menu(id_categoria, nombre, descripcion, img_url) VALUES ($categoria, '$nombre', '$descripcion', '$nombreImagen')";
+        $conexion->execute($query1);
 
+        // Segunda consulta
+        $query2 = "INSERT INTO detalle_productos_menu(id_pm, medida, precio) VALUES (LAST_INSERT_ID(), '$medida', $precio)";
+        $conexion->execute($query2);
+
+    } else {
+        echo "Error al subir la imagen.";
+    }
+    
     // Desconectar la base de datos
     $conexion->desconectarDB();
 
