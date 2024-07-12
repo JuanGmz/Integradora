@@ -60,6 +60,7 @@ a:hover {
 .coffee-image {
     width: 100%; /* Ancho del contenedor */
     object-fit: cover; /* Ajuste para cubrir el contenedor manteniendo la relación de aspecto */
+    border-radius: 5% 5% 0% 0%;
 }
 
 @media (min-width: 768px) {

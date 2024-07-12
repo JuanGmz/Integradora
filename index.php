@@ -166,15 +166,16 @@
                 </div>
                 <!-- Contenido de las categorias -->
                 <div class="tab-content col-12 p-1" id="menuTabsContent">
-                    <!--Contenido para Clasicos -->
+
                     <div class="tab-pane fade show active" id="clasicos" role="tabpanel" aria-labelledby="clasicos-tab">
+                        <!--Contenido para Clasicos -->
                         <div class="row justify-content-center mb-5">
                             <div class="col-12 col-md-8 d-flex align-items-center">
                                 <div class="d-flex flex-wrap w-100 d-flex justify-content-center">
-                                    <div class="col-10 col-md-6 p-2 col-sm-10">
-                                        <img src="./img/cafes/cafe11.webp" class="card-img-top img-fluid" alt="..." style="height: 250px; object-fit: cover; width: 300px;">
+                                    <div class="col-10 col-md-6 p-2 col-sm-10" >
+                                        <img src="./img/cafes/cafe15.webp" class="card-img-top img-fluid" alt="..." style="height: 250px; object-fit: cover;">
                                     </div>
-                                    <div class="col-10 col-sm-10 col-md-6 p-2 d-flex flex-column justify-content-cente p-lg-2">
+                                    <div class="col-9 col-sm-9  col-md-6 p-2 d-flex flex-column justify-content-cente p-lg-2">
                                         <h5 class="fw-bold mb-3" style="letter-spacing: 1px;">Menu Clasicos</h5>
                                         <p class="text-dark-emphasis mb-4 ">Explora nuestro Menú Clásico de Café, donde
                                             cada taza es una experiencia única y reconfortante. Desde el espresso
@@ -319,7 +320,7 @@
                 </div>
                 <div class="row justify-content-center d-flex ">
                     <div class="col-6 col-sm-6 col-md-4 col-lg-3 p-3 ">
-                        <div class="card product-card">
+                        <div class="card product-card" style="border-radius: 5% 5% 0% 0%;">
                             <img src="./img/cafes/bolsa2.webp" class=" coffee-image " alt="Cappucino">
                             <div class="card-body product-card-body">
                                 <h5 class="card-title fw-bold " style="letter-spacing: 1px;">Cappucino</h5>
@@ -332,7 +333,7 @@
                         </div>
                     </div>
                     <div class="col-6 col-sm-6 col-md-4 col-lg-3 p-3">
-                        <div class="card product-card">
+                        <div class="card product-card" style="border-radius: 5% 5% 0% 0%;">
                             <img src="./img/cafes/bolsa1.webp" class=" coffee-image " alt="Moccacino">
                             <div class="card-body product-card-body">
                                 <h5 class="card-title fw-bold " style="letter-spacing: 1px;">Moccacino</h5>
@@ -345,7 +346,7 @@
                         </div>
                     </div>
                     <div class="col-6 col-sm-6 col-md-4 col-lg-3 p-3 d-none d-md-block">
-                        <div class="card product-card">
+                        <div class="card product-card" style="border-radius: 5% 5% 0% 0%;">
                             <img src="./img/cafes/bolsa3.webp" class=" coffee-image" alt="Waffle Ice Cream">
                             <div class="card-body product-card-body">
                                 <h5 class="card-title fw-bold" style="letter-spacing: 1px;">Waffle Ice Cream</h5>
@@ -359,7 +360,7 @@
                         </div>
                     </div>
                     <div class="col-6 col-sm-6 col-md-4 col-lg-3 p-3 d-none d-md-block">
-                        <div class="card product-card">
+                        <div class="card product-card" style="border-radius: 5% 5% 0% 0%;">
                             <img src="./img/cafes/bolsa1.webp" class=" coffee-image" alt="Waffle Ice Cream">
                             <div class="card-body product-card-body">
                                 <h5 class="card-title fw-bold" style="letter-spacing: 1px;">Waffle Ice Cream</h5>
@@ -394,9 +395,9 @@
 
                 <div class="row  justify-content-center d-flex">
                     <!-- Blog Card 1 -->
-                    <div class="col-md-4 p-3 col-6 col-sm-6  col-sm-6">
-                        <div class="card blog-card">
-                            <img src="./img/cafes/lugar1.webp" class="card-img-top coffee-image" alt="Image 1">
+                    <div class="col-md-4 p-3 col-6 col-sm-6 " >
+                        <div class="card blog-card"style="border-radius: 5% 5% 0% 0%;">
+                            <img src="./img/cafes/lugar1.webp" class="coffee-image" alt="Image 1">
                             <div class="card-body">
                                 <h5 class="blog-card-title">MAKE IT SIMPLE</h5>
                                 <h6 class="blog-card-subtitle mb-2 text-muted">20/20/2020
@@ -409,9 +410,9 @@
                         </div>
                     </div>
                     <!-- Blog Card 2 -->
-                    <div class="col-md-4 p-3 col-6 col-sm-6  col-sm-6">
-                        <div class="card blog-card">
-                            <img src="./img/cafes/cafe8.webp" class="card-img-top coffee-image" alt="Image 2">
+                    <div class="col-md-4 p-3 col-6 col-sm-6 " >
+                        <div class="card blog-card"style="border-radius: 5% 5% 0% 0%;">
+                            <img src="./img/cafes/cafe8.webp" class="coffee-image" alt="Image 2">
                             <div class="card-body">
                                 <h5 class="blog-card-title">COFFEE SHOP</h5>
                                 <h6 class="blog-card-subtitle mb-2 text-muted">20/20/2020
@@ -424,9 +425,9 @@
                         </div>
                     </div>
                     <!-- Blog Card 3 -->
-                    <div class="col-md-4 p-3 col-6 col-sm-6  col-sm-6 d-none d-md-block">
-                        <div class="card blog-card">
-                            <img src="./img/cafes/cafe4.webp" class="card-img-top coffee-image" alt="Image 3">
+                    <div class="col-md-4 p-3 col-6 col-sm-6 d-none d-md-block" >
+                        <div class="card blog-card" style="border-radius: 5% 5% 0% 0%;">
+                            <img src="./img/cafes/cafe4.webp" class="coffee-image" alt="Image 3">
                             <div class="card-body">
                                 <h5 class="blog-card-title">COFFEE BAR</h5>
                                 <h6 class="blog-card-subtitle mb-2 text-muted">20/20/2020
