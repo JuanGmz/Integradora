@@ -10,6 +10,7 @@ id_categoria int auto_increment not null,
 nombre nvarchar(100) not null,
 descripcion nvarchar(150),
 tipo enum('Menu','Evento') not null,
+img_url nvarchar(255),
 primary key(id_categoria)
 );
 
