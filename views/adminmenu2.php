@@ -68,9 +68,6 @@
                                                 aria-current="true">
                                                 Administrar Menú
                                             </a>
-                                            <br><br>
-                                            <a href="#" class="ms-5 text-light fw-bold fs-5 text-decoration-none">Ver
-                                                Menú</a>
                                         </div>
                                     </div>
                                 </div>
@@ -99,9 +96,6 @@
                                             <a href="adminReservas.html"
                                                 class="text-light fw-bold fs-5 text-decoration-none ms-5">
                                                 Administar Reservas
-                                            </a><br><br>
-                                            <a href="#" class="text-light fw-bold fs-5 text-decoration-none ms-5">Ver
-                                                Eventos
                                             </a>
                                         </div>
                                     </div>
@@ -131,9 +125,6 @@
                                             <a href="adminProductosEcommerce.html"
                                                 class="fw-bold fs-4 ms-5 text-light text-decoration-none">
                                                 Administrar Productos
-                                            </a><br><br>
-                                            <a href="#" class="fw-bold fs-5 ms-5 text-light text-decoration-none">
-                                                Ver E-Commerce
                                             </a>
                                         </div>
                                     </div>
@@ -145,7 +136,7 @@
                                             aria-expanded="false" aria-controls="flush-blog">
                                             <div class="col-8">
                                                 <i class="fa-solid fa-blog me-3"></i>
-                                                Blog
+                                                Publicaciones
                                             </div>
                                             <div class="col-4 text-end">
                                                 <i class="fa-solid fa-chevron-down"></i>
@@ -158,11 +149,8 @@
                                             <a href="adminBlog.html"
                                                 class="fw-bold fs-5 ms-5 text-light text-decoration-none"
                                                 aria-current="true">
-                                                Administrar Blog
+                                                Administrar Publicaciones
                                             </a><br><br>
-                                            <a href="#" class="fw-bold fs-5 ms-5 text-light text-decoration-none">Ver
-                                                Blog
-                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -188,10 +176,7 @@
                                                 aria-current="true">
                                                 Administrar Recompensa
                                             </a>
-                                            <br><br>
-                                            <a href="#" class="fw-bold fs-5 ms-5 text-light text-decoration-none">Ver
-                                                Recompensas
-                                            </a>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -242,10 +227,6 @@
                                     aria-current="true">
                                     Administrar Menú
                                 </a>
-                                <br><br>
-                                <a href="#" class="ms-5 text-light fw-bold fs-6 text-decoration-none">
-                                    Ver Menú
-                                </a>
                             </div>
                         </div>
                     </div>
@@ -271,9 +252,6 @@
                                 </a><br><br>
                                 <a href="adminReservas.html" class="text-light fw-bold fs-6 text-decoration-none ms-5">
                                     Administar Reservas
-                                </a><br><br>
-                                <a href="#" class="text-light fw-bold fs-6 text-decoration-none ms-5">
-                                    Ver Eventos
                                 </a>
                             </div>
                         </div>
@@ -301,9 +279,6 @@
                                 <a href="adminProductosEcommerce.html"
                                     class="fw-bold fs-6 ms-5 text-light text-decoration-none">
                                     Administrar Productos
-                                </a><br><br>
-                                <a href="#" class="fw-bold fs-6 ms-5 text-light text-decoration-none">Ver
-                                    E-Commerce
                                 </a>
                             </div>
                         </div>
@@ -315,7 +290,7 @@
                                 aria-controls="flush-blog">
                                 <div class="col-8">
                                     <i class="fa-solid fa-blog me-1"></i>
-                                    Blog
+                                    Publicaciones
                                 </div>
                                 <div class="col-4 text-end">
                                     <i class="fa-solid fa-chevron-down"></i>
@@ -326,10 +301,7 @@
                             <div class="accordion-body bg-dark">
                                 <a href="adminBlog.html" class="fw-bold fs-6 ms-5 text-light text-decoration-none"
                                     aria-current="true">
-                                    Administrar Blog
-                                </a><br><br>
-                                <a href="#" class="fw-bold fs-6 ms-5 text-light text-decoration-none">Ver
-                                    Blog
+                                    Administrar Publicaciones
                                 </a>
                             </div>
                         </div>
@@ -354,10 +326,6 @@
                                     class="fw-bold fs-6 ms-5 text-light text-decoration-none" aria-current="true">
                                     Administrar Recompensa
                                 </a>
-                                <br><br>
-                                <a href="" class="fw-bold fs-6 ms-5 text-light text-decoration-none">
-                                    Ver Recompensas
-                                </a>
                             </div>
                         </div>
                     </div>
@@ -376,8 +344,9 @@
                                 data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
                                 Agregar Producto
                             </button>
-                            <a href="../index.php" class="text-decoration-none"><i
-                                    class="fa-solid fa-house fa-2x"></i></a>
+                            <a href="../index.php" class="text-decoration-none">
+                                <i class="fa-solid fa-house fa-2x"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -391,16 +360,16 @@
                                             <option selected disabled value="">Seleccionar Categoria</option>
                                             <!-- Aqui va el select de categorías -->
                                             <?php
-                                                include_once ('../class/database.php');
-                                                $db = new Database();
-                                                $db->conectarDB();
+                                            include_once ('../class/database.php');
+                                            $db = new Database();
+                                            $db->conectarDB();
 
-                                                $query = "SELECT id_categoria, nombre FROM categorias WHERE tipo = 'Menu'";
-                                                $categorias = $db->select($query);
-                                                foreach ($categorias as $categoria) {
-                                                    $selected = (isset($_POST['categoria']) && $_POST['categoria'] == $categoria->id_categoria) ? 'selected' : '';
-                                                    echo "<option value='".htmlspecialchars($categoria->id_categoria)."' $selected>".htmlspecialchars($categoria->nombre)."</option>";
-                                                }
+                                            $query = "SELECT id_categoria, nombre FROM categorias WHERE tipo = 'Menu'";
+                                            $categorias = $db->select($query);
+                                            foreach ($categorias as $categoria) {
+                                                $selected = (isset($_POST['categoria']) && $_POST['categoria'] == $categoria->id_categoria) ? 'selected' : '';
+                                                echo "<option value='" . htmlspecialchars($categoria->id_categoria) . "' $selected>" . htmlspecialchars($categoria->nombre) . "</option>";
+                                            }
                                             ?>
                                         </select>
                                     </div>
@@ -414,55 +383,144 @@
                 </div>
                 <div class="row mt-3 p-4 m-0">
                     <?php
-                    if (isset($_POST["categoria"])) {
-                        include_once ('../class/database.php');
-                        $db = new Database();
-                        $db->conectarDB();
-                        extract($_POST);
+                        if (isset($_POST["categoria"])) {
+                            extract($_POST);
                             echo "<table class='table table-striped table-hover table-dark text-center'>
-                                    <thead>
-                                        <tr>
-                                            <th scope='col'>Nombre</th>
-                                            <th scope='col'>Acciones</th>
-                                        </tr>
-                                    </thead>
-                                <tbody class='table-group-divider table-light'>";
-                            $query = "SELECT * FROM productos_menu WHERE id_categoria = $categoria";
+                                        <thead>
+                                            <tr>
+                                                <th scope='col'>Nombre</th>
+                                                <th scope='col'>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                    <tbody class='table-group-divider table-light'>";
+                            $query = "SELECT 
+                                        pm.id_pm, 
+                                        pm.img_url, 
+                                        pm.nombre, 
+                                        pm.descripcion,  
+                                        c.nombre AS categoria
+                                      FROM 
+                                        productos_menu AS pm 
+                                    JOIN 
+                                        categorias AS c ON pm.id_categoria = c.id_categoria WHERE c.id_categoria = $categoria";
                             $productos = $db->select($query);
                             foreach ($productos as $producto) {
                                 echo "
-                                    <tr>
-                                    <td>$producto->nombre</td>
-                                        <td class='d-flex flex-row align-items-center justify-content-center gap-1'>
-                                            <!-- Imagen -->
-                                            <!-- Botón que activa el modal de ver la imagen  -->
-                                            <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#modalImagen_$producto->id_pm'>
-                                                <i class='fa-solid fa-image'></i>
-                                            </button>
-                                            <!-- Modal de ver imagen -->
-                                            <div class='modal fade' id='modalImagen_$producto->id_pm' tabindex='-1' aria-labelledby='modalImagenLabel' aria-hidden='true'>
-                                                <div class='modal-dialog modal-dialog-centered modal-dialog-scrollable'>
-                                                    <div class='modal-content'>
-                                                        <div class='modal-header'>
-                                                            <h5 class='modal-title' id='modalImagenLabel'>$producto->nombre</h5>
-                                                            <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                                                        </div>
-                                                        <div class='modal-body'>
-                                                            <img src='$producto->img_url' class='img-fluid' alt='img'>
+                                        <tr>
+                                        <td>$producto->nombre</td>
+                                            <td class='d-flex flex-row align-items-center justify-content-center gap-1'>
+                                                <!-- Imagen -->
+                                                <!-- Botón que activa el modal de ver la imagen  -->
+                                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#modalImagen_$producto->id_pm'>
+                                                    <i class='fa-solid fa-image'></i>
+                                                </button>
+                                                <!-- Modal de ver imagen -->
+                                                <div class='modal fade' id='modalImagen_$producto->id_pm' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+                                                    <div class='modal-dialog'>
+                                                        <div class='modal-content'>
+                                                            <div class='modal-header'>
+                                                                <h1 class='modal-title fs-5' id='exampleModalLabel'>$producto->nombre</h1>
+                                                            </div>
+                                                            <div class='modal-body mb-3'>
+                                                                <!-- Aquí se está mostrando la imagen -->
+                                                                <form action='../scripts/adminmenu/editarImagen.php' method='POST'>
+                                                                    <div class='col-12 mb-3'>
+                                                                        <label for='imagen' class='form-label'>Imagen Actual</label><br>
+                                                                        <img src='../img/cafes/" . htmlspecialchars($producto->img_url) . "' class='img-fluid' alt='Imagen Actual'><br>
+                                                                            <small>Selecciona una nueva imagen para actualizar, si es necesario.</small>
+                                                                        </div>
+                                                                        <div class='col-12 mb-3'>
+                                                                            <label for='imagen_nueva' class='form-label'>Selecciona una nueva imagen:</label>
+                                                                            <input type='file' class='form-control' id='imagen_nueva' name='imagen_nueva' accept='image/*' required>
+                                                                        </div>
+                                                                        <input type='hidden' name='id_pm' value='$producto->id_pm'>
+                                                                        <div class='col-12 mb-3 text-end'>
+                                                                            <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
+                                                                            <button type='submit' class='btn btn-primary'>Actualizar</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                    </tr>";
+
+                                                <!-- Botón que activa el modal de ver detalles del producto -->
+                                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#detalleProducto_$producto->id_pm'>
+                                                    <i class='fa-solid fa-bars'></i>
+                                                </button>
+                                                <div class='modal fade' id='detalleProducto_$producto->id_pm' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+                                                    <div class='modal-dialog'>
+                                                        <div class='modal-content'>
+                                                            <div class='modal-header'>
+                                                                <h1 class='modal-title fs-5' id='exampleModalLabel'>Detalles del Producto</h1>
+                                                                <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                                            </div>
+                                                            <!-- Aquí va el contenido del modal -->
+                                                            <div class='modal-body'>
+                                                                <h5 class='text-start fw-bold mb-3'>Nombre: <span class='fw-normal'>$producto->nombre</span></h5>
+                                                                <h5 class='text-start fw-bold mb-3'>Descripción: <span class='fw-normal'>$producto->descripcion</span></h5>
+                                                                <h5 class='text-start fw-bold mb-3'>Categoría: <span class='fw-normal'>{$producto->categoria}</span></h5>
+                                                                <!-- Tabla de productos -->
+                                                                <table class='table table-light table-striped text-center mt-4' border='1'>
+                                                                    <thead class='table-dark'>
+                                                                        <th>Medida</th>
+                                                                        <th>Precio</th>
+                                                                        <th>Acciones</th>
+                                                                    </thead>
+                                                                    <tbody class='table-group-divider'>";
+                                                                    //Consulta de productos_menu relacionados con este detalle
+                                                                    $queryMedidas = "SELECT medida, precio FROM detalle_productos_menu WHERE id_pm = $producto->id_pm";
+                                                                    $medidas = $db->select($queryMedidas);
+                                                                    foreach ($medidas as $medida_precio) {
+                                                                        echo "<tr>
+                                                                                <td>$medida_precio->medida</td>
+                                                                                <td>$medida_precio->precio</td>
+                                                                                <td>
+                                                                                    <form action='../scripts/adminmenu/eliminarMedida.php' method='POST'>
+                                                                                        <input type='hidden' name='id_pm' value='$producto->id_pm'>
+                                                                                        <input type='hidden' name='medida' value='$medida_precio->medida'>
+                                                                                        <input type='hidden' name='precio' value='$medida_precio->precio'>
+                                                                                        <button type='submit' class='btn btn-danger'><i class='fa-solid fa-trash'></i></button>
+                                                                                    </form>
+                                                                            </tr>";
+                                                                    }
+                                                                    echo "
+                                                                    </tbody>
+                                                                </table>
+                                                                <div class='row'>
+                                                                    <div class='col-12'>
+                                                                        <form class='text-start' method='POST'>
+                                                                            <div class='row'>
+                                                                                <div class='col-6'>
+                                                                                    <label class='form-label'>Medida extra</label>
+                                                                                    <input type='text' maxlength='15' name='medidaExtra' class='form-control' required>
+                                                                                </div>
+                                                                                <div class='col-6'>
+                                                                                    <label class='form-label'>Precio extra</label>
+                                                                                    <input type='number' name='precioExtra' class='form-control' required>
+                                                                                    <input type='hidden' name='id_pm' value='$producto->id_pm'>
+                                                                                </div>
+                                                                                <div class='col-12 text-end mt-3'>
+                                                                                    <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cerrar</button>
+                                                                                    <button type='submit' class='btn btn-primary'>Agregar</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </form>  
+                                                                    </div>
+                                                                </div>       
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>";
                             }
                             echo "</tbody></table>";
-                        }
-                        else {
+                        } else {
                             echo "<div class='alert alert-warning' role='alert'>Selecciona una categoria</div>";
                         }
                     ?>
-
                 </div>
             </div>
         </div>
