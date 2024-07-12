@@ -45,10 +45,10 @@
                         <div class="justify-content-end d-flex p-2 ">
                             <div class="dropdown ">
                                 <i class="fa-solid fa-user" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;"></i>
-                                <div class="dropdown-menu" aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="#account">Cuenta</a>
-                                    <a class="dropdown-item" href="#logout">Cerrar Sesión</a>
-                                    <a class="dropdown-item" href="#cart">Carrito</a>
+                                <div class="dropdown-menu dropdown-itemcolor" aria-labelledby="userDropdown">
+                                    <a class="dropdown-item dropdown-itemcolor" href="#account">Cuenta</a>
+                                    <a class="dropdown-item dropdown-itemcolor" href="#logout">Cerrar Sesión</a>
+                                    <a class="dropdown-item dropdown-itemcolor" href="#cart">Carrito</a>
                                 </div>
                             </div>
                         </div>
