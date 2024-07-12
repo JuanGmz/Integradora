@@ -4,20 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú</title>
+    <title>Perfil</title>
     <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/style.css">
 </head>
 
 <body>
+
     <!-- NavBar -->
     <nav class="navbar navbar-expand-lg shadow-lg mb-lg-5">
         <div class="container-fluid">
             <a class="navbar-brand" href="../index.html">
                 <img src="../../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
             </a>
-            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar"
-                aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -42,12 +42,25 @@
                         <li class="nav-item">
                             <a class="nav-link mx-lg-2" href="contact.html">Contacto</a>
                         </li>
+                        <div class="justify-content-end d-flex p-2 ">
+                            <div class="dropdown ">
+                                <i class="fa-solid fa-user" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;"></i>
+                                <div class="dropdown-menu dropdown-itemcolor" aria-labelledby="userDropdown">
+                                    <a class="dropdown-item dropdown-itemcolor" href="#account">Cuenta</a>
+                                    <a class="dropdown-item dropdown-itemcolor" href="#logout">Cerrar Sesión</a>
+                                    <a class="dropdown-item dropdown-itemcolor" href="#cart">Carrito</a>
+                                </div>
+                            </div>
+                        </div>
                     </ul>
                 </div>
             </div>
-            <a href="login.html" class="login-button ms-auto">Iniciar Sesión</a>
-            <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+
+
+
+
+
+            <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
@@ -59,40 +72,58 @@
         <!-- Breadcrumbs -->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb mt-4">
-                <li class="breadcrumb-item"><a href="../menu.php">Menú</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Clásicos</li>
+                <li class="breadcrumb-item"><a href="../menu.php">Inicio</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Perfil</li>
             </ol>
         </nav>
 
         <!-- Titulo -->
-        <h1>Clásicos</h1>
+        <h1 class="fw-bold">Perfil</h1>
+        <div class="container mt-5">
 
-        <hr>
+            <hr class="section-divider">
 
-        <div class="row mb-3">
-            <?php
-                include_once("../../class/database.php");
-                $db = new Database();
-                $db->conectarDB();
+            <!-- Order History Section -->
+            <h4>Historial de pedidos</h4>
+            <p>No hay historial de pedidos</p>
 
-                $query = "CALL listar_productos_menu('Clasicos')";
+            <!-- Account Details Section -->
+            <h4 class="mt-4">Detalles de la cuenta</h4>
+            <table class="table table-striped table-warning">
+                <tbody>
+                    <tr>
+                        <th scope="row">Nombre:</th>
+                        <td>Dante Raziel Basurto Saucedo</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Email:</th>
+                        <td>bune_assassin@hotmail.com</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Dirección:</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Dirección 2:</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">País:</th>
+                        <td>México</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Código postal:</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Teléfono:</th>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
 
-                $clasicos = $db->select($query);
-
-                foreach ($clasicos as $clasico) {
-                    echo "
-                        <div class='col-6 col-lg-3 mb-3'>
-                            <div class='card border-0' style='background: var(--color6);'> 
-                                <img src='../../img/cafes/{$clasico->img_url}' class='card-img-top rounded-5' alt='clasico" . $clasico->id_pm . "'>
-                                <div class='card-body'>
-                                    <h5 class='card-title fw-bold text-center'>{$clasico->nombre}</h5>
-                                </div>
-                            </div>
-                        </div>
-                    ";
-                }
-            ?>
-
+            <!-- View Addresses Button -->
+            <button class="btn btn-danger">Ver Direcciones (1)</button>
         </div>
     </div>
 
@@ -129,8 +160,16 @@
         </div>
     </footer>
 
-    <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://kit.fontawesome.com/b820f07375.js" crossorigin="anonymous"></script>
+
+
+
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/45ef8dbe96.js" crossorigin="anonymous"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 
 </html>

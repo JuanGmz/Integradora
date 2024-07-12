@@ -29,7 +29,7 @@
 /* Estilos globales */
 body {
     font-family: 'MiFuentePersonalizada', sans-serif;
-    background: var(--color5);
+    background: var(--color6);
 
 }
 
@@ -60,6 +60,7 @@ a:hover {
 .coffee-image {
     width: 100%; /* Ancho del contenedor */
     object-fit: cover; /* Ajuste para cubrir el contenedor manteniendo la relación de aspecto */
+    border-radius: 5% 5% 0% 0%;
 }
 
 @media (min-width: 768px) {
@@ -537,4 +538,23 @@ a:hover {
 
 .bg-dark{
     background-color:  rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+}
+/*---------------------------- Perfil----------------------------------*/
+.section-divider {
+    border-top: 2px solid var(--color3); /* Light gray color */
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.dropdown .fa-user {
+    transition: color 0.3s ease;
+}
+.dropdown .fa-user:hover {
+    color: var(--obscuro); /* Change this color to whatever you prefer */
+}
+.dropdown-itemcolor{
+    background-color: var(--color1);
+}
+.dropdown-itemcolor:hover{
+    background-color: var(--cuarto);
+    color: var(--blanco);
 }

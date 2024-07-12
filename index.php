@@ -58,15 +58,15 @@
                 <img src="img/sinfo.webp" class="img-fluid p-0 m-0" alt="imginicio" lazy="loading">
             </div>
             <div class="col-lg-4 d-flex flex-column justify-content-center align-items-center p-5" style="background: var(--color3);">
-                <div class="row">
+                <div class="row ">
                     <div class="col-12">
                         <h1 class="text-light text-center" style="letter-spacing: 1px;">Prueba el mejor café de la
                             ciudad</h1>
                     </div>
                 </div>
-                <div class="row mb-3">
-                    <div class="col-12">
-                        <h5 class="text-light">La mejor calidad para ti</h5>
+                <div class="row mb-3 p-2 ">
+                    <div class="col-12 d-flex justify-content-center">
+                        <h5 class="text-light text-center">La mejor calidad para ti</h5>
                     </div>
                 </div>
                 <div class="row">
@@ -88,7 +88,7 @@
             <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center">
                 <div class="container-fluid p-5 ">
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-12 d-flex justify-content-center">
                             <h1 class="fw-bold text-center">SinfoníaCafé&Cultura</h1>
                         </div>
                     </div>
@@ -101,9 +101,9 @@
                                 facere, aut earum sapiente voluptate officia soluta explicabo quaerat nihil officiis
                                 commodi animi. In deserunt culpa provident pariatur.
                             </p>
-                            
-                            <a href="#" class="btn btn-cafe w-100  ">Ver mas</a>
-                         
+
+                            <a href="#" class="btn btn-cafe ">Ver mas</a>
+
                         </div>
                     </div>
                 </div>
@@ -113,19 +113,20 @@
                     <div class="row story-section justify-content-center d-flex">
                         <div class="col-md-8 col-12 col-sm-8">
                             <div class="row justify-content-center d-flex">
-                                <div class="col-md-6 mb-4 col-4 col-sm-5">
-                                    <img src="./img/cafes/cafe7.webp" alt="Coffee Image 1" class="img-thumbnail">
+                                <!-- imagen 1 -->
+                                <div class="col-md-6 mb-4 col-4 col-sm-6 col-6">
+                                    <img src="./img/cafes/dino1.webp" alt="Coffee Image 3" class="img-thumbnail">
                                 </div>
-                                <div class="col-md-6 mb-4 col-4 col-sm-5">
+                                <!-- imagen 2 -->
+                                <div class="col-md-6 mb-4 col-4 col-sm-6 col-6">
                                     <img src="./img/cafes/cafe9.webp" alt="Coffee Image 2" class="img-thumbnail">
                                 </div>
-
-                            </div>
-                            <div class="row justify-content-center d-flex">
-                                <div class="col-md-6 mb-4 col-4 col-sm-5 ">
-                                    <img src="./img/cafes/muñeco1.webp" alt="Coffee Image 3" class="img-thumbnail">
+                                <!-- imafen 3 -->
+                                <div class="col-md-6 mb-4 col-4 col-sm-5 d-none d-md-block ">
+                                    <img src="./img/cafes/cafe7.webp" alt="Coffee Image 1" class="img-thumbnail">
                                 </div>
-                                <div class="col-md-6 mb-4 col-4 row-cols-sm-5">
+                                <!-- imagen 4 -->
+                                <div class="col-md-6 mb-4 col-4 col-sm-5 d-none d-md-block">
                                     <img src="./img/cafes/dino2.webp" alt="Coffee Image 4" class="img-thumbnail">
                                 </div>
                             </div>
@@ -160,20 +161,21 @@
                             <!--Frappes-->
                             <button class=" btn-categorias   w-100" id="Frappes-tab" data-bs-toggle="tab" data-bs-target="#Frappes" type="button" role="tab" aria-controls="Frappes" aria-selected="false">Frappes</button>
                         </li>
-                        
+
                     </ul>
                 </div>
                 <!-- Contenido de las categorias -->
                 <div class="tab-content col-12 p-1" id="menuTabsContent">
-                    <!--Contenido para Clasicos -->
+
                     <div class="tab-pane fade show active" id="clasicos" role="tabpanel" aria-labelledby="clasicos-tab">
+                        <!--Contenido para Clasicos -->
                         <div class="row justify-content-center mb-5">
                             <div class="col-12 col-md-8 d-flex align-items-center">
                                 <div class="d-flex flex-wrap w-100 d-flex justify-content-center">
-                                    <div class="col-10 col-md-6 p-2 col-sm-10">
-                                        <img src="./img/cafes/cafe11.webp" class="card-img-top img-fluid" alt="..." style="height: 250px; object-fit: cover; width: 300px;">
+                                    <div class="col-10 col-md-6 p-2 col-sm-10" >
+                                        <img src="./img/cafes/cafe15.webp" class="card-img-top img-fluid" alt="..." style="height: 250px; object-fit: cover;">
                                     </div>
-                                    <div class="col-10 col-sm-10 col-md-6 p-2 d-flex flex-column justify-content-cente p-lg-2">
+                                    <div class="col-9 col-sm-9  col-md-6 p-2 d-flex flex-column justify-content-cente p-lg-2">
                                         <h5 class="fw-bold mb-3" style="letter-spacing: 1px;">Menu Clasicos</h5>
                                         <p class="text-dark-emphasis mb-4 ">Explora nuestro Menú Clásico de Café, donde
                                             cada taza es una experiencia única y reconfortante. Desde el espresso
@@ -190,7 +192,7 @@
                         <div class="row justify-content-center mb-5">
                             <div class="col-12 col-md-8 d-flex align-items-center">
                                 <div class="d-flex flex-wrap w-100 d-flex justify-content-center">
-                                    <div class="col-7 col-md-6 p-2 col-sm-6">
+                                    <div class="col-10 col-md-6 p-2 col-sm-10">
                                         <img src="./img/cafes/cafe12.webp" class="card-img-top img-fluid" alt="..." style="height: 300px; object-fit: cover;">
                                     </div>
                                     <div class="col-9 col-sm-9  col-md-6 p-2 d-flex flex-column justify-content-cente p-lg-2">
@@ -210,7 +212,7 @@
                         <div class="row justify-content-center mb-5">
                             <div class="col-12 col-md-8 d-flex align-items-center">
                                 <div class="d-flex flex-wrap w-100 d-flex justify-content-center">
-                                    <div class="col-7 col-md-6 p-2 col-sm-6">
+                                    <div class="col-10 col-md-6 p-2 col-sm-10">
                                         <img src="./img/cafes/cafe3.webp" class="card-img-top img-fluid" alt="..." style="height: 300px; object-fit: cover;">
                                     </div>
                                     <div class="col-9 col-sm-9  col-md-6 p-2 d-flex flex-column justify-content-cente p-lg-2">
@@ -231,7 +233,7 @@
                         <div class="row justify-content-center mb-5">
                             <div class="col-12 col-md-8 d-flex align-items-center">
                                 <div class="d-flex flex-wrap w-100 d-flex justify-content-center">
-                                    <div class="col-7 col-md-6 p-2 col-sm-6">
+                                    <div class="col-10 col-md-6 p-2 col-sm-10">
                                         <img src="./img/cafes/cafe6.webp" class="card-img-top img-fluid" alt="..." style="height: 300px; object-fit: cover;">
                                     </div>
                                     <div class="col-9 col-sm-9  col-md-6 p-2 d-flex flex-column justify-content-cente p-lg-2">
@@ -260,7 +262,7 @@
                 </div>
                 <!--seccion de servicios-->
                 <div class="d-flex justify-content-center p-2">
-                    <section class="col-12 row justify-content-center">
+                    <section class="col-12 row justify-content-center p-2">
 
                         <!-- Envio a tu Servicio-->
                         <div class="col-8 col-sm-6 col-sm-5 col-lg-4 m-0 p-0 text-center justify-content-center d-flex card-feature p-1">
@@ -317,10 +319,9 @@
                     <h1 class="fw-bold text-center" style="letter-spacing: 1px;">E-Commerce</h1>
                 </div>
                 <div class="row justify-content-center d-flex ">
-
                     <div class="col-6 col-sm-6 col-md-4 col-lg-3 p-3 ">
-                        <div class="card product-card">
-                            <img src="./img/cafes/bolsa2.webp" class="card-img-top coffee-image " alt="Cappucino">
+                        <div class="card product-card" style="border-radius: 5% 5% 0% 0%;">
+                            <img src="./img/cafes/bolsa2.webp" class=" coffee-image " alt="Cappucino">
                             <div class="card-body product-card-body">
                                 <h5 class="card-title fw-bold " style="letter-spacing: 1px;">Cappucino</h5>
                                 <p class="card-text">Hot Cappucino</p>
@@ -332,8 +333,8 @@
                         </div>
                     </div>
                     <div class="col-6 col-sm-6 col-md-4 col-lg-3 p-3">
-                        <div class="card product-card">
-                            <img src="./img/cafes/bolsa1.webp" class="card-img-top coffee-image " alt="Moccacino">
+                        <div class="card product-card" style="border-radius: 5% 5% 0% 0%;">
+                            <img src="./img/cafes/bolsa1.webp" class=" coffee-image " alt="Moccacino">
                             <div class="card-body product-card-body">
                                 <h5 class="card-title fw-bold " style="letter-spacing: 1px;">Moccacino</h5>
                                 <p class="card-text">Hot Moccacino</p>
@@ -344,9 +345,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-11 col-sm-6 col-md-4 col-lg-3 p-3 d-none d-md-block">
-                        <div class="card product-card">
-                            <img src="./img/cafes/bolsa3.webp" class="card-img-topc coffee-image" alt="Waffle Ice Cream">
+                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 p-3 d-none d-md-block">
+                        <div class="card product-card" style="border-radius: 5% 5% 0% 0%;">
+                            <img src="./img/cafes/bolsa3.webp" class=" coffee-image" alt="Waffle Ice Cream">
                             <div class="card-body product-card-body">
                                 <h5 class="card-title fw-bold" style="letter-spacing: 1px;">Waffle Ice Cream</h5>
                                 <p class="card-text">Waffle with Ice Cream</p>
@@ -358,9 +359,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-11 col-sm-6 col-md-4 col-lg-3 p-3 d-none d-md-block">
-                        <div class="card product-card">
-                            <img src="./img/cafes/bolsa1.webp" class="card-img-top coffee-image" alt="Waffle Ice Cream">
+                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 p-3 d-none d-md-block">
+                        <div class="card product-card" style="border-radius: 5% 5% 0% 0%;">
+                            <img src="./img/cafes/bolsa1.webp" class=" coffee-image" alt="Waffle Ice Cream">
                             <div class="card-body product-card-body">
                                 <h5 class="card-title fw-bold" style="letter-spacing: 1px;">Waffle Ice Cream</h5>
                                 <p class="card-text">Waffle with Ice Cream</p>
@@ -394,9 +395,9 @@
 
                 <div class="row  justify-content-center d-flex">
                     <!-- Blog Card 1 -->
-                    <div class="col-md-4 p-3 col-6 col-sm-6  col-sm-6">
-                        <div class="card blog-card">
-                            <img src="./img/cafes/lugar1.webp" class="card-img-top coffee-image" alt="Image 1">
+                    <div class="col-md-4 p-3 col-6 col-sm-6 " >
+                        <div class="card blog-card"style="border-radius: 5% 5% 0% 0%;">
+                            <img src="./img/cafes/lugar1.webp" class="coffee-image" alt="Image 1">
                             <div class="card-body">
                                 <h5 class="blog-card-title">MAKE IT SIMPLE</h5>
                                 <h6 class="blog-card-subtitle mb-2 text-muted">20/20/2020
@@ -409,9 +410,9 @@
                         </div>
                     </div>
                     <!-- Blog Card 2 -->
-                    <div class="col-md-4 p-3 col-6 col-sm-6  col-sm-6">
-                        <div class="card blog-card">
-                            <img src="./img/cafes/cafe8.webp" class="card-img-top coffee-image" alt="Image 2">
+                    <div class="col-md-4 p-3 col-6 col-sm-6 " >
+                        <div class="card blog-card"style="border-radius: 5% 5% 0% 0%;">
+                            <img src="./img/cafes/cafe8.webp" class="coffee-image" alt="Image 2">
                             <div class="card-body">
                                 <h5 class="blog-card-title">COFFEE SHOP</h5>
                                 <h6 class="blog-card-subtitle mb-2 text-muted">20/20/2020
@@ -424,9 +425,9 @@
                         </div>
                     </div>
                     <!-- Blog Card 3 -->
-                    <div class="col-md-4 p-3 col-6 col-sm-6  col-sm-6 d-none d-md-block">
-                        <div class="card blog-card">
-                            <img src="./img/cafes/cafe4.webp" class="card-img-top coffee-image" alt="Image 3">
+                    <div class="col-md-4 p-3 col-6 col-sm-6 d-none d-md-block" >
+                        <div class="card blog-card" style="border-radius: 5% 5% 0% 0%;">
+                            <img src="./img/cafes/cafe4.webp" class="coffee-image" alt="Image 3">
                             <div class="card-body">
                                 <h5 class="blog-card-title">COFFEE BAR</h5>
                                 <h6 class="blog-card-subtitle mb-2 text-muted">20/20/2020

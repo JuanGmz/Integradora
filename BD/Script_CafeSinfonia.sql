@@ -17,6 +17,7 @@ create table publicaciones(
 id_publicacion int auto_increment not null,
 titulo nvarchar(100) not null,
 descripcion nvarchar(500),
+fecha datetime default current_timestamp,
 img_url nvarchar(100),
 tipo enum('Difusion','Blog') not null,
 primary key(id_publicacion) 
@@ -291,23 +292,42 @@ condicion int not null,
 fecha_inicio date not null, 
 fecha_expiracion date not null,
 estatus enum('Activa','Inactiva'),
-img_url nvarchar(100)null,
+img_url nvarchar(255) not null,
 primary key (id_recompensa)
 );
 
--- Define el campo de estatus al momento de ingresar una nueva recompensa.
-DELIMITER //
-CREATE TRIGGER before_insert_actualizar_estatus_recompensa
-BEFORE INSERT ON recompensas
-FOR EACH ROW
-BEGIN
-    IF curdate() >= new.fecha_inicio and curdate() < new.fecha_expiracion  THEN
-         SET NEW.estatus = 'Activa';
+-- Validar el estatus al ingresar una nueva recompensa
+delimiter //
+create procedure sp_agregar_recompensa(
+in p_recompensa nvarchar(150),
+in p_condicion int,
+in p_fecha_inicio date, 
+in p_fecha_expiracion date,
+in p_img_url varchar(100)
+)
+begin
+	IF p_fecha_expiracion < p_fecha_inicio or p_condicion < 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Periodo campos invalidos.';
     ELSE
-        SET NEW.estatus = 'Inactiva';
+		INSERT INTO recompensas (recompensa, condicion, fecha_inicio, fecha_expiracion, img_url)
+		VALUES (p_recompensa, p_condicion, p_fecha_inicio, p_fecha_expiracion, p_img_url);
     END IF;
-END//
-DELIMITER ;
+end // 
+delimiter ;
+
+-- Asignar estatus antes de insertar recompensa
+delimiter //
+create trigger before_insert_recompensas_estatus
+before insert on recompensas 
+for each row
+begin 
+		IF curdate() >= new.fecha_inicio and curdate() < new.fecha_expiracion  THEN
+			SET NEW.estatus = 'Activa';
+		ELSE
+			SET NEW.estatus = 'Inactiva';
+END IF;
+end //
+delimiter ;
 
 -- Trigger para marcar una asistencia a la recompensa correspondiente cada ves que se inserte una nueva 
 -- asistencia.
@@ -387,37 +407,6 @@ set estatus = 'Activa'
 where curdate() >= fecha_inicio and curdate() < fecha_expiracion and  estatus = 'Inactiva';
 end //
 delimiter ;
-
-DELIMITER //
-
-CREATE PROCEDURE SP_actualizar_periodo_recompensa(
-    IN p_id_recompensa INT,
-    IN p_fecha_inicio DATE,
-    IN p_fecha_expiracion DATE
-)
-BEGIN
-    -- Actualizar las fechas de inicio y expiración
-    if p_fecha_inicio > p_fecha_expiracion then
-		select 'Periodo incorrecto.' as mensaje;
-    else
-    UPDATE recompensas
-    SET fecha_inicio = p_fecha_inicio,
-        fecha_expiracion = p_fecha_expiracion
-    WHERE id_recompensa = p_id_recompensa;
-     -- Actualizar el estatus si la fecha actual esta dentro del periodo de la recompensa.
-		IF CURDATE() >= p_fecha_inicio and curdate() < p_fecha_expiracion THEN
-			UPDATE recompensas
-			SET estatus = 'Activa'
-			WHERE id_recompensa = p_id_recompensa;
-		ELSE 
-			UPDATE recompensas
-			SET estatus = 'Inactiva'
-			WHERE id_recompensa = p_id_recompensa;
-		END IF;
-	end if;
-    
-END //
-DELIMITER ;
 
 -- Evento para cambiar los estatus de las recompensas a inactiva cuando expiren.
 delimiter //
