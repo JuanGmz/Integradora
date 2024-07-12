@@ -535,3 +535,15 @@ a:hover {
     color: #fff; /* Color de texto del elemento activo */
     border-color: var(--cuarto); /* Color del borde del elemento activo */
 }
+/*---------------------------- Perfil----------------------------------*/
+.section-divider {
+    border-top: 2px solid var(--color3); /* Light gray color */
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.dropdown .fa-user {
+    transition: color 0.3s ease;
+}
+.dropdown .fa-user:hover {
+    color: var(--obscuro); /* Change this color to whatever you prefer */
+}
