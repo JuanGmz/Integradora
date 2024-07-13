@@ -1,3 +1,8 @@
+<?php
+    include_once '../class/database.php';
+    $db = new Database(); 
+    $db->conectarDB();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -318,11 +323,16 @@
                             <form method="post">
                                 <div class="row">
                                     <div class="col-8">
-                                        <select name="categoria" id="categoria" class="form-select">
-                                            <option selected disabled value="">Seleccionar ??????</option>
-                                            <!-- Aqui va el select de categorías -->
+                                        <select name="evento" id="evento" class="form-select">
+                                            <option selected disabled value="">Seleccionar Evento</option>
+                                            <!-- Aqui va el select del filtrado -->
                                             <?php
-
+                                                $queryFiltrar = "SELECT id_evento, nombre FROM eventos WHERE tipo = 'De Pago'";
+                                                $eventos = $db->select($queryFiltrar);
+                                                foreach ($eventos as $evento) {
+                                                    $selected = (isset($_POST['evento']) && $_POST['evento'] == $evento->id_evento) ? 'selected' : '';
+                                                    echo "<option value='$evento->id_evento' $selected>$evento->nombre</option>";
+                                                }    
                                             ?>
                                         </select>
                                     </div>
@@ -336,7 +346,36 @@
                 </div>
                 <div class="row mt-3 p-4 m-0">
                     <!-- Tabla de reservas AQUI -->
-                    
+                    <?php
+                        $id_evento = intval($_POST['evento']);
+                        echo "<table class='table table-dark table-striped table-hover text-center'>
+                                <thead>
+                                    <tr>
+                                        <th scope='col'>Folio</th>
+                                        <th scope='col'>Cliente</th>
+                                        <th scope='col'>Boletos</th>
+                                        <th scope='col'>Monto Total</th>
+                                        <th scope='col'>Estatus</th>
+                                    </tr>
+                                </thead>
+                                <tbody class='table-group-divider table-light'>";
+                        $queryReservas = "CALL filtrar_reservas($id_evento)";
+                        $db->execute($queryReservas);
+                        
+
+                        foreach ($reservas as $reserva) {
+                            echo "<tr>
+                                    <th scope='row'>$reserva->id_reserva</th>
+                                    <th scope='row'>$reserva->Cliente</th>
+                                    <td>$reserva->c_boletos</td>
+                                    <td>$reserva->monto_total</td>
+                                    <td>$reserva->estatus</td>
+                                </tr>";
+                        }
+
+                        echo "</tbody>
+                            </table>";
+                    ?>
                 </div>
             </div>
         </div>

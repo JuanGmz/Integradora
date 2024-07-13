@@ -57,6 +57,13 @@
         <!-- NavBar End -->
 
         <div class="container mb-5">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mt-4">
+                    <li class="breadcrumb-item fw-bold"><a href="../index.php">Inicio</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"></li>Publicaciones</li>
+                </ol>
+            </nav>
+
             <div class="fw-bold fs-2 mt-3 mb-4">
                 <h1 class="h1contact">Publicaciones</h1>
             </div>
@@ -83,7 +90,7 @@
                     </a>
                 </div>
                 <div class="col-lg-6">
-                    <a href="publicaciones/blog.php">
+                    <a href="publicaciones/difusion.php">
                     <div class="card mb-3">
                         <img src="../img/cafes/cafe17.webp" class="card-img" alt="...">
                         <div class="card-body">

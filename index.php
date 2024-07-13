@@ -381,9 +381,9 @@
             <!-- Recompensas-->
             <section class="subscription-section d-flex align-items-center justify-content-center p-2">
                 <div class="subscription-content text-center">
-                    <h1 class="display-4">Recibe grandes <span style="color: #d4a373;">RECOMPENSAS</span> facil</h1>
+                    <h1 class="display-4">Recibe grandes <span style="color: #d4a373;">RECOMPENSAS</span> fácilmente</h1>
                     <p class="lead">Mediante asistencias recibe grandes recompensas</p>
-                    <a href="./html/recompensas.html" class="btn subscription-btn">Echar un vistazo</a>
+                    <a href="views/recompensas.php" class="btn subscription-btn">Echar un vistazo</a>
                 </div>
             </section>
 

@@ -55,13 +55,18 @@
         <!-- NavBar End -->
 
         <div class="container mb-5">
-            <div class="text-center fw-bold fs-2 mt-5 mb-3">
-                <h1 class="h1contact">Publicaciones</h1>
+            <!-- Breadcrumbs -->
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mt-4">
+                    <li class="breadcrumb-item"><a href="../../index.php">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="../publicaciones.php">Publicaciones</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Canal de Difusión</li>
+                </ol>
+            </nav>
+            <div class="fw-bold fs-2 mb-5">
+                <h1 class="h1contact">Canal de Difusión</h1>
             </div>
-        </div>
-
-        <div class="col-12 p-5">
-            <div class="row g-4 ">
+            <div class="row">
                 <?php
                     include_once("../../class/database.php");
 
@@ -95,10 +100,10 @@
                               LIMIT ' . $offset . ', ' . $results_per_page;
                     $publicaciones = $conexion->select($query);
                 ?>
-                <div class="container">
-                    <div class="row g-4 p-3">
+                <div class="container mb-3">
+                    <div class="row">
                         <?php foreach ($publicaciones as $publicacion) : ?>
-                            <div class='col-md-4 col-12 col-sm-6'>
+                            <div class='col-md-4 col-12 col-sm-6 mb-3'>
                                 <div class='card blog-card h-100 shadow-lg'>
                                     <img src='../../img/publicaciones/<?php echo $publicacion->img_url; ?>' class='card-img-top' alt='<?php echo $publicacion->titulo ?>'>
                                     <div class='card-body'>
