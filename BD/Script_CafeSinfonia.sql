@@ -1,5 +1,25 @@
 drop database if exists cafe_sinfonia;
 
+/*
+-- Usuarios de la base de datos--
+
+-- Administrador | ALL PRIVILEGES, GRANT OPTION, SUPER |
+create user administrador@localhost identified by 'admin';
+grant all privileges on cafe_sinfonia.* to administrador@localhost;
+grant grant option on cafe_sinfonia.* to administrador@localhost;
+grant reload on *.* to administrador@localhost;
+GRANT SUPER ON *.* TO 'administrador'@'localhost';
+flush privileges;
+--
+show grants for administrador@localhost;
+
+-- Auxiliar | SELECT, INSERT, UPDATE , DELETE
+create user auxiliar@localhost identified by 'aux';
+GRANT SELECT, INSERT, UPDATE,execute,DELETE, create view ON cafe_sinfonia.* TO 'auxiliar'@'localhost';
+--
+drop user auxiliar@localhost;
+show grants for auxiliar@localhost;
+*/
 create database cafe_sinfonia;
 
 use cafe_sinfonia;
@@ -27,33 +47,8 @@ primary key(id_publicacion)
 -- Usuarios
 create table usuarios(
 id_usuario int auto_increment not null,
-usuario nvarchar (100) not null,
-correo nvarchar(100) not null,
-contraseña varbinary(150)not null,
-telefono nchar(10),
 primary key(id_usuario)
 );
-
--- Trigger para encripar automaticamente.
-DELIMITER //
-CREATE TRIGGER before_insert_usuarios
-BEFORE INSERT ON usuarios
-FOR EACH ROW
-BEGIN
-    SET NEW.contraseña = MD5(NEW.contraseña);
-END; //
-DELIMITER ;
--- Trigger para encriptar cuando se actualiza  una password.
-DELIMITER //
-CREATE TRIGGER before_update_usuarios
-BEFORE UPDATE ON usuarios
-FOR EACH ROW
-BEGIN
-    IF NEW.contraseña != OLD.contraseña THEN
-        SET NEW.contraseña = MD5(NEW.contraseña);
-    END IF;
-END; //
-DELIMITER ;
 
 create table roles(
 id_rol int auto_increment not null,
@@ -74,10 +69,15 @@ foreign key (id_usuario) references usuarios(id_usuario)
 create table personas(
     id_persona int auto_increment not null,
     id_usuario int not null,
+    usuario nvarchar (100) not null,
+    correo nvarchar(100) not null,
+    contrasena varbinary(255)not null,
+	telefono nchar(10) not null,
     nombres nvarchar(150) not null,
     apellido_paterno nvarchar(100) not null,
     apellido_materno nvarchar(100) not null,
     primary key(id_persona),
+    unique(usuario),
     foreign key (id_usuario) references usuarios(id_usuario)
 );
 
@@ -117,39 +117,29 @@ primary key(id_domicilio),
 foreign key (id_cliente) references clientes(id_cliente)
 );
 
-CREATE TABLE comprobantes (
-    id_comprobante INT PRIMARY KEY AUTO_INCREMENT,
-    concepto VARCHAR(255),
-    referencia VARCHAR(255),
-    folio_operacion VARCHAR(255),
-    fecha DATE,
-    monto DECIMAL(10, 2),
-    banco_origen VARCHAR(255),
-    imagen_comprobante varchar(255)
+create table metodos_pago (
+id_mp int auto_increment not null,
+metodo_pago varchar(100) not null,
+primary key(id_mp),
+unique(metodo_pago)
 );
 
 create table pedidos(
 id_pedido int auto_increment not null,
 id_cliente int not null,
 id_domicilio int not null,
-metodo_de_pago enum('Transferencia') default 'Transferencia',
+id_mp int not null,
 estatus enum('Pendiente','Finalizado','Cancelado') default 'Pendiente' not null,
 fecha_hora_pedido datetime default current_timestamp,
-envio nvarchar(150),
 monto_total double,
-guia_de_envio nvarchar(100),
-documento_url nvarchar(100),
+envio nvarchar(150),
+costo_envio double,
+guia_de_envio nvarchar(200),
+documento_url nvarchar(255),
 primary key(id_pedido),
+foreign key (id_mp) references metodos_pago(id_mp),
 foreign key (id_cliente) references clientes(id_cliente),
 foreign key (id_domicilio) references domicilios(id_domicilio)
-);
-
-create table comprobantes_pedidos(
-    id_cp int auto_increment primary key,
-    id_comprobante int not null,
-    id_pedido int not null,
-    foreign key (id_comprobante) references comprobantes(id_comprobante),
-    foreign key (id_pedido) references pedidos(id_pedido)
 );
 
 create table bolsas_cafe (
@@ -172,7 +162,7 @@ primary key(id_bolsa)
 create table detalle_bc(
 id_dbc int auto_increment not null,
 id_bolsa int not null,
-medida nvarchar(50)not null,
+medida ENUM('1/4 Kg','1/2 Kg','1 Kg'),
 precio double not null,
 stock int not null,
 primary key(id_dbc),
@@ -247,14 +237,88 @@ foreign key (id_cliente) references clientes(id_cliente),
 foreign key (id_evento) references EVENTOS(id_evento)
 );
 
-create table comprobantes_reservas
-(
- id_cr int auto_increment primary key,
- id_comprobante int not null,
- id_reserva int not null,
- foreign key (id_comprobante) references comprobantes(id_comprobante),
- foreign key (id_reserva) references eventos_reservas(id_reserva)
+delimiter //
+CREATE EVENT cancelar_reservas_no_pagadas
+ON SCHEDULE EVERY 1 minute
+DO
+BEGIN
+    UPDATE eventos_reservas
+    SET estatus = 'Cancelada'
+    WHERE estatus = 'Pendiente'
+      AND fecha_hora_reserva < DATE_SUB(NOW(), INTERVAL 2 minute);
+END //
+delimiter ;
+
+-- Trigger para validar la disponibilidad de boletos al realizar una reserva
+delimiter //
+create trigger before_insert_reservas
+before insert on eventos_reservas
+for each row
+begin 
+    declare v_disponibilidad int;
+    -- Seleccionar disponibilidad de la tabla eventos
+    select disponibilidad 
+    into v_disponibilidad
+    from eventos e
+    where e.id_evento = new.id_evento;
+    -- Verificar si hay suficientes boletos
+    if v_disponibilidad < new.c_boletos then 
+        signal sqlstate '45000' set message_text = 'No hay suficientes boletos.';
+    else 
+        -- Actualizar la disponibilidad de la tabla eventos
+        update eventos 
+        set disponibilidad = disponibilidad - new.c_boletos 
+        where id_evento = new.id_evento;
+    end if;
+end //
+delimiter ;
+
+-- Cuando el se cancele el pedido/reserva devolver cantidad.
+delimiter //
+create trigger before_update_reservas
+before update on eventos_reservas
+for each row
+begin 
+    if old.estatus = 'Pendiente' and new.estatus = 'Cancelada' then
+        -- Restaurar la disponibilidad de boletos cuando una reserva se cancela
+        update eventos 
+        set disponibilidad = disponibilidad + old.c_boletos 
+        where id_evento = old.id_evento;
+    end if;
+end //
+delimiter ;
+
+CREATE TABLE comprobantes (
+    id_comprobante INT AUTO_INCREMENT,
+    id_reserva int not null,
+    concepto VARCHAR(255),
+    folio_operacion VARCHAR(255),
+    fecha DATE,
+    monto double,
+    banco_origen VARCHAR(255),
+    imagen_comprobante varchar(255),
+    primary key(id_comprobante),
+    unique(id_reserva),
+    foreign key (id_reserva) references eventos_reservas(id_reserva)
 );
+
+-- Trigger para calcular el monto_total de la reserva.
+DELIMITER //
+CREATE TRIGGER calcular_monto_total_eventos_reservas
+BEFORE INSERT ON eventos_reservas
+FOR EACH ROW
+BEGIN
+    DECLARE precio DOUBLE;
+    
+    -- Obtener el precio del boleto del evento
+    SELECT precio_boleto INTO precio 
+    FROM EVENTOS 
+    WHERE id_evento = NEW.id_evento;
+    
+    -- Calcular el monto total
+    SET NEW.monto_total = NEW.c_boletos * precio;
+END //
+DELIMITER ;
 
 -- Productos del Menu 
 create table productos_menu(
@@ -299,7 +363,7 @@ primary key (id_recompensa)
 
 -- Validar el estatus al ingresar una nueva recompensa
 delimiter //
-create procedure sp_agregar_recompensa(
+create procedure SP_agregar_recompensa(
 in p_recompensa nvarchar(150),
 in p_condicion int,
 in p_fecha_inicio date, 
@@ -329,6 +393,81 @@ begin
 END IF;
 end //
 delimiter ;
+
+-- Trigger para pasar lo que tiene en el carrito el cliente a detalle del pedido.
+delimiter //
+CREATE TRIGGER after_insert_añadir_productos_a_detalle_pedido
+AFTER INSERT ON pedidos
+FOR EACH ROW
+BEGIN
+    -- Declaración de variables locales
+    DECLARE permiso BOOLEAN DEFAULT TRUE;
+    DECLARE bolsa INT;
+    DECLARE cantidad INT;
+    DECLARE no_hay_producto BOOLEAN DEFAULT FALSE;
+
+    -- Cursor para leer los productos del carrito asociados al nuevo pedido
+    DECLARE leer CURSOR FOR
+        SELECT DISTINCT carrito.id_dbc, carrito.cantidad
+        FROM carrito
+        JOIN pedidos ON new.id_cliente = carrito.id_cliente;
+
+    -- Cursor para la comprobacion de stock de los productos en detalle_bc
+    DECLARE comprobacion CURSOR FOR
+        SELECT DISTINCT carrito.id_dbc, carrito.cantidad
+        FROM carrito
+        JOIN pedidos ON new.id_cliente = carrito.id_cliente;
+
+    -- Manejador para cuando no se encuentra ningún producto en el cursor
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET no_hay_producto = TRUE;
+
+    -- Verificar el estado del pedido
+    IF new.estatus = 'Pendiente' THEN
+        -- Comprobar si hay suficiente stock para todos los productos del carrito
+        OPEN comprobacion;
+        comprobar_bucle: LOOP
+            FETCH comprobacion INTO bolsa, cantidad;
+            IF no_hay_producto THEN
+                LEAVE comprobar_bucle;
+            END IF;
+
+            -- Verificar el stock disponible
+            IF (SELECT stock FROM detalle_bc WHERE detalle_bc.id_dbc = bolsa) < cantidad THEN
+                SET permiso = FALSE;
+                SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'No hay suficiente stock para realizar el pedido.';
+            END IF;
+        END LOOP;
+        CLOSE comprobacion;
+
+        -- Resetear la variable de control
+        SET no_hay_producto = FALSE;
+
+        -- Abrir el cursor para procesar los productos del carrito
+        OPEN leer;
+        leer_bucle: LOOP
+            FETCH leer INTO bolsa, cantidad;
+            IF no_hay_producto THEN
+                LEAVE leer_bucle;
+            END IF;
+
+            -- Si hay permiso para continuar, insertar en detalle_pedidos y actualizar stock
+            IF permiso THEN
+                INSERT INTO detalle_pedidos (id_dbc, cantidad, id_pedido, precio_unitario)
+                VALUES (bolsa, cantidad, new.id_pedido, (SELECT detalle_bc.precio FROM detalle_bc WHERE detalle_bc.id_dbc = bolsa));
+
+                UPDATE detalle_bc
+                SET stock = stock - cantidad
+                WHERE id_dbc = bolsa;
+
+            ELSE
+                -- Si no hay permiso, enviar un mensaje de error
+                SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Hubo un error y se canceló el pedido, pero se registraron los productos.';
+            END IF;
+        END LOOP;
+        CLOSE leer;
+    END IF;  -- Fin de la condición de estado del pedido
+END //
+DELIMITER ;
 
 -- Trigger para marcar una asistencia a la recompensa correspondiente cada ves que se inserte una nueva 
 -- asistencia.
@@ -503,6 +642,103 @@ end if;
 end //
 delimiter ;
 
+-- Procedimiento almacenado para registrar usuarios(clientes).
+delimiter //
+create procedure SP_Registrar_usuariosClientes(
+    in p_nombres nvarchar(150),
+    in p_apellido_paterno nvarchar(100),
+    in p_apellido_materno nvarchar(100),
+	in p_usuario nvarchar (100),
+	in p_correo nvarchar(100),
+	in p_contrasena varbinary(150),
+	in p_telefono nchar(10)
+)
+begin 
+-- Se declaran variables para guardar el id del usuario y la persona. 
+declare v_usuario int;
+declare v_persona int;
+
+-- Se inserta el usuario.
+insert into usuarios (id_usuario) values (default); 
+
+-- Obtenemos el ultimo id autoincrementado y se guarda en la variable.
+select last_insert_id() into v_usuario;
+
+-- Se le asigna un rol a ese usuario.
+insert into roles_usuarios(id_usuario, id_rol)
+values(v_usuario, 2);
+
+-- Se inserta en la tabla personas con los parametros recibidos por el sp y la variable v_usuario.
+insert into personas(id_usuario,usuario, correo, contrasena, telefono, nombres, apellido_paterno, apellido_materno)
+values (v_usuario,p_usuario, p_correo,p_contrasena,p_telefono, p_nombres, p_apellido_paterno, p_apellido_materno);
+
+-- Obtenemos el ultimo id autoincrementado y lo guardamos en la variable.
+select last_insert_id() into v_persona;
+
+-- Insertamos en la tabla clientes dandole el valor de la variable de que guarda la persona.
+insert into clientes(id_persona)
+values(v_persona);
+
+end //
+delimiter ; 
+
+-- Procedimiento almacenado para realizar reservas de eventos (pago)
+delimiter //
+create procedure SP_reserva_evento(
+in p_id_cliente int, 
+in p_id_evento int, 
+in p_c_boletos int
+)
+begin 
+
+-- Insertamos la reserva del cliente para el evento junto con la cantidad de boletos.
+insert into eventos_reservas(id_cliente, id_evento, c_boletos)
+VALUES (p_id_cliente, p_id_evento, p_c_boletos);
+
+end //
+delimiter ;
+
+-- Procedimiento Almacenado para subir comprobantes de pedidos.
+delimiter //
+create procedure SP_comprobante_reserva(
+    -- id de la reserva
+    in p_reserva int,
+    -- datos del comprobante
+    in p_concepto varchar(255),
+    in p_monto double,
+    in p_folio_operacion varchar(255),
+    in p_banco_origen varchar(255),
+    in p_img_comprobante varchar(255)
+)
+begin
+
+    -- Subir comprobante de la reserva.
+    insert into comprobantes(id_reserva,concepto, folio_operacion, monto, banco_origen, imagen_comprobante)
+    values(p_reserva,p_concepto, p_folio_operacion, p_monto, p_banco_origen, p_img_comprobante);
+
+end //
+delimiter ;
+
+-- Procedimiento almacenado para filtrar los productos del menu por categoria
+DELIMITER //
+CREATE PROCEDURE listar_productos_menu(IN categoria VARCHAR(60))
+BEGIN
+	SELECT
+		pm.id_pm,
+		pm.nombre,
+        pm.descripcion,
+        pm.img_url
+	FROM
+		productos_menu AS pm
+	JOIN
+		categorias AS c ON pm.id_categoria = c.id_categoria
+	WHERE
+		c.nombre = categoria
+	ORDER BY 
+		pm.nombre ASC;
+END//
+DELIMITER ;
+
 -- Vistas 
 
 -- Vista para recompensas que se mostraran en el apartado correspondiente(recompensas) segun el cliente que este iniciado sesion.
@@ -516,6 +752,14 @@ CONCAT(DATE_FORMAT(r.fecha_inicio, '%d/%m/%Y'), ' - ', DATE_FORMAT(r.fecha_expir
 from clientes_recompensas cr
 join recompensas r on r.id_recompensa = cr.id_recompensa 
 where r.estatus = 'Activa';
+
+-- Vista de los comprobantes de las reservas.
+create view view_comprobante_reserva as
+select er.id_reserva as folio_reserva, c.concepto, c.monto, c.folio_operacion, c.banco_origen, c.imagen_comprobante
+from comprobantes c
+	join eventos_reservas er on er.id_reserva = c.id_reserva;
+    
+INSERT INTO metodos_pago (metodo_pago) VALUES ('Transferencia');
 
 INSERT INTO publicaciones (titulo, descripcion, img_url, tipo)
 VALUES
@@ -534,87 +778,6 @@ INSERT INTO roles (rol, descripcion) VALUES
 ('empleado', 'Empleado del café sinfonía'),
 ('cliente', 'Cliente del café sinfonía'),
 ('proveedor', 'Proveedor del café sinfonía');
-
-
-INSERT INTO usuarios (usuario, correo, contraseña, telefono) VALUES 
-('juanperez', 'juan.perez@example.com', MD5('password1'), '8712345678'),
-('marialopez', 'maria.lopez@example.com', MD5('password2'), '8712345679'),
-('carloshernandez', 'carlos.hernandez@example.com', MD5('password3'), '8712345680'),
-('anamartinez', 'ana.martinez@example.com', MD5('password4'), '8712345681'),
-('luisgonzalez', 'luis.gonzalez@example.com', MD5('password5'), '8712345682'),
-('laurasanchez', 'laura.sanchez@example.com', MD5('password6'), '8712345683'),
-('joseramirez', 'jose.ramirez@example.com', MD5('password7'), '8712345684'),
-('rosatorres', 'rosa.torres@example.com', MD5('password8'), '8712345685'),
-('miguelreyes', 'miguel.reyes@example.com', MD5('password9'), '8712345686'),
-('luisacruz', 'luisa.cruz@example.com', MD5('password10'), '8712345687'),
-('jorgeflores', 'jorge.flores@example.com', MD5('password11'), '8712345688'),
-('isabelgomez', 'isabel.gomez@example.com', MD5('password12'), '8712345689'),
-('pedrodiaz', 'pedro.diaz@example.com', MD5('password13'), '8712345690'),
-('carmenmorales', 'carmen.morales@example.com', MD5('password14'), '8712345691'),
-('ricardoortiz', 'ricardo.ortiz@example.com', MD5('password15'), '8712345692'),
-('sofiasilva', 'sofia.silva@example.com', MD5('password16'), '8712345693'),
-('fernandoromero', 'fernando.romero@example.com', MD5('password17'), '8712345694'),
-('patriciarojas', 'patricia.rojas@example.com', MD5('password18'), '8712345695'),
-('robertovazquez', 'roberto.vazquez@example.com', MD5('password19'), '8712345696'),
-('gabrielamendoza', 'gabriela.mendoza@example.com', MD5('password20'), '8712345697');
-
-INSERT INTO roles_usuarios (id_usuario, id_rol)
-VALUES
-(1, 1),  -- Juan Perez
-(2, 1),  -- Maria Lopez
-(3, 1),  -- Carlos Hernandez
-(4, 1),  -- Ana Martinez
-(5, 1);  -- Luis Gonzalez
-
-INSERT INTO personas (id_usuario, nombres, apellido_paterno, apellido_materno) VALUES 
-(1, 'Juan', 'Perez', 'Garcia'),
-(2, 'Maria', 'Lopez', 'Martinez'),
-(3, 'Carlos', 'Hernandez', 'Sanchez'),
-(4, 'Ana', 'Martinez', 'Rodriguez'),
-(5, 'Luis', 'Gonzalez', 'Lopez'),
-(6, 'Laura', 'Sanchez', 'Perez'),
-(7, 'Jose', 'Ramirez', 'Hernandez'),
-(8, 'Rosa', 'Torres', 'Gonzalez'),
-(9, 'Miguel', 'Reyes', 'Sanchez'),
-(10, 'Luisa', 'Cruz', 'Ramirez'),
-(11, 'Jorge', 'Flores', 'Torres'),
-(12, 'Isabel', 'Gomez', 'Reyes'),
-(13, 'Pedro', 'Diaz', 'Cruz'),
-(14, 'Carmen', 'Morales', 'Flores'),
-(15, 'Ricardo', 'Ortiz', 'Gomez'),
-(16, 'Sofia', 'Silva', 'Diaz'),
-(17, 'Fernando', 'Romero', 'Morales'),
-(18, 'Patricia', 'Rojas', 'Ortiz'),
-(19, 'Roberto', 'Vazquez', 'Silva'),
-(20, 'Gabriela', 'Mendoza', 'Romero');
-
--- Insertar registros en la tabla empleados
-INSERT INTO empleados (id_persona)
-VALUES
-(1),   -- Juan Perez
-(2),   -- Maria Lopez
-(3),   -- Carlos Hernandez
-(4),   -- Ana Martinez
-(5);   -- Luis Gonzalez
-
--- Insertar registros en la tabla clientes
-INSERT INTO clientes (id_persona)
-VALUES
-(6),   -- Laura Sanchez
-(7),   -- Jose Ramirez
-(8),   -- Rosa Torres
-(9),   -- Miguel Reyes
-(10),  -- Luisa Cruz
-(11),  -- Jorge Flores
-(12),  -- Isabel Gomez
-(13),  -- Pedro Diaz
-(14),  -- Carmen Morales
-(15),  -- Ricardo Ortiz
-(16),  -- Sofia Silva
-(17),  -- Fernando Romero
-(18),  -- Patricia Rojas
-(19),  -- Roberto Vazquez
-(20);  -- Gabriela Mendoza
 
 -- Insertar registros en la tabla categorias.
 	INSERT INTO CATEGORIAS (nombre, descripcion, tipo) VALUES
@@ -836,6 +999,7 @@ INSERT INTO productos_menu (id_categoria, nombre, descripcion, img_url) VALUES
 (67, '', 40); -- Rollos de Canela con Glaseado
 
 -- Ingresar domicilios para los primeros 19 clientes
+/*
 INSERT INTO domicilios(id_cliente, referencia, estado, ciudad, codigo_postal, colonia, calle, telefono)
 VALUES
 (1, 'Laura Sanchez', 'Coahuila', 'Torreón', '27050', 'Colinas del Sol', 'Calle del Águila #1415', '8712345683'),
@@ -852,7 +1016,7 @@ VALUES
 (12, 'Fernando Romero', 'Coahuila', 'Torreón', '27160', 'San Agustín', 'Avenida del Río #3637', '8712345694'),
 (13, 'Patricia Rojas', 'Coahuila', 'Torreón', '27170', 'Villa Florida', 'Boulevard de las Rosas #3839', '8712345695'),
 (14, 'Roberto Vazquez', 'Coahuila', 'Torreón', '27180', 'Los Ángeles', 'Calle de los Sauces #4041', '8712345696');
-
+*/
 INSERT INTO ubicacion_lugares (nombre, ciudad, estado, descripcion)
 VALUES 
 ('Cafetería Sinfonía Café', 'Torreón', 'Coahuila', 'Cafetería acogedora con ambiente musical.'),
@@ -905,11 +1069,11 @@ VALUES
 (1, '1/4 Kg', 85, 10),
 (1, '1/2 Kg', 170, 5),
 (1, '1 Kg', 340, 2),
-(2, '250 g', 130, 20),
-(2, '500 g', 250, 15),
+(2, '1/4 Kg', 130, 20),
+(2, '1/2 Kg', 250, 15),
 (2, '1 Kg', 480, 10),
-(3,  '250 g', 80, 20),
-(3,  '500 g', 160, 15),
+(3,  '1/4 Kg', 80, 20),
+(3,  '1/2 Kg', 160, 15),
 (3,  '1 Kg', 320, 10);
 
 -- Inserción de recompensas
