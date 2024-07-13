@@ -412,7 +412,6 @@
                                         <thead>
                                             <tr>
                                                 <th scope='col'>Título</th>
-                                                <th scope='col' class='d-none d-lg-table-cell'>Descripción</th>
                                                 <th scope='col'>Acciones</th>
                                             </tr>
                                         </thead>
@@ -420,8 +419,7 @@
                                 foreach ($publicaciones as $publicacion) {
                                     echo "<tr>
                                             <td>{$publicacion->titulo}</td>
-                                            <td class='d-none d-lg-table-cell'>{$publicacion->descripcion}</td>
-                                            <td>
+                                            <td class='d-flex justify-content-center gap-2'>
                                                 <!-- Botón para ver y editar imágen -->
                                                 <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#imgPublicacion{$publicacion->id_publicacion}'>
                                                     <i class='fa-solid fa-image'></i>
@@ -439,7 +437,7 @@
                                                                 <form action='../scripts/adminpublicaciones/editarImagen.php' method='POST' enctype='multipart/form-data'>
                                                                     <div class='col-12 mb-3'>
                                                                         <label for='imagen' class='form-label'>Imagen Actual</label><br>
-                                                                        <img src='../img/publicaciones/$publicacion->img_url' class='img-fluid' alt='imagen$publicacion->titulo'><br>
+                                                                        <img src='../img/publicaciones/$publicacion->img_url' class='img-fluid rounded' alt='imagen$publicacion->titulo'><br>
                                                                             <small>Selecciona una nueva imagen para actualizar, si es necesario.</small>
                                                                         </div>
                                                                         <div class='col-12 mb-3'>
@@ -451,6 +449,75 @@
                                                                             <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
                                                                             <button type='submit' class='btn btn-primary'>Actualizar</button>
                                                                         </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Botón de ver detalles -->
+                                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#detallePublicacion{$publicacion->id_publicacion}'>
+                                                    <i class='fa-solid fa-bars'></i>
+                                                </button>
+                                                <!-- Modal para ver detalles -->
+                                                <div class='modal fade' id='detallePublicacion{$publicacion->id_publicacion}' tabindex='-1' aria-labelledby='detallePublicacion{$publicacion->id_publicacion}Label' aria-hidden='true'>
+                                                    <div class='modal-dialog modal-dialog-centered'>
+                                                        <div class='modal-content'>
+                                                            <div class='modal-header'>
+                                                                <h5 class='modal-title' id='detallePublicacion{$publicacion->id_publicacion}Label'>{$publicacion->titulo}</h5>
+                                                                <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                                            </div>
+                                                            <div class='modal-body text-start'>
+                                                                <h5 class='fs-4 fw-bold mb-2'>Título: <span class='fw-normal fs-5'>{$publicacion->titulo}</span></h3>
+                                                                <h5 class='fs-4 fw-bold mb-2'>Descripción: <span class='fw-normal fs-5'>{$publicacion->descripcion}</span></h3>
+                                                                <h5 class='fs-4 fw-bold mb-2'>Tipo: <span class='fw-normal fs-5'>{$publicacion->tipo}</span></h3>
+                                                                <h5 class='fs-4 fw-bold mb-2'>Fecha de creación: <span class='fw-normal fs-5'>{$publicacion->fecha}</span></h3>
+                                                                <div class='text-end mt-4'>
+                                                                    <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cerrar</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Botón de editar -->
+                                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#editarPublicacion{$publicacion->id_publicacion}'>
+                                                    <i class='fa-solid fa-pen-to-square'></i>
+                                                </button>
+                                                <!-- Modal para editar -->
+                                                <div class='modal fade' id='editarPublicacion{$publicacion->id_publicacion}' tabindex='-1' aria-labelledby='editarPublicacion{$publicacion->id_publicacion}Label' aria-hidden='true'>
+                                                    <div class='modal-dialog modal-dialog-centered'>
+                                                        <div class='modal-content'>
+                                                            <div class='modal-header'>
+                                                                <h5 class='modal-title' id='editarPublicacion{$publicacion->id_publicacion}Label'>{$publicacion->titulo}</h5>
+                                                                <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                                            </div>
+                                                            <div class='modal-body text-start'>
+                                                                <form action='../scripts/adminpublicaciones/editarPublicacion.php' method='POST'>
+                                                                    <div class='col-12 mb-3'>
+                                                                        <label for='titulo' class='form-label'>Título</label>
+                                                                        <input type='text' class='form-control' id='titulo' name='titulo' value='$publicacion->titulo' required>
+                                                                    </div>
+                                                                    <div class='col-12 mb-3 text-start'>
+                                                                        <label for='descripcion' class='form-label'>Descripción</label>
+                                                                        <textarea class='form-control' id='descripcion' name='descripcion' rows='3' maxlength='255' required>$publicacion->descripcion
+                                                                        </textarea>
+                                                                    </div>
+                                                                    <div class='col-12 mb-3 text-start'>
+                                                                        <label for='tipo' class='form-label'>Tipo</label>
+                                                                        <select class='form-select' id='tipo' name='tipo' required>
+                                                                            <option selected disabled value=''>Seleccionar Tipo</option>'
+                                                                            <!-- Aqui va el select de categorías -->";
+                                                                                foreach ($tipos as $tipo) {
+                                                                                    $selected = (isset($_POST['tipo']) && $_POST['tipo'] == $tipo->tipo) ? 'selected' : '';
+                                                                                    echo "<option value='{$tipo->tipo}' {$selected}>{$tipo->tipo}</option>";
+                                                                                }
+                                                                                    echo "
+                                                                        </select>
+                                                                    </div>
+                                                                    <input type='hidden' name='id_publicacion' value='$publicacion->id_publicacion'>
+                                                                    <div class='col-12 mt-3 text-end'>
+                                                                        <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
+                                                                        <button type='submit' class='btn btn-primary'>Guardar Cambios</button>
                                                                     </div>
                                                                 </form>
                                                             </div>

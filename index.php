@@ -31,19 +31,19 @@ session_start();
                             <a class="nav-link" aria-current="page" href="views/menu.php">Menú</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="html/ecommerce.html">Comprar</a>
+                            <a class="nav-link mx-lg-2" href="views/ecommerce.php">Comprar</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="html/recompensas.html">Recompensas</a>
+                            <a class="nav-link mx-lg-2" href="views/recompensas.php">Recompensas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="html/eventos.html">Eventos</a>
+                            <a class="nav-link mx-lg-2" href="views/eventos.php">Eventos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="html/blog.html">Blog</a>
+                            <a class="nav-link mx-lg-2" href="views/publicaciones.php">Publicaciones</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="html/contact.html">Contacto</a>
+                            <a class="nav-link mx-lg-2" href="views/contact.php">Contacto</a>
                         </li>
                     </ul>
                 </div>
@@ -444,7 +444,7 @@ session_start();
                     <div class="col-md-4 p-3 col-6 col-sm-6 ">
                         <div class="card blog-card" style="border-radius: 5% 5% 0% 0%;">
                             <img src="./img/cafes/lugar1.webp" class="coffee-image" alt="Image 1">
-                            <div class="card-body">
+                            <div class="card-body product-card">
                                 <h5 class="blog-card-title">MAKE IT SIMPLE</h5>
                                 <h6 class="blog-card-subtitle mb-2 text-muted">20/20/2020
                                 </h6>
@@ -460,7 +460,7 @@ session_start();
                     <div class="col-md-4 p-3 col-6 col-sm-6 ">
                         <div class="card blog-card" style="border-radius: 5% 5% 0% 0%;">
                             <img src="./img/cafes/cafe8.webp" class="coffee-image" alt="Image 2">
-                            <div class="card-body">
+                            <div class="card-body product-card">
                                 <h5 class="blog-card-title">COFFEE SHOP</h5>
                                 <h6 class="blog-card-subtitle mb-2 text-muted">20/20/2020
                                 </h6>
@@ -476,7 +476,7 @@ session_start();
                     <div class="col-md-4 p-3 col-6 col-sm-6 d-none d-md-block">
                         <div class="card blog-card" style="border-radius: 5% 5% 0% 0%;">
                             <img src="./img/cafes/cafe4.webp" class="coffee-image" alt="Image 3">
-                            <div class="card-body">
+                            <div class="card-body product-card">
                                 <h5 class="blog-card-title">COFFEE BAR</h5>
                                 <h6 class="blog-card-subtitle mb-2 text-muted">20/20/2020
                                 </h6>
