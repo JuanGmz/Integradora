@@ -20,3 +20,27 @@ from pedidos pd
 	join clientes c on c.id_cliente = pd.id_cliente
     join personas p on p.id_persona = c.id_persona;
 
+select r.recompensa, r.condicion, concat(r.fecha_inicio,' - ',fecha_expiracion) as periodo, r.estatus
+from recompensas r order by r.estatus asc;
+
+show events;
+select tipo from publicaciones;
+
+select * from view_clientes_recompensas where id_cliente= 5;
+
+select * from publicaciones;
+
+
+
+
+
+select user from mysql.user;
+
+
+grant select,insert,delete,update on *.* to auxiliar@localhost;
+
+
+
+ 
+ 
+repair table cafe_sinfonia;
