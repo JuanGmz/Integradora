@@ -398,7 +398,7 @@
                     <div class="col-md-4 p-3 col-6 col-sm-6 " >
                         <div class="card blog-card"style="border-radius: 5% 5% 0% 0%;">
                             <img src="./img/cafes/lugar1.webp" class="coffee-image" alt="Image 1">
-                            <div class="card-body">
+                            <div class="card-body product-card">
                                 <h5 class="blog-card-title">MAKE IT SIMPLE</h5>
                                 <h6 class="blog-card-subtitle mb-2 text-muted">20/20/2020
                                 </h6>
@@ -413,7 +413,7 @@
                     <div class="col-md-4 p-3 col-6 col-sm-6 " >
                         <div class="card blog-card"style="border-radius: 5% 5% 0% 0%;">
                             <img src="./img/cafes/cafe8.webp" class="coffee-image" alt="Image 2">
-                            <div class="card-body">
+                            <div class="card-body product-card">
                                 <h5 class="blog-card-title">COFFEE SHOP</h5>
                                 <h6 class="blog-card-subtitle mb-2 text-muted">20/20/2020
                                 </h6>
@@ -428,7 +428,7 @@
                     <div class="col-md-4 p-3 col-6 col-sm-6 d-none d-md-block" >
                         <div class="card blog-card" style="border-radius: 5% 5% 0% 0%;">
                             <img src="./img/cafes/cafe4.webp" class="coffee-image" alt="Image 3">
-                            <div class="card-body">
+                            <div class="card-body product-card">
                                 <h5 class="blog-card-title">COFFEE BAR</h5>
                                 <h6 class="blog-card-subtitle mb-2 text-muted">20/20/2020
                                 </h6>

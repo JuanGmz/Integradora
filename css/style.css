@@ -59,6 +59,7 @@ a:hover {
 /* Estilos para las imágenes */
 .coffee-image {
     width: 100%; /* Ancho del contenedor */
+    height: 70%;
     object-fit: cover; /* Ajuste para cubrir el contenedor manteniendo la relación de aspecto */
     border-radius: 5% 5% 0% 0%;
 }
@@ -317,6 +318,8 @@ a:hover {
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease-in-out;
+    width: 100%;
+    height: 100%;
 }
 
 .product-card:hover {
@@ -573,4 +576,29 @@ a:hover {
 .dropdown-itemcolor:hover{
     background-color: var(--cuarto);
     color: var(--blanco);
+}
+/*---------------------------- E-ecommerce----------------------------------*/
+.sidebar {
+    border-right: 1px solid #ddd;
+    padding-right: 20px;
+}
+.product-list {
+    padding-left: 20px;
+}
+/*filtro*/
+.sidebar {
+    border-right: 1px solid #ddd;
+    padding-right: 20px;
+}
+.product-list {
+    padding-left: 20px;
+}
+.filter-icon {
+    font-size: 24px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+.filter-icon:hover {
+   color: var(--cuarto);
+   transition: color 0.3s, transform 0.3s; /* Transición suave */
 }
