@@ -27,19 +27,19 @@
                             <a class="nav-link" aria-current="page" href="views/menu.php">Menú</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="html/ecommerce.html">Comprar</a>
+                            <a class="nav-link mx-lg-2" href="views/ecommerce.php">Comprar</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="html/recompensas.html">Recompensas</a>
+                            <a class="nav-link mx-lg-2" href="views/recompensas.php">Recompensas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="html/eventos.html">Eventos</a>
+                            <a class="nav-link mx-lg-2" href="views/eventos.php">Eventos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="html/blog.html">Blog</a>
+                            <a class="nav-link mx-lg-2" href="views/publicaciones.php">Publicaciones</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="html/contact.html">Contacto</a>
+                            <a class="nav-link mx-lg-2" href="views/contact.php">Contacto</a>
                         </li>
                     </ul>
                 </div>
