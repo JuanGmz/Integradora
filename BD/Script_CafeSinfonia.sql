@@ -246,7 +246,9 @@ c_boletos int not null,
 monto_total double,
 fecha_hora_reserva datetime default current_timestamp,
 estatus enum('Pendiente','Cancelada','Apartada') default 'Pendiente', -- Puede ser pendiente, y esas cosas.
+id_mp int not null,
 primary key(id_reserva),
+foreign key (id_cliente) references metodos_pago (id_mp),
 foreign key (id_cliente) references clientes(id_cliente),
 foreign key (id_evento) references EVENTOS(id_evento)
 );
