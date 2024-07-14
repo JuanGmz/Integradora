@@ -142,6 +142,19 @@ foreign key (id_cliente) references clientes(id_cliente),
 foreign key (id_domicilio) references domicilios(id_domicilio)
 );
 
+-- Evento para cancelar pedidos no pagados dentro del tiempo establecido.
+delimiter //
+CREATE EVENT cancelar_pedidos_no_pagados
+ON SCHEDULE EVERY 1 hour
+DO
+BEGIN
+    UPDATE pedidos
+    SET estatus = 'Cancelado'
+    WHERE estatus = 'Pendiente'
+      AND fecha_hora_pedido < DATE_SUB(NOW(), INTERVAL 48 hour);
+END //
+delimiter ;
+
 create table bolsas_cafe (
 id_bolsa int auto_increment not null,
 nombre nvarchar(100) not null,
@@ -186,7 +199,8 @@ id_dp int auto_increment not null,
 id_pedido int not null,
 id_dbc int not null,
 precio_unitario double not null,
-cantidad int not null, -- Actualizar el monto si se actualiza el precio de alguna bolsa.
+cantidad int not null,
+monto double not null,
 primary key(id_dp),
 foreign key (id_pedido) references pedidos(id_pedido),
 foreign key (id_dbc) references detalle_bc(id_dbc)
@@ -237,15 +251,16 @@ foreign key (id_cliente) references clientes(id_cliente),
 foreign key (id_evento) references EVENTOS(id_evento)
 );
 
+-- Evento para cancelar la reserva si no se paga dentro de 48 horas.
 delimiter //
 CREATE EVENT cancelar_reservas_no_pagadas
-ON SCHEDULE EVERY 1 minute
+ON SCHEDULE EVERY 1 hour
 DO
 BEGIN
     UPDATE eventos_reservas
     SET estatus = 'Cancelada'
     WHERE estatus = 'Pendiente'
-      AND fecha_hora_reserva < DATE_SUB(NOW(), INTERVAL 2 minute);
+      AND fecha_hora_reserva < DATE_SUB(NOW(), INTERVAL 48 hour);
 END //
 delimiter ;
 
@@ -404,17 +419,18 @@ BEGIN
     DECLARE permiso BOOLEAN DEFAULT TRUE;
     DECLARE bolsa INT;
     DECLARE cantidad INT;
+    DECLARE monto double;
     DECLARE no_hay_producto BOOLEAN DEFAULT FALSE;
 
     -- Cursor para leer los productos del carrito asociados al nuevo pedido
     DECLARE leer CURSOR FOR
-        SELECT DISTINCT carrito.id_dbc, carrito.cantidad
+        SELECT DISTINCT carrito.id_dbc, carrito.cantidad, carrito.monto
         FROM carrito
         JOIN pedidos ON new.id_cliente = carrito.id_cliente;
 
     -- Cursor para la comprobacion de stock de los productos en detalle_bc
     DECLARE comprobacion CURSOR FOR
-        SELECT DISTINCT carrito.id_dbc, carrito.cantidad
+        SELECT DISTINCT carrito.id_dbc, carrito.cantidad, carrito.monto
         FROM carrito
         JOIN pedidos ON new.id_cliente = carrito.id_cliente;
 
@@ -426,7 +442,7 @@ BEGIN
         -- Comprobar si hay suficiente stock para todos los productos del carrito
         OPEN comprobacion;
         comprobar_bucle: LOOP
-            FETCH comprobacion INTO bolsa, cantidad;
+            FETCH comprobacion INTO bolsa, cantidad, monto;
             IF no_hay_producto THEN
                 LEAVE comprobar_bucle;
             END IF;
@@ -445,15 +461,15 @@ BEGIN
         -- Abrir el cursor para procesar los productos del carrito
         OPEN leer;
         leer_bucle: LOOP
-            FETCH leer INTO bolsa, cantidad;
+            FETCH leer INTO bolsa, cantidad, monto;
             IF no_hay_producto THEN
                 LEAVE leer_bucle;
             END IF;
 
             -- Si hay permiso para continuar, insertar en detalle_pedidos y actualizar stock
             IF permiso THEN
-                INSERT INTO detalle_pedidos (id_dbc, cantidad, id_pedido, precio_unitario)
-                VALUES (bolsa, cantidad, new.id_pedido, (SELECT detalle_bc.precio FROM detalle_bc WHERE detalle_bc.id_dbc = bolsa));
+                INSERT INTO detalle_pedidos (id_dbc, cantidad,monto, id_pedido, precio_unitario)
+                VALUES (bolsa, cantidad, monto,new.id_pedido, (SELECT detalle_bc.precio FROM detalle_bc WHERE detalle_bc.id_dbc = bolsa));
 
                 UPDATE detalle_bc
                 SET stock = stock - cantidad
@@ -468,6 +484,56 @@ BEGIN
     END IF;  -- Fin de la condición de estado del pedido
 END //
 DELIMITER ;
+
+
+-- Trigger para borrar los productos del carrito en cuanto se realize un pedido
+delimiter //
+create trigger after_insert_borrar_carrito
+after insert on pedidos
+for each row
+begin
+SET SQL_SAFE_UPDATES = 0;
+delete carrito from carrito 
+join pedidos on carrito.id_cliente = pedidos.id_cliente
+join detalle_pedidos on pedidos.id_pedido = detalle_pedidos.id_pedido
+where carrito.id_cliente = pedidos.id_cliente and new.id_pedido = detalle_pedidos.id_pedido;
+    SET SQL_SAFE_UPDATES = 1;
+end //
+delimiter ;
+
+-- Trigger para restaurar el stock si se cancela.
+delimiter //
+create trigger after_update_restaurar_stock
+after update on pedidos
+for each row
+begin
+
+declare permiso boolean default true;
+declare bolsa int;
+    declare cantidad int;
+declare no_hay_producto boolean default false;
+    
+    declare restauracion cursor for
+    select distinct dp.id_dbc, dp.cantidad from detalle_pedidos dp join pedidos p on dp.id_pedido = p.id_pedido where dp.id_pedido = old.id_pedido;
+    
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET no_hay_producto = TRUE;-- condicion para que el loop siga
+    if new.estatus = 'Cancelado' and old.estatus = 'Pendiente' then
+open restauracion;
+restauracion_bucle: loop
+fetch restauracion into bolsa, cantidad;
+if no_hay_producto then
+leave restauracion_bucle;
+end if;  
+        
+update detalle_bc
+set stock = stock + cantidad
+where id_dbc = bolsa;
+            
+end loop;
+close restauracion;
+end if;
+end //
+delimiter ; 
 
 -- Trigger para marcar una asistencia a la recompensa correspondiente cada ves que se inserte una nueva 
 -- asistencia.
@@ -621,26 +687,54 @@ DELIMITER ;
 delimiter //
 create procedure SP_Insert_Update_Carrito(
 in p_id_cliente int,
-in p_id_bc int,
+in p_id_dbc int,
 in p_cantidad int
 )
 begin 
 declare existe_bolsa int;
 
-select c.id_bc into existe_bolsa
+select c.id_dbc into existe_bolsa
 from carrito c 
-where c.id_cliente = p_id_cliente  and c.id_bc = p_id_bc;
+where c.id_cliente = p_id_cliente  and c.id_dbc = p_id_dbc;
 
 if existe_bolsa > 0 then 
-	update carrito c set c.cantidad = c.cantidad + p_cantidad, monto_total = (select ((cantidad+p_cantidad)*bc.precio) from bolsas_cafe bc join carrito c on c.id_bc = bc.id_bc  where bc.id_bc = p_id_bc  and c.id_cliente = p_id_cliente)
-	where c.id_cliente = p_id_cliente and c.id_bc = p_id_bc;
+    update carrito c set c.cantidad = c.cantidad + p_cantidad, monto = (select ((cantidad+p_cantidad)*dbc.precio) from detalle_bc dbc join carrito c on c.id_dbc = dbc.id_dbc  where dbc.id_dbc = p_id_dbc  and c.id_cliente = p_id_cliente)
+    where c.id_cliente = p_id_cliente and c.id_dbc = p_id_dbc;
 else 
-	insert into carrito(id_cliente, id_bc, cantidad, monto_total)
-	values (p_id_cliente,p_id_bc,p_cantidad, p_cantidad * (select precio from bolsas_cafe bc where bc.id_bc = p_id_bc) );
+    insert into carrito(id_cliente, id_dbc, cantidad, monto)
+    values (p_id_cliente,p_id_dbc,p_cantidad, p_cantidad * (select precio from detalle_bc dbc where dbc.id_dbc = p_id_dbc) );
 end if;
 
 end //
 delimiter ;
+
+-- Procedimiento almacenado para realizar pedido.
+delimiter //
+CREATE PROCEDURE SP_Realizar_Pedido(
+    IN p_id_cliente INT,
+    IN p_id_domicilio INT,
+    IN p_id_mp INT
+)
+BEGIN 
+    DECLARE v_monto_total double;
+    DECLARE v_count INT;
+
+    -- Verifica si el carrito tiene artículos para el cliente especificado
+    SELECT COUNT(*) INTO v_count FROM carrito WHERE id_cliente = p_id_cliente;
+    
+    IF v_count > 0 THEN
+        -- Calcula el monto total del carrito
+        SELECT SUM(monto) INTO v_monto_total FROM carrito WHERE id_cliente = p_id_cliente;
+        
+        -- Inserta el pedido en la tabla pedidos
+        INSERT INTO pedidos(id_cliente, id_domicilio, id_mp, monto_total)
+        VALUES (p_id_cliente, p_id_domicilio, p_id_mp, v_monto_total);
+    ELSE
+        -- Lanza un error si el carrito está vacío
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'No tienes nada en el carrito';
+    END IF;
+END //
+DELIMITER ;
 
 -- Procedimiento almacenado para registrar usuarios(clientes).
 delimiter //
@@ -711,11 +805,9 @@ create procedure SP_comprobante_reserva(
     in p_img_comprobante varchar(255)
 )
 begin
-
     -- Subir comprobante de la reserva.
     insert into comprobantes(id_reserva,concepto, folio_operacion, monto, banco_origen, imagen_comprobante)
     values(p_reserva,p_concepto, p_folio_operacion, p_monto, p_banco_origen, p_img_comprobante);
-
 end //
 delimiter ;
 
