@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
+<?php
+session_start();
+?>
 
 <body>
     <!-- NavBar -->
@@ -16,7 +19,8 @@
             <a class="navbar-brand" href="index.php">
                 <img src="./img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
             </a>
-            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="tituloOffcanvas">
+            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="tituloOffcanvas">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title text-light" id="tituloOffcanvas">SinfoníaCafé&Cultura</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -44,13 +48,20 @@
                     </ul>
                 </div>
             </div>
-            <a href="html/login.html" class="login-button ms-auto">Iniciar Sesión</a>
-            <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <?php
+            if (isset($_SESSION["usuario"])) {
+                echo "<h5 class='text-light'>" . $_SESSION["usuario"] . "</h5>" . "<br>";
+            } else {
+                ?>
+                <a href="views/login.php" class="login-button ms-auto">Iniciar Sesión</a>
+                <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <?php
+            }
+            ?>
         </div>
     </nav>
-
     <!-- Inicio -->
     <div style="max-width: 100%;">
         <div class="row p-0 m-0">
@@ -60,8 +71,7 @@
             <div class="col-lg-4 d-flex flex-column justify-content-center align-items-center p-5" style="background: var(--color3);">
                 <div class="row ">
                     <div class="col-12">
-                        <h1 class="text-light text-center" style="letter-spacing: 1px;">Prueba el mejor café de la
-                            ciudad</h1>
+                        <h1 class="text-light text-center" style="letter-spacing: 1px;">Prueba el mejor café de la ciudad</h1>
                     </div>
                 </div>
                 <div class="row mb-3 p-2 ">
@@ -82,9 +92,7 @@
     <div class="container-fluid m-0 p-0" style="background: var(--color2);">
 
         <div class="row p-0 m-0">
-
             <!--Introducción-->
-
             <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center">
                 <div class="container-fluid p-5 ">
                     <div class="row">
@@ -101,9 +109,7 @@
                                 facere, aut earum sapiente voluptate officia soluta explicabo quaerat nihil officiis
                                 commodi animi. In deserunt culpa provident pariatur.
                             </p>
-
                             <a href="#" class="btn btn-cafe ">Ver mas</a>
-
                         </div>
                     </div>
                 </div>
@@ -135,8 +141,6 @@
                 </div>
             </div>
             <!-- Fin introducción-->
-
-
             <!-- Menu especial para ti -->
             <div class="container p-3 bagr-cafe2">
                 <div class="col-12 text-center ">
@@ -151,15 +155,21 @@
                         </li>
                         <li class="nav-item  mb-2 col-6 col-sm-6 col-md-4 col-lg-3  " role="presentation">
                             <!--Cool and Dark-->
-                            <button class=" btn-categorias   w-100" id="Cool-tab" data-bs-toggle="tab" data-bs-target="#Cool" type="button" role="tab" aria-controls="Cool" aria-selected="false">Cool and Dark</button>
+                            <button class=" btn-categorias   w-100" id="Cool-tab" data-bs-toggle="tab"
+                                data-bs-target="#Cool" type="button" role="tab" aria-controls="Cool"
+                                aria-selected="false">Cool and Dark</button>
                         </li>
                         <li class="nav-item  mb-2 col-6 col-sm-6 col-md-4 col-lg-3  " role="presentation">
                             <!--Around The World-->
-                            <button class=" btn-categorias  w-100" id="Around-tab" data-bs-toggle="tab" data-bs-target="#Around" type="button" role="tab" aria-controls="Around" aria-selected="false">Around The World</button>
+                            <button class=" btn-categorias  w-100" id="Around-tab" data-bs-toggle="tab"
+                                data-bs-target="#Around" type="button" role="tab" aria-controls="Around"
+                                aria-selected="false">Around The World</button>
                         </li>
                         <li class="nav-item  mb-2 col-6 col-sm-6 col-md-4 col-lg-3  " role="presentation">
                             <!--Frappes-->
-                            <button class=" btn-categorias   w-100" id="Frappes-tab" data-bs-toggle="tab" data-bs-target="#Frappes" type="button" role="tab" aria-controls="Frappes" aria-selected="false">Frappes</button>
+                            <button class=" btn-categorias   w-100" id="Frappes-tab" data-bs-toggle="tab"
+                                data-bs-target="#Frappes" type="button" role="tab" aria-controls="Frappes"
+                                aria-selected="false">Frappes</button>
                         </li>
 
                     </ul>
@@ -172,16 +182,20 @@
                         <div class="row justify-content-center mb-5">
                             <div class="col-12 col-md-8 d-flex align-items-center">
                                 <div class="d-flex flex-wrap w-100 d-flex justify-content-center">
-                                    <div class="col-10 col-md-6 p-2 col-sm-10" >
-                                        <img src="./img/cafes/cafe15.webp" class="card-img-top img-fluid" alt="..." style="height: 250px; object-fit: cover;">
+                                    <div class="col-10 col-md-6 p-2 col-sm-10">
+                                        <img src="./img/cafes/cafe15.webp" class="card-img-top img-fluid" alt="..."
+                                            style="height: 250px; object-fit: cover;">
                                     </div>
-                                    <div class="col-9 col-sm-9  col-md-6 p-2 d-flex flex-column justify-content-cente p-lg-2">
+                                    <div
+                                        class="col-9 col-sm-9  col-md-6 p-2 d-flex flex-column justify-content-cente p-lg-2">
                                         <h5 class="fw-bold mb-3" style="letter-spacing: 1px;">Menu Clasicos</h5>
                                         <p class="text-dark-emphasis mb-4 ">Explora nuestro Menú Clásico de Café, donde
                                             cada taza es una experiencia única y reconfortante. Desde el espresso
                                             intenso hasta el cappuccino cremoso, cada bebida se prepara con gran
                                             atención al detalle para ofrecerte el mejor sabor y aroma.</p>
-                                        <a href="html/menu.html" class="btn text-light shadow-lg align-self-start col-12 col-sm-12 col-md-6 col-lg-6" style="background: var(--primario);">Ver Menú</a>
+                                        <a href="html/menu.html"
+                                            class="btn text-light shadow-lg align-self-start col-12 col-sm-12 col-md-6 col-lg-6"
+                                            style="background: var(--primario);">Ver Menú</a>
                                     </div>
                                 </div>
                             </div>
@@ -193,15 +207,19 @@
                             <div class="col-12 col-md-8 d-flex align-items-center">
                                 <div class="d-flex flex-wrap w-100 d-flex justify-content-center">
                                     <div class="col-10 col-md-6 p-2 col-sm-10">
-                                        <img src="./img/cafes/cafe12.webp" class="card-img-top img-fluid" alt="..." style="height: 300px; object-fit: cover;">
+                                        <img src="./img/cafes/cafe12.webp" class="card-img-top img-fluid" alt="..."
+                                            style="height: 300px; object-fit: cover;">
                                     </div>
-                                    <div class="col-9 col-sm-9  col-md-6 p-2 d-flex flex-column justify-content-cente p-lg-2">
+                                    <div
+                                        class="col-9 col-sm-9  col-md-6 p-2 d-flex flex-column justify-content-cente p-lg-2">
                                         <h5 class="fw-bold mb-3" style="letter-spacing: 1px;">Menu Cool and Dark</h5>
                                         <p class="text-dark-emphasis mb-4">Déjate cautivar por nuestro exclusivo Menú
                                             Cool and Dark de Café, donde cada sorbo es una experiencia de sabor intensa
                                             y sofisticada. Disfruta de una selección de bebidas que combinan el rico
                                             aroma del café con notas profundas y indulgentes</p>
-                                        <a href="html/menu.html" class="btn text-light shadow-lg align-self-start col-12 col-sm-12 col-md-6 col-lg-6" style="background: var(--primario);">Ver Menú</a>
+                                        <a href="html/menu.html"
+                                            class="btn text-light shadow-lg align-self-start col-12 col-sm-12 col-md-6 col-lg-6"
+                                            style="background: var(--primario);">Ver Menú</a>
                                     </div>
                                 </div>
                             </div>
@@ -213,16 +231,20 @@
                             <div class="col-12 col-md-8 d-flex align-items-center">
                                 <div class="d-flex flex-wrap w-100 d-flex justify-content-center">
                                     <div class="col-10 col-md-6 p-2 col-sm-10">
-                                        <img src="./img/cafes/cafe3.webp" class="card-img-top img-fluid" alt="..." style="height: 300px; object-fit: cover;">
+                                        <img src="./img/cafes/cafe3.webp" class="card-img-top img-fluid" alt="..."
+                                            style="height: 300px; object-fit: cover;">
                                     </div>
-                                    <div class="col-9 col-sm-9  col-md-6 p-2 d-flex flex-column justify-content-cente p-lg-2">
+                                    <div
+                                        class="col-9 col-sm-9  col-md-6 p-2 d-flex flex-column justify-content-cente p-lg-2">
                                         <h5 class="fw-bold mb-3" style="letter-spacing: 1px;">Around The World</h5>
                                         <p class="text-dark-emphasis mb-4">Embárcate en un viaje culinario con nuestro
                                             Menú Around The World, donde cada plato te transporta a sabores únicos y
                                             exóticos de diferentes rincones del mundo. Descubre una variedad de delicias
                                             internacionales cuidadosamente seleccionadas para satisfacer tu curiosidad
                                             gastronómica</p>
-                                        <a href="html/menu.html" class="btn text-light shadow-lg align-self-start col-12 col-sm-12 col-md-6 col-lg-6" style="background: var(--primario);">Ver Menú</a>
+                                        <a href="html/menu.html"
+                                            class="btn text-light shadow-lg align-self-start col-12 col-sm-12 col-md-6 col-lg-6"
+                                            style="background: var(--primario);">Ver Menú</a>
                                     </div>
                                 </div>
                             </div>
@@ -234,15 +256,19 @@
                             <div class="col-12 col-md-8 d-flex align-items-center">
                                 <div class="d-flex flex-wrap w-100 d-flex justify-content-center">
                                     <div class="col-10 col-md-6 p-2 col-sm-10">
-                                        <img src="./img/cafes/cafe6.webp" class="card-img-top img-fluid" alt="..." style="height: 300px; object-fit: cover;">
+                                        <img src="./img/cafes/cafe6.webp" class="card-img-top img-fluid" alt="..."
+                                            style="height: 300px; object-fit: cover;">
                                     </div>
-                                    <div class="col-9 col-sm-9  col-md-6 p-2 d-flex flex-column justify-content-cente p-lg-2">
+                                    <div
+                                        class="col-9 col-sm-9  col-md-6 p-2 d-flex flex-column justify-content-cente p-lg-2">
                                         <h5 class="fw-bold mb-3" style="letter-spacing: 1px;">Frappes</h5>
                                         <p class="text-dark-emphasis mb-4">Descubre nuestro irresistible menú de
                                             frappés, donde cada sorbo es una fusión perfecta de café, cremosidad y
                                             refrescante hielo. </p>
 
-                                        <a href="html/menu.html" class="btn text-light shadow-lg align-self-start col-12 col-sm-12 col-md-6 col-lg-6" style="background: var(--primario);">
+                                        <a href="html/menu.html"
+                                            class="btn text-light shadow-lg align-self-start col-12 col-sm-12 col-md-6 col-lg-6"
+                                            style="background: var(--primario);">
                                             Ver Menú
                                         </a>
                                     </div>
@@ -265,7 +291,8 @@
                     <section class="col-12 row justify-content-center p-2">
 
                         <!-- Envio a tu Servicio-->
-                        <div class="col-8 col-sm-6 col-sm-5 col-lg-4 m-0 p-0 text-center justify-content-center d-flex card-feature p-1">
+                        <div
+                            class="col-8 col-sm-6 col-sm-5 col-lg-4 m-0 p-0 text-center justify-content-center d-flex card-feature p-1">
                             <div class="">
                                 <div class="row">
                                     <div class="col-12">
@@ -279,7 +306,8 @@
                             </div>
                         </div>
                         <!-- Tarjeta regalo especial-->
-                        <div class="col-8 col-sm-6 col-sm-5 col-lg-4 m-0 p-0 text-center justify-content-center d-flex card-feature p-1">
+                        <div
+                            class="col-8 col-sm-6 col-sm-5 col-lg-4 m-0 p-0 text-center justify-content-center d-flex card-feature p-1">
                             <a href="./html/recompensas.html">
                                 <div class="">
                                     <div class="col-12">
@@ -295,7 +323,8 @@
                             </a>
                         </div>
                         <!-- Servicio al cliente-->
-                        <div class="col-8 col-sm-6 col-sm-5 col-lg-4 m-0 p-0 text-center justify-content-center d-flex card-feature p-1">
+                        <div
+                            class="col-8 col-sm-6 col-sm-5 col-lg-4 m-0 p-0 text-center justify-content-center d-flex card-feature p-1">
                             <a href="./html/contact.html">
                                 <div class="">
                                     <div class="col-12">
@@ -328,7 +357,8 @@
                             </div>
                             <div class="card-footer product-card-footer">
 
-                                <button class="btn btn-light float-right btn-cafe"><i class="fa fa-shopping-cart"></i></button>
+                                <button class="btn btn-light float-right btn-cafe"><i
+                                        class="fa fa-shopping-cart"></i></button>
                             </div>
                         </div>
                     </div>
@@ -341,7 +371,8 @@
                             </div>
                             <div class="card-footer product-card-footer">
 
-                                <button class="btn btn-light float-right btn-cafe"><i class="fa fa-shopping-cart"></i></button>
+                                <button class="btn btn-light float-right btn-cafe"><i
+                                        class="fa fa-shopping-cart"></i></button>
                             </div>
                         </div>
                     </div>
@@ -355,7 +386,8 @@
                             </div>
                             <div class="card-footer product-card-footer">
 
-                                <button class="btn btn-light float-right btn-cafe"><i class="fa fa-shopping-cart"></i></button>
+                                <button class="btn btn-light float-right btn-cafe"><i
+                                        class="fa fa-shopping-cart"></i></button>
                             </div>
                         </div>
                     </div>
@@ -369,7 +401,8 @@
                             </div>
                             <div class="card-footer product-card-footer">
 
-                                <button class="btn btn-light float-right btn-cafe"><i class="fa fa-shopping-cart"></i></button>
+                                <button class="btn btn-light float-right btn-cafe"><i
+                                        class="fa fa-shopping-cart"></i></button>
                             </div>
                         </div>
                     </div>
@@ -395,14 +428,15 @@
 
                 <div class="row  justify-content-center d-flex">
                     <!-- Blog Card 1 -->
-                    <div class="col-md-4 p-3 col-6 col-sm-6 " >
-                        <div class="card blog-card"style="border-radius: 5% 5% 0% 0%;">
+                    <div class="col-md-4 p-3 col-6 col-sm-6 ">
+                        <div class="card blog-card" style="border-radius: 5% 5% 0% 0%;">
                             <img src="./img/cafes/lugar1.webp" class="coffee-image" alt="Image 1">
                             <div class="card-body product-card">
                                 <h5 class="blog-card-title">MAKE IT SIMPLE</h5>
                                 <h6 class="blog-card-subtitle mb-2 text-muted">20/20/2020
                                 </h6>
-                                <p class="blog-card-text  d-none d-md-block">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                <p class="blog-card-text  d-none d-md-block">Lorem ipsum dolor sit amet, consectetur
+                                    adipiscing elit.
                                     Aenean feugiat dictum lacus, ut hendrerit mi pulvinar vel. Fusce id nibh at neque
                                     eleifend tristique...</p>
                                 <a href="#" class="blog-card-link">READ MORE <i class="fa-solid fa-arrow-right"></i></a>
@@ -410,14 +444,15 @@
                         </div>
                     </div>
                     <!-- Blog Card 2 -->
-                    <div class="col-md-4 p-3 col-6 col-sm-6 " >
-                        <div class="card blog-card"style="border-radius: 5% 5% 0% 0%;">
+                    <div class="col-md-4 p-3 col-6 col-sm-6 ">
+                        <div class="card blog-card" style="border-radius: 5% 5% 0% 0%;">
                             <img src="./img/cafes/cafe8.webp" class="coffee-image" alt="Image 2">
                             <div class="card-body product-card">
                                 <h5 class="blog-card-title">COFFEE SHOP</h5>
                                 <h6 class="blog-card-subtitle mb-2 text-muted">20/20/2020
                                 </h6>
-                                <p class="blog-card-text  d-none d-md-block">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                <p class="blog-card-text  d-none d-md-block">Lorem ipsum dolor sit amet, consectetur
+                                    adipiscing elit.
                                     Aenean feugiat dictum lacus, ut hendrerit mi pulvinar vel. Fusce id nibh at neque
                                     eleifend tristique...</p>
                                 <a href="#" class="blog-card-link">READ MORE <i class="fa-solid fa-arrow-right"></i></a>
@@ -425,14 +460,15 @@
                         </div>
                     </div>
                     <!-- Blog Card 3 -->
-                    <div class="col-md-4 p-3 col-6 col-sm-6 d-none d-md-block" >
+                    <div class="col-md-4 p-3 col-6 col-sm-6 d-none d-md-block">
                         <div class="card blog-card" style="border-radius: 5% 5% 0% 0%;">
                             <img src="./img/cafes/cafe4.webp" class="coffee-image" alt="Image 3">
                             <div class="card-body product-card">
                                 <h5 class="blog-card-title">COFFEE BAR</h5>
                                 <h6 class="blog-card-subtitle mb-2 text-muted">20/20/2020
                                 </h6>
-                                <p class="blog-card-text  d-none d-md-block">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                <p class="blog-card-text  d-none d-md-block">Lorem ipsum dolor sit amet, consectetur
+                                    adipiscing elit.
                                     Aenean feugiat dictum lacus, ut hendrerit mi pulvinar vel. Fusce id nibh at neque
                                     eleifend tristique...</p>
                                 <a href="#" class="blog-card-link">READ MORE <i class="fa-solid fa-arrow-right"></i></a>
@@ -468,7 +504,8 @@
                                 </div>
                                 <!-- imagen 2 -->
                                 <div class="col-4 col-md-2">
-                                    <a href="https://www.facebook.com/photo.php?fbid=1098191388477112&set=pb.100048587835727.-2207520000&type=3">
+                                    <a
+                                        href="https://www.facebook.com/photo.php?fbid=1098191388477112&set=pb.100048587835727.-2207520000&type=3">
                                         <div class="carousel-item-wrapper">
                                             <img src="./img/cafes/cafe2.webp" class="d-block w-100" alt="...">
                                             <div class="overlay">
@@ -480,7 +517,8 @@
                                 </div>
                                 <!-- imagen 3 -->
                                 <div class="col-4 col-md-2">
-                                    <a href="https://www.facebook.com/photo.php?fbid=1089403459355905&set=pb.100048587835727.-2207520000&type=3">
+                                    <a
+                                        href="https://www.facebook.com/photo.php?fbid=1089403459355905&set=pb.100048587835727.-2207520000&type=3">
                                         <div class="carousel-item-wrapper">
                                             <img src="./img/cafes/cafe3.webp" class="d-block w-100" alt="...">
                                             <div class="overlay">
@@ -491,7 +529,8 @@
                                 </div>
                                 <!-- imagen 4 -->
                                 <div class="col-4 col-md-2 d-none d-md-block">
-                                    <a href="https://www.facebook.com/photo.php?fbid=1088035302826054&set=pb.100048587835727.-2207520000&type=3">
+                                    <a
+                                        href="https://www.facebook.com/photo.php?fbid=1088035302826054&set=pb.100048587835727.-2207520000&type=3">
                                         <div class="carousel-item-wrapper">
                                             <img src="./img/cafes/cafe4.webp" class="d-block w-100" alt="...">
                                             <div class="overlay">
@@ -503,7 +542,8 @@
                                 </div>
                                 <!-- imagen 5 -->
                                 <div class="col-4 col-md-2 d-none d-md-block">
-                                    <a href="https://www.facebook.com/photo.php?fbid=1083951893234395&set=pb.100048587835727.-2207520000&type=3">
+                                    <a
+                                        href="https://www.facebook.com/photo.php?fbid=1083951893234395&set=pb.100048587835727.-2207520000&type=3">
                                         <div class="carousel-item-wrapper">
                                             <img src="./img/cafes/cafe5.webp" class="d-block w-100" alt="...">
                                             <div class="overlay">
@@ -515,7 +555,8 @@
                                 </div>
                                 <!-- imagen 6 -->
                                 <div class="col-4 col-md-2 d-none d-md-block">
-                                    <a href="https://www.facebook.com/photo.php?fbid=1081126390183612&set=pb.100048587835727.-2207520000&type=3">
+                                    <a
+                                        href="https://www.facebook.com/photo.php?fbid=1081126390183612&set=pb.100048587835727.-2207520000&type=3">
                                         <div class="carousel-item-wrapper">
                                             <img src="./img/cafes/cafe6.webp" class="d-block w-100" alt="...">
                                             <div class="overlay">
@@ -532,7 +573,8 @@
                             <div class="row ">
                                 <!-- imagen 7 -->
                                 <div class="col-4 col-md-2">
-                                    <a href="https://www.facebook.com/photo.php?fbid=1075046007458317&set=pb.100048587835727.-2207520000&type=3">
+                                    <a
+                                        href="https://www.facebook.com/photo.php?fbid=1075046007458317&set=pb.100048587835727.-2207520000&type=3">
                                         <div class="carousel-item-wrapper">
                                             <img src="./img/cafes/cafe7.webp" class="d-block w-100" alt="...">
                                             <div class="overlay">
@@ -544,7 +586,8 @@
                                 </div>
                                 <!-- imagen 8 -->
                                 <div class="col-4 col-md-2">
-                                    <a href="https://www.facebook.com/photo.php?fbid=789497972679790&set=pb.100048587835727.-2207520000&type=3">
+                                    <a
+                                        href="https://www.facebook.com/photo.php?fbid=789497972679790&set=pb.100048587835727.-2207520000&type=3">
                                         <div class="carousel-item-wrapper">
                                             <img src="./img/cafes/cafe8.webp" class="d-block w-100" alt="...">
                                             <div class="overlay">
@@ -556,7 +599,8 @@
                                 </div>
                                 <!-- imagen 9 -->
                                 <div class="col-4 col-md-2">
-                                    <a href="https://www.facebook.com/photo.php?fbid=1021787422784176&set=pb.100048587835727.-2207520000&type=3">
+                                    <a
+                                        href="https://www.facebook.com/photo.php?fbid=1021787422784176&set=pb.100048587835727.-2207520000&type=3">
                                         <div class="carousel-item-wrapper">
                                             <img src="./img/cafes/cafe9.webp" class="d-block w-100" alt="...">
                                             <div class="overlay">
@@ -568,7 +612,8 @@
                                 </div>
                                 <!-- imagen 10 -->
                                 <div class="col-4 col-md-2 d-none d-md-block">
-                                    <a href="https://www.facebook.com/photo.php?fbid=1013628096933442&set=pb.100048587835727.-2207520000&type=3">
+                                    <a
+                                        href="https://www.facebook.com/photo.php?fbid=1013628096933442&set=pb.100048587835727.-2207520000&type=3">
                                         <div class="carousel-item-wrapper">
                                             <img src="./img/cafes/cafe10.webp" class="d-block w-100" alt="...">
                                             <div class="overlay">
@@ -580,7 +625,8 @@
                                 </div>
                                 <!-- imagen 11 -->
                                 <div class="col-4 col-md-2 d-none d-md-block">
-                                    <a href="https://www.facebook.com/photo.php?fbid=999156661713919&set=pb.100048587835727.-2207520000&type=3">
+                                    <a
+                                        href="https://www.facebook.com/photo.php?fbid=999156661713919&set=pb.100048587835727.-2207520000&type=3">
                                         <div class="carousel-item-wrapper">
                                             <img src="./img/cafes/cafe11.webp" class="d-block w-100" alt="...">
                                             <div class="overlay">
@@ -592,7 +638,8 @@
                                 </div>
                                 <!-- imagen 12 -->
                                 <div class="col-4 col-md-2 d-none d-md-block d-lg-block">
-                                    <a href="https://www.facebook.com/photo.php?fbid=728966215399633&set=pb.100048587835727.-2207520000&type=3">
+                                    <a
+                                        href="https://www.facebook.com/photo.php?fbid=728966215399633&set=pb.100048587835727.-2207520000&type=3">
                                         <div class="carousel-item-wrapper">
                                             <img src="./img/cafes/cafe13.webp" class="d-block w-100" alt="...">
                                             <div class="overlay">
@@ -605,19 +652,19 @@
                             </div>
                         </div>
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
+                        data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
+                        data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>
                 </div>
 
             </div>
-
-
         </div>
     </div>
 

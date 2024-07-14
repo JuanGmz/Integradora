@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrar Productos E-Commerce</title>
+    <title>Administrar Reservas</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -317,7 +317,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="shadow-lg bg-light container p-3">
+                <div class="shadow-lg bg-light row p-3">
                     <div class="row m-1">
                         <div class="col-12">
                             <form method="post">
@@ -331,7 +331,7 @@
                                                 $eventos = $db->select($queryFiltrar);
                                                 foreach ($eventos as $evento) {
                                                     $selected = (isset($_POST['evento']) && $_POST['evento'] == $evento->id_evento) ? 'selected' : '';
-                                                    echo "<option value='$evento->id_evento' $selected>$evento->nombre</option>";
+                                                    echo "<option value='{$evento->id_evento}' $selected>{$evento->nombre}</option>";
                                                 }    
                                             ?>
                                         </select>
@@ -347,34 +347,108 @@
                 <div class="row mt-3 p-4 m-0">
                     <!-- Tabla de reservas AQUI -->
                     <?php
-                        $id_evento = intval($_POST['evento']);
-                        echo "<table class='table table-dark table-striped table-hover text-center'>
-                                <thead>
-                                    <tr>
-                                        <th scope='col'>Folio</th>
-                                        <th scope='col'>Cliente</th>
-                                        <th scope='col'>Boletos</th>
-                                        <th scope='col'>Monto Total</th>
-                                        <th scope='col'>Estatus</th>
-                                    </tr>
-                                </thead>
-                                <tbody class='table-group-divider table-light'>";
-                        $queryReservas = "CALL filtrar_reservas($id_evento)";
-                        $db->execute($queryReservas);
-                        
+                        if (isset($_POST['evento'])) {
+                            $id_evento = intval($_POST['evento']);
 
-                        foreach ($reservas as $reserva) {
-                            echo "<tr>
-                                    <th scope='row'>$reserva->id_reserva</th>
-                                    <th scope='row'>$reserva->Cliente</th>
-                                    <td>$reserva->c_boletos</td>
-                                    <td>$reserva->monto_total</td>
-                                    <td>$reserva->estatus</td>
-                                </tr>";
+                            $queryReservas = "SELECT * FROM view_AdminReservas WHERE id_evento = $id_evento";
+                            $reservas = $db->select($queryReservas);
+
+                            if (empty($reservas)) {
+                                    echo "<div>
+                                            No hay reservas registradas para este evento.
+                                        </div>";
+                            } else {
+                                echo "<table class='table table-dark table-striped table-hover text-center border-3 border-black border-bottom border-end border-start'>
+                                        <thead>
+                                            <tr>
+                                                <th scope='col' class='d-none d-lg-table-cell'>Folio</th>
+                                                <th scope='col'>Cliente</th>
+                                                <th scope='col' class='d-none d-lg-table-cell'>Boletos</th>
+                                                <th scope='col' class='d-none d-lg-table-cell'>Monto Total</th>
+                                                <th scope='col'>Estatus</th>
+                                                <th scope='col'>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class='table-group-divider table-light'>";
+                                foreach ($reservas as $reserva) {
+                                    echo "<tr>
+                                            <th scope='row' class='d-none d-lg-table-cell'>$reserva->folio</th>
+                                            <th scope='row'>$reserva->cliente</th>
+                                            <td class='d-none d-lg-table-cell'>$reserva->boletos</td>
+                                            <td class='d-none d-lg-table-cell'>$$reserva->montoTotal</td>
+                                            <td>$reserva->estatus</td>
+                                            <td>
+                                                <!-- Modal para ver detalles de la reserva -->
+                                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#detalles$reserva->folio'>
+                                                    <i class='fa-solid fa-list'></i>
+                                                </button>
+                                                <div class='modal fade' id='detalles$reserva->folio' tabindex='-1' aria-labelledby='detalles$reserva->folio' aria-hidden='true'>
+                                                    <div class='modal-dialog' style='max-width: 30% !important;'>
+                                                        <div class='modal-content'>
+                                                            <div class='modal-header'>
+                                                                <h5 class='modal-title' id='detalles$reserva->folio'>Detalles de la reserva</h5>
+                                                                <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                                            </div>
+                                                            <div class='modal-body text-start'>";
+                                                                $queryComprobante = "SELECT * FROM vw_comprobante_reserva WHERE id_cliente = $reserva->folio";
+                                                                $comprobantes = $db->select($queryComprobante);
+                                                                if (empty($comprobantes)) {
+                                                                    echo "<div class='alert alert-danger mb-4' role='alert'>Aún no se envía el comprobante</div>";
+                                                                } else {
+                                                                    foreach ($comprobantes as $comprobante) {
+                                                                        echo "<h4 class='fw-bold'>Folio de la reserva: <span class='fw-normal fs-5'>{$reserva->folio}</span></h5>";
+                                                                        echo "<h4 class='fw-bold'>Referencia: <span class='fw-normal fs-5'>{$comprobante->referencia}</span></h5>";
+                                                                        echo "<h4 class='fw-bold'>Folio de operación: <span class='fw-normal fs-5'>{$comprobante->folio_operacion}</span></h5>";
+                                                                        echo "<h4 class='fw-bold'>Fecha de la reserva: <span class='fw-normal fs-5'>{$comprobante->fecha}</span></h5>";
+                                                                        echo "<h4 class='fw-bold'>Cantidad de boletos: <span class='fw-normal fs-5'>{$reserva->boletos}</span></h5>";
+                                                                        echo "<h4 class='fw-bold'>Precio por boleto: <span class='fw-normal fs-5'>{$reserva->precio_boleto}</span></h5>";
+                                                                        echo "<h4 class='fw-bold'>Monto total: <span class='fw-normal fs-5'>$$comprobante->monto</span></h5>";
+                                                                        echo "<h4 class='fw-bold'>Banco de origen: <span class='fw-normal fs-5'>{$comprobante->banco_origen}</span></h5>";
+                                                                        echo "<img src='../img/comprobantes/$comprobante->imagen_comprobante' class='img-fluid'>";
+                                                                    }
+                                                                }
+                                                                echo"
+                                                                <form method='post' action='../scripts/adminreservas/estatusReserva.php'>
+                                                                    <input type='hidden' name='id_reserva' value='$reserva->folio'>
+                                                                    <div class='mb-3'>
+                                                                        <label for='estatus' class='form-label'>Estatus</label>
+                                                                        <select name='estatus' id='estatus' class='form-select' required>";
+                                                                            if ($reserva->estatus == 'Pendiente') {
+                                                                                echo "<option value='Pendiente' selected>Pendiente</option>
+                                                                                        <option value='Apartada'>Apartada</option>
+                                                                                        <option value='Cancelada'>Cancelada</option>";
+                                                                            } else if ($reserva->estatus == 'Apartada') {
+                                                                                echo "<option value='Pendiente'>Pendiente</option>
+                                                                                        <option value='Apartada' selected>Apartada</option>
+                                                                                        <option value='Cancelada'>Cancelada</option>";
+                                                                                } else {
+                                                                                echo "<option value='Pendiente'>Pendiente</option>
+                                                                                        <option value='Apartada'>Apartada</option>
+                                                                                        <option value='Cancelada' selected>Cancelada</option>";
+                                                                            }
+                                                                            echo "
+                                                                        </select>
+                                                                        <div class='text-end mt-4'>
+                                                                            <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
+                                                                            <input type='submit' class='btn btn-primary' value='Guardar Cambios'>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>";
+                                }   
+                                echo "</tbody>
+                                    </table>";
+                            }
+                        } else {
+                            echo "<div>
+                                    Seleccionde un evento
+                                 </div>";
                         }
-
-                        echo "</tbody>
-                            </table>";
                     ?>
                 </div>
             </div>

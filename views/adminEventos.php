@@ -181,7 +181,6 @@
                         <a href="../index.php" class="text-decoration-none">
                             <i class="fa-solid fa-house text-light fa-2x"></i>
                         </a>
-                    </button>
                 </div>
             </nav>
         </div>

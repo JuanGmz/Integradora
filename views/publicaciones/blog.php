@@ -14,7 +14,7 @@
         <!-- NavBar -->
         <nav class="navbar navbar-expand-lg shadow-lg mb-lg-5">
             <div class="container-fluid">
-                <a class="navbar-brand" href="../index.php">
+                <a class="navbar-brand" href="../../index.php">
                     <img src="../../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
                 </a>
                 <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
@@ -46,7 +46,7 @@
                         </ul>
                     </div>
                 </div>
-                <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
+                <a href="../login.php" class="login-button ms-auto">Iniciar Sesión</a>
                 <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>

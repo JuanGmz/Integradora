@@ -15,7 +15,7 @@
     <nav class="navbar navbar-expand-lg shadow-lg mb-lg-5">
         <div class="container-fluid">
             <a class="navbar-brand" href="../index.php">
-                <img src="../../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
+                <img src="../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
             </a>
             <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
@@ -42,23 +42,9 @@
                         <li class="nav-item">
                             <a class="nav-link mx-lg-2" href="contact.php">Contacto</a>
                         </li>
-                        <div class="justify-content-end d-flex p-2 ">
-                            <div class="dropdown ">
-                                <i class="fa-solid fa-user" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;"></i>
-                                <div class="dropdown-menu dropdown-itemcolor" aria-labelledby="userDropdown">
-                                    <a class="dropdown-item dropdown-itemcolor" href="#account">Cuenta</a>
-                                    <a class="dropdown-item dropdown-itemcolor" href="#logout">Cerrar Sesión</a>
-                                    <a class="dropdown-item dropdown-itemcolor" href="#cart">Carrito</a>
-                                </div>
-                            </div>
-                        </div>
                     </ul>
                 </div>
             </div>
-
-
-
-
 
             <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -68,63 +54,92 @@
     <!-- NavBar End -->
 
     <div class="container mb-5">
-
         <!-- Breadcrumbs -->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb mt-4">
-                <li class="breadcrumb-item"><a href="../menu.php">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="../index.php">Inicio</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Perfil</li>
             </ol>
         </nav>
 
         <!-- Titulo -->
-        <h1 class="fw-bold">Perfil</h1>
-        <div class="container mt-5">
-
-            <hr class="section-divider">
-
-            <!-- Order History Section -->
-            <h4>Historial de pedidos</h4>
-            <p>No hay historial de pedidos</p>
-
-            <!-- Account Details Section -->
-            <h4 class="mt-4">Detalles de la cuenta</h4>
-            <table class="table table-striped table-warning">
-                <tbody>
-                    <tr>
-                        <th scope="row">Nombre:</th>
-                        <td>Dante Raziel Basurto Saucedo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Email:</th>
-                        <td>bune_assassin@hotmail.com</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Dirección:</th>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Dirección 2:</th>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">País:</th>
-                        <td>México</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Código postal:</th>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Teléfono:</th>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <!-- View Addresses Button -->
-            <button class="btn btn-danger">Ver Direcciones (1)</button>
+        <div class="fw-bold fs-2 mt-3 mb-4">
+            <h1 class="fw-bold">Bienvenido <span class="fw-normal">Aquí irá el usuario</span></h1>
+            <hr>
+            <h4>Qué deseas hacer?</h4>
+            <hr>
         </div>
+
+        <!-- Contenido -->
+        <div class="row">
+            <div class="col-lg-6 blog-card">
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4 d-flex justify-content-center align-items-center p-3 p-lg-3 pb-0">
+                            <i class="fa-solid fa-user fa-8x text-dark"></i>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h4 class="card-title fw-bold">Datos Personales</h4>
+                                <p class="card-text">Ver y actualizar información personal.</p>
+                                <a href="#" class="blog-card-link">Datos Personales <i class="fa-solid fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 blog-card">
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4 d-flex justify-content-center align-items-center p-3 p-lg-3 pb-0">
+                            <i class="fa-solid fa-file-invoice fa-8x text-dark"></i>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h4 class="card-title fw-bold">Pedidos</h4>
+                                <p class="card-text">Ver historial de compras.</p>
+                                <a href="#" class="blog-card-link">Pedidos <i class="fa-solid fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         </div>
+        <div class="row">
+            <div class="col-lg-6 blog-card">
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4 d-flex justify-content-center align-items-center p-3 p-lg-3 pb-0">
+                            <i class="fa-solid fa-address-book fa-8x text-dark"></i>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h4 class="card-title fw-bold">Agregar Direcciones</h4>
+                                <p class="card-text">Agrega otra dirección para recibir tus pedidos.</p>
+                                <a href="#" class="blog-card-link">Direcciones <i class="fa-solid fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 blog-card">
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4 d-flex justify-content-center align-items-center p-3 p-lg-3 pb-0">
+                            <i class="fa-solid fa-ticket fa-8x text-dark"></i>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h4 class="card-title fw-bold">Reservas</h4>
+                                <p class="card-text">Ver el historial de reservas de boletos para los eventos.</p>
+                                <a href="#" class="blog-card-link">Reservas <i class="fa-solid fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         </div>
+        
     </div>
 
     <!-- Footer -->
@@ -160,16 +175,8 @@
         </div>
     </footer>
 
-
-
-
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/45ef8dbe96.js" crossorigin="anonymous"></script>
-
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 
 </html>
