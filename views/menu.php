@@ -53,6 +53,13 @@
     <!-- NavBar End -->
 
     <div class="container mb-5">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mt-4">
+                <li class="breadcrumb-item"><a href="../../index.php">Inicio</a></li>
+                <li class="breadcrumb-item active">Menú</li>
+            </ol>
+        </nav>
+
         <div class="fw-bold fs-2 mt-3 mb-4">
             <h1 class="h1contact">Menu</h1>
         </div>

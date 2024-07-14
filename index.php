@@ -53,9 +53,8 @@ session_start();
                 echo "<h5 class='text-light'>" . $_SESSION["usuario"] . "</h5>" . "<br>";
             } else {
                 ?>
-                <a href="html/login.html" class="login-button ms-auto">Iniciar Sesión</a>
-                <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <a href="views/login.php" class="login-button ms-auto">Iniciar Sesión</a>
+                <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <?php
@@ -63,19 +62,16 @@ session_start();
             ?>
         </div>
     </nav>
-
     <!-- Inicio -->
     <div style="max-width: 100%;">
         <div class="row p-0 m-0">
             <div class="col-lg-8 m-0 p-0">
                 <img src="img/sinfo.webp" class="img-fluid p-0 m-0" alt="imginicio" lazy="loading">
             </div>
-            <div class="col-lg-4 d-flex flex-column justify-content-center align-items-center p-5"
-                style="background: var(--color3);">
+            <div class="col-lg-4 d-flex flex-column justify-content-center align-items-center p-5" style="background: var(--color3);">
                 <div class="row ">
                     <div class="col-12">
-                        <h1 class="text-light text-center" style="letter-spacing: 1px;">Prueba el mejor café de la
-                            ciudad</h1>
+                        <h1 class="text-light text-center" style="letter-spacing: 1px;">Prueba el mejor café de la ciudad</h1>
                     </div>
                 </div>
                 <div class="row mb-3 p-2 ">
@@ -85,8 +81,7 @@ session_start();
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <a href="views/menu.php" class="btn text-light shadow-lg "
-                            style="background: var(--primario);">Ver Menú</a>
+                        <a href="views/menu.php" class="btn text-light shadow-lg " style="background: var(--primario);">Ver Menú</a>
                     </div>
                 </div>
             </div>
@@ -97,9 +92,7 @@ session_start();
     <div class="container-fluid m-0 p-0" style="background: var(--color2);">
 
         <div class="row p-0 m-0">
-
             <!--Introducción-->
-
             <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center">
                 <div class="container-fluid p-5 ">
                     <div class="row">
@@ -116,9 +109,7 @@ session_start();
                                 facere, aut earum sapiente voluptate officia soluta explicabo quaerat nihil officiis
                                 commodi animi. In deserunt culpa provident pariatur.
                             </p>
-
                             <a href="#" class="btn btn-cafe ">Ver mas</a>
-
                         </div>
                     </div>
                 </div>
@@ -150,8 +141,6 @@ session_start();
                 </div>
             </div>
             <!-- Fin introducción-->
-
-
             <!-- Menu especial para ti -->
             <div class="container p-3 bagr-cafe2">
                 <div class="col-12 text-center ">
@@ -162,9 +151,7 @@ session_start();
                     <ul class="nav nav-tabs row col-12 m-0" id="menuTabs" role="tablist" style="border-bottom: none;">
                         <li class="nav-item  mb-2 col-6 col-sm-6 col-md-4 col-lg-3 " role="presentation">
                             <!--Clasicos-->
-                            <button class="btn-categorias   active w-100" id="clasicos-tab" data-bs-toggle="tab"
-                                data-bs-target="#clasicos" type="button" role="tab" aria-controls="clasicos"
-                                aria-selected="true">Clasicos</button>
+                            <button class="btn-categorias   active w-100" id="clasicos-tab" data-bs-toggle="tab" data-bs-target="#clasicos" type="button" role="tab" aria-controls="clasicos" aria-selected="true">Clasicos</button>
                         </li>
                         <li class="nav-item  mb-2 col-6 col-sm-6 col-md-4 col-lg-3  " role="presentation">
                             <!--Cool and Dark-->
@@ -427,9 +414,9 @@ session_start();
             <!-- Recompensas-->
             <section class="subscription-section d-flex align-items-center justify-content-center p-2">
                 <div class="subscription-content text-center">
-                    <h1 class="display-4">Recibe grandes <span style="color: #d4a373;">RECOMPENSAS</span> facil</h1>
+                    <h1 class="display-4">Recibe grandes <span style="color: #d4a373;">RECOMPENSAS</span> fácilmente</h1>
                     <p class="lead">Mediante asistencias recibe grandes recompensas</p>
-                    <a href="./html/recompensas.html" class="btn subscription-btn">Echar un vistazo</a>
+                    <a href="views/recompensas.php" class="btn subscription-btn">Echar un vistazo</a>
                 </div>
             </section>
 
@@ -678,8 +665,6 @@ session_start();
                 </div>
 
             </div>
-
-
         </div>
     </div>
 

@@ -466,6 +466,7 @@ a:hover {
     color: rgb(0, 0, 0);
     border: none;
     transition: transform 0.3s;
+    cursor: pointer;
 }
 .blog-card:hover {
     transform: scale(1.05);
