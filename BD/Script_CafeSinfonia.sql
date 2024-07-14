@@ -419,17 +419,18 @@ BEGIN
     DECLARE permiso BOOLEAN DEFAULT TRUE;
     DECLARE bolsa INT;
     DECLARE cantidad INT;
+    DECLARE monto double;
     DECLARE no_hay_producto BOOLEAN DEFAULT FALSE;
 
     -- Cursor para leer los productos del carrito asociados al nuevo pedido
     DECLARE leer CURSOR FOR
-        SELECT DISTINCT carrito.id_dbc, carrito.cantidad
+        SELECT DISTINCT carrito.id_dbc, carrito.cantidad, carrito.monto
         FROM carrito
         JOIN pedidos ON new.id_cliente = carrito.id_cliente;
 
     -- Cursor para la comprobacion de stock de los productos en detalle_bc
     DECLARE comprobacion CURSOR FOR
-        SELECT DISTINCT carrito.id_dbc, carrito.cantidad
+        SELECT DISTINCT carrito.id_dbc, carrito.cantidad, carrito.monto
         FROM carrito
         JOIN pedidos ON new.id_cliente = carrito.id_cliente;
 
@@ -441,7 +442,7 @@ BEGIN
         -- Comprobar si hay suficiente stock para todos los productos del carrito
         OPEN comprobacion;
         comprobar_bucle: LOOP
-            FETCH comprobacion INTO bolsa, cantidad;
+            FETCH comprobacion INTO bolsa, cantidad, monto;
             IF no_hay_producto THEN
                 LEAVE comprobar_bucle;
             END IF;
@@ -460,15 +461,15 @@ BEGIN
         -- Abrir el cursor para procesar los productos del carrito
         OPEN leer;
         leer_bucle: LOOP
-            FETCH leer INTO bolsa, cantidad;
+            FETCH leer INTO bolsa, cantidad, monto;
             IF no_hay_producto THEN
                 LEAVE leer_bucle;
             END IF;
 
             -- Si hay permiso para continuar, insertar en detalle_pedidos y actualizar stock
             IF permiso THEN
-                INSERT INTO detalle_pedidos (id_dbc, cantidad, id_pedido, precio_unitario)
-                VALUES (bolsa, cantidad, new.id_pedido, (SELECT detalle_bc.precio FROM detalle_bc WHERE detalle_bc.id_dbc = bolsa));
+                INSERT INTO detalle_pedidos (id_dbc, cantidad,monto, id_pedido, precio_unitario)
+                VALUES (bolsa, cantidad, monto,new.id_pedido, (SELECT detalle_bc.precio FROM detalle_bc WHERE detalle_bc.id_dbc = bolsa));
 
                 UPDATE detalle_bc
                 SET stock = stock - cantidad
@@ -483,6 +484,7 @@ BEGIN
     END IF;  -- Fin de la condición de estado del pedido
 END //
 DELIMITER ;
+
 
 -- Trigger para borrar los productos del carrito en cuanto se realize un pedido
 delimiter //
