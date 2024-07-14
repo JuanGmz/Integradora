@@ -142,6 +142,19 @@ foreign key (id_cliente) references clientes(id_cliente),
 foreign key (id_domicilio) references domicilios(id_domicilio)
 );
 
+-- Evento para cancelar pedidos no pagados dentro del tiempo establecido.
+delimiter //
+CREATE EVENT cancelar_pedidos_no_pagados
+ON SCHEDULE EVERY 1 hour
+DO
+BEGIN
+    UPDATE pedidos
+    SET estatus = 'Cancelado'
+    WHERE estatus = 'Pendiente'
+      AND fecha_hora_pedido < DATE_SUB(NOW(), INTERVAL 48 hour);
+END //
+delimiter ;
+
 create table bolsas_cafe (
 id_bolsa int auto_increment not null,
 nombre nvarchar(100) not null,
@@ -186,7 +199,8 @@ id_dp int auto_increment not null,
 id_pedido int not null,
 id_dbc int not null,
 precio_unitario double not null,
-cantidad int not null, -- Actualizar el monto si se actualiza el precio de alguna bolsa.
+cantidad int not null,
+monto double not null,
 primary key(id_dp),
 foreign key (id_pedido) references pedidos(id_pedido),
 foreign key (id_dbc) references detalle_bc(id_dbc)
@@ -237,15 +251,16 @@ foreign key (id_cliente) references clientes(id_cliente),
 foreign key (id_evento) references EVENTOS(id_evento)
 );
 
+-- Evento para cancelar la reserva si no se paga dentro de 48 horas.
 delimiter //
 CREATE EVENT cancelar_reservas_no_pagadas
-ON SCHEDULE EVERY 1 minute
+ON SCHEDULE EVERY 1 hour
 DO
 BEGIN
     UPDATE eventos_reservas
     SET estatus = 'Cancelada'
     WHERE estatus = 'Pendiente'
-      AND fecha_hora_reserva < DATE_SUB(NOW(), INTERVAL 2 minute);
+      AND fecha_hora_reserva < DATE_SUB(NOW(), INTERVAL 48 hour);
 END //
 delimiter ;
 
@@ -469,6 +484,19 @@ BEGIN
 END //
 DELIMITER ;
 
+-- Trigger para borrar los productos del carrito en cuanto se realize un pedido
+delimiter //
+create trigger after_insert_borrar_carrito
+after insert on pedidos
+for each row
+begin
+delete carrito from carrito 
+join pedidos on carrito.id_cliente = pedidos.id_cliente
+join detalle_pedidos on pedidos.id_pedido = detalle_pedidos.id_pedido
+where carrito.id_cliente = pedidos.id_cliente and new.id_pedido = detalle_pedidos.id_pedido;
+end $$
+delimiter ;
+
 -- Trigger para marcar una asistencia a la recompensa correspondiente cada ves que se inserte una nueva 
 -- asistencia.
 DELIMITER //
@@ -621,22 +649,22 @@ DELIMITER ;
 delimiter //
 create procedure SP_Insert_Update_Carrito(
 in p_id_cliente int,
-in p_id_bc int,
+in p_id_dbc int,
 in p_cantidad int
 )
 begin 
 declare existe_bolsa int;
 
-select c.id_bc into existe_bolsa
+select c.id_dbc into existe_bolsa
 from carrito c 
-where c.id_cliente = p_id_cliente  and c.id_bc = p_id_bc;
+where c.id_cliente = p_id_cliente  and c.id_dbc = p_id_dbc;
 
 if existe_bolsa > 0 then 
-	update carrito c set c.cantidad = c.cantidad + p_cantidad, monto_total = (select ((cantidad+p_cantidad)*bc.precio) from bolsas_cafe bc join carrito c on c.id_bc = bc.id_bc  where bc.id_bc = p_id_bc  and c.id_cliente = p_id_cliente)
-	where c.id_cliente = p_id_cliente and c.id_bc = p_id_bc;
+    update carrito c set c.cantidad = c.cantidad + p_cantidad, monto = (select ((cantidad+p_cantidad)*dbc.precio) from detalle_bc dbc join carrito c on c.id_dbc = dbc.id_dbc  where dbc.id_dbc = p_id_dbc  and c.id_cliente = p_id_cliente)
+    where c.id_cliente = p_id_cliente and c.id_dbc = p_id_dbc;
 else 
-	insert into carrito(id_cliente, id_bc, cantidad, monto_total)
-	values (p_id_cliente,p_id_bc,p_cantidad, p_cantidad * (select precio from bolsas_cafe bc where bc.id_bc = p_id_bc) );
+    insert into carrito(id_cliente, id_dbc, cantidad, monto)
+    values (p_id_cliente,p_id_dbc,p_cantidad, p_cantidad * (select precio from detalle_bc dbc where dbc.id_dbc = p_id_dbc) );
 end if;
 
 end //
