@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrar Eventos</title>
+    <title>Administrar lugares</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -175,12 +175,12 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <h1 class="fw-bold text-light pt-2 me-auto">Eventos</h1>
                     <!-- Botón para volver atras -->
                     <button class="btn btn-dark">
                         <a href="../index.php" class="text-decoration-none">
                             <i class="fa-solid fa-house text-light fa-2x"></i>
                         </a>
+                    </button>
                 </div>
             </nav>
         </div>
@@ -337,17 +337,76 @@
             <div class="col-lg-9 offset-lg-3 p-0">
                 <!-- AQUI VA EL CONTENIDO DE LA PAGINAAAAAAAAAAAA -->
                 <div class="row p-0 m-0 bg-dark">
-                    <div class="row p-3 m-0 shadow-lg bg-dark d-none d-lg-flex">
+                    <div class="row p-3 m-0 shadow-lg">
                         <div class="col-3">
-                            <h1 class="fw-bold text-light d-none d-lg-block">Eventos</h1>
+                            <h1 class="text-light fw-bold">lugares</h1>
                         </div>
                         <div class="col-9 d-flex justify-content-end align-items-center gap-3">
                             <!-- Botón que activa el modal de agregar -->
-                            <div class="ms-auto text-end col">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#agregarEvento">
-                                    Agregar Evento
-                                </button>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#agregarProducto">
+                                Agregar nuevo lugar
+                            </button>
+                            <!-- Modal de agregar -->
+                            <div class="modal fade" id="agregarProducto" tabindex="-1"
+                                aria-labelledby="agregarProductoLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="agregarProductoLabel">Agregar lugar</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <!-- Aquí va el contenido del modal -->
+                                        <div class="modal-body">
+                                            <form action="../scripts/insertarlugares.php" method="POST"
+                                                enctype="multipart/form-data">
+                                                <!-- Aqui va el formulario -->
+                                                <div class="mb-3">
+                                                    <label for="nombre" class="form-label">Nombre</label>
+                                                    <input type="text" class="form-control" id="nombre" name="nombre"
+                                                        maxlength="45" required>
+                                                </div>
+                                                <div class="row">
+                                                <div class="col-6 mb-3">
+                                                    <label for="descripcion" class="form-label">ciudad</label>
+                                                    <input type="text" class="form-control" id="ciudad"
+                                                        name="ciudad" maxlength="255" required>
+                                                </div>
+                                                <div class="col-6 mb-3">
+                                                    <label for="medida" class="form-label">Estado</label>
+                                                    <input type="text" class="form-control" name="estado">
+                                                </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="mb-3 col-4">
+                                                        <label for="medida" class="form-label">Calle</label>
+                                                        <input type="text" class="form-control" id="calle"
+                                                            name="calle" maxlength="15" required>
+                                                    </div>
+                                                    <div class="mb-3 col-4">
+                                                        <label for="colonia" class="form-label">Colonia</label>
+                                                        <input type="text" min="0" class="form-control" id="precio"
+                                                            name="colonia" required>
+                                                    </div>
+                                                    <div class="mb-3 col-4">
+                                                        <label for="codigop" class="form-label">C.P</label>
+                                                        <input type="text" class="form-control" id="CodigoP"
+                                                            name="CodigoP">
+                                                    </div>+
+                                                    <div class="mb-3">
+                                                        <label for="descripcion" class="form-label">Descripción</label>
+                                                        <input type="text" class="form-control" name="descripcion">
+                                                    </div>
+                                                </div>
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Cancelar</button>
+                                                    <button type="submit" class="btn btn-primary">Agregar
+                                                        evento</button>
+                                                </div>
+                                            </form>
+                                    </div>
+                                </div>
                             </div>
                             <!-- Botón para volver atras -->
                             <a href="../index.php" class="text-decoration-none d-none d-lg-block">
@@ -356,167 +415,13 @@
                         </div>
                     </div>
                 </div>
-                <!-- Modal -->
-                <div class="modal fade" id="agregarEvento" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5 w-3" id="exampleModalLabel">Agregar Evento</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <!-- Aqui va el contenido de el boton de agregar-->
-                                <form action="..\scripts\insertarevento.php" method="post">
-                                    <div class="col-12 mb-3">
-                                        <label for="titulo" class="form-label">Titulo del Evento</label>
-                                        <input type="text" class="form-control" id="titulo" name="evento" required>
-                                    </div>
-                                    <div class="col-12 mb-3">
-                                        <label for="descripcion" class="form-label">Descripción</label>
-                                        <input type="text" class="form-control" id="descripcion" name="descripcion" required>
-                                    </div>
-                                    <div class="col-12 mb-3">
-                                        <label for="cap" class="form-label">Capacidad</label>
-                                        <input type="number" min="1" max="80" class="form-control" id="cap" name="cap" required>
-                                    </div>
-                                    <div class="col-12 mb-3">
-                                        <label for="img" class="form-label">Imagen</label>
-                                        <input type="file" class="form-control" id="img" name="imgEvento">
-                                    </div>
-                                    <div class="col-12 text-center">
-                                        <h4 class="fw-bold">Fecha y Hora</h4>
-                                    </div>
-                                    <div class="col-12 mb-3">
-                                        <label for="fecha" class="form-label">Fecha del Evento</label>
-                                        <input type="date" class="form-control" id="fecha" name="fechaEvento" required>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6 mb-3">
-                                            <label for="horaIni" class="form-label">Hora de Inicio</label>
-                                            <input type="time" min="11:00" max="21:00" class="form-control" id="horaIni" name="horaIni" required>
-                                        </div>
-                                        <div class="col-6 mb-3">
-                                            <label for="horaFin" class="form-label">Hora de Fin</label>
-                                            <input type="time" min="11:00" max="21:00" class="form-control" id="horaFin" name="horaFin" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 text-center">
-                                        <h4 class="fw-bold">Ubicación</h4>
-                                    </div>
-                                    <div class="col-12 mb-3">
-                                        <label for="lugar" class="form-label">Nombre del Lugar</label>
-                                        <select name="lugar" id="lugar" class="form-select" required>
-                                        <option selected disabled value="">Seleccionar Categoria</option>
-                                            <?php
-                                                include ("../class/database.php");
-                                                $db = new Database();
-                                                $db->conectarDB();
-
-                                                $consulta = "SELECT id_lugar, nombre FROM ubicacion_lugares";
-                                                $lugares = $db->select($consulta);
-                                                foreach ($lugares as $lugar) {
-                                                    echo "<option value='{$lugar->id_lugar}'>{$lugar->nombre}</option>";
-                                                }
-                                            ?>
-                                        </select>
-                                    </div>
-                                    <div class="col-12 mb-3 text-center">
-                                        <h4 class="fw-bold">Costo del Evento</h4>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6 mb-3">
-                                            <label for="tipo" class="form-label">Tipo</label>
-                                            <select name="tipo" id="tipo" class="form-select" required>
-                                                <option value="Gratuito">Gratuito</option>
-                                                <option value="De Pago">De Pago</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-6 mb-3">
-                                            <label for="costo" class="form-label">Costo por boleto</label>
-                                            <input type="number" min="0" class="form-control" id="costo" name="costo" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 mb-3">
-                                        <label for="categoria" class="form-label">CATEGORIA</label><br>
-                                        <select name="categoria" id="categoria" class="form-select" required>
-                                            <?php
-                                                $consulta = "SELECT id_categoria, nombre FROM categorias WHERE tipo = 'evento'";
-                                                $tabla = $db->select($consulta);
-                                                foreach ($tabla as $categoria) {
-                                                    echo "<option value='{$categoria->id_categoria}'>{$categoria->nombre}</option>";
-                                                }
-                                            ?>
-                                        </select>
-                                    </div>
-                                    <div class="col-12 mb-3">
-                                        <label for="cantidadBoletos" class="form-label">Cantidad de boletos</label>
-                                        <input type="number" min="0" max="100" class="form-control" id="cantidadBoletos" name="cantidadBoletos" required>
-                                    </div>
-                                    <div class="col-12 mb-3">
-                                        <label for="fechaPub" class="form-label">Fecha de publicación</label>
-                                        <input type="date" class="form-control" id="fechaPub" name="fechaPub" required>
-                                    </div>
-                                    <div class="text-end mb-3">
-                                        <button class="btn btn-primary" type="submit" id="btn-agregar">
-                                            Agregar Evento
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="shadow-lg bg-light row p-0 m-0 p-3">
-                    <div class="row m-1">
-                        <div class="col-12">
-                            <form method="post">
-                                <div class="row">
-                                <?php
-                                $selectedCategoria = isset($_POST['categoria']) ? $_POST['categoria'] : '';
-                                ?>
-
-                                <div class="col-8">
-                                <select name="categoria" id="categoria" class="form-select" required>
-                                 <option selected disabled value="">Seleccionar Categoria</option>
-                                <?php
-                                 $consulta = "SELECT id_categoria, nombre FROM categorias WHERE tipo = 'evento'";
-                                $tabla = $db->select($consulta);
-                                foreach ($tabla as $categoria) {
-                                $selected = $categoria->id_categoria == $selectedCategoria ? 'selected' : '';
-                                 echo "<option value='{$categoria->id_categoria}' {$selected}>{$categoria->nombre}</option>";
-                                 }
-                                 ?>
-                                </select>
-                                </div>
-
-                                    <div class="col-4">
-                                        <button type="submit" class="btn btn-primary w-100" value="Buscar">Buscar</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-lg-3 p-3 p-lg-4 m-0">
-                    <div class="d-lg-none w-100 mb-3 m-0 p-0">
-                        <button type="button" class="btn w-100 btn-primary shadow-lg" data-bs-toggle="modal" data-bs-target="#agregarEvento">
-                            <i class="fa-solid fa-plus fa-2x"></i>
-                        </button>
-                    </div>
+                <div class="row mt-3 p-4 m-0">
                     <?php
-                    if (isset($_POST["categoria"])) {
-                        extract($_POST);
-
-                        $query = "SELECT e.*, l.nombre AS lugar_nombre 
-                        FROM eventos e
-                        JOIN ubicacion_lugares l ON e.id_lugar = l.id_lugar
-                        WHERE e.id_categoria = '$categoria'";
-              
+                    include ("../class/database.php");
+                    $db = new Database();
+                    $db->conectarDB();
+                        $query = "SELECT * FROM ubicacion_lugares";
                         $productos = $db->select($query);
-
-                        if (empty($productos)) {
-                            echo "<div class='alert alert-danger' role='alert'>No hay productos registrados en esta categoría.</div>";
-                        } else {
                             echo "
                                     <table class='table table-striped table-hover table-dark text-center border-3 border-black border-bottom border-start border-end'>
                                         <thead>
@@ -530,47 +435,12 @@
                                 echo "
                                         <tr>
                                         <td>$producto->nombre</td>
-                                            <td class='d-flex flex-row align-items-center justify-content-center gap-1'>
-                                                <!-- Imagen -->
-                                                <!-- Botón que activa el modal de ver la imagen  -->
-                                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#modalImagen_$producto->id_evento'>
-                                                    <i class='fa-solid fa-image'></i>
-                                                </button>
-                                                <!-- Modal de ver imagen -->
-                                                <div class='modal fade' id='modalImagen_$producto->id_evento' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
-                                                    <div class='modal-dialog'>
-                                                        <div class='modal-content'>
-                                                            <div class='modal-header'>
-                                                                <h1 class='modal-title fs-5' id='exampleModalLabel'>$producto->nombre</h1>
-                                                            </div>
-                                                            <div class='modal-body mb-3'>
-                                                                <!-- Aquí se está mostrando la imagen -->
-                                                                <form action='' method='POST' enctype='multipart/form-data'>
-                                                                    <div class='col-12 mb-3'>
-                                                                        <label for='imagen' class='form-label'>Imagen Actual</label><br>
-                                                                        <img src='../img/menu/$producto->img_url' class='img-fluid' alt='imagen$producto->nombre'><br>
-                                                                            <small>Selecciona una nueva imagen para actualizar, si es necesario.</small>
-                                                                        </div>
-                                                                        <div class='col-12 mb-3'>
-                                                                            <label for='imagen_nueva' class='form-label'>Selecciona una nueva imagen</label>
-                                                                            <input type='file' class='form-control' id='imagen_nueva' name='imagen_nueva' accept='image/*' required>
-                                                                        </div>
-                                                                        <input type='hidden' name='id_pm' value='$producto->id_evento'>
-                                                                        <div class='col-12 mb-3 text-end'>
-                                                                            <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
-                                                                            <button type='submit' class='btn btn-primary'>Actualizar</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                        <td>
                                                 <!-- Botón que activa el modal de ver detalles del producto -->
-                                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#detalleProducto_$producto->id_evento'>
+                                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#detalleProducto_$producto->id_lugar'>
                                                     <i class='fa-solid fa-bars'></i>
                                                 </button>
-                                                <div class='modal fade' id='detalleProducto_$producto->id_evento' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+                                                <div class='modal fade' id='detalleProducto_$producto->id_lugar' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
                                                     <div class='modal-dialog'>
                                                         <div class='modal-content'>
                                                             <div class='modal-header'>
@@ -580,13 +450,12 @@
                                                             <!-- Aquí va el contenido del modal -->
                                                             <div class='modal-body'>
                                                                 <h4 class='text-start fw-bold mb-3'>Nombre: <span class='fw-normal fs-5'>$producto->nombre</span></h4>
-                                                                <h4 class='text-start fw-bold mb-3'>Descripción: <span class='fw-normal fs-5'>$producto->descripcion</span></h4>
-                                                                <h4 class='text-start fw-bold mb-3'>fecha evento: <span class='fw-normal fs-5'>{$producto->fecha_evento}</span></h5>
-                                                                <h4 class='text-start fw-bold mb-3'>hora inicio: <span class='fw-normal fs-5'>{$producto->hora_inicio}</span></h5>
-                                                                <h4 class='text-start fw-bold mb-3'>hora final: <span class='fw-normal fs-5'>{$producto->hora_fin}</span></h5>
-                                                                <h4 class='text-start fw-bold mb-3'>tipo: <span class='fw-normal fs-5'>{$producto->tipo}</span></h5>
-                                                                <h4 class='text-start fw-bold mb-3'>costo boleto: <span class='fw-normal fs-5'>{$producto->precio_boleto}</span></h5>
-                                                                <h4 class='text-start fw-bold mb-3'>Lugar: <span class='fw-normal fs-5'>{$producto->lugar_nombre}</span></h5>
+                                                                <h4 class='text-start fw-bold mb-3'>Ciudad: <span class='fw-normal fs-5'>$producto->ciudad</span></h4>
+                                                                <h4 class='text-start fw-bold mb-3'>Estado: <span class='fw-normal fs-5'>{$producto->estado}</span></h5>
+                                                                <h4 class='text-start fw-bold mb-3'>Codigo Postal: <span class='fw-normal fs-5'>{$producto->codigo_postal}</span></h5>
+                                                                <h4 class='text-start fw-bold mb-3'>calle: <span class='fw-normal fs-5'>{$producto->calle}</span></h5>
+                                                                <h4 class='text-start fw-bold mb-3'>Colonia: <span class='fw-normal fs-5'>{$producto->colonia}</span></h5>
+                                                                <h4 class='text-start fw-bold mb-3'>Descripcion: <span class='fw-normal fs-5'>{$producto->descripcion}</span></h5>
 
                                                                 <!-- Tabla de productos -->
                                                             </div>
@@ -594,113 +463,68 @@
                                                     </div>
                                                 </div>
                                                 <!-- Botón que activa el modal de editar producto -->
-                                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#editarProducto_$producto->id_evento'>
+                                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#editarProducto_$producto->id_lugar'>
                                                     <i class='fa-solid fa-pen-to-square'></i>
                                                 </button>
-                                                <div class='modal fade' id='editarProducto_$producto->id_evento' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+                                                <div class='modal fade' id='editarProducto_$producto->id_lugar' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
                                                     <div class='modal-dialog'>
                                                         <div class='modal-content'>
                                                             <div class='modal-header'>
-                                                                <h1 class='modal-title fs-5' id='exampleModalLabel'>Editar Evento</h1>
+                                                                <h1 class='modal-title fs-5' id='exampleModalLabel'>Editar Producto</h1>
                                                                 <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                                                             </div>
                                                             <!-- Aquí va el contenido del modal -->
                                                             <div class='modal-body'>
-                                                                <form action='../scripts/editareventos.php' method='post'>
-                                            <input type='hidden' name='id_evento' value='$producto->id_evento'>
-                                                <div>
-                                                    <label for='titulo' class='form-label'>Editar Titulo</label>
-                                                    <input type='text' class='form-control' id='titulo' name='titulo' value=$producto->nombre>
-                                                </div>
-                                                <div>
-                                                    <label for='lugar' class='form-label'>Lugar</label>
-                                                    <select name='lugar' id='lugar' class='form-select'> ";
-                                $consulta = "SELECT id_lugar, nombre FROM ubicacion_lugares";
-                                $lugares = $db->select($consulta);
-                                foreach ($lugares as $lugar) {
-                                    echo "<option value='{$lugar->id_lugar}'>{$lugar->nombre}</option>";
-                                }
-                                echo " </select>
-                                                    </div>
-                                                <div>
-                                                    <label for='descripcion' class='form-label'>Descripcion</label>
-                                                    <textarea name='descripcion' id='descripcion' name='descripcion' class='form-control'>$producto->descripcion</textarea>
-                                                </div>
-                                                <div class='row'>
-                                                <div class='col-6'>
-                                                    <label for='cap' class='form-label'>Capacidad</label>
-                                                    <input type='number' min='1' max='80' class='form-control' id='cap' name='cap' value=$producto->capacidad>
-                                                </div>
-                                                <div class='col-6'>
-                                                    <label for='costo' class='form-label'>Costo por boleto</label>
-                                                    <input type='number' min='0' class='form-control' id='costo' name='costo' value=$producto->precio_boleto>
-                                                    </div>
-                                                </div>
-                                                <div class='row'>
-                                                <div class='col-6'>
-                                                <label for='categoria' class='form-label'>Categoría</label>
-                                                <select name='categoria' id='categoria' class='form-select'>";
-                                $consulta = "SELECT id_categoria, nombre FROM categorias WHERE tipo = 'evento'";
-                                $categorias = $db->select($consulta);
-                                foreach ($categorias as $categoria) {
-                                    echo "<option value='{$categoria->id_categoria}'>{$categoria->nombre}</option>";
-                                }
-
-                                echo "</select>
-                                                </div>
-                                                <div class='col-6'>
-                                                <label for='tipo' class='form-label'>Tipo</label>
-                                                <select name='tipo' id='tipo' class='form-select'>
-                                                    <option value=$producto->tipo>$producto->tipo</option>
-                                                    <option value='Gratuito'>Gratuito</option>
-                                                    <option value='De Pago'>De Pago</option>
-                                                </select>
-                                                </div>
-                                                 </div>         
-                                                 <div>
-                                                    <label for='imagen' class='form-label'>Imagen</label>
-                                                    <input type='file' class='form-control' id='imagen' name='imagen' value=$producto->img_url>
-                                               </div> 
-                                               <div class='row'>
-                                                <div class='col-6'>
-                                                    <label for='fecha' class='form-label'>Fecha del Evento</label>
-                                                    <input type='date' class='form-control' id='fecha' name='fecha' value=$producto->fecha_evento>
-                                                </div>
-                                                <div class='col-6'>
-                                                    <label for='fechaPub' class='form-label'>Fecha de publicación</label>
-                                                    <input type='date' class='form-control' id='fechaPub' name='fechaPub' value=$producto->fecha_publicacion>
-                                                    </div>
-                                                </div>
-                                                <div class='row'>
-                                                <div class='col-6'>
-                                                    <label for='hora' class='form-label'>Hora de Inicio</label>
-                                                    <input type='time' min='11:00' max='21:00' class='form-control' id='horainicio' name='horainicio' value=$producto->hora_inicio>
-                                                </div>
-                                                <div class='col-6'>
-                                                    <label for='hora' class='form-label'>Hora de Fin</label>
-                                                    <input type='time' min='11:00' max='21:00' class='form-control' id='horafin' name='horafin' value=$producto->hora_fin>
-                                                    </div>
-                                                </div>
-
-                                                <div class='row'>
-                                                <div class='col-12 text-end'>
-                                                    <button type='submit' class='btn btn-primary mt-3'>Actualizar</button>
-                                                </div>
-                                                </div> 
-                                                </form>
-
+                                                                <form class='text-start' action='../scripts/editarlugares.php' method='POST'>
+                                                                    <input type='hidden' name='id_lugar' value='$producto->id_lugar'>
+                                                                    <div class='row'>
+                                                                        <div class='col-12 mb-3'>
+                                                                            <label class='form-label'>Nombre</label>
+                                                                            <input type='text' name='nombre' class='form-control' value='$producto->nombre'>
+                                                                        </div>
+                                                                        <div class='row'>
+                                                                        <div class='col-6 mb-3'>
+                                                                            <label class='form-label'>Ciudad</label>
+                                                                            <input type='text' maxlength='15' name='ciudad' class='form-control' value='$producto->ciudad' >
+                                                                        </div>
+                                                                        <div class='col-6 mb-3'>
+                                                                            <label class='form-label'>Estado</label>
+                                                                            <input type='text' maxlength='15' name='estado' class='form-control' value='$producto->estado' >
+                                                                        </div>
+                                                                        </div>
+                                                                        <div class='row'>
+                                                                        <div class='col-4 mb-3'>
+                                                                            <label class='form-label'>Calle</label>
+                                                                            <input type='text' maxlength='15' name='calle' class='form-control' value='$producto->calle' >
+                                                                        </div>
+                                                                        <div class='col-4 mb-3'>
+                                                                            <label class='form-label'>Colonia</label>
+                                                                            <input type='text' maxlength='15' name='colonia' class='form-control' value='$producto->colonia' >
+                                                                        </div>
+                                                                        <div class='col-4 mb-3'>
+                                                                            <label class='form-label'>C.P</label>
+                                                                            <input type='text' maxlength='15' name='codigoP' class='form-control' value='$producto->codigo_postal' >
+                                                                        </div>
+                                                                        </div>
+                                                                        <div class='col-12 mb-3'>
+                                                                            <label class='form-label'>Descripción</label>
+                                                                            <textarea class='form-control' name='descripcion' maxlength='255' >$producto->descripcion</textarea>
+                                                                        </div>
+                                                                        <div class='col-12 mt-3 text-end'>
+                                                                            <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
+                                                                            <button type='submit' class='btn btn-primary'>Guardar Cambios</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </td>
+                                        </tr>
                                         </tr>";
                             }
                             echo "</tbody></table>";
-                        }
-                    } else {
-                        echo "<div class='alert alert-danger' role='alert'>Seleccione una categoria</div>";
-                    }
                     ?>
                 </div>
             </div>
