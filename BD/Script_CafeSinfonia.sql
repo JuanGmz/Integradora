@@ -15,7 +15,7 @@ show grants for administrador@localhost;
 
 -- Auxiliar | SELECT, INSERT, UPDATE , DELETE
 create user auxiliar@localhost identified by 'aux';
-GRANT SELECT, INSERT, UPDATE,execute,DELETE, create view ON cafe_sinfonia.* TO 'auxiliar'@'localhost';
+GRANT SELECT, INSERT, UPDATE,execute,create view ON cafe_sinfonia.* TO 'auxiliar'@'localhost';
 --
 drop user auxiliar@localhost;
 show grants for auxiliar@localhost;
@@ -794,6 +794,26 @@ VALUES (p_id_cliente, p_id_evento, p_c_boletos);
 end //
 delimiter ;
 
+-- Procedimiento almacenado para insertar domicilios.
+delimiter //
+create procedure SP_insert_domicilios(
+in p_id_cliente int, 
+in p_referencia varchar(200), 
+in p_estado varchar(100), 
+in p_ciudad varchar(100), 
+in p_codigo_postal varchar(100), 
+in p_colonia varchar(150), 
+in p_calle varchar(200),
+in p_telefono char(10)
+)
+begin 
+INSERT INTO domicilios(id_cliente, referencia, estado, ciudad, codigo_postal, colonia, calle, telefono)
+VALUES
+(p_id_cliente,p_referencia, p_estado, p_estado, p_codigo_postal, p_colonia, p_calle, p_telefono);
+end //
+delimiter ;
+
+
 -- Procedimiento Almacenado para subir comprobantes de pedidos.
 delimiter //
 create procedure SP_comprobante_reserva(
@@ -852,6 +872,13 @@ create view view_comprobante_reserva as
 select er.id_reserva as folio_reserva, c.concepto, c.monto, c.folio_operacion, c.banco_origen, c.imagen_comprobante
 from comprobantes c
 	join eventos_reservas er on er.id_reserva = c.id_reserva;
+    
+-- Vista del carrito
+create view view_carrito as
+select c.id_cliente as cliente,bc.img_url,bc.nombre as producto, dbc.medida, dbc.precio, c.cantidad, c.monto as subtotal 
+from carrito c
+join detalle_bc dbc on dbc.id_dbc = c.id_dbc
+join bolsas_cafe bc on bc.id_bolsa = dbc.id_bolsa;
     
 INSERT INTO metodos_pago (metodo_pago) VALUES ('Transferencia');
 
@@ -1094,21 +1121,19 @@ INSERT INTO productos_menu (id_categoria, nombre, descripcion, img_url) VALUES
 
 -- Ingresar domicilios para los primeros 19 clientes
 /*
-INSERT INTO domicilios(id_cliente, referencia, estado, ciudad, codigo_postal, colonia, calle, telefono)
-VALUES
-(1, 'Laura Sanchez', 'Coahuila', 'Torreón', '27050', 'Colinas del Sol', 'Calle del Águila #1415', '8712345683'),
-(2, 'Jose Ramirez', 'Coahuila', 'Torreón', '27060', 'Jardines del Bosque', 'Calle de los Cedros #1617', '8712345684'),
-(3, 'Rosa Torres', 'Coahuila', 'Torreón', '27070', 'San Felipe', 'Avenida de la Paz #1819', '8712345685'),
-(4, 'Miguel Reyes', 'Coahuila', 'Torreón', '27080', 'Revolución', 'Boulevard de las Palmas #2021', '8712345686'),
-(5, 'Luisa Cruz', 'Coahuila', 'Torreón', '27090', 'Las Fuentes', 'Avenida del Bosque #2223', '8712345687'),
-(6, 'Jorge Flores', 'Coahuila', 'Torreón', '27100', 'Real del Sol', 'Calle del Río #2425', '8712345688'),
-(7, 'Isabel Gomez', 'Coahuila', 'Torreón', '27110', 'La Rosita', 'Avenida de las Estrellas #2627', '8712345689'),
-(8, 'Pedro Diaz', 'Coahuila', 'Torreón', '27120', 'Ampliación Loma Real', 'Calle del Mirador #2829', '8712345690'),
-(9, 'Carmen Morales', 'Coahuila', 'Torreón', '27130', 'Nueva Laguna', 'Boulevard del Álamo #3031', '8712345691'),
-(10, 'Ricardo Ortiz', 'Coahuila', 'Torreón', '27140', 'Laguna Sur', 'Avenida del Cielo #3233', '8712345692'),
-(11, 'Sofia Silva', 'Coahuila', 'Torreón', '27150', 'Mirasierra', 'Calle del Monte #3435', '8712345693'),
-(12, 'Fernando Romero', 'Coahuila', 'Torreón', '27160', 'San Agustín', 'Avenida del Río #3637', '8712345694'),
-(13, 'Patricia Rojas', 'Coahuila', 'Torreón', '27170', 'Villa Florida', 'Boulevard de las Rosas #3839', '8712345695'),
+(1, 'Laura Sanchez', 'Coahuila', 'Torreón', '27050', 'Colinas del Sol', 'Calle del Águila #1415', '8712345683')
+(2, 'Jose Ramirez', 'Coahuila', 'Torreón', '27060', 'Jardines del Bosque', 'Calle de los Cedros #1617', '8712345684')
+(3, 'Rosa Torres', 'Coahuila', 'Torreón', '27070', 'San Felipe', 'Avenida de la Paz #1819', '8712345685')
+(4, 'Miguel Reyes', 'Coahuila', 'Torreón', '27080', 'Revolución', 'Boulevard de las Palmas #2021', '8712345686')
+(5, 'Luisa Cruz', 'Coahuila', 'Torreón', '27090', 'Las Fuentes', 'Avenida del Bosque #2223', '8712345687')
+(6, 'Jorge Flores', 'Coahuila', 'Torreón', '27100', 'Real del Sol', 'Calle del Río #2425', '8712345688')
+(7, 'Isabel Gomez', 'Coahuila', 'Torreón', '27110', 'La Rosita', 'Avenida de las Estrellas #2627', '8712345689')
+(8, 'Pedro Diaz', 'Coahuila', 'Torreón', '27120', 'Ampliación Loma Real', 'Calle del Mirador #2829', '8712345690')
+(9, 'Carmen Morales', 'Coahuila', 'Torreón', '27130', 'Nueva Laguna', 'Boulevard del Álamo #3031', '8712345691')
+(10, 'Ricardo Ortiz', 'Coahuila', 'Torreón', '27140', 'Laguna Sur', 'Avenida del Cielo #3233', '8712345692')
+(11, 'Sofia Silva', 'Coahuila', 'Torreón', '27150', 'Mirasierra', 'Calle del Monte #3435', '8712345693')
+(12, 'Fernando Romero', 'Coahuila', 'Torreón', '27160', 'San Agustín', 'Avenida del Río #3637', '8712345694')
+(13, 'Patricia Rojas', 'Coahuila', 'Torreón', '27170', 'Villa Florida', 'Boulevard de las Rosas #3839', '8712345695')
 (14, 'Roberto Vazquez', 'Coahuila', 'Torreón', '27180', 'Los Ángeles', 'Calle de los Sauces #4041', '8712345696');
 */
 INSERT INTO ubicacion_lugares (nombre, ciudad, estado, descripcion)
