@@ -115,7 +115,7 @@
                     foreach ($bolsas as $bolsa) {
                         echo "<div class='col-6 col-sm-5 col-md-5 col-lg-4 p-3'>";
                         echo "<div class='card product-card' style='border-radius: 5% 5% 0% 0%;'>";
-                        echo "<a href='/views/bolsas/{$bolsa->id_bolsa}.php'>";
+                        echo "<a href='../views/bolsas/{$bolsa->id_bolsa}.php'>";
                         echo "<img src='../{$bolsa->img_url}' class=' coffee-image ' alt='{$bolsa->id_bolsa}'>";
                         echo "<div class='card-body product-card-body'>";
                         echo "<h5 class='card-title fw-bold' style='letter-spacing: 1px;'>{$bolsa->nombre}</h5>";
