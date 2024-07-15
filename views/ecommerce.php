@@ -101,121 +101,33 @@
                     </div>
 
                     <div class="col-12 col-md-10 col-lg-9 row justify-content-center">
-                        <div class="col-6 col-sm-5 col-md-5 col-lg-4 p-3 ">
-                            <div class="card product-card" style="border-radius: 5% 5% 0% 0%;">
-                                <img src="/img/cafes/bolsa2.webp" class=" coffee-image " alt="Cappucino">
-                                <div class="card-body product-card-body">
-                                    <h5 class="card-title fw-bold " style="letter-spacing: 1px;">Cappucino</h5>
-                                    <p class="card-text">Hot Cappucino</p>
-                                </div>
-                                <div class="card-footer product-card-footer">
+                        
+                        <?php
+                        include_once("../class/database.php");
+                        $conexion = new Database();
+                        $conexion->conectarDB();
+                        $query = 'SELECT DISTINCT bolsas_cafe.id_bolsa,bolsas_cafe.nombre, bolsas_cafe.productor_finca ,bolsas_cafe.proceso,
+                        bolsas_cafe.variedad,bolsas_cafe.altura,bolsas_cafe.aroma,bolsas_cafe.acidez,bolsas_cafe.sabor,
+                        bolsas_cafe.cuerpo,bolsas_cafe.img_url
+                        FROM bolsas_cafe;';
 
-                                    <button class="btn btn-light float-right btn-cafe"><i class="fa fa-shopping-cart"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-6 col-sm-5 col-md-5 col-lg-4 p-3">
-                            <div class="card product-card" style="border-radius: 5% 5% 0% 0%;">
-                                <img src="/img/cafes/bolsa1.webp" class=" coffee-image " alt="Moccacino">
-                                <div class="card-body product-card-body">
-                                    <h5 class="card-title fw-bold " style="letter-spacing: 1px;">Moccacino</h5>
-                                    <p class="card-text">Hot Moccacino</p>
-                                </div>
-                                <div class="card-footer product-card-footer">
-
-                                    <button class="btn btn-light float-right btn-cafe"><i class="fa fa-shopping-cart"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-6 col-sm-5 col-md-5 col-lg-4 p-3 ">
-                            <div class="card product-card" style="border-radius: 5% 5% 0% 0%;">
-                                <img src="/img/cafes/bolsa3.webp" class=" coffee-image" alt="Waffle Ice Cream">
-                                <div class="card-body product-card-body">
-                                    <h5 class="card-title fw-bold" style="letter-spacing: 1px;">Waffle Ice Cream</h5>
-                                    <p class="card-text">Waffle with Ice Cream</p>
-
-                                </div>
-                                <div class="card-footer product-card-footer">
-
-                                    <button class="btn btn-light float-right btn-cafe"><i class="fa fa-shopping-cart"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-6 col-sm-5 col-md-5 col-lg-4 p-3 ">
-                            <div class="card product-card" style="border-radius: 5% 5% 0% 0%;">
-                                <img src="/img/cafes/bolsa1.webp" class=" coffee-image" alt="Waffle Ice Cream">
-                                <div class="card-body product-card-body">
-                                    <h5 class="card-title fw-bold" style="letter-spacing: 1px;">Waffle Ice Cream</h5>
-                                    <p class="card-text">Waffle with Ice Cream</p>
-
-                                </div>
-                                <div class="card-footer product-card-footer">
-
-                                    <button class="btn btn-light float-right btn-cafe"><i class="fa fa-shopping-cart"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-6 col-sm-5 col-md-5 col-lg-4 p-3 ">
-                            <div class="card product-card" style="border-radius: 5% 5% 0% 0%;">
-                                <img src="/img/cafes/bolsa2.webp" class=" coffee-image " alt="Cappucino">
-                                <div class="card-body product-card-body">
-                                    <h5 class="card-title fw-bold " style="letter-spacing: 1px;">Cappucino</h5>
-                                    <p class="card-text">Hot Cappucino</p>
-                                </div>
-                                <div class="card-footer product-card-footer">
-
-                                    <button class="btn btn-light float-right btn-cafe"><i class="fa fa-shopping-cart"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-6 col-sm-5 col-md-5 col-lg-4 p-3">
-                            <div class="card product-card" style="border-radius: 5% 5% 0% 0%;">
-                                <img src="/img/cafes/bolsa1.webp" class=" coffee-image " alt="Moccacino">
-                                <div class="card-body product-card-body">
-                                    <h5 class="card-title fw-bold " style="letter-spacing: 1px;">Moccacino</h5>
-                                    <p class="card-text">Hot Moccacino</p>
-                                </div>
-                                <div class="card-footer product-card-footer">
-
-                                    <button class="btn btn-light float-right btn-cafe"><i class="fa fa-shopping-cart"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-6 col-sm-5 col-md-5 col-lg-4 p-3 ">
-                            <div class="card product-card" style="border-radius: 5% 5% 0% 0%;">
-                                <img src="/img/cafes/bolsa3.webp" class=" coffee-image" alt="Waffle Ice Cream">
-                                <div class="card-body product-card-body">
-                                    <h5 class="card-title fw-bold" style="letter-spacing: 1px;">Waffle Ice Cream</h5>
-                                    <p class="card-text">Waffle with Ice Cream</p>
-
-                                </div>
-                                <div class="card-footer product-card-footer">
-
-                                    <button class="btn btn-light float-right btn-cafe"><i class="fa fa-shopping-cart"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-6 col-sm-5 col-md-5 col-lg-4 p-3 ">
-                            <div class="card product-card" style="border-radius: 5% 5% 0% 0%;">
-                                <img src="/img/cafes/bolsa1.webp" class=" coffee-image" alt="Waffle Ice Cream">
-                                <div class="card-body product-card-body">
-                                    <h5 class="card-title fw-bold" style="letter-spacing: 1px;">Waffle Ice Cream</h5>
-                                    <p class="card-text">Waffle with Ice Cream</p>
-
-                                </div>
-                                <div class="card-footer product-card-footer">
-
-                                    <button class="btn btn-light float-right btn-cafe"><i class="fa fa-shopping-cart"></i></button>
-                                </div>
-                            </div>
-                        </div>
+                        $bolsas = $conexion->select($query);
+                        foreach ($bolsas as $bolsa) {
+                            echo "<div class='col-6 col-sm-5 col-md-5 col-lg-4 p-3'>";
+                            echo "<div class='card product-card' style='border-radius: 5% 5% 0% 0%;'>";
+                            echo "<img src='{$bolsa->img_url}' class=' coffee-image ' alt='{$bolsa->id_bolsa}'>";
+                            echo "<div class='card-body product-card-body'>";
+                            echo "<h5 class='card-title fw-bold' style='letter-spacing: 1px;'>{$bolsa->nombre}</h5>";
+                            echo "<p class='card-text'>{$bolsa->proceso}</p>";
+                            echo "</div>";
+                            echo "<div class='card-footer product-card-footer'>";
+                            echo "<button class='btn btn-light float-right btn-cafe'><i class='fa fa-shopping-cart'></i></button>";
+                            echo "</div>";
+                            echo "</div>";
+                            echo "</div>";
+                        }
+                        $conexion->desconectarDB();
+                        ?>
                     </div>
 
 
