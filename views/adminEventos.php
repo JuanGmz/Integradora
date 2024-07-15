@@ -507,9 +507,10 @@
                     if (isset($_POST["categoria"])) {
                         extract($_POST);
 
-                        $query = "SELECT e.*, l.nombre AS lugar_nombre 
+                        $query = "SELECT e.*, l.nombre AS lugar_nombre, c.nombre AS categoria
                         FROM eventos e
                         JOIN ubicacion_lugares l ON e.id_lugar = l.id_lugar
+                        JOIN categorias c ON e.id_categoria = c.id_categoria
                         WHERE e.id_categoria = '$categoria'";
               
                         $productos = $db->select($query);
@@ -587,6 +588,7 @@
                                                                 <h4 class='text-start fw-bold mb-3'>tipo: <span class='fw-normal fs-5'>{$producto->tipo}</span></h5>
                                                                 <h4 class='text-start fw-bold mb-3'>costo boleto: <span class='fw-normal fs-5'>{$producto->precio_boleto}</span></h5>
                                                                 <h4 class='text-start fw-bold mb-3'>Lugar: <span class='fw-normal fs-5'>{$producto->lugar_nombre}</span></h5>
+                                                                <h4 class='text-start fw-bold mb-3'>Ciudad: <span class='fw-normal fs-5'>{$producto->categoria}</span></h5>
 
                                                                 <!-- Tabla de productos -->
                                                             </div>
