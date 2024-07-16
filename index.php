@@ -378,7 +378,7 @@
                             ?>
                                 <div class='col-md-6 p-2 col-6 col-sm-6 col-lg-4<?php echo ' '. $additionalClass.' '. $additionalClass2 ?>'>
                                     <div class='card blog-card shadow-lg' style="border-radius: 5% 5% 0% 0%;">
-                                        <img src='/img/publicaciones/<?php echo $publicacion->img_url; ?>' class='coffee-image' alt='<?php echo $publicacion->titulo ?>'>
+                                        <img src='img/publicaciones/<?php echo $publicacion->img_url; ?>' class='coffee-image' alt='<?php echo $publicacion->titulo ?>'>
                                         <div class='cblog-card product-card-body'>
                                             <h5 class='blog-card-title'><?php echo $publicacion->titulo; ?></h5>
                                             <h6 class='blog-card-subtitle mb-2 text-muted'><?php echo $publicacion->fecha; ?></h6>
