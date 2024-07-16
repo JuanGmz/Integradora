@@ -55,6 +55,7 @@
     <!-- Contenido -->
     <div class="container-fluid m-0 p-0" style="background: var(--color2);">
         <div class="row p-0 m-0">
+
             <!-- E-Commerce-->
 
             <?php
@@ -80,15 +81,22 @@
             $bolsacafe = $conexion->select($query);
 
             echo "
+            <!-- Breadcrumbs -->
+        
             <div class='container-fluid bagr-cafe3 p-3'>
+            
                 <!-- Título -->
-                <div class='row align-items-center'>
-                    <div class='col-2 col-md-2'>
-                        <a href='../ecommerce.php' class='btn btn-light mb-3'>
-                            <i class='fas fa-arrow-left'></i>
-                        </a>
-                    </div>
-                    <div class='col-8 text-center'>
+    <div class='row align-items-center'>
+        <nav aria-label='breadcrumb' class='col-4 justify-content-center d-flex'>
+            <ol class='breadcrumb mt-4'>
+                <li class='breadcrumb-item'><a href='../../index.php'>Inicio</a></li>
+                <li class='breadcrumb-item'><a href='../ecommerce.php'>Ecommerce</a></li>
+                <li class='breadcrumb-item active' aria-current='page'>{$bolsacafe[0]->nombre}</li>
+            </ol>
+        </nav>
+                    
+                    
+                    <div class='col-12 text-center'>
                         <h1 class='product-title mb-0'>{$bolsacafe[0]->nombre}</h1>
                         <h2 class='product-subtitle'>CH I A P A S</h2>
                     </div>
