@@ -28,7 +28,7 @@ use cafe_sinfonia;
 create table CATEGORIAS(
 id_categoria int auto_increment not null,
 nombre nvarchar(100) not null,
-descripcion nvarchar(150),
+descripcion nvarchar(500),
 tipo enum('Menu','Evento') not null,
 img_url nvarchar(255),
 primary key(id_categoria)
@@ -928,25 +928,26 @@ INSERT INTO roles (rol, descripcion) VALUES
 ('proveedor', 'Proveedor del café sinfonía');
 
 -- Insertar registros en la tabla categorias.
-	INSERT INTO CATEGORIAS (nombre, descripcion, tipo) VALUES
-('Conciertos', 'Categoría para eventos musicales', 'Evento'),-- 1
-('Teatro', 'Categoría para representaciones teatrales', 'Evento'), 
-('Podcast en vivo', 'Categoría para conferencias y charlas', 'Evento'),
-('Talleres', 'Categoría para talleres y cursos', 'Evento'),
-('Ferias', 'Categoría para ferias comerciales y de productos', 'Evento'),-- 5
-('Festivales', 'Categoría para festivales culturales y musicales', 'Evento'), 
-('Seminarios', 'Categoría para seminarios educativos', 'Evento'),
-('Cine', 'Categoría para proyecciones de películas', 'Evento'),
-('Clasicos', 'Categoría para el menú de cafés clásicos durante todo tipo de horarios', 'Menu'),
-('Los métodos de Jazz Band', 'Categoría para el menú de métodos de preparación de café con alma de jazz durante todo tipo de horarios', 'Menu'),-- 10
-('Metal Coffee', 'Categoría para el menú de cafés con influencias de la música metal', 'Menu'), 
-('Cool and Dark', 'Categoría para el menú de cafés oscuros y refrescantes', 'Menu'),
-('Cold Brew', 'Categoría para el menú de cafés fríos y refrescantes', 'Menu'),
-('Around The World', 'Categoría para el menú de cafés de diversas partes del mundo', 'Menu'),
-('Sodas Italianas', 'Categoría para el menú de refrescos italianos', 'Menu'), -- 15
-('Frappes', 'Categoría para el menú de bebidas frappé', 'Menu'),  
-('Té y Tisanas', 'Categoría para el menú de tés y tisanas', 'Menu'),
-('Sweet Blues', 'Categoría para el menú de cafés dulces con un toque de blues', 'Menu');
+	INSERT INTO CATEGORIAS (nombre, descripcion, tipo,img_url ) VALUES
+('Conciertos', 'Categoría para eventos musicales', 'Evento',''),-- 1
+('Teatro', 'Categoría para representaciones teatrales', 'Evento',''), 
+('Podcast en vivo', 'Categoría para conferencias y charlas', 'Evento',''),
+('Talleres', 'Categoría para talleres y cursos', 'Evento',''),
+('Ferias', 'Categoría para ferias comerciales y de productos', 'Evento',''),-- 5
+('Festivales', 'Categoría para festivales culturales y musicales', 'Evento',''), 
+('Seminarios', 'Categoría para seminarios educativos', 'Evento',''),
+('Cine', 'Categoría para proyecciones de películas', 'Evento',''),
+('Clasicos', 'Les mostramos la diferencia de tamaños y proporciones de nuestra sección “Clásicos base a espresso” desde lo más pequeño que es un espresso sencillo hasta lo más grande que es un Latte.', 'Menu','img/categorias/clasicos.webp'),
+('Los métodos de Jazz Band', 'Categoría para el menú de métodos de preparación de café con alma de jazz durante todo tipo de horarios', 'Menu','img/categorias/jazz.webp'),-- 10
+('Metal Coffee', 'Metal Coffee
+3 bebidas con 3 intensidades de sabor diferentes, cada una con una cantidad de espresso combinadas con café americano una perfecta bebida para quellos que buscan emociones fueres en el café.', 'Menu','img/categorias/metal.webp'), 
+('Cool and Dark', 'Déjate cautivar por nuestro exclusivo Menú Cool and Dark de Café, donde cada sorbo es una experiencia de sabor intensa y sofisticada. Disfruta de una selección de bebidas que combinan el rico aroma del café con notas profundas y indulgentes.', 'Menu','img/categorias/cool.webp'),
+('Cold Brew', 'Categoría para el menú de cafés fríos y refrescantes', 'Menu','img/categorias/'),
+('Around The World', 'Categoría para el menú de cafés de diversas partes del mundo', 'Menu','img/categorias/'),
+('Sodas Italianas', 'Categoría para el menú de refrescos italianos', 'Menu','img/categorias/'), -- 15
+('Frappes', 'Categoría para el menú de bebidas frappé', 'Menu','img/categorias/'),  
+('Té y Tisanas', 'Categoría para el menú de tés y tisanas', 'Menu','img/categorias/'),
+('Sweet Blues', 'Categoría para el menú de cafés dulces con un toque de blues', 'Menu','img/categorias/');
 
 -- Insertar productos_menu
 INSERT INTO productos_menu (id_categoria, nombre, descripcion, img_url) VALUES
