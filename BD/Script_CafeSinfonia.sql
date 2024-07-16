@@ -1,8 +1,8 @@
 drop database if exists cafe_sinfonia;
 
-/*
--- Usuarios de la base de datos--
 
+-- Usuarios de la base de datos--
+/*
 -- Administrador | ALL PRIVILEGES, GRANT OPTION, SUPER |
 create user administrador@localhost identified by 'admin';
 grant all privileges on cafe_sinfonia.* to administrador@localhost;
@@ -731,9 +731,11 @@ BEGIN
         -- Inserta el pedido en la tabla pedidos
         INSERT INTO pedidos(id_cliente, id_domicilio, id_mp, monto_total)
         VALUES (p_id_cliente, p_id_domicilio, p_id_mp, v_monto_total);
+        
+        Select 'Pedido realizado.' as mensaje;
     ELSE
         -- Lanza un error si el carrito está vacío
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'No tienes nada en el carrito';
+       Select 'El carrito esta vacio.' as mensaje;
     END IF;
 END //
 DELIMITER ;
@@ -812,6 +814,31 @@ VALUES
 (p_id_cliente,p_referencia, p_estado, p_estado, p_codigo_postal, p_colonia, p_calle, p_telefono);
 end //
 delimiter ;
+
+-- Procedimiento almacenado para filtrar por evento.
+DELIMITER //
+CREATE PROCEDURE filtrar_reservas(IN idevento INT)
+BEGIN
+    SELECT
+        er.id_reserva,
+        er.c_boletos,
+        er.monto_total,
+        er.fecha_hora_reserva,
+        er.estatus,
+        e.nombre AS evento,
+        CONCAT_WS(' ', p.nombres, p.apellido_paterno, p.apellido_materno) AS Cliente
+    FROM
+        eventos AS e
+    JOIN
+        eventos_reservas AS er ON e.id_evento = er.id_evento
+    JOIN
+        clientes AS c ON er.id_cliente = c.id_cliente
+    JOIN
+        personas AS p ON c.id_persona = p.id_persona
+    WHERE
+        e.id_evento = idevento;
+END //
+DELIMITER ;
 
 
 -- Procedimiento Almacenado para subir comprobantes de pedidos.
@@ -1119,9 +1146,11 @@ INSERT INTO productos_menu (id_categoria, nombre, descripcion, img_url) VALUES
 (66, '', 70), -- Pastel Red Velvet
 (67, '', 40); -- Rollos de Canela con Glaseado
 
+call SP_Registrar_usuariosClientes('Noe Abel','Vargas','Lopez','noe134','noe@gmail.com','micontraseñasupersegura','8715083731');
+
 -- Ingresar domicilios para los primeros 19 clientes
+call SP_insert_domicilios(1, 'Eva Yadira Lopez Tonche', 'Coahuila', 'Torreón', '27050', 'Colinas del Sol', 'Calle del Águila #1415', '8712345683');
 /*
-(1, 'Laura Sanchez', 'Coahuila', 'Torreón', '27050', 'Colinas del Sol', 'Calle del Águila #1415', '8712345683')
 (2, 'Jose Ramirez', 'Coahuila', 'Torreón', '27060', 'Jardines del Bosque', 'Calle de los Cedros #1617', '8712345684')
 (3, 'Rosa Torres', 'Coahuila', 'Torreón', '27070', 'San Felipe', 'Avenida de la Paz #1819', '8712345685')
 (4, 'Miguel Reyes', 'Coahuila', 'Torreón', '27080', 'Revolución', 'Boulevard de las Palmas #2021', '8712345686')
@@ -1197,11 +1226,11 @@ VALUES
 
 -- Inserción de recompensas
 INSERT INTO recompensas (recompensa, condicion, fecha_inicio, fecha_expiracion, img_url) VALUES
-('10% de descuento en café', 5, '2024-07-9', '2024-07-10', 'img/descuento_cafe.jpg'),
-('Bebida gratis al comprar un pastel', 10, '2024-07-9', '2024-07-11', 'img/bebida_gratis.jpg'),
-('Taza conmemorativa gratis', 15, '2024-07-9', '2024-07-12', 'img/taza_conmemorativa.jpg'),
-('Acceso a evento exclusivo', 20, '2024-07-10', '2024-07-10', 'img/evento_exclusivo.jpg'),
-('Descuento del 20% en tu próxima compra', 25, '2024-07-10', '2024-07-11', 'img/descuento_proxima.jpg');
+('10% de descuento en café', 5, '2024-07-9', '2024-07-15', 'img/descuento_cafe.jpg'),
+('Bebida gratis al comprar un pastel', 10, '2024-07-15', '2024-07-11', 'img/bebida_gratis.jpg'),
+('Taza conmemorativa gratis', 15, '2024-07-9', '2024-07-15', 'img/taza_conmemorativa.jpg'),
+('Acceso a evento exclusivo', 20, '2024-07-10', '2024-07-15', 'img/evento_exclusivo.jpg'),
+('Descuento del 20% en tu próxima compra', 25, '2024-07-15', '2024-07-11', 'img/descuento_proxima.jpg');
 
 -- Insertar asociaciones entre todos los clientes y las recompensas activas
 
