@@ -8,7 +8,11 @@
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</head>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <?php
+    session_start();
+    ?>
 </head>
 
 <body>
@@ -18,7 +22,8 @@
             <a class="navbar-brand" href="../index.php">
                 <img src="../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
             </a>
-            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -46,10 +51,39 @@
                     </ul>
                 </div>
             </div>
-            <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
-            <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <?php
+            if ($_SESSION["usuario"]) {
+                ?>
+                <!-- Navbar con dropdown -->
+                <nav class="navbar navbar-expand-lg ">
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
+                                    style="left: auto; right: 0;">
+                                    <a class="dropdown-item" href="views/perfil.php">Mi perfil</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="cerrar_sesion.php">Cerrar sesión</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <?php
+            } else {
+                ?>
+                <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
+                <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <?php
+            }
+            ?>
         </div>
     </nav>
     <!-- NavBar End -->
@@ -66,13 +100,16 @@
         <div class="row">
             <!-- Recompensa 1 -->
             <div class="col-12 col-sm-6 col-md-6 col-lg-4  p-4 d-flex justify-content-center ">
-                <div class="relative flex w-80 flex-col rounded-xl bg-white  text-gray-700 shadow-md col-12 col-sm-6 col-md-4 col-lg-4">
+                <div
+                    class="relative flex w-80 flex-col rounded-xl bg-white  text-gray-700 shadow-md col-12 col-sm-6 col-md-4 col-lg-4">
                     <!-- Imagen superior -->
-                    <div class="relative mx-4 -mt-6 h-55 overflow-hidden rounded-xl bg-clip-border text-white shadow-lg">
+                    <div
+                        class="relative mx-4 -mt-6 h-55 overflow-hidden rounded-xl bg-clip-border text-white shadow-lg">
                         <img src="../img/cafes/dino2.webp" alt="Placeholder Image" class="object-cover h-full w-full">
                     </div>
                     <div class="p-6">
-                        <h5 class="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
+                        <h5
+                            class="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
                             Cafe gratis
                         </h5>
                         <p class="block font-sans text-base font-light leading-relaxed text-inherit antialiased">
@@ -90,7 +127,7 @@
                 </div>
             </div>
             <?php
-            include_once("../class/database.php");
+            include_once ("../class/database.php");
             $conexion = new Database();
             $conexion->conectarDB();
             $query = 'SELECT * from view_clientes_recompensas';

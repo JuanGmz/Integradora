@@ -7,6 +7,9 @@
     <title>Perfil</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
+    <?php
+    session_start();
+    ?>
 </head>
 
 <body>
@@ -17,7 +20,8 @@
             <a class="navbar-brand" href="../index.php">
                 <img src="../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
             </a>
-            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -46,7 +50,8 @@
                 </div>
             </div>
 
-            <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
@@ -64,7 +69,7 @@
 
         <!-- Titulo -->
         <div class="fw-bold fs-2 mt-3 mb-4">
-            <h1 class="fw-bold">Bienvenido <span class="fw-normal">Aquí irá el usuario</span></h1>
+            <h1 class="fw-bold">Bienvenido <span class="fw-normal"><?php echo $_SESSION['usuario']; ?></span></h1>
             <hr>
             <h4>Qué deseas hacer?</h4>
             <hr>
@@ -82,7 +87,8 @@
                             <div class="card-body">
                                 <h4 class="card-title fw-bold">Datos Personales</h4>
                                 <p class="card-text">Ver y actualizar información personal.</p>
-                                <a href="datosPersonales.php" class="blog-card-link">Datos Personales <i class="fa-solid fa-arrow-right"></i></a>
+                                <a href="datosPersonales.php" class="blog-card-link">Datos Personales <i
+                                        class="fa-solid fa-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -104,7 +110,7 @@
                     </div>
                 </div>
             </div>
-         </div>
+        </div>
         <div class="row">
             <div class="col-lg-6 blog-card">
                 <div class="card mb-3">
@@ -116,7 +122,8 @@
                             <div class="card-body">
                                 <h4 class="card-title fw-bold">Agregar Direcciones</h4>
                                 <p class="card-text">Agrega otra dirección para recibir tus pedidos.</p>
-                                <a href="#" class="blog-card-link">Direcciones <i class="fa-solid fa-arrow-right"></i></a>
+                                <a href="#" class="blog-card-link">Direcciones <i
+                                        class="fa-solid fa-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -138,8 +145,8 @@
                     </div>
                 </div>
             </div>
-         </div>
-        
+        </div>
+
     </div>
 
     <!-- Footer -->
