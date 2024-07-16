@@ -123,11 +123,8 @@
                     <div class="row ">
                         <div class="col-12 text-center p-2 ">
                             <p class="text-light text-dark p-3">
-                                La mejor manera de preparar tu cafe
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus provident ex
-                                impedit
-                                facere, aut earum sapiente voluptate officia soluta explicabo quaerat nihil officiis
-                                commodi animi. In deserunt culpa provident pariatur.
+                            La primera barra y expendio de café de especialidad en la laguna.
+                            Café 100% Mexicano seleccionado por nuestro maestro catador y tostador. ☕️♥️
                             </p>
                             <a href="#" class="btn btn-cafe ">Ver mas</a>
                         </div>
@@ -187,7 +184,7 @@
                         $active="active";
                         foreach ($categorias as $categoria) {
                             echo "<li class='nav-item mb-2 col-6 col-sm-6 col-md-4 col-lg-3' role='presentation'>";
-                            echo "<button class='btn-categorias $active w-100' id='{$categoria->id_categoria}-tab' data-bs-toggle='tab' data-bs-target='#{$categoria->id_categoria}' type='button' role='tab' aria-controls='{$categoria->id_categoria}' aria-selected='$tr'>{$categoria->nombre}</button>";
+                            echo "<button class='btn-categorias $active w-100 h-100' id='{$categoria->id_categoria}-tab' data-bs-toggle='tab' data-bs-target='#{$categoria->id_categoria}' type='button' role='tab' aria-controls='{$categoria->id_categoria}' aria-selected='$tr'>{$categoria->nombre}</button>";
                             echo "</li>";
                             $tr = "false"; // Cambia el valor después de la primera iteración
                             $active = "";
@@ -255,7 +252,7 @@
                                         <i class="fa-solid fa-truck"></i>
                                     </div>
                                     <div class="col-12">
-                                        <span class="fw-bold">Envio a tu Servicio</span>
+                                        <span class="fw-bold">Envios a tu Servicio</span>
                                         <p>En pedido superior a $150</p>
                                     </div>
                                 </div>
@@ -263,7 +260,7 @@
                         </div>
                         <!-- Tarjeta regalo especial-->
                         <div class="col-8 col-sm-6 col-sm-5 col-lg-4 m-0 p-0 text-center justify-content-center d-flex card-feature p-1">
-                            <a href="./html/recompensas.html">
+                            <a href="./views/recompensas.php">
                                 <div class="">
                                     <div class="col-12">
                                         <div class="">
@@ -279,7 +276,7 @@
                         </div>
                         <!-- Servicio al cliente-->
                         <div class="col-8 col-sm-6 col-sm-5 col-lg-4 m-0 p-0 text-center justify-content-center d-flex card-feature p-1">
-                            <a href="./html/contact.html">
+                            <a href="./views/contact.php">
                                 <div class="">
                                     <div class="col-12">
                                         <i class="fa-solid fa-headset"></i>
