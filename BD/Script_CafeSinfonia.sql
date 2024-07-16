@@ -911,16 +911,16 @@ INSERT INTO metodos_pago (metodo_pago) VALUES ('Transferencia');
 
 INSERT INTO publicaciones (titulo, descripcion, img_url, tipo)
 VALUES
-('¡Bienvenidos a Sinfonía Café y Cultura!', 'Estamos emocionados de abrir nuestras puertas y ofrecerles una experiencia única de café y cultura. ¡Visítanos hoy!', 'img/bienvenidos.jpg', 'Difusion'),
-('Tarde de Jazz', 'Acompáñanos este viernes para una tarde de jazz en vivo con artistas locales. ¡No te lo pierdas!', 'img/tarde_de_jazz.jpg', 'Difusion'),
-('Nueva Carta de Verano', 'Descubre nuestra nueva carta de verano con bebidas refrescantes y deliciosas. ¡Ven a probarlas!', 'img/carta_verano.jpg', 'Difusion'),
-('Taller de Cata de Café', 'Aprende a distinguir los sabores y aromas del café en nuestro próximo taller de cata. ¡Inscríbete ya!', 'img/taller_cata.jpg', 'Blog'),
-('Concierto Acústico', 'Disfruta de una noche de música acústica con artistas emergentes este sábado. ¡Te esperamos!', 'img/concierto_acustico.jpg', 'Difusion'),
-('Exposición de Arte', 'Ven a admirar las obras de artistas locales en nuestra exposición de arte. ¡Entrada libre!', 'img/expo_arte.jpg', 'Difusion'),
-('Café del Mes', 'Este mes presentamos nuestro café de origen etíope. ¡Ven a degustarlo!', 'img/cafe_mes.jpg', 'Blog'),
-('Noche de Poesía', 'Acompáñanos para una noche de poesía y micrófono abierto. ¡Comparte tus versos con nosotros!', 'img/noche_poesia.jpg', 'Difusion'),
-('Clases de Barismo', 'Inscríbete en nuestras clases de barismo y aprende a preparar el café perfecto.', 'img/clases_barismo.jpg', 'Blog'),
-('Feria de Libros', 'No te pierdas nuestra feria de libros con grandes descuentos y actividades para toda la familia.', 'img/feria_libros.jpg', 'Difusion');
+('¡Bienvenidos a Sinfonía Café y Cultura!', 'Estamos emocionados de abrir nuestras puertas y ofrecerles una experiencia única de café y cultura. ¡Visítanos hoy!', 'img/publicaciones/bienvenidos.jpg', 'Difusion'),
+('Tarde de Jazz', 'Acompáñanos este viernes para una tarde de jazz en vivo con artistas locales. ¡No te lo pierdas!', 'img/publicaciones/tarde_de_jazz.jpg', 'Difusion'),
+('Nueva Carta de Verano', 'Descubre nuestra nueva carta de verano con bebidas refrescantes y deliciosas. ¡Ven a probarlas!', 'img/publicaciones/carta_verano.jpg', 'Difusion'),
+('Taller de Cata de Café', 'Aprende a distinguir los sabores y aromas del café en nuestro próximo taller de cata. ¡Inscríbete ya!', 'img/publicaciones/taller_cata.jpg', 'Blog'),
+('Concierto Acústico', 'Disfruta de una noche de música acústica con artistas emergentes este sábado. ¡Te esperamos!', 'img/publicaciones/concierto_acustico.jpg', 'Difusion'),
+('Exposición de Arte', 'Ven a admirar las obras de artistas locales en nuestra exposición de arte. ¡Entrada libre!', 'img/publicaciones/expo_arte.jpg', 'Difusion'),
+('Café del Mes', 'Este mes presentamos nuestro café de origen etíope. ¡Ven a degustarlo!', 'img/publicaciones/cafe_mes.jpg', 'Blog'),
+('Noche de Poesía', 'Acompáñanos para una noche de poesía y micrófono abierto. ¡Comparte tus versos con nosotros!', 'img/publicaciones/noche_poesia.jpg', 'Difusion'),
+('Clases de Barismo', 'Inscríbete en nuestras clases de barismo y aprende a preparar el café perfecto.', 'img/publicaciones/clases_barismo.jpg', 'Blog'),
+('Feria de Libros', 'No te pierdas nuestra feria de libros con grandes descuentos y actividades para toda la familia.', 'img/publicaciones/feria_libros.jpg', 'Difusion');
 
 INSERT INTO roles (rol, descripcion) VALUES 
 ('empleado', 'Empleado del café sinfonía'),
