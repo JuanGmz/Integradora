@@ -212,7 +212,7 @@
                         echo "<div class='row justify-content-center'>";
                         echo "<div class='col-12 col-md-10 col-lg-9 row justify-content-center'>";
                         echo "<div class='col-10 col-md-6 p-2 col-sm-10'>";
-                        echo "<img src='./{$categoria->img_url}' class='card-img-top img-fluid' alt='...' style='height: 280px; object-fit: cover;'>";
+                        echo "<img src='img/categorias/{$categoria->img_url}' class='card-img-top img-fluid' alt='...' style='height: 280px; object-fit: cover;'>";
                         echo "</div>";
                         echo "<div class='col-9 col-sm-9  col-md-6 p-2 d-flex flex-column justify-content-cente p-lg-2'>";
                         echo "<h5 class='fw-bold mb-3' style='letter-spacing: 1px;'>{$categoria->nombre}</h5>";
@@ -313,10 +313,10 @@
                         $additionalClass = ($counter > 3) ? 'd-none' : ''; // Cambia la clase después del tercer ciclo
                         $additionalClass2 = ($counter > 3) ? 'd-md-block' : ''; // Cambia la clase después del tercer ciclo
 
-                        echo "<div class='col-9 col-sm-6 col-md-4 col-lg-4 p-4 m-0 {$additionalClass} {$additionalClass2}'>";
-                        echo "<div class='card m-0' style='border-radius: 5% 5% 0% 0%;'>";
+                        echo "<div class='col-10 col-sm-6 col-md-4 col-lg-4 p-4 m-0 {$additionalClass} {$additionalClass2}'>";
+                        echo "<div class='card m-0 blog-card shadow-lg' style='border-radius: 5% 5% 0% 0%;'>";
                         echo "<a href='../views/bolsas/{$bolsa->id_bolsa}.php'>";
-                        echo "<img src='../{$bolsa->img_url}' class='coffee-image align-card-img-top' alt='{$bolsa->id_bolsa}'>";
+                        echo "<img src='/img/bolsas/{$bolsa->img_url}' class='coffee-image align-card-img-top' alt='{$bolsa->id_bolsa}'>";
                         echo "<div class='card-body product-card-body'>";
                         echo "<h5 class='card-title fw-bold product-title' style='letter-spacing: 1px;'>{$bolsa->nombre}</h5>";
                         echo "<p class='card-text product-subtitle'>{$bolsa->proceso}</p>";
@@ -378,7 +378,7 @@
                             ?>
                                 <div class='col-md-6 p-2 col-6 col-sm-6 col-lg-4<?php echo ' '. $additionalClass.' '. $additionalClass2 ?>'>
                                     <div class='card blog-card shadow-lg' style="border-radius: 5% 5% 0% 0%;">
-                                        <img src='../../<?php echo $publicacion->img_url; ?>' class='coffee-image' alt='<?php echo $publicacion->titulo ?>'>
+                                        <img src='/img/publicaciones/<?php echo $publicacion->img_url; ?>' class='coffee-image' alt='<?php echo $publicacion->titulo ?>'>
                                         <div class='cblog-card product-card-body'>
                                             <h5 class='blog-card-title'><?php echo $publicacion->titulo; ?></h5>
                                             <h6 class='blog-card-subtitle mb-2 text-muted'><?php echo $publicacion->fecha; ?></h6>

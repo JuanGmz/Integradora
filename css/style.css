@@ -70,7 +70,7 @@ a:hover {
 /* Tamaños de pantalla pequeños */
 @media (max-width: 767px) {
   .coffee-image {
-    height: 12rem; /* Altura deseada para tamaños de pantalla pequeños */
+    height: 15rem; /* Altura deseada para tamaños de pantalla pequeños */
   }
 }
 

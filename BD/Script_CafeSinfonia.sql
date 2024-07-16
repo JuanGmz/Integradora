@@ -911,16 +911,16 @@ INSERT INTO metodos_pago (metodo_pago) VALUES ('Transferencia');
 
 INSERT INTO publicaciones (titulo, descripcion, img_url, tipo)
 VALUES
-('¡Bienvenidos a Sinfonía Café y Cultura!', 'Estamos emocionados de abrir nuestras puertas y ofrecerles una experiencia única de café y cultura. ¡Visítanos hoy!', 'img/publicaciones/bienvenidos.jpg', 'Difusion'),
-('Tarde de Jazz', 'Acompáñanos este viernes para una tarde de jazz en vivo con artistas locales. ¡No te lo pierdas!', 'img/publicaciones/tarde_de_jazz.jpg', 'Difusion'),
-('Nueva Carta de Verano', 'Descubre nuestra nueva carta de verano con bebidas refrescantes y deliciosas. ¡Ven a probarlas!', 'img/publicaciones/carta_verano.jpg', 'Difusion'),
-('Taller de Cata de Café', 'Aprende a distinguir los sabores y aromas del café en nuestro próximo taller de cata. ¡Inscríbete ya!', 'img/publicaciones/taller_cata.jpg', 'Blog'),
-('Concierto Acústico', 'Disfruta de una noche de música acústica con artistas emergentes este sábado. ¡Te esperamos!', 'img/publicaciones/concierto_acustico.jpg', 'Difusion'),
-('Exposición de Arte', 'Ven a admirar las obras de artistas locales en nuestra exposición de arte. ¡Entrada libre!', 'img/publicaciones/expo_arte.jpg', 'Difusion'),
-('Café del Mes', 'Este mes presentamos nuestro café de origen etíope. ¡Ven a degustarlo!', 'img/publicaciones/cafe_mes.jpg', 'Blog'),
-('Noche de Poesía', 'Acompáñanos para una noche de poesía y micrófono abierto. ¡Comparte tus versos con nosotros!', 'img/publicaciones/noche_poesia.jpg', 'Difusion'),
-('Clases de Barismo', 'Inscríbete en nuestras clases de barismo y aprende a preparar el café perfecto.', 'img/publicaciones/clases_barismo.jpg', 'Blog'),
-('Feria de Libros', 'No te pierdas nuestra feria de libros con grandes descuentos y actividades para toda la familia.', 'img/publicaciones/feria_libros.jpg', 'Difusion');
+('¡Bienvenidos a Sinfonía Café y Cultura!', 'Estamos emocionados de abrir nuestras puertas y ofrecerles una experiencia única de café y cultura. ¡Visítanos hoy!', 'bienvenidos.jpg', 'Difusion'),
+('Tarde de Jazz', 'Acompáñanos este viernes para una tarde de jazz en vivo con artistas locales. ¡No te lo pierdas!', 'tarde_de_jazz.jpg', 'Difusion'),
+('Nueva Carta de Verano', 'Descubre nuestra nueva carta de verano con bebidas refrescantes y deliciosas. ¡Ven a probarlas!', 'carta_verano.jpg', 'Difusion'),
+('Taller de Cata de Café', 'Aprende a distinguir los sabores y aromas del café en nuestro próximo taller de cata. ¡Inscríbete ya!', 'taller_cata.jpg', 'Blog'),
+('Concierto Acústico', 'Disfruta de una noche de música acústica con artistas emergentes este sábado. ¡Te esperamos!', 'concierto_acustico.jpg', 'Difusion'),
+('Exposición de Arte', 'Ven a admirar las obras de artistas locales en nuestra exposición de arte. ¡Entrada libre!', 'expo_arte.jpg', 'Difusion'),
+('Café del Mes', 'Este mes presentamos nuestro café de origen etíope. ¡Ven a degustarlo!', 'cafe_mes.jpg', 'Blog'),
+('Noche de Poesía', 'Acompáñanos para una noche de poesía y micrófono abierto. ¡Comparte tus versos con nosotros!', 'noche_poesia.jpg', 'Difusion'),
+('Clases de Barismo', 'Inscríbete en nuestras clases de barismo y aprende a preparar el café perfecto.', 'clases_barismo.jpg', 'Blog'),
+('Feria de Libros', 'No te pierdas nuestra feria de libros con grandes descuentos y actividades para toda la familia.', 'feria_libros.jpg', 'Difusion');
 
 INSERT INTO roles (rol, descripcion) VALUES 
 ('empleado', 'Empleado del café sinfonía'),
@@ -937,17 +937,17 @@ INSERT INTO roles (rol, descripcion) VALUES
 ('Festivales', 'Categoría para festivales culturales y musicales', 'Evento',''), 
 ('Seminarios', 'Categoría para seminarios educativos', 'Evento',''),
 ('Cine', 'Categoría para proyecciones de películas', 'Evento',''),
-('Clasicos', 'Les mostramos la diferencia de tamaños y proporciones de nuestra sección “Clásicos base a espresso” desde lo más pequeño que es un espresso sencillo hasta lo más grande que es un Latte.', 'Menu','img/categorias/clasicos.webp'),
-('Los métodos de Jazz Band', 'Categoría para el menú de métodos de preparación de café con alma de jazz durante todo tipo de horarios', 'Menu','img/categorias/jazz.webp'),-- 10
+('Clasicos', 'Les mostramos la diferencia de tamaños y proporciones de nuestra sección “Clásicos base a espresso” desde lo más pequeño que es un espresso sencillo hasta lo más grande que es un Latte.', 'Menu','clasicos.webp'),
+('Los métodos de Jazz Band', 'Categoría para el menú de métodos de preparación de café con alma de jazz durante todo tipo de horarios', 'Menu','jazz.webp'),-- 10
 ('Metal Coffee', 'Metal Coffee
-3 bebidas con 3 intensidades de sabor diferentes, cada una con una cantidad de espresso combinadas con café americano una perfecta bebida para quellos que buscan emociones fueres en el café.', 'Menu','img/categorias/metal.webp'), 
-('Cool and Dark', 'Déjate cautivar por nuestro exclusivo Menú Cool and Dark de Café, donde cada sorbo es una experiencia de sabor intensa y sofisticada. Disfruta de una selección de bebidas que combinan el rico aroma del café con notas profundas y indulgentes.', 'Menu','img/categorias/cool.webp'),
-('Cold Brew', 'Categoría para el menú de cafés fríos y refrescantes', 'Menu','img/categorias/'),
-('Around The World', 'Categoría para el menú de cafés de diversas partes del mundo', 'Menu','img/categorias/'),
-('Sodas Italianas', 'Categoría para el menú de refrescos italianos', 'Menu','img/categorias/'), -- 15
-('Frappes', 'Categoría para el menú de bebidas frappé', 'Menu','img/categorias/'),  
-('Té y Tisanas', 'Categoría para el menú de tés y tisanas', 'Menu','img/categorias/'),
-('Sweet Blues', 'Categoría para el menú de cafés dulces con un toque de blues', 'Menu','img/categorias/');
+3 bebidas con 3 intensidades de sabor diferentes, cada una con una cantidad de espresso combinadas con café americano una perfecta bebida para quellos que buscan emociones fueres en el café.', 'Menu','metal.webp'), 
+('Cool and Dark', 'Déjate cautivar por nuestro exclusivo Menú Cool and Dark de Café, donde cada sorbo es una experiencia de sabor intensa y sofisticada. Disfruta de una selección de bebidas que combinan el rico aroma del café con notas profundas y indulgentes.', 'Menu','cool.webp'),
+('Cold Brew', 'Categoría para el menú de cafés fríos y refrescantes', 'Menu',''),
+('Around The World', 'Categoría para el menú de cafés de diversas partes del mundo', 'Menu',''),
+('Sodas Italianas', 'Categoría para el menú de refrescos italianos', 'Menu',''), -- 15
+('Frappes', 'Categoría para el menú de bebidas frappé', 'Menu',''),  
+('Té y Tisanas', 'Categoría para el menú de tés y tisanas', 'Menu',''),
+('Sweet Blues', 'Categoría para el menú de cafés dulces con un toque de blues', 'Menu','');
 
 -- Insertar productos_menu
 INSERT INTO productos_menu (id_categoria, nombre, descripcion, img_url) VALUES
@@ -1203,9 +1203,9 @@ INSERT INTO bolsas_cafe(
     img_url
 )
 VALUES
-('Texin Veracruz','2023 - 2024','Eduardo Vital Díaz', 'Lavado', 'Marsellesa, San Román, Oro Azteca', '1,220 msnm', 'Cacao, Vainilla', 'Cítrica, brillante', 'Choc. Oscuro, Avellana', 'Alto - Denso',85, 'img/bolsas/TEXINVER(LAV)T.webp'),
-('Jaltenango Chiapas','2023 - 2024','Finca Santa María', 'Lavado', 'Caturra', '1,300 - 1,500 msnm', 'Cítrico, Floral', 'Brillante, Equilibrada', 'Miel, Manzana Verde, Durazno', 'Medio - Denso',86.5, 'img/bolsas/JALTCHIAP(MARAGO)T.webp'),
-('Jaltenango Chiapas','2023 - 2024','Finca Santa María', 'Natural', 'Marsellesa, Bourbon', '1,350 - 1,450 msnm', 'Dulce de Leche, Nuez', 'Frutal Intensa', 'Almíbar, Naranja', 'Ligero',84, 'img/bolsas/JALTCHIAP(NAT)T.webp');
+('Texin Veracruz','2023 - 2024','Eduardo Vital Díaz', 'Lavado', 'Marsellesa, San Román, Oro Azteca', '1,220 msnm', 'Cacao, Vainilla', 'Cítrica, brillante', 'Choc. Oscuro, Avellana', 'Alto - Denso',85, 'TEXINVER(LAV)T.webp'),
+('Jaltenango Chiapas','2023 - 2024','Finca Santa María', 'Lavado', 'Caturra', '1,300 - 1,500 msnm', 'Cítrico, Floral', 'Brillante, Equilibrada', 'Miel, Manzana Verde, Durazno', 'Medio - Denso',86.5, 'JALTCHIAP(MARAGO)T.webp'),
+('Jaltenango Chiapas','2023 - 2024','Finca Santa María', 'Natural', 'Marsellesa, Bourbon', '1,350 - 1,450 msnm', 'Dulce de Leche, Nuez', 'Frutal Intensa', 'Almíbar, Naranja', 'Ligero',84, 'JALTCHIAP(NAT)T.webp');
 
 -- Insert 
 INSERT INTO detalle_bc (
