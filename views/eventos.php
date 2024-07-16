@@ -116,8 +116,8 @@
                         echo "  <div class='row justify-content-center mb-5'>";
                         echo "      <div class='col-12 col-md-8 d-flex align-items-center'>";
                         echo "          <div class='d-flex flex-wrap w-100 d-flex justify-content-center'>";
-                        echo "              <div class='col-7 col-md-6 p-2 col-sm-6'>";
-                        echo "                  <img src='../img/eventos/{$categoria->img_url}' class='card-img-top img-fluid' alt='...' style='height: 300px; object-fit: cover;'>";
+                        echo "              <div class='col-12 col-md-6 p-2 col-sm-6'>";
+                        echo "                  <img src='../{$categoria->img_url}' class='card-img-top img-fluid' alt='...' style='height: 300px; object-fit: cover;'>";
                         echo "              </div>";
                         echo "              <div class='col-9 col-sm-9 col-md-6 p-2 d-flex flex-column justify-content-cente p-lg-2'>";
                         echo "                  <h5 class='fw-bold mb-3' style='letter-spacing: 1px;'>{$categoria->nombre}</h5>";

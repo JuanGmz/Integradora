@@ -75,12 +75,12 @@
                     $conexion->conectarDB();
 
                     // Configurar la paginación
-                    $results_per_page = 9; // Número de resultados por página
+                    $results_per_page = 6; // Número de resultados por página
                     $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
                     $page = max($page, 1); // Asegurar que la página sea al menos 1
 
                     // Contar el número total de publicaciones
-                    $total_query = 'SELECT COUNT(*) AS total FROM publicaciones WHERE tipo = "Blog"';
+                    $total_query = 'SELECT COUNT(*) AS total FROM publicaciones WHERE tipo = "Difusión"';
                     $total_result = $conexion->select($total_query);
                     $total_pages = ceil($total_result[0]->total / $results_per_page);
 
@@ -103,10 +103,10 @@
                 <div class="container mb-3">
                     <div class="row">
                         <?php foreach ($publicaciones as $publicacion) : ?>
-                            <div class='col-md-4 col-12 col-sm-6 mb-3'>
-                                <div class='card blog-card h-100 shadow-lg'>
-                                    <img src='../../img/publicaciones/<?php echo $publicacion->img_url; ?>' class='card-img-top' alt='<?php echo $publicacion->titulo ?>'>
-                                    <div class='card-body'>
+                            <div class='col-md-4 col-12 col-sm-6 mb-3 p-3'>
+                                <div class='card blog-card h-100 shadow-lg' style='border-radius: 5% 5% 0% 0%;'>
+                                    <img src='/img/publicaciones/<?php echo $publicacion->img_url; ?>' class='coffee-image' alt='<?php echo $publicacion->titulo ?>'>
+                                    <div class='cblog-card product-card-body'>
                                         <h5 class='blog-card-title'><?php echo $publicacion->titulo; ?></h5>
                                         <h6 class='blog-card-subtitle mb-2 text-muted'><?php echo $publicacion->fecha; ?></h6>
                                         <p class='blog-card-text'><?php echo $publicacion->descripcion; ?></p>
