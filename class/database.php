@@ -3,23 +3,18 @@ class database
 {
     private $pdo;
     private $user = "root";
-    private $password = "amomifamilia";
+    private $password = "";
     private $server = "localhost";
     private $dbname = "cafe_sinfonia";
-    private $puerto = "3305";
 
     // funcion para conectar
     function conectarDB()
     {
-        try 
-        {
-            $dsn = "mysql:host={$this->server};dbname={$this->dbname};port={$this->puerto}";
+        try {
+            $dsn = "mysql:host={$this->server};dbname={$this->dbname};";
             $this->pdo = new PDO($dsn, $this->user, $this->password);
-            // Establecer el modo de error de PDO a excepción
-            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } 
-        catch (PDOException $e) 
-        {
+            // Establecer el modo de error de PDO a excepció
+        } catch (PDOException $e) {
             echo $e->getMessage();
         }
 
