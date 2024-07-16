@@ -16,7 +16,8 @@
             <a class="navbar-brand" href="../index.php">
                 <img src="../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
             </a>
-            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -45,7 +46,8 @@
                 </div>
             </div>
             <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
-            <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
@@ -55,10 +57,17 @@
     <!-- Contenido -->
     <div class="container-fluid m-0 p-0" style="background: var(--color2);">
         <div class="row p-0 m-0">
+
             <!-- E-Commerce-->
             <div class="container-fluid bagr-cafe3 p-3">
+                <nav aria-label="breadcrumb" class='col-12 justify-content-center d-flex col-lg-2 col-md-3 col-sm-3'>
+                    <ol class="breadcrumb mt-4">
+                        <li class="breadcrumb-item fw-bold"><a href="../index.php">Inicio</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"></li>E-Commerce</li>
+                    </ol>
+                </nav>
                 <!-- Título -->
-                <div class="col-12 text-center p-2">
+                <div class="col-12 text-center p-3">
                     <h1 class="fw-bold text-center" style="letter-spacing: 1px;">E-Commerce</h1>
                 </div>
                 <!-- contenedor de productos -->
@@ -103,7 +112,7 @@
                     <div class="col-12 col-md-10 col-lg-9 row justify-content-center">
 -->
                     <?php
-                    include_once("../class/database.php");
+                    include_once ("../class/database.php");
                     $conexion = new Database();
                     $conexion->conectarDB();
                     $query = 'SELECT bolsas_cafe.id_bolsa,bolsas_cafe.nombre, bolsas_cafe.productor_finca ,bolsas_cafe.proceso,
@@ -113,15 +122,13 @@
 
                     $bolsas = $conexion->select($query);
                     foreach ($bolsas as $bolsa) {
-                        echo "<div class='col-6 col-sm-5 col-md-5 col-lg-4 p-3'>";
-                        echo "<div class='card product-card' style='border-radius: 5% 5% 0% 0%;'>";
+                        echo "<div class='col-10 col-sm-6 col-md-4 col-lg-4 p-4 m-0'>";
+                        echo "<div class='card m-0' style='border-radius: 5% 5% 0% 0%;'>";
                         echo "<a href='../views/bolsas/{$bolsa->id_bolsa}.php'>";
-                        echo "<img src='../{$bolsa->img_url}' class=' coffee-image ' alt='{$bolsa->id_bolsa}'>";
+                        echo "<img src='../{$bolsa->img_url}' class='coffee-image align-card-img-top' alt='{$bolsa->id_bolsa}'>";
                         echo "<div class='card-body product-card-body'>";
-                        echo "<h5 class='card-title fw-bold' style='letter-spacing: 1px;'>{$bolsa->nombre}</h5>";
-                        echo "<p class='card-text text-success'>{$bolsa->proceso}</p>";
-                        echo "</div>";
-                        echo "<div class='card-footer product-card-footer'>";
+                        echo "<h5 class='card-title fw-bold product-title' style='letter-spacing: 1px;'>{$bolsa->nombre}</h5>";
+                        echo "<p class='card-text product-subtitle'>{$bolsa->proceso}</p>";
                         echo "</div>";
                         echo "</a>";
                         echo "</div>";
@@ -182,10 +189,12 @@
 
 
     <!-- Botón de Carrito -->
-    <button id="floatingButton" class="btn btn-cafe position-fixed bottom-0 end-0 m-3 d-flex p-3 z-3 text-light fw-bold" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+    <button id="floatingButton" class="btn btn-cafe position-fixed bottom-0 end-0 m-3 d-flex p-3 z-3 text-light fw-bold"
+        type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
         <i class="fa-solid fa-cart-shopping fa-2x"></i>
     </button>
-    <div class="offcanvas offcanvas-end text-light" style="background: var(--primario);" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas offcanvas-end text-light" style="background: var(--primario);" tabindex="-1"
+        id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
         <div class="mt-3 fw-bold d-flex justify-content-center">
             <h5 class="offcanvas-title fs-3 mx-auto" id="offcanvasRightLabel">
                 <i class="fa-solid fa-bag-shopping"></i>
