@@ -7,10 +7,10 @@
     <title>SínfoniaCafé&Cultura</title>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <?php
+    session_start();
+    ?>
 </head>
-<?php
-session_start();
-?>
 
 <body>
     <!-- NavBar -->
@@ -54,7 +54,8 @@ session_start();
             } else {
                 ?>
                 <a href="views/login.php" class="login-button ms-auto">Iniciar Sesión</a>
-                <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <?php
@@ -68,10 +69,12 @@ session_start();
             <div class="col-lg-8 m-0 p-0">
                 <img src="img/sinfo.webp" class="img-fluid p-0 m-0" alt="imginicio" lazy="loading">
             </div>
-            <div class="col-lg-4 d-flex flex-column justify-content-center align-items-center p-5" style="background: var(--color3);">
+            <div class="col-lg-4 d-flex flex-column justify-content-center align-items-center p-5"
+                style="background: var(--color3);">
                 <div class="row ">
                     <div class="col-12">
-                        <h1 class="text-light text-center" style="letter-spacing: 1px;">Prueba el mejor café de la ciudad</h1>
+                        <h1 class="text-light text-center" style="letter-spacing: 1px;">Prueba el mejor café de la
+                            ciudad</h1>
                     </div>
                 </div>
                 <div class="row mb-3 p-2 ">
@@ -81,7 +84,8 @@ session_start();
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <a href="views/menu.php" class="btn text-light shadow-lg " style="background: var(--primario);">Ver Menú</a>
+                        <a href="views/menu.php" class="btn text-light shadow-lg "
+                            style="background: var(--primario);">Ver Menú</a>
                     </div>
                 </div>
             </div>
@@ -151,7 +155,9 @@ session_start();
                     <ul class="nav nav-tabs row col-12 m-0" id="menuTabs" role="tablist" style="border-bottom: none;">
                         <li class="nav-item  mb-2 col-6 col-sm-6 col-md-4 col-lg-3 " role="presentation">
                             <!--Clasicos-->
-                            <button class="btn-categorias   active w-100" id="clasicos-tab" data-bs-toggle="tab" data-bs-target="#clasicos" type="button" role="tab" aria-controls="clasicos" aria-selected="true">Clasicos</button>
+                            <button class="btn-categorias   active w-100" id="clasicos-tab" data-bs-toggle="tab"
+                                data-bs-target="#clasicos" type="button" role="tab" aria-controls="clasicos"
+                                aria-selected="true">Clasicos</button>
                         </li>
                         <li class="nav-item  mb-2 col-6 col-sm-6 col-md-4 col-lg-3  " role="presentation">
                             <!--Cool and Dark-->
@@ -382,7 +388,8 @@ session_start();
             <!-- Recompensas-->
             <section class="subscription-section d-flex align-items-center justify-content-center p-2">
                 <div class="subscription-content text-center">
-                    <h1 class="display-4">Recibe grandes <span style="color: #d4a373;">RECOMPENSAS</span> fácilmente</h1>
+                    <h1 class="display-4">Recibe grandes <span style="color: #d4a373;">RECOMPENSAS</span> fácilmente
+                    </h1>
                     <p class="lead">Mediante asistencias recibe grandes recompensas</p>
                     <a href="views/recompensas.php" class="btn subscription-btn">Echar un vistazo</a>
                 </div>

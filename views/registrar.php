@@ -57,14 +57,10 @@
     <!-- Registrar -->
     <div class="container bg-light rounded-3 lg lg-0 lg-0">
         <div class="row">
-            <!-- Imagen -->
-            <div class="col-lg-6 col-6  p-0 m-0 d-none d-md-block">
-                <img src="../img/cafes/cafe16.webp" class="img-fluid h-100 rounded coffee-image" alt="">
-            </div>
+
             <!-- Formulario -->
             <div class="col-lg-6 col-md-6 col-md-6 p-5 d-flex justify-content-center">
-                <form action="../scripts/login/guardarusuario.php" method="post" class="p-0 p-lg-5"
-                    onsubmit="return validarPassword()">
+                <form action="#" method="post" class="p-0 p-lg-5" onsubmit="return validarPassword()">
                     <legend class="fw-bold fs-1">Crear Cuenta</legend>
                     <div class="row p-2">
                         <div class="col-12 mb-2">
@@ -90,8 +86,8 @@
                         </div>
                         <div class="col-12 mb-3">
                             <label for="email" class="form-label fs-5">Telefono</label>
-                            <input type="tel" class="form-control form-control-bb" id="telefono" name="telefono"
-                                required>
+                            <input type="te" class="form-control form-control-bb" id="telefono" name="telefono"
+                                pattern="[0-9]{10}" required>
                         </div>
                         <hr>
                         <div class="col-12 mb-2">
@@ -107,21 +103,46 @@
                         </div>
                         <div class="col-12 mb-3">
                             <label for="password2" class="form-label fs-5">Repetir Contraseña</label>
-                            <input type="password" class="form-control form-control-bb" id="password2" name="password2"
-                                required>
+                            <input type="password" class="form-control form-control-bb" id="password2" name="password2" " required>
                         </div>
-                        <div class="col-12 mb-3 ">
+                        <div class=" col-12 mb-3 ">
                             <a href="./login.php">
-                                <p for="password2" class="blog-card-link ">Ya tienes cuenta</p>
+                            <p for="password2" class="blog-card-link ">¿Ya tienes cuenta? Click aqui</p>
                             </a>
 
                         </div>
+                        <?php
+                        if ($_POST) {
+                            include '../class/database.php';
+                            $db = new Database();
+                            $db->conectarDB();
+
+                            extract($_POST);
+
+                            $usuarioExistente = "select count(*) as count from personas where usuario = '$usuario'";
+                            $resultado = $db->select($usuarioExistente);
+                            if ($resultado[0]->count > 0) {
+                                echo "<div class='alert alert-warning' role='alert'>¡El usuario ya existe!</div>";
+                            } else {
+                                $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+                                $query = "call SP_Registrar_usuariosClientes('$nombres','$aPaterno','$aMaterno','$usuario','$email','$hashedPassword','$telefono')";
+                                $db->execute($query);
+                                echo "<div class='alert alert-success' role='alert'>¡Registro Exitoso!<i class='fa-solid fa-check'></i></div>";
+                                header('refresh:3;url=./login.php');
+                            }
+                            $db->desconectarDB();
+                        }
+                        ?>
                         <div class="col-12 mb-2 text-end d-flex justify-content-cente text-center">
                             <button type="submit"
                                 class="btn btn-cafe w-100 text-light fw-bold fs-5 m-5">Registrarse</button>
                         </div>
                     </div>
                 </form>
+            </div>
+            <!-- Imagen -->
+            <div class="col-lg-6 col-6  p-0 m-0 d-none d-md-block">
+                <img src="../img/cafes/cafe16.webp" class="img-fluid h-100 rounded coffee-image" alt="">
             </div>
         </div>
     </div>

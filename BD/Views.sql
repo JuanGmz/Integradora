@@ -66,7 +66,7 @@ select * from publicaciones;
 
 
 
-
+select * from recompensas;
 
 select user from mysql.user;
 
@@ -75,6 +75,6 @@ grant select,insert,delete,update on *.* to auxiliar@localhost;
 
 
 
- 
+ update personas set telefono = '8715084325' where id_persona = 1;
  
 repair table cafe_sinfonia;
