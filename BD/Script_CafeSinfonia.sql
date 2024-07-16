@@ -893,12 +893,6 @@ CONCAT(DATE_FORMAT(r.fecha_inicio, '%d/%m/%Y'), ' - ', DATE_FORMAT(r.fecha_expir
 from clientes_recompensas cr
 join recompensas r on r.id_recompensa = cr.id_recompensa 
 where r.estatus = 'Activa';
-
--- Vista de los comprobantes de las reservas.
-create view view_comprobante_reserva as
-select er.id_reserva as folio_reserva, c.concepto, c.monto, c.folio_operacion, c.banco_origen, c.imagen_comprobante
-from comprobantes c
-	join eventos_reservas er on er.id_reserva = c.id_reserva;
     
 -- Vista del carrito
 create view view_carrito as
@@ -906,21 +900,60 @@ select c.id_cliente as cliente,bc.img_url,bc.nombre as producto, dbc.medida, dbc
 from carrito c
 join detalle_bc dbc on dbc.id_dbc = c.id_dbc
 join bolsas_cafe bc on bc.id_bolsa = dbc.id_bolsa;
+
+-- Vista de Administrador Resrvas
+create view view_AdminReservas as
+select 
+	concat(p.nombres,' ',p.apellido_paterno,' ', p.apellido_materno) as cliente,
+    er.id_reserva as folio,
+    er.estatus as estatus,
+    er.c_boletos AS boletos,
+    er.monto_total AS montoTotal,
+    er.fecha_hora_reserva as fechaHoraReserva,
+    e.nombre as EVENTO,
+    e.id_evento,
+    e.precio_boleto,
+    e.fecha_evento as fechaEvento
+from eventos_reservas er
+	join clientes c on c.id_cliente = er.id_cliente
+	join personas p on p.id_persona = c.id_persona
+	join eventos e on e.id_evento = er.id_evento
+WHERE e.tipo = 'De Pago';
+
+-- Vista para mostrar la informacion del comprobante de la reserva
+CREATE VIEW vw_comprobante_reserva AS
+SELECT 
+	c.concepto,
+    c.folio_operacion,
+    c.fecha,
+    c.monto,
+    c.banco_origen,
+    c.imagen_comprobante,
+    cli.id_cliente
+FROM
+	comprobantes AS c
+JOIN
+	eventos_reservas AS er ON c.id_reserva = er.id_reserva
+JOIN
+	clientes AS cli ON er.id_cliente = cli.id_cliente
+JOIN 
+	personas AS p ON cli.id_persona = p.id_persona
+;
     
 INSERT INTO metodos_pago (metodo_pago) VALUES ('Transferencia');
 
 INSERT INTO publicaciones (titulo, descripcion, img_url, tipo)
 VALUES
-('¡Bienvenidos a Sinfonía Café y Cultura!', 'Estamos emocionados de abrir nuestras puertas y ofrecerles una experiencia única de café y cultura. ¡Visítanos hoy!', 'img/bienvenidos.jpg', 'Difusion'),
-('Tarde de Jazz', 'Acompáñanos este viernes para una tarde de jazz en vivo con artistas locales. ¡No te lo pierdas!', 'img/tarde_de_jazz.jpg', 'Difusion'),
-('Nueva Carta de Verano', 'Descubre nuestra nueva carta de verano con bebidas refrescantes y deliciosas. ¡Ven a probarlas!', 'img/carta_verano.jpg', 'Difusion'),
-('Taller de Cata de Café', 'Aprende a distinguir los sabores y aromas del café en nuestro próximo taller de cata. ¡Inscríbete ya!', 'img/taller_cata.jpg', 'Blog'),
-('Concierto Acústico', 'Disfruta de una noche de música acústica con artistas emergentes este sábado. ¡Te esperamos!', 'img/concierto_acustico.jpg', 'Difusion'),
-('Exposición de Arte', 'Ven a admirar las obras de artistas locales en nuestra exposición de arte. ¡Entrada libre!', 'img/expo_arte.jpg', 'Difusion'),
-('Café del Mes', 'Este mes presentamos nuestro café de origen etíope. ¡Ven a degustarlo!', 'img/cafe_mes.jpg', 'Blog'),
-('Noche de Poesía', 'Acompáñanos para una noche de poesía y micrófono abierto. ¡Comparte tus versos con nosotros!', 'img/noche_poesia.jpg', 'Difusion'),
-('Clases de Barismo', 'Inscríbete en nuestras clases de barismo y aprende a preparar el café perfecto.', 'img/clases_barismo.jpg', 'Blog'),
-('Feria de Libros', 'No te pierdas nuestra feria de libros con grandes descuentos y actividades para toda la familia.', 'img/feria_libros.jpg', 'Difusion');
+('¡Bienvenidos a Sinfonía Café y Cultura!', 'Estamos emocionados de abrir nuestras puertas y ofrecerles una experiencia única de café y cultura. ¡Visítanos hoy!', 'img/publicaciones/bienvenidos.jpg', 'Difusion'),
+('Tarde de Jazz', 'Acompáñanos este viernes para una tarde de jazz en vivo con artistas locales. ¡No te lo pierdas!', 'img/publicaciones/tarde_de_jazz.jpg', 'Difusion'),
+('Nueva Carta de Verano', 'Descubre nuestra nueva carta de verano con bebidas refrescantes y deliciosas. ¡Ven a probarlas!', 'img/publicaciones/carta_verano.jpg', 'Difusion'),
+('Taller de Cata de Café', 'Aprende a distinguir los sabores y aromas del café en nuestro próximo taller de cata. ¡Inscríbete ya!', 'img/publicaciones/taller_cata.jpg', 'Blog'),
+('Concierto Acústico', 'Disfruta de una noche de música acústica con artistas emergentes este sábado. ¡Te esperamos!', 'img/publicaciones/concierto_acustico.jpg', 'Difusion'),
+('Exposición de Arte', 'Ven a admirar las obras de artistas locales en nuestra exposición de arte. ¡Entrada libre!', 'img/publicaciones/expo_arte.jpg', 'Difusion'),
+('Café del Mes', 'Este mes presentamos nuestro café de origen etíope. ¡Ven a degustarlo!', 'img/publicaciones/cafe_mes.jpg', 'Blog'),
+('Noche de Poesía', 'Acompáñanos para una noche de poesía y micrófono abierto. ¡Comparte tus versos con nosotros!', 'img/publicaciones/noche_poesia.jpg', 'Difusion'),
+('Clases de Barismo', 'Inscríbete en nuestras clases de barismo y aprende a preparar el café perfecto.', 'img/publicaciones/clases_barismo.jpg', 'Blog'),
+('Feria de Libros', 'No te pierdas nuestra feria de libros con grandes descuentos y actividades para toda la familia.', 'img/publicaciones/feria_libros.jpg', 'Difusion');
 
 INSERT INTO roles (rol, descripcion) VALUES 
 ('empleado', 'Empleado del café sinfonía'),
