@@ -7,10 +7,10 @@
     <title>SínfoniaCafé&Cultura</title>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <?php
+    session_start();
+    ?>
 </head>
-<?php
-session_start();
-?>
 
 <body>
     <!-- NavBar -->
@@ -54,7 +54,8 @@ session_start();
             } else {
                 ?>
                 <a href="views/login.php" class="login-button ms-auto">Iniciar Sesión</a>
-                <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <?php
@@ -68,10 +69,12 @@ session_start();
             <div class="col-lg-8 m-0 p-0">
                 <img src="img/sinfo.webp" class="img-fluid p-0 m-0" alt="imginicio" lazy="loading">
             </div>
-            <div class="col-lg-4 d-flex flex-column justify-content-center align-items-center p-5" style="background: var(--color3);">
+            <div class="col-lg-4 d-flex flex-column justify-content-center align-items-center p-5"
+                style="background: var(--color3);">
                 <div class="row ">
                     <div class="col-12">
-                        <h1 class="text-light text-center" style="letter-spacing: 1px;">Prueba el mejor café de la ciudad</h1>
+                        <h1 class="text-light text-center" style="letter-spacing: 1px;">Prueba el mejor café de la
+                            ciudad</h1>
                     </div>
                 </div>
                 <div class="row mb-3 p-2 ">
@@ -81,7 +84,8 @@ session_start();
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <a href="views/menu.php" class="btn text-light shadow-lg " style="background: var(--primario);">Ver Menú</a>
+                        <a href="views/menu.php" class="btn text-light shadow-lg "
+                            style="background: var(--primario);">Ver Menú</a>
                     </div>
                 </div>
             </div>
@@ -151,7 +155,9 @@ session_start();
                     <ul class="nav nav-tabs row col-12 m-0" id="menuTabs" role="tablist" style="border-bottom: none;">
                         <li class="nav-item  mb-2 col-6 col-sm-6 col-md-4 col-lg-3 " role="presentation">
                             <!--Clasicos-->
-                            <button class="btn-categorias   active w-100" id="clasicos-tab" data-bs-toggle="tab" data-bs-target="#clasicos" type="button" role="tab" aria-controls="clasicos" aria-selected="true">Clasicos</button>
+                            <button class="btn-categorias   active w-100" id="clasicos-tab" data-bs-toggle="tab"
+                                data-bs-target="#clasicos" type="button" role="tab" aria-controls="clasicos"
+                                aria-selected="true">Clasicos</button>
                         </li>
                         <li class="nav-item  mb-2 col-6 col-sm-6 col-md-4 col-lg-3  " role="presentation">
                             <!--Cool and Dark-->
@@ -348,64 +354,40 @@ session_start();
                     <h1 class="fw-bold text-center" style="letter-spacing: 1px;">E-Commerce</h1>
                 </div>
                 <div class="row justify-content-center d-flex ">
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 p-3 ">
-                        <div class="card product-card" style="border-radius: 5% 5% 0% 0%;">
-                            <img src="./img/cafes/bolsa2.webp" class=" coffee-image " alt="Cappucino">
-                            <div class="card-body product-card-body">
-                                <h5 class="card-title fw-bold " style="letter-spacing: 1px;">Cappucino</h5>
-                                <p class="card-text">Hot Cappucino</p>
-                            </div>
-                            <div class="card-footer product-card-footer">
+                    
+                    <?php
+                    include_once("./class/database.php");
+                    $conexion = new Database();
+                    $conexion->conectarDB();
+                    $query = 'SELECT bolsas_cafe.id_bolsa,bolsas_cafe.nombre, bolsas_cafe.productor_finca ,bolsas_cafe.proceso,
+                        bolsas_cafe.variedad,bolsas_cafe.altura,bolsas_cafe.aroma,bolsas_cafe.acidez,bolsas_cafe.sabor,
+                        bolsas_cafe.cuerpo,bolsas_cafe.img_url
+                        FROM bolsas_cafe;';
 
-                                <button class="btn btn-light float-right btn-cafe"><i
-                                        class="fa fa-shopping-cart"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 p-3">
-                        <div class="card product-card" style="border-radius: 5% 5% 0% 0%;">
-                            <img src="./img/cafes/bolsa1.webp" class=" coffee-image " alt="Moccacino">
-                            <div class="card-body product-card-body">
-                                <h5 class="card-title fw-bold " style="letter-spacing: 1px;">Moccacino</h5>
-                                <p class="card-text">Hot Moccacino</p>
-                            </div>
-                            <div class="card-footer product-card-footer">
+                    $bolsas = $conexion->select($query);
+                    $counter = 1;
+                    foreach ($bolsas as $bolsa) {
+                        $counter++;
+                        $additionalClass = ($counter > 3) ? 'd-none' : ''; // Cambia la clase después del tercer ciclo
+                        $additionalClass2 = ($counter > 3) ? 'd-md-block' : ''; // Cambia la clase después del tercer ciclo
 
-                                <button class="btn btn-light float-right btn-cafe"><i
-                                        class="fa fa-shopping-cart"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 p-3 d-none d-md-block">
-                        <div class="card product-card" style="border-radius: 5% 5% 0% 0%;">
-                            <img src="./img/cafes/bolsa3.webp" class=" coffee-image" alt="Waffle Ice Cream">
-                            <div class="card-body product-card-body">
-                                <h5 class="card-title fw-bold" style="letter-spacing: 1px;">Waffle Ice Cream</h5>
-                                <p class="card-text">Waffle with Ice Cream</p>
+                        // Debugging
+                        echo "<!-- Counter: $counter, Class: $additionalClass -->";
 
-                            </div>
-                            <div class="card-footer product-card-footer">
-
-                                <button class="btn btn-light float-right btn-cafe"><i
-                                        class="fa fa-shopping-cart"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 p-3 d-none d-md-block">
-                        <div class="card product-card" style="border-radius: 5% 5% 0% 0%;">
-                            <img src="./img/cafes/bolsa1.webp" class=" coffee-image" alt="Waffle Ice Cream">
-                            <div class="card-body product-card-body">
-                                <h5 class="card-title fw-bold" style="letter-spacing: 1px;">Waffle Ice Cream</h5>
-                                <p class="card-text">Waffle with Ice Cream</p>
-
-                            </div>
-                            <div class="card-footer product-card-footer">
-
-                                <button class="btn btn-light float-right btn-cafe"><i
-                                        class="fa fa-shopping-cart"></i></button>
-                            </div>
-                        </div>
-                    </div>
+                        echo "<div class='col-10 col-sm-6 col-md-4 col-lg-4 p-4 m-0 {$additionalClass} {$additionalClass2}'>";
+                        echo "<div class='card product-card m-0' style='border-radius: 5% 5% 0% 0%;'>";
+                        echo "<a href='../views/bolsas/{$bolsa->id_bolsa}.php'>";
+                        echo "<img src='../{$bolsa->img_url}' class='coffee-image align-card-img-top' alt='{$bolsa->id_bolsa}'>";
+                        echo "<div class='card-body product-card-body'>";
+                        echo "<h5 class='card-title fw-bold product-title' style='letter-spacing: 1px;'>{$bolsa->nombre}</h5>";
+                        echo "<p class='card-text product-subtitle'>{$bolsa->proceso}</p>";
+                        echo "</div>";
+                        echo "</a>";
+                        echo "</div>";
+                        echo "</div>";
+                    }
+                    $conexion->desconectarDB();
+                    ?>
 
                 </div>
 
@@ -414,7 +396,8 @@ session_start();
             <!-- Recompensas-->
             <section class="subscription-section d-flex align-items-center justify-content-center p-2">
                 <div class="subscription-content text-center">
-                    <h1 class="display-4">Recibe grandes <span style="color: #d4a373;">RECOMPENSAS</span> fácilmente</h1>
+                    <h1 class="display-4">Recibe grandes <span style="color: #d4a373;">RECOMPENSAS</span> fácilmente
+                    </h1>
                     <p class="lead">Mediante asistencias recibe grandes recompensas</p>
                     <a href="views/recompensas.php" class="btn subscription-btn">Echar un vistazo</a>
                 </div>
@@ -431,7 +414,7 @@ session_start();
                     <div class="col-md-4 p-3 col-6 col-sm-6 ">
                         <div class="card blog-card" style="border-radius: 5% 5% 0% 0%;">
                             <img src="./img/cafes/lugar1.webp" class="coffee-image" alt="Image 1">
-                            <div class="card-body product-card">
+                            <div class="cblog-card product-card-body">
                                 <h5 class="blog-card-title">MAKE IT SIMPLE</h5>
                                 <h6 class="blog-card-subtitle mb-2 text-muted">20/20/2020
                                 </h6>
@@ -447,7 +430,7 @@ session_start();
                     <div class="col-md-4 p-3 col-6 col-sm-6 ">
                         <div class="card blog-card" style="border-radius: 5% 5% 0% 0%;">
                             <img src="./img/cafes/cafe8.webp" class="coffee-image" alt="Image 2">
-                            <div class="card-body product-card">
+                            <div class="cblog-card product-card-body">
                                 <h5 class="blog-card-title">COFFEE SHOP</h5>
                                 <h6 class="blog-card-subtitle mb-2 text-muted">20/20/2020
                                 </h6>
@@ -463,7 +446,7 @@ session_start();
                     <div class="col-md-4 p-3 col-6 col-sm-6 d-none d-md-block">
                         <div class="card blog-card" style="border-radius: 5% 5% 0% 0%;">
                             <img src="./img/cafes/cafe4.webp" class="coffee-image" alt="Image 3">
-                            <div class="card-body product-card">
+                            <div class="cblog-card product-card-body">
                                 <h5 class="blog-card-title">COFFEE BAR</h5>
                                 <h6 class="blog-card-subtitle mb-2 text-muted">20/20/2020
                                 </h6>

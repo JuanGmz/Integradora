@@ -86,14 +86,15 @@
             <div class='container-fluid bagr-cafe3 p-3'>
             
                 <!-- Título -->
-    <div class='row align-items-center'>
-        <nav aria-label='breadcrumb' class='col-4 justify-content-center d-flex'>
-            <ol class='breadcrumb mt-4'>
-                <li class='breadcrumb-item'><a href='../../index.php'>Inicio</a></li>
-                <li class='breadcrumb-item'><a href='../ecommerce.php'>Ecommerce</a></li>
-                <li class='breadcrumb-item active' aria-current='page'>{$bolsacafe[0]->nombre}</li>
-            </ol>
-        </nav>
+                <div class='row align-items-center'>
+                    <nav aria-label='breadcrumb' class='col-4 justify-content-center d-flex'>
+                        <ol class='breadcrumb mt-4'>
+                            <li class='breadcrumb-item'><a href='../../index.php'>Inicio</a></li>
+                            <li class='breadcrumb-item'><a href='../ecommerce.php'>Ecommerce</a></li>
+                            <li class='breadcrumb-item active' aria-current='page'>{$bolsacafe[0]->nombre}</li>
+                        </ol>
+                    </nav>
+                </div>
                     
                     
                     <div class='col-12 text-center'>

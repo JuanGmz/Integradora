@@ -83,7 +83,7 @@
             <div class='container-fluid bagr-cafe3 p-3'>
                 <!-- Título -->
                 <div class='row align-items-center'>
-                          <nav aria-label='breadcrumb' class='col-4 justify-content-center d-flex'>
+                          <nav aria-label='breadcrumb'class='col-12 justify-content-center d-flex col-lg-4 col-md-7 col-sm-10'>
             <ol class='breadcrumb mt-4'>
                 <li class='breadcrumb-item'><a href='../../index.php'>Inicio</a></li>
                 <li class='breadcrumb-item'><a href='../ecommerce.php'>Ecommerce</a></li>
@@ -97,8 +97,8 @@
                 </div>
                 <div class='container mt-5'>
                     <div class='row d-flex justify-content-center'>
-                        <div class='col-9 col-md-6 col-lg-3 text-sm-center'>
-                            <img src='../../img/cafes/bolsa3.webp' class='img-fluid rounded coffee-image' alt='Producto'>
+                        <div class='col-9 col-md-6 col-lg-4 text-sm-center'>
+                            <img src='../../img/cafes/bolsa2.webp' class='img-fluid rounded coffee-image' alt='Producto'>
                             <p class='mt-3'><strong>Puntaje de catacion:</strong>{$bolsacafe[0]->puntaje_catacion}<pts</p>
                             <div class='col-12 text-center'>
                                 <p class='product-price' id='productPrice'>0$</p>
@@ -162,6 +162,11 @@
                                             <option value='3'>3</option>
                                             <option value='4'>4</option>
                                             <option value='5'>5</option>
+                                            <option value='6'>6</option>
+                                            <option value='7'>7</option>
+                                            <option value='8'>8</option>
+                                            <option value='9'>9</option>
+                                            <option value='10'>10</option>
                                         </select>
                                     </div>
                                     <div class='col-12 mt-3 d-block'>
