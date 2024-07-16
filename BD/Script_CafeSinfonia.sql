@@ -893,12 +893,6 @@ CONCAT(DATE_FORMAT(r.fecha_inicio, '%d/%m/%Y'), ' - ', DATE_FORMAT(r.fecha_expir
 from clientes_recompensas cr
 join recompensas r on r.id_recompensa = cr.id_recompensa 
 where r.estatus = 'Activa';
-
--- Vista de los comprobantes de las reservas.
-create view view_comprobante_reserva as
-select er.id_reserva as folio_reserva, c.concepto, c.monto, c.folio_operacion, c.banco_origen, c.imagen_comprobante
-from comprobantes c
-	join eventos_reservas er on er.id_reserva = c.id_reserva;
     
 -- Vista del carrito
 create view view_carrito as
@@ -906,6 +900,45 @@ select c.id_cliente as cliente,bc.img_url,bc.nombre as producto, dbc.medida, dbc
 from carrito c
 join detalle_bc dbc on dbc.id_dbc = c.id_dbc
 join bolsas_cafe bc on bc.id_bolsa = dbc.id_bolsa;
+
+-- Vista de Administrador Resrvas
+create view view_AdminReservas as
+select 
+	concat(p.nombres,' ',p.apellido_paterno,' ', p.apellido_materno) as cliente,
+    er.id_reserva as folio,
+    er.estatus as estatus,
+    er.c_boletos AS boletos,
+    er.monto_total AS montoTotal,
+    er.fecha_hora_reserva as fechaHoraReserva,
+    e.nombre as EVENTO,
+    e.id_evento,
+    e.precio_boleto,
+    e.fecha_evento as fechaEvento
+from eventos_reservas er
+	join clientes c on c.id_cliente = er.id_cliente
+	join personas p on p.id_persona = c.id_persona
+	join eventos e on e.id_evento = er.id_evento
+WHERE e.tipo = 'De Pago';
+
+-- Vista para mostrar la informacion del comprobante de la reserva
+CREATE VIEW vw_comprobante_reserva AS
+SELECT 
+	c.concepto,
+    c.folio_operacion,
+    c.fecha,
+    c.monto,
+    c.banco_origen,
+    c.imagen_comprobante,
+    cli.id_cliente
+FROM
+	comprobantes AS c
+JOIN
+	eventos_reservas AS er ON c.id_reserva = er.id_reserva
+JOIN
+	clientes AS cli ON er.id_cliente = cli.id_cliente
+JOIN 
+	personas AS p ON cli.id_persona = p.id_persona
+;
     
 INSERT INTO metodos_pago (metodo_pago) VALUES ('Transferencia');
 
