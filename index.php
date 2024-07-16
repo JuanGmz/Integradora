@@ -348,64 +348,32 @@ session_start();
                     <h1 class="fw-bold text-center" style="letter-spacing: 1px;">E-Commerce</h1>
                 </div>
                 <div class="row justify-content-center d-flex ">
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 p-3 ">
-                        <div class="card product-card" style="border-radius: 5% 5% 0% 0%;">
-                            <img src="./img/cafes/bolsa2.webp" class=" coffee-image " alt="Cappucino">
-                            <div class="card-body product-card-body">
-                                <h5 class="card-title fw-bold " style="letter-spacing: 1px;">Cappucino</h5>
-                                <p class="card-text">Hot Cappucino</p>
-                            </div>
-                            <div class="card-footer product-card-footer">
+                    
+                    <?php
+                    include_once("./class/database.php");
+                    $conexion = new Database();
+                    $conexion->conectarDB();
+                    $query = 'SELECT bolsas_cafe.id_bolsa,bolsas_cafe.nombre, bolsas_cafe.productor_finca ,bolsas_cafe.proceso,
+                        bolsas_cafe.variedad,bolsas_cafe.altura,bolsas_cafe.aroma,bolsas_cafe.acidez,bolsas_cafe.sabor,
+                        bolsas_cafe.cuerpo,bolsas_cafe.img_url
+                        FROM bolsas_cafe;';
 
-                                <button class="btn btn-light float-right btn-cafe"><i
-                                        class="fa fa-shopping-cart"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 p-3">
-                        <div class="card product-card" style="border-radius: 5% 5% 0% 0%;">
-                            <img src="./img/cafes/bolsa1.webp" class=" coffee-image " alt="Moccacino">
-                            <div class="card-body product-card-body">
-                                <h5 class="card-title fw-bold " style="letter-spacing: 1px;">Moccacino</h5>
-                                <p class="card-text">Hot Moccacino</p>
-                            </div>
-                            <div class="card-footer product-card-footer">
-
-                                <button class="btn btn-light float-right btn-cafe"><i
-                                        class="fa fa-shopping-cart"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 p-3 d-none d-md-block">
-                        <div class="card product-card" style="border-radius: 5% 5% 0% 0%;">
-                            <img src="./img/cafes/bolsa3.webp" class=" coffee-image" alt="Waffle Ice Cream">
-                            <div class="card-body product-card-body">
-                                <h5 class="card-title fw-bold" style="letter-spacing: 1px;">Waffle Ice Cream</h5>
-                                <p class="card-text">Waffle with Ice Cream</p>
-
-                            </div>
-                            <div class="card-footer product-card-footer">
-
-                                <button class="btn btn-light float-right btn-cafe"><i
-                                        class="fa fa-shopping-cart"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 p-3 d-none d-md-block">
-                        <div class="card product-card" style="border-radius: 5% 5% 0% 0%;">
-                            <img src="./img/cafes/bolsa1.webp" class=" coffee-image" alt="Waffle Ice Cream">
-                            <div class="card-body product-card-body">
-                                <h5 class="card-title fw-bold" style="letter-spacing: 1px;">Waffle Ice Cream</h5>
-                                <p class="card-text">Waffle with Ice Cream</p>
-
-                            </div>
-                            <div class="card-footer product-card-footer">
-
-                                <button class="btn btn-light float-right btn-cafe"><i
-                                        class="fa fa-shopping-cart"></i></button>
-                            </div>
-                        </div>
-                    </div>
+                    $bolsas = $conexion->select($query);
+                    foreach ($bolsas as $bolsa) {
+                        echo "<div class='col-10 col-sm-6 col-md-4 col-lg-4 p-4 m-0'>";
+                        echo "<div class='card product-card m-0' style='border-radius: 5% 5% 0% 0%;'>";
+                        echo "<a href='../views/bolsas/{$bolsa->id_bolsa}.php'>";
+                        echo "<img src='../{$bolsa->img_url}' class='coffee-image align-card-img-top' alt='{$bolsa->id_bolsa}'>";
+                        echo "<div class='card-body product-card-body'>";
+                        echo "<h5 class='card-title fw-bold product-title' style='letter-spacing: 1px;'>{$bolsa->nombre}</h5>";
+                        echo "<p class='card-text product-subtitle'>{$bolsa->proceso}</p>";
+                        echo "</div>";
+                        echo "</a>";
+                        echo "</div>";
+                        echo "</div>";
+                    }
+                    $conexion->desconectarDB();
+                    ?>
 
                 </div>
 
@@ -431,7 +399,7 @@ session_start();
                     <div class="col-md-4 p-3 col-6 col-sm-6 ">
                         <div class="card blog-card" style="border-radius: 5% 5% 0% 0%;">
                             <img src="./img/cafes/lugar1.webp" class="coffee-image" alt="Image 1">
-                            <div class="card-body product-card">
+                            <div class="cblog-card product-card-body">
                                 <h5 class="blog-card-title">MAKE IT SIMPLE</h5>
                                 <h6 class="blog-card-subtitle mb-2 text-muted">20/20/2020
                                 </h6>
@@ -447,7 +415,7 @@ session_start();
                     <div class="col-md-4 p-3 col-6 col-sm-6 ">
                         <div class="card blog-card" style="border-radius: 5% 5% 0% 0%;">
                             <img src="./img/cafes/cafe8.webp" class="coffee-image" alt="Image 2">
-                            <div class="card-body product-card">
+                            <div class="cblog-card product-card-body">
                                 <h5 class="blog-card-title">COFFEE SHOP</h5>
                                 <h6 class="blog-card-subtitle mb-2 text-muted">20/20/2020
                                 </h6>
@@ -463,7 +431,7 @@ session_start();
                     <div class="col-md-4 p-3 col-6 col-sm-6 d-none d-md-block">
                         <div class="card blog-card" style="border-radius: 5% 5% 0% 0%;">
                             <img src="./img/cafes/cafe4.webp" class="coffee-image" alt="Image 3">
-                            <div class="card-body product-card">
+                            <div class="cblog-card product-card-body">
                                 <h5 class="blog-card-title">COFFEE BAR</h5>
                                 <h6 class="blog-card-subtitle mb-2 text-muted">20/20/2020
                                 </h6>

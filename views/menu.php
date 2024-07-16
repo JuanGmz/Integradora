@@ -73,7 +73,7 @@
                 <a href="menu/aroundtheworld.php">
                     <div class="card border-0" style="background: var(--color6)">
                         <img src="../img/cafes/bolsa1.webp" class="card-img-top rounded-5" alt="aroundtheworld">
-                        <div class="card-body">
+                        <div class="cblog-card p-2">
                             <h5 class="card-title fw-bold text-center">Around The World</h5>
                         </div>
                     </div>
@@ -83,7 +83,7 @@
                 <a href="menu/clasicos.php">
                     <div class="card border-0" style="background: var(--color6)">
                         <img src="../img/cafes/bolsa1.webp" class="card-img-top rounded-5" alt="clasicos">
-                        <div class="card-body">
+                        <div class="cblog-card p-2">
                             <h5 class="card-title fw-bold text-center">Clásicos</h5>
                         </div>
                     </div>
@@ -93,7 +93,7 @@
                 <a href="menu/coldbrew.php">
                     <div class="card border-0" style="background: var(--color6)">
                         <img src="../img/cafes/coldbrew.webp" class="card-img-top rounded-5" alt="coldbrew">
-                        <div class="card-body">
+                        <div class="cblog-card p-2">
                             <h5 class="card-title fw-bold text-center">Cold Brew</h5>
                         </div>
                     </div>
@@ -103,7 +103,7 @@
                 <a href="menu/coolanddark.php">
                     <div class="card border-0" style="background: var(--color6)">
                         <img src="../img/cafes/bolsa1.webp" class="card-img-top rounded-5" alt="coolanddark">
-                        <div class="card-body">
+                        <div class="cblog-card p-2">
                             <h5 class="card-title fw-bold text-center">Cool And Dark</h5>
                         </div>
                     </div>
@@ -115,7 +115,7 @@
                 <a href="menu/frappes.php">
                     <div class="card border-0" style="background: var(--color6);">
                         <img src="../img/cafes/frappes.webp" class="card-img-top rounded-5" alt="frappes">
-                        <div class="card-body">
+                        <div class="cblog-card p-2">
                             <h5 class="card-title fw-bold text-center">Frappes</h5>
                         </div>
                     </div>
@@ -125,7 +125,7 @@
                 <a href="menu/jazzband.php">
                     <div class="card border-0" style="background: var(--color6)">
                         <img src="../img/cafes/bolsa1.webp" class="card-img-top rounded-5" alt="jazzband">
-                        <div class="card-body">
+                        <div class="cblog-card p-2">
                             <h5 class="card-title fw-bold text-center">Jazz Band</h5>
                         </div>
                     </div>
@@ -135,7 +135,7 @@
                 <a href="menu/metalcoffee.php">
                     <div class="card border-0" style="background: var(--color6)">
                         <img src="../img/cafes/bolsa1.webp" class="card-img-top rounded-5" alt="metalcoffee">
-                        <div class="card-body">
+                        <div class="cblog-card p-2">
                             <h5 class="card-title fw-bold text-center">Metal Coffe</h5>
                         </div>
                     </div>
@@ -145,7 +145,7 @@
                 <a href="menu/sodasitalianas.php">
                     <div class="card border-0" style="background: var(--color6)">
                         <img src="../img/cafes/bolsa1.webp" class="card-img-top rounded-5" alt="sodasitalianas">
-                        <div class="card-body">
+                        <div class="cblog-card p-2">
                             <h5 class="card-title fw-bold text-center">Sodas Italianas</h5>
                         </div>
                     </div>
@@ -158,7 +158,7 @@
                 <a href="menu/tetisanas.php">
                     <div class="card border-0" style="background: var(--color6)">
                         <img src="../img/cafes/bolsa1.webp" class="card-img-top rounded-5" alt="teytisanas">
-                        <div class="card-body">
+                        <div class="cblog-card p-2">
                             <h5 class="card-title fw-bold text-center">Té y Tisanas</h5>
                         </div>
                     </div>
@@ -175,7 +175,7 @@
                 <a href="menu/sweetblue.php">
                     <div class="card border-0" style="background: var(--color6)">
                         <img src="../img/cafes/bolsa1.webp" class="card-img-top rounded-5" alt="sweetblue">
-                        <div class="card-body">
+                        <div class="cblog-card p-2">
                             <h5 class="card-title fw-bold text-center">Sweet Blue</h5>
                         </div>
                     </div>

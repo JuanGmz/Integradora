@@ -63,11 +63,12 @@ a:hover {
     height: 70%;
     object-fit: cover; /* Ajuste para cubrir el contenedor manteniendo la relación de aspecto */
     border-radius: 5% 5% 0% 0%;
+   
 }
 
 @media (min-width: 768px) {
     .coffee-image {
-        height: 23rem; /* Altura deseada para tamaños de pantalla medianos y grandes */
+        height: 30rem; /* Altura deseada para tamaños de pantalla medianos y grandes */
     }
 }
 /* Estilos de la barra de navegación */
@@ -330,6 +331,7 @@ a:hover {
 
 .product-card-body {
     padding: 15px;
+
 }
 
 .product-card-footer {
@@ -506,6 +508,16 @@ a:hover {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    border: 10px solid var(--color10); /* Aplica el borde con el color de la variable */
+    background-color: var(--color10);
+    
+}
+.cblog-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 10%;
+
 }
 .blog-card-title {
     font-size: 1.25rem;
