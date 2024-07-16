@@ -13,11 +13,10 @@
     <!-- NavBar -->
     <nav class="navbar navbar-expand-lg shadow-lg mb-lg-5">
         <div class="container-fluid">
-            <a class="navbar-brand" href="../index.html">
-                <img src="../../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
+            <a class="navbar-brand" href="../index.php">
+                <img src="../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
             </a>
-            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar"
-                aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -28,72 +27,127 @@
                             <a class="nav-link" aria-current="page" href="../menu.php">Menú</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="ecommerce.html">Comprar</a>
+                            <a class="nav-link mx-lg-2" href="../ecommerce.php">Comprar</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="recompensas.html">Recompensas</a>
+                            <a class="nav-link mx-lg-2" href="../recompensas.php">Recompensas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="eventos.html">Eventos</a>
+                            <a class="nav-link mx-lg-2" href="../eventos.php">Eventos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="blog.html">Blog</a>
+                            <a class="nav-link mx-lg-2" href="../publicaciones.php">Publicaciones</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="contact.html">Contacto</a>
+                            <a class="nav-link mx-lg-2" href="../contact.php">Contacto</a>
                         </li>
                     </ul>
                 </div>
             </div>
-            <a href="login.html" class="login-button ms-auto">Iniciar Sesión</a>
-            <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
+            <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
     </nav>
     <!-- NavBar End -->
+    <!-- NavBar End -->
 
     <div class="container mb-5">
+            <!-- Breadcrumbs -->
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mt-4">
+                    <li class="breadcrumb-item"><a href="../../index.php">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="../menu.php">Menu</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Around The World</li>
+                </ol>
+            </nav>
+            <div class="fw-bold fs-2 mb-5">
+                <h1 class="h1contact">Productos</h1>
+            </div>
+            <div class="row">
+                <?php
+                    include_once("../../class/database.php");
 
-        <!-- Breadcrumbs -->
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb mt-4">
-                <li class="breadcrumb-item"><a href="../../index.php">Inicio</a></li>
-                <li class="breadcrumb-item"><a href="../menu.php">Menú</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Around The World</li>
-            </ol>
-        </nav>
+                    // Conectar a la base de datos
+                    $conexion = new Database();
+                    $conexion->conectarDB();
 
-        <!-- Titulo -->
-        <h1>Around The World</h1>
+                    // Configurar la paginación
+                    $results_per_page = 8; // Número de resultados por página
+                    $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
+                    $page = max($page, 1); // Asegurar que la página sea al menos 1
 
-        <hr>
+                    // Contar el número total de publicaciones
+                    $total_query = 'SELECT COUNT(*) AS total from productos_menu
+                                      join categorias on productos_menu.id_categoria = categorias.id_categoria WHERE categorias.nombre = "Around The World"';
+                    $total_result = $conexion->select($total_query);
+                    $total_pages = ceil($total_result[0]->total / $results_per_page);
 
-        <div class="row mb-3">
-            <?php
-                include_once("../../class/database.php");
-                $db = new Database();
-                $db->conectarDB();
+                    // Calcular el desplazamiento (offset)
+                    $offset = ($page - 1) * $results_per_page;
 
-                $query = "CALL listar_productos_menu('Around the World')";
-
-                $atws = $db->select($query);
-
-                foreach ($atws as $atw) {
-                    echo "
-                        <div class='col-6 col-lg-3 mb-3' >
-                            <div class='card border-0' style='background: var(--color6);'>
-                                <img src='../../img/cafes/{$atw->img_url}' class='card-img-top rounded-5' alt='aroundtheworld" . $atw->id_pm . "'>
-                                <div class='card-body'>
-                                    <h5 class='card-title fw-bold text-center'>{$atw->nombre}</h5>
+                    // Obtener las publicaciones para la página actual
+                    $query = 'SELECT productos_menu.nombre, count(medida) as m from productos_menu
+                                join categorias on productos_menu.id_categoria = categorias.id_categoria
+                                join detalle_productos_menu on productos_menu.id_pm = detalle_productos_menu.id_pm
+                                where categorias.nombre = "Around The World"
+                                group by nombre
+                                LIMIT ' . $offset . ', ' . $results_per_page;
+                    $productos = $conexion->select($query);
+                ?>
+                <div class="container mb-3">
+                    <div class="row">
+                        <?php foreach ($productos as $producto) : ?>
+                            <div class='col-md-3 col-12 col-sm-6 mb-3'>
+                                <div class='card blog-card h-100 shadow-lg' href="">
+                                    <img src='../../img/menu/<?php echo $producto->img_url; ?>' class='card-img-top' alt='<?php echo $producto->nombre ?>'>
+                                    <div class='card-body'>
+                                        <h5 class='blog-card-title'><?php echo $producto->nombre; ?></h5>
+                                        <h6 class='blog-card-subtitle mb-2 text-muted'><?php if ($producto->m >= 2)
+                                        {
+                                            echo 'Con varios tamaños'; 
+                                        }
+                                        else
+                                        {
+                                            echo 'En un tamaño';  
+                                        }
+                                        ?></h6>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    ";
-                }
-            ?>
-
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination d-flex justify-content-center">
+                        <li class="page-item<?php if ($page <= 1) {
+                            echo ' disabled'; } ?>"
+                        >
+                            <a class="page-link custom-page-link" href="?page=<?php echo $page - 1; ?>" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
+                        <li class="page-item custom-page-item<?php if ($page == $i) {
+                            echo ' active'; } ?>"
+                        >
+                            <a class="page-link custom-page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                        </li>
+                        <?php endfor; ?>
+                        <li class="page-item<?php if ($page >= $total_pages) {
+                            echo ' disabled'; } ?>"
+                        >
+                            <a class="page-link custom-page-link" href="?page=<?php echo $page + 1; ?>" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <?php
+                    $conexion->desconectarDB();
+                ?>
+            </div>
         </div>
     </div>
 
