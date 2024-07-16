@@ -7,6 +7,9 @@
     <title>Perfil</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
+    <?php
+    session_start();
+    ?>
 </head>
 
 <body>
@@ -73,24 +76,42 @@
                 </div>
                 <div class="mb-3">
                     <h3>Nombre</h3>
-                    <h5>Nombre del usuario aquí</h5>
+                    <h5><?php
+                    include '../class/database.php';
+                    $db = new Database();
+                    $db->conectarDB();
+                    $query = "SELECT concat(nombres,' ', apellido_paterno,' ', apellido_materno)as nombre, correo, telefono FROM personas WHERE usuario = '" . $_SESSION['usuario'] . "'";
+                    $datospersonales = $db->select($query);
+                    foreach ($datospersonales as $campo) {
+                        echo "$campo->nombre";
+                    }
+                    ?></h5>
                 </div>
                 <div class="mb-3">
                     <h3>Usuario</h3>
-                    <h5>Usuario va aquí</h5>
+                    <h5><?php echo $_SESSION['usuario']; ?> </h5>
                 </div>
                 <div class="row mb-3">
                     <h3>Correo</h3>
-                    <h5>Correo del usuario aquí</h5>
+                    <h5><?php
+                    foreach ($datospersonales as $campo) {
+                        echo "$campo->correo";
+                    }
+                    ?></h5>
                 </div>
                 <div class="row mb-3">
                     <div class="col-8">
                         <h3>Teléfono</h3>
-                        <h5>Teléfono del usuario aquí</h5>
+                        <h5><?php
+                        foreach ($datospersonales as $campo) {
+                            echo "$campo->telefono";
+                        }
+                        ?></h5>
                     </div>
                     <div class="col-4 d-flex justify-content-center align-items-center flex-column">
                         <!-- Botón para abrir el modal de editar el telefono -->
-                        <button data-bs-toggle="modal" data-bs-target="#modalEditarTel" class="btn btn-primary">Editar</button>
+                        <button data-bs-toggle="modal" data-bs-target="#modalEditarTel"
+                            class="btn btn-primary">Editar</button>
                         <!-- Modal para editar el telefono -->
                         <div class="modal fade" id="modalEditarTel" tabindex="-1" aria-labelledby="modalEditarTelLabel"
                             aria-hidden="true">
@@ -98,7 +119,8 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="modalEditarTelLabel">Cambiar Télefono</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <form>
@@ -107,9 +129,10 @@
                                                 <input type="tel" class="form-control" id="tel" name="tel" required>
                                             </div>
                                             <div class="text-end">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Cancelar</button>
                                                 <button type="submit" class="btn btn-primary">Guardar</button>
-                                            </div>  
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
@@ -124,7 +147,8 @@
                     </div>
                     <div class="col-4 d-flex justify-content-center align-items-center flex-column">
                         <!-- Botón para abrir el modal de editar el password -->
-                        <button data-bs-toggle="modal" data-bs-target="#modalEditarPass" class="btn btn-primary">Editar</button>
+                        <button data-bs-toggle="modal" data-bs-target="#modalEditarPass"
+                            class="btn btn-primary">Cambiar</button>
                         <!-- Modal para editar el password -->
                         <div class="modal fade" id="modalEditarPass" tabindex="-1" aria-labelledby="editarPass"
                             aria-hidden="true">
@@ -139,16 +163,19 @@
                                         <form>
                                             <div class="mb-3">
                                                 <label for="pass" class="form-label">Ingresar Nueva Contraseña</label>
-                                                <input type="password" class="form-control" id="pass" name="pass" required>
+                                                <input type="password" class="form-control" id="pass" name="pass"
+                                                    required>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="pass" class="form-label">Confirmar Contraseña</label>
-                                                <input type="password" class="form-control" id="pass" name="passConfirmada" required>
+                                                <input type="password" class="form-control" id="pass"
+                                                    name="passConfirmada" required>
                                             </div>
                                             <div class="text-end">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Cancelar</button>
                                                 <button type="submit" class="btn btn-primary">Guardar</button>
-                                            </div>  
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
