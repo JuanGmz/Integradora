@@ -365,8 +365,16 @@
                         FROM bolsas_cafe;';
 
                     $bolsas = $conexion->select($query);
+                    $counter = 1;
                     foreach ($bolsas as $bolsa) {
-                        echo "<div class='col-10 col-sm-6 col-md-4 col-lg-4 p-4 m-0'>";
+                        $counter++;
+                        $additionalClass = ($counter > 3) ? 'd-none' : ''; // Cambia la clase después del tercer ciclo
+                        $additionalClass2 = ($counter > 3) ? 'd-md-block' : ''; // Cambia la clase después del tercer ciclo
+
+                        // Debugging
+                        echo "<!-- Counter: $counter, Class: $additionalClass -->";
+
+                        echo "<div class='col-10 col-sm-6 col-md-4 col-lg-4 p-4 m-0 {$additionalClass} {$additionalClass2}'>";
                         echo "<div class='card product-card m-0' style='border-radius: 5% 5% 0% 0%;'>";
                         echo "<a href='../views/bolsas/{$bolsa->id_bolsa}.php'>";
                         echo "<img src='../{$bolsa->img_url}' class='coffee-image align-card-img-top' alt='{$bolsa->id_bolsa}'>";
