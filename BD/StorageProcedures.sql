@@ -17,6 +17,26 @@ from eventos_reservas er
 end //
 delimiter ;
 
+-- Buscar productos por categoria
+DELIMITER //
+CREATE PROCEDURE `listar_productos_menu`(IN categoria VARCHAR(60))
+BEGIN
+	SELECT
+		pm.id_pm,
+		pm.nombre,
+        pm.descripcion,
+        pm.img_url
+	FROM
+		productos_menu AS pm
+	JOIN
+		categorias AS c ON pm.id_categoria = c.id_categoria
+	WHERE
+		c.nombre = categoria
+	ORDER BY 
+		pm.nombre ASC;
+END//
+DELIMITER ;
+
 -- LLamar el procedimiento almacenado para insertar productos en el carrito.
 call SP_Insert_Update_Carrito(1, 4, 1);
 

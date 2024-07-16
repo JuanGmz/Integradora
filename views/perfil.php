@@ -82,7 +82,7 @@
                             <div class="card-body">
                                 <h4 class="card-title fw-bold">Datos Personales</h4>
                                 <p class="card-text">Ver y actualizar información personal.</p>
-                                <a href="#" class="blog-card-link">Datos Personales <i class="fa-solid fa-arrow-right"></i></a>
+                                <a href="datosPersonales.php" class="blog-card-link">Datos Personales <i class="fa-solid fa-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>

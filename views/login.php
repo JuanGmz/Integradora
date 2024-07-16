@@ -100,7 +100,6 @@
             <div class="col-lg-6 col-6  p-0 m-0 d-none d-md-block">
                 <img src="../img/cafes/cafe17.webp" class="img-fluid h-100 rounded coffee-image" alt="">
             </div>
-
         </div>
     </div>
 

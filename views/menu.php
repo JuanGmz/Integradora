@@ -55,7 +55,7 @@
     <div class="container mb-5">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb mt-4">
-                <li class="breadcrumb-item"><a href="../../index.php">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="../index.php">Inicio</a></li>
                 <li class="breadcrumb-item active">Menú</li>
             </ol>
         </nav>

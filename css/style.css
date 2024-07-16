@@ -22,6 +22,7 @@
     --color11: #fbf9f6;
     --color12: #1c2338;
     --color13: #e4d4c3;
+    --color14:#327312;
 
 }
 
@@ -324,6 +325,7 @@ a:hover {
 
 .product-card:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: scale(1.01);
 }
 
 .product-card-body {
@@ -511,7 +513,7 @@ a:hover {
 .blog-card-text {
     font-size: 0.9rem;
 }
-/*------------------------------- Blog----------------------------------*/
+/*------------------------------- Blog ----------------------------------*/
 
 .blog-card-link {
     color: var(--color3); /* Color inicial del enlace */
@@ -602,4 +604,34 @@ a:hover {
 .filter-icon:hover {
    color: var(--cuarto);
    transition: color 0.3s, transform 0.3s; /* Transición suave */
+}
+/*---------------------------- E-ecommerce bolsa----------------------------------*/
+.product-title {
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: var(--obscuro);
+}
+.product-text {
+    color: var(--cuarto);
+}
+
+.product-subtitle {
+    font-size: 1.5rem;
+    letter-spacing: 0.5px;
+    color: var(--terciario);
+}
+.product-detail {
+    font-weight: bold;
+    color: var(--primario);
+}
+.product-detail2 {
+    font-weight: bold;
+    color: var(--color14);
+}
+.product-price {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    
 }

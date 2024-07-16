@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrar Menú</title>
+    <title>Administrar Eventos</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -406,6 +406,7 @@
                                     <div class="col-12 mb-3">
                                         <label for="lugar" class="form-label">Nombre del Lugar</label>
                                         <select name="lugar" id="lugar" class="form-select" required>
+                                        <option selected disabled value="">Seleccionar Categoria</option>
                                             <?php
                                                 include ("../class/database.php");
                                                 $db = new Database();
@@ -470,18 +471,24 @@
                         <div class="col-12">
                             <form method="post">
                                 <div class="row">
-                                    <div class="col-8">
-                                        <select name="categoria" id="categoria" class="form-select" required>
-                                            <option selected disabled value="">Seleccionar Categoria</option>
-                                            <?php
-                                            $consulta = "SELECT id_categoria, nombre FROM categorias WHERE tipo = 'evento'";
-                                            $tabla = $db->select($consulta);
-                                            foreach ($tabla as $categoria) {
-                                                echo "<option value='{$categoria->id_categoria}'>{$categoria->nombre}</option>";
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
+                                <?php
+                                $selectedCategoria = isset($_POST['categoria']) ? $_POST['categoria'] : '';
+                                ?>
+
+                                <div class="col-8">
+                                <select name="categoria" id="categoria" class="form-select" required>
+                                 <option selected disabled value="">Seleccionar Categoria</option>
+                                <?php
+                                 $consulta = "SELECT id_categoria, nombre FROM categorias WHERE tipo = 'evento'";
+                                $tabla = $db->select($consulta);
+                                foreach ($tabla as $categoria) {
+                                $selected = $categoria->id_categoria == $selectedCategoria ? 'selected' : '';
+                                 echo "<option value='{$categoria->id_categoria}' {$selected}>{$categoria->nombre}</option>";
+                                 }
+                                 ?>
+                                </select>
+                                </div>
+
                                     <div class="col-4">
                                         <button type="submit" class="btn btn-primary w-100" value="Buscar">Buscar</button>
                                     </div>
@@ -500,9 +507,12 @@
                     if (isset($_POST["categoria"])) {
                         extract($_POST);
 
-                        $query = "SELECT *
-                                    FROM eventos
-                                    WHERE id_categoria = '$categoria'";
+                        $query = "SELECT e.*, l.nombre AS lugar_nombre, c.nombre AS categoria
+                        FROM eventos e
+                        JOIN ubicacion_lugares l ON e.id_lugar = l.id_lugar
+                        JOIN categorias c ON e.id_categoria = c.id_categoria
+                        WHERE e.id_categoria = '$categoria'";
+              
                         $productos = $db->select($query);
 
                         if (empty($productos)) {
@@ -577,7 +587,8 @@
                                                                 <h4 class='text-start fw-bold mb-3'>hora final: <span class='fw-normal fs-5'>{$producto->hora_fin}</span></h5>
                                                                 <h4 class='text-start fw-bold mb-3'>tipo: <span class='fw-normal fs-5'>{$producto->tipo}</span></h5>
                                                                 <h4 class='text-start fw-bold mb-3'>costo boleto: <span class='fw-normal fs-5'>{$producto->precio_boleto}</span></h5>
-                                                                <h4 class='text-start fw-bold mb-3'>Lugar: <span class='fw-normal fs-5'>{$lugar->nombre}</span></h5>
+                                                                <h4 class='text-start fw-bold mb-3'>Lugar: <span class='fw-normal fs-5'>{$producto->lugar_nombre}</span></h5>
+                                                                <h4 class='text-start fw-bold mb-3'>Ciudad: <span class='fw-normal fs-5'>{$producto->categoria}</span></h5>
 
                                                                 <!-- Tabla de productos -->
                                                             </div>
@@ -592,7 +603,7 @@
                                                     <div class='modal-dialog'>
                                                         <div class='modal-content'>
                                                             <div class='modal-header'>
-                                                                <h1 class='modal-title fs-5' id='exampleModalLabel'>Editar Producto</h1>
+                                                                <h1 class='modal-title fs-5' id='exampleModalLabel'>Editar Evento</h1>
                                                                 <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                                                             </div>
                                                             <!-- Aquí va el contenido del modal -->
@@ -675,7 +686,7 @@
 
                                                 <div class='row'>
                                                 <div class='col-12 text-end'>
-                                                    <button type='submit' class='btn btn-primary'>Actualizar</button>
+                                                    <button type='submit' class='btn btn-primary mt-3'>Actualizar</button>
                                                 </div>
                                                 </div> 
                                                 </form>

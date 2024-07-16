@@ -61,11 +61,9 @@
                 <div class="col-12 text-center p-2">
                     <h1 class="fw-bold text-center" style="letter-spacing: 1px;">E-Commerce</h1>
                 </div>
-
-
                 <!-- contenedor de productos -->
                 <div class="row  d-flex justify-content-center">
-
+                    <!--
                     <div class="col-12 d-md-none">
                         <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#filterOffcanvas" aria-controls="filterOffcanvas" style="border: none;">
                             <i class="fa-solid fa-filter filter-icon"></i>
@@ -77,11 +75,14 @@
                         <h5>TIPO DE PRODUCTO</h5>
                         <hr>
                         <ul class="list-unstyled">
-                            <li><a href="#" class="blog-card-link p-lg-3">Café en grano o molido</a></li>
-                            <li><a href="#" class="blog-card-link p-lg-3">Café Soluble</a></li>
-                            <li><a href="#" class="blog-card-link p-lg-3">Tueste Suave</a></li>
-                            <li><a href="#" class="blog-card-link p-lg-3">Tueste Medio</a></li>
-                            <li><a href="#" class="blog-card-link p-lg-3">Tueste Intenso</a></li>
+                            <li><a href="#" class="blog-card-link p-lg-3">Proceso Natural</a></li>
+                            <li><a href="#" class="blog-card-link p-lg-3">Proceso Lavado</a></li>
+                            <li><a href="#" class="blog-card-link p-lg-3">Aroma Cacao, Vinilla</a></li>
+                            <li><a href="#" class="blog-card-link p-lg-3">Aroma Citrico, Florales</a></li>
+                            <li><a href="#" class="blog-card-link p-lg-3">Aroma Dulce de Leche, Nuez</a></li>
+                            <li><a href="#" class="blog-card-link p-lg-3">Cuerpo Alto</a></li>
+                            <li><a href="#" class="blog-card-link p-lg-3">Cuerpo Medio</a></li>
+                            <li><a href="#" class="blog-card-link p-lg-3">Cuerpo Ligero</a></li>
                         </ul>
                         <h5>DISPONIBILIDAD</h5>
                         <hr>
@@ -99,132 +100,45 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="col-12 col-md-10 col-lg-9 row justify-content-center">
-                        <div class="col-6 col-sm-5 col-md-5 col-lg-4 p-3 ">
-                            <div class="card product-card" style="border-radius: 5% 5% 0% 0%;">
-                                <img src="/img/cafes/bolsa2.webp" class=" coffee-image " alt="Cappucino">
-                                <div class="card-body product-card-body">
-                                    <h5 class="card-title fw-bold " style="letter-spacing: 1px;">Cappucino</h5>
-                                    <p class="card-text">Hot Cappucino</p>
-                                </div>
-                                <div class="card-footer product-card-footer">
+-->
+                    <?php
+                    include_once("../class/database.php");
+                    $conexion = new Database();
+                    $conexion->conectarDB();
+                    $query = 'SELECT bolsas_cafe.id_bolsa,bolsas_cafe.nombre, bolsas_cafe.productor_finca ,bolsas_cafe.proceso,
+                        bolsas_cafe.variedad,bolsas_cafe.altura,bolsas_cafe.aroma,bolsas_cafe.acidez,bolsas_cafe.sabor,
+                        bolsas_cafe.cuerpo,bolsas_cafe.img_url
+                        FROM bolsas_cafe;';
 
-                                    <button class="btn btn-light float-right btn-cafe"><i class="fa fa-shopping-cart"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-6 col-sm-5 col-md-5 col-lg-4 p-3">
-                            <div class="card product-card" style="border-radius: 5% 5% 0% 0%;">
-                                <img src="/img/cafes/bolsa1.webp" class=" coffee-image " alt="Moccacino">
-                                <div class="card-body product-card-body">
-                                    <h5 class="card-title fw-bold " style="letter-spacing: 1px;">Moccacino</h5>
-                                    <p class="card-text">Hot Moccacino</p>
-                                </div>
-                                <div class="card-footer product-card-footer">
-
-                                    <button class="btn btn-light float-right btn-cafe"><i class="fa fa-shopping-cart"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-6 col-sm-5 col-md-5 col-lg-4 p-3 ">
-                            <div class="card product-card" style="border-radius: 5% 5% 0% 0%;">
-                                <img src="/img/cafes/bolsa3.webp" class=" coffee-image" alt="Waffle Ice Cream">
-                                <div class="card-body product-card-body">
-                                    <h5 class="card-title fw-bold" style="letter-spacing: 1px;">Waffle Ice Cream</h5>
-                                    <p class="card-text">Waffle with Ice Cream</p>
-
-                                </div>
-                                <div class="card-footer product-card-footer">
-
-                                    <button class="btn btn-light float-right btn-cafe"><i class="fa fa-shopping-cart"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-6 col-sm-5 col-md-5 col-lg-4 p-3 ">
-                            <div class="card product-card" style="border-radius: 5% 5% 0% 0%;">
-                                <img src="/img/cafes/bolsa1.webp" class=" coffee-image" alt="Waffle Ice Cream">
-                                <div class="card-body product-card-body">
-                                    <h5 class="card-title fw-bold" style="letter-spacing: 1px;">Waffle Ice Cream</h5>
-                                    <p class="card-text">Waffle with Ice Cream</p>
-
-                                </div>
-                                <div class="card-footer product-card-footer">
-
-                                    <button class="btn btn-light float-right btn-cafe"><i class="fa fa-shopping-cart"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-6 col-sm-5 col-md-5 col-lg-4 p-3 ">
-                            <div class="card product-card" style="border-radius: 5% 5% 0% 0%;">
-                                <img src="/img/cafes/bolsa2.webp" class=" coffee-image " alt="Cappucino">
-                                <div class="card-body product-card-body">
-                                    <h5 class="card-title fw-bold " style="letter-spacing: 1px;">Cappucino</h5>
-                                    <p class="card-text">Hot Cappucino</p>
-                                </div>
-                                <div class="card-footer product-card-footer">
-
-                                    <button class="btn btn-light float-right btn-cafe"><i class="fa fa-shopping-cart"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-6 col-sm-5 col-md-5 col-lg-4 p-3">
-                            <div class="card product-card" style="border-radius: 5% 5% 0% 0%;">
-                                <img src="/img/cafes/bolsa1.webp" class=" coffee-image " alt="Moccacino">
-                                <div class="card-body product-card-body">
-                                    <h5 class="card-title fw-bold " style="letter-spacing: 1px;">Moccacino</h5>
-                                    <p class="card-text">Hot Moccacino</p>
-                                </div>
-                                <div class="card-footer product-card-footer">
-
-                                    <button class="btn btn-light float-right btn-cafe"><i class="fa fa-shopping-cart"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-6 col-sm-5 col-md-5 col-lg-4 p-3 ">
-                            <div class="card product-card" style="border-radius: 5% 5% 0% 0%;">
-                                <img src="/img/cafes/bolsa3.webp" class=" coffee-image" alt="Waffle Ice Cream">
-                                <div class="card-body product-card-body">
-                                    <h5 class="card-title fw-bold" style="letter-spacing: 1px;">Waffle Ice Cream</h5>
-                                    <p class="card-text">Waffle with Ice Cream</p>
-
-                                </div>
-                                <div class="card-footer product-card-footer">
-
-                                    <button class="btn btn-light float-right btn-cafe"><i class="fa fa-shopping-cart"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-6 col-sm-5 col-md-5 col-lg-4 p-3 ">
-                            <div class="card product-card" style="border-radius: 5% 5% 0% 0%;">
-                                <img src="/img/cafes/bolsa1.webp" class=" coffee-image" alt="Waffle Ice Cream">
-                                <div class="card-body product-card-body">
-                                    <h5 class="card-title fw-bold" style="letter-spacing: 1px;">Waffle Ice Cream</h5>
-                                    <p class="card-text">Waffle with Ice Cream</p>
-
-                                </div>
-                                <div class="card-footer product-card-footer">
-
-                                    <button class="btn btn-light float-right btn-cafe"><i class="fa fa-shopping-cart"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
+                    $bolsas = $conexion->select($query);
+                    foreach ($bolsas as $bolsa) {
+                        echo "<div class='col-6 col-sm-5 col-md-5 col-lg-4 p-3'>";
+                        echo "<div class='card product-card' style='border-radius: 5% 5% 0% 0%;'>";
+                        echo "<a href='../views/bolsas/{$bolsa->id_bolsa}.php'>";
+                        echo "<img src='../{$bolsa->img_url}' class=' coffee-image ' alt='{$bolsa->id_bolsa}'>";
+                        echo "<div class='card-body product-card-body'>";
+                        echo "<h5 class='card-title fw-bold' style='letter-spacing: 1px;'>{$bolsa->nombre}</h5>";
+                        echo "<p class='card-text text-success'>{$bolsa->proceso}</p>";
+                        echo "</div>";
+                        echo "<div class='card-footer product-card-footer'>";
+                        echo "</div>";
+                        echo "</a>";
+                        echo "</div>";
+                        echo "</div>";
+                    }
+                    $conexion->desconectarDB();
+                    ?>
                 </div>
 
+
             </div>
+
         </div>
     </div>
+    </div>
     <!-- Offcanvas -->
+    <!--
     <div class="offcanvas offcanvas-start bagr-cafe1" tabindex="-1" id="filterOffcanvas" aria-labelledby="filterOffcanvasLabel">
         <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="filterOffcanvasLabel">Filtros</h5>
@@ -234,11 +148,14 @@
             <h5>TIPO DE PRODUCTO</h5>
             <hr>
             <ul class="list-unstyled">
-                <li><a href="#" class="blog-card-link p-3">Café en grano o molido</a></li>
-                <li><a href="#" class="blog-card-link p-3">Café Soluble</a></li>
-                <li><a href="#" class="blog-card-link p-3">Tueste Suave</a></li>
-                <li><a href="#" class="blog-card-link p-3">Tueste Medio</a></li>
-                <li><a href="#" class="blog-card-link p-3">Tueste Intenso</a></li>
+                <li><a href="#" class="blog-card-link p-lg-3">Proceso Natural</a></li>
+                <li><a href="#" class="blog-card-link p-lg-3">Proceso Lavado</a></li>
+                <li><a href="#" class="blog-card-link p-lg-3">Aroma Cacao, Vinilla</a></li>
+                <li><a href="#" class="blog-card-link p-lg-3">Aroma Citrico, Florales</a></li>
+                <li><a href="#" class="blog-card-link p-lg-3">Aroma Dulce de Leche, Nuez</a></li>
+                <li><a href="#" class="blog-card-link p-lg-3">Cuerpo Alto</a></li>
+                <li><a href="#" class="blog-card-link p-lg-3">Cuerpo Medio</a></li>
+                <li><a href="#" class="blog-card-link p-lg-3">Cuerpo Ligero</a></li>
             </ul>
             <h5>DISPONIBILIDAD</h5>
             <hr>
@@ -259,7 +176,7 @@
     </div>
 
 
-
+                -->
 
 
 
