@@ -63,7 +63,7 @@
                 </div>
                 <!--botónes de categorias-->
                 <div class="d-flex justify-content-center">
-                    <ul class="nav nav-tabs justify-content-center col-12" id="ex1" role="tablist" style="border-bottom: none;">
+                    <ul class="nav nav-tabs d-flex row justify-content-center  " id="ex1" role="tablist" style="border-bottom: none;">
                         <?php
                         include_once("../class/database.php");
                         $conexion = new Database();
@@ -79,8 +79,8 @@
                         $tru = "true";
                         $active = "active";
                         foreach ($categorias as $categoria) {
-                            echo "<li class='nav-item col-5 col-sm-5 col-md-3 col-lg-auto mb-2 mb-lg-0  me-1 align-self-center ' role='presentation'>";
-                            echo "<a data-mdb-tab-init class='btn-toolbar btn-cafe w-100 h-100 text-center justify-content-center' id='ex1-tabs-{$categoria->id_categoria}' href='#ex1-tabs-{$categoria->id_categoria}' role='tab' aria-controls='ex1-tabs-{$categoria->id_categoria}' aria-selected='$tru'>{$categoria->nombre}</a>";
+                            echo "<li class='row nav-item col-5 col-sm-5 col-md-3 col-lg-auto mb-2 mb-lg-0  me-3 d-flex text-center justify-content-center d-flex m-0 p-0' role='presentation'>";
+                            echo "<a data-mdb-tab-init class='btn-categorias w-100 h-100' id='ex1-tabs-{$categoria->id_categoria}' href='#ex1-tabs-{$categoria->id_categoria}' role='tab' aria-controls='ex1-tabs-{$categoria->id_categoria}' aria-selected='$tru'>{$categoria->nombre}</a>";
                             echo "</li>";
                             $tru = "false";
                             $active = "";
