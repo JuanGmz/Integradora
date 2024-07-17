@@ -100,23 +100,25 @@
                               LIMIT ' . $offset . ', ' . $results_per_page;
                     $publicaciones = $conexion->select($query);
                 ?>
-                <div class="container mb-3">
-                    <div class="row">
+                <div class="container mb-3 ">
+                    <div class="row justify-content-center d-flex">
                         <?php foreach ($publicaciones as $publicacion) : ?>
-                            <div class='col-md-4 col-12 col-sm-6 mb-3'>
-                                <div class='card blog-card h-100 shadow-lg'>
-                                    <img src='../../img/publicaciones/<?php echo $publicacion->img_url; ?>' class='card-img-top' alt='<?php echo $publicacion->titulo ?>'>
-                                    <div class='card-body'>
+                            <div class='col-md-6 p-2 col-10 col-sm-6 col-lg-4 '>
+                                <div class='card blog-card shadow-lg' style="border-radius: 5% 5% 0% 0%;">
+                                    <img src='/img/publicaciones/<?php echo $publicacion->img_url; ?>' class='coffee-image' alt='<?php echo $publicacion->titulo ?>'>
+                                    <div class='cblog-card product-card-body'>
                                         <h5 class='blog-card-title'><?php echo $publicacion->titulo; ?></h5>
                                         <h6 class='blog-card-subtitle mb-2 text-muted'><?php echo $publicacion->fecha; ?></h6>
-                                        <p class='blog-card-text'><?php echo $publicacion->descripcion; ?></p>
+                                        <p class='blog-card-text  d-none d-md-block'><?php echo $publicacion->descripcion; ?></p>
+                                        <a href='#' class='blog-card-link'>Mas detalles  <i class="fa-solid fa-arrow-right"></i></a>
                                     </div>
-                                    <a href='#' class='blog-card-link p-3'>Mas detalles <i class='fa-solid fa-arrow-right'></i></a>
+                                   
                                 </div>
                             </div>
                         <?php endforeach; ?>
                     </div>
                 </div>
+
                 <nav aria-label="Page navigation example">
                     <ul class="pagination d-flex justify-content-center">
                         <li class="page-item<?php if ($page <= 1) {

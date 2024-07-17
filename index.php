@@ -19,8 +19,7 @@
             <a class="navbar-brand" href="index.php">
                 <img src="./img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
             </a>
-            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar"
-                aria-labelledby="tituloOffcanvas">
+            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="tituloOffcanvas">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title text-light" id="tituloOffcanvas">SinfoníaCafé&Cultura</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -46,34 +45,41 @@
                             <a class="nav-link mx-lg-2" href="views/contact.php">Contacto</a>
                         </li>
                     </ul>
-                    <?php
-                    if (isset($_SESSION["usuario"])) {
-                        ?>
-                        <li class="nav-item dropdown">
-                            <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fa-solid fa-user"><?php echo $_SESSION['usuario']; ?></i>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-dark">
-                                <li><a class="dropdown-item" href="views/perfil.php">Mi cuenta</a></li>
-                                <li><a class="dropdown-item" href="scripts/login/cerrarsesion.php">Cerrar
-                                        Sesion</a></li>
-                            </ul>
-                        </li>
-                        <?php
-                    } else {
-                        ?>
-                        <li>
-                            <a href="views/login.php" class="login-button ms-auto">Iniciar Sesión</a>
-                        </li>
-                        <?php
-                    }
-                    ?>
                 </div>
+            </div>
+            <?php
+            if (isset($_SESSION["usuario"])) {
+                ?>
+                <!-- Navbar con dropdown -->
+                <nav class="navbar navbar-expand-lg ">
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
+                                    style="left: auto; right: 0;">
+                                    <a class="dropdown-item" href="views/perfil.php">Mi perfil</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="cerrar_sesion.php">Cerrar sesión</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <?php
+            } else {
+                ?>
+                <a href="views/login.php" class="login-button ms-auto">Iniciar Sesión</a>
                 <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-            </div>
+                <?php
+            }
+            ?>
         </div>
     </nav>
     <!-- Inicio -->
@@ -82,8 +88,7 @@
             <div class="col-lg-8 m-0 p-0">
                 <img src="img/sinfo.webp" class="img-fluid p-0 m-0" alt="imginicio" lazy="loading">
             </div>
-            <div class="col-lg-4 d-flex flex-column justify-content-center align-items-center p-5"
-                style="background: var(--color3);">
+            <div class="col-lg-4 d-flex flex-column justify-content-center align-items-center p-5" style="background: var(--color3);">
                 <div class="row ">
                     <div class="col-12">
                         <h1 class="text-light text-center" style="letter-spacing: 1px;">Prueba el mejor café de la
@@ -97,8 +102,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <a href="views/menu.php" class="btn text-light shadow-lg "
-                            style="background: var(--primario);">Ver Menú</a>
+                        <a href="views/menu.php" class="btn text-light shadow-lg " style="background: var(--primario);">Ver Menú</a>
                     </div>
                 </div>
             </div>
@@ -120,11 +124,8 @@
                     <div class="row ">
                         <div class="col-12 text-center p-2 ">
                             <p class="text-light text-dark p-3">
-                                La mejor manera de preparar tu cafe
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus provident ex
-                                impedit
-                                facere, aut earum sapiente voluptate officia soluta explicabo quaerat nihil officiis
-                                commodi animi. In deserunt culpa provident pariatur.
+                                La primera barra y expendio de café de especialidad en la laguna.
+                                Café 100% Mexicano seleccionado por nuestro maestro catador y tostador. ☕️♥️
                             </p>
                             <a href="#" class="btn btn-cafe ">Ver mas</a>
                         </div>
@@ -158,6 +159,7 @@
                 </div>
             </div>
             <!-- Fin introducción-->
+
             <!-- Menu especial para ti -->
             <div class="container p-3 bagr-cafe2">
                 <div class="col-12 text-center ">
@@ -166,135 +168,69 @@
                 <!--botónes de categorias-->
                 <div class="d-flex justify-content-center p-3 m-0">
                     <ul class="nav nav-tabs row col-12 m-0" id="menuTabs" role="tablist" style="border-bottom: none;">
-                        <li class="nav-item  mb-2 col-6 col-sm-6 col-md-4 col-lg-3 " role="presentation">
-                            <!--Clasicos-->
-                            <button class="btn-categorias   active w-100" id="clasicos-tab" data-bs-toggle="tab"
-                                data-bs-target="#clasicos" type="button" role="tab" aria-controls="clasicos"
-                                aria-selected="true">Clasicos</button>
-                        </li>
-                        <li class="nav-item  mb-2 col-6 col-sm-6 col-md-4 col-lg-3  " role="presentation">
-                            <!--Cool and Dark-->
-                            <button class=" btn-categorias   w-100" id="Cool-tab" data-bs-toggle="tab"
-                                data-bs-target="#Cool" type="button" role="tab" aria-controls="Cool"
-                                aria-selected="false">Cool and Dark</button>
-                        </li>
-                        <li class="nav-item  mb-2 col-6 col-sm-6 col-md-4 col-lg-3  " role="presentation">
-                            <!--Around The World-->
-                            <button class=" btn-categorias  w-100" id="Around-tab" data-bs-toggle="tab"
-                                data-bs-target="#Around" type="button" role="tab" aria-controls="Around"
-                                aria-selected="false">Around The World</button>
-                        </li>
-                        <li class="nav-item  mb-2 col-6 col-sm-6 col-md-4 col-lg-3  " role="presentation">
-                            <!--Frappes-->
-                            <button class=" btn-categorias   w-100" id="Frappes-tab" data-bs-toggle="tab"
-                                data-bs-target="#Frappes" type="button" role="tab" aria-controls="Frappes"
-                                aria-selected="false">Frappes</button>
-                        </li>
+                        <?php
+                        include_once("./class/database.php");
+                        $conexion = new Database();
+                        $conexion->conectarDB();
+                        $query = 'SELECT 
+                        categorias.id_categoria,categorias.nombre,categorias.descripcion,categorias.tipo,categorias.img_url
+                        FROM 
+                        categorias 
+                        WHERE 
+                        categorias.tipo = "Menu" limit 4';
+
+                        $categorias = $conexion->select($query);
+
+                        $tr = "true"; // Inicializa la variable fuera del ciclo
+                        $active = "active";
+                        foreach ($categorias as $categoria) {
+                            echo "<li class='nav-item mb-2 col-6 col-sm-6 col-md-4 col-lg-3' role='presentation'>";
+                            echo "<button class='btn-categorias $active w-100 h-100' id='{$categoria->id_categoria}-tab' data-bs-toggle='tab' data-bs-target='#{$categoria->id_categoria}' type='button' role='tab' aria-controls='{$categoria->id_categoria}' aria-selected='$tr'>{$categoria->nombre}</button>";
+                            echo "</li>";
+                            $tr = "false"; // Cambia el valor después de la primera iteración
+                            $active = "";
+                        }
+                        $conexion->desconectarDB();
+                        ?>
+
 
                     </ul>
                 </div>
                 <!-- Contenido de las categorias -->
                 <div class="tab-content col-12 p-1" id="menuTabsContent">
+                    <?php
+                    $conexion->conectarDB();
+                    $query = 'SELECT 
+                        categorias.id_categoria,categorias.nombre,categorias.descripcion,categorias.tipo,categorias.img_url
+                        FROM 
+                        categorias 
+                        WHERE 
+                        categorias.tipo = "Menu" limit 4';
 
-                    <div class="tab-pane fade show active" id="clasicos" role="tabpanel" aria-labelledby="clasicos-tab">
-                        <!--Contenido para Clasicos -->
-                        <div class="row justify-content-center mb-5">
-                            <div class="col-12 col-md-8 d-flex align-items-center">
-                                <div class="d-flex flex-wrap w-100 d-flex justify-content-center">
-                                    <div class="col-10 col-md-6 p-2 col-sm-10">
-                                        <img src="./img/cafes/cafe15.webp" class="card-img-top img-fluid" alt="..."
-                                            style="height: 250px; object-fit: cover;">
-                                    </div>
-                                    <div
-                                        class="col-9 col-sm-9  col-md-6 p-2 d-flex flex-column justify-content-cente p-lg-2">
-                                        <h5 class="fw-bold mb-3" style="letter-spacing: 1px;">Menu Clasicos</h5>
-                                        <p class="text-dark-emphasis mb-4 ">Explora nuestro Menú Clásico de Café, donde
-                                            cada taza es una experiencia única y reconfortante. Desde el espresso
-                                            intenso hasta el cappuccino cremoso, cada bebida se prepara con gran
-                                            atención al detalle para ofrecerte el mejor sabor y aroma.</p>
-                                        <a href="html/menu.html"
-                                            class="btn text-light shadow-lg align-self-start col-12 col-sm-12 col-md-6 col-lg-6"
-                                            style="background: var(--primario);">Ver Menú</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="Cool" role="tabpanel" aria-labelledby="Cool-tab">
-                        <!-- Contenido para Cool and Dark -->
-                        <div class="row justify-content-center mb-5">
-                            <div class="col-12 col-md-8 d-flex align-items-center">
-                                <div class="d-flex flex-wrap w-100 d-flex justify-content-center">
-                                    <div class="col-10 col-md-6 p-2 col-sm-10">
-                                        <img src="./img/cafes/cafe12.webp" class="card-img-top img-fluid" alt="..."
-                                            style="height: 300px; object-fit: cover;">
-                                    </div>
-                                    <div
-                                        class="col-9 col-sm-9  col-md-6 p-2 d-flex flex-column justify-content-cente p-lg-2">
-                                        <h5 class="fw-bold mb-3" style="letter-spacing: 1px;">Menu Cool and Dark</h5>
-                                        <p class="text-dark-emphasis mb-4">Déjate cautivar por nuestro exclusivo Menú
-                                            Cool and Dark de Café, donde cada sorbo es una experiencia de sabor intensa
-                                            y sofisticada. Disfruta de una selección de bebidas que combinan el rico
-                                            aroma del café con notas profundas y indulgentes</p>
-                                        <a href="html/menu.html"
-                                            class="btn text-light shadow-lg align-self-start col-12 col-sm-12 col-md-6 col-lg-6"
-                                            style="background: var(--primario);">Ver Menú</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="Around" role="tabpanel" aria-labelledby="Around-tab">
-                        <!-- Contenido para Around The World -->
-                        <div class="row justify-content-center mb-5">
-                            <div class="col-12 col-md-8 d-flex align-items-center">
-                                <div class="d-flex flex-wrap w-100 d-flex justify-content-center">
-                                    <div class="col-10 col-md-6 p-2 col-sm-10">
-                                        <img src="./img/cafes/cafe3.webp" class="card-img-top img-fluid" alt="..."
-                                            style="height: 300px; object-fit: cover;">
-                                    </div>
-                                    <div
-                                        class="col-9 col-sm-9  col-md-6 p-2 d-flex flex-column justify-content-cente p-lg-2">
-                                        <h5 class="fw-bold mb-3" style="letter-spacing: 1px;">Around The World</h5>
-                                        <p class="text-dark-emphasis mb-4">Embárcate en un viaje culinario con nuestro
-                                            Menú Around The World, donde cada plato te transporta a sabores únicos y
-                                            exóticos de diferentes rincones del mundo. Descubre una variedad de delicias
-                                            internacionales cuidadosamente seleccionadas para satisfacer tu curiosidad
-                                            gastronómica</p>
-                                        <a href="html/menu.html"
-                                            class="btn text-light shadow-lg align-self-start col-12 col-sm-12 col-md-6 col-lg-6"
-                                            style="background: var(--primario);">Ver Menú</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="Frappes" role="tabpanel" aria-labelledby="Frappes-tab">
-                        <!-- Contenido para frappes -->
-                        <div class="row justify-content-center mb-5">
-                            <div class="col-12 col-md-8 d-flex align-items-center">
-                                <div class="d-flex flex-wrap w-100 d-flex justify-content-center">
-                                    <div class="col-10 col-md-6 p-2 col-sm-10">
-                                        <img src="./img/cafes/cafe6.webp" class="card-img-top img-fluid" alt="..."
-                                            style="height: 300px; object-fit: cover;">
-                                    </div>
-                                    <div
-                                        class="col-9 col-sm-9  col-md-6 p-2 d-flex flex-column justify-content-cente p-lg-2">
-                                        <h5 class="fw-bold mb-3" style="letter-spacing: 1px;">Frappes</h5>
-                                        <p class="text-dark-emphasis mb-4">Descubre nuestro irresistible menú de
-                                            frappés, donde cada sorbo es una fusión perfecta de café, cremosidad y
-                                            refrescante hielo. </p>
+                    $categorias = $conexion->select($query);
 
-                                        <a href="html/menu.html"
-                                            class="btn text-light shadow-lg align-self-start col-12 col-sm-12 col-md-6 col-lg-6"
-                                            style="background: var(--primario);">
-                                            Ver Menú
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    $active = "show active";
+                    foreach ($categorias as $categoria) {
+                        echo "<div class='tab-pane fade $active' id='{$categoria->id_categoria}' role='tabpanel' aria-labelledby='{$categoria->id_categoria}-tab'>";
+                        echo "<div class='row justify-content-center'>";
+                        echo "<div class='col-12 col-md-10 col-lg-9 row justify-content-center'>";
+                        echo "<div class='col-10 col-md-6 p-2 col-sm-10'>";
+                        echo "<img src='img/categorias/{$categoria->img_url}' class='card-img-top img-fluid' alt='...' style='height: 280px; object-fit: cover;'>";
+                        echo "</div>";
+                        echo "<div class='col-9 col-sm-9  col-md-6 p-2 d-flex flex-column justify-content-cente p-lg-2'>";
+                        echo "<h5 class='fw-bold mb-3' style='letter-spacing: 1px;'>{$categoria->nombre}</h5>";
+                        echo "<p class='text-dark-emphasis mb-4 '>{$categoria->descripcion}</p>";
+                        echo "<a href='views/menu.php' class='btn text-light shadow-lg align-self-start col-12 col-sm-12 col-md-6 col-lg-6 ' style='background: var(--primario);'>Ver Menú</a>";
+                        echo "</div>";
+                        echo "</div>";
+                        echo "</div>";
+                        echo "</div>";
+                        $active = "";
+                    }
+
+                    ?>
+
+
                 </div>
             </div>
 
@@ -310,24 +246,22 @@
                     <section class="col-12 row justify-content-center p-2">
 
                         <!-- Envio a tu Servicio-->
-                        <div
-                            class="col-8 col-sm-6 col-sm-5 col-lg-4 m-0 p-0 text-center justify-content-center d-flex card-feature p-1">
+                        <div class="col-8 col-sm-6 col-sm-5 col-lg-4 m-0 p-0 text-center justify-content-center d-flex card-feature p-1">
                             <div class="">
                                 <div class="row">
                                     <div class="col-12">
                                         <i class="fa-solid fa-truck"></i>
                                     </div>
                                     <div class="col-12">
-                                        <span class="fw-bold">Envio a tu Servicio</span>
+                                        <span class="fw-bold">Envios a tu Servicio</span>
                                         <p>En pedido superior a $150</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- Tarjeta regalo especial-->
-                        <div
-                            class="col-8 col-sm-6 col-sm-5 col-lg-4 m-0 p-0 text-center justify-content-center d-flex card-feature p-1">
-                            <a href="./html/recompensas.html">
+                        <div class="col-8 col-sm-6 col-sm-5 col-lg-4 m-0 p-0 text-center justify-content-center d-flex card-feature p-1">
+                            <a href="./views/recompensas.php">
                                 <div class="">
                                     <div class="col-12">
                                         <div class="">
@@ -342,9 +276,8 @@
                             </a>
                         </div>
                         <!-- Servicio al cliente-->
-                        <div
-                            class="col-8 col-sm-6 col-sm-5 col-lg-4 m-0 p-0 text-center justify-content-center d-flex card-feature p-1">
-                            <a href="./html/contact.html">
+                        <div class="col-8 col-sm-6 col-sm-5 col-lg-4 m-0 p-0 text-center justify-content-center d-flex card-feature p-1">
+                            <a href="./views/contact.php">
                                 <div class="">
                                     <div class="col-12">
                                         <i class="fa-solid fa-headset"></i>
@@ -369,7 +302,7 @@
                 <div class="row justify-content-center d-flex ">
 
                     <?php
-                    include_once ("./class/database.php");
+                    include_once("./class/database.php");
                     $conexion = new Database();
                     $conexion->conectarDB();
                     $query = 'SELECT bolsas_cafe.id_bolsa,bolsas_cafe.nombre, bolsas_cafe.productor_finca ,bolsas_cafe.proceso,
@@ -383,14 +316,14 @@
                         $counter++;
                         $additionalClass = ($counter > 3) ? 'd-none' : ''; // Cambia la clase después del tercer ciclo
                         $additionalClass2 = ($counter > 3) ? 'd-md-block' : ''; // Cambia la clase después del tercer ciclo
-                    
+
                         // Debugging
                         echo "<!-- Counter: $counter, Class: $additionalClass -->";
 
                         echo "<div class='col-10 col-sm-6 col-md-4 col-lg-4 p-4 m-0 {$additionalClass} {$additionalClass2}'>";
-                        echo "<div class='card product-card m-0' style='border-radius: 5% 5% 0% 0%;'>";
+                        echo "<div class='card m-0 blog-card shadow-lg' style='border-radius: 5% 5% 0% 0%;'>";
                         echo "<a href='../views/bolsas/{$bolsa->id_bolsa}.php'>";
-                        echo "<img src='../{$bolsa->img_url}' class='coffee-image align-card-img-top' alt='{$bolsa->id_bolsa}'>";
+                        echo "<img src='/img/bolsas/{$bolsa->img_url}' class='coffee-image align-card-img-top' alt='{$bolsa->id_bolsa}'>";
                         echo "<div class='card-body product-card-body'>";
                         echo "<h5 class='card-title fw-bold product-title' style='letter-spacing: 1px;'>{$bolsa->nombre}</h5>";
                         echo "<p class='card-text product-subtitle'>{$bolsa->proceso}</p>";
@@ -423,54 +356,52 @@
                 </div>
 
                 <div class="row  justify-content-center d-flex">
-                    <!-- Blog Card 1 -->
-                    <div class="col-md-4 p-3 col-6 col-sm-6 ">
-                        <div class="card blog-card" style="border-radius: 5% 5% 0% 0%;">
-                            <img src="./img/cafes/lugar1.webp" class="coffee-image" alt="Image 1">
-                            <div class="cblog-card product-card-body">
-                                <h5 class="blog-card-title">MAKE IT SIMPLE</h5>
-                                <h6 class="blog-card-subtitle mb-2 text-muted">20/20/2020
-                                </h6>
-                                <p class="blog-card-text  d-none d-md-block">Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit.
-                                    Aenean feugiat dictum lacus, ut hendrerit mi pulvinar vel. Fusce id nibh at neque
-                                    eleifend tristique...</p>
-                                <a href="#" class="blog-card-link">READ MORE <i class="fa-solid fa-arrow-right"></i></a>
-                            </div>
+
+                    <?php
+                    $conexion->conectarDB();
+
+                    // Obtener las publicaciones para la página actual
+                    $query = 'SELECT 
+                                titulo, 
+                                descripcion, 
+                                img_url,
+                                fecha
+                              FROM 
+                                publicaciones
+                              WHERE 
+                                tipo = "blog"
+                              LIMIT 3';
+                    $publicaciones = $conexion->select($query);
+
+                    $countes = 1;
+
+                    ?>
+                    <div class="container mb-3 ">
+                        <div class="row justify-content-center d-flex">
+                            <?php foreach ($publicaciones as $publicacion) :
+                                $countes++;
+                                $additionalClass = ($countes > 3) ? 'd-none' : ''; // Cambia la clase después del tercer ciclo
+                                $additionalClass2 = ($countes > 3) ? 'd-md-block' : ''; // Cambia la clase después del tercer ciclo
+                            ?>
+                                <div class='col-md-6 p-2 col-6 col-sm-6 col-lg-4<?php echo ' '. $additionalClass.' '. $additionalClass2 ?>'>
+                                    <div class='card blog-card shadow-lg' style="border-radius: 5% 5% 0% 0%;">
+                                        <img src='img/publicaciones/<?php echo $publicacion->img_url; ?>' class='coffee-image' alt='<?php echo $publicacion->titulo ?>'>
+                                        <div class='cblog-card product-card-body'>
+                                            <h5 class='blog-card-title'><?php echo $publicacion->titulo; ?></h5>
+                                            <h6 class='blog-card-subtitle mb-2 text-muted'><?php echo $publicacion->fecha; ?></h6>
+                                            <p class='blog-card-text  d-none d-md-block'><?php echo $publicacion->descripcion; ?></p>
+                                            <a href='#' class='blog-card-link'>Mas detalles <i class="fa-solid fa-arrow-right"></i></a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
                         </div>
                     </div>
-                    <!-- Blog Card 2 -->
-                    <div class="col-md-4 p-3 col-6 col-sm-6 ">
-                        <div class="card blog-card" style="border-radius: 5% 5% 0% 0%;">
-                            <img src="./img/cafes/cafe8.webp" class="coffee-image" alt="Image 2">
-                            <div class="cblog-card product-card-body">
-                                <h5 class="blog-card-title">COFFEE SHOP</h5>
-                                <h6 class="blog-card-subtitle mb-2 text-muted">20/20/2020
-                                </h6>
-                                <p class="blog-card-text  d-none d-md-block">Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit.
-                                    Aenean feugiat dictum lacus, ut hendrerit mi pulvinar vel. Fusce id nibh at neque
-                                    eleifend tristique...</p>
-                                <a href="#" class="blog-card-link">READ MORE <i class="fa-solid fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Blog Card 3 -->
-                    <div class="col-md-4 p-3 col-6 col-sm-6 d-none d-md-block">
-                        <div class="card blog-card" style="border-radius: 5% 5% 0% 0%;">
-                            <img src="./img/cafes/cafe4.webp" class="coffee-image" alt="Image 3">
-                            <div class="cblog-card product-card-body">
-                                <h5 class="blog-card-title">COFFEE BAR</h5>
-                                <h6 class="blog-card-subtitle mb-2 text-muted">20/20/2020
-                                </h6>
-                                <p class="blog-card-text  d-none d-md-block">Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit.
-                                    Aenean feugiat dictum lacus, ut hendrerit mi pulvinar vel. Fusce id nibh at neque
-                                    eleifend tristique...</p>
-                                <a href="#" class="blog-card-link">READ MORE <i class="fa-solid fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
+
+                    <?php
+                    $conexion->desconectarDB();
+                    ?>
 
                 </div>
             </div>
@@ -500,8 +431,7 @@
                                 </div>
                                 <!-- imagen 2 -->
                                 <div class="col-4 col-md-2">
-                                    <a
-                                        href="https://www.facebook.com/photo.php?fbid=1098191388477112&set=pb.100048587835727.-2207520000&type=3">
+                                    <a href="https://www.facebook.com/photo.php?fbid=1098191388477112&set=pb.100048587835727.-2207520000&type=3">
                                         <div class="carousel-item-wrapper">
                                             <img src="./img/cafes/cafe2.webp" class="d-block w-100" alt="...">
                                             <div class="overlay">
@@ -513,8 +443,7 @@
                                 </div>
                                 <!-- imagen 3 -->
                                 <div class="col-4 col-md-2">
-                                    <a
-                                        href="https://www.facebook.com/photo.php?fbid=1089403459355905&set=pb.100048587835727.-2207520000&type=3">
+                                    <a href="https://www.facebook.com/photo.php?fbid=1089403459355905&set=pb.100048587835727.-2207520000&type=3">
                                         <div class="carousel-item-wrapper">
                                             <img src="./img/cafes/cafe3.webp" class="d-block w-100" alt="...">
                                             <div class="overlay">
@@ -525,8 +454,7 @@
                                 </div>
                                 <!-- imagen 4 -->
                                 <div class="col-4 col-md-2 d-none d-md-block">
-                                    <a
-                                        href="https://www.facebook.com/photo.php?fbid=1088035302826054&set=pb.100048587835727.-2207520000&type=3">
+                                    <a href="https://www.facebook.com/photo.php?fbid=1088035302826054&set=pb.100048587835727.-2207520000&type=3">
                                         <div class="carousel-item-wrapper">
                                             <img src="./img/cafes/cafe4.webp" class="d-block w-100" alt="...">
                                             <div class="overlay">
@@ -538,8 +466,7 @@
                                 </div>
                                 <!-- imagen 5 -->
                                 <div class="col-4 col-md-2 d-none d-md-block">
-                                    <a
-                                        href="https://www.facebook.com/photo.php?fbid=1083951893234395&set=pb.100048587835727.-2207520000&type=3">
+                                    <a href="https://www.facebook.com/photo.php?fbid=1083951893234395&set=pb.100048587835727.-2207520000&type=3">
                                         <div class="carousel-item-wrapper">
                                             <img src="./img/cafes/cafe5.webp" class="d-block w-100" alt="...">
                                             <div class="overlay">
@@ -551,8 +478,7 @@
                                 </div>
                                 <!-- imagen 6 -->
                                 <div class="col-4 col-md-2 d-none d-md-block">
-                                    <a
-                                        href="https://www.facebook.com/photo.php?fbid=1081126390183612&set=pb.100048587835727.-2207520000&type=3">
+                                    <a href="https://www.facebook.com/photo.php?fbid=1081126390183612&set=pb.100048587835727.-2207520000&type=3">
                                         <div class="carousel-item-wrapper">
                                             <img src="./img/cafes/cafe6.webp" class="d-block w-100" alt="...">
                                             <div class="overlay">
@@ -569,8 +495,7 @@
                             <div class="row ">
                                 <!-- imagen 7 -->
                                 <div class="col-4 col-md-2">
-                                    <a
-                                        href="https://www.facebook.com/photo.php?fbid=1075046007458317&set=pb.100048587835727.-2207520000&type=3">
+                                    <a href="https://www.facebook.com/photo.php?fbid=1075046007458317&set=pb.100048587835727.-2207520000&type=3">
                                         <div class="carousel-item-wrapper">
                                             <img src="./img/cafes/cafe7.webp" class="d-block w-100" alt="...">
                                             <div class="overlay">
@@ -582,8 +507,7 @@
                                 </div>
                                 <!-- imagen 8 -->
                                 <div class="col-4 col-md-2">
-                                    <a
-                                        href="https://www.facebook.com/photo.php?fbid=789497972679790&set=pb.100048587835727.-2207520000&type=3">
+                                    <a href="https://www.facebook.com/photo.php?fbid=789497972679790&set=pb.100048587835727.-2207520000&type=3">
                                         <div class="carousel-item-wrapper">
                                             <img src="./img/cafes/cafe8.webp" class="d-block w-100" alt="...">
                                             <div class="overlay">
@@ -595,8 +519,7 @@
                                 </div>
                                 <!-- imagen 9 -->
                                 <div class="col-4 col-md-2">
-                                    <a
-                                        href="https://www.facebook.com/photo.php?fbid=1021787422784176&set=pb.100048587835727.-2207520000&type=3">
+                                    <a href="https://www.facebook.com/photo.php?fbid=1021787422784176&set=pb.100048587835727.-2207520000&type=3">
                                         <div class="carousel-item-wrapper">
                                             <img src="./img/cafes/cafe9.webp" class="d-block w-100" alt="...">
                                             <div class="overlay">
@@ -608,8 +531,7 @@
                                 </div>
                                 <!-- imagen 10 -->
                                 <div class="col-4 col-md-2 d-none d-md-block">
-                                    <a
-                                        href="https://www.facebook.com/photo.php?fbid=1013628096933442&set=pb.100048587835727.-2207520000&type=3">
+                                    <a href="https://www.facebook.com/photo.php?fbid=1013628096933442&set=pb.100048587835727.-2207520000&type=3">
                                         <div class="carousel-item-wrapper">
                                             <img src="./img/cafes/cafe10.webp" class="d-block w-100" alt="...">
                                             <div class="overlay">
@@ -621,8 +543,7 @@
                                 </div>
                                 <!-- imagen 11 -->
                                 <div class="col-4 col-md-2 d-none d-md-block">
-                                    <a
-                                        href="https://www.facebook.com/photo.php?fbid=999156661713919&set=pb.100048587835727.-2207520000&type=3">
+                                    <a href="https://www.facebook.com/photo.php?fbid=999156661713919&set=pb.100048587835727.-2207520000&type=3">
                                         <div class="carousel-item-wrapper">
                                             <img src="./img/cafes/cafe11.webp" class="d-block w-100" alt="...">
                                             <div class="overlay">
@@ -634,8 +555,7 @@
                                 </div>
                                 <!-- imagen 12 -->
                                 <div class="col-4 col-md-2 d-none d-md-block d-lg-block">
-                                    <a
-                                        href="https://www.facebook.com/photo.php?fbid=728966215399633&set=pb.100048587835727.-2207520000&type=3">
+                                    <a href="https://www.facebook.com/photo.php?fbid=728966215399633&set=pb.100048587835727.-2207520000&type=3">
                                         <div class="carousel-item-wrapper">
                                             <img src="./img/cafes/cafe13.webp" class="d-block w-100" alt="...">
                                             <div class="overlay">
@@ -648,13 +568,11 @@
                             </div>
                         </div>
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
-                        data-bs-slide="prev">
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
-                        data-bs-slide="next">
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>

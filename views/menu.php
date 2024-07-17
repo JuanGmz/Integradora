@@ -102,7 +102,7 @@
             <div class="col-6 col-lg-3">
                 <a href="menu/coolanddark.php">
                     <div class="card border-0" style="background: var(--color6)">
-                        <img src="../img/cafes/bolsa1.webp" class="card-img-top rounded-5" alt="coolanddark">
+                        <img src="../img/categorias/cool.webp" class="card-img-top rounded-5" alt="coolanddark">
                         <div class="cblog-card p-2">
                             <h5 class="card-title fw-bold text-center">Cool And Dark</h5>
                         </div>
@@ -124,7 +124,7 @@
             <div class="col-6 col-lg-3">
                 <a href="menu/jazzband.php">
                     <div class="card border-0" style="background: var(--color6)">
-                        <img src="../img/cafes/bolsa1.webp" class="card-img-top rounded-5" alt="jazzband">
+                        <img src="../img/categorias/jazz.webp" class="card-img-top rounded-5" alt="jazzband">
                         <div class="cblog-card p-2">
                             <h5 class="card-title fw-bold text-center">Jazz Band</h5>
                         </div>
@@ -134,7 +134,7 @@
             <div class="col-6 col-lg-3">
                 <a href="menu/metalcoffee.php">
                     <div class="card border-0" style="background: var(--color6)">
-                        <img src="../img/cafes/bolsa1.webp" class="card-img-top rounded-5" alt="metalcoffee">
+                        <img src="../img/categorias/metal.webp" class="card-img-top rounded-5" alt="metalcoffee">
                         <div class="cblog-card p-2">
                             <h5 class="card-title fw-bold text-center">Metal Coffe</h5>
                         </div>
@@ -174,7 +174,7 @@
             <div class="col-6 col-lg-3">
                 <a href="menu/sweetblue.php">
                     <div class="card border-0" style="background: var(--color6)">
-                        <img src="../img/cafes/bolsa1.webp" class="card-img-top rounded-5" alt="sweetblue">
+                        <img src="../img/cafes/cafe3.webp" class="card-img-top rounded-5" alt="sweetblue">
                         <div class="cblog-card p-2">
                             <h5 class="card-title fw-bold text-center">Sweet Blue</h5>
                         </div>

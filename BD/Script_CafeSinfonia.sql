@@ -28,7 +28,7 @@ use cafe_sinfonia;
 create table CATEGORIAS(
 id_categoria int auto_increment not null,
 nombre nvarchar(100) not null,
-descripcion nvarchar(150),
+descripcion nvarchar(500),
 tipo enum('Menu','Evento') not null,
 img_url nvarchar(255),
 primary key(id_categoria)
@@ -893,12 +893,6 @@ CONCAT(DATE_FORMAT(r.fecha_inicio, '%d/%m/%Y'), ' - ', DATE_FORMAT(r.fecha_expir
 from clientes_recompensas cr
 join recompensas r on r.id_recompensa = cr.id_recompensa 
 where r.estatus = 'Activa';
-
--- Vista de los comprobantes de las reservas.
-create view view_comprobante_reserva as
-select er.id_reserva as folio_reserva, c.concepto, c.monto, c.folio_operacion, c.banco_origen, c.imagen_comprobante
-from comprobantes c
-	join eventos_reservas er on er.id_reserva = c.id_reserva;
     
 -- Vista del carrito
 create view view_carrito as
@@ -906,21 +900,60 @@ select c.id_cliente as cliente,bc.img_url,bc.nombre as producto, dbc.medida, dbc
 from carrito c
 join detalle_bc dbc on dbc.id_dbc = c.id_dbc
 join bolsas_cafe bc on bc.id_bolsa = dbc.id_bolsa;
+
+-- Vista de Administrador Resrvas
+create view view_AdminReservas as
+select 
+	concat(p.nombres,' ',p.apellido_paterno,' ', p.apellido_materno) as cliente,
+    er.id_reserva as folio,
+    er.estatus as estatus,
+    er.c_boletos AS boletos,
+    er.monto_total AS montoTotal,
+    er.fecha_hora_reserva as fechaHoraReserva,
+    e.nombre as EVENTO,
+    e.id_evento,
+    e.precio_boleto,
+    e.fecha_evento as fechaEvento
+from eventos_reservas er
+	join clientes c on c.id_cliente = er.id_cliente
+	join personas p on p.id_persona = c.id_persona
+	join eventos e on e.id_evento = er.id_evento
+WHERE e.tipo = 'De Pago';
+
+-- Vista para mostrar la informacion del comprobante de la reserva
+CREATE VIEW vw_comprobante_reserva AS
+SELECT 
+	c.concepto,
+    c.folio_operacion,
+    c.fecha,
+    c.monto,
+    c.banco_origen,
+    c.imagen_comprobante,
+    cli.id_cliente
+FROM
+	comprobantes AS c
+JOIN
+	eventos_reservas AS er ON c.id_reserva = er.id_reserva
+JOIN
+	clientes AS cli ON er.id_cliente = cli.id_cliente
+JOIN 
+	personas AS p ON cli.id_persona = p.id_persona
+;
     
 INSERT INTO metodos_pago (metodo_pago) VALUES ('Transferencia');
 
 INSERT INTO publicaciones (titulo, descripcion, img_url, tipo)
 VALUES
-('¡Bienvenidos a Sinfonía Café y Cultura!', 'Estamos emocionados de abrir nuestras puertas y ofrecerles una experiencia única de café y cultura. ¡Visítanos hoy!', 'img/bienvenidos.jpg', 'Difusion'),
-('Tarde de Jazz', 'Acompáñanos este viernes para una tarde de jazz en vivo con artistas locales. ¡No te lo pierdas!', 'img/tarde_de_jazz.jpg', 'Difusion'),
-('Nueva Carta de Verano', 'Descubre nuestra nueva carta de verano con bebidas refrescantes y deliciosas. ¡Ven a probarlas!', 'img/carta_verano.jpg', 'Difusion'),
-('Taller de Cata de Café', 'Aprende a distinguir los sabores y aromas del café en nuestro próximo taller de cata. ¡Inscríbete ya!', 'img/taller_cata.jpg', 'Blog'),
-('Concierto Acústico', 'Disfruta de una noche de música acústica con artistas emergentes este sábado. ¡Te esperamos!', 'img/concierto_acustico.jpg', 'Difusion'),
-('Exposición de Arte', 'Ven a admirar las obras de artistas locales en nuestra exposición de arte. ¡Entrada libre!', 'img/expo_arte.jpg', 'Difusion'),
-('Café del Mes', 'Este mes presentamos nuestro café de origen etíope. ¡Ven a degustarlo!', 'img/cafe_mes.jpg', 'Blog'),
-('Noche de Poesía', 'Acompáñanos para una noche de poesía y micrófono abierto. ¡Comparte tus versos con nosotros!', 'img/noche_poesia.jpg', 'Difusion'),
-('Clases de Barismo', 'Inscríbete en nuestras clases de barismo y aprende a preparar el café perfecto.', 'img/clases_barismo.jpg', 'Blog'),
-('Feria de Libros', 'No te pierdas nuestra feria de libros con grandes descuentos y actividades para toda la familia.', 'img/feria_libros.jpg', 'Difusion');
+('¡Bienvenidos a Sinfonía Café y Cultura!', 'Estamos emocionados de abrir nuestras puertas y ofrecerles una experiencia única de café y cultura. ¡Visítanos hoy!', 'bienvenidos.jpg', 'Difusion'),
+('Tarde de Jazz', 'Acompáñanos este viernes para una tarde de jazz en vivo con artistas locales. ¡No te lo pierdas!', 'tarde_de_jazz.jpg', 'Difusion'),
+('Nueva Carta de Verano', 'Descubre nuestra nueva carta de verano con bebidas refrescantes y deliciosas. ¡Ven a probarlas!', 'carta_verano.jpg', 'Difusion'),
+('Taller de Cata de Café', 'Aprende a distinguir los sabores y aromas del café en nuestro próximo taller de cata. ¡Inscríbete ya!', 'taller_cata.jpg', 'Blog'),
+('Concierto Acústico', 'Disfruta de una noche de música acústica con artistas emergentes este sábado. ¡Te esperamos!', 'concierto_acustico.jpg', 'Difusion'),
+('Exposición de Arte', 'Ven a admirar las obras de artistas locales en nuestra exposición de arte. ¡Entrada libre!', 'expo_arte.jpg', 'Difusion'),
+('Café del Mes', 'Este mes presentamos nuestro café de origen etíope. ¡Ven a degustarlo!', 'cafe_mes.jpg', 'Blog'),
+('Noche de Poesía', 'Acompáñanos para una noche de poesía y micrófono abierto. ¡Comparte tus versos con nosotros!', 'noche_poesia.jpg', 'Difusion'),
+('Clases de Barismo', 'Inscríbete en nuestras clases de barismo y aprende a preparar el café perfecto.', 'clases_barismo.jpg', 'Blog'),
+('Feria de Libros', 'No te pierdas nuestra feria de libros con grandes descuentos y actividades para toda la familia.', 'feria_libros.jpg', 'Difusion');
 
 INSERT INTO roles (rol, descripcion) VALUES 
 ('empleado', 'Empleado del café sinfonía'),
@@ -928,25 +961,26 @@ INSERT INTO roles (rol, descripcion) VALUES
 ('proveedor', 'Proveedor del café sinfonía');
 
 -- Insertar registros en la tabla categorias.
-	INSERT INTO CATEGORIAS (nombre, descripcion, tipo) VALUES
-('Conciertos', 'Categoría para eventos musicales', 'Evento'),-- 1
-('Teatro', 'Categoría para representaciones teatrales', 'Evento'), 
-('Podcast en vivo', 'Categoría para conferencias y charlas', 'Evento'),
-('Talleres', 'Categoría para talleres y cursos', 'Evento'),
-('Ferias', 'Categoría para ferias comerciales y de productos', 'Evento'),-- 5
-('Festivales', 'Categoría para festivales culturales y musicales', 'Evento'), 
-('Seminarios', 'Categoría para seminarios educativos', 'Evento'),
-('Cine', 'Categoría para proyecciones de películas', 'Evento'),
-('Clasicos', 'Categoría para el menú de cafés clásicos durante todo tipo de horarios', 'Menu'),
-('Los métodos de Jazz Band', 'Categoría para el menú de métodos de preparación de café con alma de jazz durante todo tipo de horarios', 'Menu'),-- 10
-('Metal Coffee', 'Categoría para el menú de cafés con influencias de la música metal', 'Menu'), 
-('Cool and Dark', 'Categoría para el menú de cafés oscuros y refrescantes', 'Menu'),
-('Cold Brew', 'Categoría para el menú de cafés fríos y refrescantes', 'Menu'),
-('Around The World', 'Categoría para el menú de cafés de diversas partes del mundo', 'Menu'),
-('Sodas Italianas', 'Categoría para el menú de refrescos italianos', 'Menu'), -- 15
-('Frappes', 'Categoría para el menú de bebidas frappé', 'Menu'),  
-('Té y Tisanas', 'Categoría para el menú de tés y tisanas', 'Menu'),
-('Sweet Blues', 'Categoría para el menú de cafés dulces con un toque de blues', 'Menu');
+	INSERT INTO CATEGORIAS (nombre, descripcion, tipo,img_url ) VALUES
+('Conciertos', 'Categoría para eventos musicales', 'Evento',''),-- 1
+('Teatro', 'Categoría para representaciones teatrales', 'Evento',''), 
+('Podcast en vivo', 'Categoría para conferencias y charlas', 'Evento',''),
+('Talleres', 'Categoría para talleres y cursos', 'Evento',''),
+('Ferias', 'Categoría para ferias comerciales y de productos', 'Evento',''),-- 5
+('Festivales', 'Categoría para festivales culturales y musicales', 'Evento',''), 
+('Seminarios', 'Categoría para seminarios educativos', 'Evento',''),
+('Cine', 'Categoría para proyecciones de películas', 'Evento',''),
+('Clasicos', 'Les mostramos la diferencia de tamaños y proporciones de nuestra sección “Clásicos base a espresso” desde lo más pequeño que es un espresso sencillo hasta lo más grande que es un Latte.', 'Menu','clasicos.webp'),
+('Los métodos de Jazz Band', 'Categoría para el menú de métodos de preparación de café con alma de jazz durante todo tipo de horarios', 'Menu','jazz.webp'),-- 10
+('Metal Coffee', 'Metal Coffee
+3 bebidas con 3 intensidades de sabor diferentes, cada una con una cantidad de espresso combinadas con café americano una perfecta bebida para quellos que buscan emociones fueres en el café.', 'Menu','metal.webp'), 
+('Cool and Dark', 'Déjate cautivar por nuestro exclusivo Menú Cool and Dark de Café, donde cada sorbo es una experiencia de sabor intensa y sofisticada. Disfruta de una selección de bebidas que combinan el rico aroma del café con notas profundas y indulgentes.', 'Menu','cool.webp'),
+('Cold Brew', 'Categoría para el menú de cafés fríos y refrescantes', 'Menu',''),
+('Around The World', 'Categoría para el menú de cafés de diversas partes del mundo', 'Menu',''),
+('Sodas Italianas', 'Categoría para el menú de refrescos italianos', 'Menu',''), -- 15
+('Frappes', 'Categoría para el menú de bebidas frappé', 'Menu',''),  
+('Té y Tisanas', 'Categoría para el menú de tés y tisanas', 'Menu',''),
+('Sweet Blues', 'Categoría para el menú de cafés dulces con un toque de blues', 'Menu','');
 
 -- Insertar productos_menu
 INSERT INTO productos_menu (id_categoria, nombre, descripcion, img_url) VALUES
@@ -1202,9 +1236,9 @@ INSERT INTO bolsas_cafe(
     img_url
 )
 VALUES
-('Texin Veracruz','2023 - 2024','Eduardo Vital Díaz', 'Lavado', 'Marsellesa, San Román, Oro Azteca', '1,220 msnm', 'Cacao, Vainilla', 'Cítrica, brillante', 'Choc. Oscuro, Avellana', 'Alto - Denso',85, 'img/bolsas/TEXINVER(LAV)T.webp'),
-('Jaltenango Chiapas','2023 - 2024','Finca Santa María', 'Lavado', 'Caturra', '1,300 - 1,500 msnm', 'Cítrico, Floral', 'Brillante, Equilibrada', 'Miel, Manzana Verde, Durazno', 'Medio - Denso',86.5, 'img/bolsas/JALTCHIAP(MARAGO)T.webp'),
-('Jaltenango Chiapas','2023 - 2024','Finca Santa María', 'Natural', 'Marsellesa, Bourbon', '1,350 - 1,450 msnm', 'Dulce de Leche, Nuez', 'Frutal Intensa', 'Almíbar, Naranja', 'Ligero',84, 'img/bolsas/JALTCHIAP(NAT)T.webp');
+('Texin Veracruz','2023 - 2024','Eduardo Vital Díaz', 'Lavado', 'Marsellesa, San Román, Oro Azteca', '1,220 msnm', 'Cacao, Vainilla', 'Cítrica, brillante', 'Choc. Oscuro, Avellana', 'Alto - Denso',85, 'TEXINVER(LAV)T.webp'),
+('Jaltenango Chiapas','2023 - 2024','Finca Santa María', 'Lavado', 'Caturra', '1,300 - 1,500 msnm', 'Cítrico, Floral', 'Brillante, Equilibrada', 'Miel, Manzana Verde, Durazno', 'Medio - Denso',86.5, 'JALTCHIAP(MARAGO)T.webp'),
+('Jaltenango Chiapas','2023 - 2024','Finca Santa María', 'Natural', 'Marsellesa, Bourbon', '1,350 - 1,450 msnm', 'Dulce de Leche, Nuez', 'Frutal Intensa', 'Almíbar, Naranja', 'Ligero',84, 'JALTCHIAP(NAT)T.webp');
 
 -- Insert 
 INSERT INTO detalle_bc (

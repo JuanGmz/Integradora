@@ -67,6 +67,13 @@ a:hover {
     height: 30rem; /* Altura deseada para tamaños de pantalla medianos y grandes */
   }
 }
+/* Tamaños de pantalla pequeños */
+@media (max-width: 767px) {
+  .coffee-image {
+    height: 15rem; /* Altura deseada para tamaños de pantalla pequeños */
+  }
+}
+
 /* Estilos de la barra de navegación */
 .navbar-brand .logo {
   /* Ajusta la altura según sea necesario */
@@ -495,6 +502,7 @@ a:hover {
   height: 100%; /* Altura completa para el card */
 }
 .card-body {
+ 
   display: flex;
   flex-direction: column;
   justify-content: space-between;

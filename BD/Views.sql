@@ -42,10 +42,6 @@ JOIN
 JOIN 
 	personas AS p ON cli.id_persona = p.id_persona
 ;
-
--- Vista de Administrador Pedidos(Detalles)
-create view view_AdminPedidosDetalles as 
-;
 -- Vista de Administrador Pedidos
 create view view_AdminPedidos as 
 select 
@@ -73,13 +69,12 @@ select r.recompensa, r.condicion, concat(r.fecha_inicio,' - ',fecha_expiracion) 
 from recompensas r order by r.estatus asc;
 
 show events;
+
 select tipo from publicaciones;
 
 select * from view_clientes_recompensas where id_cliente= 5;
 
 select * from publicaciones;
-
-
 
 select * from recompensas;
 
@@ -87,8 +82,6 @@ select user from mysql.user;
 
 
 grant select,insert,delete,update on *.* to auxiliar@localhost;
-
-
 
  update personas set telefono = '8715084325' where id_persona = 1;
  
