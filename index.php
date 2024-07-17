@@ -48,39 +48,30 @@
                 </div>
             </div>
             <?php
-            if (isset($_SESSION["usuario"])) {
-                ?>
+                if (isset($_SESSION["usuario"])) {
+            ?>
                 <!-- Navbar con dropdown -->
-                <nav class="navbar navbar-expand-lg ">
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
-                                    style="left: auto; right: 0;">
-                                    <a class="dropdown-item" href="views/perfil.php">Mi perfil</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="cerrar_sesion.php">Cerrar sesión</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
+                <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px" >
+                    <a class="dropdown-item" href="views/perfil.php">Mi perfil</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="scripts/login/cerrarsesion.php">Cerrar sesión</a>
+                </div>
                 <?php
             } else {
                 ?>
                 <a href="views/login.php" class="login-button ms-auto">Iniciar Sesión</a>
-                <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
                 <?php
             }
             ?>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
         </div>
+        
     </nav>
     <!-- Inicio -->
     <div style="max-width: 100%;">
