@@ -22,8 +22,6 @@
             }
 
             tipoSelect.addEventListener('change', toggleCostoInput);
-
-            // Inicialización del estado del campo costo
             toggleCostoInput();
         });
     </script>
