@@ -102,16 +102,16 @@
 
                         <!-- Horario en acordeón -->
                         <div class="d-lg-none">
-                            <div class="accordion" id="accordionExample">
+                            <div class="accordion " id="accordionExample">
                                 <div class="accordion-item ">
 
                                     <h2 class="accordion-header">
                                         <button class="accordion-button collapsed btn-categorias" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="border-radius: 0;">
                                             Horario
                                         </button>
-                                    </h2>
+                                    </h2> 
 
-                                    <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                    <div id="collapseOne" class="accordion-collapse collapse bagr-cafe1 container" data-bs-parent="#accordionExample">
                                         <div class="card-body">
                                             <div class="d-flex justify-content-between border-bottom py-2">
                                                 <span>Lunes</span><span class="text-dark-emphasis">CERRADO</span>
