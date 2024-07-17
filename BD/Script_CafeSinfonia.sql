@@ -1,6 +1,5 @@
 drop database if exists cafe_sinfonia;
 
-
 -- Usuarios de la base de datos--
 /*
 -- Administrador | ALL PRIVILEGES, GRANT OPTION, SUPER |
@@ -92,13 +91,6 @@ create table empleados(
     id_empleado int auto_increment not null,
     id_persona int not null,
     primary key(id_empleado),
-    foreign key (id_persona) references personas(id_persona)
-);
-
-create table proveedores(
-    id_proveedor int auto_increment not null,
-    id_persona int not null,
-    primary key(id_proveedor),
     foreign key (id_persona) references personas(id_persona)
 );
 
@@ -956,9 +948,8 @@ VALUES
 ('Feria de Libros', 'No te pierdas nuestra feria de libros con grandes descuentos y actividades para toda la familia.', 'feria_libros.jpg', 'Difusion');
 
 INSERT INTO roles (rol, descripcion) VALUES 
-('empleado', 'Empleado del café sinfonía'),
-('cliente', 'Cliente del café sinfonía'),
-('proveedor', 'Proveedor del café sinfonía');
+('administrador', 'Encargado de cafe sinfonia y cultura'),
+('cliente', 'Cliente del café sinfonía');
 
 -- Insertar registros en la tabla categorias.
 	INSERT INTO CATEGORIAS (nombre, descripcion, tipo,img_url ) VALUES
