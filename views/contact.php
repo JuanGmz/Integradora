@@ -102,16 +102,16 @@
 
                         <!-- Horario en acordeón -->
                         <div class="d-lg-none">
-                            <div class="accordion" id="accordionExample">
+                            <div class="accordion " id="accordionExample">
                                 <div class="accordion-item ">
 
                                     <h2 class="accordion-header">
                                         <button class="accordion-button collapsed btn-categorias" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="border-radius: 0;">
                                             Horario
                                         </button>
-                                    </h2>
+                                    </h2> 
 
-                                    <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                    <div id="collapseOne" class="accordion-collapse collapse bagr-cafe1 container" data-bs-parent="#accordionExample">
                                         <div class="card-body">
                                             <div class="d-flex justify-content-between border-bottom py-2">
                                                 <span>Lunes</span><span class="text-dark-emphasis">CERRADO</span>
@@ -156,7 +156,7 @@
                             <div class="col-6 row col-sm-6 col-md-5 col-lg-4 mb-4 ">
                                 <div>
                                     <div class="social-card">
-                                        <img src="/img/portada.webp" class="img-fluid" alt="Twitter">
+                                        <img src="../img/portada.webp" class="img-fluid" alt="Twitter">
                                         <div class="overlay">
                                             <a href="https://x.com/SinfoniaCoffee" class="social-icon">
                                                 <i class="fa-brands fa-x-twitter"></i>
@@ -177,7 +177,7 @@
                             <div class="col-6 row col-sm-6 col-md-5 col-lg-4 mb-4 ">
                                 <div>
                                     <div class="social-card">
-                                        <img src="/img/portada.webp" class="img-fluid" alt="Facebook">
+                                        <img src="../img/portada.webp" class="img-fluid" alt="Facebook">
                                         <div class="overlay">
                                             <a href="https://www.facebook.com/SinfoniaCoffee" class="social-icon">
                                                 <i class="fab fa-facebook-f fa-2x"></i>
@@ -201,7 +201,7 @@
                             <div class="col-6 row col-sm-6 col-md-5 col-lg-4 mb-4 ">
                                 <div>
                                     <div class="social-card">
-                                        <img src="/img/portada.webp" class="img-fluid " alt="Instagram">
+                                        <img src="../img/portada.webp" class="img-fluid " alt="Instagram">
                                         <div class="overlay">
                                             <a href="https://www.instagram.com/sinfoniacoffee/" class="social-icon">
                                                 <i class="fab fa-instagram fa-2x"></i>
