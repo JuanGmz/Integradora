@@ -1313,3 +1313,47 @@ CREATE INDEX idx_asistencias_id_cliente ON asistencias(id_cliente);
 -- Tabla clientes_recompensas
 CREATE INDEX idx_clientes_recompensas_id_cliente ON clientes_recompensas(id_cliente);
 CREATE INDEX idx_clientes_recompensas_id_recompensa ON clientes_recompensas(id_recompensa);
+
+DELIMITER $$
+CREATE PROCEDURE SP_filtrar_pedidos(
+    IN busqueda VARCHAR(50)
+)
+BEGIN
+    SELECT p.*, 
+           CONCAT(pe.nombres, ' ', pe.apellido_paterno, ' ', pe.apellido_materno) AS cliente,
+           concat(dom.calle, ' ', dom.colonia, ' ', dom.ciudad, '', dom.estado, ' ', dom.codigo_postal) AS domicilio,
+           dom.telefono AS telefono, 
+           p.estatus AS estatus,
+           mp.metodo_pago AS metodo_pago,
+           bc.nombre AS bolsa,
+           dbc.medida AS medida,
+           dp.cantidad AS cantidad
+    FROM pedidos AS p
+    JOIN clientes
+    ON p.id_cliente = clientes.id_cliente
+    JOIN personas AS pe
+    ON clientes.id_persona = pe.id_persona
+    JOIN domicilios AS dom 
+    ON p.id_domicilio = dom.id_domicilio
+    JOIN metodos_pago AS mp 
+    ON p.id_mp = mp.id_mp
+    JOIN usuarios 
+    ON pe.id_usuario = usuarios.id_usuario
+    JOIN detalle_pedidos AS dp 
+    ON dp.id_pedido = p.id_pedido
+    JOIN detalle_bc AS dbc 
+    ON dbc.id_dbc = dp.id_dbc
+    JOIN bolsas_cafe AS bc
+    ON dbc.id_bolsa = bc.id_bolsa
+    WHERE p.id_pedido like busqueda
+	OR pe.usuario like busqueda
+	OR pe.telefono like busqueda;
+END $$
+DELIMITER ;
+call SP_filtrar_pedidos('1');
+select * from pedidos;
+select * from personas;
+select * from detalle_pedidos;
+select * from detalle_bc;
+select * from bolsas_cafe;
+select * from pedidos;
