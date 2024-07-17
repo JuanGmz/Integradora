@@ -161,7 +161,7 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form>
+                                        <form method="post">
                                             <div class="mb-3">
                                                 <label for="pass" class="form-label">Ingresar Nueva Contraseña</label>
                                                 <input type="password" class="form-control" id="pass" name="pass"
