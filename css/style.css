@@ -200,6 +200,7 @@ a:hover {
 
 .btn-cafe:hover {
   background-color: var(--cuarto);
+  color: var(--blanco);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
@@ -502,12 +503,9 @@ a:hover {
   height: 100%; /* Altura completa para el card */
 }
 .card-body {
- 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border: 10px solid var(--color10); /* Aplica el borde con el color de la variable */
-  background-color: var(--color10);
 }
 .cblog-card {
   display: flex;

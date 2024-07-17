@@ -175,13 +175,20 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
+                    <h1 class="fw-bold text-light pt-2 me-auto">Inicio</h1>
+                    <!-- Botón para volver atras -->
+                    <button class="btn btn-dark">
+                        <a href="../index.php" class="text-decoration-none">
+                            <i class="fa-solid fa-house text-light fa-2x"></i>
+                        </a>
+                    </button>
                 </div>
             </nav>
         </div>
 
         <div class="row">
             <!-- navbar pc -->
-            <div class="col-lg-3 border-end border-black bg-dark h-100 position-fixed d-none d-lg-block">
+            <div class="col-lg-3 bg-dark h-100 position-fixed d-none d-lg-block">
                 <h4 class="text-center text-light m-3 fs-2 fw-bold">Administrar</h4>
                 <div class="row">
                     <div class="col-12 text-center">
@@ -330,20 +337,20 @@
 
             <div class="col-lg-9 offset-lg-3 p-0">
                 <!-- AQUI VA EL CONTENIDO DE LA PAGINAAAAAAAAAAAA -->
-                <div class="container p-0 m-0 bg-light">
+                <div class="container p-0 m-0 bg-dark d-none d-lg-block">
                     <div class="row p-3 m-0 shadow-lg">
                         <div class="col-3">
-                            <h1>Inicio</h1>
+                            <h1 class="fw-bold text-light">Inicio</h1>
                         </div>
                         <div class="col-9 d-flex justify-content-end align-items-center gap-3">
                             <!-- Botón para volver atras -->
                             <a href="../index.php" class="text-decoration-none">
-                                <i class="fa-solid fa-house fa-2x"></i>
+                                <i class="fa-solid fa-house fa-2x text-light"></i>
                             </a>
                         </div>
                     </div>
                 </div>
-                <div class="row mt-3 p-4 m-0">
+                <div class="row p-4 m-0 bg-light shadow-none">
                     <div class="">
                         <div class="p-3">
                             <div class="container">
@@ -361,7 +368,7 @@
                         </div>
                     </div>
                     <!-- Tabla -->
-                    <div class="table-responsive container">
+                    <div class="table-responsive container bg-light shadow-none">
                         <table class="table table-borderless">
                             <tbody>
                                 <!--Contenido-->
@@ -372,7 +379,7 @@
                                         <div class="container mt-2 d-flex justify-content-center align-items-center">
                                             <div class="" style="width: 18rem;">
                                                 <div class="card mb-3">
-                                                    <a href=""
+                                                    <a href="adminroles.php"
                                                         class="btn btn-secondary d-flex align-items-center justify-content-center align-items-center justify-content-center"
                                                         style="height: 180px;">
                                                         <i class="fa-solid fa-user-tag fa-4x text-dark"></i>
@@ -390,7 +397,7 @@
                                         <div class="container mt-2 d-flex justify-content-center align-items-center">
                                             <div class="" style="width: 18rem;">
                                                 <div class="card mb-3">
-                                                    <a href="adminUsuarios.html"
+                                                    <a href="adminUsuarios.php"
                                                         class="btn btn-secondary d-flex align-items-center justify-content-center align-items-center justify-content-center"
                                                         style="height: 180px;">
                                                         <i class="fa-solid fa-users text-dark fa-4x"></i>
@@ -402,32 +409,13 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <!--3-->
-                                    <td class="col col-lg-4 col-md-4 ">
-                                        <!--Accesos rapidos 3 Administracion Inicio -->
-                                        <div class="container mt-2 d-flex justify-content-center align-items-center">
-                                            <div class="" style="width: 18rem;">
-                                                <div class="card mb-3">
-                                                    <a href="adminAdministrarInicio.html"
-                                                        class="btn btn-secondary d-flex align-items-center justify-content-center align-items-center justify-content-center"
-                                                        style="height: 180px;">
-                                                        <i class="fa-solid fa-house-laptop text-dark  fa-4x"></i>
-
-                                                    </a>
-                                                </div>
-                                                <div class="card-body text-center">
-                                                    <h5 class="card-title fw-bold">Administracion Inicio</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
                                     <!--4-->
                                     <td class="col col-lg-4 col-md-4 ">
                                         <!--Accesos rapidos 4 pedidos -->
                                         <div class="container mt-2 d-flex justify-content-center align-items-center">
                                             <div class="" style="width: 18rem;">
                                                 <div class="card mb-3">
-                                                    <a href="adminPedidos.html"
+                                                    <a href="adminPedidos.php"
                                                         class="btn btn-secondary d-flex align-items-center justify-content-center align-items-center justify-content-center"
                                                         style="height: 180px;">
                                                         <i class="fa-solid fa-basket-shopping fa-4x text-dark"></i>
@@ -439,31 +427,13 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <!--5-->
-                                    <td class="col col-lg-4 col-md-4 ">
-                                        <!--Accesos rapidos 4 categorias -->
-                                        <div class="container mt-2 d-flex justify-content-center align-items-center">
-                                            <div class="" style="width: 18rem;">
-                                                <div class="card mb-3">
-                                                    <a href="adminCategorias.html"
-                                                        class="btn btn-secondary d-flex align-items-center justify-content-center align-items-center justify-content-center"
-                                                        style="height: 180px;">
-                                                        <i class="fa-solid fa-list fa-4x text-dark"></i>
-                                                    </a>
-                                                </div>
-                                                <div class="card-body text-center">
-                                                    <h5 class="card-title fw-bold">categorias</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
                                     <!--6-->
                                     <td class="col col-lg-4 col-md-4 ">
                                         <!--Accesos rapidos 4 eventos -->
                                         <div class="container mt-2 d-flex justify-content-center align-items-center">
                                             <div class="" style="width: 18rem;">
                                                 <div class="card mb-3">
-                                                    <a href="adminEventos.html"
+                                                    <a href="adminEventos.php"
                                                         class="btn btn-secondary d-flex align-items-center justify-content-center align-items-center justify-content-center"
                                                         style="height: 180px;">
                                                         <i class="fa-solid fa-bell fa-4x text-dark"></i>
@@ -475,31 +445,13 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <!--7-->
-                                    <td class="col col-lg-4 col-md-4 ">
-                                        <!--Accesos rapidos 7 blog -->
-                                        <div class="container mt-2 d-flex justify-content-center align-items-center">
-                                            <div class="" style="width: 18rem;">
-                                                <div class="card mb-3">
-                                                    <a href="adminBlog.html"
-                                                        class="btn btn-secondary d-flex align-items-center justify-content-center align-items-center justify-content-center"
-                                                        style="height: 180px;">
-                                                        <i class="fa-solid fa-newspaper fa-4x text-dark"></i>
-                                                    </a>
-                                                </div>
-                                                <div class="card-body text-center">
-                                                    <h5 class="card-title fw-bold">Blog</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
                                     <!--8-->
                                     <td class="col col-lg-4 col-md-4 ">
                                         <!--Accesos rapidos 8 menu -->
                                         <div class="container mt-2 d-flex justify-content-center align-items-center">
                                             <div class="" style="width: 18rem;">
                                                 <div class="card mb-3">
-                                                    <a href="adminMenu.html"
+                                                    <a href="adminMenu.php"
                                                         class="btn btn-secondary d-flex align-items-center justify-content-center align-items-center justify-content-center"
                                                         style="height: 180px;">
                                                         <i class="fa-solid fa-store fa-4x text-dark"></i>
@@ -517,7 +469,7 @@
                                         <div class="container mt-2 d-flex justify-content-center align-items-center">
                                             <div class="" style="width: 18rem;">
                                                 <div class="card mb-3">
-                                                    <a href="adminRecompensas.html"
+                                                    <a href="adminrecompensas.php"
                                                         class="btn btn-secondary d-flex align-items-center justify-content-center align-items-center justify-content-center"
                                                         style="height: 180px;">
                                                         <i class="fa-solid fa-gift fa-4x text-dark"></i>
