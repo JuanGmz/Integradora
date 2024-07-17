@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú</title>
-    <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../css/style.css">
+    <title>Document</title>
+    <link rel="stylesheet" href="/HTML/Repositorios/Integradora/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/HTML/Repositorios/Integradora/css/style.css">
 </head>
 
 <body>
@@ -51,71 +51,48 @@
         </div>
     </nav>
     <!-- NavBar End -->
-    <!-- NavBar End -->
 
-    <div class="container mb-5">
-            <!-- Breadcrumbs -->
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb mt-4">
-                    <li class="breadcrumb-item"><a href="../../index.php">Inicio</a></li>
-                    <li class="breadcrumb-item"><a href="../menu.php">Menu</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Around The World</li>
-                </ol>
-            </nav>
-            <div class="fw-bold fs-2 mb-5">
-                <h1 class="h1contact">Productos</h1>
-            </div>
-            <div class="row">
-                <?php
-                    include_once("../../class/database.php");
+    <!-- Contenidillo-->
+    <?php
+    include_once("../../../class/database.php");
 
-                    // Conectar a la base de datos
-                    $conexion = new Database();
-                    $conexion->conectarDB();
+    // Conectar a la base de datos
+    $conexion = new Database();
+    $conexion->conectarDB();
 
-                    // Obtener las publicaciones para la página actual
-                    $query = 'SELECT productos_menu.nombre, count(medida) as m, productos_menu.id_pm from productos_menu
+    // Obtener las publicaciones para la página actual
+    $query = 'SELECT productos_menu.nombre, count(medida) as m, productos_menu.id_pm from productos_menu
                                 join categorias on productos_menu.id_categoria = categorias.id_categoria
                                 join detalle_productos_menu on productos_menu.id_pm = detalle_productos_menu.id_pm
                                 where categorias.nombre = "Around The World"
                                 group by nombre';
-                    $productos = $conexion->select($query);
-                ?>
-                <div class="container mb-3">
+    $productos = $conexion->select($query);
 
 
-                    <div class="row">
-                        <?php foreach ($productos as $producto) : ?>
-                            
-                            <div class='col-md-6 col-12 col-sm-6 mb-3 col-lg-3' >
-                                <a href= '<?php echo 'detalle_producto/detalles.php?id_pm='.$producto->id_pm; ?>'>
-                                <div class='card blog-card h-100 shadow-lg' >
-                                    <img src='../../img/menu/<?php echo $producto->img_url; ?>' class='card-img-top' alt='<?php echo $producto->nombre ?>'>
-                                    <div class='card-body'>
-                                        <h5 class='blog-card-title' ><?php echo $producto->nombre; ?></h5>
-                                        <h6 class='blog-card-subtitle mb-2 text-muted'><?php if ($producto->m >= 2)
-                                        {
-                                            echo '+ Con varios tamaños'; 
-                                        }
-                                        else
-                                        {
-                                            echo '- En un tamaño';  
-                                        }
-                                        ?></h6>
-                                    </div>
-                                </div>
-                                </a>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
+    ?>
+
+    <?php foreach ($productos as $producto) : ?>
+
+    <?php endforeach; ?>
+
+    <div class="container mb-1">
+        <div class="row">
+            <div class=" col-6 img-fluid w-50">
+                <img src="../../../img/cafe2.webp" class="img-fluid" alt="">
+            </div>
+            <div class="col-6">
+                <div>
+                    <h1></h1>
                 </div>
-               
-                <?php
-                    $conexion->desconectarDB();
-                ?>
             </div>
         </div>
     </div>
+
+    <?php
+    $conexion->desconectarDB();
+    ?>
+
+
 
     <!-- Footer -->
     <footer>
@@ -149,7 +126,6 @@
             </div>
         </div>
     </footer>
-
     <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/b820f07375.js" crossorigin="anonymous"></script>
 </body>
