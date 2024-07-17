@@ -1,3 +1,19 @@
+<?php
+session_start();
+$alerta = "";
+if ($_POST) {
+    include '../class/database.php';
+    $db = new Database();
+    $db->conectarDB();
+
+    extract($_POST);
+    $db->verifica($usuario, $password);
+    if (!isset($_SESSION["usuario"])) {
+        $alerta = "<div class='alert alert-danger' role='alert'>¡Usuario o contraseña incorrectos!</div>";
+    }
+    $db->desconectarDB();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,6 +23,7 @@
     <title>Ingresar</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
+
 </head>
 
 <body style="background: var(--color5)">
@@ -57,7 +74,7 @@
         <div class="row">
             <!-- Formulario -->
             <div class="col-lg-6 col-md-6 col-md-6 p-5 d-flex justify-content-center">
-                <form action="#" method="post" class="p-0 p-lg-5">
+                <form action="" method="post" class="p-0 p-lg-5">
                     <legend class="fw-bold fs-1">Iniciar Sesión</legend>
                     <div class="row p-2">
                         <div class="col-12 mb-2">
@@ -80,14 +97,7 @@
                             </a>
                         </div>
                         <?php
-                        if ($_POST) {
-                            include '../class/database.php';
-                            $db = new Database();
-                            $db->conectarDB();
-                            extract($_POST);
-                            $db->verifica($usuario, $password);
-                            $db->desconectarDB();
-                        }
+                        echo $alerta;
                         ?>
                         <div class="col-12 mb-2 text-end d-flex justify-content-cente text-center">
                             <button type="submit" class="btn btn-cafe w-100 text-light fw-bold fs-5 m-5">Iniciar

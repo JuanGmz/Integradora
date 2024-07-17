@@ -72,14 +72,8 @@ class database
             }
 
             if ($pase) {
-                session_start();
                 $_SESSION["usuario"] = $usuario;
-                $_SESSION["mensaje"] = "<div class='alert alert-success' role='alert'>¡Bienvenido " . $_SESSION["usuario"] . "!</div>";
-                header('refresh:2;url=../index.php');
-                exit();
-            } else {
-                $_SESSION["mensaje"] = "<div class='alert alert-warning' role='alert'>¡Usuario o contraseña incorrectos!</div>";
-                exit();
+                header('location: ../index.php');
             }
 
         } catch (PDOException $e) {

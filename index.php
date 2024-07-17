@@ -46,41 +46,34 @@
                             <a class="nav-link mx-lg-2" href="views/contact.php">Contacto</a>
                         </li>
                     </ul>
+                    <?php
+                    if (isset($_SESSION["usuario"])) {
+                        ?>
+                        <li class="nav-item dropdown">
+                            <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-user"><?php echo $_SESSION['usuario']; ?></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li><a class="dropdown-item" href="views/perfil.php">Mi cuenta</a></li>
+                                <li><a class="dropdown-item" href="scripts/login/cerrarsesion.php">Cerrar
+                                        Sesion</a></li>
+                            </ul>
+                        </li>
+                        <?php
+                    } else {
+                        ?>
+                        <li>
+                            <a href="views/login.php" class="login-button ms-auto">Iniciar Sesión</a>
+                        </li>
+                        <?php
+                    }
+                    ?>
                 </div>
-            </div>
-            <?php
-            if (isset($_SESSION["usuario"])) {
-                ?>
-                <!-- Navbar con dropdown -->
-                <nav class="navbar navbar-expand-lg ">
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
-                                    style="left: auto; right: 0;">
-                                    <a class="dropdown-item" href="views/perfil.php">Mi perfil</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="cerrar_sesion.php">Cerrar sesión</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-                <?php
-            } else {
-                ?>
-                <a href="views/login.php" class="login-button ms-auto">Iniciar Sesión</a>
                 <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <?php
-            }
-            ?>
+            </div>
         </div>
     </nav>
     <!-- Inicio -->
@@ -374,9 +367,9 @@
                     <h1 class="fw-bold text-center" style="letter-spacing: 1px;">E-Commerce</h1>
                 </div>
                 <div class="row justify-content-center d-flex ">
-                    
+
                     <?php
-                    include_once("./class/database.php");
+                    include_once ("./class/database.php");
                     $conexion = new Database();
                     $conexion->conectarDB();
                     $query = 'SELECT bolsas_cafe.id_bolsa,bolsas_cafe.nombre, bolsas_cafe.productor_finca ,bolsas_cafe.proceso,
@@ -390,7 +383,7 @@
                         $counter++;
                         $additionalClass = ($counter > 3) ? 'd-none' : ''; // Cambia la clase después del tercer ciclo
                         $additionalClass2 = ($counter > 3) ? 'd-md-block' : ''; // Cambia la clase después del tercer ciclo
-
+                    
                         // Debugging
                         echo "<!-- Counter: $counter, Class: $additionalClass -->";
 

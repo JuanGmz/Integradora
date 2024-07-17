@@ -126,7 +126,8 @@
                                         <form>
                                             <div class="mb-3">
                                                 <label for="tel" class="form-label">Teléfono</label>
-                                                <input type="tel" class="form-control" id="tel" name="tel" required>
+                                                <input type="tel" class="form-control" id="tel" name="tel"
+                                                    value="<?php echo $campo->telefono; ?>" required>
                                             </div>
                                             <div class="text-end">
                                                 <button type="button" class="btn btn-secondary"

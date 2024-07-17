@@ -1,3 +1,26 @@
+<?php
+$alerta = "";
+if ($_POST) {
+    include '../class/database.php';
+    $db = new Database();
+    $db->conectarDB();
+
+    extract($_POST);
+
+    $usuarioExistente = "select count(*) as count from personas where usuario = '$usuario'";
+    $resultado = $db->select($usuarioExistente);
+    if (!$resultado[0]->count > 0) {
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $query = "call SP_Registrar_usuariosClientes('$nombres','$aPaterno','$aMaterno','$usuario','$email','$hashedPassword','$telefono')";
+        $db->execute($query);
+        $alerta = "<div class='alert alert-success' role='alert'>¡Usuario registrado!</div>";
+        header('refresh:3;url=./login.php');
+    } else {
+        $alerta = "<div class='alert alert-danger' role='alert'>¡El usuario ya existe!</div>";
+    }
+    $db->desconectarDB();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,7 +68,7 @@
                     </ul>
                 </div>
             </div>
-            <a href="login.html" class="login-button ms-auto">Iniciar Sesión</a>
+            <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
             <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -106,32 +129,13 @@
                             <input type="password" class="form-control form-control-bb" id="password2" name="password2" " required>
                         </div>
                         <div class=" col-12 mb-3 ">
-                            <a href="./login.php">
+                            <a href=" ./login.php">
                             <p for="password2" class="blog-card-link ">¿Ya tienes cuenta? Click aqui</p>
                             </a>
 
                         </div>
                         <?php
-                        if ($_POST) {
-                            include '../class/database.php';
-                            $db = new Database();
-                            $db->conectarDB();
-
-                            extract($_POST);
-
-                            $usuarioExistente = "select count(*) as count from personas where usuario = '$usuario'";
-                            $resultado = $db->select($usuarioExistente);
-                            if ($resultado[0]->count > 0) {
-                                echo "<div class='alert alert-warning' role='alert'>¡El usuario ya existe!</div>";
-                            } else {
-                                $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-                                $query = "call SP_Registrar_usuariosClientes('$nombres','$aPaterno','$aMaterno','$usuario','$email','$hashedPassword','$telefono')";
-                                $db->execute($query);
-                                echo "<div class='alert alert-success' role='alert'>¡Registro Exitoso!<i class='fa-solid fa-check'></i></div>";
-                                header('refresh:3;url=./login.php');
-                            }
-                            $db->desconectarDB();
-                        }
+                        echo $alerta;
                         ?>
                         <div class="col-12 mb-2 text-end d-flex justify-content-cente text-center">
                             <button type="submit"

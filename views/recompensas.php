@@ -55,24 +55,22 @@
             if ($_SESSION["usuario"]) {
                 ?>
                 <!-- Navbar con dropdown -->
-                <nav class="navbar navbar-expand-lg ">
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
-                                    style="left: auto; right: 0;">
-                                    <a class="dropdown-item" href="views/perfil.php">Mi perfil</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="cerrar_sesion.php">Cerrar sesión</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa-solid fa-user"><?php echo $_SESSION['usuario']; ?></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
+                                style="left: auto; right: 0;">
+                                <a class="dropdown-item" href="perfil.php">Mi perfil</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="cerrar_sesion.php">Cerrar sesión</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
                 <?php
             } else {
                 ?>
