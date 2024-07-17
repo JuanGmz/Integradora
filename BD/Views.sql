@@ -49,11 +49,26 @@ create view view_AdminPedidosDetalles as
 -- Vista de Administrador Pedidos
 create view view_AdminPedidos as 
 select 
-	concat(p.nombres, '', p.apellido_paterno,'', p.apellido_materno) as CLIENTE, pd.id_pedido as 'FOLIO PEDIDO'
+	concat(p.nombres, '', p.apellido_paterno,'', p.apellido_materno) as cliente,
+    pd.id_pedido as 'folio_pedido',
+    pd.estatus,
+    pd.fecha_hora_pedido,
+    pd.monto_total
 from pedidos pd
 	join clientes c on c.id_cliente = pd.id_cliente
     join personas p on p.id_persona = c.id_persona;
-
+    
+    create view view_detalle_pedidos as
+    select 
+    bc.nombre as producto, 
+    dbc.medida, 
+    dp.cantidad,
+    dp.monto
+    from detalle_pedidos dp
+    join detalle_bc	dbc on dbc.id_dbc = dp.id_dbc
+    join bolsas_cafe bc on bc.id_bolsa = dbc.id_bolsa;
+    
+describe pedidos;
 select r.recompensa, r.condicion, concat(r.fecha_inicio,' - ',fecha_expiracion) as periodo, r.estatus
 from recompensas r order by r.estatus asc;
 
