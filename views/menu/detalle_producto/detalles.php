@@ -51,6 +51,7 @@
         </div>
     </nav>
     <!-- NavBar End -->
+     
 
     <!-- Contenidillo-->
     <?php
@@ -60,31 +61,66 @@
     $conexion = new Database();
     $conexion->conectarDB();
 
+    $nombre = $_GET['nom'];
+    $descripcion = $_GET['desc'];
+    $img_url = $_GET['img'];
+    $id_pm = $_GET['id_pm'];
+
+
     // Obtener las publicaciones para la página actual
-    $query = 'SELECT productos_menu.nombre, count(medida) as m, productos_menu.id_pm from productos_menu
-                                join categorias on productos_menu.id_categoria = categorias.id_categoria
-                                join detalle_productos_menu on productos_menu.id_pm = detalle_productos_menu.id_pm
-                                where categorias.nombre = "Around The World"
-                                group by nombre';
-    $productos = $conexion->select($query);
+    $query = 'SELECT detalle_productos_menu.medida, detalle_productos_menu.precio 
+              from detalle_productos_menu 
+              where id_pm = "'.$id_pm.'"
+              group by medida;';
+    $DETALLES = $conexion->select($query);
+
 
 
     ?>
+    <?php
+    ?>
+    <!--
 
-    <?php foreach ($productos as $producto) : ?>
-
-    <?php endforeach; ?>
-
-    <div class="container mb-1">
-        <div class="row">
-            <div class=" col-6 img-fluid w-50">
+    -->
+    <div class="container mb-5">
+        <!-- Breadcrumbs -->
+        <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mt-4">
+                    <li class="breadcrumb-item"><a href="../../../index.php">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="../../menu.php">Menu</a></li>
+                    <li class="breadcrumb-item"><a href="../aroundtheworld.php">Around The World</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Detalles</li>
+                </ol>
+            </nav>
+            <div class="fw-bold fs-2 mb-5">
+                <h1 class="h1contact">Productos</h1>
+            </div>
+            <!-- Breadcrumbs End-->
+        <div class="row mb-0">
+            <div class=" col-6 img-fluid w-50 mt-0">
                 <img src="../../../img/cafe2.webp" class="img-fluid" alt="">
             </div>
             <div class="col-6">
                 <div>
-                    <h1></h1>
+                    <h1 class="fw-bold text-center mt-0"><?php echo $nombre; ?></h1>
                 </div>
+                <div>
+                    <p class="fw-bold text-center mt-3">
+                        <?php echo $descripcion; ?>
+                    </p>
+                </div>
+                <?php foreach ($DETALLES as $detalle) : ?>
+                    <div class="row mt-4">
+                        <div class="container col-3 ">
+                            <h2 class="fw-bold "> <?php echo $detalle->medida;?></h2>
+                        </div>
+                        <div class="container col-6">
+                            <h2  class="fw-bold"><?php echo $detalle->precio;?></h2>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
             </div>
+
         </div>
     </div>
 

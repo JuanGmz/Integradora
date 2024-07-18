@@ -65,6 +65,7 @@
             <div class="fw-bold fs-2 mb-5">
                 <h1 class="h1contact">Productos</h1>
             </div>
+            <!-- Breadcrumbs End-->
             <div class="row">
                 <?php
                     include_once("../../class/database.php");
@@ -74,7 +75,7 @@
                     $conexion->conectarDB();
 
                     // Obtener las publicaciones para la página actual
-                    $query = 'SELECT productos_menu.nombre, count(medida) as m, productos_menu.id_pm from productos_menu
+                    $query = 'SELECT productos_menu.nombre, count(medida) as m, productos_menu.id_pm, productos_menu.descripcion, productos_menu.img_url from productos_menu
                                 join categorias on productos_menu.id_categoria = categorias.id_categoria
                                 join detalle_productos_menu on productos_menu.id_pm = detalle_productos_menu.id_pm
                                 where categorias.nombre = "Around The World"
@@ -88,7 +89,10 @@
                         <?php foreach ($productos as $producto) : ?>
                             
                             <div class='col-md-6 col-12 col-sm-6 mb-3 col-lg-3' >
-                                <a href= '<?php echo 'detalle_producto/detalles.php?id_pm='.$producto->id_pm; ?>'>
+                                
+                                <a href= "detalle_producto/detalles.php?<?= http_build_query(['id_pm' => $producto->id_pm,'nom' => $producto->nombre,'desc' =>  $producto->descripcion,
+                                'img' =>  $producto->img_url,], '', '&amp;') ?>">
+
                                 <div class='card blog-card h-100 shadow-lg' >
                                     <img src='../../img/menu/<?php echo $producto->img_url; ?>' class='card-img-top' alt='<?php echo $producto->nombre ?>'>
                                     <div class='card-body'>
