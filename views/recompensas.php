@@ -7,9 +7,6 @@
     <title>Recompensas</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/style.css">
     <?php
     session_start();
     ?>
@@ -52,36 +49,28 @@
                 </div>
             </div>
             <?php
-            if ($_SESSION["usuario"]) {
-                ?>
+                if (isset($_SESSION["usuario"])) {
+            ?>
                 <!-- Navbar con dropdown -->
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa-solid fa-user"><?php echo $_SESSION['usuario']; ?></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
-                                style="left: auto; right: 0;">
-                                <a class="dropdown-item" href="perfil.php">Mi perfil</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="cerrar_sesion.php">Cerrar sesión</a>
-                            </div>
-                        </li>
-                    </ul>
+                <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px" >
+                    <a class="dropdown-item" href="perfil.php">Mi perfil</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="scripts/login/cerrarsesion.php">Cerrar sesión</a>
                 </div>
                 <?php
             } else {
                 ?>
-                <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
-                <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                <a href="views/login.php" class="login-button ms-auto">Iniciar Sesión</a>
                 <?php
             }
             ?>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
         </div>
     </nav>
     <!-- NavBar End -->
@@ -90,77 +79,15 @@
 
     <section class="subscription-section d-flex align-items-center justify-content-center p-2">
         <div class="subscription-content text-center">
-            <h1 class="display-4 fw-bold "><span style="color: #d4a373;">RECOMPENSAS</span></h1>
+            <h1 class="display-4 fw-bold "><span style="color: #d4a373;">Recompensas</span></h1>
         </div>
     </section>
 
-    <div class=" p-3">
-        <div class="row">
-            <!-- Recompensa 1 -->
-            <div class="col-12 col-sm-6 col-md-6 col-lg-4  p-4 d-flex justify-content-center ">
-                <div
-                    class="relative flex w-80 flex-col rounded-xl bg-white  text-gray-700 shadow-md col-12 col-sm-6 col-md-4 col-lg-4">
-                    <!-- Imagen superior -->
-                    <div
-                        class="relative mx-4 -mt-6 h-55 overflow-hidden rounded-xl bg-clip-border text-white shadow-lg">
-                        <img src="../img/cafes/dino2.webp" alt="Placeholder Image" class="object-cover h-full w-full">
-                    </div>
-                    <div class="p-6">
-                        <h5
-                            class="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
-                            Cafe gratis
-                        </h5>
-                        <p class="block font-sans text-base font-light leading-relaxed text-inherit antialiased">
-                            Consigue tu cafe gratis a traves de nuestra recompensas.
-                        </p>
-                    </div>
-                    <div class="p-6 pt-0 d-flex justify-content-between align-items-center">
-                        <button type="button" class="btn bg-dark-subtle">
-                            Reclamar
-                        </button>
-                        <p class="font-sans text-base font-light leading-relaxed">
-                            1/10
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <?php
-            include_once ("../class/database.php");
-            $conexion = new Database();
-            $conexion->conectarDB();
-            $query = 'SELECT * from view_clientes_recompensas';
-            $recompensas = $conexion->select($query);
+    <row class="mt-5">
+        <div class="col-sm-6 col-lg-4">
 
-            foreach ($recompensas as $categoria) {
-                echo " <div class='col-12 col-sm-6 col-md-6 col-lg-4  p-4 d-flex justify-content-center '>";
-                echo "  <div class='relative flex w-80 flex-col rounded-xl bg-white  text-gray-700 shadow-md col-12 col-sm-6 col-md-4 col-lg-4'>";
-                echo "  <div class='relative mx-4 -mt-6 h-55 overflow-hidden rounded-xl bg-clip-border text-white shadow-lg'>";
-                echo "  <img src='../img/cafes/" . $categoria['imagen'] . "' alt='Placeholder Image' class='object-cover h-full w-full'>";
-                echo "  </div>";
-                echo "  <div class='p-6'>";
-                echo "  <h5 class='mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased'>";
-                echo "  " . $categoria['nombre'] . "";
-                echo "  </h5>";
-                echo "  <p class='block font-sans text-base font-light leading-relaxed text-inherit antialiased'>";
-                echo "  " . $categoria['descripcion'] . "";
-                echo "  </p>";
-                echo "  </div>";
-                echo "  <div class='p-6 pt-0 d-flex justify-content-between align-items-center'>";
-                echo "  <button type='button' class='btn bg-dark-subtle'>";
-                echo "  Reclamar";
-                echo "  </button>";
-                echo "  <p class='font-sans text-base font-light leading-relaxed'>";
-                echo "  " . $categoria['porcentaje'] . "";
-                echo "  </p>";
-                echo "  </div>";
-                echo "  </div>";
-                echo "  </div>";
-            }
-            $conexion->desconectarDB();
-
-            ?>
         </div>
-    </div>
+    </row>
 
     <!-- Footer -->
     <footer>
@@ -197,6 +124,10 @@
 
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/b820f07375.js" crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 
 </html>

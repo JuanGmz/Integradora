@@ -351,32 +351,183 @@
                     </div>
                 </div>
                 <div class="shadow-lg bg-light container p-3">
-                    <div class="row m-1">
+                    <div class="row m-2">
                         <div class="col-12">
-                            <form method="post">
+                        <form method="post">
                                 <div class="row">
                                     <div class="col-8">
-                                        <select name="categoria" id="categoria" class="form-select">
-                                            <option selected disabled value="">Seleccionar ????</option>
-                                            <!-- Aqui va el select de categorías -->
-                                            <?php
-
-                                            ?>
-                                        </select>
+                                        <input type="text" class="form-control" name="busqueda" placeholder="Ingresa folio, usuario o teléfono" value="<?php echo isset($_POST['busqueda']) ? htmlspecialchars($_POST['busqueda']) : ''; ?>">
                                     </div>
                                     <div class="col-4">
                                         <input type="submit" class="btn btn-primary w-100" value="Buscar">
                                     </div>
                                 </div>
-                            </form>
+                        </form>
                         </div>
                     </div>
-                </div>
-                <div class="row mt-3 p-4 m-0">
+            </div>
+                <div class="row">
                     <!-- Tabla de pedidos AQUI -->
+                    <div class="row mt-lg-3 p-3 p-lg-4 m-0">
+                    <div class="d-lg-none w-100 mb-3 m-0 p-0">
+                        <button type="button" class="btn w-100 btn-primary shadow-lg" data-bs-toggle="modal" data-bs-target="#agregarEvento">
+                            <i class="fa-solid fa-plus fa-2x"></i>
+                        </button>
+                    </div>
+                            <?php
+                                include("../class/database.php");
+
+                                $db = new Database();
+
+                                $db->conectarDB();
+                                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                    $busqueda = $_POST['busqueda'];
+
+                                    $query = "CALL SP_filtrar_pedidos('%$busqueda%')";
+
+                                    $productos = $db->select($query);
+
+                                    if (empty($productos)) {
+                                        echo "<div role='alert'>No hay pedidos registrados con este folio, usuario o teléfono.</div>";
+                                    } else {
+                                        echo "
+                                        <table class='table table-striped table-hover table-dark text-center border-3 border-black border-bottom border-start border-end'>
+                                            <thead>
+                                                <tr>
+                                                    <th scope='col'>Folio</th>
+                                                    <th scope='col'>Nombre</th>
+                                                    <th scope='col'>Domicilio</th>
+                                                    <th scope='col'>Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class='table-group-divider table-light'>";
+                                        
+                                        // Recorrer los productos y mostrar cada uno en una fila de la tabla
+                                        foreach ($productos as $producto) {
+                                            echo "
+                                                <tr>
+                                                    <td>$producto->id_pedido</td>
+                                                    <td>$producto->cliente</td>
+                                                    <td>$producto->domicilio</td>
+                                                    <td class='d-flex flex-row align-items-center justify-content-center gap-1'>
+                                                        <!-- Botón para ver detalles del producto -->
+                                                        <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#detalleProducto_$producto->id_pedido'>
+                                                            <i class='fa-solid fa-bars'></i>
+                                                        </button>
+                                                        <!-- Modal para mostrar los detalles del producto -->
+                                                        <div class='modal fade' id='detalleProducto_$producto->id_pedido' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+                                                            <div class='modal-dialog'>
+                                                                <div class='modal-content'>
+                                                                    <div class='modal-header'>
+                                                                        <h1 class='modal-title fs-5' id='exampleModalLabel'>Detalles del pedido</h1>
+                                                                        <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                                                    </div>
+                                                                    <div class='modal-body'>
+                                                                        <h4 class='text-start fw-bolder mb-3 col-4'>Bolsa de cafe: <span class='fw-normal fs-4'><br>$producto->bolsa</span></h4>
+                                                                        <h4 class='text-start fw-bolder mb-3 col-4'>Medida: <span class='fw-normal fs-4'>$producto->medida</span></h4>
+                                                                        <h4 class='text-start fw-bolder mb-3 col-4'>Cantidad: <span class='fw-normal fs-4'>$producto->cantidad</span></h4>
+                                                                        <h4 class='text-start fw-bolder mb-3 col-4'>Método de pago: <span class='fw-normal fs-4'>$producto->metodo_pago</span></h4>
+                                                                        <h4 class='text-start fw-bolder mb-3 col-4'>Telefono: <span class='fw-normal fs-4'>$producto->telefono</span></h4>
+                                                                        <h4 class='text-start fw-bolder mb-3 col-5'>Fecha y hora: <span class='fw-normal fs-4'>$producto->fecha_hora_pedido</span></h4>
+                                                                        <h4 class='text-start fw-bolder mb-3 col-7'>Estatus: <span class='fw-normal fs-4'>$producto->estatus</span></h4>                                                                    
+                                                                        <h4 class='text-start fw-bolder mb-3 col-4'>Monto total: <span class='fw-normal fs-4'>$producto->monto_total</span></h4>
+                                                                        <h4 class='text-start fw-bolder mb-3 col-4'>Envío: <span class='fw-normal fs-4'>$producto->envio</span></h4>
+                                                                        <h4 class='text-start fw-bolder mb-3 col-4'>Costo envío: <span class='fw-normal fs-4'>$producto->costo_envio</span></h4>
+                                                                        <h4 class='text-start fw-bolder mb-3'>Guía de envío: <span class='fw-normal fs-4'>$producto->guia_de_envio</span></h4>
+                                                                        <h4 class='text-start fw-bolder mb-3'>Documento: <span class='fw-normal fs-4'>$producto->documento_url</span></h4>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#editarProducto_$producto->id_pedido'>
+                                                    <i class='fa-solid fa-pen-to-square'></i>
+                                                    </button>
+                                                        <div class='modal fade' id='editarProducto_$producto->id_pedido' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+                                                            <div class='modal-dialog'>
+                                                                <div class='modal-content'>
+                                                                    <div class='modal-header'>
+                                                                            <h1 class='modal-title fs-5' id='exampleModalLabel'>Editar pedido</h1>
+                                                                            <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                                                    </div>
+                                                                        <!-- Aquí va el contenido del modal -->
+                                                                    <div class='modal-body text-start'>
+                                                                            <form action='../scripts/editarpedido.php' method='post'>
+                                                                                <input type='hidden' name='id_pedido' value='$producto->id_pedido' readonly>
+                                                                    <div>
+                                                                        <label for='titulo' class='form-label'>Cliente: </label>
+                                                                        <input type='text' class='form-control' id='titulo' name='cliente' value='$producto->cliente' readonly >
+                                                                    </div>
+                                                                    <div>
+                                                                    <label for='descripcion' class='form-label'>Bolsa</label>
+                                                                    <input type='text' class='form-control' id='descripcion' name='bolsa' value='$producto->bolsa' readonly>
+                                                                    </div>
+                                                                    <div class='row'>
+                                                                    <div class='col-4'>
+                                                                        <label for='cap' class='form-label'>Monto total</label>
+                                                                        <input type='text' min='1' class='form-control' id='cap' name='montototal' value='$producto->monto_total' readonly>
+                                                                    </div>
+
+                                                                    <div class='col-4'>
+                                                                        <label for='costo' class='form-label'>Costo de envio</label>
+                                                                        <input type='number' min='0' class='form-control' id='costo' name='costo' value=$producto->costo_envio>                                                                        
+                                                                    </div>
+                                                                    <div class='col-4'>
+                                                                    <label for='estatus' class='form-label'>Estatus</label>
+                                                                    <select name='estatus' id='estatus' class='form-select'>
+                                                                        <option value='{$producto->id_pedido}'>{$producto->estatus}</option>
+                                                                        <option value='Pendiente' " . ($producto->estatus == 'Cancelado' ? 'disabled' : '') . ">Pendiente</option>
+                                                                        <option value='Finalizado' " . ($producto->estatus == 'Cancelado' ? 'disabled' : '') . ">Finalizado</option>
+                                                                    </select>
+                                                                    </div>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label for='imagen' class='form-label'>Guia de envío</label>
+                                                                        <input type='file' class='form-control' id='imagen' name='guia' value=$producto->guia_de_envio>
+                                                                     </div> 
+                                                                
+                                                                    <div >
+                                                                        <label for='fecha' class='form-label'>Documento</label>
+                                                                        <input type='file' class='form-control' id='fecha' name='documento' value=$producto->documento_url>  
+                                                                    </div>
+                                                                    <div class='row'>
+                                                                    <div class='col-12 text-end'>
+                                                                        <button type='submit' class='btn btn-primary mt-3'>Actualizar</button>
+                                                                    </div>
+                                                                    </div> 
+                                                                 </form>
+                                                             </div>
+                                                         </div>
+                                                    /div>
+                                                </div>
+                                            </td>
+                                    </tr>";
+                            }
+                            echo "</tbody></table>";
+                        }
+                    }
+                    ?>
                 </div>
             </div>
         </div>
+     </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const estado = document.getElementById('estado');
+        const form = document.getElementById('pedidoForm');
+        
+        function toggleForm(disabled) {
+            const inputs = form.querySelectorAll('input, select, textarea, button:not([type="submit"])');
+            inputs.forEach(input => input.disabled = disabled);
+        }
+
+        estado.addEventListener('change', function() {
+            toggleForm(estado.value === 'cancelado');
+        });
+
+        // Verificar el estado inicial al cargar la página
+        toggleForm(estado.value === 'cancelado');
+    });
+</script>
         <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://kit.fontawesome.com/b820f07375.js" crossorigin="anonymous"></script>
         <script src="../script/script.js"></script>

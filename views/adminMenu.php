@@ -381,7 +381,7 @@
                         <div class="col-12">
                             <form method="post">
                                 <div class="row">
-                                    <div class="col-8">
+                                    <div class="col-8 col-lg-4">
                                         <select name="categoria" id="categoria" class="form-select">
                                             <option selected disabled value="">Seleccionar Categoria</option>
                                             <!-- Aqui va el select de categorías -->
@@ -399,7 +399,7 @@
                                             ?>
                                         </select>
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col-4 col-lg-2">
                                         <input type="submit" class="btn btn-primary w-100" value="Buscar">
                                     </div>
                                 </div>
@@ -431,7 +431,7 @@
                             $productos = $db->select($query);
 
                             if (empty($productos)) {
-                                echo "<div class='alert alert-danger' role='alert'>No hay productos registrados en esta categoría.</div>";
+                                echo "<div>No hay productos registrados en esta categoría.</div>";
                             } else {
                                 echo "
                                     <table class='table table-striped table-hover table-dark text-center border-3 border-black border-bottom border-start border-end'>
@@ -599,7 +599,7 @@
                             echo "</tbody></table>";
                         }
                     } else {
-                        echo "<div class='alert alert-danger' role='alert'>Seleccione una categoria</div>";
+                        echo "<div>Seleccione una categoria</div>";
                     }
                     ?>
                 </div>
