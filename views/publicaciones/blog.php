@@ -107,11 +107,10 @@
                                 <div class='card blog-card shadow-lg' style="border-radius: 5% 5% 0% 0%;">
                                     <img src='../../img/publicaciones/<?php echo $publicacion->img_url; ?>' class='coffee-image' alt='<?php echo $publicacion->titulo ?>'>
                                     <div class='cblog-card product-card-body'>
-                                        <h5 class='blog-card-title'><?php echo $publicacion->titulo; ?></h5>
+                                       <h5 class='blog-card-title'><?php echo $publicacion->titulo; ?></h5>
+                                        <p class='blog-card-text' style="color:black;"><?php echo $publicacion->descripcion; ?></p>
                                         <h6 class='blog-card-subtitle mb-2 text-muted'><?php echo $publicacion->fecha; ?></h6>
-                                        <p class='blog-card-text  d-none d-md-block'><?php echo $publicacion->descripcion; ?></p>
                                     </div>
-                                   
                                 </div>
                             </div>
                         <?php endforeach; ?>
