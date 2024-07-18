@@ -1,47 +1,5 @@
 
-
--- Vista de Administrador Resrvas
-drop view view_AdminReservas;
-create view view_AdminReservas as
-select 
-	concat(p.nombres,' ',p.apellido_paterno,' ', p.apellido_materno) as cliente,
-    er.id_reserva as folio,
-    er.estatus as estatus,
-    er.c_boletos AS boletos,
-    er.monto_total AS montoTotal,
-    er.fecha_hora_reserva as fechaHoraReserva,
-    e.nombre as EVENTO,
-    e.id_evento,
-    e.precio_boleto,
-    e.fecha_evento as fechaEvento
-from eventos_reservas er
-	join clientes c on c.id_cliente = er.id_cliente
-	join personas p on p.id_persona = c.id_persona
-	join eventos e on e.id_evento = er.id_evento
-WHERE e.tipo = 'De Pago';
-
--- Vista para mostrar la informacion del comprobante de la reserva
-CREATE VIEW vw_comprobante_reserva AS
-SELECT 
-	c.concepto,
-    c.referencia,
-    c.folio_operacion,
-    c.fecha,
-    c.monto,
-    c.banco_origen,
-    c.imagen_comprobante,
-    cli.id_cliente
-FROM
-	comprobantes AS c
-JOIN
-	comprobantes_reservas AS cr ON c.id_comprobante = cr.id_comprobante
-JOIN
-	eventos_reservas AS er ON cr.id_reserva = er.id_reserva
-JOIN
-	clientes AS cli ON er.id_cliente = cli.id_cliente
-JOIN 
-	personas AS p ON cli.id_persona = p.id_persona
-;
+/*
 -- Vista de Administrador Pedidos
 create view view_AdminPedidos as 
 select 
@@ -54,6 +12,7 @@ from pedidos pd
 	join clientes c on c.id_cliente = pd.id_cliente
     join personas p on p.id_persona = c.id_persona;
     
+-- Vista de Administrador Detalle de pedidos
     create view view_detalle_pedidos as
     select 
     bc.nombre as producto, 
@@ -175,9 +134,10 @@ select * from eventos where tipo = 'De Pago';
 
 select * from personas;
 select * from detalle_bc;
+*/
+show triggers;
 
-
--- Funcionamiento del sistema de recompensas
+-- Funcionamiento del sistema de recompensas -- 289
 select * from personas;
 select * from clientes;
 select * from recompensas;
@@ -191,10 +151,10 @@ values (1);
 
 call SP_canjear_recompensa(1);
 
-INSERT INTO recompensas (recompensa, condicion, fecha_inicio, fecha_expiracion, img_url) VALUES
-('Un frappe gratis', 4, '2024-07-12', '2024-07-16', 'cafebonito.png');
 
--- Funcionamiento del sistema de Ecommerce
+call sp_agregar_recompensa('Frappe natural gratis', 5, '2024-07-16', '2024-07-20', 'frappenatural.png');
+
+-- Funcionamiento del sistema de Ecommerce -- 472
 select * from personas;
 select * from clientes;
 select * from domicilios;
@@ -212,10 +172,11 @@ call SP_insert_domicilios(1, 'Laura Sanchez', 'Coahuila', 'Torreón', '27050', '
 
 call SP_Registrar_usuariosClientes('Jonathan Ivan','Castro','Saenz','4','janathangmail.com','micontraseñasupersegura2','8715079031');
 
--- Funcionamiento del sistema de reservas para los eventos.
+-- Funcionamiento del sistema de reservas para los eventos. -- 668
 select * from personas;
 select * from clientes;
 select * from eventos;
+select * from eventos_reservas;
 
 -- Consulta para ver los eventos de pago.
 select e.id_evento,
@@ -247,6 +208,4 @@ CALL SP_comprobante_reserva(
     'comprobante.jpg' -- img_comprobante
 );
 
-
-
-
+show triggers;

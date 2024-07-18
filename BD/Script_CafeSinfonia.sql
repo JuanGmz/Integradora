@@ -1,6 +1,5 @@
 drop database if exists cafe_sinfonia;
 
-
 -- Usuarios de la base de datos--
 /*
 -- Administrador | ALL PRIVILEGES, GRANT OPTION, SUPER |
@@ -78,6 +77,7 @@ create table personas(
     apellido_materno nvarchar(100) not null,
     primary key(id_persona),
     unique(usuario),
+    unique(correo),
     foreign key (id_usuario) references usuarios(id_usuario)
 );
 
@@ -92,13 +92,6 @@ create table empleados(
     id_empleado int auto_increment not null,
     id_persona int not null,
     primary key(id_empleado),
-    foreign key (id_persona) references personas(id_persona)
-);
-
-create table proveedores(
-    id_proveedor int auto_increment not null,
-    id_persona int not null,
-    primary key(id_proveedor),
     foreign key (id_persona) references personas(id_persona)
 );
 
@@ -141,19 +134,6 @@ foreign key (id_mp) references metodos_pago(id_mp),
 foreign key (id_cliente) references clientes(id_cliente),
 foreign key (id_domicilio) references domicilios(id_domicilio)
 );
-
--- Evento para cancelar pedidos no pagados dentro del tiempo establecido.
-delimiter //
-CREATE EVENT cancelar_pedidos_no_pagados
-ON SCHEDULE EVERY 1 hour
-DO
-BEGIN
-    UPDATE pedidos
-    SET estatus = 'Cancelado'
-    WHERE estatus = 'Pendiente'
-      AND fecha_hora_pedido < DATE_SUB(NOW(), INTERVAL 48 hour);
-END //
-delimiter ;
 
 create table bolsas_cafe (
 id_bolsa int auto_increment not null,
@@ -253,58 +233,6 @@ foreign key (id_cliente) references clientes(id_cliente),
 foreign key (id_evento) references EVENTOS(id_evento)
 );
 
--- Evento para cancelar la reserva si no se paga dentro de 48 horas.
-delimiter //
-CREATE EVENT cancelar_reservas_no_pagadas
-ON SCHEDULE EVERY 1 hour
-DO
-BEGIN
-    UPDATE eventos_reservas
-    SET estatus = 'Cancelada'
-    WHERE estatus = 'Pendiente'
-      AND fecha_hora_reserva < DATE_SUB(NOW(), INTERVAL 48 hour);
-END //
-delimiter ;
-
--- Trigger para validar la disponibilidad de boletos al realizar una reserva
-delimiter //
-create trigger before_insert_reservas
-before insert on eventos_reservas
-for each row
-begin 
-    declare v_disponibilidad int;
-    -- Seleccionar disponibilidad de la tabla eventos
-    select disponibilidad 
-    into v_disponibilidad
-    from eventos e
-    where e.id_evento = new.id_evento;
-    -- Verificar si hay suficientes boletos
-    if v_disponibilidad < new.c_boletos then 
-        signal sqlstate '45000' set message_text = 'No hay suficientes boletos.';
-    else 
-        -- Actualizar la disponibilidad de la tabla eventos
-        update eventos 
-        set disponibilidad = disponibilidad - new.c_boletos 
-        where id_evento = new.id_evento;
-    end if;
-end //
-delimiter ;
-
--- Cuando el se cancele el pedido/reserva devolver cantidad.
-delimiter //
-create trigger before_update_reservas
-before update on eventos_reservas
-for each row
-begin 
-    if old.estatus = 'Pendiente' and new.estatus = 'Cancelada' then
-        -- Restaurar la disponibilidad de boletos cuando una reserva se cancela
-        update eventos 
-        set disponibilidad = disponibilidad + old.c_boletos 
-        where id_evento = old.id_evento;
-    end if;
-end //
-delimiter ;
-
 CREATE TABLE comprobantes (
     id_comprobante INT AUTO_INCREMENT,
     id_reserva int not null,
@@ -318,24 +246,6 @@ CREATE TABLE comprobantes (
     unique(id_reserva),
     foreign key (id_reserva) references eventos_reservas(id_reserva)
 );
-
--- Trigger para calcular el monto_total de la reserva.
-DELIMITER //
-CREATE TRIGGER calcular_monto_total_eventos_reservas
-BEFORE INSERT ON eventos_reservas
-FOR EACH ROW
-BEGIN
-    DECLARE precio DOUBLE;
-    
-    -- Obtener el precio del boleto del evento
-    SELECT precio_boleto INTO precio 
-    FROM EVENTOS 
-    WHERE id_evento = NEW.id_evento;
-    
-    -- Calcular el monto total
-    SET NEW.monto_total = NEW.c_boletos * precio;
-END //
-DELIMITER ;
 
 -- Productos del Menu 
 create table productos_menu(
@@ -357,8 +267,6 @@ primary key(id_dpm),
 foreign key (id_pm) references productos_menu(id_pm)
 );
 
--- Sistemma de Recompensas
-
 create table asistencias(
 id_asistencia int auto_increment not null,
 id_cliente int not null,
@@ -378,6 +286,8 @@ img_url nvarchar(255) not null,
 primary key (id_recompensa)
 );
 
+-- Modulo de recompensas.
+
 -- Validar el estatus al ingresar una nueva recompensa
 delimiter //
 create procedure SP_agregar_recompensa(
@@ -388,7 +298,7 @@ in p_fecha_expiracion date,
 in p_img_url varchar(100)
 )
 begin
-	IF p_fecha_expiracion < p_fecha_inicio or p_condicion < 0 THEN
+	IF p_fecha_expiracion < p_fecha_inicio or p_condicion < 0 or p_fecha_inicio < curdate() THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Periodo campos invalidos.';
     ELSE
 		INSERT INTO recompensas (recompensa, condicion, fecha_inicio, fecha_expiracion, img_url)
@@ -410,132 +320,6 @@ begin
 END IF;
 end //
 delimiter ;
-
--- Trigger para pasar lo que tiene en el carrito el cliente a detalle del pedido.
-delimiter //
-CREATE TRIGGER after_insert_añadir_productos_a_detalle_pedido
-AFTER INSERT ON pedidos
-FOR EACH ROW
-BEGIN
-    -- Declaración de variables locales
-    DECLARE permiso BOOLEAN DEFAULT TRUE;
-    DECLARE bolsa INT;
-    DECLARE cantidad INT;
-    DECLARE monto double;
-    DECLARE no_hay_producto BOOLEAN DEFAULT FALSE;
-
-    -- Cursor para leer los productos del carrito asociados al nuevo pedido
-    DECLARE leer CURSOR FOR
-        SELECT DISTINCT carrito.id_dbc, carrito.cantidad, carrito.monto
-        FROM carrito
-        JOIN pedidos ON new.id_cliente = carrito.id_cliente;
-
-    -- Cursor para la comprobacion de stock de los productos en detalle_bc
-    DECLARE comprobacion CURSOR FOR
-        SELECT DISTINCT carrito.id_dbc, carrito.cantidad, carrito.monto
-        FROM carrito
-        JOIN pedidos ON new.id_cliente = carrito.id_cliente;
-
-    -- Manejador para cuando no se encuentra ningún producto en el cursor
-    DECLARE CONTINUE HANDLER FOR NOT FOUND SET no_hay_producto = TRUE;
-
-    -- Verificar el estado del pedido
-    IF new.estatus = 'Pendiente' THEN
-        -- Comprobar si hay suficiente stock para todos los productos del carrito
-        OPEN comprobacion;
-        comprobar_bucle: LOOP
-            FETCH comprobacion INTO bolsa, cantidad, monto;
-            IF no_hay_producto THEN
-                LEAVE comprobar_bucle;
-            END IF;
-
-            -- Verificar el stock disponible
-            IF (SELECT stock FROM detalle_bc WHERE detalle_bc.id_dbc = bolsa) < cantidad THEN
-                SET permiso = FALSE;
-                SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'No hay suficiente stock para realizar el pedido.';
-            END IF;
-        END LOOP;
-        CLOSE comprobacion;
-
-        -- Resetear la variable de control
-        SET no_hay_producto = FALSE;
-
-        -- Abrir el cursor para procesar los productos del carrito
-        OPEN leer;
-        leer_bucle: LOOP
-            FETCH leer INTO bolsa, cantidad, monto;
-            IF no_hay_producto THEN
-                LEAVE leer_bucle;
-            END IF;
-
-            -- Si hay permiso para continuar, insertar en detalle_pedidos y actualizar stock
-            IF permiso THEN
-                INSERT INTO detalle_pedidos (id_dbc, cantidad,monto, id_pedido, precio_unitario)
-                VALUES (bolsa, cantidad, monto,new.id_pedido, (SELECT detalle_bc.precio FROM detalle_bc WHERE detalle_bc.id_dbc = bolsa));
-
-                UPDATE detalle_bc
-                SET stock = stock - cantidad
-                WHERE id_dbc = bolsa;
-
-            ELSE
-                -- Si no hay permiso, enviar un mensaje de error
-                SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Hubo un error y se canceló el pedido, pero se registraron los productos.';
-            END IF;
-        END LOOP;
-        CLOSE leer;
-    END IF;  -- Fin de la condición de estado del pedido
-END //
-DELIMITER ;
-
-
--- Trigger para borrar los productos del carrito en cuanto se realize un pedido
-delimiter //
-create trigger after_insert_borrar_carrito
-after insert on pedidos
-for each row
-begin
-SET SQL_SAFE_UPDATES = 0;
-delete carrito from carrito 
-join pedidos on carrito.id_cliente = pedidos.id_cliente
-join detalle_pedidos on pedidos.id_pedido = detalle_pedidos.id_pedido
-where carrito.id_cliente = pedidos.id_cliente and new.id_pedido = detalle_pedidos.id_pedido;
-    SET SQL_SAFE_UPDATES = 1;
-end //
-delimiter ;
-
--- Trigger para restaurar el stock si se cancela.
-delimiter //
-create trigger after_update_restaurar_stock
-after update on pedidos
-for each row
-begin
-
-declare permiso boolean default true;
-declare bolsa int;
-    declare cantidad int;
-declare no_hay_producto boolean default false;
-    
-    declare restauracion cursor for
-    select distinct dp.id_dbc, dp.cantidad from detalle_pedidos dp join pedidos p on dp.id_pedido = p.id_pedido where dp.id_pedido = old.id_pedido;
-    
-    DECLARE CONTINUE HANDLER FOR NOT FOUND SET no_hay_producto = TRUE;-- condicion para que el loop siga
-    if new.estatus = 'Cancelado' and old.estatus = 'Pendiente' then
-open restauracion;
-restauracion_bucle: loop
-fetch restauracion into bolsa, cantidad;
-if no_hay_producto then
-leave restauracion_bucle;
-end if;  
-        
-update detalle_bc
-set stock = stock + cantidad
-where id_dbc = bolsa;
-            
-end loop;
-close restauracion;
-end if;
-end //
-delimiter ; 
 
 -- Trigger para marcar una asistencia a la recompensa correspondiente cada ves que se inserte una nueva 
 -- asistencia.
@@ -685,6 +469,134 @@ BEGIN
 END //
 DELIMITER ;
 
+-- Modulo ecommerce.
+
+-- Trigger para borrar los productos del carrito en cuanto se realize un pedido
+delimiter //
+create trigger after_insert_borrar_carrito
+after insert on pedidos
+for each row
+begin
+SET SQL_SAFE_UPDATES = 0;
+delete carrito from carrito 
+join pedidos on carrito.id_cliente = pedidos.id_cliente
+join detalle_pedidos on pedidos.id_pedido = detalle_pedidos.id_pedido
+where carrito.id_cliente = pedidos.id_cliente and new.id_pedido = detalle_pedidos.id_pedido;
+    SET SQL_SAFE_UPDATES = 1;
+end //
+delimiter ;
+
+-- Trigger para restaurar el stock si se cancela.
+delimiter //
+create trigger after_update_restaurar_stock
+after update on pedidos
+for each row
+begin
+
+declare permiso boolean default true;
+declare bolsa int;
+    declare cantidad int;
+declare no_hay_producto boolean default false;
+    
+    declare restauracion cursor for
+    select distinct dp.id_dbc, dp.cantidad from detalle_pedidos dp join pedidos p on dp.id_pedido = p.id_pedido where dp.id_pedido = old.id_pedido;
+    
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET no_hay_producto = TRUE;-- condicion para que el loop siga
+    if new.estatus = 'Cancelado' and old.estatus = 'Pendiente' then
+open restauracion;
+restauracion_bucle: loop
+fetch restauracion into bolsa, cantidad;
+if no_hay_producto then
+leave restauracion_bucle;
+end if;  
+        
+update detalle_bc
+set stock = stock + cantidad
+where id_dbc = bolsa;
+            
+end loop;
+close restauracion;
+end if;
+end //
+delimiter ; 
+
+-- Trigger para pasar lo que tiene en el carrito el cliente a detalle del pedido.
+delimiter //
+CREATE TRIGGER after_insert_añadir_productos_a_detalle_pedido
+AFTER INSERT ON pedidos
+FOR EACH ROW
+BEGIN
+    -- Declaración de variables locales
+    DECLARE permiso BOOLEAN DEFAULT TRUE;
+    DECLARE bolsa INT;
+    DECLARE cantidad INT;
+    DECLARE monto double;
+    DECLARE no_hay_producto BOOLEAN DEFAULT FALSE;
+
+    -- Cursor para leer los productos del carrito asociados al nuevo pedido
+    DECLARE leer CURSOR FOR
+        SELECT DISTINCT carrito.id_dbc, carrito.cantidad, carrito.monto
+        FROM carrito
+        JOIN pedidos ON new.id_cliente = carrito.id_cliente;
+
+    -- Cursor para la comprobacion de stock de los productos en detalle_bc
+    DECLARE comprobacion CURSOR FOR
+        SELECT DISTINCT carrito.id_dbc, carrito.cantidad, carrito.monto
+        FROM carrito
+        JOIN pedidos ON new.id_cliente = carrito.id_cliente;
+
+    -- Manejador para cuando no se encuentra ningún producto en el cursor
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET no_hay_producto = TRUE;
+
+    -- Verificar el estado del pedido
+    IF new.estatus = 'Pendiente' THEN
+        -- Comprobar si hay suficiente stock para todos los productos del carrito
+        OPEN comprobacion;
+        comprobar_bucle: LOOP
+            FETCH comprobacion INTO bolsa, cantidad, monto;
+            IF no_hay_producto THEN
+                LEAVE comprobar_bucle;
+            END IF;
+
+            -- Verificar el stock disponible
+            IF (SELECT stock FROM detalle_bc WHERE detalle_bc.id_dbc = bolsa) < cantidad THEN
+                SET permiso = FALSE;
+                SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'No hay suficiente stock para realizar el pedido.';
+            END IF;
+        END LOOP;
+        CLOSE comprobacion;
+
+        -- Resetear la variable de control
+        SET no_hay_producto = FALSE;
+
+        -- Abrir el cursor para procesar los productos del carrito
+        OPEN leer;
+        leer_bucle: LOOP
+            FETCH leer INTO bolsa, cantidad, monto;
+            IF no_hay_producto THEN
+                LEAVE leer_bucle;
+            END IF;
+
+            -- Si hay permiso para continuar, insertar en detalle_pedidos y actualizar stock
+            IF permiso THEN
+                INSERT INTO detalle_pedidos (id_dbc, cantidad,monto, id_pedido, precio_unitario)
+                VALUES (bolsa, cantidad, monto,new.id_pedido, (SELECT detalle_bc.precio FROM detalle_bc WHERE detalle_bc.id_dbc = bolsa));
+
+                UPDATE detalle_bc
+                SET stock = stock - cantidad
+                WHERE id_dbc = bolsa;
+
+            ELSE
+                -- Si no hay permiso, enviar un mensaje de error
+                SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Hubo un error y se canceló el pedido, pero se registraron los productos.';
+            END IF;
+        END LOOP;
+        CLOSE leer;
+    END IF;  -- Fin de la condición de estado del pedido
+END //
+DELIMITER ;
+
+
 -- Procedimiento almacenado para insertar productos en el carrito.
 delimiter //
 create procedure SP_Insert_Update_Carrito(
@@ -740,6 +652,91 @@ BEGIN
 END //
 DELIMITER ;
 
+-- Evento para cancelar pedidos no pagados dentro del tiempo establecido.
+delimiter //
+CREATE EVENT cancelar_pedidos_no_pagados
+ON SCHEDULE EVERY 1 hour
+DO
+BEGIN
+    UPDATE pedidos
+    SET estatus = 'Cancelado'
+    WHERE estatus = 'Pendiente'
+      AND fecha_hora_pedido < DATE_SUB(NOW(), INTERVAL 48 hour);
+END //
+delimiter ;
+
+-- Modulo Eventos y Reservas.
+
+-- Trigger para calcular el monto_total de la reserva.
+DELIMITER //
+CREATE TRIGGER calcular_monto_total_eventos_reservas
+BEFORE INSERT ON eventos_reservas
+FOR EACH ROW
+BEGIN
+    DECLARE precio DOUBLE;
+    
+    -- Obtener el precio del boleto del evento
+    SELECT precio_boleto INTO precio 
+    FROM EVENTOS 
+    WHERE id_evento = NEW.id_evento;
+    
+    -- Calcular el monto total
+    SET NEW.monto_total = NEW.c_boletos * precio;
+END //
+DELIMITER ;
+
+-- Evento para cancelar la reserva si no se paga dentro de 48 horas.
+delimiter //
+CREATE EVENT cancelar_reservas_no_pagadas
+ON SCHEDULE EVERY 1 hour
+DO
+BEGIN
+    UPDATE eventos_reservas
+    SET estatus = 'Cancelada'
+    WHERE estatus = 'Pendiente'
+      AND fecha_hora_reserva < DATE_SUB(NOW(), INTERVAL 48 hour);
+END //
+delimiter ;
+
+-- Trigger para validar la disponibilidad de boletos al realizar una reserva
+delimiter //
+create trigger before_insert_reservas
+before insert on eventos_reservas
+for each row
+begin 
+    declare v_disponibilidad int;
+    -- Seleccionar disponibilidad de la tabla eventos
+    select disponibilidad 
+    into v_disponibilidad
+    from eventos e
+    where e.id_evento = new.id_evento;
+    -- Verificar si hay suficientes boletos
+    if v_disponibilidad < new.c_boletos then 
+        signal sqlstate '45000' set message_text = 'No hay suficientes boletos.';
+    else 
+        -- Actualizar la disponibilidad de la tabla eventos
+        update eventos 
+        set disponibilidad = disponibilidad - new.c_boletos 
+        where id_evento = new.id_evento;
+    end if;
+end //
+delimiter ;
+
+-- Cuando el se cancele el pedido/reserva devolver cantidad.
+delimiter //
+create trigger before_update_reservas
+before update on eventos_reservas
+for each row
+begin 
+    if old.estatus = 'Pendiente' and new.estatus = 'Cancelada' then
+        -- Restaurar la disponibilidad de boletos cuando una reserva se cancela
+        update eventos 
+        set disponibilidad = disponibilidad + old.c_boletos 
+        where id_evento = old.id_evento;
+    end if;
+end //
+delimiter ;
+
 -- Procedimiento almacenado para registrar usuarios(clientes).
 delimiter //
 create procedure SP_Registrar_usuariosClientes(
@@ -763,6 +760,49 @@ insert into usuarios (id_usuario) values (default);
 select last_insert_id() into v_usuario;
 
 -- Se le asigna un rol a ese usuario.
+insert into roles_usuarios(id_usuario, id_rol)
+values(v_usuario, 2);
+
+-- Se inserta en la tabla personas con los parametros recibidos por el sp y la variable v_usuario.
+insert into personas(id_usuario,usuario, correo, contrasena, telefono, nombres, apellido_paterno, apellido_materno)
+values (v_usuario,p_usuario, p_correo,p_contrasena,p_telefono, p_nombres, p_apellido_paterno, p_apellido_materno);
+
+-- Obtenemos el ultimo id autoincrementado y lo guardamos en la variable.
+select last_insert_id() into v_persona;
+
+-- Insertamos en la tabla clientes dandole el valor de la variable de que guarda la persona.
+insert into clientes(id_persona)
+values(v_persona);
+
+end //
+delimiter ; 
+
+-- Procedimiento almacenado para registrar usuarios(administradores).
+delimiter //
+create procedure SP_Registrar_usuariosAdministradores(
+    in p_nombres nvarchar(150),
+    in p_apellido_paterno nvarchar(100),
+    in p_apellido_materno nvarchar(100),
+	in p_usuario nvarchar (100),
+	in p_correo nvarchar(100),
+	in p_contrasena varbinary(150),
+	in p_telefono nchar(10)
+)
+begin 
+-- Se declaran variables para guardar el id del usuario y la persona. 
+declare v_usuario int;
+declare v_persona int;
+
+-- Se inserta el usuario.
+insert into usuarios (id_usuario) values (default); 
+
+-- Obtenemos el ultimo id autoincrementado y se guarda en la variable.
+select last_insert_id() into v_usuario;
+
+-- Se le asigna un rol a ese usuario.
+insert into roles_usuarios(id_usuario, id_rol)
+values(v_usuario, 1);
+
 insert into roles_usuarios(id_usuario, id_rol)
 values(v_usuario, 2);
 
@@ -956,9 +996,8 @@ VALUES
 ('Feria de Libros', 'No te pierdas nuestra feria de libros con grandes descuentos y actividades para toda la familia.', 'feria_libros.jpg', 'Difusion');
 
 INSERT INTO roles (rol, descripcion) VALUES 
-('empleado', 'Empleado del café sinfonía'),
-('cliente', 'Cliente del café sinfonía'),
-('proveedor', 'Proveedor del café sinfonía');
+('administrador', 'Encargado de cafe sinfonia y cultura'),
+('cliente', 'Cliente del café sinfonía');
 
 -- Insertar registros en la tabla categorias.
 	INSERT INTO CATEGORIAS (nombre, descripcion, tipo,img_url ) VALUES
@@ -1180,15 +1219,20 @@ INSERT INTO productos_menu (id_categoria, nombre, descripcion, img_url) VALUES
 (66, '', 70), -- Pastel Red Velvet
 (67, '', 40); -- Rollos de Canela con Glaseado
 
-call SP_Registrar_usuariosClientes('Noe Abel','Vargas','Lopez','noe134','noe@gmail.com','micontraseñasupersegura','8715083731');
+call SP_Registrar_usuariosAdministradores('Noe Abel','Vargas','Lopez','noe134','noelopez191119@gmail.com','micontraseñasupersegura','8715083731');
+call SP_Registrar_usuariosAdministradores('Tobias Gabriel','Rodriguez','Lujan','tlujan','totilotegabriel@gmail.com','miperro123','8716764502');
+call SP_Registrar_usuariosAdministradores('Iker Jesus','Flores','Luna','iker','iker@gmail.com','elgato123','8713923040');
+call SP_Registrar_usuariosAdministradores('Juan Alfredo','Gomez','Gonzalez','juangmz','juan@gmail.com','123juan123','8718451815');
+call SP_Registrar_usuariosClientes('Dante Raziel','Basurto','Saucedo','bune','dantin@gmail.com','lagallina123','8714307468');
+call SP_Registrar_usuariosAdministradores('Hector Armando','Caballero','Serna','hector','hector@gmail.com','123sinfonia123','8715066618');
 
--- Ingresar domicilios para los primeros 19 clientes
+-- Ingresar domicilios
 call SP_insert_domicilios(1, 'Eva Yadira Lopez Tonche', 'Coahuila', 'Torreón', '27050', 'Colinas del Sol', 'Calle del Águila #1415', '8712345683');
+call SP_insert_domicilios(2, 'Jose Ramirez', 'Coahuila', 'Torreón', '27060', 'Jardines del Bosque', 'Calle de los Cedros #1617', '8712345684');
+call SP_insert_domicilios(3, 'Rosa Torres', 'Coahuila', 'Torreón', '27070', 'San Felipe', 'Avenida de la Paz #1819', '8712345685');
+call SP_insert_domicilios(4, 'Miguel Reyes', 'Coahuila', 'Torreón', '27080', 'Revolución', 'Boulevard de las Palmas #2021', '8712345686');
+call SP_insert_domicilios(5, 'Luisa Cruz', 'Coahuila', 'Torreón', '27090', 'Las Fuentes', 'Avenida del Bosque #2223', '8712345687');
 /*
-(2, 'Jose Ramirez', 'Coahuila', 'Torreón', '27060', 'Jardines del Bosque', 'Calle de los Cedros #1617', '8712345684')
-(3, 'Rosa Torres', 'Coahuila', 'Torreón', '27070', 'San Felipe', 'Avenida de la Paz #1819', '8712345685')
-(4, 'Miguel Reyes', 'Coahuila', 'Torreón', '27080', 'Revolución', 'Boulevard de las Palmas #2021', '8712345686')
-(5, 'Luisa Cruz', 'Coahuila', 'Torreón', '27090', 'Las Fuentes', 'Avenida del Bosque #2223', '8712345687')
 (6, 'Jorge Flores', 'Coahuila', 'Torreón', '27100', 'Real del Sol', 'Calle del Río #2425', '8712345688')
 (7, 'Isabel Gomez', 'Coahuila', 'Torreón', '27110', 'La Rosita', 'Avenida de las Estrellas #2627', '8712345689')
 (8, 'Pedro Diaz', 'Coahuila', 'Torreón', '27120', 'Ampliación Loma Real', 'Calle del Mirador #2829', '8712345690')
@@ -1260,11 +1304,11 @@ VALUES
 
 -- Inserción de recompensas
 INSERT INTO recompensas (recompensa, condicion, fecha_inicio, fecha_expiracion, img_url) VALUES
-('10% de descuento en café', 5, '2024-07-9', '2024-07-15', 'img/descuento_cafe.jpg'),
-('Bebida gratis al comprar un pastel', 10, '2024-07-15', '2024-07-11', 'img/bebida_gratis.jpg'),
-('Taza conmemorativa gratis', 15, '2024-07-9', '2024-07-15', 'img/taza_conmemorativa.jpg'),
-('Acceso a evento exclusivo', 20, '2024-07-10', '2024-07-15', 'img/evento_exclusivo.jpg'),
-('Descuento del 20% en tu próxima compra', 25, '2024-07-15', '2024-07-11', 'img/descuento_proxima.jpg');
+('10% de descuento en café', 5, '2024-07-18', '2024-07-20', 'img/descuento_cafe.jpg'),
+('Bebida gratis al comprar un pastel', 10, '2024-07-18', '2024-07-21', 'img/bebida_gratis.jpg'),
+('Taza conmemorativa gratis', 15, '2024-07-28', '2024-08-15', 'img/taza_conmemorativa.jpg'),
+('Acceso a evento exclusivo', 20, '2024-07-18', '2024-08-15', 'img/evento_exclusivo.jpg'),
+('Descuento del 20% en tu próxima compra', 25, '2024-07-19', '2024-09-21', 'img/descuento_proxima.jpg');
 
 -- Insertar asociaciones entre todos los clientes y las recompensas activas
 
@@ -1279,7 +1323,6 @@ CREATE INDEX idx_roles_usuarios_id_rol ON roles_usuarios(id_rol);
 CREATE INDEX idx_personas_id_usuario ON personas(id_usuario);
 CREATE INDEX idx_clientes_id_persona ON clientes(id_persona);
 CREATE INDEX idx_empleados_id_persona ON empleados(id_persona);
-CREATE INDEX idx_proveedores_id_persona ON proveedores(id_persona);
 
 -- Tabla domicilios
 CREATE INDEX idx_domicilios_id_cliente ON domicilios(id_cliente);
@@ -1313,3 +1356,53 @@ CREATE INDEX idx_asistencias_id_cliente ON asistencias(id_cliente);
 -- Tabla clientes_recompensas
 CREATE INDEX idx_clientes_recompensas_id_cliente ON clientes_recompensas(id_cliente);
 CREATE INDEX idx_clientes_recompensas_id_recompensa ON clientes_recompensas(id_recompensa);
+
+DELIMITER $$
+CREATE PROCEDURE SP_filtrar_pedidos(
+    IN busqueda VARCHAR(50)
+)
+BEGIN
+    SELECT p.*, 
+           CONCAT(pe.nombres, ' ', pe.apellido_paterno, ' ', pe.apellido_materno) AS cliente,
+           concat(dom.calle, ' ', dom.colonia, ' ', dom.ciudad, '', dom.estado, ' ', dom.codigo_postal) AS domicilio,
+           dom.telefono AS telefono, 
+           p.estatus AS estatus,
+           mp.metodo_pago AS metodo_pago,
+           bc.nombre AS bolsa,
+           dbc.medida AS medida,
+           dp.cantidad AS cantidad
+    FROM pedidos AS p
+    JOIN clientes
+    ON p.id_cliente = clientes.id_cliente
+    JOIN personas AS pe
+    ON clientes.id_persona = pe.id_persona
+    JOIN domicilios AS dom 
+    ON p.id_domicilio = dom.id_domicilio
+    JOIN metodos_pago AS mp 
+    ON p.id_mp = mp.id_mp
+    JOIN usuarios 
+    ON pe.id_usuario = usuarios.id_usuario
+    JOIN detalle_pedidos AS dp 
+    ON dp.id_pedido = p.id_pedido
+    JOIN detalle_bc AS dbc 
+    ON dbc.id_dbc = dp.id_dbc
+    JOIN bolsas_cafe AS bc
+    ON dbc.id_bolsa = bc.id_bolsa
+    WHERE p.id_pedido like busqueda
+	OR pe.usuario like busqueda
+	OR pe.telefono like busqueda;
+END $$
+DELIMITER ;
+
+
+/*
+call SP_filtrar_pedidos('1');
+select * from pedidos;
+select * from personas;
+select * from detalle_pedidos;
+select * from detalle_bc;
+select * from bolsas_cafe;
+select * from pedidos;
+*/
+
+

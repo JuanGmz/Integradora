@@ -84,7 +84,7 @@
                             <i class="fa-solid fa-user fa-8x text-dark"></i>
                         </div>
                         <div class="col-md-8">
-                            <div class="card-body">
+                            <div class="cblog-card">
                                 <h4 class="card-title fw-bold">Datos Personales</h4>
                                 <p class="card-text">Ver y actualizar información personal.</p>
                                 <a href="datosPersonales.php" class="blog-card-link">Datos Personales <i
@@ -101,7 +101,7 @@
                             <i class="fa-solid fa-file-invoice fa-8x text-dark"></i>
                         </div>
                         <div class="col-md-8">
-                            <div class="card-body">
+                            <div class="cblog-card">
                                 <h4 class="card-title fw-bold">Pedidos</h4>
                                 <p class="card-text">Ver historial de compras.</p>
                                 <a href="#" class="blog-card-link">Pedidos <i class="fa-solid fa-arrow-right"></i></a>
@@ -119,7 +119,7 @@
                             <i class="fa-solid fa-address-book fa-8x text-dark"></i>
                         </div>
                         <div class="col-md-8">
-                            <div class="card-body">
+                            <div class="cblog-card">
                                 <h4 class="card-title fw-bold">Agregar Direcciones</h4>
                                 <p class="card-text">Agrega otra dirección para recibir tus pedidos.</p>
                                 <a href="#" class="blog-card-link">Direcciones <i
@@ -136,7 +136,7 @@
                             <i class="fa-solid fa-ticket fa-8x text-dark"></i>
                         </div>
                         <div class="col-md-8">
-                            <div class="card-body">
+                            <div class="cblog-card">
                                 <h4 class="card-title fw-bold">Reservas</h4>
                                 <p class="card-text">Ver el historial de reservas de boletos para los eventos.</p>
                                 <a href="#" class="blog-card-link">Reservas <i class="fa-solid fa-arrow-right"></i></a>

@@ -81,10 +81,14 @@
                 foreach ($sBlues as $sBlue) {
                     echo "
                         <div class='col-6 col-lg-3 mb-3'>
-                            <div class='card border-0' style='background: var(--color6);'>
-                                <img src='../../img/cafes/{$sBlue->img_url}' class='card-img-top rounded-5' alt='sweetblue" . $sBlue->id_pm . "'>
+                            <div class='card border-0' style='background: var(--color6);'> 
+                                <img src='../../img/menu/{$sBlue->img_url}' class='card-img-top rounded-5' alt='sBlue" . $sBlue->id_pm . "'>
                                 <div class='card-body'>
                                     <h5 class='card-title fw-bold text-center'>{$sBlue->nombre}</h5>
+                                    <form action='detalle_producto/detalles.php' method='post'>
+                                        <input type='hidden' name='id_pm' value='" . $sBlue->id_pm . "'>
+                                        <input type='submit' class='btn btn-cafe w-100' value='Ver Detalles'>
+                                    </form>
                                 </div>
                             </div>
                         </div>

@@ -61,12 +61,12 @@
             <ol class="breadcrumb mt-4">
                 <li class="breadcrumb-item"><a href="../../index.php">Inicio</a></li>
                 <li class="breadcrumb-item"><a href="../menu.php">Menú</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Los Métodos de Jazz Band</li>
+                <li class="breadcrumb-item active" aria-current="page">Té y Tisanas</li>
             </ol>
         </nav>
 
         <!-- Titulo -->
-        <h1>Los Métodos de Jazz Band</h1>
+        <h1>Té y Tisanas</h1>
 
         <hr>
 
@@ -76,17 +76,21 @@
                 $db = new Database();
                 $db->conectarDB();
 
-                $query = "CALL listar_productos_menu('Los métodos de Jazz Band')";
+                $query = "CALL listar_productos_menu('Te y Tisanas')";
 
-                $jazzbands = $db->select($query);
+                $tYtisanas = $db->select($query);
 
-                foreach ($jazzbands as $jazzband) {
+                foreach ($tYtisanas as $tYtisana) {
                     echo "
                         <div class='col-6 col-lg-3 mb-3'>
-                            <div class='card border-0' style='background: var(--color6);'>
-                                <img src='../../img/cafes/{$jazzband->img_url}' class='card-img-top rounded-5' alt='jazzband" . $jazzband->id_pm . "'>
+                            <div class='card border-0' style='background: var(--color6);'> 
+                                <img src='../../img/menu/{$tYtisana->img_url}' class='card-img-top rounded-5' alt='tYtisana" . $tYtisana->id_pm . "'>
                                 <div class='card-body'>
-                                    <h5 class='card-title fw-bold text-center'>{$jazzband->nombre}</h5>
+                                    <h5 class='card-title fw-bold text-center'>{$tYtisana->nombre}</h5>
+                                    <form action='detalle_producto/detalles.php' method='post'>
+                                        <input type='hidden' name='id_pm' value='" . $tYtisana->id_pm . "'>
+                                        <input type='submit' class='btn btn-cafe w-100' value='Ver Detalles'>
+                                    </form>
                                 </div>
                             </div>
                         </div>

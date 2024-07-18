@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú</title>
+    <title>Cold Brew</title>
     <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/style.css">
 </head>
@@ -83,10 +83,14 @@
                 foreach ($coldbrews as $coldbrew) {
                     echo "
                         <div class='col-6 col-lg-3 mb-3'>
-                            <div class='card border-0' style='background: var(--color6);'>
-                                <img src='../../img/cafes/{$coldbrew->img_url}' class='card-img-top rounded-5' alt='coldbrew" . $coldbrew->id_pm . "'>
+                            <div class='card border-0' style='background: var(--color6);'> 
+                                <img src='../../img/menu/{$coldbrew->img_url}' class='card-img-top rounded-5' alt='coldbrew" . $coldbrew->id_pm . "'>
                                 <div class='card-body'>
                                     <h5 class='card-title fw-bold text-center'>{$coldbrew->nombre}</h5>
+                                    <form action='detalle_producto/detalles.php' method='post'>
+                                        <input type='hidden' name='id_pm' value='" . $coldbrew->id_pm . "'>
+                                        <input type='submit' class='btn btn-cafe w-100' value='Ver Detalles'>
+                                    </form>
                                 </div>
                             </div>
                         </div>
