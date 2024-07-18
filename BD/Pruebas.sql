@@ -135,14 +135,28 @@ select * from eventos where tipo = 'De Pago';
 select * from personas;
 select * from detalle_bc;
 */
-show triggers;
-
+/*
+Momento de Ejecución: El momento específico o el intervalo de tiempo en el que se ejecutará el evento.
+Cuerpo del Evento: Las declaraciones SQL que se ejecutarán cuando se dispare el evento.
+Eventos de una sola vez: Se ejecutan una sola vez en un momento específico.
+Eventos recurrentes: Se ejecutan repetidamente a intervalos de tiempo específicos.
+---- Estructura
+CREATE EVENT: Indica el inicio de la declaración de creación del evento.
+nombre_evento: El nombre del evento.
+ON SCHEDULE: Especifica el momento o el intervalo de ejecución del evento.
+AT: Indica un momento específico.
+EVERY: Indica un intervalo recurrente.
+STARTS: Define cuándo debe comenzar a ejecutarse un evento recurrente.
+ENDS: Define cuándo debe dejar de ejecutarse un evento recurrente (opcional).
+DO: Introduce las declaraciones SQL que se ejecutarán cuando el evento se dispare.
+BEGIN ... END: Delimita el bloque de declaraciones SQL en el cuerpo del evento.
+*/
 -- Funcionamiento del sistema de recompensas -- 289
 select * from personas;
 select * from clientes;
 select * from recompensas;
 select * from asistencias;
-select * from view_clientes_recompensas;
+select * from view_clientes_recompensas where id_cliente = 1;
 
 SET SQL_SAFE_UPDATES = 0;
 
@@ -152,7 +166,7 @@ values (1);
 call SP_canjear_recompensa(1);
 
 
-call sp_agregar_recompensa('Frappe natural gratis', 5, '2024-07-16', '2024-07-20', 'frappenatural.png');
+call sp_agregar_recompensa('Frappe natural gratis', 5, '2024-07-19', '2024-07-20', 'frappenatural.png');
 
 -- Funcionamiento del sistema de Ecommerce -- 472
 select * from personas;
@@ -162,15 +176,25 @@ select * from pedidos;
 select * from detalle_pedidos;
 select * from view_carrito;
 
-call SP_Insert_Update_Carrito(2,2,1);
+call SP_Insert_Update_Carrito(1,1,3);
+call SP_Insert_Update_Carrito(1,3,1);
+call SP_Insert_Update_Carrito(1,5,3);
+
+call SP_Realizar_Pedido(2,2,1);
+
+call SP_Realizar_Pedido(1,1,1);
+
+call SP_Insert_Update_Carrito(1,1,1);
 call SP_Insert_Update_Carrito(2,3,1);
 call SP_Insert_Update_Carrito(2,5,3);
-
-call SP_Realizar_Pedido(2,1,1);
 
 call SP_insert_domicilios(1, 'Laura Sanchez', 'Coahuila', 'Torreón', '27050', 'Colinas del Sol', 'Calle del Águila #1415', '8712345683');
 
 call SP_Registrar_usuariosClientes('Jonathan Ivan','Castro','Saenz','4','janathangmail.com','micontraseñasupersegura2','8715079031');
+
+update pedidos set estatus = 'Cancelado' where id_pedido =1;
+
+describe pedidos;
 
 -- Funcionamiento del sistema de reservas para los eventos. -- 668
 select * from personas;
@@ -191,12 +215,12 @@ from eventos e
 join categorias c on e.id_categoria = c.id_categoria
  where e.tipo = 'De pago';
  
-select * from view_comprobante_reserva;
+select * from vw_comprobante_reserva;
 
 call SP_reserva_evento(
 1,  -- Cliente
-5, -- Evento
-5 -- Cantidad de boletos
+4, -- Evento
+20 -- Cantidad de boletos
 );
 
 CALL SP_comprobante_reserva(
@@ -207,5 +231,6 @@ CALL SP_comprobante_reserva(
     'BBVA', -- banco_origen
     'comprobante.jpg' -- img_comprobante
 );
+update eventos_reservas set estatus = 'Cancelada' where id_reserva = 1;
 
 show triggers;

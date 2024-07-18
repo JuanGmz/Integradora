@@ -1,5 +1,4 @@
 drop database if exists cafe_sinfonia;
-
 -- Usuarios de la base de datos--
 /*
 -- Administrador | ALL PRIVILEGES, GRANT OPTION, SUPER |
@@ -471,20 +470,6 @@ DELIMITER ;
 
 -- Modulo ecommerce.
 
--- Trigger para borrar los productos del carrito en cuanto se realize un pedido
-delimiter //
-create trigger after_insert_borrar_carrito
-after insert on pedidos
-for each row
-begin
-SET SQL_SAFE_UPDATES = 0;
-delete carrito from carrito 
-join pedidos on carrito.id_cliente = pedidos.id_cliente
-join detalle_pedidos on pedidos.id_pedido = detalle_pedidos.id_pedido
-where carrito.id_cliente = pedidos.id_cliente and new.id_pedido = detalle_pedidos.id_pedido;
-    SET SQL_SAFE_UPDATES = 1;
-end //
-delimiter ;
 
 -- Trigger para restaurar el stock si se cancela.
 delimiter //
@@ -595,6 +580,19 @@ BEGIN
     END IF;  -- Fin de la condición de estado del pedido
 END //
 DELIMITER ;
+
+-- Trigger para borrar los productos del carrito en cuanto se realize un pedido
+delimiter //
+create trigger after_insert_borrar_carrito
+after insert on pedidos
+for each row
+begin
+delete carrito from carrito 
+join pedidos on carrito.id_cliente = pedidos.id_cliente
+join detalle_pedidos on pedidos.id_pedido = detalle_pedidos.id_pedido
+where carrito.id_cliente = pedidos.id_cliente and new.id_pedido = detalle_pedidos.id_pedido;
+end //
+delimiter ;
 
 
 -- Procedimiento almacenado para insertar productos en el carrito.

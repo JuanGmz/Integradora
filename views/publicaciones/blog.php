@@ -105,12 +105,11 @@
                         <?php foreach ($publicaciones as $publicacion) : ?>
                             <div class='col-md-6 p-2 col-10 col-sm-6 col-lg-4 '>
                                 <div class='card blog-card shadow-lg' style="border-radius: 5% 5% 0% 0%;">
-                                    <img src='/img/publicaciones/<?php echo $publicacion->img_url; ?>' class='coffee-image' alt='<?php echo $publicacion->titulo ?>'>
+                                    <img src='../../img/publicaciones/<?php echo $publicacion->img_url; ?>' class='coffee-image' alt='<?php echo $publicacion->titulo ?>'>
                                     <div class='cblog-card product-card-body'>
                                         <h5 class='blog-card-title'><?php echo $publicacion->titulo; ?></h5>
                                         <h6 class='blog-card-subtitle mb-2 text-muted'><?php echo $publicacion->fecha; ?></h6>
                                         <p class='blog-card-text  d-none d-md-block'><?php echo $publicacion->descripcion; ?></p>
-                                        <a href='#' class='blog-card-link'>Mas detalles  <i class="fa-solid fa-arrow-right"></i></a>
                                     </div>
                                    
                                 </div>
