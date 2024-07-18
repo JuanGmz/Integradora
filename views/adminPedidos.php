@@ -350,30 +350,25 @@
                         </div>
                     </div>
                 </div>
-                <div class="shadow-lg bg-light container p-3">
-                    <div class="row m-2">
-                        <div class="col-12">
-                        <form method="post">
+                <div class="shadow-lg bg-light container-fluid p-3">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8 col-md-10 col-sm-12">
+                            <form method="post">
                                 <div class="row">
-                                    <div class="col-8">
+                                    <div class="col-md-8 col-sm-12 mb-2">
                                         <input type="text" class="form-control" name="busqueda" placeholder="Ingresa folio, usuario o teléfono" value="<?php echo isset($_POST['busqueda']) ? htmlspecialchars($_POST['busqueda']) : ''; ?>">
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col-md-4 col-sm-12">
                                         <input type="submit" class="btn btn-primary w-100" value="Buscar">
                                     </div>
                                 </div>
-                        </form>
+                            </form>
                         </div>
                     </div>
-            </div>
+                </div>
                 <div class="row">
                     <!-- Tabla de pedidos AQUI -->
                     <div class="row mt-lg-3 p-3 p-lg-4 m-0">
-                    <div class="d-lg-none w-100 mb-3 m-0 p-0">
-                        <button type="button" class="btn w-100 btn-primary shadow-lg" data-bs-toggle="modal" data-bs-target="#agregarEvento">
-                            <i class="fa-solid fa-plus fa-2x"></i>
-                        </button>
-                    </div>
                             <?php
                                 include("../class/database.php");
 
