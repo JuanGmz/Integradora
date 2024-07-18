@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog</title>
+    <title>Publicaciones</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
+    <?php
+        session_start();
+    ?>
 </head>
 
 <body>
@@ -47,8 +50,26 @@
                         </ul>
                     </div>
                 </div>
-                <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
-                <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas"
+                <?php
+                if (isset($_SESSION["usuario"])) {
+                ?>
+                    <!-- Navbar con dropdown -->
+                    <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px" >
+                        <a class="dropdown-item" href="perfil.php">Mi perfil</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="../scripts/login/cerrarsesion.php">Cerrar sesión</a>
+                    </div>
+                    <?php
+                } else {
+                    ?>
+                    <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
+                    <?php
+                }
+                ?>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -146,6 +167,9 @@
 
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/45ef8dbe96.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 
 </html>

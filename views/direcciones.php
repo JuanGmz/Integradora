@@ -4,9 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil</title>
+    <title>Direcciones</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
+    <?php
+        session_start();
+    ?>
 </head>
 
 <body>
@@ -46,8 +49,26 @@
                     </ul>
                 </div>
             </div>
-
-            <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas"
+            <?php
+                if (isset($_SESSION["usuario"])) {
+            ?>
+                <!-- Navbar con dropdown -->
+                <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px" >
+                    <a class="dropdown-item" href="perfil.php">Mi perfil</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="../scripts/login/cerrarsesion.php">Cerrar sesión</a>
+                </div>
+                <?php
+            } else {
+                ?>
+                <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
+                <?php
+            }
+            ?>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -63,99 +84,10 @@
                     <ol class="breadcrumb mt-4">
                         <li class="breadcrumb-item"><a href="../index.php">Inicio</a></li>
                         <li class="breadcrumb-item" aria-current="page"><a href="perfil.php">Perfil</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Datos Personales</li>
+                        <li class="breadcrumb-item active" aria-current="page">Direcciones</li>
                     </ol>
                 </nav>
-                <!-- Titulo -->
-                <div class="fw-bold fs-2 mt-3 mb-4">
-                    <h1 class="fw-bold">Datos Personales</h1>
-                    <hr>
-                </div>
-                <div class="mb-3">
-                    <h3>Nombre</h3>
-                    <h5>Nombre del usuario aquí</h5>
-                </div>
-                <div class="mb-3">
-                    <h3>Usuario</h3>
-                    <h5>Usuario va aquí</h5>
-                </div>
-                <div class="row mb-3">
-                    <h3>Correo</h3>
-                    <h5>Correo del usuario aquí</h5>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-8">
-                        <h3>Teléfono</h3>
-                        <h5>Teléfono del usuario aquí</h5>
-                    </div>
-                    <div class="col-4 d-flex justify-content-center align-items-center flex-column">
-                        <!-- Botón para abrir el modal de editar el telefono -->
-                        <button data-bs-toggle="modal" data-bs-target="#modalEditarTel" class="btn btn-primary">Editar</button>
-                        <!-- Modal para editar el telefono -->
-                        <div class="modal fade" id="modalEditarTel" tabindex="-1" aria-labelledby="modalEditarTelLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="modalEditarTelLabel">Cambiar Télefono</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form>
-                                            <div class="mb-3">
-                                                <label for="tel" class="form-label">Teléfono</label>
-                                                <input type="tel" class="form-control" id="tel" name="tel" required>
-                                            </div>
-                                            <div class="text-end">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                <button type="submit" class="btn btn-primary">Guardar</button>
-                                            </div>  
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-8">
-                        <h3>Contraseña</h3>
-                        <h5>Contaseña del usuario aquí</h5>
-                    </div>
-                    <div class="col-4 d-flex justify-content-center align-items-center flex-column">
-                        <!-- Botón para abrir el modal de editar el password -->
-                        <button data-bs-toggle="modal" data-bs-target="#modalEditarPass" class="btn btn-primary">Editar</button>
-                        <!-- Modal para editar el password -->
-                        <div class="modal fade" id="modalEditarPass" tabindex="-1" aria-labelledby="editarPass"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="editarPass">Cambiar contraseña</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form>
-                                            <div class="mb-3">
-                                                <label for="pass" class="form-label">Ingresar Nueva Contraseña</label>
-                                                <input type="password" class="form-control" id="pass" name="pass" required>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="pass" class="form-label">Confirmar Contraseña</label>
-                                                <input type="password" class="form-control" id="pass" name="passConfirmada" required>
-                                            </div>
-                                            <div class="text-end">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                <button type="submit" class="btn btn-primary">Guardar</button>
-                                            </div>  
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
@@ -195,6 +127,9 @@
 
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/45ef8dbe96.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 
 </html>
