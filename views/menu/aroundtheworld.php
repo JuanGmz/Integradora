@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Around The World</title>
+    <title>Menú</title>
     <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/style.css">
 </head>
@@ -16,8 +16,7 @@
             <a class="navbar-brand" href="../index.php">
                 <img src="../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
             </a>
-            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar"
-                aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -46,55 +45,79 @@
                 </div>
             </div>
             <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
-            <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
     </nav>
     <!-- NavBar End -->
+    <!-- NavBar End -->
 
     <div class="container mb-5">
-        <!-- Breadcrumbs -->
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb mt-4">
-                <li class="breadcrumb-item"><a href="../../index.php">Inicio</a></li>
-                <li class="breadcrumb-item"><a href="../menu.php">Menu</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Around The World</li>
-            </ol>
-        </nav>
+            <!-- Breadcrumbs -->
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mt-4">
+                    <li class="breadcrumb-item"><a href="../../index.php">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="../menu.php">Menu</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Around The World</li>
+                </ol>
+            </nav>
+            <div class="fw-bold fs-2 mb-5">
+                <h1 class="h1contact">Productos</h1>
+            </div>
+            <!-- Breadcrumbs End-->
+            <div class="row">
+                <?php
+                    include_once("../../class/database.php");
 
-            <h1>Around The World</h1>
+                    // Conectar a la base de datos
+                    $conexion = new Database();
+                    $conexion->conectarDB();
 
-        <hr>
+                    // Obtener las publicaciones para la página actual
+                    $query = 'SELECT productos_menu.nombre, count(medida) as m, productos_menu.id_pm, productos_menu.descripcion, productos_menu.img_url from productos_menu
+                                join categorias on productos_menu.id_categoria = categorias.id_categoria
+                                join detalle_productos_menu on productos_menu.id_pm = detalle_productos_menu.id_pm
+                                where categorias.nombre = "Around The World"
+                                group by nombre';
+                    $productos = $conexion->select($query);
+                ?>
+                <div class="container mb-3">
 
-        <div class="row mb-3">
-            <?php
-            include_once ("../../class/database.php");
-            $db = new Database();
-            $db->conectarDB();
 
-            $query = "CALL listar_productos_menu('Around The World')";
+                    <div class="row">
+                        <?php foreach ($productos as $producto) : ?>
+                            
+                            <div class='col-md-6 col-12 col-sm-6 mb-3 col-lg-3' >
+                                
+                                <a href= "detalle_producto/detalles.php?<?= http_build_query(['id_pm' => $producto->id_pm,'nom' => $producto->nombre,'desc' =>  $producto->descripcion,
+                                'img' =>  $producto->img_url,], '', '&amp;') ?>">
 
-            $atws = $db->select($query);
-
-            foreach ($atws as $atw) {
-                echo "
-                        <div class='col-6 col-lg-3 mb-3'>
-                            <div class='card border-0' style='background: var(--color6);'> 
-                                <img src='../../img/menu/{$atw->img_url}' class='card-img-top rounded-5' alt='atw" . $atw->id_pm . "'>
-                                <div class='card-body'>
-                                    <h5 class='card-title fw-bold text-center'>{$atw->nombre}</h5>
-                                    <form action='detalle_producto/detalles.php' method='post'>
-                                        <input type='hidden' name='id_pm' value='" . $atw->id_pm . "'>
-                                        <input type='submit' class='btn btn-cafe w-100' value='Ver Detalles'>
-                                    </form>
+                                <div class='card blog-card h-100 shadow-lg' >
+                                    <img src='../../img/menu/<?php echo $producto->img_url; ?>' class='card-img-top' alt='<?php echo $producto->nombre ?>'>
+                                    <div class='card-body'>
+                                        <h5 class='blog-card-title' ><?php echo $producto->nombre; ?></h5>
+                                        <h6 class='blog-card-subtitle mb-2 text-muted'><?php if ($producto->m >= 2)
+                                        {
+                                            echo '+ Con varios tamaños'; 
+                                        }
+                                        else
+                                        {
+                                            echo '- En un tamaño';  
+                                        }
+                                        ?></h6>
+                                    </div>
                                 </div>
+                                </a>
                             </div>
-                        </div>
-                    ";
-            }
-            ?>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+               
+                <?php
+                    $conexion->desconectarDB();
+                ?>
+            </div>
         </div>
     </div>
 

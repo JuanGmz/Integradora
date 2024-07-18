@@ -423,16 +423,16 @@
                                                                         <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                                                                     </div>
                                                                     <div class='modal-body'>
-                                                                        <h4 class='text-start fw-bolder mb-3 col-4'>Bolsa de cafe: <span class='fw-normal fs-4'><br>$producto->bolsa</span></h4>
-                                                                        <h4 class='text-start fw-bolder mb-3 col-4'>Medida: <span class='fw-normal fs-4'>$producto->medida</span></h4>
-                                                                        <h4 class='text-start fw-bolder mb-3 col-4'>Cantidad: <span class='fw-normal fs-4'>$producto->cantidad</span></h4>
-                                                                        <h4 class='text-start fw-bolder mb-3 col-4'>Método de pago: <span class='fw-normal fs-4'>$producto->metodo_pago</span></h4>
-                                                                        <h4 class='text-start fw-bolder mb-3 col-4'>Telefono: <span class='fw-normal fs-4'>$producto->telefono</span></h4>
-                                                                        <h4 class='text-start fw-bolder mb-3 col-5'>Fecha y hora: <span class='fw-normal fs-4'>$producto->fecha_hora_pedido</span></h4>
-                                                                        <h4 class='text-start fw-bolder mb-3 col-7'>Estatus: <span class='fw-normal fs-4'>$producto->estatus</span></h4>                                                                    
-                                                                        <h4 class='text-start fw-bolder mb-3 col-4'>Monto total: <span class='fw-normal fs-4'>$producto->monto_total</span></h4>
-                                                                        <h4 class='text-start fw-bolder mb-3 col-4'>Envío: <span class='fw-normal fs-4'>$producto->envio</span></h4>
-                                                                        <h4 class='text-start fw-bolder mb-3 col-4'>Costo envío: <span class='fw-normal fs-4'>$producto->costo_envio</span></h4>
+                                                                        <h4 class='text-start fw-bolder mb-3'>Bolsa: <span class='fw-normal fs-4'><br>$producto->bolsa</span></h4>
+                                                                        <h4 class='text-start fw-bolder mb-3'>Medida: <span class='fw-normal fs-4'>$producto->medida</span></h4>
+                                                                        <h4 class='text-start fw-bolder mb-3'>Cantidad: <span class='fw-normal fs-4'>$producto->cantidad</span></h4>
+                                                                        <h4 class='text-start fw-bolder mb-3'>Método de pago: <span class='fw-normal fs-4'>$producto->metodo_pago</span></h4>
+                                                                        <h4 class='text-start fw-bolder mb-3'>Telefono: <span class='fw-normal fs-4'>$producto->telefono</span></h4>
+                                                                        <h4 class='text-start fw-bolder mb-3'>Fecha y hora: <span class='fw-normal fs-4'>$producto->fecha_hora_pedido</span></h4>
+                                                                        <h4 class='text-start fw-bolder mb-3'>Estatus: <span class='fw-normal fs-4'>$producto->estatus</span></h4>                                                                    
+                                                                        <h4 class='text-start fw-bolder mb-3'>Monto total: <span class='fw-normal fs-4'>$producto->monto_total</span></h4>
+                                                                        <h4 class='text-start fw-bolder mb-3'>Envío: <span class='fw-normal fs-4'>$producto->envio</span></h4>
+                                                                        <h4 class='text-start fw-bolder mb-3'>Costo envío: <span class='fw-normal fs-4'>$producto->costo_envio</span></h4>
                                                                         <h4 class='text-start fw-bolder mb-3'>Guía de envío: <span class='fw-normal fs-4'>$producto->guia_de_envio</span></h4>
                                                                         <h4 class='text-start fw-bolder mb-3'>Documento: <span class='fw-normal fs-4'>$producto->documento_url</span></h4>
                                                                     </div>

@@ -1,3 +1,8 @@
+<?php
+    include_once("../class/database.php");
+    $db = new Database();
+    $db->conectarDB();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -83,10 +88,8 @@
         </div>
     </section>
 
-    <row class="mt-5">
-        <div class="col-sm-6 col-lg-4">
-
-        </div>
+    <row class="row m-5 p-3">
+        
     </row>
 
     <!-- Footer -->
