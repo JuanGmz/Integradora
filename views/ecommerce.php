@@ -7,6 +7,9 @@
     <title>E-Commerce</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
+    <?php
+        session_start();
+    ?>
 </head>
 
 <body>
@@ -45,8 +48,26 @@
                     </ul>
                 </div>
             </div>
-            <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
-            <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas"
+            <?php
+                if (isset($_SESSION["usuario"])) {
+            ?>
+                <!-- Navbar con dropdown -->
+                <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px" >
+                    <a class="dropdown-item" href="perfil.php">Mi perfil</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="../scripts/login/cerrarsesion.php">Cerrar sesión</a>
+                </div>
+                <?php
+            } else {
+                ?>
+                <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
+                <?php
+            }
+            ?>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -57,7 +78,6 @@
     <!-- Contenido -->
     <div class="container-fluid m-0 p-0" style="background: var(--color2);">
         <div class="row p-0 m-0">
-
             <!-- E-Commerce-->
             <div class="container-fluid bagr-cafe3 p-3">
                 <nav aria-label="breadcrumb" class='col-12 justify-content-center d-flex col-lg-2 col-md-3 col-sm-3'>
@@ -72,45 +92,6 @@
                 </div>
                 <!-- contenedor de productos -->
                 <div class="row  d-flex justify-content-center">
-                    <!--
-                    <div class="col-12 d-md-none">
-                        <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#filterOffcanvas" aria-controls="filterOffcanvas" style="border: none;">
-                            <i class="fa-solid fa-filter filter-icon"></i>
-                        </button>
-
-
-                    </div>
-                    <div class="col-6 col-md-2 col-lg-3 col-xl-3 d-none d-md-block">
-                        <h5>TIPO DE PRODUCTO</h5>
-                        <hr>
-                        <ul class="list-unstyled">
-                            <li><a href="#" class="blog-card-link p-lg-3">Proceso Natural</a></li>
-                            <li><a href="#" class="blog-card-link p-lg-3">Proceso Lavado</a></li>
-                            <li><a href="#" class="blog-card-link p-lg-3">Aroma Cacao, Vinilla</a></li>
-                            <li><a href="#" class="blog-card-link p-lg-3">Aroma Citrico, Florales</a></li>
-                            <li><a href="#" class="blog-card-link p-lg-3">Aroma Dulce de Leche, Nuez</a></li>
-                            <li><a href="#" class="blog-card-link p-lg-3">Cuerpo Alto</a></li>
-                            <li><a href="#" class="blog-card-link p-lg-3">Cuerpo Medio</a></li>
-                            <li><a href="#" class="blog-card-link p-lg-3">Cuerpo Ligero</a></li>
-                        </ul>
-                        <h5>DISPONIBILIDAD</h5>
-                        <hr>
-                        <ul class="list-unstyled">
-                            <li><a href="#" class="blog-card-link p-lg-3">En existencia</a></li>
-                            <li><a href="#" class="blog-card-link p-lg-3">Agotado</a></li>
-                        </ul>
-                        <h5>PRECIO</h5>
-                        <hr>
-                        <div>
-                            <input type="range" class="custom-range col-12" id="priceRange" min="0" max="850">
-                            <div class="d-flex justify-content-between">
-                                <span>0</span>
-                                <span>850</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-10 col-lg-9 row justify-content-center">
--->
                     <?php
                     include_once ("../class/database.php");
                     $conexion = new Database();
@@ -144,50 +125,6 @@
         </div>
     </div>
     </div>
-    <!-- Offcanvas -->
-    <!--
-    <div class="offcanvas offcanvas-start bagr-cafe1" tabindex="-1" id="filterOffcanvas" aria-labelledby="filterOffcanvasLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="filterOffcanvasLabel">Filtros</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <h5>TIPO DE PRODUCTO</h5>
-            <hr>
-            <ul class="list-unstyled">
-                <li><a href="#" class="blog-card-link p-lg-3">Proceso Natural</a></li>
-                <li><a href="#" class="blog-card-link p-lg-3">Proceso Lavado</a></li>
-                <li><a href="#" class="blog-card-link p-lg-3">Aroma Cacao, Vinilla</a></li>
-                <li><a href="#" class="blog-card-link p-lg-3">Aroma Citrico, Florales</a></li>
-                <li><a href="#" class="blog-card-link p-lg-3">Aroma Dulce de Leche, Nuez</a></li>
-                <li><a href="#" class="blog-card-link p-lg-3">Cuerpo Alto</a></li>
-                <li><a href="#" class="blog-card-link p-lg-3">Cuerpo Medio</a></li>
-                <li><a href="#" class="blog-card-link p-lg-3">Cuerpo Ligero</a></li>
-            </ul>
-            <h5>DISPONIBILIDAD</h5>
-            <hr>
-            <ul class="list-unstyled">
-                <li><a href="#" class="blog-card-link p-3">En existencia</a></li>
-                <li><a href="#" class="blog-card-link p-3">Agotado</a></li>
-            </ul>
-            <h5>PRECIO</h5>
-            <hr>
-            <div>
-                <input type="range" class="custom-range col-12" id="priceRangeOffcanvas" min="0" max="850">
-                <div class="d-flex justify-content-between">
-                    <span>0</span>
-                    <span>850</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-                -->
-
-
-
-
     <!-- Botón de Carrito -->
     <button id="floatingButton" class="btn btn-cafe position-fixed bottom-0 end-0 m-3 d-flex p-3 z-3 text-light fw-bold"
         type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
@@ -204,8 +141,7 @@
             <div class="d-flex justify-content-center fs-5">
                 <div class="text-center">
                     <p>Su Carrito esta vacio</p>
-                    <button type="button" class="btn btn-dark" data-bs-dismiss="offcanvas" aria-label="Close">Regresar a
-                        la tienda</button>
+                    <button type="button" class="btn btn-dark" data-bs-dismiss="offcanvas" aria-label="Close">Regresar a la tienda</button>
                 </div>
             </div>
         </div>
@@ -246,7 +182,10 @@
     </footer>
 
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://kit.fontawesome.com/b820f07375.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/45ef8dbe96.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 
 </html>

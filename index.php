@@ -214,7 +214,7 @@
                         echo "<div class='col-9 col-sm-9  col-md-6 p-2 d-flex flex-column justify-content-cente p-lg-2'>";
                         echo "<h5 class='fw-bold mb-3' style='letter-spacing: 1px;'>{$categoria->nombre}</h5>";
                         echo "<p class='text-dark-emphasis mb-4 '>{$categoria->descripcion}</p>";
-                        echo "<a href='views/menu.php' class='btn text-light shadow-lg align-self-start col-12 col-sm-12 col-md-6 col-lg-6 ' style='background: var(--primario);'>Ver Menú</a>";
+                        echo "<a href='views/menu/" .str_replace(' ', '', $categoria->nombre).".php' class='btn text-light shadow-lg align-self-start col-12 col-sm-12 col-md-6 col-lg-6 ' style='background: var(--primario);'>Ver Menú</a>";
                         echo "</div>";
                         echo "</div>";
                         echo "</div>";
@@ -319,7 +319,7 @@
 
                         echo "<div class='col-10 col-sm-6 col-md-4 col-lg-4 p-4 m-0 {$additionalClass} {$additionalClass2}'>";
                         echo "<div class='card m-0 blog-card shadow-lg' style='border-radius: 5% 5% 0% 0%;'>";
-                        echo "<a href='../views/bolsas/{$bolsa->id_bolsa}.php'>";
+                        echo "<a href='views/bolsas/{$bolsa->id_bolsa}.php'>";
                         echo "<img src='/img/bolsas/{$bolsa->img_url}' class='coffee-image align-card-img-top' alt='{$bolsa->id_bolsa}'>";
                         echo "<div class='card-body product-card-body'>";
                         echo "<h5 class='card-title fw-bold product-title' style='letter-spacing: 1px;'>{$bolsa->nombre}</h5>";
@@ -391,7 +391,7 @@
                                                 <?php echo $publicacion->fecha; ?></h6>
                                             <p class='blog-card-text  d-none d-md-block'>
                                                 <?php echo $publicacion->descripcion; ?></p>
-                                            <a href='#' class='blog-card-link'>Mas detalles <i
+                                            <a href='views/publicaciones.php' class='blog-card-link'>Mas detalles <i
                                                     class="fa-solid fa-arrow-right"></i></a>
                                         </div>
 

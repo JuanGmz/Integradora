@@ -63,12 +63,12 @@
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px" >
                     <a class="dropdown-item" href="perfil.php">Mi perfil</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="scripts/login/cerrarsesion.php">Cerrar sesión</a>
+                    <a class="dropdown-item" href="../scripts/login/cerrarsesion.php">Cerrar sesión</a>
                 </div>
                 <?php
             } else {
                 ?>
-                <a href="views/login.php" class="login-button ms-auto">Iniciar Sesión</a>
+                <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
                 <?php
             }
             ?>
@@ -88,10 +88,14 @@
         </div>
     </section>
 
-    <row class="row m-5 p-3">
-        
-    </row>
-
+    <div class="container mb-5">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mt-4">
+                    <li class="breadcrumb-item fw-bold"><a href="../index.php">Inicio</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"></li>Recompensas</li>
+                </ol>
+            </nav>
+    </div>
     <!-- Footer -->
     <footer>
         <div class="container-fluid p-5 " style="background: var(--negroclaro);">
