@@ -136,7 +136,8 @@ select * from personas;
 select * from detalle_bc;
 */
 show triggers;
--- Funcionamiento del sistema de recompensas -- eventos(609) triggers ()
+
+-- Funcionamiento del sistema de recompensas -- 289
 select * from personas;
 select * from clientes;
 select * from recompensas;
@@ -153,7 +154,7 @@ call SP_canjear_recompensa(1);
 
 call sp_agregar_recompensa('Frappe natural gratis', 5, '2024-07-16', '2024-07-20', 'frappenatural.png');
 
--- Funcionamiento del sistema de Ecommerce
+-- Funcionamiento del sistema de Ecommerce -- 472
 select * from personas;
 select * from clientes;
 select * from domicilios;
@@ -171,7 +172,7 @@ call SP_insert_domicilios(1, 'Laura Sanchez', 'Coahuila', 'Torreón', '27050', '
 
 call SP_Registrar_usuariosClientes('Jonathan Ivan','Castro','Saenz','4','janathangmail.com','micontraseñasupersegura2','8715079031');
 
--- Funcionamiento del sistema de reservas para los eventos.
+-- Funcionamiento del sistema de reservas para los eventos. -- 668
 select * from personas;
 select * from clientes;
 select * from eventos;
