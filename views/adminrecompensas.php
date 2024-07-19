@@ -45,15 +45,11 @@ if (isset($_POST['agRecompensa'])) {
 
     if (!empty($resultado)) {
         $conexion->execute($consulta);
-        echo "<script> document.addEventListener('DOMContentLoaded', function() { showAlert('Asistencia registrada con éxito.', 'success'); }); </script>";
+        echo "<script> document.addEventListener('DOMContentLoaded', function() { showAlert('¡Asistencia registrada con éxito!', 'success'); }); </script>";
     } else {
-        echo "<script> document.addEventListener('DOMContentLoaded', function() { showAlert('El usuario no existe.', 'warning'); }); </script>";
+        echo "<script> document.addEventListener('DOMContentLoaded', function() { showAlert('¡El usuario no existe!', 'warning'); }); </script>";
     }
-
-
-
     $conexion->desconectarDB();
-
 }
 
 ?>
@@ -68,42 +64,6 @@ if (isset($_POST['agRecompensa'])) {
     <link rel="shortcut icon" href="../img/Sinfonía-Café-y-Cultura.webp">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/scrollbar.css">
-    <style>
-        /* Estilo base para todas las alertas flotantes */
-        .floating-alert {
-            position: fixed;
-            top: 20px;
-            /* Espacio desde la parte superior */
-            left: 50%;
-            /* Centra horizontalmente */
-            transform: translateX(-50%);
-            /* Ajusta el centro para que sea realmente el centro */
-            z-index: 9999;
-            display: none;
-            padding: 15px;
-            border-radius: 5px;
-            color: #fff;
-            font-size: 16px;
-        }
-
-        /* Estilo para alertas de éxito */
-        .alert-success {
-            background-color: #28a745;
-            /* Color verde */
-        }
-
-        /* Estilo para alertas de error */
-        .alert-error {
-            background-color: #dc3545;
-            /* Color rojo */
-        }
-
-        /* Estilo para alertas de advertencia */
-        .alert-warning {
-            background-color: #ffc107;
-            /* Color amarillo */
-        }
-    </style>
 </head>
 
 <body class="bg-light">
@@ -561,7 +521,7 @@ if (isset($_POST['agRecompensa'])) {
                     </div>
                 </div>
                 <div class="alert floating-alert" id="floatingAlert">
-                    <strong id="alertStrong">¡Alerta!</strong> <span id="alertMessage">Mensaje de prueba.</span>
+                    <span id="alertMessage">Mensaje de la alerta.</span>
                 </div>
             </div>
         </div>
