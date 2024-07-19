@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administrar Eventos</title>
+    <link rel="shortcut icon" href="../img/Sinfonía-Café-y-Cultura.webp">
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <script>
@@ -388,7 +389,7 @@
                             </div>
                             <div class="modal-body">
                                 <!-- Aqui va el contenido de el boton de agregar-->
-                                <form action="..\scripts\insertarevento.php" method="post">
+                                <form action="../scripts/insertarevento.php" method="post" enctype="multipart/form-data">
                                     <div class="col-12 mb-3">
                                         <label for="titulo" class="form-label">Titulo del Evento</label>
                                         <input type="text" maxlength="50"  class="form-control" id="titulo" name="evento" required>
@@ -568,17 +569,17 @@
                                                             </div>
                                                             <div class='modal-body mb-3'>
                                                                 <!-- Aquí se está mostrando la imagen -->
-                                                                <form action='' method='POST' enctype='multipart/form-data'>
+                                                                <form action='../scripts/admineventos/editarimagen.php' method='POST' enctype='multipart/form-data'>
                                                                     <div class='col-12 mb-3'>
                                                                         <label for='imagen' class='form-label'>Imagen Actual</label><br>
-                                                                        <img src='../img/menu/$producto->img_url' class='img-fluid' alt='imagen$producto->nombre'><br>
+                                                                        <img src='../img/eventos/$producto->img_url' class='img-fluid' alt='imagen$producto->nombre'><br>
                                                                             <small>Selecciona una nueva imagen para actualizar, si es necesario.</small>
                                                                         </div>
                                                                         <div class='col-12 mb-3'>
                                                                             <label for='imagen_nueva' class='form-label'>Selecciona una nueva imagen</label>
                                                                             <input type='file' class='form-control' id='imagen_nueva' name='imagen_nueva' accept='image/*' required>
                                                                         </div>
-                                                                        <input type='hidden' name='id_pm' value='$producto->id_evento'>
+                                                                        <input type='hidden' name='id_evento' value='$producto->id_evento'>
                                                                         <div class='col-12 mb-3 text-end'>
                                                                             <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
                                                                             <button type='submit' class='btn btn-primary'>Actualizar</button>

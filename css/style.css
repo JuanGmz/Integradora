@@ -56,21 +56,26 @@ a:hover {
 
 /* Estilos para las imágenes */
 .coffee-image {
-  width: 100%; /* Ancho del contenedor */
+  width: 100%;
+  /* Ancho del contenedor */
   height: 23rem;
-  object-fit: cover; /* Ajuste para cubrir el contenedor manteniendo la relación de aspecto */
+  object-fit: cover;
+  /* Ajuste para cubrir el contenedor manteniendo la relación de aspecto */
   border-radius: 5% 5% 0% 0%;
 }
 
 @media (min-width: 768px) {
   .coffee-image {
-    height: 30rem; /* Altura deseada para tamaños de pantalla medianos y grandes */
+    height: 30rem;
+    /* Altura deseada para tamaños de pantalla medianos y grandes */
   }
 }
+
 /* Tamaños de pantalla pequeños */
 @media (max-width: 767px) {
   .coffee-image {
-    height: 15rem; /* Altura deseada para tamaños de pantalla pequeños */
+    height: 15rem;
+    /* Altura deseada para tamaños de pantalla pequeños */
   }
 }
 
@@ -234,6 +239,7 @@ a:hover {
   box-shadow: 0 8px 8px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease-in-out;
 }
+
 .form-control-bb:hover {
   border-bottom: 2px solid var(--color1);
   box-shadow: 0 5px 8px var(--cuarto);
@@ -242,7 +248,8 @@ a:hover {
 .form-control-bb:focus {
   border-bottom: 2px solid var(--color1);
   box-shadow: 0 5px 8px var(--obscuro);
-  outline: none; /* Esto es opcional, pero ayuda a eliminar el borde azul por defecto */
+  outline: none;
+  /* Esto es opcional, pero ayuda a eliminar el borde azul por defecto */
 }
 
 /* Navbar admin */
@@ -367,9 +374,11 @@ a:hover {
   height: 120px;
   transition: all 0.3s ease;
 }
+
 @media (min-width: 768px) {
   .carousel-item img {
-    height: 200px; /* Altura deseada para tamaños de pantalla medianos y grandes */
+    height: 200px;
+    /* Altura deseada para tamaños de pantalla medianos y grandes */
   }
 }
 
@@ -428,13 +437,16 @@ a:hover {
   position: relative;
   background-image: url("../img/cafes/cafe14.webp");
   background-size: cover;
-  background-attachment: fixed; /* Mantiene la imagen fija */
+  background-attachment: fixed;
+  /* Mantiene la imagen fija */
   background-position: center;
   color: white;
   text-align: center;
   padding: 60px 20px;
-  height: 400px; /* Ajusta según tus necesidades */
+  height: 400px;
+  /* Ajusta según tus necesidades */
 }
+
 .subscription-section::before {
   content: "";
   position: absolute;
@@ -442,24 +454,30 @@ a:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Oscurecer fondo */
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Oscurecer fondo */
   z-index: 1;
 }
+
 .subscription-content {
   position: relative;
   z-index: 2;
 }
+
 .subscription-btn {
   font-size: 1rem;
   padding: 10px 30px;
   border: none;
   border-radius: 30px;
-  background-color: #d4a373; /* Color del botón */
+  background-color: #d4a373;
+  /* Color del botón */
   color: white;
   transition: background-color 0.3s ease;
 }
+
 .subscription-btn:hover {
-  background-color: #b58359; /* Color del botón al pasar el cursor */
+  background-color: #b58359;
+  /* Color del botón al pasar el cursor */
 }
 
 /* Apartado de blog */
@@ -470,6 +488,7 @@ a:hover {
   transition: transform 0.3s;
   cursor: pointer;
 }
+
 .blog-card:hover {
   transform: scale(1.05);
 }
@@ -477,140 +496,187 @@ a:hover {
 .blog-card .card-body {
   padding: 1rem;
 }
+
 .blog-card-title {
   font-size: 1.25rem;
   font-weight: bold;
 }
+
 .blog-card-subtitle {
   color: #d4a373;
   margin-bottom: 0.5rem;
 }
+
 .blog-card-text {
   font-size: 0.875rem;
   color: #aaa;
 }
+
 .blog-card-link {
   color: #d4a373;
   text-decoration: none;
   font-weight: bold;
 }
+
 /*Apartado de imagenes de Publicaciones*/
 .card-img-top {
-  height: 200px; /* Altura deseada para todas las imágenes */
-  object-fit: cover; /* Ajuste para cubrir el contenedor manteniendo la relación de aspecto */
+  height: 200px;
+  /* Altura deseada para todas las imágenes */
+  object-fit: cover;
+  /* Ajuste para cubrir el contenedor manteniendo la relación de aspecto */
 }
+
 .blog-card {
-  height: 100%; /* Altura completa para el card */
+  height: 100%;
+  /* Altura completa para el card */
 }
+
 .card-body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
+
 .cblog-card {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   border: 10%;
 }
+
 .blog-card-title {
   font-size: 1.25rem;
 }
+
 .blog-card-text {
   font-size: 0.9rem;
 }
+
 /*------------------------------- Blog ----------------------------------*/
 
 .blog-card-link {
-  color: var(--color3); /* Color inicial del enlace */
-  text-decoration: none; /* Sin subrayado */
-  transition: color 0.3s, transform 0.3s; /* Transición suave */
+  color: var(--color3);
+  /* Color inicial del enlace */
+  text-decoration: none;
+  /* Sin subrayado */
+  transition: color 0.3s, transform 0.3s;
+  /* Transición suave */
 }
 
 .blog-card-link:hover {
-  color: var(--cuarto); /* Color del enlace al hacer hover */
-  transform: translateX(5px); /* Mueve el enlace 5px hacia la derecha */
+  color: var(--cuarto);
+  /* Color del enlace al hacer hover */
+  transform: translateX(5px);
+  /* Mueve el enlace 5px hacia la derecha */
 }
 
 .blog-card-link i {
-  transition: transform 0.3s; /* Transición suave para el ícono */
+  transition: transform 0.3s;
+  /* Transición suave para el ícono */
 }
 
 .blog-card-link:hover i {
-  transform: translateX(5px); /* Mueve el ícono 5px hacia la derecha */
+  transform: translateX(5px);
+  /* Mueve el ícono 5px hacia la derecha */
 }
 
 /*--- paginación ---*/
 .custom-page-item {
-  margin: 0 5px; /* Añade margen entre los elementos de paginación */
+  margin: 0 5px;
+  /* Añade margen entre los elementos de paginación */
 }
 
 .custom-page-link {
-  color: var(--color1); /* Color de texto */
-  background-color: var(--color13); /* Color de fondo */
-  border: 1px solid var(--color13); /* Borde */
-  padding: 10px 20px; /* Espaciado interno */
-  transition: all 0.3s; /* Efecto de transición */
+  color: var(--color1);
+  /* Color de texto */
+  background-color: var(--color13);
+  /* Color de fondo */
+  border: 1px solid var(--color13);
+  /* Borde */
+  padding: 10px 20px;
+  /* Espaciado interno */
+  transition: all 0.3s;
+  /* Efecto de transición */
 }
 
 .custom-page-link:hover {
-  background-color: var(--obscuro); /* Color de fondo al pasar el mouse */
-  color: #fff; /* Color de texto al pasar el mouse */
+  background-color: var(--obscuro);
+  /* Color de fondo al pasar el mouse */
+  color: #fff;
+  /* Color de texto al pasar el mouse */
 }
 
 .page-item.active .custom-page-link {
-  background-color: var(--cuarto); /* Color de fondo del elemento activo */
-  color: #fff; /* Color de texto del elemento activo */
-  border-color: var(--cuarto); /* Color del borde del elemento activo */
+  background-color: var(--cuarto);
+  /* Color de fondo del elemento activo */
+  color: #fff;
+  /* Color de texto del elemento activo */
+  border-color: var(--cuarto);
+  /* Color del borde del elemento activo */
 }
 
 .bg-dark {
   background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
 }
+
 /*---------------------------- Perfil----------------------------------*/
 .section-divider {
-  border-top: 2px solid var(--color3); /* Light gray color */
+  border-top: 2px solid var(--color3);
+  /* Light gray color */
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
 .dropdown .fa-user {
   transition: color 0.3s ease;
 }
+
 .dropdown .fa-user:hover {
-  color: var(--obscuro); /* Change this color to whatever you prefer */
+  color: var(--obscuro);
+  /* Change this color to whatever you prefer */
 }
+
 .dropdown-itemcolor {
   background-color: var(--color1);
 }
+
 .dropdown-itemcolor:hover {
   background-color: var(--cuarto);
   color: var(--blanco);
 }
+
 /*---------------------------- E-ecommerce----------------------------------*/
 .sidebar {
   border-right: 1px solid #ddd;
   padding-right: 20px;
 }
+
 .product-list {
   padding-left: 20px;
 }
+
 /*filtro*/
 .sidebar {
   border-right: 1px solid #ddd;
   padding-right: 20px;
 }
+
 .product-list {
   padding-left: 20px;
 }
+
 .filter-icon {
   font-size: 24px;
   cursor: pointer;
   margin-bottom: 20px;
 }
+
 .filter-icon:hover {
   color: var(--cuarto);
-  transition: color 0.3s, transform 0.3s; /* Transición suave */
+  transition: color 0.3s, transform 0.3s;
+  /* Transición suave */
 }
+
 /*---------------------------- E-ecommerce bolsa----------------------------------*/
 .product-title {
   font-size: 2rem;
@@ -618,6 +684,7 @@ a:hover {
   letter-spacing: 1px;
   color: var(--obscuro);
 }
+
 .product-text {
   color: var(--cuarto);
 }
@@ -627,20 +694,24 @@ a:hover {
   letter-spacing: 0.5px;
   color: var(--terciario);
 }
+
 .product-detail {
   font-weight: bold;
   color: var(--primario);
 }
+
 .product-detail2 {
   font-weight: bold;
   color: var(--color14);
 }
+
 .product-price {
   font-size: 2rem;
   font-weight: bold;
   color: #333;
 }
-/*---------------------------- Contactanos----------------------------------*/  
+
+/*---------------------------- Contactanos----------------------------------*/
 .social-card {
   position: relative;
   overflow: hidden;
@@ -685,18 +756,24 @@ a:hover {
   color: #000000;
   font-weight: bold;
 }
+
 .accordion-button:not(.collapsed) {
-  background-color: var(--cuarto); /* Color de fondo cuando está expandido */
-  color: #000; /* Color de texto negro */
+  background-color: var(--cuarto);
+  /* Color de fondo cuando está expandido */
+  color: #000;
+  /* Color de texto negro */
 }
+
 /*----------------- Mapa------------------*/
 .map-container {
   position: relative;
   width: 100%;
-  padding-bottom: 44.5%; /* 16:9 aspect ratio */
+  padding-bottom: 44.5%;
+  /* 16:9 aspect ratio */
   height: 0;
   overflow: hidden;
 }
+
 .map-container iframe {
   position: absolute;
   top: 0;
@@ -704,4 +781,40 @@ a:hover {
   width: 100%;
   height: 100%;
   border: 0;
+}
+
+/* Estilo base para todas las alertas flotantes */
+.floating-alert {
+  position: fixed;
+  bottom: 20px;
+  /* Espacio desde la parte inferior */
+  right: 20px;
+  /* Espacio desde la parte derecha */
+  z-index: 9999;
+  display: none;
+  padding: 15px;
+  border-radius: 5px;
+  color: hsl(0, 0%, 100%);
+  font-size: 16px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  /* Sombra */
+}
+
+/* Estilo para alertas de éxito */
+.alert-success {
+  background-color: #28a745;
+  /* Color verde */
+}
+
+/* Estilo para alertas de error */
+.alert-error {
+  background-color: #dc3545;
+  /* Color rojo */
+}
+
+/* Estilo para alertas de advertencia */
+.alert-warning {
+  background-color: #ffc107;
+  /* Color amarillo */
 }

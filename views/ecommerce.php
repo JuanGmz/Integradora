@@ -7,6 +7,7 @@
     <title>E-Commerce</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="shortcut icon" href="../img/Sinfonía-Café-y-Cultura.webp">
     <?php
         session_start();
     ?>
@@ -109,6 +110,10 @@
                             echo "<div class='card-body product-card-body'>";
                             echo "<h5 class='card-title fw-bold product-title' style='letter-spacing: 1px;'>{$bolsa->nombre}</h5>";
                             echo "<p class='card-text product-subtitle'>{$bolsa->proceso}</p>";
+                            echo "<form action='../views/bolsas/detallebolsa.php' method='post'>";
+                            echo "<input type='hidden' name='id_bolsa' value='{$bolsa->id_bolsa}'>";
+                            echo "<input type='submit' class='btn btn-cafe w-100' value='Ver Detalles'>";
+                            echo "</form>";
                             echo "</div>";
                             echo "</a>";
                             echo "</div>";

@@ -6,48 +6,71 @@
     <title>Canal de Difusión</title>
     <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/style.css">
+    <link rel="shortcut icon" href="../../img/Sinfonía-Café-y-Cultura.webp">
+    <?php
+    session_start();
+    ?>
 </head>
 
 <body>
 
+
     <div class="content">
         <!-- NavBar -->
-        <nav class="navbar navbar-expand-lg shadow-lg mb-lg-5">
+        <!-- NavBar -->
+        <nav class="navbar navbar-expand-lg shadow-lg">
             <div class="container-fluid">
                 <a class="navbar-brand" href="../../index.php">
                     <img src="../../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
                 </a>
-                <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="tituloOffcanvas">
                     <div class="offcanvas-header">
-                        <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura
-                        </h5>
+                        <h5 class="offcanvas-title text-light" id="tituloOffcanvas">SinfoníaCafé&Cultura</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
                     <div class="offcanvas-body">
                         <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="../menu.php">Menú</a>
+                                <a class="nav-link" aria-current="page" href="../../views/menu.php">Menú</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link mx-lg-2" href="../ecommerce.php">Comprar</a>
+                                <a class="nav-link mx-lg-2" href="../../views/ecommerce.php">Comprar</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link mx-lg-2" href="../recompensas.php">Recompensas</a>
+                                <a class="nav-link mx-lg-2" href="../../views/recompensas.php">Recompensas</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link mx-lg-2" href="../eventos.php">Eventos</a>
+                                <a class="nav-link mx-lg-2" href="../../views/eventos.php">Eventos</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link mx-lg-2" href="../publicaciones.php">Publicaciones</a>
+                                <a class="nav-link mx-lg-2" href="../../views/publicaciones.php">Publicaciones</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link mx-lg-2" href="../contact.php">Contacto</a>
+                                <a class="nav-link mx-lg-2" href="../../views/contact.php">Contacto</a>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <a href="../login.php" class="login-button ms-auto">Iniciar Sesión</a>
-                <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <?php
+                if (isset($_SESSION["usuario"])) {
+                ?>
+                    <!-- Navbar con dropdown -->
+                    <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
+                        <a class="dropdown-item" href="../../views/perfil.php">Mi perfil</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="../../scripts/login/cerrarsesion.php">Cerrar sesión</a>
+                    </div>
+                <?php
+                } else {
+                ?>
+                    <a href="../../views/login.php" class="login-button ms-auto">Iniciar Sesión</a>
+                <?php
+                }
+                ?>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
             </div>
@@ -68,27 +91,27 @@
             </div>
             <div class="row">
                 <?php
-                    include_once("../../class/database.php");
+                include_once("../../class/database.php");
 
-                    // Conectar a la base de datos
-                    $conexion = new Database();
-                    $conexion->conectarDB();
+                // Conectar a la base de datos
+                $conexion = new Database();
+                $conexion->conectarDB();
 
-                    // Configurar la paginación
-                    $results_per_page = 6; // Número de resultados por página
-                    $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
-                    $page = max($page, 1); // Asegurar que la página sea al menos 1
+                // Configurar la paginación
+                $results_per_page = 6; // Número de resultados por página
+                $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
+                $page = max($page, 1); // Asegurar que la página sea al menos 1
 
-                    // Contar el número total de publicaciones
-                    $total_query = 'SELECT COUNT(*) AS total FROM publicaciones WHERE tipo = "Difusión"';
-                    $total_result = $conexion->select($total_query);
-                    $total_pages = ceil($total_result[0]->total / $results_per_page);
+                // Contar el número total de publicaciones
+                $total_query = 'SELECT COUNT(*) AS total FROM publicaciones WHERE tipo = "Difusión"';
+                $total_result = $conexion->select($total_query);
+                $total_pages = ceil($total_result[0]->total / $results_per_page);
 
-                    // Calcular el desplazamiento (offset)
-                    $offset = ($page - 1) * $results_per_page;
+                // Calcular el desplazamiento (offset)
+                $offset = ($page - 1) * $results_per_page;
 
-                    // Obtener las publicaciones para la página actual
-                    $query = 'SELECT 
+                // Obtener las publicaciones para la página actual
+                $query = 'SELECT 
                                 titulo, 
                                 descripcion, 
                                 img_url,
@@ -98,7 +121,7 @@
                               WHERE 
                                 tipo = "Difusión"
                               LIMIT ' . $offset . ', ' . $results_per_page;
-                    $publicaciones = $conexion->select($query);
+                $publicaciones = $conexion->select($query);
                 ?>
                 <div class="container mb-3">
                     <div class="row">
@@ -119,22 +142,22 @@
                 <nav aria-label="Page navigation example">
                     <ul class="pagination d-flex justify-content-center">
                         <li class="page-item<?php if ($page <= 1) {
-                            echo ' disabled'; } ?>"
-                        >
+                                                echo ' disabled';
+                                            } ?>">
                             <a class="page-link custom-page-link" href="?page=<?php echo $page - 1; ?>" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
                         <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
-                        <li class="page-item custom-page-item<?php if ($page == $i) {
-                            echo ' active'; } ?>"
-                        >
-                            <a class="page-link custom-page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                        </li>
+                            <li class="page-item custom-page-item<?php if ($page == $i) {
+                                                                        echo ' active';
+                                                                    } ?>">
+                                <a class="page-link custom-page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                            </li>
                         <?php endfor; ?>
                         <li class="page-item<?php if ($page >= $total_pages) {
-                            echo ' disabled'; } ?>"
-                        >
+                                                echo ' disabled';
+                                            } ?>">
                             <a class="page-link custom-page-link" href="?page=<?php echo $page + 1; ?>" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
@@ -142,7 +165,7 @@
                     </ul>
                 </nav>
                 <?php
-                    $conexion->desconectarDB();
+                $conexion->desconectarDB();
                 ?>
             </div>
         </div>
@@ -183,6 +206,11 @@
 
     <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/45ef8dbe96.js" crossorigin="anonymous"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 
 </html>
