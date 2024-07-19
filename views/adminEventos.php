@@ -11,13 +11,17 @@
         document.addEventListener('DOMContentLoaded', function () {
             const tipoSelect = document.getElementById('tipo');
             const costoInput = document.getElementById('costo');
+            const cantidadBoletosInput = document.getElementById('cantidadBoletos');
+
 
             function toggleCostoInput() {
                 if (tipoSelect.value === 'Gratuito') {
-                    costoInput.value = '';
+                    costoInput.value = 'NULL';
                     costoInput.disabled = true;
+                    cantidadBoletosInput.disabled = true;
                 } else {
                     costoInput.disabled = false;
+                    cantidadBoletosInput.disabled = false;
                 }
             }
 
