@@ -620,6 +620,8 @@ end if;
 end //
 delimiter ;
 
+
+
 -- Procedimiento almacenado para realizar pedido.
 delimiter //
 CREATE PROCEDURE SP_Realizar_Pedido(
@@ -662,6 +664,9 @@ BEGIN
       AND fecha_hora_pedido < DATE_SUB(NOW(), INTERVAL 48 hour);
 END //
 delimiter ;
+
+
+
 
 -- Modulo Eventos y Reservas.
 
@@ -1402,5 +1407,3 @@ select * from detalle_bc;
 select * from bolsas_cafe;
 select * from pedidos;
 */
-
-

@@ -4,120 +4,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú</title>
+    <title>Around The World</title>
     <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/style.css">
+    <link rel="shortcut icon" href="../../img/Sinfonía-Café-y-Cultura.webp">
+    <?php
+        session_start();
+    ?>
 </head>
 
 <body>
     <!-- NavBar -->
-    <nav class="navbar navbar-expand-lg shadow-lg mb-lg-5">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="../index.php">
-                <img src="../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
-            </a>
-            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    <nav class="navbar navbar-expand-lg shadow-lg">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="../../index.php">
+                    <img src="../../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
+                </a>
+                <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="tituloOffcanvas">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title text-light" id="tituloOffcanvas">SinfoníaCafé&Cultura</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="../../views/menu.php">Menú</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link mx-lg-2" href="../../views/ecommerce.php">Comprar</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link mx-lg-2" href="../../views/recompensas.php">Recompensas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link mx-lg-2" href="../../views/eventos.php">Eventos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link mx-lg-2" href="../../views/publicaciones.php">Publicaciones</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link mx-lg-2" href="../../views/contact.php">Contacto</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="offcanvas-body">
-                    <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="../menu.php">Menú</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="../ecommerce.php">Comprar</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="../recompensas.php">Recompensas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="../eventos.php">Eventos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="../publicaciones.php">Publicaciones</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="../contact.php">Contacto</a>
-                        </li>
-                    </ul>
-                </div>
+                <?php
+                if (isset($_SESSION["usuario"])) {
+                ?>
+                    <!-- Navbar con dropdown -->
+                    <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
+                        <a class="dropdown-item" href="../../views/perfil.php">Mi perfil</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="../../scripts/login/cerrarsesion.php">Cerrar sesión</a>
+                    </div>
+                <?php
+                } else {
+                ?>
+                    <a href="../../views/login.php" class="login-button ms-auto">Iniciar Sesión</a>
+                <?php
+                }
+                ?>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
             </div>
-            <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
-            <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </div>
-    </nav>
-    <!-- NavBar End -->
+        </nav>
     <!-- NavBar End -->
 
     <div class="container mb-5">
-            <!-- Breadcrumbs -->
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb mt-4">
-                    <li class="breadcrumb-item"><a href="../../index.php">Inicio</a></li>
-                    <li class="breadcrumb-item"><a href="../menu.php">Menu</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Around The World</li>
-                </ol>
-            </nav>
-            <div class="fw-bold fs-2 mb-5">
-                <h1 class="h1contact">Productos</h1>
-            </div>
-            <!-- Breadcrumbs End-->
-            <div class="row">
-                <?php
-                    include_once("../../class/database.php");
+        <!-- Breadcrumbs -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mt-4">
+                <li class="breadcrumb-item"><a href="../../index.php">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="../menu.php">Menu</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Around The World</li>
+            </ol>
+        </nav>
 
-                    // Conectar a la base de datos
-                    $conexion = new Database();
-                    $conexion->conectarDB();
+            <h1>Around The World</h1>
 
-                    // Obtener las publicaciones para la página actual
-                    $query = 'SELECT productos_menu.nombre, count(medida) as m, productos_menu.id_pm, productos_menu.descripcion, productos_menu.img_url from productos_menu
-                                join categorias on productos_menu.id_categoria = categorias.id_categoria
-                                join detalle_productos_menu on productos_menu.id_pm = detalle_productos_menu.id_pm
-                                where categorias.nombre = "Around The World"
-                                group by nombre';
-                    $productos = $conexion->select($query);
-                ?>
-                <div class="container mb-3">
+        <hr>
 
+        <div class="row mb-3">
+            <?php
+            include_once ("../../class/database.php");
+            $db = new Database();
+            $db->conectarDB();
 
-                    <div class="row">
-                        <?php foreach ($productos as $producto) : ?>
-                            
-                            <div class='col-md-6 col-12 col-sm-6 mb-3 col-lg-3' >
-                                
-                                <a href= "detalle_producto/detalles.php?<?= http_build_query(['id_pm' => $producto->id_pm,'nom' => $producto->nombre,'desc' =>  $producto->descripcion,
-                                'img' =>  $producto->img_url,], '', '&amp;') ?>">
+            $query = "CALL listar_productos_menu('Around The World')";
 
-                                <div class='card blog-card h-100 shadow-lg' >
-                                    <img src='../../img/menu/<?php echo $producto->img_url; ?>' class='card-img-top' alt='<?php echo $producto->nombre ?>'>
-                                    <div class='card-body'>
-                                        <h5 class='blog-card-title' ><?php echo $producto->nombre; ?></h5>
-                                        <h6 class='blog-card-subtitle mb-2 text-muted'><?php if ($producto->m >= 2)
-                                        {
-                                            echo '+ Con varios tamaños'; 
-                                        }
-                                        else
-                                        {
-                                            echo '- En un tamaño';  
-                                        }
-                                        ?></h6>
-                                    </div>
+            $atws = $db->select($query);
+
+            foreach ($atws as $atw) {
+                echo "
+                        <div class='col-6 col-lg-3 mb-3'>
+                            <div class='card border-0' style='background: var(--color6);'> 
+                                <img src='../../img/menu/{$atw->img_url}' class='card-img-top rounded-5' alt='atw" . $atw->id_pm . "'>
+                                <div class='card-body'>
+                                    <h5 class='card-title fw-bold text-center'>{$atw->nombre}</h5>
+                                    <form action='detalle_producto/detalles.php' method='post'>
+                                        <input type='hidden' name='id_pm' value='" . $atw->id_pm . "'>
+                                        <input type='submit' class='btn btn-cafe w-100' value='Ver Detalles'>
+                                    </form>
                                 </div>
-                                </a>
                             </div>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-               
-                <?php
-                    $conexion->desconectarDB();
-                ?>
-            </div>
+                        </div>
+                    ";
+            }
+            ?>
         </div>
     </div>
 
@@ -155,7 +152,12 @@
     </footer>
 
     <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://kit.fontawesome.com/b820f07375.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/45ef8dbe96.js" crossorigin="anonymous"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 
 </html>

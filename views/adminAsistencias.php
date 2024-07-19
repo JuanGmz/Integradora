@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrar Productos E-Commerce</title>
-    <link rel="shortcut icon" href="../img/Sinfonía-Café-y-Cultura.webp">
+    <title>Administrar Asistencias</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="shortcut icon" href="../img/Sinfonía-Café-y-Cultura.webp">
 </head>
 <body class="bg-light">
     <div class="container-fluid m-0 h-100">
         <!-- navbar mobile -->
         <div class="row bg-dark d-block d-lg-none">
             <div class="collapse m-0 p-0" id="navbarToggleExternalContent" data-bs-theme="dark">
-                <div class="bg-dark p-4 pb-1">
+                <div class="bg-dark p-4">
                     <h5 class="text-body-emphasis h4">Administrar</h5>
                 </div>
                 <div class="accordion accordion-flush" id="accordionMobile">
@@ -155,20 +155,13 @@
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <h1 class="fw-bold text-light pt-2 me-auto">Productos</h1>
-                    <!-- Botón para volver atras -->
-                    <button class="btn btn-dark">
-                        <a href="../index.php" class="text-decoration-none">
-                            <i class="fa-solid fa-house text-light fa-2x"></i>
-                        </a>
-                    </button>
                 </div>
             </nav>
         </div>
 
         <div class="row">
             <!-- navbar pc -->
-            <div class="col-lg-3 bg-dark h-100 position-fixed d-none d-lg-block">
+            <div class="col-lg-3 border-end border-black bg-dark h-100 position-fixed d-none d-lg-block">
                 <h4 class="text-center text-light m-3 fs-2 fw-bold">Administrar</h4>
                 <div class="row">
                     <div class="col-12 text-center">
@@ -266,7 +259,7 @@
                         </h2>
                         <div id="flush-blog" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
                             <div class="accordion-body bg-dark">
-                                <a href="adminPublicaciones.php" class="fw-bold fs-6 ms-5 text-light text-decoration-none">
+                                <a href="adminBlog.php" class="fw-bold fs-6 ms-5 text-light text-decoration-none" aria-current="true">
                                     Administrar Publicaciones
                                 </a>
                             </div>
@@ -300,66 +293,23 @@
 
             <div class="col-lg-9 offset-lg-3 p-0">
                 <!-- AQUI VA EL CONTENIDO DE LA PAGINAAAAAAAAAAAA -->
-                <div class="row p-0 m-0 bg-dark">
-                    <div class="row p-3 m-0 shadow-lg bg-dark d-none d-lg-flex">
+                <div class="container p-0 m-0 bg-light">
+                    <div class="row p-3 m-0 shadow-lg">
                         <div class="col-3">
-                            <h1 class="fw-bold text-light d-none d-lg-block">Productos</h1>
+                            <h1>Asistencias</h1>
                         </div>
-                        <div class="col-6 col-lg-9 d-flex justify-content-end align-items-center gap-3">
-                            <!-- Aquí va el botón del modal para registrar productos -->
-                            <div class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregarProducto">
-                                Agregar Producto
-                            </div>
+                        <div class="col-9 d-flex justify-content-end align-items-center gap-3">
+                            <!-- Aquí va el botón del modal para registrar asistencias -->
                             <!-- Botón para volver atras -->
-                            <a href="../index.php" class="text-decoration-none d-none d-lg-block">
-                                <i class="fa-solid fa-house fa-2x text-light"></i>
+                            <a href="../index.php" class="text-decoration-none">
+                                <i class="fa-solid fa-house fa-2x"></i>
                             </a>
                         </div>
                     </div>
                 </div>
-                <!-- Modal para agregar publicación -->
-                <div class="modal fade" id="agregarProducto" tabindex="-1" aria-labelledby="agregarProducto" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="agregarProducto">Agregar Producto</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="shadow-lg bg-light row p-0 m-0 p-3">
-                    <div class="row m-1">
-                        <div class="col-12">
-                            <form method="post">
-                                <div class="row">
-                                    <div class="col-8">
-                                        <select name="categoria" id="categoria" class="form-select">
-                                            <option selected disabled value="">Seleccionar ??????</option>
-                                            <!-- Aqui va el select de categorías -->
-                                            <?php
-
-                                            ?>
-                                        </select>
-                                    </div>
-                                    <div class="col-4">
-                                        <input type="submit" class="btn btn-primary w-100" value="Buscar">
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
                 <div class="row mt-3 p-4 m-0">
-                    <div class="d-lg-none w-100 mb-3 m-0 p-0">
-                        <button type="button" class="btn w-100 btn-primary shadow-lg" data-bs-toggle="modal" data-bs-target="#agregarProducto">
-                            <i class="fa-solid fa-plus fa-2x"></i>
-                        </button>
-                    </div>
-                    <!-- Tabla de productos AQUI -->
+                    <!-- Tabla de asistencias AQUI -->
+                    
                 </div>
             </div>
         </div>

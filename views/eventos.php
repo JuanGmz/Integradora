@@ -7,65 +7,104 @@
     <title>Eventos</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="shortcut icon" href="../img/Sinfonía-Café-y-Cultura.webp">
+    <?php
+    session_start();
+    ?>
 </head>
 
 <body>
-    <!-- NavBar -->
-    <nav class="navbar navbar-expand-lg shadow-lg">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="../index.php">
-                <img src="../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
-            </a>
-            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    <div class="">
+        <!-- NavBar -->
+        <nav class="navbar navbar-expand-lg shadow-lg">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="../index.php">
+                    <img src="../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
+                </a>
+                <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1"
+                    id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="menu.php">Menú</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link mx-lg-2" href="ecommerce.php">Comprar</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link mx-lg-2" href="recompensas.php">Recompensas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link mx-lg-2" href="eventos.php">Eventos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link mx-lg-2" href="publicaciones.php">Publicaciones</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link mx-lg-2" href="contact.php">Contacto</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="offcanvas-body">
-                    <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="menu.php">Menú</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="ecommerce.php">Comprar</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="recompensas.php">Recompensas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="eventos.php">Eventos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="publicaciones.php">Publicaciones</a>  
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="contact.php">Contacto</a>
-                        </li>
-                    </ul>
-                </div>
+                <?php
+                if (isset($_SESSION["usuario"])) {
+                    ?>
+                    <!-- Navbar con dropdown -->
+                    <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
+                        style="left: auto; right: 30px; top: 60px">
+                        <a class="dropdown-item" href="perfil.php">Mi perfil</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="../scripts/login/cerrarsesion.php">Cerrar sesión</a>
+                    </div>
+                    <?php
+                } else {
+                    ?>
+                    <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
+                    <?php
+                }
+                ?>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
             </div>
-            <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
-            <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </div>
+    </div>
     </nav>
     <!-- NavBar End -->
 
     <!-- Contenido -->
-    <div class="container-fluid m-0 p-0" style="background: var(--color2);">
+
+    <div class="container mb-5">
         <div class="row p-0 m-0">
             <!--NavBar EventosCategorias-->
-            <div class="p-2 bagr-cafe2">
+            <div class="p-2">
 
-                <div class="col-12 text-center p-3">
-                    <h1 class="fw-bold text-center" style="letter-spacing: 1px;">Eventos</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mt-4">
+                        <li class="breadcrumb-item fw-bold"><a href="../index.php">Inicio</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"></li>Eventos</li>
+                    </ol>
+                </nav>
+
+                <div class="fw-bold fs-3 mt-3 mb-4">
+                    <h1 class="h1contact">Eventos</h1>
                 </div>
                 <!--botónes de categorias-->
                 <div class="d-flex justify-content-center">
-                    <ul class="nav nav-tabs d-flex row justify-content-center  " id="ex1" role="tablist" style="border-bottom: none;">
+                    <ul class="nav nav-tabs justify-content-center  " id="ex1" role="tablist"
+                        style="border-bottom: none;">
+
                         <?php
-                        include_once("../class/database.php");
+                        include_once ("../class/database.php");
                         $conexion = new Database();
                         $conexion->conectarDB();
                         $query = 'SELECT 
@@ -79,17 +118,17 @@
                         $tru = "true";
                         $active = "active";
                         foreach ($categorias as $categoria) {
-                            echo "<li class='row nav-item col-5 col-sm-5 col-md-3 col-lg-auto mb-2 mb-lg-0  me-3 d-flex text-center justify-content-center d-flex m-0 p-0' role='presentation'>";
+                            echo "<li class='row nav-item col-5 col-sm-5 col-md-3 col-lg-auto mb-2 mb-lg-0  me-0 text-center justify-content-center d-flex m-2 p-0 p-md-1 me-md-2' role='presentation'>";
                             echo "<a data-mdb-tab-init class='btn-categorias w-100 h-100' id='ex1-tabs-{$categoria->id_categoria}' href='#ex1-tabs-{$categoria->id_categoria}' role='tab' aria-controls='ex1-tabs-{$categoria->id_categoria}' aria-selected='$tru'>{$categoria->nombre}</a>";
                             echo "</li>";
                             $tru = "false";
                             $active = "";
 
                             /*
-                            echo " <li class='mx-3 nav-item col-5 col-sm-5 col-md-4 col-lg-auto mb-2 mb-lg-0' role='presentation'>";
-                            echo "<button class='btn-categorias w-100' id='{$categoria->id_categoria}-tab' data-bs-toggle='tab' data-bs-target='#{$categoria->id_categoria}' type='button' role='tab' aria-controls='{$categoria->id_categoria}' aria-selected='true'>{$categoria->nombre}</button>";
-                            echo "</li>";
-                            */
+                        echo " <li class='mx-3 nav-item col-5 col-sm-5 col-md-4 col-lg-auto mb-2 mb-lg-0' role='presentation'>";
+                        echo "<button class='btn-categorias w-100' id='{$categoria->id_categoria}-tab' data-bs-toggle='tab' data-bs-target='#{$categoria->id_categoria}' type='button' role='tab' aria-controls='{$categoria->id_categoria}' aria-selected='true'>{$categoria->nombre}</button>";
+                        echo "</li>";
+                        */
                         }
                         $conexion->desconectarDB();
                         ?>
@@ -117,7 +156,7 @@
                         echo "      <div class='col-12 col-md-8 d-flex align-items-center'>";
                         echo "          <div class='d-flex flex-wrap w-100 d-flex justify-content-center'>";
                         echo "              <div class='col-12 col-md-6 p-2 col-sm-6'>";
-                        echo "                  <img src='../{$categoria->img_url}' class='card-img-top img-fluid' alt='...' style='height: 300px; object-fit: cover;'>";
+                        echo "                  <img src='../img/eventos/{$categoria->img_url}' class='card-img-top img-fluid' alt='...' style='height: 300px; object-fit: cover;'>";
                         echo "              </div>";
                         echo "              <div class='col-9 col-sm-9 col-md-6 p-2 d-flex flex-column justify-content-cente p-lg-2'>";
                         echo "                  <h5 class='fw-bold mb-3' style='letter-spacing: 1px;'>{$categoria->nombre}</h5>";
@@ -140,12 +179,6 @@
 
         </div>
     </div>
-   
-
-    <script src="../js/tabs.js"></script>
-
-
-
 
     <!-- Footer -->
     <footer class="footer">
@@ -180,17 +213,12 @@
         </div>
     </footer>
 
-    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://kit.fontawesome.com/45ef8dbe96.js" crossorigin="anonymous"></script>
-
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!--=== Enlaces de carga =====-->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="../js/onload.js"></script>
-
-    <!--=== Enlace de iconos ======-->
-    <script src="https://kit.fontawesome.com/b820f07375.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/45ef8dbe96.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="../js/tabs.js"></script>
 </body>
 
 </html>
