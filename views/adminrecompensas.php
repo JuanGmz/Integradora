@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('America/Monterrey');
 if (isset($_POST['agRecompensa'])) {
     include '../class/database.php';
 
@@ -8,25 +9,31 @@ if (isset($_POST['agRecompensa'])) {
 
     extract($_POST);
 
-    // Directorio donde se guardarán las imágenes
-    $subirDir = "../img/recompensas/";
-
-    // Nombre del archivo subido
-    $nombreImagen = basename($_FILES['imagen']['name']);
-
-    // Ruta completa del archivo a ser guardado
-    $imagen = $subirDir . $nombreImagen;
-
-    // Mover el archivo subido a la carpeta de destino
-    if (move_uploaded_file($_FILES['imagen']['tmp_name'], $imagen)) {
-        // Consulta para agregar la recompensa, con la URL de la imagen
-        $consulta = "CALL sp_agregar_recompensa('$recompensa', '$condicion', '$fechainicio', '$fechafin', '$nombreImagen')";
-
-        $conexion->execute($consulta);
-
+    if ($fechainicio < date('Y-m-d') || $fechafin < date('Y-m-d') || $fechainicio > $fechafin || $fechafin < $fechainicio || $fechainicio == $fechafin) {
+        echo "<script> document.addEventListener('DOMContentLoaded', function() { showAlert('¡Los campos de fecha no son válidos!', 'error'); }); </script>";
     } else {
-        echo "Error al subir la imagen.";
+        // Directorio donde se guardarán las imágenes
+        $subirDir = "../img/recompensas/";
+
+        // Nombre del archivo subido
+        $nombreImagen = basename($_FILES['imagen']['name']);
+
+        // Ruta completa del archivo a ser guardado
+        $imagen = $subirDir . $nombreImagen;
+
+        // Mover el archivo subido a la carpeta de destino
+        if (move_uploaded_file($_FILES['imagen']['tmp_name'], $imagen)) {
+            // Consulta para agregar la recompensa, con la URL de la imagen
+            $consulta = "CALL sp_agregar_recompensa('$recompensa', '$condicion', '$fechainicio', '$fechafin', '$nombreImagen')";
+
+            $conexion->execute($consulta);
+            echo "<script> document.addEventListener('DOMContentLoaded', function() { showAlert('¡Recompensa registrada con éxito!', 'success'); }); </script>";
+
+        } else {
+            echo "Error al subir la imagen.";
+        }
     }
+
 
     $conexion->desconectarDB();
 } else if (isset($_POST['regAsistencia'])) {
@@ -47,7 +54,7 @@ if (isset($_POST['agRecompensa'])) {
         $conexion->execute($consulta);
         echo "<script> document.addEventListener('DOMContentLoaded', function() { showAlert('¡Asistencia registrada con éxito!', 'success'); }); </script>";
     } else {
-        echo "<script> document.addEventListener('DOMContentLoaded', function() { showAlert('¡El usuario no existe!', 'warning'); }); </script>";
+        echo "<script> document.addEventListener('DOMContentLoaded', function() { showAlert('¡El usuario no existe!', 'error'); }); </script>";
     }
     $conexion->desconectarDB();
 }
@@ -232,7 +239,7 @@ if (isset($_POST['agRecompensa'])) {
                         aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <h1 class="fw-bold text-light pt-2 me-auto">Publicaciones</h1>
+                    <h1 class="fw-bold text-light pt-2 me-auto">Recompensas</h1>
                     <!-- Botón para volver atras -->
                     <button class="btn btn-dark">
                         <a href="../index.php" class="text-decoration-none">
@@ -403,8 +410,14 @@ if (isset($_POST['agRecompensa'])) {
                             <!-- Aquí va el botón del modal para registrar asistencias -->
                             <!-- Botón para registrar -->
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#canjearRecompensa">
+                                Canjear recompensa
+                            </button>
+                            <!-- Aquí va el botón del modal para registrar asistencias -->
+                            <!-- Botón para registrar -->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#registrarAsistencias">
-                                Registrar Asistencias
+                                Registrar Asistencia
                             </button>
                             <!-- Aquí va el botón del modal para registrar recompensas -->
                             <!-- Botón para agregar -->
@@ -439,16 +452,16 @@ if (isset($_POST['agRecompensa'])) {
                                     <div class="mb-3">
                                         <label for="condicion" class="form-label">Condicion</label>
                                         <input type="number" class="form-control" id="condicion" name="condicion"
-                                            maxlength="20" min="1" required>
+                                            max="20" min="1" required>
                                     </div>
                                     <div class="mb-3 row">
                                         <div class="col-6">
-                                            <label for="imagen" class="form-label">Fecha Inicio</label>
+                                            <label for="fechainicio" class="form-label">Fecha Inicio</label>
                                             <input type="date" class="form-control" id="fechainicio" name="fechainicio"
                                                 required>
                                         </div>
                                         <div class="col-6">
-                                            <label for="imagen" class="form-label">Fecha Expiracion</label>
+                                            <label for="fechafin" class="form-label">Fecha Expiracion</label>
                                             <input type="date" class="form-control" id="fechafin" name="fechafin"
                                                 required>
                                         </div>
@@ -499,20 +512,55 @@ if (isset($_POST['agRecompensa'])) {
                         </div>
                     </div>
                 </div>
+                <!-- Modal para canjear recompensas -->
+                <div class="modal fade" id="canjearRecompensa" tabindex="-1" aria-labelledby="canjearRecompensasLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="canjearRecompensasLabel">Canjear Recompensa</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" action="" enctype="multipart/form-data">
+                                    <div class="mb-3">
+                                        <label for="userid" class="form-label">Canje ID</label>
+                                        <input type="number" class="form-control" id="userid" name="canjeid" min="1"
+                                            required>
+                                    </div>
+                                    <div class="mt-3 text-end">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Cancelar</button>
+                                        <!-- Botón para agregar -->
+                                        <button type="submit" class="btn btn-primary" name="regAsistencia">Canjear
+                                            Recompensa</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="shadow-lg bg-light row p-0 m-0 p-3">
                     <div class="row m-1">
                         <div class="col-12">
                             <form method="post">
-                                <div class="row">
-                                    <label for="" class="form-label">Fecha Inicio</label>
-                                    <div class="col-4">
-                                        <input class="form-control" type="date" name="" id="">
+                                <div class="row mb-3">
+                                    <!-- Fecha Inicio -->
+                                    <div class="col-md-4 mb-3">
+                                        <label for="fechaInicio" class="form-label">Fecha Inicio</label>
+                                        <input class="form-control" type="date" name="fechaInicio" id="fechaInicio">
                                     </div>
-                                    <div class="col-4">
-                                        <input class="form-control" type="date" name="" id="">
+
+                                    <!-- Fecha Expiración -->
+                                    <div class="col-md-4 mb-3">
+                                        <label for="fechaExpiracion" class="form-label">Fecha Expiración</label>
+                                        <input class="form-control" type="date" name="fechaExpiracion"
+                                            id="fechaExpiracion">
                                     </div>
-                                    <label for="" class="form-label">Fecha Expiracion</label>
-                                    <div class="col-4">
+
+                                    <!-- Botón Buscar -->
+                                    <div class="col-md-4 d-flex align-items-end">
                                         <input type="submit" class="btn btn-primary w-100" value="Buscar">
                                     </div>
                                 </div>
