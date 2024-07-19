@@ -12,7 +12,7 @@ create database cafe_sinfonia;
 use cafe_sinfonia;
 
 -- Otros
-create table CATEGORIAS(
+create table categorias(
 id_categoria int auto_increment not null,
 nombre nvarchar(100) not null,
 descripcion nvarchar(500),
@@ -66,6 +66,7 @@ create table personas(
     primary key(id_persona),
     unique(usuario),
     unique(correo),
+    unique(telefono),
     foreign key (id_usuario) references usuarios(id_usuario)
 );
 
@@ -186,7 +187,7 @@ colonia nvarchar(100),
 descripcion NVARCHAR(255)
 );
 
-create table EVENTOS(
+create table eventos(
 id_evento int auto_increment not null,
 id_lugar int not null,
 id_categoria int not null,
@@ -218,7 +219,7 @@ id_mp int not null,
 primary key(id_reserva),
 foreign key (id_cliente) references metodos_pago (id_mp),
 foreign key (id_cliente) references clientes(id_cliente),
-foreign key (id_evento) references EVENTOS(id_evento)
+foreign key (id_evento) references eventos(id_evento)
 );
 
 CREATE TABLE comprobantes (
@@ -243,7 +244,7 @@ nombre nvarchar(150) not null,
 descripcion nvarchar (300) not null,
 img_url nvarchar(255)not null,
 primary key(id_pm),
-foreign key (id_categoria) references CATEGORIAS(id_categoria)
+foreign key (id_categoria) references categorias(id_categoria)
 );
 
 create table detalle_productos_menu(
@@ -1022,7 +1023,7 @@ INSERT INTO roles (rol, descripcion) VALUES
 ('cliente', 'Cliente del café sinfonía');
 
 -- Insertar registros en la tabla categorias.
-	INSERT INTO CATEGORIAS (nombre, descripcion, tipo,img_url ) VALUES
+	INSERT INTO categorias (nombre, descripcion, tipo,img_url ) VALUES
 ('Conciertos', 'Categoría para eventos musicales', 'Evento',''),-- 1
 ('Teatro', 'Categoría para representaciones teatrales', 'Evento',''), 
 ('Podcast en vivo', 'Categoría para conferencias y charlas', 'Evento',''),
@@ -1271,7 +1272,7 @@ VALUES
 ('Teatro Nazas', 'Torreón', 'Coahuila', 'Teatro emblemático de la ciudad, conocido por sus eventos culturales.'),
 ('Teatro Isauro Martínez', 'Torreón', 'Coahuila', 'Teatro histórico y culturalmente importante en Torreón.');
 
-INSERT INTO EVENTOS (
+INSERT INTO eventos (
     id_lugar, id_categoria, nombre, tipo, descripcion, fecha_evento, 
     hora_inicio, hora_fin, capacidad, precio_boleto, disponibilidad, 
     img_url, fecha_publicacion
@@ -1362,8 +1363,8 @@ CREATE INDEX idx_detalle_pedidos_id_pedido ON detalle_pedidos(id_pedido);
 CREATE INDEX idx_detalle_pedidos_id_bc ON detalle_pedidos(id_dbc);
 
 -- Tabla EVENTOS
-CREATE INDEX idx_eventos_id_lugar ON EVENTOS(id_lugar);
-CREATE INDEX idx_eventos_id_categoria ON EVENTOS(id_categoria);
+CREATE INDEX idx_eventos_id_lugar ON eventos(id_lugar);
+CREATE INDEX idx_eventos_id_categoria ON eventos(id_categoria);
 
 -- Tabla eventos_reservas
 CREATE INDEX idx_eventos_reservas_id_cliente ON eventos_reservas(id_cliente);
@@ -1415,13 +1416,3 @@ BEGIN
 	OR pe.telefono like busqueda;
 END $$
 DELIMITER ;
-
-/*
-call SP_filtrar_pedidos('1');
-select * from pedidos;
-select * from personas;
-select * from detalle_pedidos;
-select * from detalle_bc;
-select * from bolsas_cafe;
-select * from pedidos;
-*/
