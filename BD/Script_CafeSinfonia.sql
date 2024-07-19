@@ -1407,5 +1407,3 @@ select * from detalle_bc;
 select * from bolsas_cafe;
 select * from pedidos;
 */
-
-

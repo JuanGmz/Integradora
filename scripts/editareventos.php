@@ -20,8 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         hora_fin = '$horafin',
         capacidad = '$cap', 
         precio_boleto = '$costo', 
-        disponibilidad = '$cap', 
-        img_url = '$imagen',
+        disponibilidad = '$cap',
         fecha_publicacion = '$fechaPub'
         WHERE id_evento = '$id_evento'";
     $db->execute($consulta);
@@ -30,4 +29,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 $db->desconectarDB();
-?>
+header("location: ../views/adminEventos.php");
+exit;

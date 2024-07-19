@@ -1,5 +1,5 @@
 <?php
-include("../class/database.php");
+include ("../class/database.php");
 
 $db = new Database();
 $db->conectarDB();
@@ -7,15 +7,31 @@ $db->conectarDB();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     extract($_POST);
 
-    $consulta = "INSERT INTO EVENTOS (id_lugar, id_categoria, nombre, tipo, descripcion, fecha_evento, hora_inicio, hora_fin, capacidad, precio_boleto, disponibilidad, img_url, fecha_publicacion)
-    VALUES ('$lugar', '$categoria', '$evento', '$tipo', '$descripcion', '$fechaEvento', '$horaIni', '$horaFin', '$cap', '$costo', '$cap', '$imgEvento', '$fechaPub')";
+    // Directorio donde se guardarán las imágenes
+    $subirDir = "../img/eventos/";
 
-    if ($db->execute($consulta)) {
-        echo "Inserción exitosa.";
+    // Nombre del archivo subido
+    $nombreImagen = basename($_FILES['imgEvento']['name']);
+
+    // Ruta completa del archivo a ser guardado
+    $imagen = $subirDir . $nombreImagen;
+
+    // Mover el archivo subido a la carpeta de destino
+    if (move_uploaded_file($_FILES['imgEvento']['tmp_name'], $imagen)) {
+        $consulta = "INSERT INTO EVENTOS (id_lugar, id_categoria, nombre, tipo, descripcion, fecha_evento, hora_inicio, hora_fin, capacidad, precio_boleto, disponibilidad, img_url, fecha_publicacion)
+        VALUES ('$lugar', '$categoria', '$evento', '$tipo', '$descripcion', '$fechaEvento', '$horaIni', '$horaFin', '$cap', '$costo', '$cap', '$nombreImagen', '$fechaPub')";
+    
+        if ($db->execute($consulta)) {
+            echo "Inserción exitosa.";
+        } else {
+            echo "Error al insertar evento.";
+        }
+
     } else {
-        echo "Error al insertar evento.";
+        echo "Error al subir la imagen.";
     }
 }
 
 $db->desconectarDB();
 header("location: ../views/adminEventos.php");
+exit;
