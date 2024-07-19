@@ -1,62 +1,70 @@
 <?php
 date_default_timezone_set('America/Monterrey');
-if (isset($_POST['agRecompensa'])) {
+if ($_POST) {
     include '../class/database.php';
-
+    include '../scripts/funciones/funciones.php';
     $conexion = new Database();
 
     $conexion->conectarDB();
 
     extract($_POST);
 
-    if ($fechainicio < date('Y-m-d') || $fechafin < date('Y-m-d') || $fechainicio > $fechafin || $fechafin < $fechainicio || $fechainicio == $fechafin) {
-        echo "<script> document.addEventListener('DOMContentLoaded', function() { showAlert('¡Los campos de fecha no son válidos!', 'error'); }); </script>";
-    } else {
-        // Directorio donde se guardarán las imágenes
-        $subirDir = "../img/recompensas/";
+    if (isset($_POST['agRecompensa'])) {
 
-        // Nombre del archivo subido
-        $nombreImagen = basename($_FILES['imagen']['name']);
-
-        // Ruta completa del archivo a ser guardado
-        $imagen = $subirDir . $nombreImagen;
-
-        // Mover el archivo subido a la carpeta de destino
-        if (move_uploaded_file($_FILES['imagen']['tmp_name'], $imagen)) {
-            // Consulta para agregar la recompensa, con la URL de la imagen
-            $consulta = "CALL sp_agregar_recompensa('$recompensa', '$condicion', '$fechainicio', '$fechafin', '$nombreImagen')";
-
-            $conexion->execute($consulta);
-            echo "<script> document.addEventListener('DOMContentLoaded', function() { showAlert('¡Recompensa registrada con éxito!', 'success'); }); </script>";
-
+        if ($fechainicio < date('Y-m-d') || $fechafin < date('Y-m-d') || $fechainicio > $fechafin || $fechafin < $fechainicio || $fechainicio == $fechafin) {
+            echo "<script> document.addEventListener('DOMContentLoaded', function() { showAlert('¡Los campos de fecha no son válidos!', 'error'); }); </script>";
         } else {
-            echo "Error al subir la imagen.";
+            // Directorio donde se guardarán las imágenes
+            $subirDir = "../img/recompensas/";
+
+            // Nombre del archivo subido
+            $nombreImagen = basename($_FILES['imagen']['name']);
+
+            // Ruta completa del archivo a ser guardado
+            $imagen = $subirDir . $nombreImagen;
+
+            // Mover el archivo subido a la carpeta de destino
+            if (move_uploaded_file($_FILES['imagen']['tmp_name'], $imagen)) {
+                // Consulta para agregar la recompensa, con la URL de la imagen
+                $consulta = "CALL sp_agregar_recompensa('$recompensa', '$condicion', '$fechainicio', '$fechafin', '$nombreImagen')";
+
+                $conexion->execute($consulta);
+                showAlert("¡Recompensa registrada con éxito!", "success");
+
+            } else {
+                echo "Error al subir la imagen.";
+            }
         }
+        $conexion->desconectarDB();
+    } else if (isset($_POST['regAsistencia'])) {
+
+        $verficausuario = "select * from personas where id_persona = $userid";
+        $consulta = "insert into asistencias (id_cliente) values ($userid)";
+
+        $resultado = $conexion->select($verficausuario);
+
+        if (!empty($resultado)) {
+            $conexion->execute($consulta);
+            echo "<script> document.addEventListener('DOMContentLoaded', function() { showAlert('¡Asistencia registrada con éxito!', 'success'); }); </script>";
+        } else {
+            echo "<script> document.addEventListener('DOMContentLoaded', function() { showAlert('¡El usuario no existe!', 'error'); }); </script>";
+        }
+        $conexion->desconectarDB();
+    } else if (isset($_POST['canjebtn'])) {
+
+        $canjeproc = "call SP_canjear_recompensa($canjeid)";
+
+        $verificacupon = "select * from view_clientes_recompensas where canje_id = $canjeid";
+
+        $resultado = $conexion->select($canjeproc);
+
+        if (empty($verificacupon)) {
+            showAlert("¡El cupon no existe!", "error");
+        } else if (!empty($verificacupon)) {
+            showAlert("¡{$resultado[0]->mensaje}!", "success");
+        }
+
     }
-
-
-    $conexion->desconectarDB();
-} else if (isset($_POST['regAsistencia'])) {
-    include '../class/database.php';
-
-    $conexion = new Database();
-
-    $conexion->conectarDB();
-
-    extract($_POST);
-
-    $verficausuario = "select * from personas where id_persona = $userid";
-    $consulta = "insert into asistencias (id_cliente) values ($userid)";
-
-    $resultado = $conexion->select($verficausuario);
-
-    if (!empty($resultado)) {
-        $conexion->execute($consulta);
-        echo "<script> document.addEventListener('DOMContentLoaded', function() { showAlert('¡Asistencia registrada con éxito!', 'success'); }); </script>";
-    } else {
-        echo "<script> document.addEventListener('DOMContentLoaded', function() { showAlert('¡El usuario no existe!', 'error'); }); </script>";
-    }
-    $conexion->desconectarDB();
 }
 
 ?>
@@ -533,7 +541,7 @@ if (isset($_POST['agRecompensa'])) {
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Cancelar</button>
                                         <!-- Botón para agregar -->
-                                        <button type="submit" class="btn btn-primary" name="regAsistencia">Canjear
+                                        <button type="submit" class="btn btn-primary" name="canjebtn">Canjear
                                             Recompensa</button>
                                     </div>
                                 </form>

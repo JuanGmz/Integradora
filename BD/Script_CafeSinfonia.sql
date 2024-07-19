@@ -1,22 +1,11 @@
 drop database if exists cafe_sinfonia;
 -- Usuarios de la base de datos--
 /*
--- Administrador | ALL PRIVILEGES, GRANT OPTION, SUPER |
-create user administrador@localhost identified by 'admin';
-grant all privileges on cafe_sinfonia.* to administrador@localhost;
-grant grant option on cafe_sinfonia.* to administrador@localhost;
-grant reload on *.* to administrador@localhost;
-GRANT SUPER ON *.* TO 'administrador'@'localhost';
-flush privileges;
---
-show grants for administrador@localhost;
+-- root : .123Access123.
 
--- Auxiliar | SELECT, INSERT, UPDATE , DELETE
-create user auxiliar@localhost identified by 'aux';
-GRANT SELECT, INSERT, UPDATE,execute,create view ON cafe_sinfonia.* TO 'auxiliar'@'localhost';
---
-drop user auxiliar@localhost;
-show grants for auxiliar@localhost;
+-- Administrador : admin | ALL PRIVILEGES
+
+-- Auxiliar : aux | SELECT, INSERT, UPDATE, DELETE  
 */
 create database cafe_sinfonia;
 
@@ -567,19 +556,49 @@ BEGIN
                 INSERT INTO detalle_pedidos (id_dbc, cantidad,monto, id_pedido, precio_unitario)
                 VALUES (bolsa, cantidad, monto,new.id_pedido, (SELECT detalle_bc.precio FROM detalle_bc WHERE detalle_bc.id_dbc = bolsa));
 
-                UPDATE detalle_bc
-                SET stock = stock - cantidad
-                WHERE id_dbc = bolsa;
-
             ELSE
                 -- Si no hay permiso, enviar un mensaje de error
-                SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Hubo un error y se canceló el pedido, pero se registraron los productos.';
+                SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Hubo un error y se canceló el pedido';
             END IF;
         END LOOP;
         CLOSE leer;
     END IF;  -- Fin de la condición de estado del pedido
 END //
 DELIMITER ;
+
+-- actualizar el stock del pedido cuando el pedido esta finalizado
+delimiter //
+create trigger after_update_actualizar_stock
+after update on pedidos
+for each row
+begin
+	DECLARE bolsa INT;
+    DECLARE cantidad INT;
+     DECLARE no_hay_producto BOOLEAN DEFAULT FALSE;
+   
+    
+		DECLARE leer CURSOR FOR
+        SELECT DISTINCT detalle_pedidos.id_dbc, detalle_pedidos.cantidad
+        FROM detalle_pedidos
+        JOIN pedidos ON old.id_pedido = detalle_pedidos.id_pedido;
+			
+         DECLARE CONTINUE HANDLER FOR NOT FOUND SET no_hay_producto = TRUE;    
+		
+	    OPEN leer;
+        leer_bucle: LOOP
+            FETCH leer INTO bolsa, cantidad;
+            IF no_hay_producto THEN
+                LEAVE leer_bucle;
+            END IF;
+				if 'Finalizado' = (select distinct estatus from pedidos join detalle_pedidos on detalle_pedidos.id_pedido = pedidos.id_pedido where old.id_pedido = pedidos.id_pedido) then
+					UPDATE detalle_bc
+					SET stock = stock - cantidad
+					WHERE id_dbc = bolsa;
+                end if;
+        END LOOP;
+        CLOSE leer;
+end // 
+delimiter ;
 
 -- Trigger para borrar los productos del carrito en cuanto se realize un pedido
 delimiter //
@@ -1396,7 +1415,6 @@ BEGIN
 	OR pe.telefono like busqueda;
 END $$
 DELIMITER ;
-
 
 /*
 call SP_filtrar_pedidos('1');

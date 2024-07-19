@@ -13,6 +13,7 @@ function showAlert(message, type = 'success') {
         alertElement.classList.add('alert-warning');
     }
 
+
     alertElement.textContent = message; // Configura el mensaje de la alerta
     alertElement.style.display = 'block'; // Muestra la alerta
 
