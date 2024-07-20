@@ -1,4 +1,5 @@
 drop database if exists cafe_sinfonia;
+
 -- Usuarios de la base de datos--
 /*
 -- root : .123Access123.
@@ -287,8 +288,8 @@ in p_fecha_expiracion date,
 in p_img_url varchar(100)
 )
 begin
-	IF p_fecha_expiracion < p_fecha_inicio or p_condicion < 0 or p_fecha_inicio < curdate() THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Periodo campos invalidos.';
+	IF p_fecha_expiracion < p_fecha_inicio or p_condicion < 0 or p_fecha_inicio < curdate() or p_fecha_expiracion < curdate() THEN
+        Select 'Periodo campos invalidos.' as mensaje;
     ELSE
 		INSERT INTO recompensas (recompensa, condicion, fecha_inicio, fecha_expiracion, img_url)
 		VALUES (p_recompensa, p_condicion, p_fecha_inicio, p_fecha_expiracion, p_img_url);
@@ -1034,7 +1035,8 @@ VALUES
 
 INSERT INTO roles (rol, descripcion) VALUES 
 ('administrador', 'Encargado de cafe sinfonia y cultura'),
-('cliente', 'Cliente del café sinfonía');
+('cliente', 'Cliente del café sinfonía'),
+('empleado','Empleado del café sinfonía');
 
 -- Insertar registros en la tabla categorias.
 	INSERT INTO categorias (nombre, descripcion, tipo,img_url ) VALUES
@@ -1340,12 +1342,11 @@ VALUES
 (3,  '1 Kg', 320, 10);
 
 -- Inserción de recompensas
-INSERT INTO recompensas (recompensa, condicion, fecha_inicio, fecha_expiracion, img_url) VALUES
-('10% de descuento en café', 5, '2024-07-18', '2024-07-20', 'img/descuento_cafe.jpg'),
-('Bebida gratis al comprar un pastel', 10, '2024-07-18', '2024-07-21', 'img/bebida_gratis.jpg'),
-('Taza conmemorativa gratis', 15, '2024-07-28', '2024-08-15', 'img/taza_conmemorativa.jpg'),
-('Acceso a evento exclusivo', 20, '2024-07-18', '2024-08-15', 'img/evento_exclusivo.jpg'),
-('Descuento del 20% en tu próxima compra', 25, '2024-07-19', '2024-09-21', 'img/descuento_proxima.jpg');
+call sp_agregar_recompensa('10% de descuento en café', 5, '2024-07-19', '2024-07-20', 'img/descuento_cafe.jpg');
+call sp_agregar_recompensa('Bebida gratis al comprar un pastel', 10, '2024-07-19', '2024-07-21', 'img/bebida_gratis.jpg');
+call sp_agregar_recompensa('Taza conmemorativa gratis', 15, '2024-07-28', '2024-08-15', 'img/taza_conmemorativa.jpg');
+call sp_agregar_recompensa('Acceso a evento exclusivo', 20, '2024-07-19', '2024-08-01', 'img/evento_exclusivo.jpg');
+call sp_agregar_recompensa('Descuento del 20% en tu próxima compra', 25, '2024-07-19', '2024-08-05', 'img/descuento_proxima.jpg');
 
 -- Insertar asociaciones entre todos los clientes y las recompensas activas
 
