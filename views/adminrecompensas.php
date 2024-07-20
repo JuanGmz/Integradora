@@ -32,7 +32,7 @@ if ($_POST) {
                 showAlert("¡Recompensa registrada con éxito!", "success");
 
             } else {
-                echo "Error al subir la imagen.";
+                showAlert("Hubo un error al subir la imagen", "error");
             }
         }
         $conexion->desconectarDB();

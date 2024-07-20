@@ -415,48 +415,62 @@ FOREIGN KEY (id_recompensa) REFERENCES recompensas(id_recompensa)
 
 -- Procedimiento almacenado para canjear recompensa.
 DELIMITER //
+
 CREATE PROCEDURE SP_canjear_recompensa(
-in p_id_cr int
+    IN p_id_cr INT
 )
 BEGIN
-    DECLARE v_canje_existente BOOLEAN default false;
-    DECLARE v_progreso int default 0;
-    DECLARE v_condicion int default 0;
-    
-    -- Verificar si el canje ya existe para evitar canjes duplicados
-    SELECT cr.canje 
-    INTO v_canje_existente
+    DECLARE v_canje_existente BOOLEAN DEFAULT FALSE;
+    DECLARE v_progreso INT DEFAULT 0;
+    DECLARE v_condicion INT DEFAULT 0;
+    DECLARE v_recompensa_existe BOOLEAN DEFAULT FALSE;
+
+    -- Verificar si el cupon de canje existe
+    SELECT COUNT(*) > 0 
+    INTO v_recompensa_existe
     FROM clientes_recompensas cr
-    join recompensas r on r.id_recompensa = cr.id_recompensa
-    WHERE cr.id_cr = p_id_cr AND canje = true;
-    
-    IF v_canje_existente THEN
-        -- Informar que la recompensa ya ha sido canjeada.
-        SELECT 'La recompensa ya ha sido canjeada previamente.' AS mensaje;
-    ELSE 
-		-- Obtener el progreso y condicion de la recompensa.
-		SELECT r.condicion, cr.progreso 
-        INTO v_condicion, v_progreso
-		FROM clientes_recompensas cr
-		join recompensas r on r.id_recompensa = cr.id_recompensa
-		WHERE cr.id_cr = p_id_cr;
-        
-        if  v_progreso < v_condicion then
-        -- Informar que la no se cumple la condicion de la recompensa.
-		SELECT 'No cumple con la condicion de la recompensa.' as mensaje;
-        
-		ELSE
-        -- Marcar la recompensa como canjeada
-        UPDATE clientes_recompensas
-        SET canje = true
-        WHERE id_cr = p_id_cr;
-        -- Mensaje de éxito
-        SELECT 'Recompensa canjeada correctamente.' AS mensaje;
-		END IF;
-	END IF;
-    
+    WHERE cr.id_cr = p_id_cr;
+
+    IF NOT v_recompensa_existe THEN
+        -- Informar que el cupón de canje no existe
+        SELECT 'El cupón de canje no existe.' AS mensaje;
+    ELSE
+        -- Verificar si el canje ya existe para evitar canjes duplicados
+        SELECT cr.canje 
+        INTO v_canje_existente
+        FROM clientes_recompensas cr
+        JOIN recompensas r ON r.id_recompensa = cr.id_recompensa
+        WHERE cr.id_cr = p_id_cr AND canje = true AND estatus = 'Activa';
+
+        IF v_canje_existente THEN
+            -- Informar que la recompensa ya ha sido canjeada.
+            SELECT 'La recompensa ya ha sido canjeada previamente.' AS mensaje;
+        ELSE
+            -- Obtener el progreso y condición de la recompensa.
+            SELECT r.condicion, cr.progreso 
+            INTO v_condicion, v_progreso
+            FROM clientes_recompensas cr
+            JOIN recompensas r ON r.id_recompensa = cr.id_recompensa
+            WHERE cr.id_cr = p_id_cr;
+
+            IF v_progreso < v_condicion THEN
+                -- Informar que no se cumple la condición de la recompensa.
+                SELECT 'No cumple con la condición de la recompensa.' AS mensaje;
+            ELSE
+                -- Marcar la recompensa como canjeada
+                UPDATE clientes_recompensas
+                SET canje = true
+                WHERE id_cr = p_id_cr;
+                -- Mensaje de éxito
+                SELECT 'Recompensa canjeada correctamente.' AS mensaje;
+            END IF;
+        END IF;
+    END IF;
+
 END //
+
 DELIMITER ;
+
 
 -- Modulo ecommerce.
 
