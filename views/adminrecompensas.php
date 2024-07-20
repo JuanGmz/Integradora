@@ -12,7 +12,7 @@ if ($_POST) {
     if (isset($_POST['agRecompensa'])) {
 
         if ($fechainicio < date('Y-m-d') || $fechafin < date('Y-m-d') || $fechainicio > $fechafin || $fechafin < $fechainicio || $fechainicio == $fechafin) {
-            echo "<script> document.addEventListener('DOMContentLoaded', function() { showAlert('¡Los campos de fecha no son válidos!', 'error'); }); </script>";
+            showAlert("¡Los campos de fecha no son válidos!", "error");
         } else {
             // Directorio donde se guardarán las imágenes
             $subirDir = "../img/recompensas/";
@@ -45,22 +45,25 @@ if ($_POST) {
 
         if (!empty($resultado)) {
             $conexion->execute($consulta);
-            echo "<script> document.addEventListener('DOMContentLoaded', function() { showAlert('¡Asistencia registrada con éxito!', 'success'); }); </script>";
+            showAlert("¡Asistencia registrada con éxito!", "success");
         } else {
-            echo "<script> document.addEventListener('DOMContentLoaded', function() { showAlert('¡El usuario no existe!', 'error'); }); </script>";
+            showAlert("¡El usuario no existe!", "error");
         }
         $conexion->desconectarDB();
     } else if (isset($_POST['canjebtn'])) {
 
         $canjeproc = "call SP_canjear_recompensa($canjeid)";
 
-        $verificacupon = "select * from view_clientes_recompensas where canje_id = $canjeid";
-
         $resultado = $conexion->select($canjeproc);
 
-        if (empty($verificacupon)) {
-            showAlert("¡El cupon no existe!", "error");
-        } else if (!empty($verificacupon)) {
+        if ($resultado[0]->mensaje == "No cumple con la condición de la recompensa.") {
+            showAlert("¡{$resultado[0]->mensaje}!", "error");
+        } else if (
+            $resultado[0]->mensaje == "El cupón de canje no existe."
+        ) {
+            showAlert("¡{$resultado[0]->mensaje}!", "error");
+
+        } else if ($resultado[0]->mensaje == "Recompensa canjeada correctamente.") {
             showAlert("¡{$resultado[0]->mensaje}!", "success");
         }
 
