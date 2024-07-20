@@ -58,6 +58,7 @@ if ($_POST) {
 
         if ($resultado[0]->mensaje == "No cumple con la condición de la recompensa.") {
             showAlert("¡{$resultado[0]->mensaje}!", "error");
+            echo "no cumple con la condición";
         } else if (
             $resultado[0]->mensaje == "El cupón de canje no existe."
         ) {
