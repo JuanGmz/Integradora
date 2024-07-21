@@ -978,13 +978,14 @@ delimiter //
 create procedure SP_reserva_evento(
 in p_id_cliente int, 
 in p_id_evento int, 
-in p_c_boletos int
+in p_c_boletos int,
+in p_id_mp int
 )
 begin 
 
 -- Insertamos la reserva del cliente para el evento junto con la cantidad de boletos.
-insert into eventos_reservas(id_cliente, id_evento, c_boletos)
-VALUES (p_id_cliente, p_id_evento, p_c_boletos);
+insert into eventos_reservas(id_cliente, id_evento, c_boletos,id_mp)
+VALUES (p_id_cliente, p_id_evento, p_c_boletos,p_id_mp);
 
 end //
 delimiter ;
@@ -1048,8 +1049,8 @@ create procedure SP_comprobante_reserva(
 )
 begin
     -- Subir comprobante de la reserva.
-    insert into comprobantes(id_reserva,concepto, folio_operacion, monto, banco_origen, imagen_comprobante)
-    values(p_reserva,p_concepto, p_folio_operacion, p_monto, p_banco_origen, p_img_comprobante);
+    insert into comprobantes(id_reserva,concepto, folio_operacion,fecha, monto, banco_origen, imagen_comprobante)
+    values(p_reserva,p_concepto, p_folio_operacion, now(), p_monto, p_banco_origen, p_img_comprobante);
 end //
 delimiter ;
 
