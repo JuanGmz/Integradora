@@ -34,6 +34,9 @@ class database
             echo $e->getMessage();
         }
     }
+    public function prepare($query) {
+        return $this->pdo->prepare($query);
+    }
 
     // funcion para seleccionar
     function select($consulta)

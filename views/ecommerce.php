@@ -79,7 +79,7 @@
     <div class="container mb-5">
         <div class="row p-0 m-0">
             <!-- E-Commerce-->
-            <div class="container-fluid bagr-cafe3 p-3">
+            <div class="container-fluid p-3">
                 <nav aria-label="breadcrumb" class='col-12 justify-content-center d-flex col-lg-2 col-md-3 col-sm-3'>
                     <ol class="breadcrumb mt-4">
                         <li class="breadcrumb-item fw-bold"><a href="../index.php">Inicio</a></li>

@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,8 +17,7 @@
             <a class="navbar-brand" href="../index.php">
                 <img src="../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
             </a>
-            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar"
-                aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -49,59 +46,35 @@
                 </div>
             </div>
             <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
-            <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
     </nav>
-    <!-- NavBar End -->
-
-    <!-- Recuperar Contraseña 
     <div class="container-fluid mt-5 d-flex flex-column justify-content-center align-items-center">
-        <form action="../scripts/login/reset_password.php" method="post" class="bg-light p-5 rounded shadow-lg">
-            <legend class="text-center fw-bold mb-4">Recuperar Contraseña</legend>
-            <div class="row text-center mb-4">
-                <div class="col-12">
-                    <i class="fa-solid fa-lock fa-6x"></i>
-                </div>
-            </div>
+        <form action="../scripts/login/verefica.php" method="post" class="bg-light p-5 rounded shadow-lg">
+            <legend class="text-center fw-bold mb-4">Verificar Código</legend>
             <div class="row">
                 <div class="col-12 mb-3">
-                    <label for="email" class="form-label">Correo Electrónico</label>
-                    <input type="email" class="form-control form-control-bb" id="correo" name="correo" required>
+                    <label for="telefono" class="form-label">Número de Teléfono</label>
+                    <input type="text" class="form-control form-control-bb" id="telefono" name="telefono" required>
+                </div>
+                <div class="col-12 mb-3">
+                    <label for="codigo" class="form-label">Código de Verificación</label>
+                    <input type="text" class="form-control form-control-bb" id="codigo" name="codigo" required>
+                </div>
+                <div class="col-12 mb-3">
+                    <label for="password" class="form-label">Nueva Contraseña</label>
+                    <input type="password" class="form-control form-control-bb" id="password" name="password" required>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
-                    <button type="submit" class="btn btn-cafe w-100 text-light fw-bold fs-5">Recuperar Contraseña</button>
+                    <button type="submit" class="btn btn-cafe w-100 text-light fw-bold fs-5">Restablecer Contraseña</button>
                 </div>
             </div>
         </form>
-    </div>-->
-    <!-- Recuperar Contraseña -->
-<div class="container-fluid mt-5 d-flex flex-column justify-content-center align-items-center">
-    <form action="../scripts/login/send_code.php" method="post" class="bg-light p-5 rounded shadow-lg">
-        <legend class="text-center fw-bold mb-4">Recuperar Contraseña</legend>
-        <div class="row text-center mb-4">
-            <div class="col-12">
-                <i class="fa-solid fa-lock fa-6x"></i>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 mb-3">
-                <label for="telefono" class="form-label">Número de Teléfono</label>
-                <input type="tel" class="form-control form-control-bb" id="telefono" name="telefono" required>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <button type="submit" class="btn btn-cafe w-100 text-light fw-bold fs-5">Enviar Código</button>
-            </div>
-        </div>
-    </form>
-</div>
-    
+    </div>
 
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/b820f07375.js" crossorigin="anonymous"></script>

@@ -57,12 +57,12 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px" >
                         <a class="dropdown-item" href="../../perfil.php">Mi perfil</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="../../../scripts/login/cerrarsesion.php">Cerrar sesión</a>
+                        <a class="dropdown-item" href="../../scripts/login/cerrarsesion.php">Cerrar sesión</a>
                     </div>
                     <?php
                 } else {
                     ?>
-                    <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
+                    <a href="../login.php" class="login-button ms-auto">Iniciar Sesión</a>
                     <?php
                 }
                 ?>
