@@ -151,6 +151,95 @@ stock int not null,
 primary key(id_dbc),
 foreign key(id_bolsa) references bolsas_cafe(id_bolsa)
 );
+
+-- procedimiento almacenado para agregar una bolsa
+delimiter //
+create procedure SP_Agregar_producto_ecomerce(
+-- bolsas_cafe
+p_nombre nvarchar(100),
+p_años_cosecha nvarchar(100),
+p_productor_finca nvarchar(150) ,
+p_proceso nvarchar(100) ,
+p_variedad nvarchar(200),
+p_altura nvarchar(100) ,
+p_aroma nvarchar(150),
+p_acidez nvarchar(150),
+p_sabor nvarchar(150),
+p_cuerpo nvarchar(100),
+p_puntaje_catacion double ,
+p_img_url nvarchar(255),
+-- detalle_bc
+p_medida ENUM('1/4 Kg','1/2 Kg','1 Kg'),
+p_precio double,
+p_stock int
+)
+begin
+	insert into bolsas_cafe(nombre, años_cosecha,productor_finca,proceso,variedad,altura,aroma, acidez,sabor,cuerpo,puntaje_catacion,img_url)
+    values (p_nombre,p_años_cosecha,p_productor_finca,p_proceso, p_variedad, p_altura, p_aroma, p_acidez, p_sabor, p_cuerpo,p_puntaje_catacion, p_img_url);
+    INSERT INTO detalle_bc (id_bolsa, medida,precio,stock)
+	VALUES (last_insert_id(), p_medida, p_precio, p_stock);
+end //
+delimiter ;
+
+
+-- procedimiento almacenado para agregar una medida a las bolsas
+delimiter //
+create procedure SP_Agregar_medida_bolsa_ecomerce(
+-- detalle_bc
+p_id_bolsa int,
+p_medida ENUM('1/4 Kg','1/2 Kg','1 Kg'),
+p_precio double,
+p_stock int
+)
+begin
+    INSERT INTO detalle_bc (id_bolsa, medida,precio,stock)
+	VALUES (p_id_bolsa, p_medida, p_precio, p_stock);
+end //
+delimiter ;
+
+-- Editar precio/stock de las bolsas
+delimiter //
+create procedure SP_Editar_precio_stock_bolsa_ecomerce(
+-- detalle_bc
+in p_id_dbc int,
+in p_id_bolsa int,
+in p_precio decimal (10,2),
+in p_stock int
+)
+begin
+    update detalle_bc
+    set precio = p_precio, stock = p_stock
+	where id_bolsa = p_id_bolsa and id_dbc = p_id_dbc;
+end //
+delimiter ;
+
+-- editar detalles de bolsas
+delimiter //
+create procedure SP_Editar_bolsa_ecomerce(
+-- bolsas_cafe
+p_id_bolsa int,
+p_nombre nvarchar(100),
+p_años_cosecha nvarchar(100),
+p_productor_finca nvarchar(150) ,
+p_proceso nvarchar(100) ,
+p_variedad nvarchar(200),
+p_altura nvarchar(100) ,
+p_aroma nvarchar(150),
+p_acidez nvarchar(150),
+p_sabor nvarchar(150),
+p_cuerpo nvarchar(100),
+p_puntaje_catacion double ,
+p_img_url nvarchar(255)
+)
+begin
+	update bolsas_cafe
+    set nombre = p_nombre, años_cosecha = p_años_cosecha,productor_finca = p_productor_finca,
+    proceso = p_proceso,variedad = p_variedad,altura = p_altura,aroma = p_aroma, acidez = p_acidez,sabor = p_sabor,cuerpo = p_cuerpo,puntaje_catacion = p_puntaje_catacion,img_url = p_img_url
+    where id_bolsa = p_id_bolsa;
+end //
+delimiter ;
+
+
 -- Trigger para actualizar el stock.
 create table carrito(
 id_carrito int auto_increment not null,
@@ -257,6 +346,32 @@ primary key(id_dpm),
 foreign key (id_pm) references productos_menu(id_pm)
 );
 
+delimiter //
+create procedure SP_agregar_producto_Menu(
+-- productos_menu
+p_id_categoria int, 
+p_nombre nvarchar(150),
+p_descripcion nvarchar (300),
+p_img_url nvarchar(255),
+-- detalle_productos_menu
+p_medida nvarchar(100), 
+p_precio double
+)
+begin
+
+if (p_id_categoria = '' or p_nombre = '' or p_descripcion = '' or p_img_url = '' or p_precio = '') then
+	select ('Rellene todos los campos obligatorios') as Mensaje;
+else
+	insert into productos_menu(id_categoria,nombre,descripcion,img_url)
+    values (p_id_categoria, p_nombre, p_descripcion, p_img_url);
+    
+    insert into detalle_productos_menu(id_pm,medida,precio)
+    values (last_insert_id(),p_medida, p_precio);
+end if;
+end //
+delimiter ;
+
+
 create table asistencias(
 id_asistencia int auto_increment not null,
 id_cliente int not null,
@@ -275,19 +390,6 @@ estatus enum('Activa','Inactiva'),
 img_url nvarchar(255) not null,
 primary key (id_recompensa)
 );
-CREATE TABLE password_resets (
-    telefono VARCHAR(20) NOT NULL,
-    codigo VARCHAR(6) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (telefono)
-);
-
-
-/*Eliminar registro de recuperar contraseña en 1hora*/
-CREATE EVENT IF NOT EXISTS delete_expired_password_resets
-ON SCHEDULE EVERY 1 HOUR
-DO
-  DELETE FROM password_resets WHERE created_at < NOW() - INTERVAL 1 HOUR;
 
 -- Modulo de recompensas.
 
@@ -1355,14 +1457,14 @@ VALUES
 (3,  '1 Kg', 320, 10);
 
 -- Inserción de recompensas
-call sp_agregar_recompensa('10% de descuento en café', 5, '2024-07-19', '2024-07-20', 'img/descuento_cafe.jpg');
-call sp_agregar_recompensa('Bebida gratis al comprar un pastel', 10, '2024-07-19', '2024-07-21', 'img/bebida_gratis.jpg');
-call sp_agregar_recompensa('Taza conmemorativa gratis', 15, '2024-07-28', '2024-08-15', 'img/taza_conmemorativa.jpg');
-call sp_agregar_recompensa('Acceso a evento exclusivo', 20, '2024-07-19', '2024-08-01', 'img/evento_exclusivo.jpg');
-call sp_agregar_recompensa('Descuento del 20% en tu próxima compra', 25, '2024-07-19', '2024-08-05', 'img/descuento_proxima.jpg');
+
+call sp_agregar_recompensa('10% de descuento en café', 5, '2024-07-25', '2024-07-28', 'img/descuento_cafe.jpg');
+call sp_agregar_recompensa('Bebida gratis al comprar un pastel', 10, '2024-07-25', '2024-07-28', 'img/bebida_gratis.jpg');
+call sp_agregar_recompensa('Taza conmemorativa gratis', 15, '2024-07-28', '2024-08-05', 'img/taza_conmemorativa.jpg');
+call sp_agregar_recompensa('Acceso a evento exclusivo', 20, '2024-07-28', '2024-08-07', 'img/evento_exclusivo.jpg');
+call sp_agregar_recompensa('Descuento del 20% en tu próxima compra', 25, '2024-08-05', '2024-08-15', 'img/descuento_proxima.jpg');
 
 -- Insertar asociaciones entre todos los clientes y las recompensas activas
-
 
 -- Indices en claves foraneas
 -- Indices en las claves foraneas para la aceleracion de la gestion de tablas ligadas con JOIN.
