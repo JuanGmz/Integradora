@@ -360,7 +360,7 @@
                                         </div>
                                         <!-- Aquí va el contenido del modal -->
                                         <div class="modal-body">
-                                            <form action="../scripts/insertarlugares.php" method="POST"
+                                            <form action="../scripts/admineventos/insertarlugares.php" method="POST"
                                                 enctype="multipart/form-data">
                                                 <!-- Aqui va el formulario -->
                                                 <div class="mb-3">
@@ -476,7 +476,7 @@
                                                             </div>
                                                             <!-- Aquí va el contenido del modal -->
                                                             <div class='modal-body'>
-                                                                <form class='text-start' action='../scripts/editarlugares.php' method='POST'>
+                                                                <form class='text-start' action='../scripts/admineventos/editarlugares.php' method='POST'>
                                                                     <input type='hidden' name='id_lugar' value='$producto->id_lugar'>
                                                                     <div class='row'>
                                                                         <div class='col-12 mb-3'>

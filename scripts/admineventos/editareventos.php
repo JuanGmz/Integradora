@@ -1,5 +1,5 @@
 <?php
-include ("../class/database.php");
+include ("../../class/database.php");
 
 $db = new Database();
 $db->conectarDB();
@@ -24,10 +24,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         fecha_publicacion = '$fechaPub'
         WHERE id_evento = '$id_evento'";
     $db->execute($consulta);
-
-    header("location: ../views/adminEventos.php");
 }
 
 $db->desconectarDB();
-header("location: ../views/adminEventos.php");
+header("location: ../../views/adminEventos.php");
 exit;

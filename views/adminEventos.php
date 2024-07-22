@@ -389,7 +389,7 @@
                             </div>
                             <div class="modal-body">
                                 <!-- Aqui va el contenido de el boton de agregar-->
-                                <form action="../scripts/insertarevento.php" method="post" enctype="multipart/form-data">
+                                <form action="../scripts/admineventos/insertarevento.php" method="post" enctype="multipart/form-data">
                                     <div class="col-12 mb-3">
                                         <label for="titulo" class="form-label">Titulo del Evento</label>
                                         <input type="text" maxlength="50"  class="form-control" id="titulo" name="evento" required>
@@ -429,7 +429,7 @@
                                     <div class="col-12 mb-3">
                                         <label for="lugar" class="form-label">Nombre del Lugar</label>
                                         <select name="lugar" id="lugar" class="form-select" required>
-                                        <option selected disabled value="">Seleccionar Categoria</option>
+                                        <option selected disabled value="">Seleccionar Lugar</option>
                                             <?php
                                                 include ("../class/database.php");
                                                 $db = new Database();
@@ -536,9 +536,9 @@
                         JOIN categorias c ON e.id_categoria = c.id_categoria
                         WHERE e.id_categoria = '$categoria'";
               
-                        $productos = $db->select($query);
+                        $eventos = $db->select($query);
 
-                        if (empty($productos)) {
+                        if (empty($eventos)) {
                             echo "<div role='alert'>No hay productos registrados en esta categoría.</div>";
                         } else {
                             echo "
@@ -550,36 +550,36 @@
                                         </tr>
                                     </thead>
                                     <tbody class='table-group-divider table-light'>";
-                            foreach ($productos as $producto) {
+                            foreach ($eventos as $evento) {
                                 echo "
                                         <tr>
-                                        <td>$producto->nombre</td>
+                                        <td>$evento->nombre</td>
                                             <td class='d-flex flex-row align-items-center justify-content-center gap-1'>
                                                 <!-- Imagen -->
                                                 <!-- Botón que activa el modal de ver la imagen  -->
-                                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#modalImagen_$producto->id_evento'>
+                                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#modalImagen_$evento->id_evento'>
                                                     <i class='fa-solid fa-image'></i>
                                                 </button>
                                                 <!-- Modal de ver imagen -->
-                                                <div class='modal fade' id='modalImagen_$producto->id_evento' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+                                                <div class='modal fade' id='modalImagen_$evento->id_evento' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
                                                     <div class='modal-dialog'>
                                                         <div class='modal-content'>
                                                             <div class='modal-header'>
-                                                                <h1 class='modal-title fs-5' id='exampleModalLabel'>$producto->nombre</h1>
+                                                                <h1 class='modal-title fs-5' id='exampleModalLabel'>$evento->nombre</h1>
                                                             </div>
                                                             <div class='modal-body mb-3'>
                                                                 <!-- Aquí se está mostrando la imagen -->
                                                                 <form action='../scripts/admineventos/editarimagen.php' method='POST' enctype='multipart/form-data'>
                                                                     <div class='col-12 mb-3'>
                                                                         <label for='imagen' class='form-label'>Imagen Actual</label><br>
-                                                                        <img src='../img/eventos/$producto->img_url' class='img-fluid' alt='imagen$producto->nombre'><br>
+                                                                        <img src='../img/eventos/$evento->img_url' class='img-fluid' alt='imagen$evento->nombre'><br>
                                                                             <small>Selecciona una nueva imagen para actualizar, si es necesario.</small>
                                                                         </div>
                                                                         <div class='col-12 mb-3'>
                                                                             <label for='imagen_nueva' class='form-label'>Selecciona una nueva imagen</label>
                                                                             <input type='file' class='form-control' id='imagen_nueva' name='imagen_nueva' accept='image/*' required>
                                                                         </div>
-                                                                        <input type='hidden' name='id_evento' value='$producto->id_evento'>
+                                                                        <input type='hidden' name='id_evento' value='$evento->id_evento'>
                                                                         <div class='col-12 mb-3 text-end'>
                                                                             <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
                                                                             <button type='submit' class='btn btn-primary'>Actualizar</button>
@@ -591,10 +591,10 @@
                                                     </div>
                                                 </div>
                                                 <!-- Botón que activa el modal de ver detalles del producto -->
-                                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#detalleProducto_$producto->id_evento'>
+                                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#detalleProducto_$evento->id_evento'>
                                                     <i class='fa-solid fa-bars'></i>
                                                 </button>
-                                                <div class='modal fade' id='detalleProducto_$producto->id_evento' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+                                                <div class='modal fade' id='detalleProducto_$evento->id_evento' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
                                                     <div class='modal-dialog'>
                                                         <div class='modal-content'>
                                                             <div class='modal-header'>
@@ -603,15 +603,15 @@
                                                             </div>
                                                             <!-- Aquí va el contenido del modal -->
                                                             <div class='modal-body'>
-                                                                <h4 class='text-start fw-bold mb-3'>Nombre: <span class='fw-normal fs-5'>$producto->nombre</span></h4>
-                                                                <h4 class='text-start fw-bold mb-3'>Descripción: <span class='fw-normal fs-5'>$producto->descripcion</span></h4>
-                                                                <h4 class='text-start fw-bold mb-3'>Fecha evento: <span class='fw-normal fs-5'>{$producto->fecha_evento}</span></h5>
-                                                                <h4 class='text-start fw-bold mb-3'>Hora inicio: <span class='fw-normal fs-5'>{$producto->hora_inicio}</span></h5>
-                                                                <h4 class='text-start fw-bold mb-3'>Hora final: <span class='fw-normal fs-5'>{$producto->hora_fin}</span></h5>
-                                                                <h4 class='text-start fw-bold mb-3'>Tipo: <span class='fw-normal fs-5'>{$producto->tipo}</span></h5>
-                                                                <h4 class='text-start fw-bold mb-3'>Costo boleto: <span class='fw-normal fs-5'>{$producto->precio_boleto}</span></h5>
-                                                                <h4 class='text-start fw-bold mb-3'>Lugar: <span class='fw-normal fs-5'>{$producto->lugar_nombre}</span></h5>
-                                                                <h4 class='text-start fw-bold mb-3'>Categoria: <span class='fw-normal fs-5'>{$producto->categoria}</span></h5>
+                                                                <h4 class='text-start fw-bold mb-3'>Nombre: <span class='fw-normal fs-5'>$evento->nombre</span></h4>
+                                                                <h4 class='text-start fw-bold mb-3'>Descripción: <span class='fw-normal fs-5'>$evento->descripcion</span></h4>
+                                                                <h4 class='text-start fw-bold mb-3'>Fecha evento: <span class='fw-normal fs-5'>{$evento->fecha_evento}</span></h5>
+                                                                <h4 class='text-start fw-bold mb-3'>Hora inicio: <span class='fw-normal fs-5'>{$evento->hora_inicio}</span></h5>
+                                                                <h4 class='text-start fw-bold mb-3'>Hora final: <span class='fw-normal fs-5'>{$evento->hora_fin}</span></h5>
+                                                                <h4 class='text-start fw-bold mb-3'>Tipo: <span class='fw-normal fs-5'>{$evento->tipo}</span></h5>
+                                                                <h4 class='text-start fw-bold mb-3'>Costo boleto: <span class='fw-normal fs-5'>{$evento->precio_boleto}</span></h5>
+                                                                <h4 class='text-start fw-bold mb-3'>Lugar: <span class='fw-normal fs-5'>{$evento->lugar_nombre}</span></h5>
+                                                                <h4 class='text-start fw-bold mb-3'>Categoria: <span class='fw-normal fs-5'>{$evento->categoria}</span></h5>
 
                                                                 <!-- Tabla de productos -->
                                                             </div>
@@ -619,10 +619,10 @@
                                                     </div>
                                                 </div>
                                                 <!-- Botón que activa el modal de editar producto -->
-                                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#editarProducto_$producto->id_evento'>
+                                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#editarProducto_$evento->id_evento'>
                                                     <i class='fa-solid fa-pen-to-square'></i>
                                                 </button>
-                                                <div class='modal fade' id='editarProducto_$producto->id_evento' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+                                                <div class='modal fade' id='editarProducto_$evento->id_evento' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
                                                     <div class='modal-dialog'>
                                                         <div class='modal-content'>
                                                             <div class='modal-header'>
@@ -631,11 +631,11 @@
                                                             </div>
                                                             <!-- Aquí va el contenido del modal -->
                                                             <div class='modal-body text-start'>
-                                                                <form action='../scripts/editareventos.php' method='post'>
-                                            <input type='hidden' name='id_evento' value='$producto->id_evento'>
+                                                                <form action='../scripts/admineventos/editareventos.php' method='post'>
+                                            <input type='hidden' name='id_evento' value='$evento->id_evento'>
                                                 <div>
                                                     <label for='titulo' class='form-label'>Editar Titulo</label>
-                                                    <input type='text' maxlength='50'  class='form-control' id='titulo' name='titulo' value=$producto->nombre>
+                                                    <input type='text' maxlength='50'  class='form-control' id='titulo' name='titulo' value=$evento->nombre>
                                                 </div>
                                                 <div>
                                                     <label for='lugar' class='form-label'>Lugar</label>
@@ -649,16 +649,16 @@
                                                     </div>
                                                 <div>
                                                     <label for='descripcion' class='form-label'>Descripcion</label>
-                                                    <textarea name='descripcion' id='descripcion' name='descripcion' class='form-control'>$producto->descripcion</textarea>
+                                                    <textarea name='descripcion' id='descripcion' name='descripcion' class='form-control'>$evento->descripcion</textarea>
                                                 </div>
                                                 <div class='row'>
                                                 <div class='col-6'>
                                                     <label for='cap' class='form-label'>Capacidad</label>
-                                                    <input type='number' min='1' max='80' class='form-control' id='cap' name='cap' value=$producto->capacidad>
+                                                    <input type='number' min='1' max='80' class='form-control' id='cap' name='cap' value=$evento->capacidad>
                                                 </div>
                                                 <div class='col-6'>
                                                     <label for='costo' class='form-label'>Costo por boleto</label>
-                                                    <input type='number' min='1' class='form-control' id='costo' name='costo' value=$producto->precio_boleto>
+                                                    <input type='number' min='1' class='form-control' id='costo' name='costo' value=$evento->precio_boleto>
                                                     </div>
                                                 </div>
                                                 <div class='row'>
@@ -676,7 +676,7 @@
                                                 <div class='col-6'>
                                                 <label for='tipo' class='form-label'>Tipo</label>
                                                 <select name='tipo' id='tipo' class='form-select'>
-                                                    <option value=$producto->tipo>$producto->tipo</option>
+                                                    <option value=$evento->tipo>$evento->tipo</option>
                                                     <option value='Gratuito'>Gratuito</option>
                                                     <option value='De Pago'>De Pago</option>
                                                 </select>
@@ -684,26 +684,26 @@
                                                  </div>         
                                                  <div>
                                                     <label for='imagen' class='form-label'>Imagen</label>
-                                                    <input type='file' class='form-control' id='imagen' name='imagen' value=$producto->img_url>
+                                                    <input type='file' class='form-control' id='imagen' name='imagen' value=$evento->img_url>
                                                </div> 
                                                <div class='row'>
                                                 <div class='col-6'>
                                                     <label for='fecha' class='form-label '>Fecha del Evento</label>
-                                                    <input type='date' class='form-control' id='fecha' name='fecha' value=$producto->fecha_evento>
+                                                    <input type='date' class='form-control' id='fecha' name='fecha' value=$evento->fecha_evento>
                                                 </div>
                                                 <div class='col-6'>
                                                     <label for='fechaPub' class='form-label'>Fecha de publicación</label>
-                                                    <input type='date' class='form-control' id='fechaPub' name='fechaPub' value=$producto->fecha_publicacion>
+                                                    <input type='date' class='form-control' id='fechaPub' name='fechaPub' value=$evento->fecha_publicacion>
                                                     </div>
                                                 </div>
                                                 <div class='row'>
                                                 <div class='col-6'>
                                                     <label for='hora' class='form-label'>Hora de Inicio</label>
-                                                    <input type='time' min='11:00' max='21:00' class='form-control' id='horainicio' name='horainicio' value=$producto->hora_inicio>
+                                                    <input type='time' min='11:00' max='21:00' class='form-control' id='horainicio' name='horainicio' value=$evento->hora_inicio>
                                                 </div>
                                                 <div class='col-6'>
                                                     <label for='hora' class='form-label'>Hora de Fin</label>
-                                                    <input type='time' min='11:00' max='21:00' class='form-control' id='horafin' name='horafin' value=$producto->hora_fin>
+                                                    <input type='time' min='11:00' max='21:00' class='form-control' id='horafin' name='horafin' value=$evento->hora_fin>
                                                     </div>
                                                 </div>
 

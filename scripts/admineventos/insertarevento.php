@@ -1,5 +1,5 @@
 <?php
-include ("../class/database.php");
+include ("../../class/database.php");
 
 $db = new Database();
 $db->conectarDB();
@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     extract($_POST);
 
     // Directorio donde se guardarán las imágenes
-    $subirDir = "../img/eventos/";
+    $subirDir = "../../img/eventos/";
 
     // Nombre del archivo subido
     $nombreImagen = basename($_FILES['imgEvento']['name']);
@@ -33,5 +33,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 $db->desconectarDB();
-header("location: ../views/adminEventos.php");
+header("location: ../../views/adminEventos.php");
 exit;

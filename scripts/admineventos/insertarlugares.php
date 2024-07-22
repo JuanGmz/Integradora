@@ -1,5 +1,5 @@
 <?php
-include ("../class/database.php");
+include ("../../class/database.php");
 
 $db = new Database();
 $db->conectarDB();
@@ -18,5 +18,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 $db->desconectarDB();
-header("location: ../views/adminlugares.php");
+header("location: ../../views/adminlugares.php");
 ?>
