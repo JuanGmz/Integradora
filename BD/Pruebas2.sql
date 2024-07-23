@@ -11,7 +11,7 @@ select * from detalle_productos_menu;
 select * from categorias;
 					
 
--- prueba
+-- otra pruebita chiquita
 -- el producto a actualizar
 call SP_agregar_producto_Menu(15,'jugo de mango', 'es dulce.', 'foto_del_producto.pnj', '18 Oz', 55);
 
