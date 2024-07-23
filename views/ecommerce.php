@@ -1,3 +1,9 @@
+<?php
+include_once("../class/database.php");
+$db = new Database();
+$db->conectarDB();
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,15 +14,6 @@
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="shortcut icon" href="../img/Sinfonía-Café-y-Cultura.webp">
-    <?php
-    session_start();
-    ?>
-
-    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://kit.fontawesome.com/45ef8dbe96.js" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -140,100 +137,117 @@
     <!-- Offcanvas del Carrito -->
     <div class="offcanvas offcanvas-end text-light" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
         <!--Titulo--->
-        <div class="fw-bold d-flex justify-content-center align-content-center m-0 " style="background: var(--primario);">
+        <div class="fw-bold d-flex justify-content-center align-content-center m-0" style="background: var(--primario);">
             <h5 class="offcanvas-title fs-3 mx-auto me-5" id="offcanvasRightLabel">Carrito <i class="fa-solid fa-bag-shopping m-3"></i></h5>
             <button type="button" class="btn-close text-reset m-3" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <!--Contenido-->
-        <div class="offcanvas-body d-flex flex-column text-dark" style="background: var(--color6);">
-            <!-- Producto 1-->
-            <div class="container">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <div class="d-flex align-items-center">
-                        <img src="../img/cafes/bolsa2.webp" class="img-fluid rounded w-25 h-25" alt="Producto">
-                        <div class="ms-3">
-                            <h6 class="mb-0 fw-bold">Blend</h6>
-                            <span>$95.00</span>
-                        </div>
-                        <div class="ms-3">
-                            <button class="btn fw-bold btn-dark fs-5 p-0" style="height: 40px; width: 40px">-</button>
-                            <span class="mx-2 p-1">1</span>
-                            <button class="btn fw-bold btn-dark fs-5 p-0" style="height: 40px; width: 40px">+</button>
-                        </div>
-                    </div>
-                    <button type="button" class="btn " aria-label="Close"><i class="fa-solid fa-trash"></i></button>
-                </div>
-                <hr class="border-dark" >
-            </div>
-            <!-- Producto 2-->
-            <div class="container ">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <div class="d-flex align-items-center">
-                        <img src="../img/cafes/bolsa2.webp" class="img-fluid rounded w-25 h-25" alt="Producto">
-                        <div class="ms-3">
-                            <h6 class="mb-0 fw-bold">Blend</h6>
-                            <span>$95.00</span>
-                        </div>
-                        <div class="ms-3">
-                            <button class="btn fw-bold btn-dark fs-5 p-0" style="height: 40px; width: 40px">-</button>
-                            <span class="mx-2 p-1">1</span>
-                            <button class="btn fw-bold btn-dark fs-5 p-0" style="height: 40px; width: 40px">+</button>
-                        </div>
-                    </div>
-                    <button type="button" class="btn " aria-label="Close"><i class="fa-solid fa-trash"></i></button>
-                </div>
-                <hr class="border-dark">
-            </div>
-            <!-- Producto 3-->
-            <div class="container ">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <div class="d-flex align-items-center">
-                        <img src="../img/cafes/bolsa2.webp" class="img-fluid rounded w-25 h-25" alt="Producto">
-                        <div class="ms-3">
-                            <h6 class="mb-0 fw-bold">Blend</h6>
-                            <span>$95.00</span>
-                        </div>
-                        <div class="ms-3">
-                            <button class="btn fw-bold btn-dark fs-5 p-0" style="height: 40px; width: 40px">-</button>
-                            <span class="mx-2 p-1">1</span>
-                            <button class="btn fw-bold btn-dark fs-5 p-0" style="height: 40px; width: 40px">+</button>
-                        </div>
-                    </div>
-                    <button type="button" class="btn " aria-label="Close"><i class="fa-solid fa-trash"></i></button>
-                </div>
-                <hr class="border-dark">
-            </div>
-            <!-- Producto 4-->
-            <div class="container ">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <div class="d-flex align-items-center">
-                        <img src="../img/cafes/bolsa2.webp" class="img-fluid rounded w-25 h-25" alt="Producto">
-                        <div class="ms-3">
-                            <h6 class="mb-0 fw-bold">Blend</h6>
-                            <span>$95.00</span>
-                        </div>
-                        <div class="ms-3">
-                            <button class="btn fw-bold btn-dark fs-5 p-0" style="height: 40px; width: 40px">-</button>
-                            <span class="mx-2 p-1">1</span>
-                            <button class="btn fw-bold btn-dark fs-5 p-0" style="height: 40px; width: 40px">+</button>
-                        </div>
-                    </div>
 
-                    <button type="button" class="btn " aria-label="Close"><i class="fa-solid fa-trash"></i></button>
-                </div>
+        <?php
+        $db->conectarDB();
+        if (isset($_SESSION["usuario"])) {
+            $cliente = "SELECT 
+                            c.id_cliente 
+                        FROM 
+                            clientes AS c 
+                        JOIN
+                            personas AS p ON c.id_persona = p.id_persona 
+                        WHERE p.usuario = '" . $_SESSION["usuario"] . "'";
+            $cliente = $db->select($cliente);
+            $query = "SELECT * FROM view_carrito WHERE cliente = '" . $cliente[0]->id_cliente . "'";
+            $consulta = $db->select($query);
 
-                <hr class="border-dark">
-            </div>
-        </div>
-        <!--Subtotal-->
-        <div class="mt-auto container" style="background: var(--negroclaro);">
-            <hr>
-            <div class="d-flex justify-content-between fs-4">
-                <span>Subtotal</span>
-                <span>$95.00</span>
-            </div>
-            <a href="./bolsas/Carrito.php" class="btn w-100 mt-3 fs-5 m-1 btn-dark p-1">Ver Carrito</a>
-        </div>
+            // Aquí puedes agregar más código para mostrar los productos del carrito, por ejemplo:
+
+            echo ' <div class="offcanvas-body d-flex flex-column text-dark m-0 p-2" style="background: var(--color6);">';
+            if (count($consulta) > 0) {
+
+                foreach ($consulta as $item) {
+                    echo '<div class="container p-0">';
+                    echo '<div class="d-flex justify-content-between align-items-center mb-3">';
+                    echo '  <div class="d-flex align-items-center">';
+                    echo '      <img src="../img/cafes/bolsa2.webp" class="img-fluid rounded w-25 h-25" alt="Producto">';
+                    echo '      <div class="ms-3">';
+                    echo '          <h6 class="mb-0 fw-bold">' . $item->producto . '</h6>';
+                    echo '          <span>$' . $item->precio . '</span>';
+                    echo '      </div>';
+                    echo '      <div class="ms-3">';
+                    echo '          <form action="../scripts/actualizar_carrito.php" method="POST" style="display: inline;">';
+                    echo '              <input type="hidden" name="id_cliente" value="' . $cliente[0]->id_cliente  . '">';
+                    echo '              <input type="hidden" name="peso" value="' . $item->precio . '">';
+                    echo '              <input type="hidden" name="id_carrito" value="' . $item->id_carrito . '">';
+                    echo '              <input type="hidden" name="id_dbc" value="' . $item->id_dbc . '">';
+                    echo '              <input type="hidden" name="link" value="../views/ecommerce.php">';
+                    echo '              <input type="hidden" name="operacion" value="decrementar">';
+                    echo '              <button type="submit" class="btn fw-bold btn-dark fs-5 p-0" style="height: 35px; width: 35px">-</button>';
+                    echo '          </form>';
+                    echo '          <span class="mx-2 p-1">' . $item->cantidad . '</span>';
+                    echo '          <form action="../scripts/actualizar_carrito.php" method="POST" style="display: inline;">';
+                    echo '              <input type="hidden" name="id_cliente" value="' . $cliente[0]->id_cliente . '">';
+                    echo '              <input type="hidden" name="peso" value="' . $item->precio . '">';
+                    echo '              <input type="hidden" name="id_carrito" value="' . $item->id_carrito . '">';
+                    echo '              <input type="hidden" name="id_dbc" value="' . $item->id_dbc . '">';
+                    echo '              <input type="hidden" name="link" value="../views/ecommerce.php">';
+                    echo '              <input type="hidden" name="operacion" value="incrementar">';
+                    echo '              <button type="submit" class="btn fw-bold btn-dark fs-5 p-0" style="height: 35px; width: 35px">+</button>';
+                    echo '          </form>';
+                    echo '      </div>';
+                    echo '  </div>';
+                    echo '   <form action="../scripts/eliminar_producto.php" method="POST" style="display:inline;">
+                            <input type="hidden" name="item_id" value="' . $item->id_dbc . '">
+                            <input type="hidden" name="id_carrito" value="' . $item->id_carrito . '">
+                            <input type="hidden" name="id_cliente" value="' . $cliente[0]->id_cliente . '">
+                                <button type="submit" class="btn" aria-label="Close"><i class="fa-solid fa-trash"></i></button>
+                        </form>';
+                    echo '</div>';
+                    echo '<hr class="border-dark">';
+                    echo '</div>';
+                }
+                $subotal = "SELECT sum(monto) as subtotal from carrito where id_cliente='" . $cliente[0]->id_cliente . "';";
+                $subtotal = $db->select($subotal);
+                echo '</div>';
+                echo '<div class="mt-auto container" style="background: var(--negroclaro);">';
+                echo '  <hr>';
+                echo '  <div class="d-flex justify-content-between fs-4">';
+                echo '      <span>Subtotal</span>';
+                echo '      <span>$' . $subtotal[0]->subtotal . '</span>';
+                echo '  </div>';
+                echo '  <a href="bolsas/Carrito.php" class="btn w-100 mt-3 fs-5 m-1 btn-dark p-1">Ver Carrito</a>';
+                echo '</div>';
+            } else {
+                echo '<div class="d-flex flex-column justify-content-center align-items-center vh-100">';
+                echo '<h3 class="text-center">Tu carrito está vacío</h3>';
+                echo '<div class="d-flex justify-content-center col-12">';
+                echo '<i class="fa-solid fa-mug-hot fa-4x text-dark-emphasis"></i>';
+                echo '</div>';
+                echo '<div class="d-flex justify-content-center col-12">';
+                echo ' <a href="ecommerce.php" class="btn w-50 mt-3 fs-5 m-1 btn-dark p-1">Ver Tienda</a>';
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
+
+                echo '<div class="mt-auto container" style="background: var(--negroclaro);">';
+                echo '  <hr>';
+                echo '  <div class="d-flex justify-content-between fs-4">';
+                echo '      <span>Subtotal</span>';
+                echo '      <span>0</span>';
+                echo '  </div>';
+                echo '  <a href="bolsas/Carrito.php" class="btn w-100 mt-3 fs-5 m-1 btn-dark p-1">Ver Carrito</a>';
+                echo '</div>';
+            }
+        } else {
+            echo '<div class="d-flex flex-column justify-content-center align-items-center vh-100">';
+            echo '<h3 class="text-center text-dark">Crea una cuenta o inicia sesión para disponer de un carrito</h3>';
+            echo '<div class="d-flex justify-content-center col-12">';
+            echo '<i class="fa-solid fa-mug-hot fa-4x text-dark-emphasis"></i>';
+            echo '</div>';
+            echo '<div class="d-flex justify-content-center col-12">';
+            echo ' <a href="login.php" class="btn w-50 mt-3 fs-5 m-1 btn-dark p-1">Iniciar sesión</a>';
+            echo '</div>';
+            echo '</div>';
+            echo '</div>';
+        }
+        ?>
     </div>
 
     <!-- Footer -->
@@ -268,7 +282,7 @@
             </div>
         </div>
     </footer>
-
+    <script src="../js/Carrito.js"></script>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/45ef8dbe96.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
