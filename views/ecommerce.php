@@ -94,8 +94,8 @@
                 </nav>
                 <!-- Título -->
                 <div class="fw-bold fs-2 mt-3 mb-4">
-            <h1 class="h1contact">E-Commerce</h1>
-        </div>
+                    <h1 class="h1contact">E-Commerce</h1>
+                </div>
                 <!-- contenedor de productos -->
                 <div class="row  d-flex justify-content-center">
                     <?php
@@ -147,25 +147,23 @@
         <!--Contenido-->
         <div class="offcanvas-body d-flex flex-column text-dark" style="background: var(--color6);">
             <!-- Producto 1-->
-            <div class="container ">
+            <div class="container">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <div class="d-flex align-items-center">
                         <img src="../img/cafes/bolsa2.webp" class="img-fluid rounded w-25 h-25" alt="Producto">
                         <div class="ms-3">
-                            <h6 class="mb-0">Blend</h6>
+                            <h6 class="mb-0 fw-bold">Blend</h6>
                             <span>$95.00</span>
+                        </div>
+                        <div class="ms-3">
+                            <button class="btn fw-bold btn-dark fs-5 p-0" style="height: 40px; width: 40px">-</button>
+                            <span class="mx-2 p-1">1</span>
+                            <button class="btn fw-bold btn-dark fs-5 p-0" style="height: 40px; width: 40px">+</button>
                         </div>
                     </div>
                     <button type="button" class="btn " aria-label="Close"><i class="fa-solid fa-trash"></i></button>
                 </div>
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <div>
-                        <button class="btn  btn-cafe">-</button>
-                        <span class="mx-2">1</span>
-                        <button class="btn  btn-cafe">+</button>
-                    </div>
-                </div>
-                <hr class="border-dark">
+                <hr class="border-dark" >
             </div>
             <!-- Producto 2-->
             <div class="container ">
@@ -173,18 +171,16 @@
                     <div class="d-flex align-items-center">
                         <img src="../img/cafes/bolsa2.webp" class="img-fluid rounded w-25 h-25" alt="Producto">
                         <div class="ms-3">
-                            <h6 class="mb-0">Blend</h6>
+                            <h6 class="mb-0 fw-bold">Blend</h6>
                             <span>$95.00</span>
+                        </div>
+                        <div class="ms-3">
+                            <button class="btn fw-bold btn-dark fs-5 p-0" style="height: 40px; width: 40px">-</button>
+                            <span class="mx-2 p-1">1</span>
+                            <button class="btn fw-bold btn-dark fs-5 p-0" style="height: 40px; width: 40px">+</button>
                         </div>
                     </div>
                     <button type="button" class="btn " aria-label="Close"><i class="fa-solid fa-trash"></i></button>
-                </div>
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <div>
-                        <button class="btn  btn-cafe">-</button>
-                        <span class="mx-2">1</span>
-                        <button class="btn  btn-cafe">+</button>
-                    </div>
                 </div>
                 <hr class="border-dark">
             </div>
@@ -194,18 +190,16 @@
                     <div class="d-flex align-items-center">
                         <img src="../img/cafes/bolsa2.webp" class="img-fluid rounded w-25 h-25" alt="Producto">
                         <div class="ms-3">
-                            <h6 class="mb-0">Blend</h6>
+                            <h6 class="mb-0 fw-bold">Blend</h6>
                             <span>$95.00</span>
+                        </div>
+                        <div class="ms-3">
+                            <button class="btn fw-bold btn-dark fs-5 p-0" style="height: 40px; width: 40px">-</button>
+                            <span class="mx-2 p-1">1</span>
+                            <button class="btn fw-bold btn-dark fs-5 p-0" style="height: 40px; width: 40px">+</button>
                         </div>
                     </div>
                     <button type="button" class="btn " aria-label="Close"><i class="fa-solid fa-trash"></i></button>
-                </div>
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <div>
-                        <button class="btn  btn-cafe">-</button>
-                        <span class="mx-2">1</span>
-                        <button class="btn  btn-cafe">+</button>
-                    </div>
                 </div>
                 <hr class="border-dark">
             </div>
@@ -215,19 +209,19 @@
                     <div class="d-flex align-items-center">
                         <img src="../img/cafes/bolsa2.webp" class="img-fluid rounded w-25 h-25" alt="Producto">
                         <div class="ms-3">
-                            <h6 class="mb-0">Blend</h6>
+                            <h6 class="mb-0 fw-bold">Blend</h6>
                             <span>$95.00</span>
                         </div>
+                        <div class="ms-3">
+                            <button class="btn fw-bold btn-dark fs-5 p-0" style="height: 40px; width: 40px">-</button>
+                            <span class="mx-2 p-1">1</span>
+                            <button class="btn fw-bold btn-dark fs-5 p-0" style="height: 40px; width: 40px">+</button>
+                        </div>
                     </div>
+
                     <button type="button" class="btn " aria-label="Close"><i class="fa-solid fa-trash"></i></button>
                 </div>
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <div>
-                        <button class="btn  btn-cafe">-</button>
-                        <span class="mx-2">1</span>
-                        <button class="btn  btn-cafe">+</button>
-                    </div>
-                </div>
+
                 <hr class="border-dark">
             </div>
         </div>
