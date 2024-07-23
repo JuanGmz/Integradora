@@ -10,7 +10,7 @@
     $bolsa = $db->select($query);
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -92,8 +92,33 @@
             </ol>
         </nav>
 
-        <div class="row" style="background: url('https://chatgpt.com/api/content/file-1JSKQ4Jlv7c2smTWChUzf9G7');">
-            holaaaaa
+        <div class="row m-0 p-0 rounded shadow-lg text-light" style="background-size: cover; background-position: center; background-repeat: no-repeat; background-color: var(--primario);">
+            
+            <div class="row p-3 m-0 p-0">
+                <div class="col-lg-6 text-center">
+                    <p class="fw-bold fs-1"><?php echo $bolsa[0]->nombre ?></p>
+                    <p class="fw-bold fs-1"><?php echo $bolsa[0]->años_cosecha ?></p>
+                    <img src="../../img/bolsas/JALTCHIAP(MARAGO)T.webp" alt="" class="img-fluid coffee-image">
+                </div>
+                <div class="col-lg-6 text-center text-lg-start">
+                    <p class="fs-2 p-0 m-0">Productor y/o Finca:</p>
+                    <p class="fs-4 p-0 m-0"><?php echo $bolsa[0]->productor_finca ?></p>
+                    <p class="fs-2 p-0 m-0">Proceso:</p>
+                    <p class="fs-4 p-0 m-0"><?php echo $bolsa[0]->proceso ?></p>
+                    <p class="fs-2 p-0 m-0">Variedad:</p>
+                    <p class="fs-4 p-0 m-0"><?php echo $bolsa[0]->variedad ?></p>
+                    <p class="fs-2 p-0 m-0">Altura:</p>
+                    <p class="fs-4 p-0 m-0"><?php echo $bolsa[0]->altura ?></p>
+                </div>
+            </div>
+            <div class="row shadow-lg m-0 p-0">
+                <div class="col-12" style="background-color: var(--primario);">
+                    <h1 class="fw-bold text-center text-light">Perfil de taza</h1>
+                </div>
+            </div>
+            <div class="row m-0 p-0">
+
+            </div>
         </div>
     </div>
 

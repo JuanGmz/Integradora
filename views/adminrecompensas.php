@@ -73,7 +73,7 @@ if ($_POST) {
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -508,7 +508,7 @@ if ($_POST) {
                             <div class="modal-body">
                                 <form method="post" action="" enctype="multipart/form-data">
                                     <div class="mb-3">
-                                        <label for="userid" class="form-label">Usuario id</label>
+                                        <label for="userid" class="form-label">Id del cliente</label>
                                         <input type="number" class="form-control" id="userid" name="userid" min="1"
                                             required>
                                     </div>

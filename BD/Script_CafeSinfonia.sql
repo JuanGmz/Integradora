@@ -1077,10 +1077,13 @@ DELIMITER ;
 -- Vistas 
 
 -- Vista para recompensas que se mostraran en el apartado correspondiente(recompensas) segun el cliente que este iniciado sesion.
-create view view_clientes_recompensas as 
-select cr.id_cr as canje_id,
-id_cliente,
+CREATE view view_clientes_recompensas as 
+select cr.id_cr as canje_id, 
+ id_cliente, 
+ r.id_recompensa,
  r.recompensa,
+ r.condicion,
+ cr.progreso,
  concat(cr.progreso,' | ', r.condicion) as asistencias_completadas,
  cr.canje,
 CONCAT(DATE_FORMAT(r.fecha_inicio, '%d/%m/%Y'), ' - ', DATE_FORMAT(r.fecha_expiracion, '%d/%m/%Y')) AS periodo
