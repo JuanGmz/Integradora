@@ -99,13 +99,13 @@ session_start();
                         bolsas_cafe.variedad,bolsas_cafe.altura,bolsas_cafe.aroma,bolsas_cafe.acidez,bolsas_cafe.sabor,
                         bolsas_cafe.cuerpo,bolsas_cafe.puntaje_catacion,bolsas_cafe.img_url
                         FROM bolsas_cafe 
-                        where bolsas_cafe.id_bolsa=1;';
+                        where bolsas_cafe.id_bolsa=2;';
 
             $query2 = "SELECT detalle_bc.id_dbc, bolsas_cafe.id_bolsa,bolsas_cafe.nombre, bolsas_cafe.productor_finca ,bolsas_cafe.proceso,
             bolsas_cafe.variedad,bolsas_cafe.altura,bolsas_cafe.aroma,bolsas_cafe.acidez,bolsas_cafe.sabor,
             bolsas_cafe.cuerpo,bolsas_cafe.img_url,detalle_bc.medida,detalle_bc.precio,detalle_bc.stock
             FROM bolsas_cafe join detalle_bc on bolsas_cafe.id_bolsa=detalle_bc.id_bolsa
-            where bolsas_cafe.id_bolsa=1;";
+            where bolsas_cafe.id_bolsa=2;";
 
 
 
@@ -185,8 +185,7 @@ session_start();
                                 <div class='row d-flex p-4'>
                                     <div class='col-6'>
                                      <label for='peso' class='form-label fw-bold'>Peso</label>
-                                        <select class='form-select' id='peso' name='peso'h>
-            ";
+                                        <select class='form-select' id='peso' name='peso'>";
 
 
             foreach ($peso as $pesos) {
@@ -271,9 +270,10 @@ session_start();
                     echo '<div class="d-flex justify-content-between align-items-center mb-3">';
                     echo '  <div class="d-flex align-items-center">';
                     echo '      <img src="../../img/cafes/bolsa2.webp" class="img-fluid rounded w-25 h-25" alt="Producto">';
-                    echo '      <div class="ms-3">';
+                    echo '      <div class="ms-1 w-25">';
                     echo '          <h6 class="mb-0 fw-bold">' . $item->producto . '</h6>';
                     echo '          <span>$' . $item->precio . '</span>';
+                    echo '          <span class="text-muted d-block">' . $item->proceso . '</span>';
                     echo '      </div>';
                     echo '      <div class="ms-3">';
                     echo '          <form action="../../scripts/actualizar_carrito.php" method="POST" style="display: inline;">';

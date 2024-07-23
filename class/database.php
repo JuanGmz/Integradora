@@ -3,7 +3,7 @@ class database
 {
     private $pdo;
     private $user = "root";
-    private $password = ".123Access123.";
+    private $password = "123456";
     private $server = "localhost";
     private $dbname = "cafe_sinfonia";
 
