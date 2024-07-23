@@ -3,7 +3,7 @@ class database
 {
     private $pdo;
     private $user = "root";
-    private $password = "";
+    private $password = ".123Access123.";
     private $server = "localhost";
     private $dbname = "cafe_sinfonia";
 
@@ -13,11 +13,11 @@ class database
         try {
             $dsn = "mysql:host={$this->server};dbname={$this->dbname};";
             $this->pdo = new PDO($dsn, $this->user, $this->password);
+            $this->pdo->exec("set names utf8");
             // Establecer el modo de error de PDO a excepció
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
-
     }
     // Método opcional para obtener la conexión PDO
     public function getConnection()
@@ -34,7 +34,8 @@ class database
             echo $e->getMessage();
         }
     }
-    public function prepare($query) {
+    public function prepare($query)
+    {
         return $this->pdo->prepare($query);
     }
 
