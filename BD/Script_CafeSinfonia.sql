@@ -1513,40 +1513,41 @@ CREATE INDEX idx_asistencias_id_cliente ON asistencias(id_cliente);
 -- Tabla clientes_recompensas
 CREATE INDEX idx_clientes_recompensas_id_cliente ON clientes_recompensas(id_cliente);
 CREATE INDEX idx_clientes_recompensas_id_recompensa ON clientes_recompensas(id_recompensa);
-
+DROP PROCEDURE SP_filtrar_pedidos;
 DELIMITER $$
-CREATE PROCEDURE SP_filtrar_pedidos(
+create PROCEDURE SP_filtrar_pedidos(
+
     IN busqueda VARCHAR(50)
 )
 BEGIN
-    SELECT p.*, 
+    SELECT distinct p.id_pedido,
            CONCAT(pe.nombres, ' ', pe.apellido_paterno, ' ', pe.apellido_materno) AS cliente,
-           concat(dom.calle, ' ', dom.colonia, ' ', dom.ciudad, '', dom.estado, ' ', dom.codigo_postal) AS domicilio,
+           CONCAT(dom.calle, ' ', dom.colonia, ' ', dom.ciudad, ' ', dom.estado, ' ', dom.codigo_postal) AS domicilio,
            dom.telefono AS telefono, 
            p.estatus AS estatus,
+           pe.usuario AS usuario,
            mp.metodo_pago AS metodo_pago,
            bc.nombre AS bolsa,
            dbc.medida AS medida,
-           dp.cantidad AS cantidad
+           dp.cantidad AS cantidad,
+           p.fecha_hora_pedido,
+           p.monto_total,
+           p.envio,
+           p.costo_envio,
+           p.guia_de_envio,
+           p.documento_url
     FROM pedidos AS p
-    JOIN clientes
-    ON p.id_cliente = clientes.id_cliente
-    JOIN personas AS pe
-    ON clientes.id_persona = pe.id_persona
-    JOIN domicilios AS dom 
-    ON p.id_domicilio = dom.id_domicilio
-    JOIN metodos_pago AS mp 
-    ON p.id_mp = mp.id_mp
-    JOIN usuarios 
-    ON pe.id_usuario = usuarios.id_usuario
-    JOIN detalle_pedidos AS dp 
-    ON dp.id_pedido = p.id_pedido
-    JOIN detalle_bc AS dbc 
-    ON dbc.id_dbc = dp.id_dbc
-    JOIN bolsas_cafe AS bc
-    ON dbc.id_bolsa = bc.id_bolsa
-    WHERE p.id_pedido like busqueda
-	OR pe.usuario like busqueda
-	OR pe.telefono like busqueda;
+    JOIN clientes ON p.id_cliente = clientes.id_cliente
+    JOIN personas AS pe ON clientes.id_persona = pe.id_persona
+    JOIN domicilios AS dom ON p.id_domicilio = dom.id_domicilio
+    JOIN metodos_pago AS mp ON p.id_mp = mp.id_mp
+    JOIN detalle_pedidos AS dp ON dp.id_pedido = p.id_pedido
+    JOIN detalle_bc AS dbc ON dbc.id_dbc = dp.id_dbc
+    JOIN bolsas_cafe AS bc ON dbc.id_bolsa = bc.id_bolsa
+    WHERE p.id_pedido = busqueda
+    OR pe.usuario = busqueda
+    OR pe.telefono = busqueda;
 END $$
 DELIMITER ;
+select * from personas;
+call SP_filtrar_pedidos('noe134');
