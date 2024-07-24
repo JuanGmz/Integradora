@@ -5,7 +5,7 @@ $db->conectarDB();
 session_start();
 
 if (isset($_SESSION["usuario"])) {
-    $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE P.usuario = '$_SESSION[usuario]'";
+    $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE p.usuario = '$_SESSION[usuario]'";
     $rol = $db->select($rolUsuario);
 } else {
     $rol = null;
