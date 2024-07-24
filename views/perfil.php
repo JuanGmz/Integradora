@@ -30,7 +30,7 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="../menu.php">Menú</a>
+                            <a class="nav-link" aria-current="page" href="menu.php">Menú</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link mx-lg-2" href="ecommerce.php">Comprar</a>
@@ -53,24 +53,26 @@
             <?php
                 if (isset($_SESSION["usuario"])) {
             ?>
-                <!-- Navbar con dropdown -->
-                <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <!-- Navbar con dropdown -->
+                            <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px" >
-                    <a class="dropdown-item" href="perfil.php">Mi perfil</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="../scripts/login/cerrarsesion.php">Cerrar sesión</a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
+                    <a class="dropdown-item" href="views/perfil.php">Mi perfil</a>
+                    <?php if ($_SESSION['usuario'] == 'ADMIN') { ?>
+                        <a class="dropdown-item" href="../views/adminInicio.php">Administrar</a>
+                        <div class="dropdown-divider"></div>
+                    <?php } ?>
+                    <a class="dropdown-item" href="scripts/login/cerrarsesion.php">Cerrar sesión</a>
                 </div>
-                <?php
+            <?php
             } else {
-                ?>
-                <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
-                <?php
+            ?>
+                <a href="views/login.php" class="login-button ms-auto">Iniciar Sesión</a>
+            <?php
             }
             ?>
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
@@ -106,8 +108,7 @@
                             <div class="cblog-card">
                                 <h4 class="card-title fw-bold">Datos Personales</h4>
                                 <p class="card-text">Ver y actualizar información personal.</p>
-                                <a href="datosPersonales.php" class="blog-card-link">Datos Personales <i
-                                        class="fa-solid fa-arrow-right"></i></a>
+                                <a href="datosPersonales.php" class="blog-card-link">Datos Personales <i class="fa-solid fa-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -123,7 +124,7 @@
                             <div class="cblog-card">
                                 <h4 class="card-title fw-bold">Pedidos</h4>
                                 <p class="card-text">Ver historial de compras.</p>
-                                <a href="#" class="blog-card-link">Pedidos <i class="fa-solid fa-arrow-right"></i></a>
+                                <a href="pedidos.php" class="blog-card-link">Pedidos <i class="fa-solid fa-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>

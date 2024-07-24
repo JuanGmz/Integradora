@@ -9,7 +9,46 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="shortcut icon" href="../img/Sinfonía-Café-y-Cultura.webp">
     <?php
-    session_start();
+        include_once ("../class/database.php");
+        include_once ("../scripts/funciones/funciones.php");
+        $db = new database();
+        $db->conectarDB();
+        session_start();
+
+        if (isset($_SESSION["usuario"])) {
+            extract($_POST);
+            $query = "SELECT CONCAT_WS(' ', nombres, apellido_paterno, apellido_materno) AS nombre, correo, telefono, contrasena, id_persona FROM personas WHERE usuario = '$_SESSION[usuario]'";
+            $datos = $db->select($query);
+
+            $queryCel = "SELECT telefono FROM personas";
+
+            if(isset($_POST['actTelefono'])) {
+                if ($tel === '') {
+                    showAlert("El teléfono no puede estar vacío", "error");
+                } else if (strlen($tel) > 10) {
+                    showAlert("El teléfono no puede tener más de 10 caracteres", "error");
+                } else {
+                    $query = "UPDATE personas SET telefono = $tel WHERE id_persona = $id";
+                    $db->execute($query);
+                    showAlert("¡Teléfono actualizado con éxito!", "success");
+                    header("refresh:2;datosPersonales.php");
+                }
+            }
+            
+            // PENDIENTEEEEEEEEEEEEEE
+            if(isset($_POST['actPassword'])) {
+                if ($password != $password2) {
+                    showAlert("Las contraseñas no coinciden", "error");
+                } else {
+                    $query = "UPDATE personas SET contrasena = '$password' WHERE id_persona = $id";
+                    $db->execute($query);
+                    showAlert("¡Contraseña actualizada con éxito!", "success");
+                }
+            }
+        } else {
+            header("Location: ../index.php");
+            exit;
+        }
     ?>
 </head>
 
@@ -30,7 +69,7 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="../menu.php">Menú</a>
+                            <a class="nav-link" aria-current="page" href="menu.php">Menú</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link mx-lg-2" href="ecommerce.php">Comprar</a>
@@ -53,24 +92,26 @@
             <?php
                 if (isset($_SESSION["usuario"])) {
             ?>
-                <!-- Navbar con dropdown -->
-                <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                           <!-- Navbar con dropdown -->
+                           <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px" >
-                    <a class="dropdown-item" href="perfil.php">Mi perfil</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="../scripts/login/cerrarsesion.php">Cerrar sesión</a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
+                    <a class="dropdown-item" href="views/perfil.php">Mi perfil</a>
+                    <?php if ($_SESSION['usuario'] == 'ADMIN') { ?>
+                        <a class="dropdown-item" href="../views/adminInicio.php">Administrar</a>
+                        <div class="dropdown-divider"></div>
+                    <?php } ?>
+                    <a class="dropdown-item" href="scripts/login/cerrarsesion.php">Cerrar sesión</a>
                 </div>
-                <?php
+            <?php
             } else {
-                ?>
-                <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
-                <?php
+            ?>
+                <a href="views/login.php" class="login-button ms-auto">Iniciar Sesión</a>
+            <?php
             }
             ?>
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
@@ -93,15 +134,11 @@
                     <h1 class="fw-bold">Datos Personales</h1>
                     <hr>
                 </div>
+                <?php
+                ?>
                 <div class="mb-3">
                     <h3>Nombre</h3>
-                    <h5><?php
-                    include '../class/database.php';
-                    $db = new Database();
-                    $db->conectarDB();
-                    $query = "SELECT concat(nombres,' ', apellido_paterno,' ', apellido_materno)as nombre, correo, telefono FROM personas WHERE usuario = '" . $_SESSION['usuario'] . "'";
-                    $datos = $db->select($query);
-                    ?></h5>
+                    <h5><?php echo $datos[0]->nombre;?></h5>
                 </div>
                 <div class="mb-3">
                     <h3>Usuario</h3>
@@ -109,38 +146,34 @@
                 </div>
                 <div class="row mb-3">
                     <h3>Correo</h3>
-                    <h5><?php  ?></h5>
+                    <h5><?php echo $datos[0]->correo; ?></h5>
                 </div>
                 <div class="row mb-3">
                     <div class="col-8">
                         <h3>Teléfono</h3>
-                        <h5><?php ?></h5>
+                        <h5><?php echo $datos[0]->telefono;?></h5>
                     </div>
                     <div class="col-4 d-flex justify-content-center align-items-center flex-column">
                         <!-- Botón para abrir el modal de editar el telefono -->
-                        <button data-bs-toggle="modal" data-bs-target="#modalEditarTel"
-                            class="btn btn-primary">Editar</button>
+                        <button data-bs-toggle="modal" data-bs-target="#modalEditarTel" class="btn btn-primary">Editar</button>
                         <!-- Modal para editar el telefono -->
-                        <div class="modal fade" id="modalEditarTel" tabindex="-1" aria-labelledby="modalEditarTelLabel"
-                            aria-hidden="true">
+                        <div class="modal fade" id="modalEditarTel" tabindex="-1" aria-labelledby="modalEditarTelLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="modalEditarTelLabel">Cambiar Télefono</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
+                                        <h5 class="modal-title" id="modalEditarTelLabel">Editar Número de Télefono</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form>
+                                        <form method="post" enctype="multipart/form-data">
+                                            <input type="hidden" name="id" value="<?php echo $datos[0]->id_persona; ?>">
                                             <div class="mb-3">
                                                 <label for="tel" class="form-label">Teléfono</label>
-                                                <input type="tel" class="form-control" id="tel" name="tel"
-                                                    value="<?php ?>" required>
+                                                <input type="number" class="form-control" id="tel" name="tel" value="<?php echo $datos[0]->telefono; ?>" required>
                                             </div>
                                             <div class="text-end">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Cancelar</button>
-                                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                <button type="submit" class="btn btn-primary" name="actTelefono">Guardar</button>
                                             </div>
                                         </form>
                                     </div>
@@ -152,7 +185,7 @@
                 <div class="row mb-3">
                     <div class="col-8">
                         <h3>Contraseña</h3>
-                        <h5>Contaseña del usuario aquí</h5>
+                        <h5>*************</h5>
                     </div>
                     <div class="col-4 d-flex justify-content-center align-items-center flex-column">
                         <!-- Botón para abrir el modal de editar el password -->
@@ -165,25 +198,23 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="editarPass">Cambiar contraseña</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form method="post">
+                                        <form method="post" enctype="multipart/form-data">
+                                            <input type="hidden" name="id" value="<?php echo $datos[0]->id_persona; ?>">
                                             <div class="mb-3">
                                                 <label for="pass" class="form-label">Ingresar Nueva Contraseña</label>
-                                                <input type="password" class="form-control" id="pass" name="pass"
-                                                    required>
+                                                <input type="password" class="form-control" id="pass" name="password" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="pass" class="form-label">Confirmar Contraseña</label>
-                                                <input type="password" class="form-control" id="pass"
-                                                    name="passConfirmada" required>
+                                                <input type="password" class="form-control" id="pass" name="password2" required>
                                             </div>
                                             <div class="text-end">
                                                 <button type="button" class="btn btn-secondary"
                                                     data-bs-dismiss="modal">Cancelar</button>
-                                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                                <button type="submit" class="btn btn-primary" name="actPassword">Guardar</button>
                                             </div>
                                         </form>
                                     </div>
@@ -193,6 +224,9 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="alert floating-alert" id="floatingAlert">
+            <span id="alertMessage">Mensaje de la alerta.</span>
         </div>
     </div>
 
@@ -234,6 +268,8 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="../js/alertas.js"></script>
+    <script src="../script/script.js"></script>
 </body>
 
 </html>
