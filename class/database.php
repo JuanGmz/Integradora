@@ -13,6 +13,7 @@ class database
         try {
             $dsn = "mysql:host={$this->server};dbname={$this->dbname};";
             $this->pdo = new PDO($dsn, $this->user, $this->password);
+            $this->pdo->exec("set names utf8");
             // Establecer el modo de error de PDO a excepció
         } catch (PDOException $e) {
             echo $e->getMessage();
