@@ -15,54 +15,62 @@
     $db = new database();
     $db->conectarDB();
 
+    $query = "SELECT 
+                d.id_domicilio,
+                d.referencia,
+                d.estado,
+                d.ciudad,
+                d.codigo_postal,
+                d.colonia,
+                d.calle,
+                d.id_cliente,
+                d.telefono
+            FROM
+                domicilios AS d
+            JOIN
+                clientes AS c ON d.id_cliente = c.id_cliente
+            JOIN
+                personas AS p ON c.id_persona = p.id_persona
+            WHERE
+                p.usuario = '$_SESSION[usuario]'";
+
+
+
+    // Example of checking if a variable is set before using it
+    if (isset($dir)) {
+        echo $dir;
+    } else {
+        echo "Variable is not set.";
+    }
+
+
     if (!isset($_SESSION["usuario"])) {
         header("Location: ../index.php");
         exit;
     }
 
-    $query = "SELECT 
-                    d.id_domicilio,
-                    d.referencia,
-                    d.estado,
-                    d.ciudad,
-                    d.codigo_postal,
-                    d.colonia,
-                    d.calle,
-                    d.id_cliente,
-                    d.telefono
-                FROM
-                    domicilios AS d
-                JOIN
-                    clientes AS c ON d.id_cliente = c.id_cliente
-                JOIN
-                    personas AS p ON c.id_persona = p.id_persona
-                WHERE
-                    p.usuario = '$_SESSION[usuario]'";
+    extract($_POST);
 
-        $direcciones = $db->select($query);
-
-        extract($_POST);
-
-        if (isset($_POST["addDir"])) {
-            if (strlen($codigo_postal === 5)) {
-                showAlert("El código postal no puede tener más de 5 caracteres", "error");
-            } else if (strlen($codigo_postal) < 5) {
-                showAlert("El código postal no puede tener menos de 5 caracteres", "error");
-            } else if (strlen($telefono) > 10) {
-                showAlert("El teléfono no puede tener más de 10 caracteres", "error");
-            } else if (strlen($telefono) < 10) {
-                showAlert("El teléfono no puede tener menos de 10 caracteres", "error");
-            } else {
-                $queryDir = "INSERT INTO domicilios VALUES (NULL, $id, '$referencia', '$estado', '$ciudad', '$codigo_postal', '$colonia', '$calle', $telefono)";
-                $db->execute($queryDir);
-                showAlert("¡Dirección registrada con éxito!", "success");
-                header("refresh:2;direcciones.php");
-            }
+    if (isset($_POST["addDir"])) {
+        if (strlen($codigo_postal === 5)) {
+            showAlert("El código postal no puede tener más de 5 caracteres", "error");
+        } else if (strlen($codigo_postal) < 5) {
+            showAlert("El código postal no puede tener menos de 5 caracteres", "error");
+        } else if (strlen($telefono) > 10) {
+            showAlert("El teléfono no puede tener más de 10 caracteres", "error");
+        } else if (strlen($telefono) < 10) {
+            showAlert("El teléfono no puede tener menos de 10 caracteres", "error");
+        } else {
+            $queryDir = "INSERT INTO domicilios VALUES (NULL, $id, '$referencia', '$estado', '$ciudad', '$codigo_postal', '$colonia', '$calle', $telefono)";
+            $db->execute($queryDir);
+            showAlert("¡Dirección registrada con éxito!", "success");
+            header("refresh:2;direcciones.php");
         }
+    }
 
-        if (isset($_POST["editDir"])) {
-              if (strlen($cp) === 5 && strlen($telefono) === 10) {
-                $query = "UPDATE domicilios SET 
+    if (isset($_POST["editDir"])) {
+        if (strlen($cp) === 5 && strlen($telefono) === 10) {
+            $query = "UPDATE domicilios SET 
                     referencia = '$referencia',
                     estado = '$estado',
                     ciudad = '$ciudad',
@@ -71,28 +79,28 @@
                     calle = '$calle',
                     telefono = $telefono
                     WHERE id_domicilio = $id_domicilio";
-                $db->execute($query);
-                showAlert("¡Dirección actualizada con éxito!", "success");
-                header("refresh:2;direcciones.php");
-            } else if (strlen($cp) < 5) {
-                showAlert("El código postal no puede tener menos de 5 caracteres", "error");
-            } else if (strlen($cp) > 5) {
-                showAlert("El código postal no puede tener más de 5 caracteres", "error");
-            } else if (strlen($telefono) > 10) {
-                showAlert("El teléfono no puede tener más de 10 caracteres", "error");
-            } else if (strlen($telefono) < 10) {
-                showAlert("El teléfono no puede tener menos de 10 caracteres", "error");
-            } else {
-                showAlert("Error al actualizar el domicilio", "error");
-            }
-        }
-
-        if (isset($_POST["deleteDir"])) {
-            $query = "DELETE FROM domicilios WHERE id_domicilio = $id_domicilio";
             $db->execute($query);
-            showAlert("¡Dirección eliminada con éxito!", "success");
+            showAlert("¡Dirección actualizada con éxito!", "success");
             header("refresh:2;direcciones.php");
+        } else if (strlen($cp) < 5) {
+            showAlert("El código postal no puede tener menos de 5 caracteres", "error");
+        } else if (strlen($cp) > 5) {
+            showAlert("El código postal no puede tener más de 5 caracteres", "error");
+        } else if (strlen($telefono) > 10) {
+            showAlert("El teléfono no puede tener más de 10 caracteres", "error");
+        } else if (strlen($telefono) < 10) {
+            showAlert("El teléfono no puede tener menos de 10 caracteres", "error");
+        } else {
+            showAlert("Error al actualizar el domicilio", "error");
         }
+    }
+
+    if (isset($_POST["deleteDir"])) {
+        $query = "DELETE FROM domicilios WHERE id_domicilio = $id_domicilio";
+        $db->execute($query);
+        showAlert("¡Dirección eliminada con éxito!", "success");
+        header("refresh:2;direcciones.php");
+    }
 
     ?>
 </head>
@@ -175,6 +183,7 @@
 
         <div class="row">
             <?php
+            $direcciones = $db->select($query);
             foreach ($direcciones as $dir) {
                 ?>
                 <div class="col-lg-4">
@@ -182,7 +191,8 @@
                         <div class="card-body">
                             <h5 class="card-title text-center fw-bold"><?php echo $dir->estado; ?></h5>
                             <hr>
-                            <p class="card-text text-center mb-0"><i class="fa-solid fa-location-dot fa-3x rounded-circle"></i></p>
+                            <p class="card-text text-center mb-0"><i
+                                    class="fa-solid fa-location-dot fa-3x rounded-circle"></i></p>
                             <p class="card-text text-center mb-0"><?php echo $dir->ciudad; ?></p>
                             <p class="card-text text-center mb-0"><?php echo $dir->calle; ?></p>
                             <p class="card-text text-center mb-0"><?php echo $dir->colonia; ?></p>
@@ -194,7 +204,9 @@
                                 <div class="col-3 m-0 p-0">
                                     <!-- Boton para eliminar direccion -->
                                     <div class="d-flex justify-content-center flex-column align-items-center">
-                                        <button type="button" class="btn btn-danger btn-block shadow-lg m-0" data-bs-toggle="modal" data-bs-target="#eliminarDireccion<?php echo $dir->id_domicilio; ?>">
+                                        <button type="button" class="btn btn-danger btn-block shadow-lg m-0"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#eliminarDireccion<?php echo $dir->id_domicilio; ?>">
                                             Eliminar
                                         </button>
                                     </div>
@@ -202,55 +214,70 @@
                                 <div class="col-3 m-0 p-0">
                                     <!-- Boton para editar direccion -->
                                     <div class="d-flex justify-content-center flex-column align-items-center">
-                                        <button type="button" class="btn btn-dark btn-block shadow-lg m-0" data-bs-toggle="modal" data-bs-target="#editarDireccion<?php echo $dir->id_domicilio; ?>">
+                                        <button type="button" class="btn btn-dark btn-block shadow-lg m-0"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#editarDireccion<?php echo $dir->id_domicilio; ?>">
                                             Editar
                                         </button>
                                     </div>
                                 </div>
                             </div>
                             <!-- Modal para editar direccion -->
-                            <div class="modal fade" id="editarDireccion<?php echo $dir->id_domicilio; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal fade" id="editarDireccion<?php echo $dir->id_domicilio; ?>"
+                                data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="staticBackdropLabel">Editar Direccion</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
                                             <form method="POST">
-                                                <input type="hidden" name="id_domicilio" value="<?php echo $dir->id_domicilio; ?>">
+                                                <input type="hidden" name="id_domicilio"
+                                                    value="<?php echo $dir->id_domicilio; ?>">
                                                 <div class="mb-3">
                                                     <label for="estado" class="form-label">Estado</label>
-                                                    <input type="text" class="form-control" id="estado" value="<?php echo $dir->estado; ?>" name="estado">
+                                                    <input type="text" class="form-control" id="estado"
+                                                        value="<?php echo $dir->estado; ?>" name="estado">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="ciudad" class="form-label">Ciudad</label>
-                                                    <input type="text" class="form-control" id="ciudad" value="<?php echo $dir->ciudad; ?>" name="ciudad">
+                                                    <input type="text" class="form-control" id="ciudad"
+                                                        value="<?php echo $dir->ciudad; ?>" name="ciudad">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="calle" class="form-label">Calle</label>
-                                                    <input type="text" class="form-control" id="calle" value="<?php echo $dir->calle; ?>" name="calle">
+                                                    <input type="text" class="form-control" id="calle"
+                                                        value="<?php echo $dir->calle; ?>" name="calle">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="colonia" class="form-label">Colonia</label>
-                                                    <input type="text" class="form-control" id="colonia" value="<?php echo $dir->colonia; ?>" name="colonia">
+                                                    <input type="text" class="form-control" id="colonia"
+                                                        value="<?php echo $dir->colonia; ?>" name="colonia">
                                                 </div>
 
                                                 <div class="mb-3">
                                                     <label for="cp" class="form-label">Código Postal</label>
-                                                    <input type="text" class="form-control" id="cp" value="<?php echo $dir->codigo_postal; ?>" name="cp">
+                                                    <input type="text" class="form-control" id="cp"
+                                                        value="<?php echo $dir->codigo_postal; ?>" name="cp">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="referencia" class="form-label">Referencia</label>
-                                                    <input type="text" class="form-control" id="referencia" value="<?php echo $dir->referencia; ?>" name="referencia">
+                                                    <input type="text" class="form-control" id="referencia"
+                                                        value="<?php echo $dir->referencia; ?>" name="referencia">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="telefono" class="form-label">Telefono</label>
-                                                    <input type="text" class="form-control" id="telefono" value="<?php echo $dir->telefono; ?>" name="telefono">
+                                                    <input type="text" class="form-control" id="telefono"
+                                                        value="<?php echo $dir->telefono; ?>" name="telefono">
                                                 </div>
                                                 <div class="text-end ">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                    <button type="submit" class="btn btn-dark" name="editDir">Guardar</button>
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Cancelar</button>
+                                                    <button type="submit" class="btn btn-dark"
+                                                        name="editDir">Guardar</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -258,22 +285,28 @@
                                 </div>
                             </div>
                             <!-- Modal para eliminar direccion -->
-                            <div class="modal fade" id="eliminarDireccion<?php echo $dir->id_domicilio; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal fade" id="eliminarDireccion<?php echo $dir->id_domicilio; ?>"
+                                data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="staticBackdropLabel">Editar Direccion</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
                                             <form method="POST">
-                                                <input type="hidden" name="id_domicilio" value="<?php echo $dir->id_domicilio; ?>">
+                                                <input type="hidden" name="id_domicilio"
+                                                    value="<?php echo $dir->id_domicilio; ?>">
                                                 <div class="mb-3">
                                                     <h5>Esta seguro de que desea eliminar esta dirección?</h5>
                                                 </div>
                                                 <div class="text-end ">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                    <button type="submit" class="btn btn-danger" name="deleteDir">Eliminar</button>
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Cancelar</button>
+                                                    <button type="submit" class="btn btn-danger"
+                                                        name="deleteDir">Eliminar</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -289,8 +322,7 @@
             <div class="col-lg-4">
                 <!-- Boton para agregar direccion -->
                 <div class="d-flex justify-content-center flex-column align-items-center mt-lg-5 mt-0">
-                    <button type="button" class="btn btn-dark btn-block shadow-lg mt-0 mt-lg-4"
-                        data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <button type="button" class="btn btn-dark btn-block shadow-lg mt-0 mt-lg-4" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                         <i class="fa-solid fa-plus fa-10x rounded"></i>
                     </button>
                     <h3 class="mt-3">Agregar Nueva Dirección</h3>
@@ -346,7 +378,8 @@
                                     <div class="text-end mt-4">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="submit" class="btn btn-dark" name="addDir">Agregar Dirección</button>
+                                        <button type="submit" class="btn btn-dark" name="addDir">Agregar
+                                            Dirección</button>
                                     </div>
                                 </form>
                             </div>
