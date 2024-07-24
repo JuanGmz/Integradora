@@ -10,37 +10,12 @@
     <link rel="shortcut icon" href="../img/Sinfonía-Café-y-Cultura.webp">
     <?php
     session_start();
-    include_once ("../class/database.php");
+    require_once '../class/database.php';
     include_once ("../scripts/funciones/funciones.php");
     $db = new database();
     $db->conectarDB();
 
     if (isset($_SESSION["usuario"])) {
-        $query = "SELECT 
-                    d.id_domicilio,
-                    d.referencia,
-                    d.ciudad,
-                    d.colonia,
-                    d.calle,
-                    d.telefono,
-                    d.id_cliente
-                FROM
-                    domicilios AS d
-                JOIN
-                    clientes AS c ON d.id_cliente = c.id_cliente
-                JOIN
-                    personas AS p ON c.id_persona = p.id_persona
-                WHERE
-                    p.usuario = '$_SESSION[usuario]'";
-
-        $direcciones = $db->select($query);
-
-        if (isset($direcciones['key'])) {
-            echo $direcciones['key'];
-        } else {
-            echo "Array key does not exist.";
-        }
-
         extract($_POST);
 
         if (isset($_POST["addDir"])) {
@@ -96,6 +71,12 @@
     } else {
         header("Location: ../index.php");
         exit;
+    }
+
+    if (isset($direcciones['key'])) {
+        echo $direcciones['key'];
+    } else {
+        echo "Array key does not exist.";
     }
     ?>
 </head>
@@ -178,6 +159,23 @@
 
         <div class="row">
             <?php
+                    $query = "SELECT 
+                    d.id_domicilio,
+                    d.referencia,
+                    d.ciudad,
+                    d.colonia,
+                    d.calle,
+                    d.telefono,
+                    d.id_cliente
+                FROM
+                    domicilios AS d
+                JOIN
+                    clientes AS c ON d.id_cliente = c.id_cliente
+                JOIN
+                    personas AS p ON c.id_persona = p.id_persona
+                WHERE
+                    p.usuario = '$_SESSION[usuario]'";
+            $direcciones = $db->select($query);
             foreach ($direcciones as $dir) {
                 ?>
                 <div class="col-lg-4">
