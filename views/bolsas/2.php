@@ -134,7 +134,7 @@ session_start();
                             <img src='../../img/cafes/bolsa3.webp' class='img-fluid rounded coffee-image' alt='Producto'>
                             <p class='mt-3'><strong>Puntaje de catacion:</strong>{$bolsacafe[0]->puntaje_catacion}<pts</p>
                             <div class='col-12 text-center'>
-                                <p class='product-price' id='productPrice'>0$</p>
+                                <p class='product-price' id='productPrice'>85$</p>
                             </div>
                         </div>
                         <div class='col-12 col-md-6'>
