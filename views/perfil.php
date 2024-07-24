@@ -30,7 +30,7 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="../menu.php">Menú</a>
+                            <a class="nav-link" aria-current="page" href="menu.php">Menú</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link mx-lg-2" href="ecommerce.php">Comprar</a>
@@ -106,8 +106,7 @@
                             <div class="cblog-card">
                                 <h4 class="card-title fw-bold">Datos Personales</h4>
                                 <p class="card-text">Ver y actualizar información personal.</p>
-                                <a href="datosPersonales.php" class="blog-card-link">Datos Personales <i
-                                        class="fa-solid fa-arrow-right"></i></a>
+                                <a href="datosPersonales.php" class="blog-card-link">Datos Personales <i class="fa-solid fa-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -123,7 +122,7 @@
                             <div class="cblog-card">
                                 <h4 class="card-title fw-bold">Pedidos</h4>
                                 <p class="card-text">Ver historial de compras.</p>
-                                <a href="#" class="blog-card-link">Pedidos <i class="fa-solid fa-arrow-right"></i></a>
+                                <a href="pedidos.php" class="blog-card-link">Pedidos <i class="fa-solid fa-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>

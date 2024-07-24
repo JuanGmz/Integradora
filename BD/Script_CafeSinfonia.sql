@@ -746,29 +746,70 @@ delimiter ;
 
 
 -- Procedimiento almacenado para insertar productos en el carrito.
-delimiter //
-create procedure SP_Insert_Update_Carrito(
-in p_id_cliente int,
-in p_id_dbc int,
-in p_cantidad int
+DELIMITER //
+
+CREATE PROCEDURE SP_Insert_Update_Carrito(
+    IN p_id_cliente INT,
+    IN p_id_dbc INT,
+    IN p_cantidad INT,
+    IN p_peso DOUBLE
 )
-begin 
-declare existe_bolsa int;
+BEGIN
+    DECLARE cantidad_existente INT;
+    DECLARE monto_base DOUBLE;
+    DECLARE monto_total DOUBLE;
+    DECLARE existe_producto INT;
+    DECLARE id_medida INT;
+    
+    -- Obtener el id_medida basado en el precio
+    SET id_medida = (SELECT id_dbc FROM detalle_bc WHERE precio = p_peso);
+    
+    -- Obtener el costo por peso del producto
+    SELECT precio INTO monto_base
+    FROM detalle_bc
+    WHERE id_dbc = id_medida;
+    
+    -- Verificar si el carrito ya tiene el producto con el mismo id_dbc y id_cliente
+    SELECT cantidad INTO cantidad_existente
+    FROM carrito
+    WHERE id_cliente = p_id_cliente AND id_dbc = id_medida;
+    
+    IF cantidad_existente IS NOT NULL THEN
+        -- Actualizar la cantidad y el monto del producto existente en el carrito
+        SET monto_total = (cantidad_existente + p_cantidad) * monto_base;
+        UPDATE carrito
+        SET cantidad = cantidad_existente + p_cantidad,
+            monto = monto_total
+        WHERE id_cliente = p_id_cliente AND id_dbc = id_medida;
+    ELSE
+        -- Verificar si existe algún producto en el carrito para el cliente y dbc
+        SELECT COUNT(*) INTO existe_producto
+        FROM carrito
+        WHERE id_cliente = p_id_cliente AND id_dbc = id_medida;
 
-select c.id_dbc into existe_bolsa
-from carrito c 
-where c.id_cliente = p_id_cliente  and c.id_dbc = p_id_dbc;
+        IF existe_producto > 0 THEN
+            -- Insertar un nuevo producto con diferente peso en el carrito
+            INSERT INTO carrito(id_cliente, id_dbc, cantidad, monto)
+            VALUES (
+                p_id_cliente,
+                id_medida,
+                p_cantidad,
+                p_cantidad * monto_base
+            );
+        ELSE
+            -- Insertar un nuevo producto en el carrito si no existe ningún producto
+            INSERT INTO carrito(id_cliente, id_dbc, cantidad, monto)
+            VALUES (
+                p_id_cliente,
+                id_medida,
+                p_cantidad,
+                p_cantidad * monto_base
+            );
+        END IF;
+    END IF;
+END //
 
-if existe_bolsa > 0 then 
-    update carrito c set c.cantidad = c.cantidad + p_cantidad, monto = (select ((cantidad+p_cantidad)*dbc.precio) from detalle_bc dbc join carrito c on c.id_dbc = dbc.id_dbc  where dbc.id_dbc = p_id_dbc  and c.id_cliente = p_id_cliente)
-    where c.id_cliente = p_id_cliente and c.id_dbc = p_id_dbc;
-else 
-    insert into carrito(id_cliente, id_dbc, cantidad, monto)
-    values (p_id_cliente,p_id_dbc,p_cantidad, p_cantidad * (select precio from detalle_bc dbc where dbc.id_dbc = p_id_dbc) );
-end if;
-
-end //
-delimiter ;
+DELIMITER ;
 
 
 
@@ -1093,7 +1134,7 @@ where r.estatus = 'Activa';
     
 -- Vista del carrito
 create view view_carrito as
-select c.id_cliente as cliente,bc.img_url,bc.nombre as producto, dbc.medida, dbc.precio, c.cantidad, c.monto as subtotal 
+select c.id_cliente as cliente,bc.id_bolsa as id_dbc,c.id_carrito as id_carrito,bc.img_url,bc.nombre as producto, dbc.medida,bc.proceso, dbc.precio, c.cantidad, c.monto as subtotal 
 from carrito c
 join detalle_bc dbc on dbc.id_dbc = c.id_dbc
 join bolsas_cafe bc on bc.id_bolsa = dbc.id_bolsa;

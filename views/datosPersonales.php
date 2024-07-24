@@ -45,8 +45,10 @@
                     showAlert("¡Contraseña actualizada con éxito!", "success");
                 }
             }
+        } else {
+            header("Location: ../index.php");
+            exit;
         }
-
     ?>
 </head>
 
@@ -67,7 +69,7 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="../menu.php">Menú</a>
+                            <a class="nav-link" aria-current="page" href="menu.php">Menú</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link mx-lg-2" href="ecommerce.php">Comprar</a>

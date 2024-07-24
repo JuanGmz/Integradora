@@ -56,7 +56,7 @@
                     <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px" >
-                    <a class="dropdown-item" href="views/perfil.php">Mi perfil</a>
+                    <a class="dropdown-item" href="perfil.php">Mi perfil</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="../scripts/login/cerrarsesion.php">Cerrar sesión</a>
                 </div>

@@ -18,7 +18,6 @@ class database
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
-
     }
     // Método opcional para obtener la conexión PDO
     public function getConnection()
@@ -35,7 +34,8 @@ class database
             echo $e->getMessage();
         }
     }
-    public function prepare($query) {
+    public function prepare($query)
+    {
         return $this->pdo->prepare($query);
     }
 
