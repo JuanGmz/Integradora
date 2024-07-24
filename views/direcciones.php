@@ -15,93 +15,88 @@
     $db = new database();
     $db->conectarDB();
 
-    $query = "SELECT 
-                d.id_domicilio,
-                d.referencia,
-                d.estado,
-                d.ciudad,
-                d.codigo_postal,
-                d.colonia,
-                d.calle,
-                d.id_cliente,
-                d.telefono
-            FROM
-                domicilios AS d
-            JOIN
-                clientes AS c ON d.id_cliente = c.id_cliente
-            JOIN
-                personas AS p ON c.id_persona = p.id_persona
-            WHERE
-                p.usuario = '$_SESSION[usuario]'";
+    if (isset($_SESSION["usuario"])) {
+        $query = "SELECT 
+                    d.id_domicilio,
+                    d.referencia,
+                    d.ciudad,
+                    d.colonia,
+                    d.calle,
+                    d.telefono,
+                    d.id_cliente
+                FROM
+                    domicilios AS d
+                JOIN
+                    clientes AS c ON d.id_cliente = c.id_cliente
+                JOIN
+                    personas AS p ON c.id_persona = p.id_persona
+                WHERE
+                    p.usuario = '$_SESSION[usuario]'";
 
+        $direcciones = $db->select($query);
 
+        if (isset($direcciones['key'])) {
+            echo $direcciones['key'];
+        } else {
+            echo "Array key does not exist.";
+        }
 
-    // Example of checking if a variable is set before using it
-    if (isset($dir)) {
-        echo $dir;
+        extract($_POST);
+
+        if (isset($_POST["addDir"])) {
+            if (strlen($codigo_postal === 5)) {
+                showAlert("El código postal no puede tener más de 5 caracteres", "error");
+            } else if (strlen($codigo_postal) < 5) {
+                showAlert("El código postal no puede tener menos de 5 caracteres", "error");
+            } else if (strlen($telefono) > 10) {
+                showAlert("El teléfono no puede tener más de 10 caracteres", "error");
+            } else if (strlen($telefono) < 10) {
+                showAlert("El teléfono no puede tener menos de 10 caracteres", "error");
+            } else {
+                $queryDir = "INSERT INTO domicilios VALUES (NULL, $id, '$referencia', '$estado', '$ciudad', '$codigo_postal', '$colonia', '$calle', $telefono)";
+                $db->execute($queryDir);
+                showAlert("¡Dirección registrada con éxito!", "success");
+                header("refresh:2;direcciones.php");
+            }
+        }
+    
+        if (isset($_POST["editDir"])) {
+            if (strlen($cp) === 5 && strlen($telefono) === 10) {
+                $query = "UPDATE domicilios SET 
+                        referencia = '$referencia',
+                        estado = '$estado',
+                        ciudad = '$ciudad',
+                        codigo_postal = '$cp',
+                        colonia = '$colonia',
+                        calle = '$calle',
+                        telefono = $telefono
+                        WHERE id_domicilio = $id_domicilio";
+                $db->execute($query);
+                showAlert("¡Dirección actualizada con éxito!", "success");
+                header("refresh:2;direcciones.php");
+            } else if (strlen($cp) < 5) {
+                showAlert("El código postal no puede tener menos de 5 caracteres", "error");
+            } else if (strlen($cp) > 5) {
+                showAlert("El código postal no puede tener más de 5 caracteres", "error");
+            } else if (strlen($telefono) > 10) {
+                showAlert("El teléfono no puede tener más de 10 caracteres", "error");
+            } else if (strlen($telefono) < 10) {
+                showAlert("El teléfono no puede tener menos de 10 caracteres", "error");
+            } else {
+                showAlert("Error al actualizar el domicilio", "error");
+            }
+        }
+    
+        if (isset($_POST["deleteDir"])) {
+            $query = "DELETE FROM domicilios WHERE id_domicilio = $id_domicilio";
+            $db->execute($query);
+            showAlert("¡Dirección eliminada con éxito!", "success");
+            header("refresh:2;direcciones.php");
+        }    
     } else {
-        echo "Variable is not set.";
-    }
-
-
-    if (!isset($_SESSION["usuario"])) {
         header("Location: ../index.php");
         exit;
     }
-
-    extract($_POST);
-
-    if (isset($_POST["addDir"])) {
-        if (strlen($codigo_postal === 5)) {
-            showAlert("El código postal no puede tener más de 5 caracteres", "error");
-        } else if (strlen($codigo_postal) < 5) {
-            showAlert("El código postal no puede tener menos de 5 caracteres", "error");
-        } else if (strlen($telefono) > 10) {
-            showAlert("El teléfono no puede tener más de 10 caracteres", "error");
-        } else if (strlen($telefono) < 10) {
-            showAlert("El teléfono no puede tener menos de 10 caracteres", "error");
-        } else {
-            $queryDir = "INSERT INTO domicilios VALUES (NULL, $id, '$referencia', '$estado', '$ciudad', '$codigo_postal', '$colonia', '$calle', $telefono)";
-            $db->execute($queryDir);
-            showAlert("¡Dirección registrada con éxito!", "success");
-            header("refresh:2;direcciones.php");
-        }
-    }
-
-    if (isset($_POST["editDir"])) {
-        if (strlen($cp) === 5 && strlen($telefono) === 10) {
-            $query = "UPDATE domicilios SET 
-                    referencia = '$referencia',
-                    estado = '$estado',
-                    ciudad = '$ciudad',
-                    codigo_postal = '$cp',
-                    colonia = '$colonia',
-                    calle = '$calle',
-                    telefono = $telefono
-                    WHERE id_domicilio = $id_domicilio";
-            $db->execute($query);
-            showAlert("¡Dirección actualizada con éxito!", "success");
-            header("refresh:2;direcciones.php");
-        } else if (strlen($cp) < 5) {
-            showAlert("El código postal no puede tener menos de 5 caracteres", "error");
-        } else if (strlen($cp) > 5) {
-            showAlert("El código postal no puede tener más de 5 caracteres", "error");
-        } else if (strlen($telefono) > 10) {
-            showAlert("El teléfono no puede tener más de 10 caracteres", "error");
-        } else if (strlen($telefono) < 10) {
-            showAlert("El teléfono no puede tener menos de 10 caracteres", "error");
-        } else {
-            showAlert("Error al actualizar el domicilio", "error");
-        }
-    }
-
-    if (isset($_POST["deleteDir"])) {
-        $query = "DELETE FROM domicilios WHERE id_domicilio = $id_domicilio";
-        $db->execute($query);
-        showAlert("¡Dirección eliminada con éxito!", "success");
-        header("refresh:2;direcciones.php");
-    }
-
     ?>
 </head>
 
@@ -183,7 +178,6 @@
 
         <div class="row">
             <?php
-            $direcciones = $db->select($query);
             foreach ($direcciones as $dir) {
                 ?>
                 <div class="col-lg-4">
