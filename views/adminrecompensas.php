@@ -1,11 +1,19 @@
 <?php
 date_default_timezone_set('America/Monterrey');
 if ($_POST) {
-    include '../class/database.php';
-    include '../scripts/funciones/funciones.php';
-    $conexion = new Database();
+    session_start();
+    require_once '../class/database.php';
+    include_once ("../scripts/funciones/funciones.php");
+    $db = new database();
+    $db->conectarDB();
 
-    $conexion->conectarDB();
+    $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE P.usuario = '$_SESSION[usuario]'";
+
+    $rol = $db->select($rolUsuario);
+
+    if ($rol[0]->rol !== 'administrador') {
+        header('Location: ../index.php');
+    } 
 
     extract($_POST);
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -9,6 +9,21 @@
     <link rel="shortcut icon" href="../img/Sinfonía-Café-y-Cultura.webp">
     <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/scrollbar.css">
+    <?php
+    session_start();
+    require_once '../class/database.php';
+    include_once ("../scripts/funciones/funciones.php");
+    $db = new database();
+    $db->conectarDB();
+
+    $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE P.usuario = '$_SESSION[usuario]'";
+
+    $rol = $db->select($rolUsuario);
+
+    if ($rol[0]->rol !== 'administrador') {
+        header('Location: ../index.php');
+    }  
+    ?>
 </head>
 
 <body>

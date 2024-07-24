@@ -1,11 +1,21 @@
 <?php
-    include_once("../class/database.php");
-    $db = new Database();
+    session_start();
+    require_once '../class/database.php';
+    include_once ("../scripts/funciones/funciones.php");
+    $db = new database();
     $db->conectarDB();
+
+    $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE P.usuario = '$_SESSION[usuario]'";
+
+    $rol = $db->select($rolUsuario);
+
+    if ($rol[0]->rol !== 'administrador') {
+        header('Location: ../index.php');
+    } 
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -407,7 +417,7 @@
                             $query = "SELECT * FROM publicaciones WHERE tipo = '{$_POST['tipo']}'";
                             $publicaciones = $db->select($query);
                             if (empty($publicaciones)) {
-                                echo "<div class='alert alert-danger' role='alert'>No hay publicaciones registradas en este tipo de publicación.</div>";
+                                echo "<div>No hay publicaciones registradas en este tipo de publicación.</div>";
                             } else {
                                 echo "<table class='table table-striped table-hover table-dark text-center border-3 border-start border-bottom border-end border-black'>
                                         <thead>
@@ -532,7 +542,7 @@
                                     </table>";
                             }
                         } else {
-                            echo"<div class='alert alert-danger' role='alert'>
+                            echo"<div>
                                 Seleccione un tipo de publicación
                             </div>";
                         }

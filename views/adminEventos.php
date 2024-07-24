@@ -1,5 +1,20 @@
+<?php
+    session_start();
+    require_once '../class/database.php';
+    include_once ("../scripts/funciones/funciones.php");
+    $db = new database();
+    $db->conectarDB();
+
+    $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE P.usuario = '$_SESSION[usuario]'";
+
+    $rol = $db->select($rolUsuario);
+
+    if ($rol[0]->rol !== 'administrador') {
+        header('Location: ../index.php');
+    } 
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -431,10 +446,6 @@
                                         <select name="lugar" id="lugar" class="form-select" required>
                                         <option selected disabled value="">Seleccionar Lugar</option>
                                             <?php
-                                                include ("../class/database.php");
-                                                $db = new Database();
-                                                $db->conectarDB();
-
                                                 $consulta = "SELECT id_lugar, nombre FROM ubicacion_lugares";
                                                 $lugares = $db->select($consulta);
                                                 foreach ($lugares as $lugar) {
@@ -726,6 +737,7 @@
                     } else {
                         echo "<div role='alert'>Seleccione una categoria</div>";
                     }
+                    $db->desconectarDB()
                     ?>
                 </div>
             </div>

@@ -10,6 +10,15 @@
     <link rel="shortcut icon" href="../../img/Sinfonía-Café-y-Cultura.webp">
     <?php
         session_start();
+        require_once '../../class/database.php';
+        include_once ("../../scripts/funciones/funciones.php");
+        $db = new database();
+        $db->conectarDB();
+
+        if (isset($_SESSION['usuario'])) {
+            $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE P.usuario = '$_SESSION[usuario]'";
+            $rol = $db->select($rolUsuario);
+        }
     ?>
 </head>
 
@@ -56,14 +65,17 @@
                         <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
-                        <a class="dropdown-item" href="../../views/perfil.php">Mi perfil</a>
-                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="../perfil.php">Mi perfil</a>
+                        <?php if ($rol[0]->rol === 'administrador') { ?>
+                            <a class="dropdown-item" href="../adminInicio.php">Administrar</a>
+                            <div class="dropdown-divider"></div>
+                        <?php } ?>
                         <a class="dropdown-item" href="../../scripts/login/cerrarsesion.php">Cerrar sesión</a>
                     </div>
                 <?php
                 } else {
                 ?>
-                    <a href="../../views/login.php" class="login-button ms-auto">Iniciar Sesión</a>
+                    <a href="../login.php" class="login-button ms-auto">Iniciar Sesión</a>
                 <?php
                 }
                 ?>
@@ -100,21 +112,25 @@
 
                 $jazzbands = $db->select($query);
 
-                foreach ($jazzbands as $jazzband) {
-                    echo "
-                        <div class='col-6 col-lg-3 mb-3'>
-                            <div class='card border-0' style='background: var(--color6);'> 
-                                <img src='../../img/menu/{$jazzband->img_url}' class='card-img-top rounded-5' alt='jazzband" . $jazzband->id_pm . "'>
-                                <div class='card-body'>
-                                    <h5 class='card-title fw-bold text-center'>{$jazzband->nombre}</h5>
-                                    <form action='detalle_producto/detalles.php' method='post'>
-                                        <input type='hidden' name='id_pm' value='" . $jazzband->id_pm . "'>
-                                        <input type='submit' class='btn btn-cafe w-100' value='Ver Detalles'>
-                                    </form>
+                if (empty($jazzbands)) {
+                    echo "<h3 class='text-center'>No hay productos en esta categoria</h3>";
+                } else {
+                    foreach ($jazzbands as $jazzband) {
+                        echo "
+                            <div class='col-6 col-lg-3 mb-3'>
+                                <div class='card border-0' style='background: var(--color6);'> 
+                                    <img src='../../img/menu/{$jazzband->img_url}' class='card-img-top rounded-5' alt='jazzband" . $jazzband->id_pm . "'>
+                                    <div class='card-body'>
+                                        <h5 class='card-title fw-bold text-center'>{$jazzband->nombre}</h5>
+                                        <form action='detalle_producto/detalles.php' method='post'>
+                                            <input type='hidden' name='id_pm' value='" . $jazzband->id_pm . "'>
+                                            <input type='submit' class='btn btn-cafe w-100' value='Ver Detalles'>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    ";
+                        ";
+                    }
                 }
             ?>
 

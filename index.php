@@ -10,6 +10,18 @@
     <link rel="stylesheet" href="css/style.css">
     <?php
     session_start();
+    require_once 'class/database.php';
+    include_once ("scripts/funciones/funciones.php");
+    $db = new database();
+    $db->conectarDB();
+
+    if (isset($_SESSION["usuario"])) {
+        $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE P.usuario = '$_SESSION[usuario]'";
+
+        $rol = $db->select($rolUsuario);
+    } else {
+        $rol = null;
+    }
     ?>
 </head>
 
@@ -49,7 +61,7 @@
                 </div>
             </div>
             <?php
-            if (isset($_SESSION["usuario"])) {
+                if (isset($_SESSION["usuario"])) {
             ?>
                 <!-- Navbar con dropdown -->
                 <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -57,8 +69,8 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
                     <a class="dropdown-item" href="views/perfil.php">Mi perfil</a>
-                    <?php if ($_SESSION['usuario'] == 'ADMIN') { ?>
-                        <a class="dropdown-item" href="views/admininicio.php">Administrar</a>
+                    <?php if ($rol[0]->rol === 'administrador') { ?>
+                        <a class="dropdown-item" href="views/adminInicio.php">Administrar</a>
                         <div class="dropdown-divider"></div>
                     <?php } ?>
                     <a class="dropdown-item" href="scripts/login/cerrarsesion.php">Cerrar sesión</a>
@@ -349,7 +361,7 @@
             <div class="container-fluid bagr-cafe3 p-3">
 
                 <div class="col-12 text-center p-3">
-                    <h1 class="fw-bold text-center" style="letter-spacing: 1px;">Blog</h1>
+                    <h1 class="fw-bold text-center" style="letter-spacing: 1px;">Publicaciones</h1>
                 </div>
 
                 <div class="row  justify-content-center d-flex">
@@ -365,8 +377,8 @@
                                 fecha
                               FROM 
                                 publicaciones
-                              WHERE 
-                                tipo = "blog"
+                              ORDER BY
+                                fecha DESC
                               LIMIT 3';
                     $publicaciones = $conexion->select($query);
 
