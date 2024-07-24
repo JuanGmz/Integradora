@@ -370,138 +370,166 @@
                 <div class="row">
                     <!-- Tabla de pedidos AQUI -->
                     <div class="row mt-lg-3 p-3 p-lg-4 m-0">
-                            <?php
-                                include("../class/database.php");
+                        <?php
+                    include("../class/database.php");
 
-                                $db = new Database();
+                        $db = new Database();
+                        $db->conectarDB();
 
-                                $db->conectarDB();
-                                if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                                    $busqueda = $_POST['busqueda'];
+                        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                            $busqueda = $_POST['busqueda'];
+                            $query = "CALL SP_filtrar_pedidos('$busqueda')";
+                            $result = $db->select($query);
 
-                                    $query = "CALL SP_filtrar_pedidos('%$busqueda%')";
+                            if (empty($result)) {
+                                echo "<div>No hay pedidos registrados con este folio, usuario o teléfono.</div>";
+                            } else {
+                                echo "
+                                <table class='table table-striped table-hover table-dark text-center border-3 border-black border-bottom border-start border-end'>
+                                    <thead>
+                                        <tr>
+                                            <th scope='col'>Folio</th>
+                                            <th scope='col'>Nombre</th>
+                                            <th scope='col'>Domicilio</th>
+                                            <th scope='col'>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class='table-group-divider table-light'>";
 
-                                    $pedidos = $db->select($query);
+                                // Variable para mantener el seguimiento de los pedidos ya mostrados
+                                $pedidosMostrados = [];
 
-                                    if (empty($pedidos)) {
-                                        echo "<div '>No hay pedidos registrados con este folio, usuario o teléfono.</div>";
-                                    } else {
+                                // Recorrer los resultados y mostrar cada uno en una fila de la tabla
+                                foreach ($result as $pedido) {
+                                    // Si el pedido es nuevo, mostramos una nueva fila
+                                    if (!in_array($pedido->id_pedido, $pedidosMostrados)) {
                                         echo "
-                                        <table class='table table-striped table-hover table-dark text-center border-3 border-black border-bottom border-start border-end'>
-                                            <thead>
-                                                <tr>
-                                                    <th scope='col'>Folio</th>
-                                                    <th scope='col'>Nombre</th>
-                                                    <th scope='col'>Domicilio</th>
-                                                    <th scope='col'>Acciones</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class='table-group-divider table-light'>";
-                                        
-                                        // Recorrer los productos y mostrar cada uno en una fila de la tabla
-                                        foreach ($pedidos as $pedido) {
-                                            echo "
-                                                <tr>
-                                                    <td>$pedido->id_pedido</td>
-                                                    <td>$pedido->cliente</td>
-                                                    <td>$pedido->domicilio</td>
-                                                    <td class='d-flex flex-row align-items-center justify-content-center gap-1'>
-                                                        <!-- Botón para ver detalles del producto -->
-                                                        <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#detalleProducto_$pedido->id_pedido'>
-                                                            <i class='fa-solid fa-bars'></i>
-                                                        </button>
-                                                        <!-- Modal para mostrar los detalles del producto -->
-                                                        <div class='modal fade' id='detalleProducto_$pedido->id_pedido' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
-                                                            <div class='modal-dialog'>
-                                                                <div class='modal-content'>
-                                                                    <div class='modal-header'>
-                                                                        <h1 class='modal-title fs-5' id='exampleModalLabel'>Detalles del pedido</h1>
-                                                                        <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                                                                    </div>
-                                                                    <div class='modal-body'>
-                                                                        <h4 class='text-start fw-bolder mb-3'>Bolsa: <span class='fw-normal fs-4'><br>$pedido->bolsa</span></h4>
-                                                                        <h4 class='text-start fw-bolder mb-3'>Medida: <span class='fw-normal fs-4'>$pedido->medida</span></h4>
-                                                                        <h4 class='text-start fw-bolder mb-3'>Cantidad: <span class='fw-normal fs-4'>$pedido->cantidad</span></h4>
-                                                                        <h4 class='text-start fw-bolder mb-3'>Método de pago: <span class='fw-normal fs-4'>$pedido->metodo_pago</span></h4>
-                                                                        <h4 class='text-start fw-bolder mb-3'>Telefono: <span class='fw-normal fs-4'>$pedido->telefono</span></h4>
-                                                                        <h4 class='text-start fw-bolder mb-3'>Fecha y hora: <span class='fw-normal fs-4'>$pedido->fecha_hora_pedido</span></h4>
-                                                                        <h4 class='text-start fw-bolder mb-3'>Estatus: <span class='fw-normal fs-4'>$pedido->estatus</span></h4>                                                                    
-                                                                        <h4 class='text-start fw-bolder mb-3'>Monto total: <span class='fw-normal fs-4'>$pedido->monto_total</span></h4>
-                                                                        <h4 class='text-start fw-bolder mb-3'>Envío: <span class='fw-normal fs-4'>$pedido->envio</span></h4>
-                                                                        <h4 class='text-start fw-bolder mb-3'>Costo envío: <span class='fw-normal fs-4'>$pedido->costo_envio</span></h4>
-                                                                        <h4 class='text-start fw-bolder mb-3'>Guía de envío: <span class='fw-normal fs-4'>$pedido->guia_de_envio</span></h4>
-                                                                        <h4 class='text-start fw-bolder mb-3'>Documento: <span class='fw-normal fs-4'>$pedido->documento_url</span></h4>
-                                                                    </div>
-                                                                </div>
+                                        <tr>
+                                            <td>{$pedido->id_pedido}</td>
+                                            <td>{$pedido->cliente}</td>
+                                            <td>{$pedido->domicilio}</td>
+                                            <td class='d-flex flex-row align-items-center justify-content-center gap-1'>
+                                                <!-- Botón para ver detalles del pedido -->
+                                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#detalleProducto_{$pedido->id_pedido}'>
+                                                    <i class='fa-solid fa-bars'></i>
+                                                </button>
+                                                <!-- Modal para mostrar los detalles del pedido -->
+                                                <div class='modal fade' id='detalleProducto_{$pedido->id_pedido}' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+                                                    <div class='modal-dialog'>
+                                                        <div class='modal-content'>
+                                                            <div class='modal-header'>
+                                                                <h1 class='modal-title fs-5' id='exampleModalLabel'>Detalles del pedido</h1>
+                                                                <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                                            </div>
+                                                            <div class='modal-body'>
+                                                                <h4 class='text-start fw-bolder mb-3'>Método de pago: <span class='fw-normal fs-4'>{$pedido->metodo_pago}</span></h4>
+                                                                <h4 class='text-start fw-bolder mb-3'>Telefono: <span class='fw-normal fs-4'>{$pedido->telefono}</span></h4>
+                                                                <h4 class='text-start fw-bolder mb-3'>Fecha y hora: <span class='fw-normal fs-4'>{$pedido->fecha_hora_pedido}</span></h4>
+                                                                <h4 class='text-start fw-bolder mb-3'>Estatus: <span class='fw-normal fs-4'>{$pedido->estatus}</span></h4>                                                                    
+                                                                <h4 class='text-start fw-bolder mb-3'>Monto total: <span class='fw-normal fs-4'>{$pedido->monto_total}</span></h4>
+                                                                <h4 class='text-start fw-bolder mb-3'>Envío: <span class='fw-normal fs-4'>{$pedido->envio}</span></h4>
+                                                                <h4 class='text-start fw-bolder mb-3'>Costo envío: <span class='fw-normal fs-4'>{$pedido->costo_envio}</span></h4>
+                                                                <h4 class='text-start fw-bolder mb-3'>Guía de envío: <img src='{$pedido->guia_de_envio}' alt='Guía de envío' class='img-fluid'></h4>
+                                                                <h4 class='text-start fw-bolder mb-3'>Documento: <img src='{$pedido->documento_url}' alt='Documento' class='img-fluid'></h4>
+
+
+                                                                <!-- Tabla para mostrar detalles del pedido -->
+                                                                <table class='table table-striped table-hover mt-3 border border-2'>
+                                                                    <thead class='table-dark'>
+                                                                        <tr>
+                                                                            <th scope='col'>Bolsa</th>
+                                                                            <th scope='col'>Medida</th>
+                                                                            <th scope='col'>Cantidad</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>";
+                                        foreach ($result as $detalle) {
+                                            if ($detalle->id_pedido == $pedido->id_pedido) {
+                                                echo "
+                                                    <tr>
+                                                        <td>{$detalle->bolsa}</td>
+                                                        <td>{$detalle->medida}</td>
+                                                        <td>{$detalle->cantidad}</td>
+                                                    </tr>";
+                                            }
+                                        }
+
+                                        echo "
+                                                                    </tbody>
+                                                                </table>
                                                             </div>
                                                         </div>
-                                                    <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#editarProducto_$pedido->id_pedido'>
+                                                    </div>
+                                                </div>
+                                                <!-- Botón para editar el pedido -->
+                                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#editarProducto_{$pedido->id_pedido}'>
                                                     <i class='fa-solid fa-pen-to-square'></i>
-                                                    </button>
-                                                        <div class='modal fade' id='editarProducto_$pedido->id_pedido' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
-                                                            <div class='modal-dialog'>
-                                                                <div class='modal-content'>
-                                                                    <div class='modal-header'>
-                                                                            <h1 class='modal-title fs-5' id='exampleModalLabel'>Editar pedido</h1>
-                                                                            <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                                                                    </div>
-                                                                        <!-- Aquí va el contenido del modal -->
-                                                                    <div class='modal-body text-start'>
-                                                                            <form action='../scripts/editarpedido.php' method='post'>
-                                                                                <input type='hidden' name='id_pedido' value='$pedido->id_pedido' readonly>
+                                                </button>
+                                                <!-- Modal para editar el pedido -->
+                                                <div class='modal fade' id='editarProducto_{$pedido->id_pedido}' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+                                                    <div class='modal-dialog'>
+                                                        <div class='modal-content'>
+                                                            <div class='modal-header'>
+                                                                <h1 class='modal-title fs-5' id='exampleModalLabel'>Editar pedido</h1>
+                                                                <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                                            </div>
+                                                            <div class='modal-body text-start'>
+                                                                <form action='../scripts/editarpedido.php' method='post'>
+                                                                    <input type='hidden' name='id_pedido' value='{$pedido->id_pedido}' readonly>
                                                                     <div>
                                                                         <label for='titulo' class='form-label'>Cliente: </label>
-                                                                        <input type='text' class='form-control' id='titulo' name='cliente' value='$pedido->cliente' readonly >
+                                                                        <input type='text' class='form-control' id='titulo' name='cliente' value='{$pedido->cliente}' readonly >
                                                                     </div>
                                                                     <div>
-                                                                    <label for='descripcion' class='form-label'>Bolsa</label>
-                                                                    <input type='text' class='form-control' id='descripcion' name='bolsa' value='$pedido->bolsa' readonly>
+                                                                        <label for='descripcion' class='form-label'>Bolsa</label>
+                                                                        <input type='text' class='form-control' id='descripcion' name='bolsa' value='{$pedido->bolsa}' readonly>
                                                                     </div>
                                                                     <div class='row'>
-                                                                    <div class='col-4'>
-                                                                        <label for='cap' class='form-label'>Monto total</label>
-                                                                        <input type='text' min='1' class='form-control' id='cap' name='montototal' value='$pedido->monto_total' readonly>
-                                                                    </div>
-
-                                                                    <div class='col-4'>
-                                                                        <label for='costo' class='form-label'>Costo de envio</label>
-                                                                        <input type='number' min='0' class='form-control' id='costo' name='costo' value=$pedido->costo_envio>                                                                        
-                                                                    </div>
-                                                                    <div class='col-4'>
-                                                                    <label for='estatus' class='form-label'>Estatus</label>
-                                                                    <select name='estatus' id='estatus' class='form-select'>
-                                                                        <option value='{$pedido->id_pedido}'>{$pedido->estatus}</option>
-                                                                        <option value='Pendiente' " . ($pedido->estatus == 'Cancelado' ? 'disabled' : '') . ">Pendiente</option>
-                                                                        <option value='Finalizado' " . ($pedido->estatus == 'Cancelado' ? 'disabled' : '') . ">Finalizado</option>
-                                                                    </select>
-                                                                    </div>
+                                                                        <div class='col-4'>
+                                                                            <label for='cap' class='form-label'>Monto total</label>
+                                                                            <input type='text' min='1' class='form-control' id='cap' name='montototal' value='{$pedido->monto_total}' readonly>
+                                                                        </div>
+                                                                        <div class='col-4'>
+                                                                            <label for='costo' class='form-label'>Costo de envio</label>
+                                                                            <input type='number' min='0' class='form-control' id='costo' name='costo' value='{$pedido->costo_envio}'>                                                                        
+                                                                        </div>
+                                                                        <div class='col-4'>
+                                                                            <label for='estatus' class='form-label'>Estatus</label>
+                                                                            <select name='estatus' id='estatus' class='form-select'>
+                                                                                <option value='{$pedido->estatus}' selected>{$pedido->estatus}</option>
+                                                                                <option value='Pendiente' " . ($pedido->estatus == 'Cancelado' ? 'disabled' : '') . ">Pendiente</option>
+                                                                                <option value='Finalizado' " . ($pedido->estatus == 'Cancelado' ? 'disabled' : '') . ">Finalizado</option>
+                                                                            </select>
+                                                                        </div>
                                                                     </div>
                                                                     <div>
                                                                         <label for='imagen' class='form-label'>Guia de envío</label>
-                                                                        <input type='file' class='form-control' id='imagen' name='guia' value=$pedido->guia_de_envio>
-                                                                     </div> 
-                                                                
-                                                                    <div >
+                                                                        <input type='file' class='form-control' id='imagen' name='guia' value='{$pedido->guia_de_envio}'>
+                                                                    </div>
+                                                                    <div>
                                                                         <label for='fecha' class='form-label'>Documento</label>
-                                                                        <input type='file' class='form-control' id='fecha' name='documento' value=$pedido->documento_url>  
+                                                                        <input type='file' class='form-control' id='fecha' name='documento' value='{$pedido->documento_url}'>
                                                                     </div>
                                                                     <div class='row'>
-                                                                    <div class='col-12 text-end'>
-                                                                        <button type='submit' class='btn btn-primary mt-3'>Actualizar</button>
-                                                                    </div>
+                                                                        <div class='col-12 text-end'>
+                                                                            <button type='submit' class='btn btn-primary mt-3'>Actualizar</button>
+                                                                        </div>
                                                                     </div> 
-                                                                 </form>
-                                                             </div>
-                                                         </div>
-                                                    /div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </td>
-                                    </tr>";
+                                        </tr>";
+                                        $pedidosMostrados[] = $pedido->id_pedido;
+                                    }
+                                }
+
+                                echo "</tbody></table>";
                             }
-                            echo "</tbody></table>";
                         }
-                    }
-                    ?>
+                        ?>
                 </div>
             </div>
         </div>
