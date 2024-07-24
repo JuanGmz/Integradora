@@ -390,6 +390,20 @@ estatus enum('Activa','Inactiva'),
 img_url nvarchar(255) not null,
 primary key (id_recompensa)
 );
+CREATE TABLE password_resets (
+    telefono VARCHAR(20) NOT NULL,
+    codigo VARCHAR(6) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (telefono)
+);
+
+
+/*Eliminar registro de recuperar contraseña en 1hora*/
+CREATE EVENT IF NOT EXISTS delete_expired_password_resets
+ON SCHEDULE EVERY 1 HOUR
+DO
+  DELETE FROM password_resets WHERE created_at < NOW() - INTERVAL 1 HOUR;
+
 
 -- Modulo de recompensas.
 
