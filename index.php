@@ -57,7 +57,10 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
                     <a class="dropdown-item" href="views/perfil.php">Mi perfil</a>
-                    <div class="dropdown-divider"></div>
+                    <?php if ($_SESSION['usuario'] == 'ADMIN') { ?>
+                        <a class="dropdown-item" href="views/admininicio.php">Administrar</a>
+                        <div class="dropdown-divider"></div>
+                    <?php } ?>
                     <a class="dropdown-item" href="scripts/login/cerrarsesion.php">Cerrar sesión</a>
                 </div>
             <?php
