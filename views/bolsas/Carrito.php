@@ -95,18 +95,19 @@
         $db = new Database();
         $db->conectarDB();
 
-        $cliente = "SELECT 
-        c.id_cliente 
-        FROM 
-        clientes AS c 
-        JOIN
-        personas AS p ON c.id_persona = p.id_persona 
-        WHERE p.usuario = '" . $_SESSION["usuario"] . "'";
-        $cliente = $db->select($cliente);
 
-        $query = "SELECT * FROM view_carrito WHERE cliente = '" . $cliente[0]->id_cliente . "'";
-        $consulta = $db->select($query);
         if (isset($_SESSION["usuario"])) {
+            $cliente = "SELECT 
+            c.id_cliente 
+            FROM 
+            clientes AS c 
+            JOIN
+            personas AS p ON c.id_persona = p.id_persona 
+            WHERE p.usuario = '" . $_SESSION["usuario"] . "'";
+            $cliente = $db->select($cliente);
+
+            $query = "SELECT * FROM view_carrito WHERE cliente = '" . $cliente[0]->id_cliente . "'";
+            $consulta = $db->select($query);
             if (count($consulta) > 0) {
         ?>
                 <!-- Carrito -->
@@ -220,7 +221,7 @@
                         echo '<a href="Folio.php" class="btn btn-dark w-100">Realizar pedido</a>';
                         echo '</div>';
                         ?>
-                        
+
                     </div>
                 </div>
 
