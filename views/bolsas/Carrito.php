@@ -10,6 +10,7 @@
     <link rel="shortcut icon" href="../../img/Sinfonía-Café-y-Cultura.webp">
     <?php
     session_start();
+
     ?>
 
 
@@ -77,7 +78,7 @@
     <!-- NavBar End -->
 
     <!--Contenido-->
-    <div class="container mt-5">
+    <div class="container">
         <nav aria-label="breadcrumb" class='col-12 d-flex'>
             <ol class="breadcrumb mt-4">
                 <li class="breadcrumb-item fw-bold"><a href="../../index.php">Inicio</a></li>
@@ -89,81 +90,170 @@
         <div class="fw-bold fs-3 mt-3 mb-4 ">
             <h1 class="h1contact">Mi Carrito</h1>
         </div>
+        <?php
+        include_once("../../class/database.php");
+        $db = new Database();
+        $db->conectarDB();
 
-        <!-- Dirección de envío -->
-        <div class="row mb-4 my-5">
-            <div class="col-12 d-flex justify-content-between align-items-center">
-                <h4 class="fw-bold">Dirección de envío</h4>
-                <a href="../../views/direcciones.php" class="text-decoration-none fw-bold blog-card-link">Cambiar <i class="fa-solid fa-pencil"></i></a>
-            </div>
-            <div class="col-12">
-                <p class="m-1 p-0">Tobias Gabriel Rodriguez Lujan</P>
-                <P class="m-1 p-0">Las lomas 80</P>
-                <P class="m-1 p-0">Joyas del desierto</P>
-                <P class="m-1 p-0">TORREON, COAHUILA DE ZARAGOZA, 27087</p>
-            </div>
-        </div>
-        <hr>
 
-        <!-- Pago -->
+        if (isset($_SESSION["usuario"])) {
+            $cliente = "SELECT 
+            c.id_cliente 
+            FROM 
+            clientes AS c 
+            JOIN
+            personas AS p ON c.id_persona = p.id_persona 
+            WHERE p.usuario = '" . $_SESSION["usuario"] . "'";
+            $cliente = $db->select($cliente);
 
-        <div class="row mb-4">
-            <div class="col-12 d-flex justify-content-between align-items-center">
+            $query = "SELECT * FROM view_carrito WHERE cliente = '" . $cliente[0]->id_cliente . "'";
+            $consulta = $db->select($query);
+            if (count($consulta) > 0) {
+        ?>
+                <!-- Carrito -->
                 <div>
-                    <h4 class="fw-bold ">Pago</h4>
-                    <p class="mb-0">Para completar tu compra, selecciona tu método de pago preferido y luego comunícate con nosotros para finalizar el proceso.</p>
-                </div>
-                <div class="dropdown">
-                    <button class="btn btn-outline-dark dropdown-toggle" type="button" id="paymentMethodDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        Transferencia
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="paymentMethodDropdown">
-                        <li><a class="dropdown-item" href="#">Tarjeta de Crédito</a></li>
-                        <li><a class="dropdown-item" href="#">PayPal</a></li>
-                        <li><a class="dropdown-item" href="#">Efectivo</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <hr>
+                    <!-- Dirección de envío -->
+                    <div class="row mb-4 my-5">
+                        <div class="col-12 d-flex justify-content-between align-items-center">
+                            <h4 class="fw-bold">Dirección de envío</h4>
+                            <a href="../../views/direcciones.php" class="text-decoration-none fw-bold blog-card-link">Cambiar <i class="fa-solid fa-pencil"></i></a>
+                        </div>
+                        <div class="col-12">
+                            <p class="m-1 p-0">Tobias Gabriel Rodriguez Lujan</P>
+                            <P class="m-1 p-0">Las lomas 80</P>
+                            <P class="m-1 p-0">Joyas del desierto</P>
+                            <P class="m-1 p-0">TORREON, COAHUILA DE ZARAGOZA, 27087</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <!-- Pago -->
 
-        <!-- Productos y Confirmación del pedido -->
-        <div class="row mb-4">
-            <div class="col-md-8">
-                <h4 class="fw-bold ">Productos</h4>
-                <div class="d-flex mb-3">
-                    <img src="../../img/cafes/bolsa2.webp" class="img-fluid rounded me-3 w-25 h-25" alt="Producto">
-                    <div>
-                        <h6>Jaltenango chiapas</h6>
-                        <p>Peso: 1kg<br>
-                            Cantidad: 2</p>
+                    <div class="row mb-4">
+                        <div class="col-12 d-flex justify-content-between align-items-center">
+                            <div>
+                                <h4 class="fw-bold ">Pago</h4>
+                                <p class="mb-0">Para completar tu compra, selecciona tu método de pago preferido y luego comunícate con nosotros para finalizar el proceso.</p>
+                            </div>
+                            <div class="dropdown">
+                                <button class="btn btn-outline-dark dropdown-toggle" type="button" id="paymentMethodDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Transferencia
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="paymentMethodDropdown">
+                                    <li><a class="dropdown-item" href="#">Tarjeta de Crédito</a></li>
+                                    <li><a class="dropdown-item" href="#">PayPal</a></li>
+                                    <li><a class="dropdown-item" href="#">Efectivo</a></li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="ms-auto">
-                        <p>$462.42</p>
+                    <hr>
+                    <!-- Productos y Confirmación del pedido -->
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h4 class="fw-bold ">Productos</h4>
+
+                            <?php
+
+
+                            foreach ($consulta as $item) {
+                                echo '<div class="container p-0">';
+                                echo '<div class="d-flex justify-content-between align-items-center mb-3">';
+                                echo '  <div class="d-flex align-items-center">';
+                                echo '      <img src="../../img/cafes/bolsa2.webp" class="img-fluid rounded w-25 h-25" alt="Producto">';
+                                echo '      <div class="ms-3 w-25">';
+                                echo '          <h6 class="mb-0 fw-bold">' . $item->producto . '</h6>';
+                                echo '          <span>$' . $item->precio . '</span>';
+                                echo '          <span class="text-muted d-block">' . $item->proceso . '</span>';
+                                echo '      </div>';
+                                echo '      <div class="ms-3">';
+                                echo '          <form action="../../scripts/actualizar_carrito.php" method="POST" style="display: inline;">';
+                                echo '              <input type="hidden" name="id_cliente" value="' . $cliente[0]->id_cliente  . '">';
+                                echo '              <input type="hidden" name="peso" value="' . $item->precio . '">';
+                                echo '              <input type="hidden" name="id_carrito" value="' . $item->id_carrito . '">';
+                                echo '              <input type="hidden" name="id_dbc" value="' . $item->id_dbc . '">';
+                                echo '              <input type="hidden" name="link" value="../views/bolsas/Carrito.php">';
+                                echo '              <input type="hidden" name="operacion" value="decrementar">';
+                                echo '              <button type="submit" class="btn fw-bold btn-dark fs-5 p-0" style="height: 35px; width: 35px">-</button>';
+                                echo '          </form>';
+                                echo '          <span class="mx-2 p-1">' . $item->cantidad . '</span>';
+                                echo '          <form action="../../scripts/actualizar_carrito.php" method="POST" style="display: inline;">';
+                                echo '              <input type="hidden" name="id_cliente" value="' . $cliente[0]->id_cliente . '">';
+                                echo '              <input type="hidden" name="peso" value="' . $item->precio . '">';
+                                echo '              <input type="hidden" name="id_carrito" value="' . $item->id_carrito . '">';
+                                echo '              <input type="hidden" name="id_dbc" value="' . $item->id_dbc . '">';
+                                echo '              <input type="hidden" name="link" value="../views/bolsas/Carrito.php">';
+                                echo '              <input type="hidden" name="operacion" value="incrementar">';
+                                echo '              <button type="submit" class="btn fw-bold btn-dark fs-5 p-0" style="height: 35px; width: 35px">+</button>';
+                                echo '          </form>';
+                                echo '      </div>';
+                                echo '  </div>';
+                                echo '   <form action="../../scripts/eliminar_producto.php" method="POST" style="display:inline;">
+                                <input type="hidden" name="item_id" value="' . $item->id_dbc . '">
+                                <input type="hidden" name="id_carrito" value="' . $item->id_carrito . '">
+                                <input type="hidden" name="id_cliente" value="' . $cliente[0]->id_cliente . '">
+                                <input type="hidden" name="link" value="../views/bolsas/Carrito.php">
+                                    <button type="submit" class="btn" aria-label="Close"><i class="fa-solid fa-trash"></i></button>
+                            </form>';
+                                echo '</div>';
+                                echo '<hr class="border-dark">';
+                                echo '</div>';
+                            }
+
+                            ?>
+
+
+                        </div>
+                        <?php
+                        $subotal = "SELECT sum(monto) as subtotal from carrito where id_cliente='" . $cliente[0]->id_cliente . "';";
+                        $subtotal = $db->select($subotal);
+
+                        $iva = $subtotal[0]->subtotal * 0.16;
+
+                        $total = $subtotal[0]->subtotal + $iva;
+
+                        echo '<div class="col-md-4 p-4">';
+                        echo '<h3 class="fw-bold text-center m-0">Confirmación del pedido</h3>';
+                        echo '<p>Productos: <span class="float-end fw-bold">$' . $subtotal[0]->subtotal . '</span></p>';
+                        echo '<p>Envío: <span class="float-end">--</span></p>';
+                        echo '<hr>';
+                        echo '<p>Total: <span class="float-end fw-bold">$' . $total . '</span></p>';
+                        echo '<p class="small text-muted">* No incluye los gastos de envío.</p>';
+                        echo '<a href="Folio.php" class="btn btn-dark w-100">Realizar pedido</a>';
+                        echo '</div>';
+                        ?>
+
                     </div>
                 </div>
-                <div class="d-flex mb-3">
-                    <img src="../../img/cafes/bolsa2.webp" class="img-fluid rounded me-3 w-25 h-25" alt="Producto">
-                    <div>
-                        <h6>Jaltenango chiapas</h6>
-                        <p>Peso: 250gr<br>
-                            Cantidad: 2</p>
-                    </div>
-                    <div class="ms-auto">
-                        <p>$190</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <h3 class="fw-bold text-center m-0">Confirmación del pedido</h3>
-                <p>Productos: <span class="float-end fw-bold">$652.00</span></p>
-                <p>Envío: <span class="float-end">--</span></p>
-                <hr>
-                <p>Total: <span class="float-end fw-bold">$652.00</span></p>
-                <p class="small text-muted">* No incluye los gastos de envío.</p>
-                <a href="Folio.php" class="btn btn-dark w-100">Realizar pedido</a>
-            </div>
-        </div>
+
+        <?php
+            } else {
+                echo '<div class="d-flex flex-column justify-content-center align-items-center vh-100">';
+                echo '<h3 class="text-center">Tu carrito está vacío</h3>';
+                echo '<div class="d-flex justify-content-center col-12">';
+                echo '<i class="fa-solid fa-mug-hot fa-4x text-dark-emphasis"></i>';
+                echo '</div>';
+                echo '<div class="d-flex justify-content-center col-12">';
+                echo ' <a href="../ecommerce.php" class="btn w-50 mt-3 fs-5 m-1 btn-dark p-1">Ver Tienda</a>';
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
+            }
+        } else {
+            echo '<div class="d-flex flex-column justify-content-center align-items-center vh-100">';
+            echo '<h3 class="text-center text-dark">Crea una cuenta o inicia sesión para disponer de un carrito</h3>';
+            echo '<div class="d-flex justify-content-center col-12">';
+            echo '<i class="fa-solid fa-mug-hot fa-4x text-dark-emphasis"></i>';
+            echo '</div>';
+            echo '<div class="d-flex justify-content-center col-12">';
+            echo ' <a href="../login.php" class="btn w-50 mt-3 fs-5 m-1 btn-dark p-1">Iniciar sesión</a>';
+            echo '</div>';
+            echo '</div>';
+            echo '</div>';
+        }
+        ?>
+
+
+
     </div>
     <!-- Footer -->
     <footer>

@@ -134,7 +134,7 @@ session_start();
                             <img src='../../img/cafes/bolsa3.webp' class='img-fluid rounded coffee-image' alt='Producto'>
                             <p class='mt-3'><strong>Puntaje de catacion:</strong>{$bolsacafe[0]->puntaje_catacion}<pts</p>
                             <div class='col-12 text-center'>
-                                <p class='product-price' id='productPrice'>85$</p>
+                                <p class='product-price' id='productPrice'>80$</p>
                             </div>
                         </div>
                         <div class='col-12 col-md-6'>
@@ -300,6 +300,7 @@ session_start();
                                 <input type="hidden" name="item_id" value="' . $item->id_dbc . '">
                                 <input type="hidden" name="id_carrito" value="' . $item->id_carrito . '">
                                 <input type="hidden" name="id_cliente" value="' . $cliente[0]->id_cliente . '">
+                                <input type="hidden" name="link" value="../views/bolsas/3.php">
                                     <button type="submit" class="btn" aria-label="Close"><i class="fa-solid fa-trash"></i></button>
                             </form>';
                     echo '</div>';
@@ -335,7 +336,7 @@ session_start();
                 echo '      <span>Subtotal</span>';
                 echo '      <span>0</span>';
                 echo '  </div>';
-                echo '  <a href="./bolsas/Carrito.php" class="btn w-100 mt-3 fs-5 m-1 btn-dark p-1">Ver Carrito</a>';
+                echo '  <a href="Carrito.php" class="btn w-100 mt-3 fs-5 m-1 btn-dark p-1">Ver Carrito</a>';
                 echo '</div>';
             }
         } else {
