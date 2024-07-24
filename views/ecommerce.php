@@ -55,19 +55,22 @@ session_start();
             <?php
             if (isset($_SESSION["usuario"])) {
             ?>
-                <!-- Navbar con dropdown -->
-                <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <!-- Navbar con dropdown -->
+                            <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
-                    <a class="dropdown-item" href="perfil.php">Mi perfil</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="../scripts/login/cerrarsesion.php">Cerrar sesión</a>
+                    <a class="dropdown-item" href="views/perfil.php">Mi perfil</a>
+                    <?php if ($_SESSION['usuario'] == 'ADMIN') { ?>
+                        <a class="dropdown-item" href="../views/adminInicio.php">Administrar</a>
+                        <div class="dropdown-divider"></div>
+                    <?php } ?>
+                    <a class="dropdown-item" href="scripts/login/cerrarsesion.php">Cerrar sesión</a>
                 </div>
             <?php
             } else {
             ?>
-                <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
+                <a href="views/login.php" class="login-button ms-auto">Iniciar Sesión</a>
             <?php
             }
             ?>
@@ -96,7 +99,6 @@ session_start();
                 <!-- contenedor de productos -->
                 <div class="row  d-flex justify-content-center">
                     <?php
-                    include_once("../class/database.php");
                     $conexion = new Database();
                     $conexion->conectarDB();
                     $query = 'SELECT bolsas_cafe.id_bolsa,bolsas_cafe.nombre, bolsas_cafe.productor_finca ,bolsas_cafe.proceso,
@@ -106,9 +108,10 @@ session_start();
 
                     $bolsas = $conexion->select($query);
                     foreach ($bolsas as $bolsa) {
+
                         echo "<div class='col-10 col-sm-6 col-md-4 col-lg-4 p-4 m-0'>";
                         echo "<div class='card m-0 blog-card shadow-lg' style='border-radius: 5% 5% 0% 0%;'>";
-                        echo "<a href='../views/bolsas/{$bolsa->id_bolsa}.php'>";
+                        echo "<a href='../views/bolsas/bolsas.php?id={$bolsa->id_bolsa}'>";
                         echo "<img src='../img/bolsas/{$bolsa->img_url}' class='coffee-image align-card-img-top' alt='{$bolsa->id_bolsa}'>";
                         echo "<div class='card-body product-card-body'>";
                         echo "<h5 class='card-title fw-bold product-title' style='letter-spacing: 1px;'>{$bolsa->nombre}</h5>";
@@ -188,7 +191,8 @@ session_start();
                     echo '              <input type="hidden" name="peso" value="' . $item->precio . '">';
                     echo '              <input type="hidden" name="id_carrito" value="' . $item->id_carrito . '">';
                     echo '              <input type="hidden" name="id_dbc" value="' . $item->id_dbc . '">';
-                    echo '              <input type="hidden" name="link" value="../views/ecommerce.php">';
+                    
+                    echo '              <input type="hidden" name="link" value=../views/ecommerce.php">">';
                     echo '              <input type="hidden" name="operacion" value="incrementar">';
                     echo '              <button type="submit" class="btn fw-bold btn-dark fs-5 p-0" style="height: 35px; width: 35px">+</button>';
                     echo '          </form>';
@@ -198,6 +202,7 @@ session_start();
                             <input type="hidden" name="item_id" value="' . $item->id_dbc . '">
                             <input type="hidden" name="id_carrito" value="' . $item->id_carrito . '">
                             <input type="hidden" name="id_cliente" value="' . $cliente[0]->id_cliente . '">
+                            <input type="hidden" name="link" value=../views/bolsas/ecommerce.php">
                                 <button type="submit" class="btn" aria-label="Close"><i class="fa-solid fa-trash"></i></button>
                         </form>';
                     echo '</div>';
