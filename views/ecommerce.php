@@ -110,13 +110,12 @@ session_start();
                     foreach ($bolsas as $bolsa) {
 
                         echo "<div class='col-10 col-sm-6 col-md-4 col-lg-4 p-4 m-0'>";
-                        echo "<div class='card m-0 blog-card shadow-lg' style='border-radius: 5% 5% 0% 0%;'>";
-                        echo "<a href='../views/bolsas/bolsas.php?id={$bolsa->id_bolsa}'>";
+                        echo "<div class='card m-0 blog-card shadow-lg' style='border-radius: 5% 5% 0% 0%;'>";;
                         echo "<img src='../img/bolsas/{$bolsa->img_url}' class='coffee-image align-card-img-top' alt='{$bolsa->id_bolsa}'>";
                         echo "<div class='card-body product-card-body'>";
                         echo "<h5 class='card-title fw-bold product-title' style='letter-spacing: 1px;'>{$bolsa->nombre}</h5>";
                         echo "<p class='card-text product-subtitle'>{$bolsa->proceso}</p>";
-                        echo "<form action='../views/bolsas/detallebolsa.php' method='post'>";
+                        echo "<form action='../views/bolsas/bolsas.php?id={$bolsa->id_bolsa}' method='post'>";
                         echo "<input type='hidden' name='id_bolsa' value='{$bolsa->id_bolsa}'>";
                         echo "<input type='submit' class='btn btn-cafe w-100' value='Ver Detalles'>";
                         echo "</form>";
@@ -191,7 +190,6 @@ session_start();
                     echo '              <input type="hidden" name="peso" value="' . $item->precio . '">';
                     echo '              <input type="hidden" name="id_carrito" value="' . $item->id_carrito . '">';
                     echo '              <input type="hidden" name="id_dbc" value="' . $item->id_dbc . '">';
-                    
                     echo '              <input type="hidden" name="link" value=../views/ecommerce.php">">';
                     echo '              <input type="hidden" name="operacion" value="incrementar">';
                     echo '              <button type="submit" class="btn fw-bold btn-dark fs-5 p-0" style="height: 35px; width: 35px">+</button>';
