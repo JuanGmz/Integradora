@@ -36,33 +36,33 @@ if ($_POST) {
                 // Consulta para agregar la recompensa, con la URL de la imagen
                 $consulta = "CALL sp_agregar_recompensa('$recompensa', '$condicion', '$fechainicio', '$fechafin', '$nombreImagen')";
 
-                $conexion->execute($consulta);
+                $db->execute($consulta);
                 showAlert("¡Recompensa registrada con éxito!", "success");
 
             } else {
                 showAlert("Hubo un error al subir la imagen", "error");
             }
         }
-        $conexion->desconectarDB();
+        $db->desconectarDB();
     } else if (isset($_POST['regAsistencia'])) {
 
         $verficausuario = "select * from personas where id_persona = $userid";
         $consulta = "insert into asistencias (id_cliente) values ($userid)";
 
-        $resultado = $conexion->select($verficausuario);
+        $resultado = $db->select($verficausuario);
 
         if (!empty($resultado)) {
-            $conexion->execute($consulta);
+            $db->execute($consulta);
             showAlert("¡Asistencia registrada con éxito!", "success");
         } else {
             showAlert("¡El usuario no existe!", "error");
         }
-        $conexion->desconectarDB();
+        $db->desconectarDB();
     } else if (isset($_POST['canjebtn'])) {
 
         $canjeproc = "call SP_canjear_recompensa($canjeid)";
 
-        $resultado = $conexion->select($canjeproc);
+        $resultado = $db->select($canjeproc);
 
         if ($resultado[0]->mensaje == "No cumple con la condición de la recompensa.") {
             showAlert("¡{$resultado[0]->mensaje}!", "error");

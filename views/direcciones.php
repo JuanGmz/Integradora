@@ -65,10 +65,14 @@
         }
     
         if (isset($_POST["deleteDir"])) {
-            $query = "DELETE FROM domicilios WHERE id_domicilio = $id_domicilio";
-            $db->execute($query);
-            showAlert("¡Dirección eliminada con éxito!", "success");
-            header("refresh:2;direcciones.php");
+            if ("SELECT id_domicilio FROM pedidos EXISTS IN (SELECT id_domicilio FROM pedidos WHERE id_domicilio = $id_domicilio") {
+                showAlert("No se puede eliminar una dirección en uso", "error");
+            } else {
+                $query = "DELETE FROM domicilios WHERE id_domicilio = $id_domicilio";
+                $db->execute($query);
+                showAlert("¡Dirección eliminada con éxito!", "success");
+                header("refresh:2;direcciones.php");
+            }
         } 
     } else {
         header("location: ../index.php");
@@ -151,6 +155,9 @@
                 <li class="breadcrumb-item active" aria-current="page">Direcciones</li>
             </ol>
         </nav>
+
+        <h1>Mis Direcciones</h1>
+        <hr>
 
         <div class="row">
             <?php
@@ -355,11 +362,12 @@
                         </div>
                     </div>
                 </div>
+                <div class="alert floating-alert " id="floatingAlert">
+                    <span id="alertMessage">Mensaje de la alerta.</span>
+                </div>
             </div>
         </div>
-        <div class="alert floating-alert" id="floatingAlert">
-            <span id="alertMessage">Mensaje de la alerta.</span>
-        </div>
+
     </div>
 
     <!-- Footer -->
