@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pedidos</title>
+    <title>Detalle Pedido</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="shortcut icon" href="../img/Sinfonía-Café-y-Cultura.webp">
@@ -16,8 +16,11 @@
     $db->conectarDB();
 
     if (isset($_SESSION["usuario"])) {
-        $queryPed = "SELECT * FROM vw_pedidos_clientes WHERE usuario = '$_SESSION[usuario]' ORDER BY p.fecha_hora_pedido DESC";
-        $pedidos = $db->select($queryPed);
+        if (isset($_POST['verDetalles'])) {
+            extract($_POST);
+            $queryPed = "SELECT * FROM vw_pedidos_clientes WHERE folio = $id_pedido";
+            $pedido = $db->select($queryPed);
+        }
     } else {
         header("location: ../index.php");
     }
@@ -96,44 +99,45 @@
             <ol class="breadcrumb mt-4">
                 <li class="breadcrumb-item"><a href="../index.php">Inicio</a></li>
                 <li class="breadcrumb-item" aria-current="page"><a href="perfil.php">Perfil</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Pedidos</li>
+                <li class="breadcrumb-item"><a href="pedidos.php">Pedidos</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Pedido #<?php echo $pedido[0]->folio; ?></li>
             </ol>
         </nav>
 
-        <h1>Mis Pedidos</h1>
-        <hr>
-
         <div class="row">
-            <?php
-            if (empty($pedidos)) {
-                echo "<h3>Aún no haz realizado ningún pedido</h3>";
-            }
-            foreach ($pedidos as $pedido) {
-            ?>
-                <div class="col-12 col-lg-6 mb-4">
-                    <div class="card shadow">
-                        <div class="card-body">
-                            <div class="row p-3">
-                                <div class="col-12 d-flex flex-column">
-                                    <h1 class="card-title m-2">Folio de Pedido: <?= $pedido->folio ?></h1>
-                                    <h3 class="card-subtitle m-2 text-muted">Fecha y Hora: <?= $pedido->fecha_hora_pedido ?></h3>
-                                    <h4 class="card-subtitle m-2 text-muted">Estatus: <?= $pedido->estatus ?></h4>
-                                    <h4 class="card-subtitle m-2 mb-3 text-muted">Monto Total: $<?= $pedido->monto_total ?></h4>
-                                    <!-- Button trigger modal -->
-                                    <form action="detallePedido.php" method="post" enctype="multipart/form-data">
-                                        <input type="hidden" name="id_pedido" value="<?= $pedido->folio ?>"/>
-                                        <button type="submit" class="btn btn-primary m-2 mt-0 mb-0 w-100" name="verDetalles">
-                                            Ver Detalles
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="row text-center">
+                <div class="col-12 col-lg-6">
+                    <h2>Detalles del Pedido</h2>
+                    <h4>Fecha y Hora: <?= $pedido[0]->fecha_hora_pedido ?></h4>
                 </div>
-            <?php
-            }
-            ?>
+                <div class="col-12 col-lg-6 d-flex flex-column justify-content-center">
+                    <h3>Pedido # <?= $pedido[0]->folio ?></h3>
+                </div>
+            </div>
+            <hr>
+            <div class="row text-center">
+                <div class="col-12 col-lg-6">
+                    <h3>Dirección de envío</h3>
+                    <h4 class="fw-bold d-inline">Referencia: <span class="fw-normal"><h5 class="d-inline-block"><?= $pedido[0]->referencia ?></h5></span></h4><br>
+                    <h4 class="fw-bold d-inline">Ciudad y Estado: <span class="fw-normal"><h5 class="d-inline-block"><?= $pedido[0]->ciudad ?>, <?= $pedido[0]->estado ?></h5></span></h4><br>
+                    <h4 class="fw-bold d-inline">Código Postal: <span class="fw-normal"><h5 class="d-inline-block"><?= $pedido[0]->codigo_postal ?></h5></span></h4><br>
+                    <h4 class="fw-bold d-inline">Colonia: <span class="fw-normal"><h5 class="d-inline-block"><?= $pedido[0]->colonia ?></h5></span></h4><br>
+                    <h4 class="fw-bold d-inline">Calle: <span class="fw-normal"><h5 class="d-inline-block"><?= $pedido[0]->calle ?></h5></span></h4><br>
+                </div>
+                <hr class="d-block d-lg-none">
+                <div class="col-12 col-lg-6">
+                    <h3>Resúmen del pedido</h3>
+                    <h4 class="fw-bold d-inline">Costo de Envío: <span class="fw-normal"><h5 class="d-inline-block">$<?= $pedido[0]->costo_envio ?></h5></span></h4><br>
+                    <h4 class="fw-bold d-inline">Monto Total: <span class="fw-normal"><h5 class="d-inline-block">$<?= $pedido[0]->monto_total ?></h5></span></h4><br>
+                </div>
+            </div>
+            <hr class="m-0">
+            <div class="row">
+                <h1>Productos</h1>
+            </div>
+            <hr>
+            <div class="row">
+            </div>
         </div>
     </div>
 

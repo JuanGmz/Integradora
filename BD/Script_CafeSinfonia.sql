@@ -1567,7 +1567,7 @@ CREATE INDEX idx_asistencias_id_cliente ON asistencias(id_cliente);
 -- Tabla clientes_recompensas
 CREATE INDEX idx_clientes_recompensas_id_cliente ON clientes_recompensas(id_cliente);
 CREATE INDEX idx_clientes_recompensas_id_recompensa ON clientes_recompensas(id_recompensa);
-DROP PROCEDURE SP_filtrar_pedidos;
+DROP PROCEDURE IF EXISTS SP_filtrar_pedidos;
 DELIMITER $$
 create PROCEDURE SP_filtrar_pedidos(
 
@@ -1603,5 +1603,32 @@ BEGIN
     OR pe.telefono = busqueda;
 END $$
 DELIMITER ;
-select * from personas;
-call SP_filtrar_pedidos('noe134');
+
+-- VISTA PEDIDOS DE CLIENTES
+DROP VIEW IF EXISTS vw_pedidos_clientes;
+CREATE VIEW vw_pedidos_clientes AS 
+SELECT 
+	p.id_pedido AS folio,
+	p.estatus,
+	mp.metodo_pago,
+	p.fecha_hora_pedido,
+	p.monto_total,
+	p.envio,
+    d.referencia,
+    d.estado,
+    d.ciudad,
+    d.codigo_postal,
+    d.colonia,
+    d.calle,
+    d.telefono,
+    per.usuario
+FROM
+	pedidos p
+JOIN
+	domicilios d ON p.id_domicilio = d.id_domicilio
+JOIN
+	metodos_pago mp ON p.id_mp = mp.id_mp
+JOIN
+	clientes c ON p.id_cliente = c.id_cliente
+JOIN
+	personas per ON c.id_persona = per.id_persona;
