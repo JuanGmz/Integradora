@@ -55,8 +55,8 @@ session_start();
             <?php
             if (isset($_SESSION["usuario"])) {
             ?>
-                            <!-- Navbar con dropdown -->
-                            <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <!-- Navbar con dropdown -->
+                <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
@@ -109,7 +109,7 @@ session_start();
                     $bolsas = $conexion->select($query);
                     foreach ($bolsas as $bolsa) {
 
-                        echo "<div class='col-10 col-sm-6 col-md-4 col-lg-4 p-4 m-0'>";
+                        echo "<div class='col-10 col-sm-6 col-md-6 col-lg-4 p-4 m-0'>";
                         echo "<div class='card m-0 blog-card shadow-lg' style='border-radius: 5% 5% 0% 0%;'>";;
                         echo "<img src='../img/bolsas/{$bolsa->img_url}' class='coffee-image align-card-img-top' alt='{$bolsa->id_bolsa}'>";
                         echo "<div class='card-body product-card-body'>";
@@ -190,7 +190,7 @@ session_start();
                     echo '              <input type="hidden" name="peso" value="' . $item->precio . '">';
                     echo '              <input type="hidden" name="id_carrito" value="' . $item->id_carrito . '">';
                     echo '              <input type="hidden" name="id_dbc" value="' . $item->id_dbc . '">';
-                    echo '              <input type="hidden" name="link" value=../views/ecommerce.php">">';
+                    echo '              <input type="hidden" name="link" value=../views/ecommerce.php">';
                     echo '              <input type="hidden" name="operacion" value="incrementar">';
                     echo '              <button type="submit" class="btn fw-bold btn-dark fs-5 p-0" style="height: 35px; width: 35px">+</button>';
                     echo '          </form>';
@@ -286,7 +286,6 @@ session_start();
             </div>
         </div>
     </footer>
-    <script src="../js/Carrito.js"></script>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/45ef8dbe96.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>

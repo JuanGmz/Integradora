@@ -161,7 +161,7 @@
                 </div>
                 <!--botónes de categorias-->
                 <div class="d-flex justify-content-center p-3 m-0">
-                    <ul class="nav nav-tabs row col-12 m-0" id="menuTabs" role="tablist" style="border-bottom: none;">
+                    <ul class="nav nav-tabs row col-12 m-0 d-flex justify-content-center" id="menuTabs" role="tablist" style="border-bottom: none;">
                         <?php
                         include_once("./class/database.php");
                         $conexion = new Database();
@@ -314,7 +314,7 @@
                         // Debugging
                         echo "<!-- Counter: $counter, Class: $additionalClass -->";
 
-                        echo "<div class='col-10 col-sm-6 col-md-4 col-lg-4 p-4 m-0 {$additionalClass} {$additionalClass2}'>";
+                        echo "<div class='col-md-6 p-2 col-6 col-sm-6 col-lg-4 p-md-4 p-0 m-0 {$additionalClass} {$additionalClass2}'>";
                         echo "<div class='card m-0 blog-card shadow-lg' style='border-radius: 5% 5% 0% 0%;'>";
                         echo "<img src='img/bolsas/{$bolsa->img_url}' class='coffee-image align-card-img-top' alt='{$bolsa->id_bolsa}'>";
                         echo "<div class='card-body product-card-body'>";

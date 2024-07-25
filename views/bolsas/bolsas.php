@@ -24,7 +24,7 @@ if ($result) {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Bolsa . $producto->nombre .</title>
+        <title>Bolsa</title>
         <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="../../css/style.css">
     </head>
@@ -32,7 +32,7 @@ if ($result) {
     <body>
         <!-- NavBar -->
         <nav class="navbar navbar-expand-lg shadow-lg ">
-            <div class="container-fluid">
+            <div class="container-fluid show">
                 <a class="navbar-brand" href="../../index.php">
                     <img src="../../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
                 </a>
@@ -72,14 +72,17 @@ if ($result) {
                         <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
-                        <a class="dropdown-item" href="../../perfil.php">Mi perfil</a>
-                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="../../views/perfil.php">Mi perfil</a>
+                        <?php if ($_SESSION['usuario'] == 'ADMIN') { ?>
+                            <a class="dropdown-item" href="../../views/adminInicio.php">Administrar</a>
+                            <div class="dropdown-divider"></div>
+                        <?php } ?>
                         <a class="dropdown-item" href="../../scripts/login/cerrarsesion.php">Cerrar sesión</a>
                     </div>
                 <?php
                 } else {
                 ?>
-                    <a href="../login.php" class="login-button ms-auto">Iniciar Sesión</a>
+                    <a href="../../views/login.php" class="login-button ms-auto">Iniciar Sesión</a>
                 <?php
                 }
                 ?>
@@ -196,17 +199,17 @@ if ($result) {
                 if (isset($_SESSION['usuario'])) {
                     echo "  <input type='hidden' name='id_cliente' value='{$cliente[0]->id_cliente}'> <!-- ID del cliente -->";
                 }
-    
-    
+
+
                 echo "  <input type='hidden' name='id_dbc' value='{$bolsacafe[0]->id_bolsa}'> <!-- ID del producto -->
                                     <div class='row d-flex p-4'>
                                         <div class='col-6'>
                                          <label for='peso' class='form-label fw-bold'>Peso</label>
                                             <select class='form-select' id='peso' name='peso'>";
-    
-    
+
+
                 foreach ($peso as $pesos) {
-    
+
                     echo "<option value='{$pesos->precio}'>{$pesos->medida}</option>";
                 };
                 echo "</select>
@@ -262,7 +265,7 @@ if ($result) {
             include_once("../../class/database.php");
             $db = new Database();
             $db->conectarDB();
-    
+
 
             if (isset($_SESSION["usuario"])) {
                 $cliente = "SELECT 
@@ -275,12 +278,12 @@ if ($result) {
                 $cliente = $db->select($cliente);
                 $query = "SELECT * FROM view_carrito WHERE cliente = '" . $cliente[0]->id_cliente . "'";
                 $consulta = $db->select($query);
-    
+
                 // Aquí puedes agregar más código para mostrar los productos del carrito, por ejemplo:
-    
+
                 echo ' <div class="offcanvas-body d-flex flex-column text-dark m-0 p-2" style="background: var(--color6);">';
                 if (count($consulta) > 0) {
-    
+
                     foreach ($consulta as $item) {
                         echo '<div class="container p-0">';
                         echo '<div class="d-flex justify-content-between align-items-center mb-3">';
@@ -297,7 +300,7 @@ if ($result) {
                         echo '              <input type="hidden" name="peso" value="' . $item->precio . '">';
                         echo '              <input type="hidden" name="id_carrito" value="' . $item->id_carrito . '">';
                         echo '              <input type="hidden" name="id_dbc" value="' . $item->id_dbc . '">';
-                        echo '              <input type="hidden" name="link" value="../views/bolsas/bolsas.php?id='.$item->id_dbc.'">';
+                        echo '              <input type="hidden" name="link" value="../views/bolsas/bolsas.php?id=' . $item->id_dbc . '">';
                         echo '              <input type="hidden" name="operacion" value="decrementar">';
                         echo '              <button type="submit" class="btn fw-bold btn-dark fs-5 p-0" style="height: 35px; width: 35px">-</button>';
                         echo '          </form>';
@@ -307,7 +310,7 @@ if ($result) {
                         echo '              <input type="hidden" name="peso" value="' . $item->precio . '">';
                         echo '              <input type="hidden" name="id_carrito" value="' . $item->id_carrito . '">';
                         echo '              <input type="hidden" name="id_dbc" value="' . $item->id_dbc . '">';
-                        echo '              <input type="hidden" name="link" value="../views/bolsas/bolsas.php?id='.$item->id_dbc.'">';
+                        echo '              <input type="hidden" name="link" value="../views/bolsas/bolsas.php?id=' . $item->id_dbc . '">';
                         echo '              <input type="hidden" name="operacion" value="incrementar">';
                         echo '              <button type="submit" class="btn fw-bold btn-dark fs-5 p-0" style="height: 35px; width: 35px">+</button>';
                         echo '          </form>';
@@ -317,7 +320,7 @@ if ($result) {
                                     <input type="hidden" name="item_id" value="' . $item->id_dbc . '">
                                     <input type="hidden" name="id_carrito" value="' . $item->id_carrito . '">
                                     <input type="hidden" name="id_cliente" value="' . $cliente[0]->id_cliente . '">
-                                    <input type="hidden" name="link" value="../views/bolsas/bolsas.php?id='.$item->id_dbc.'">
+                                    <input type="hidden" name="link" value="../views/bolsas/bolsas.php?id=' . $item->id_dbc . '">
                                         <button type="submit" class="btn" aria-label="Close"><i class="fa-solid fa-trash"></i></button>
                                 </form>';
                         echo '</div>';
@@ -346,7 +349,7 @@ if ($result) {
                     echo '</div>';
                     echo '</div>';
                     echo '</div>';
-    
+
                     echo '<div class="mt-auto container" style="background: var(--negroclaro);">';
                     echo '  <hr>';
                     echo '  <div class="d-flex justify-content-between fs-4">';
