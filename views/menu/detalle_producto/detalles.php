@@ -19,7 +19,7 @@
                 detalle_productos_menu.precio 
                 FROM 
                     productos_menu 
-                JOIN
+                left JOIN
                     detalle_productos_menu ON detalle_productos_menu.id_pm = productos_menu.id_pm
                 JOIN 
                     categorias ON categorias.id_categoria = productos_menu.id_categoria

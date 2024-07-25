@@ -1244,13 +1244,13 @@ INSERT INTO productos_menu (id_categoria, nombre, descripcion, img_url) VALUES
 (9, 'Mochaccino', 'Café expreso con leche, espuma y un toque de chocolate.', 'coffee-1808933_1920.jpg'),
 (9, 'Latte', 'Café con leche y un toque de espuma.', 'latte-2319101_1920.jpg'),
 (9, 'Mocha Latte', 'Latte con un toque de chocolate.', 'coffee-5256000_1920.jpg'),
-(9, 'Caramel Latte', 'Latte con un toque de caramelo.', 'coffee-4326948_1920.jpg'),
+(9, 'Caramel Latte', 'Latte con un toque de caramelo.', 'drink-2060696_1920.jpg'),
 (9, 'Dirty Chai Latte', 'Latte con chai y un shot de expreso.', 'latte-4219204_1920.jpg'),
 (10, 'V60/Dripper', 'Método de goteo para preparar café.', 'coffee-2242215_1920.jpg'),
 (10, 'Aeropress', 'Método de preparación de café por presión.', 'coffee-3262453_1920.jpg'),
-(10, 'Clever', 'Método de preparación de café por inmersión y goteo.', 'coffee-3368493_1920.jpg'),
-(10, 'Prensa Francesa', 'Método de preparación de café por inmersión.', 'coffee-573313_1920.jpg'),
-(10, 'Chemex', 'Método de goteo para preparar café con filtro especial.', 'coffee-437303_1920.jpg'),
+(10, 'Clever', 'Método de preparación de café por inmersión y goteo.', 'beer-6583039_1920.jpg'),
+(10, 'Prensa Francesa', 'Método de preparación de café por inmersión.', 'latte-art-3348729_1920.jpg'),
+(10, 'Chemex', 'Método de goteo para preparar café con filtro especial.', 'coffee-2806416_1920.jpg'),
 (10, 'Vandola', 'Método tradicional costarricense para preparar café.', 'coffee-5132728_1920.jpg'),
 (10, 'Sifón Japonés', 'Método de preparación de café con vacío y presión.', 'coffee-2695467_1920.jpg'),
 (12, 'SHAKERATTO', 'Bebida fría a base de espresso.', 'cocoa-4845909_1920.jpg'),
@@ -1262,7 +1262,7 @@ INSERT INTO productos_menu (id_categoria, nombre, descripcion, img_url) VALUES
 (13, 'Cold B. MINERAL', 'Cold Brew es una infusión de café en frío de 12 a 15 horas.', 'coffee-896200_1920.jpg'),
 (13, 'Cold B. TONIC', 'Cold Brew es una infusión de café en frío de 12 a 15 horas.', 'drink-2060696_1920.jpg'),
 (14, 'Affogato', 'Una bola de nieve de vainilla servida en vaso y bañado en Espresso doble. Puedes comerlo a cucharadas o esperar a que se derrita para tomarlo. Dato curioso: Affogato significa “Ahogado” en Italiano.', 'cafe-4756801_1920.jpg'),
-(14, 'Marocchino', 'Espresso sencillo servido sobre chocolate, leche cremada y top de cocoa.', 'coffee-2435263_1920.jpg'),
+(14, 'Marocchino', 'Espresso sencillo servido sobre chocolate, leche cremada y top de cocoa.', 'cup-of-coffee-455423_1920.jpg'),
 (14, 'Café Bombón', 'Espresso sencillo servido sobre leche condensada. Puedes pedirlo como “Bombón del tiempo” para que sea servido en frío!', 'coffee-4734164_1920.jpg'),
 (14, 'Café con Miel', 'Espresso sencillo con miel disuelta y leche cremada.', 'coffee-4184598_1920.jpg'),
 (14, 'Café Au Lait', 'Sencillamente un americano preparado en V60 al que añadimos leche cremada al final. Dato curioso: Literalmente significa “café con leche” en francés.', 'coffee-3586526_1920.jpg'),
@@ -1273,48 +1273,44 @@ INSERT INTO productos_menu (id_categoria, nombre, descripcion, img_url) VALUES
 (14, 'Flat White (Australia/Nueva Zelanda)', 'Preparado con Ristretto doble y leche cremada muy ligeramente.', 'latte-1565931_1920.jpg'),
 (14, 'Cà Phê Sữa Nóng (Vietnam)', 'Café preparado en cafetera vietnamita "Phin", extracción intensa endulzada con leche condensada.', 'turkish-coffee-6402682_1920.jpg'),
 (14, 'Cà Phê Sữa Dá (Vietnam)', 'Versión fría de la preparación en cafetera Vietnamita "Phin".', 'turkish-coffee-1478976_1920.jpg'),
-(14, 'Mazagrán (Argelia)', 'Café americano preparado en clever, con jugo de limón y endulzado con azúcar morena.', 'cafe-4715845_1920.jpg'),
+(14, 'Mazagrán (Argelia)', 'Café americano preparado en clever, con jugo de limón y endulzado con azúcar morena.', 'coffee-3792145_1920.jpg'),
 (15, 'MORA AZUL', 'Soda italiana sabor mora azul', 'drink-6809939_1920.jpg'),
 (15, 'MANZANA VERDE', 'Soda italiana sabor manzana verde', 'drink-3492107_1920.jpg'),
 (15, 'ZARZAMORA', 'Soda italiana sabor zarzamora', 'drink-7156111_1920.jpg'),
 (15, 'FRAMBUESA', 'Soda italiana sabor frambuesa', 'drink-2060696_1920.jpg'),
-(15, 'Natural', 'Frappé clásico con leche, café y hielo', 'coffee-898200_1920.jpg'),
-(15, 'Cajeta', 'Frappé con sabor a cajeta, leche, café y hielo', 'coffee-6734626_1920.jpg'),
-(15, 'Mocha', 'Frappé con sabor a chocolate y café, leche y hielo', 'coffee-9579324_1920.jpg'),
-(15, 'Nutella', 'Frappé con sabor a Nutella, leche, café y hielo', 'coffee-437303_1920.jpg'),
-(15, 'Oreo', 'Frappé con galletas Oreo, leche, café y hielo', 'cappuccino-830962_1920.jpg'),
-(15, 'Dirty Chai', 'Frappé con té Chai, leche y hielo', 'coffee-5978312_1920.jpg'),
-(15, 'Muddy Matcha', 'Frappé con matcha, leche y hielo', 'coffee-9538216_1920.jpg'),
-(15, 'Matcha', 'Frappé con matcha y leche', 'coffee-5439721_1920.jpg'),
-(15, 'Chai', 'Frappé con té Chai y leche', 'coffee-8372615_1920.jpg'),
-(16, 'Natural', 'Frappé clásico con leche, café y hielo', 'coffee-2753284_1920.jpg'),
-(16, 'Cajeta', 'Frappé con sabor a cajeta, leche, café y hielo', 'coffee-3728392_1920.jpg'),
-(16, 'Mocha', 'Frappé con sabor a chocolate y café, leche y hielo', 'coffee-3487238_1920.jpg'),
-(16, 'Nutella', 'Frappé con sabor a Nutella, leche, café y hielo', 'coffee-3974632_1920.jpg'),
-(16, 'Oreo', 'Frappé con galletas Oreo, leche, café y hielo', 'coffee-7483294_1920.jpg'),
-(16, 'Dirty Chai', 'Frappé con té Chai, leche y hielo', 'coffee-8932617_1920.jpg'),
-(16, 'Muddy Matcha', 'Frappé con matcha, leche y hielo', 'coffee-2374621_1920.jpg'),
-(16, 'Matcha', 'Frappé con matcha y leche', 'coffee-7463281_1920.jpg'),
-(16, 'Chai', 'Frappé con té Chai y leche', 'coffee-1932761_1920.jpg'),
-(17, 'Natural', 'Granizado clásico con café, leche y hielo.', 'coffee-4219204_1920.jpg'),
-(17, 'Cajeta', 'Granizado con sabor a cajeta, café, leche y hielo.', 'coffee-4184598_1920.jpg'),
-(17, 'Mocha', 'Granizado con sabor a chocolate, café, leche y hielo.', 'coffee-1808941_1920.jpg'),
-(17, 'Nutella', 'Granizado con sabor a Nutella, café, leche y hielo.', 'coffee-2796352_1920.jpg'),
-(17, 'Oreo', 'Granizado con galletas Oreo, café, leche y hielo.', 'coffee-1958233_1920.jpg'),
-(17, 'Dirty Chai', 'Granizado con té Chai, café, leche y hielo.', 'coffee-6600644_1920.jpg'),
-(17, 'Muddy Matcha', 'Granizado con matcha, café, leche y hielo.', 'latte-2319101_1920.jpg'),
-(17, 'Matcha', 'Granizado con matcha y leche.', 'coffee-2695467_1920.jpg'),
-(17, 'Chai', 'Granizado con té Chai y leche.', 'drink-3492107_1920.jpg'),
-(18, 'Tisana de Frutas', 'Infusión de frutas frescas.', 'tisana-201.jpg'),
-(18, 'Tisana de Frutas', 'Infusión de frutas frescas.', 'coffee-2806416_1920.jpg'),
-(18, 'Té Verde', 'Té verde natural.', 'coffee-896200_1920.jpg'),
-(18, 'Té Negro', 'Té negro clásico.', 'beer-6583039_1920.jpg'),
-(18, 'Té de Manzanilla', 'Té de manzanilla calmante.', 'kermit-1899262.jpg'),
-(18, 'Té de Hierbabuena', 'Té refrescante de hierbabuena.', 'coffee-3792145_1920.jpg'),
-(18, 'Té Chai', 'Té chai con especias.', 'drink-7156111_1920.jpg'),
-(18, 'Té Matcha', 'Té matcha japonés.', 'cup-6854258_1920.jpg'),
-(18, 'Té de Jazmín', 'Té aromático de jazmín.', 'cup-of-coffee-455423_1920.jpg');
-
+(16, 'Natural', 'Frappé clásico con leche, café y hielo', 'turkish-coffee-6402682_1920.jpg'),
+(16, 'Cajeta', 'Frappé con sabor a cajeta, leche, café y hielo', 'cafe-4756801_1920.jpg'),
+(16, 'Mocha', 'Frappé con sabor a chocolate y café, leche y hielo', 'coffee-3792145_1920.jpg'),
+(16, 'Nutella', 'Frappé con sabor a Nutella, leche, café y hielo', 'cocoa-4845909_1920.jpg'),
+(16, 'Oreo', 'Frappé con galletas Oreo, leche, café y hielo', 'cup-6854258_1920.jpg'),
+(16, 'Dirty Chai', 'Frappé con té Chai, leche y hielo', 'coffee-1808933_1920.jpg'),
+(16, 'Muddy Matcha', 'Frappé con matcha, leche y hielo', 'drink-7156111_1920.jpg'),
+(16, 'Matcha', 'Frappé con matcha y leche', 'latte-art-3348729_1920.jpg'),
+(16, 'Chai', 'Frappé con té Chai y leche', 'coffee-5149151_1920.jpg'),
+(17, 'Té Verde Menta', 'Té verde con un toque refrescante de menta.', 'cocoa-4845909_1920.jpg'),
+(17, 'Té Negro', 'Té negro tradicional.', 'tea-7036402_1920.jpg'),
+(17, 'Earl Grey', 'Té negro aromatizado con aceite de bergamota.', 'coffee-4734164_1920.jpg'),
+(17, 'Chai Verde', 'Té verde con especias tradicionales de Chai.', 'coffee-5149151_1920.jpg'),
+(17, 'Rooibos', 'Té Rooibos con un toque dulce y afrutado.', 'cocoa-4845909_1920.jpg'),
+(17, 'TISANAS', 'Infusiones de Hierbas', 'coffee-2242215_1920.jpg'),
+(17, 'Chai Latte', 'Bebida de Té Chai con Leche', 'coffee-4184598_1920.jpg'),
+(17, 'Matcha Latte', 'Bebida de Té Matcha con Leche', 'latte-1565931_1920.jpg'),
+(17, 'Chai Latte Roca', 'Chai Latte con Hielo', 'latte-art-3348729_1920.jpg'),
+(17, 'Matcha Latte Roca', 'Matcha Latte con Hielo', 'drink-2060696_1920.jpg'),
+(17, 'Chocolate Caliente', 'Bebida de Chocolate Caliente', 'tea-7036402_1920.jpg'),
+(18, 'Flan Napolitano', 'Delicioso flan napolitano tradicional.', 'coffee-3792145_1920.jpg'),
+(18, 'Cheesecake Frutos Rojos', 'Cheesecake con una cobertura de frutos rojos.', 'drink-7156111_1920.jpg'),
+(18, 'Cheesecake Brownie', 'Cheesecake combinado con trozos de brownie.', 'cup-6854258_1920.jpg'),
+(18, 'Cheesecake Tortuga', 'Cheesecake con nueces y caramelo.', 'cup-of-coffee-455423_1920.jpg'),
+(18, 'Brownie', 'Brownie de chocolate.', 'coffee-896200_1920.jpg'),
+(18, 'Pan Elote', 'Pan de elote casero.', 'coffee-2806416_1920.jpg'),
+(18, 'Panque Plátano', 'Panque de plátano suave y esponjoso.', 'coffee-896200_1920.jpg'),
+(18, 'Panque Zanahoria', 'Panque de zanahoria con especias.', 'beer-6583039_1920.jpg'),
+(18, 'Panque Moras', 'Panque con moras frescas.', 'kermit-1899262.jpg'),
+(18, 'Pastel Chocolate', 'Pastel de chocolate.', 'coffee-3792145_1920.jpg'),
+(18, 'Pastel Chorreado', 'Pastel con cobertura de chocolate.', 'drink-7156111_1920.jpg'),
+(18, 'Pastel Red Velvet', 'Pastel Red Velvet con crema de queso.', 'cup-6854258_1920.jpg'),
+(18, 'Rollos de Canela con Glaseado', 'Rollos de canela con glaseado.', 'cup-of-coffee-455423_1920.jpg');
 -- Insertar detalle de productos del menu
 	INSERT INTO detalle_productos_menu (id_pm, medida, precio) VALUES
 (1, '1 Oz', 20.00),
@@ -1413,23 +1409,39 @@ INSERT INTO productos_menu (id_categoria, nombre, descripcion, img_url) VALUES
   (51, '16 Oz', 50.00),
   (52, '12 Oz', 40.00),
   (52, '16 Oz', 45.00),
-  (53, '12 Oz', 45.00),
-  (53, '16 Oz', 50.00),
-  (54, '12 Oz', 45.00),
-  (54, '16 Oz', 50.00),
-  (55, '', 60), -- Flan Napolitano
-(56, '', 60), -- Cheesecake Frutos Rojos
-(57, '', 60), -- Cheesecake Brownie
-(58, '', 60), -- Cheesecake Tortuga
-(59, '', 60), -- Brownie
-(60, '', 35), -- Pan Elote
-(61, '', 40), -- Panque Platano
-(62, '', 40), -- Panque Zanahoria
-(63, '', 40), -- Panque Moras
-(64, '', 70), -- Pastel Chocolate
-(65, '', 70), -- Pastel Chorreado
-(66, '', 70), -- Pastel Red Velvet
-(67, '', 40); -- Rollos de Canela con Glaseado
+  (53, '12 Oz', 40.00),
+  (53, '16 Oz', 45.00),
+  (54, '12 Oz', 40.00),
+  (54, '16 Oz', 45.00),
+  (55, '14 oz', 45),
+(55, '16 oz', 50),
+(56, '14 oz', 45),
+(56, '16 oz', 50),
+(57, '14 oz', 45),
+(57, '16 oz', 50),
+(58, '14 oz', 45),
+(58, '16 oz', 50),
+(59, '14 oz', 55),
+(59, '16 oz', 60),
+(60, '14 oz', 55),
+(60, '16 oz', 60),
+(61, '12 oz', 60),
+(61, '16 oz', 65),
+(62, '12 oz', 60),
+(62, '16 oz', 70),
+(63, null, 60), -- Flan Napolitano
+(64, null, 60), -- Cheesecake Frutos Rojos
+(65, null, 60), -- Cheesecake Brownie
+(66, null, 60), -- Cheesecake Tortuga
+(67, null, 40), -- Brownie
+(68, null, 35), -- Pan Elote
+(69, null, 40), -- Panque Plátano
+(70, null, 40), -- Panque Zanahoria
+(71, null, 40), -- Panque Moras
+(72, null, 70), -- Pastel Chocolate
+(73, null, 70), -- Pastel Chorreado
+(74, null, 70), -- Pastel Red Velvet
+(75, null, 40); -- Rollos de Canela con Glaseado
 
 call SP_Registrar_usuariosAdministradores('Noe Abel','Vargas','Lopez','noe134','noelopez191119@gmail.com','micontraseñasupersegura','8715083731');
 call SP_Registrar_usuariosAdministradores('Tobias Gabriel','Rodriguez','Lujan','tlujan','totilotegabriel@gmail.com','miperro123','8716764502');
