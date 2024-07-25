@@ -18,6 +18,7 @@ if ($result) {
     $producto = $result[0]; // Asumimos que select devuelve una matriz de resultados
 
 ?>
+
     <!DOCTYPE html>
     <html lang="en">
 
@@ -92,7 +93,7 @@ if ($result) {
             </div>
         </nav>
         <!-- NavBar End -->
-
+        
         <!-- Contenido -->
         <div class="container-fluid m-0 p-0" style="background: var(--color2);">
             <div class="row p-0 m-0">
@@ -206,7 +207,9 @@ if ($result) {
                                         <div class='col-6'>
                                          <label for='peso' class='form-label fw-bold'>Peso</label>
                                             <select class='form-select' id='peso' name='peso'>";
-
+                                            
+                                            
+                                        
 
                 foreach ($peso as $pesos) {
 

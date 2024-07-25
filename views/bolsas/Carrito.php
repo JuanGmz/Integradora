@@ -131,10 +131,11 @@
                             if ($result) {
                                 echo "<label for='direccion'>Selecciona una dirección:</label>";
                                 echo "<select class='form-select' name='direccion' id='direccion'>";
-
+                                $DOMICIOLIO = $result[0]->id_domicilio;
                                 // Recorrer los resultados y crear opciones en el dropdown
                                 foreach ($result as $domicilio) {
                                     echo "<option value='" . $domicilio->id_domicilio . "' 
+                                    data-id_domicilio='" . $domicilio->id_domicilio . "'
                                     data-referencia='" . $domicilio->referencia . "' 
                                     data-ciudad='" . $domicilio->ciudad . "' 
                                     data-estado='" . $domicilio->estado . "' 
@@ -179,20 +180,34 @@
                                 <h4 class="fw-bold ">Pago</h4>
                                 <p class="mb-0">Para completar tu compra, selecciona tu método de pago preferido y luego comunícate con nosotros para finalizar el proceso.</p>
                             </div>
+                            <?php
+                            // Archivo para obtener métodos de pago
+
+                            $query = "SELECT id_mp, metodo_pago FROM metodos_pago";
+                            $result = $db->select($query);
+                            ?>
                             <div class="form-group text-center col-12 col-md-3 p-md-0 p-2">
                                 <label class="form-label fw-bold" for="paymentMethodSelect">Método de Pago</label>
-                                <select class="form-control form-select" id="paymentMethodSelect">
-                                    <option value="transferencia">Transferencia</option>
-                                    <option value="tarjeta">Tarjeta de Crédito</option>
-                                    <option value="paypal">PayPal</option>
-                                    <option value="efectivo">Efectivo</option>
+                                <select class="form-control form-select" id="paymentMethodSelect" name="id_mp">
+                                    <?php
+                                    if ($result) {
+                                        foreach ($result as $mp) {
+                                            echo "<option value='" . $mp->id_mp . "'>" . $mp->metodo_pago . "</option>";
+                                        }
+                                    } else {
+                                        echo "<option value=''>No se encontraron métodos de pago</option>";
+                                    }
+                                    ?>
                                 </select>
+
                             </div>
                         </div>
                     </div>
                     <hr>
                     <!-- Productos y Confirmación del pedido -->
+
                     <div class="row">
+
                         <div class="col-md-8">
                             <h4 class="fw-bold ">Productos</h4>
 
@@ -231,13 +246,13 @@
                                 echo '          </form>';
                                 echo '      </div>';
                                 echo '  </div>';
-                                echo '   <form action="../../scripts/eliminar_producto.php" method="POST" style="display:inline;">
-                                <input type="hidden" name="item_id" value="' . $item->id_dbc . '">
-                                <input type="hidden" name="id_carrito" value="' . $item->id_carrito . '">
-                                <input type="hidden" name="id_cliente" value="' . $cliente[0]->id_cliente . '">
-                                <input type="hidden" name="link" value="../views/bolsas/Carrito.php">
-                                    <button type="submit" class="btn" aria-label="Close"><i class="fa-solid fa-trash"></i></button>
-                            </form>';
+                                echo '  <form action="../../scripts/eliminar_producto.php" method="POST" style="display:inline;">
+                                                    <input type="hidden" name="item_id" value="' . $item->id_dbc . '">
+                                                    <input type="hidden" name="id_carrito" value="' . $item->id_carrito . '">
+                                                    <input type="hidden" name="id_cliente" value="' . $cliente[0]->id_cliente . '">
+                                                    <input type="hidden" name="link" value="../views/bolsas/Carrito.php">
+                                                <button type="submit" class="btn" aria-label="Close"><i class="fa-solid fa-trash"></i></button>
+                                            </form>';
                                 echo '</div>';
                                 echo '<hr class="border-dark">';
                                 echo '</div>';
@@ -260,14 +275,66 @@
                         echo '<p>Productos: <span class="float-end fw-bold">$' . $subtotal[0]->subtotal . '</span></p>';
                         echo '<p>Envío: <span class="float-end">--</span></p>';
                         echo '<hr>';
-                        echo '<p>Total: <span class="float-end fw-bold">$' . $total . '</span></p>';
-                        echo '<p class="small text-muted">* No incluye los gastos de envío.</p>';
-                        echo '<a href="Folio.php" class="btn btn-dark w-100">Realizar pedido</a>';
+                        $iva = $subtotal[0]->subtotal * 0.16;
+                        $total = $subtotal[0]->subtotal + $iva;
+                        echo '
+                          
+                        <form id="pedidoForm" action="../../scripts/ecommerce/pedido.php" method="POST" onsubmit="return confirmarPedido()">
+                                 <input type="hidden" name="id_mp" value="' . $mp->id_mp . '">
+                            <input type="hidden" id="hiddenIdDomicilio" name="id_domicilio" value="' .  $DOMICIOLIO . '">
+                               <input type="hidden" name="id_cliente" value="' . $cliente[0]->id_cliente . '">
+                            <p>Total: <span class="float-end fw-bold">$' . $total . '</span></p>
+                            <p class="small text-muted">* No incluye los gastos de envío.</p>
+                                <button type="submit" class="btn btn-dark w-100">Realizar pedido</button>
+                        </form>
+
+                            <script>
+                            function confirmarPedido() {
+                                return confirm("¿Realmente desea realizar el pedido?");
+                            }
+                            </script>';
                         echo '</div>';
                         ?>
 
                     </div>
+
                 </div>
+                <!-- Script para actualizar el campo oculto con el ID del domicilio -->
+                <script>
+                    document.getElementById('direccion').addEventListener('change', function(event) {
+                        // Obtener el ID del domicilio seleccionado
+                        const selectedDomicilioId = event.target.value;
+
+                        // Actualizar el campo oculto con el ID del domicilio
+                        document.getElementById('hiddenIdDomicilio').value = selectedDomicilioId;
+                    });
+                </script>
+                <!-- sCRIP PARA ACTUALIZAR LOS DETALLES DE LA DIRECCION -->
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        // Obtener el elemento select
+                        const selectDireccion = document.getElementById('direccion');
+
+                        // Función para actualizar los detalles de la dirección
+                        function actualizarDetalles() {
+                            const selectedOption = selectDireccion.options[selectDireccion.selectedIndex];
+
+                            // Actualizar los detalles de la dirección
+                            document.getElementById('referencia').textContent = selectedOption.getAttribute('data-referencia');
+                            document.getElementById('ciudad').textContent = selectedOption.getAttribute('data-ciudad');
+                            document.getElementById('estado').textContent = selectedOption.getAttribute('data-estado');
+                            document.getElementById('direccion_completa').textContent = selectedOption.getAttribute('data-colonia') + " " +
+                                selectedOption.getAttribute('data-calle') + " " +
+                                selectedOption.getAttribute('data-codigo_postal');
+                        }
+
+                        // Escuchar cambios en el elemento select
+                        selectDireccion.addEventListener('change', actualizarDetalles);
+
+                        // Actualizar los detalles de la dirección cuando se carga la página
+                        actualizarDetalles();
+                    });
+                </script>
 
         <?php
             } else {
@@ -331,31 +398,6 @@
             </div>
         </div>
     </footer>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Obtener el elemento select
-            const selectDireccion = document.getElementById('direccion');
-
-            // Función para actualizar los detalles de la dirección
-            function actualizarDetalles() {
-                const selectedOption = selectDireccion.options[selectDireccion.selectedIndex];
-
-                // Actualizar los detalles de la dirección
-                document.getElementById('referencia').textContent = selectedOption.getAttribute('data-referencia');
-                document.getElementById('ciudad').textContent = selectedOption.getAttribute('data-ciudad');
-                document.getElementById('estado').textContent = selectedOption.getAttribute('data-estado');
-                document.getElementById('direccion_completa').textContent = selectedOption.getAttribute('data-colonia') + " " +
-                    selectedOption.getAttribute('data-calle') + " " +
-                    selectedOption.getAttribute('data-codigo_postal');
-            }
-
-            // Escuchar cambios en el elemento select
-            selectDireccion.addEventListener('change', actualizarDetalles);
-
-            // Actualizar los detalles de la dirección cuando se carga la página
-            actualizarDetalles();
-        });
-    </script>
     <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/45ef8dbe96.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
