@@ -9,7 +9,16 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="shortcut icon" href="../img/Sinfonía-Café-y-Cultura.webp">
     <?php
-    session_start();
+        include_once ("../class/database.php");
+        $db = new Database();
+        $db->conectarDB();
+        session_start();
+        if (isset($_SESSION["usuario"])) {
+            $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE p.usuario = '$_SESSION[usuario]'";
+            $rol = $db->select($rolUsuario);
+        } else {
+            $rol = null;
+        }
     ?>
 </head>
 
@@ -52,25 +61,25 @@
                 <?php
                 if (isset($_SESSION["usuario"])) {
                 ?>
-                               <!-- Navbar con dropdown -->
-                               <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
-                    <a class="dropdown-item" href="views/perfil.php">Mi perfil</a>
-                    <?php if ($_SESSION['usuario'] == 'ADMIN') { ?>
-                        <a class="dropdown-item" href="../views/adminInicio.php">Administrar</a>
-                        <div class="dropdown-divider"></div>
-                    <?php } ?>
-                    <a class="dropdown-item" href="scripts/login/cerrarsesion.php">Cerrar sesión</a>
-                </div>
-            <?php
-            } else {
-            ?>
-                <a href="views/login.php" class="login-button ms-auto">Iniciar Sesión</a>
-            <?php
-            }
-            ?>
+                    <!-- Navbar con dropdown -->
+                    <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
+                        <a class="dropdown-item" href="perfil.php">Mi perfil</a>
+                        <?php if ($rol[0]->rol === 'administrador') { ?>
+                            <a class="dropdown-item" href="../views/adminInicio.php">Administrar</a>
+                            <div class="dropdown-divider"></div>
+                        <?php } ?>
+                        <a class="dropdown-item" href="../scripts/login/cerrarsesion.php">Cerrar sesión</a>
+                    </div>
+                <?php
+                } else {
+                ?>
+                    <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
+                <?php
+                }
+                ?>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

@@ -8,7 +8,17 @@
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="shortcut icon" href="../../img/Sinfonía-Café-y-Cultura.webp">
     <?php
-    session_start();
+        session_start();
+        include_once("../../class/database.php");
+
+        // Conectar a la base de datos
+        $conexion = new Database();
+        $conexion->conectarDB();
+    
+        if (isset($_SESSION['usuario'])) {
+            $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE p.usuario = '$_SESSION[usuario]'";
+            $rol = $conexion->select($rolUsuario);
+        }
     ?>
 </head>
 
@@ -31,22 +41,22 @@
                     <div class="offcanvas-body">
                         <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="../../views/menu.php">Menú</a>
+                                <a class="nav-link" aria-current="page" href="../menu.php">Menú</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link mx-lg-2" href="../../views/ecommerce.php">Comprar</a>
+                                <a class="nav-link mx-lg-2" href="../ecommerce.php">Comprar</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link mx-lg-2" href="../../views/recompensas.php">Recompensas</a>
+                                <a class="nav-link mx-lg-2" href="../recompensas.php">Recompensas</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link mx-lg-2" href="../../views/eventos.php">Eventos</a>
+                                <a class="nav-link mx-lg-2" href="../eventos.php">Eventos</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link mx-lg-2" href="../../views/publicaciones.php">Publicaciones</a>
+                                <a class="nav-link mx-lg-2" href="../publicaciones.php">Publicaciones</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link mx-lg-2" href="../../views/contact.php">Contacto</a>
+                                <a class="nav-link mx-lg-2" href="../contact.php">Contacto</a>
                             </li>
                         </ul>
                     </div>
@@ -59,14 +69,17 @@
                         <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
-                        <a class="dropdown-item" href="../../views/perfil.php">Mi perfil</a>
-                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="../perfil.php">Mi perfil</a>
+                        <?php if ($rol[0]->rol === 'administrador') { ?>
+                            <a class="dropdown-item" href="../adminInicio.php">Administrar</a>
+                            <div class="dropdown-divider"></div>
+                        <?php } ?>
                         <a class="dropdown-item" href="../../scripts/login/cerrarsesion.php">Cerrar sesión</a>
                     </div>
                 <?php
                 } else {
                 ?>
-                    <a href="../../views/login.php" class="login-button ms-auto">Iniciar Sesión</a>
+                    <a href="../login.php" class="login-button ms-auto">Iniciar Sesión</a>
                 <?php
                 }
                 ?>
@@ -91,11 +104,6 @@
             </div>
             <div class="row">
                 <?php
-                include_once("../../class/database.php");
-
-                // Conectar a la base de datos
-                $conexion = new Database();
-                $conexion->conectarDB();
 
                 // Configurar la paginación
                 $results_per_page = 6; // Número de resultados por página
@@ -120,6 +128,8 @@
                                 publicaciones
                               WHERE 
                                 tipo = "Difusión"
+                              ORDER BY
+                                fecha DESC
                               LIMIT ' . $offset . ', ' . $results_per_page;
                 $publicaciones = $conexion->select($query);
                 ?>

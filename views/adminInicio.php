@@ -1,5 +1,20 @@
+<?php
+    session_start();
+    require_once '../class/database.php';
+    include_once ("../scripts/funciones/funciones.php");
+    $db = new database();
+    $db->conectarDB();
+
+    $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE p.usuario = '$_SESSION[usuario]'";
+
+    $rol = $db->select($rolUsuario);
+
+    if ($rol[0]->rol !== 'administrador') {
+        header('Location: ../index.php');
+    } 
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -299,7 +314,7 @@
                         </h2>
                         <div id="flush-blog" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
                             <div class="accordion-body bg-dark">
-                                <a href="adminBlog.php" class="fw-bold fs-6 ms-5 text-light text-decoration-none"
+                                <a href="adminPublicaciones.php" class="fw-bold fs-6 ms-5 text-light text-decoration-none"
                                     aria-current="true">
                                     Administrar Publicaciones
                                 </a>
