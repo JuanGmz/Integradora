@@ -1614,6 +1614,7 @@ SELECT
 	p.fecha_hora_pedido,
 	p.monto_total,
 	p.envio,
+    p.costo_envio,
     d.referencia,
     d.estado,
     d.ciudad,

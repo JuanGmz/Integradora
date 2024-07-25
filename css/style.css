@@ -486,7 +486,7 @@ a:hover {
   background-color: var(--color6);
   color: rgb(0, 0, 0);
   border: none;
-  transition: transform 0.3s;
+  transition: transform 1s;
 }
 
 .blog-card:hover {

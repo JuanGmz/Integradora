@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -20,7 +20,7 @@
     <!-- NavBar -->
     <nav class="navbar navbar-expand-lg shadow-lg ">
         <div class="container-fluid">
-            <a class="navbar-brand" href="../../index.php">
+            <a class="navbar-brand" href="../index.php">
                 <img src="../../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
             </a>
             <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
@@ -59,14 +59,17 @@
                     <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
-                    <a class="dropdown-item" href="perfil.php">Mi perfil</a>
-                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="../../views/perfil.php">Mi perfil</a>
+                    <?php if ($_SESSION['usuario'] == 'ADMIN') { ?>
+                        <a class="dropdown-item" href="../../views/adminInicio.php">Administrar</a>
+                        <div class="dropdown-divider"></div>
+                    <?php } ?>
                     <a class="dropdown-item" href="../../scripts/login/cerrarsesion.php">Cerrar sesión</a>
                 </div>
             <?php
             } else {
             ?>
-                <a href="../login.php" class="login-button ms-auto">Iniciar Sesión</a>
+                <a href="../../views/login.php" class="login-button ms-auto">Iniciar Sesión</a>
             <?php
             }
             ?>
@@ -114,35 +117,76 @@
                 <div>
                     <!-- Dirección de envío -->
                     <div class="row mb-4 my-5">
+
                         <div class="col-12 d-flex justify-content-between align-items-center">
                             <h4 class="fw-bold">Dirección de envío</h4>
-                            <a href="../../views/direcciones.php" class="text-decoration-none fw-bold blog-card-link">Cambiar <i class="fa-solid fa-pencil"></i></a>
+                            <a href="../../views/direcciones.php" class="text-decoration-none fw-bold blog-card-link">Agregar <i class="fa-solid fa-pencil"></i></a>
                         </div>
-                        <div class="col-12">
-                            <p class="m-1 p-0">Tobias Gabriel Rodriguez Lujan</P>
-                            <P class="m-1 p-0">Las lomas 80</P>
-                            <P class="m-1 p-0">Joyas del desierto</P>
-                            <P class="m-1 p-0">TORREON, COAHUILA DE ZARAGOZA, 27087</p>
+                        <div class="col-12 col-md-6">
+                            <?php
+                            $query = "SELECT * from domicilios join clientes on clientes.id_cliente=domicilios.id_cliente join personas on personas.id_persona=clientes.id_persona where domicilios.id_cliente='" . $cliente[0]->id_cliente . "'";
+                            $result = $db->select($query);
+
+                            // Verificar si se obtuvieron resultados
+                            if ($result) {
+                                echo "<label for='direccion'>Selecciona una dirección:</label>";
+                                echo "<select class='form-select' name='direccion' id='direccion'>";
+
+                                // Recorrer los resultados y crear opciones en el dropdown
+                                foreach ($result as $domicilio) {
+                                    echo "<option value='" . $domicilio->id_domicilio . "' 
+                                    data-referencia='" . $domicilio->referencia . "' 
+                                    data-ciudad='" . $domicilio->ciudad . "' 
+                                    data-estado='" . $domicilio->estado . "' 
+                                    data-colonia='" . $domicilio->colonia . "' 
+                                    data-calle='" . $domicilio->calle . "' 
+                                    data-codigo_postal='" . $domicilio->codigo_postal . "'>" . $domicilio->referencia . "</option>";
+                                }
+
+                                echo "</select>";
+                                echo "<br>";
+
+
+                                // Contenedores para mostrar los detalles de la dirección
+                                echo "<div class='card-body'>";
+                                echo "<h5 class='card-title fw-bold'>Detalles de la dirección</h5>";
+                                echo "<div>";
+                                echo "<p class='m-1 p-0 fw-bold d-inline'>Referencia:</p><p id='referencia' class='m-1 p-0 d-inline'></p>";
+                                echo "</div>";
+                                echo "<div>";
+                                echo "<p class='m-1 p-0 fw-bold d-inline'>Ciudad:</p><p id='ciudad' class='m-1 p-0 d-inline'></p>";
+                                echo "</div>";
+                                echo "<div>";
+                                echo "<p class='m-1 p-0 fw-bold d-inline'>Estado:</p><p id='estado' class='m-1 p-0 d-inline'></p>";
+                                echo "</div>";
+                                echo "<div>";
+                                echo "<p class='m-1 p-0 fw-bold d-inline'>Colonia:</p><p id='direccion_completa' class='m-1 p-0 d-inline'></p>";
+                                echo "</div>";
+                                echo "</div>";
+                            } else {
+                                echo "No se encontraron direcciones para el usuario.";
+                            }
+                            ?>
+
                         </div>
                     </div>
                     <hr>
                     <!-- Pago -->
 
                     <div class="row mb-4">
-                        <div class="col-12 d-flex justify-content-between align-items-center">
-                            <div>
+                        <div class="col-12 d-flex justify-content-between align-items-center row">
+                            <div class="col-12 col-md-9">
                                 <h4 class="fw-bold ">Pago</h4>
                                 <p class="mb-0">Para completar tu compra, selecciona tu método de pago preferido y luego comunícate con nosotros para finalizar el proceso.</p>
                             </div>
-                            <div class="dropdown">
-                                <button class="btn btn-outline-dark dropdown-toggle" type="button" id="paymentMethodDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Transferencia
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="paymentMethodDropdown">
-                                    <li><a class="dropdown-item" href="#">Tarjeta de Crédito</a></li>
-                                    <li><a class="dropdown-item" href="#">PayPal</a></li>
-                                    <li><a class="dropdown-item" href="#">Efectivo</a></li>
-                                </ul>
+                            <div class="form-group text-center col-12 col-md-3 p-md-0 p-2">
+                                <label class="form-label fw-bold" for="paymentMethodSelect">Método de Pago</label>
+                                <select class="form-control form-select" id="paymentMethodSelect">
+                                    <option value="transferencia">Transferencia</option>
+                                    <option value="tarjeta">Tarjeta de Crédito</option>
+                                    <option value="paypal">PayPal</option>
+                                    <option value="efectivo">Efectivo</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -287,7 +331,31 @@
             </div>
         </div>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Obtener el elemento select
+            const selectDireccion = document.getElementById('direccion');
 
+            // Función para actualizar los detalles de la dirección
+            function actualizarDetalles() {
+                const selectedOption = selectDireccion.options[selectDireccion.selectedIndex];
+
+                // Actualizar los detalles de la dirección
+                document.getElementById('referencia').textContent = selectedOption.getAttribute('data-referencia');
+                document.getElementById('ciudad').textContent = selectedOption.getAttribute('data-ciudad');
+                document.getElementById('estado').textContent = selectedOption.getAttribute('data-estado');
+                document.getElementById('direccion_completa').textContent = selectedOption.getAttribute('data-colonia') + " " +
+                    selectedOption.getAttribute('data-calle') + " " +
+                    selectedOption.getAttribute('data-codigo_postal');
+            }
+
+            // Escuchar cambios en el elemento select
+            selectDireccion.addEventListener('change', actualizarDetalles);
+
+            // Actualizar los detalles de la dirección cuando se carga la página
+            actualizarDetalles();
+        });
+    </script>
     <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/45ef8dbe96.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
