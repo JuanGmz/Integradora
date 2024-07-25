@@ -23,6 +23,8 @@
                     detalle_productos_menu ON detalle_productos_menu.id_pm = productos_menu.id_pm
                 JOIN 
                     categorias ON categorias.id_categoria = productos_menu.id_categoria
+                WHERE
+                    c.nombre = 'Sweet Blues'
                 WHERE productos_menu.id_pm = $id_pm";
 
     $producto = $db->select($query);
