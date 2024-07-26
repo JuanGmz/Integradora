@@ -1,3 +1,51 @@
+<?php
+    session_start();
+    include_once("../../class/database.php");
+// Verificar si el parámetro id_pedido está presente en la URL
+if (!isset($_GET['id_pedido'])) {
+    die("No se ha proporcionado un ID de pedido.");
+}
+
+$id_pedido = $_GET['id_pedido'];
+
+$db = new Database();
+$db->conectarDB();
+
+// Verificar si el parámetro id_pedido está presente en la URL
+if (!isset($_GET['id_pedido'])) {
+    die("No se ha proporcionado un ID de pedido.");
+}
+
+
+// Verificar si el usuario está autenticado
+if (!isset($_SESSION["usuario"])) {
+    echo '<div class="container text-center mt-3 p-5">
+            <h4 class="fw-bold p-2">Para ver el folio de su pedido, primero debe iniciar sesión</h4>
+            <a href="../login.php" class="btn btn-dark mt-3">Iniciar sesión</a>
+        </div>';
+    exit;
+}
+
+// Obtener el ID del cliente autenticado
+$cliente_query = "SELECT c.id_cliente 
+                  FROM clientes AS c 
+                  JOIN personas AS p ON c.id_persona = p.id_persona 
+                  WHERE p.usuario = '" . $_SESSION["usuario"] . "'";
+$cliente_result = $db->select($cliente_query);
+
+if (is_array($cliente_result) && count($cliente_result) > 0) {
+    $id_cliente_autenticado = $cliente_result[0]->id_cliente;
+
+    // Verificar que el pedido pertenece al cliente autenticado
+    $pedido_query = "SELECT id_cliente FROM pedidos WHERE id_pedido = $id_pedido";
+    $pedido_result = $db->select($pedido_query);
+
+    if (is_array($pedido_result) && count($pedido_result) > 0) {
+        $id_cliente_pedido = $pedido_result[0]->id_cliente;
+
+        if ($id_cliente_autenticado == $id_cliente_pedido) {
+            // El pedido pertenece al cliente autenticado, mostrar el folio
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -9,16 +57,13 @@
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="shortcut icon" href="../../img/Sinfonía-Café-y-Cultura.webp">
     <?php
-        session_start();
-        require_once '../../class/database.php';
-        include_once ("../../scripts/funciones/funciones.php");
-        $db = new database();
-        $db->conectarDB();
-        
-        if (isset($_SESSION['usuario'])) {
-            $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE p.usuario = '$_SESSION[usuario]'";
-            $rol = $db->select($rolUsuario);
-        }
+
+    include_once("../../scripts/funciones/funciones.php");
+
+    if (isset($_SESSION['usuario'])) {
+        $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE p.usuario = '$_SESSION[usuario]'";
+        $rol = $db->select($rolUsuario);
+    }
     ?>
 </head>
 
@@ -58,26 +103,26 @@
                 </div>
             </div>
             <?php
-                if (isset($_SESSION["usuario"])) {
-                    ?>
-                        <!-- Navbar con dropdown -->
-                        <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
-                            <a class="dropdown-item" href="../perfil.php">Mi perfil</a>
-                            <?php if ($rol[0]->rol === 'administrador') { ?>
-                                <a class="dropdown-item" href="../adminInicio.php">Administrar</a>
-                                <div class="dropdown-divider"></div>
-                            <?php } ?>
-                            <a class="dropdown-item" href="../../scripts/login/cerrarsesion.php">Cerrar sesión</a>
-                        </div>
-                    <?php
-                    } else {
-                    ?>
-                        <a href="../login.php" class="login-button ms-auto">Iniciar Sesión</a>
-                    <?php
-                    }
+            if (isset($_SESSION["usuario"])) {
+            ?>
+                <!-- Navbar con dropdown -->
+                <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
+                    <a class="dropdown-item" href="../perfil.php">Mi perfil</a>
+                    <?php if ($rol[0]->rol === 'administrador') { ?>
+                        <a class="dropdown-item" href="../adminInicio.php">Administrar</a>
+                        <div class="dropdown-divider"></div>
+                    <?php } ?>
+                    <a class="dropdown-item" href="../../scripts/login/cerrarsesion.php">Cerrar sesión</a>
+                </div>
+            <?php
+            } else {
+            ?>
+                <a href="../login.php" class="login-button ms-auto">Iniciar Sesión</a>
+            <?php
+            }
             ?>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -100,10 +145,22 @@
         </div>
     </div>
     <!--Contenido-->
-    <div class="container text-center mt-3">
-    
+    <?php
+
+    if (isset($_SESSION["usuario"])) {
+        $cliente = "SELECT 
+                                c.id_cliente 
+                            FROM 
+                                clientes AS c 
+                            JOIN
+                                personas AS p ON c.id_persona = p.id_persona 
+                            WHERE p.usuario = '" . $_SESSION["usuario"] . "'";
+        $cliente = $db->select($cliente);
+        $id_pedido=htmlspecialchars($id_pedido);
+        echo '<div class="container text-center mt-3">
+
         <h4 class="fw-bold p-2">Pedido realizado, ¡Gracias por tu pedido!</h4>
-        <h1 class="mt-4 p-3">Su Folio es: <strong>F568AE2R</strong></h1>
+        <h1 class="mt-4 p-3">Su Folio es: <strong>' . $id_pedido . '</strong></h1>
         <p class="mt-4">Para realizar el pago de la compra contacte con nuestro siguiente número entre las 9:00AM y 8:00PM para acordar el método de pago</p>
         <div class="d-flex justify-content-center align-items-center my-4 p-2">
             <i class="fa-solid fa-phone fs-3 me-3"></i>
@@ -111,14 +168,22 @@
         </div>
         <p>También nos puede contactar por los siguientes medios</p>
         <div class="d-flex justify-content-center p-2">
-            <a href="https://www.facebook.com/SinfoniaCoffee" class="text-decoration-none mx-2">
+            <a href="https://www.facebook.com/SinfoniaCoffee" class="text-decoration-none mx-2 blog-card-link">
                 <i class="fa-brands fa-facebook m-3"></i> Sinfonia@facebook.com
             </a>
-            <a href="mailto:Sinfonia@gmail.com" class="text-decoration-none mx-2">
+            <a href="mailto:Sinfonia@gmail.com" class="text-decoration-none mx-2 blog-card-link">
                 <i class="fa-solid fa-envelope m-3"></i>Sinfonia@gmail.com
             </a>
         </div>
-    </div>
+    </div>';
+    } else {
+        echo '<div class="container text-center mt-3 p-5">
+            <h4 class="fw-bold p-2">Para realizar el pedido primero debe iniciar sesión</h4>
+            <a href="../login.php" class="btn btn-dark mt-3">Iniciar sesión</a>
+        </div>';
+    }
+    ?>
+
 
     <!-- Footer -->
     <footer>
@@ -161,3 +226,25 @@
 </body>
 
 </html>
+<?php
+        } else {
+            // El pedido no pertenece al cliente autenticado
+            echo '<div class="container text-center mt-3 p-5">
+                    <h4 class="fw-bold p-2">No tiene permiso para ver este pedido</h4>
+                </div>';
+        }
+    } else {
+        // El pedido no existe
+        echo '<div class="container text-center mt-3 p-5">
+                <h4 class="fw-bold p-2">El pedido no existe</h4>
+            </div>';
+    }
+} else {
+    // El cliente autenticado no se encontró en la base de datos
+    echo '<div class="container text-center mt-3 p-5">
+            <h4 class="fw-bold p-2">Error al verificar el cliente autenticado</h4>
+        </div>';
+}
+
+$db->desconectarDB();
+?>

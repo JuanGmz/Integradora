@@ -130,7 +130,7 @@
                             // Verificar si se obtuvieron resultados
                             if ($result) {
                                 echo "<label for='direccion'>Selecciona una dirección:</label>";
-                                echo "<select class='form-select' name='direccion' id='direccion'>";
+                                echo "<select class='form-select' name='direccion' id='direccion' required>";
                                 $DOMICIOLIO = $result[0]->id_domicilio;
                                 // Recorrer los resultados y crear opciones en el dropdown
                                 foreach ($result as $domicilio) {
@@ -165,6 +165,7 @@
                                 echo "</div>";
                                 echo "</div>";
                             } else {
+                                $DOMICIOLIO = '';
                                 echo "No se encontraron direcciones para el usuario.";
                             }
                             ?>
@@ -334,6 +335,29 @@
                         // Actualizar los detalles de la dirección cuando se carga la página
                         actualizarDetalles();
                     });
+                </script>
+                <!-- script para habilitar el botón de envío cuando se seleccione un domicilio -->
+                <script>
+                    function confirmarPedido() {
+                        // Obtén el valor del domicilio
+                        var domicilio = document.getElementById('hiddenIdDomicilio').value;
+
+                        // Si no hay domicilio seleccionado, muestra un mensaje y previene el envío
+                        if (!domicilio) {
+                            alert('Por favor, selecciona o crea un domicilio antes de realizar el pedido.');
+                            return false; // Previene el envío del formulario
+                        }
+
+                        return true; // Permite el envío del formulario si el domicilio está seleccionado
+                    }
+
+                    // Función para habilitar el botón de envío cuando se seleccione un domicilio
+                    function seleccionarDomicilio(idDomicilio) {
+                        document.getElementById('hiddenIdDomicilio').value = idDomicilio;
+                        document.getElementById('submitButton').disabled = false; // Habilita el botón
+                    }
+
+                    // Puedes tener un evento o lógica para llamar a seleccionarDomicilio con el id del domicilio
                 </script>
 
         <?php
