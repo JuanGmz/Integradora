@@ -1034,20 +1034,31 @@ delimiter ;
 
 -- Procedimiento almacenado para realizar reservas de eventos (pago)
 delimiter //
-create procedure SP_reserva_evento(
-in p_id_cliente int, 
-in p_id_evento int, 
-in p_c_boletos int,
-in p_id_mp int
+CREATE PROCEDURE SP_reserva_evento(
+    IN p_id_cliente INT,
+    IN p_id_evento INT,
+    IN p_c_boletos INT,
+    IN p_id_mp INT
 )
-begin 
-
--- Insertamos la reserva del cliente para el evento junto con la cantidad de boletos.
-insert into eventos_reservas(id_cliente, id_evento, c_boletos,id_mp)
-VALUES (p_id_cliente, p_id_evento, p_c_boletos,p_id_mp);
-
-end //
+BEGIN
+    -- Insertamos la reserva del cliente para el evento junto con la cantidad de boletos.
+    INSERT INTO eventos_reservas (id_cliente, id_evento, c_boletos, id_mp)
+    VALUES (p_id_cliente, p_id_evento, p_c_boletos, p_id_mp);
+    
+    -- Seleccionamos el último ID insertado (que corresponde a la reserva recién creada)
+    SELECT LAST_INSERT_ID() AS id_reserva;
+END //
 delimiter ;
+
+ALTER TABLE eventos_reservas
+DROP FOREIGN KEY eventos_reservas_ibfk_1,
+ADD CONSTRAINT fk_id_cliente
+FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente);
+
+ALTER TABLE eventos_reservas
+DROP FOREIGN KEY eventos_reservas_ibfk_2,
+ADD CONSTRAINT fk_id_evento
+FOREIGN KEY (id_evento) REFERENCES eventos(id_evento);
 
 -- Procedimiento almacenado para insertar domicilios.
 delimiter //

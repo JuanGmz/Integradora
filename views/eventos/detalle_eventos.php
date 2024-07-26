@@ -94,6 +94,21 @@ if ($result) {
         </nav>
         <!-- NavBar End -->
 
+        <?php
+
+        if (isset($_SESSION["usuario"])) {
+            $cliente = "SELECT 
+                c.id_cliente 
+            FROM 
+                clientes AS c 
+            JOIN
+                personas AS p ON c.id_persona = p.id_persona 
+            WHERE p.usuario = '" . $_SESSION["usuario"] . "'";
+            $cliente = $conexion->select($cliente);
+        } else {
+            $cliente = null;
+        }
+        ?>
         <div class="container my-5">
             <nav aria-label="breadcrumb" class='col-12 d-flex'>
                 <ol class="breadcrumb mt-4">
@@ -143,25 +158,90 @@ if ($result) {
 
                     echo "<h3 class='text-center text-cafe fw-bold'>Reservar</h3>";
 
-                    if ($evento->capacidad <= 0) {
-                        echo "<p class='fw-bold'>Cupo disponible: <span>" . $evento->capacidad . "</span></p>";
+                    if ($evento->disponibilidad <= 0) {
+                        echo "<p class='fw-bold'>Cupo Total: <span>" . $evento->capacidad . "</span></p>";
                         echo "<p class='fw-bold text-danger'>No se pueden realizar más reservas. El evento está completo.</p>";
                     } else {
-                        echo "<p class='fw-bold'>Cupo disponible: <span>" . $evento->capacidad . "</span></p>";
-                        
+                        echo "<p class='fw-bold'>Cupo Total: <span>" . $evento->capacidad . "</span></p>";
+
                         if ($evento->tipo != "Gratuito") {
+                            echo "<p class='fw-bold'>Cupo Disponible: <span>" . $evento->disponibilidad . "</span></p>";
                             echo "<p class='fw-bold'>Costo por persona: <span>$" . $evento->precio_boleto . "</span></p>";
                             echo "<p class='fw-bold'>Tipo de evento: <span>" . $evento->tipo . "</span></p>";
-                            
+
                             // Aquí puedes agregar el botón de reservar si lo deseas
-                            echo "<button type='button' class='btn btn-cafe w-100'>Realizar reserva</button>";
+                            echo "<button type='button' class='btn btn-cafe w-100' data-bs-toggle='modal' data-bs-target='#reservaModal'>Realizar reserva</button>";
+                            echo '
+                                <div class="modal fade" id="reservaModal" tabindex="-1" aria-labelledby="reservaModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="reservaModalLabel">Reservar Boletos</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form id="reservaForm" action="../../scripts/eventos/reservar_boletos.php" method="POST">
+                                                <div class="mb-3">';
+
+                            // Archivo para obtener métodos de pago
+
+                            $query = "SELECT id_mp, metodo_pago FROM metodos_pago";
+                            $result = $conexion->select($query);
+                            if (isset($_SESSION['usuario'])) {
+
+                                echo "  <input type='hidden' name='id_cliente' value='{$cliente[0]->id_cliente}'> <!-- ID del cliente -->";
+                            } else {
+
+                                echo "  <input type='hidden' name='id_cliente' value='0'> <!-- ID del cliente -->";
+                            }
+
+                    ?>
+                            <label class="form-label fw-bold" for="paymentMethodSelect">Método de Pago</label>
+                            <select class="form-control form-select" id="paymentMethodSelect" name="id_mp">
+                                <?php
+                                if ($result) {
+                                    foreach ($result as $mp) {
+                                        echo "<option value='" . $mp->id_mp . "'>" . $mp->metodo_pago . "</option>";
+                                    }
+                                } else {
+                                    echo "<option value=''>No se encontraron métodos de pago</option>";
+                                }
+                                ?>
+                            </select>
+
+
+                    <?php
+                            echo '                 </div>
+                                                    <div class="mb-3">
+                                                        <label class="form-label fw-bold" for="cantidadBoletos" class="form-label">Cantidad de Boletos</label>
+                                                        <select class="form-select" id="cantidadBoletos" name="c_boletos" required>';
+                            $i = 1;
+                            while ($i <= $evento->disponibilidad) {
+                                echo "<option value='$i'>$i</option>";
+                                $i++;
+                            }
+                            echo '                      </select>
+                                                    </div>
+                                                    <input type="hidden" name="id_evento" value="' . $evento->id_evento . '">
+                                                    <input type="hidden" name="id_cliente" value="' . $cliente[0]->id_cliente . '">
+                                                    <input type="hidden" name="id_mp" value="' . $mp->id_mp . '">
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                        <button type="submit" class="btn btn-categorias">Reservar</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                ';
                         } else {
                             echo "<p class='fw-bold'>Tipo de evento: <span>" . $evento->tipo . "</span></p>";
                         }
                     }
 
                     ?>
-                    
+
                 </div>
             </div>
         </div>
