@@ -5,13 +5,14 @@
     $db = new database();
     $db->conectarDB();
 
-    $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE p.usuario = '$_SESSION[usuario]'";
+    if (isset($_SESSION["usuario"])) {
+        $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE p.usuario = '$_SESSION[usuario]'";
+        $rol = $db->select($rolUsuario);
 
-    $rol = $db->select($rolUsuario);
-
-    if ($rol[0]->rol !== 'administrador') {
-        header('Location: ../index.php');
-    } 
+        if ($rol[0]->rol !== 'administrador') {
+            header('Location: ../index.php');
+        } 
+    }
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -358,9 +359,6 @@
                                             <option selected disabled value="">Seleccionar Categoría </option>
                                             <!-- Aqui va el select de categorías -->
                                             <?php
-                                                include_once ('../class/database.php');
-                                                $db = new Database();
-                                                $db->conectarDB();
                                                 $queryCate = "SELECT * FROM categorias WHERE tipo = 'Menu'";
                                                 $categorias = $db->select($queryCate);
                                                 foreach ($categorias as $categoria) {
@@ -402,10 +400,6 @@
                                             <option selected disabled value="">Seleccionar Categoria</option>
                                             <!-- Aqui va el select de categorías -->
                                             <?php
-                                                include_once ('../class/database.php');
-                                                $db = new Database();
-                                                $db->conectarDB();
-
                                                 $query = "SELECT id_categoria, nombre FROM categorias WHERE tipo = 'Menu'";
                                                 $categorias = $db->select($query);
                                                 foreach ($categorias as $categoria) {
@@ -624,6 +618,5 @@
     </div>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/b820f07375.js" crossorigin="anonymous"></script>
-    <script src="../script/script.js"></script>
 </body>
 </html>

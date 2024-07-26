@@ -5,29 +5,32 @@
 
     extract($_POST);
 
-    // Directorio donde se guardarán las imágenes
-    $subirDir = "../../img/menu/";
+    if (isset($_POST['imagen']) && isset($_POST['medida']) && isset($_POST['precio']) && isset($_POST['nombre']) && isset($_POST['descripcion']) && isset($_POST['categoria'])) {
 
-    // Nombre del archivo subido
-    $nombreImagen = basename($_FILES['imagen']['name']);
+        // Directorio donde se guardarán las imágenes
+        $subirDir = "../../img/menu/";
 
-    // Ruta completa del archivo a ser guardado
-    $imagen = $subirDir . $nombreImagen;
+        // Nombre del archivo subido
+        $nombreImagen = basename($_FILES['imagen']['name']);
 
-    // Mover el archivo subido a la carpeta de destino
-    if (move_uploaded_file($_FILES['imagen']['tmp_name'], $imagen)) {
-        // Primera consulta
-        $query1 = "INSERT INTO productos_menu(id_categoria, nombre, descripcion, img_url) VALUES ($categoria, '$nombre', '$descripcion', '$nombreImagen')";
-        $conexion->execute($query1);
+        // Ruta completa del archivo a ser guardado
+        $imagen = $subirDir . $nombreImagen;
 
-        // Segunda consulta
-        $query2 = "INSERT INTO detalle_productos_menu(id_pm, medida, precio) VALUES (LAST_INSERT_ID(), '$medida', $precio)";
-        $conexion->execute($query2);
+        // Mover el archivo subido a la carpeta de destino
+        if (move_uploaded_file($_FILES['imagen']['tmp_name'], $imagen)) {
+            // Primera consulta
+            $query1 = "INSERT INTO productos_menu(id_categoria, nombre, descripcion, img_url) VALUES ($categoria, '$nombre', '$descripcion', '$nombreImagen')";
+            $conexion->execute($query1);
 
-    } else {
-        echo "Error al subir la imagen.";
+            // Segunda consulta
+            $query2 = "INSERT INTO detalle_productos_menu(id_pm, medida, precio) VALUES (LAST_INSERT_ID(), '$medida', $precio)";
+            $conexion->execute($query2);
+
+        } else {
+            echo "Error al subir la imagen.";
+        }
     }
-    
+
     // Desconectar la base de datos
     $conexion->desconectarDB();
 

@@ -18,8 +18,14 @@
     if (isset($_SESSION["usuario"])) {
         $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE p.usuario = '$_SESSION[usuario]'";
         $rol = $db->select($rolUsuario);
-        $queryPed = "SELECT * FROM vw_pedidos_clientes WHERE usuario = '$_SESSION[usuario]' ORDER BY p.fecha_hora_pedido DESC";
-        $pedidos = $db->select($queryPed);
+        $queryPed = "SELECT * FROM vw_pedidos_clientes WHERE usuario = '$_SESSION[usuario]'";
+
+        if(empty($queryPed)){
+            echo "<h3>No tienes pedidos</h3>";
+        } else {
+            $queryPedidos = "SELECT * FROM vw_pedidos_clientes WHERE usuario = '$_SESSION[usuario]' ORDER BY fecha_hora_pedido DESC";
+            $pedidos = $db->select($queryPedidos);
+        }
     } else {
         header("location: ../index.php");
     }
