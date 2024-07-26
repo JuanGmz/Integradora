@@ -193,21 +193,25 @@ if (isset($_SESSION["usuario"])) {
                     echo '          </form>';
                     echo '          <span class="mx-2 p-1">' . $item->cantidad . '</span>';
                     echo '          <form action="../scripts/actualizar_carrito.php" method="POST" style="display: inline;">';
+                    echo '              <div class="d-none">';
                     echo '              <input type="hidden" name="id_cliente" value="' . $cliente[0]->id_cliente . '">';
                     echo '              <input type="hidden" name="peso" value="' . $item->precio . '">';
                     echo '              <input type="hidden" name="id_carrito" value="' . $item->id_carrito . '">';
                     echo '              <input type="hidden" name="id_dbc" value="' . $item->id_dbc . '">';
                     echo '              <input type="hidden" name="link" value=../views/ecommerce.php">';
                     echo '              <input type="hidden" name="operacion" value="incrementar">';
+                    echo '              </div>';
                     echo '              <button type="submit" class="btn fw-bold btn-dark fs-5 p-0" style="height: 35px; width: 35px">+</button>';
                     echo '          </form>';
                     echo '      </div>';
                     echo '  </div>';
                     echo '   <form action="../scripts/eliminar_producto.php" method="POST" style="display:inline;">
+                        <div class="d-none">
                             <input type="hidden" name="item_id" value="' . $item->id_dbc . '">
                             <input type="hidden" name="id_carrito" value="' . $item->id_carrito . '">
                             <input type="hidden" name="id_cliente" value="' . $cliente[0]->id_cliente . '">
                             <input type="hidden" name="link" value=../views/bolsas/ecommerce.php">
+                        </div>
                                 <button type="submit" class="btn" aria-label="Close"><i class="fa-solid fa-trash"></i></button>
                         </form>';
                     echo '</div>';

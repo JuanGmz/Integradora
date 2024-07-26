@@ -20,7 +20,7 @@
     <!-- NavBar -->
     <nav class="navbar navbar-expand-lg shadow-lg ">
         <div class="container-fluid">
-            <a class="navbar-brand" href="../index.php">
+            <a class="navbar-brand" href="../../index.php">
                 <img src="../../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
             </a>
             <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
@@ -227,31 +227,37 @@
                                 echo '      </div>';
                                 echo '      <div class="ms-3">';
                                 echo '          <form action="../../scripts/actualizar_carrito.php" method="POST" style="display: inline;">';
+                                echo '              <div class="d-none">';
                                 echo '              <input type="hidden" name="id_cliente" value="' . $cliente[0]->id_cliente  . '">';
                                 echo '              <input type="hidden" name="peso" value="' . $item->precio . '">';
                                 echo '              <input type="hidden" name="id_carrito" value="' . $item->id_carrito . '">';
                                 echo '              <input type="hidden" name="id_dbc" value="' . $item->id_dbc . '">';
                                 echo '              <input type="hidden" name="link" value="../views/bolsas/Carrito.php">';
                                 echo '              <input type="hidden" name="operacion" value="decrementar">';
+                                echo '              </div>';
                                 echo '              <button type="submit" class="btn fw-bold btn-dark fs-5 p-0" style="height: 35px; width: 35px">-</button>';
                                 echo '          </form>';
                                 echo '          <span class="mx-2 p-1">' . $item->cantidad . '</span>';
                                 echo '          <form action="../../scripts/actualizar_carrito.php" method="POST" style="display: inline;">';
+                                echo '              <div class="d-none">';
                                 echo '              <input type="hidden" name="id_cliente" value="' . $cliente[0]->id_cliente . '">';
                                 echo '              <input type="hidden" name="peso" value="' . $item->precio . '">';
                                 echo '              <input type="hidden" name="id_carrito" value="' . $item->id_carrito . '">';
                                 echo '              <input type="hidden" name="id_dbc" value="' . $item->id_dbc . '">';
                                 echo '              <input type="hidden" name="link" value="../views/bolsas/Carrito.php">';
                                 echo '              <input type="hidden" name="operacion" value="incrementar">';
+                                echo '              </div>';
                                 echo '              <button type="submit" class="btn fw-bold btn-dark fs-5 p-0" style="height: 35px; width: 35px">+</button>';
                                 echo '          </form>';
                                 echo '      </div>';
                                 echo '  </div>';
                                 echo '  <form action="../../scripts/eliminar_producto.php" method="POST" style="display:inline;">
+                                                <div class="d-none">
                                                     <input type="hidden" name="item_id" value="' . $item->id_dbc . '">
                                                     <input type="hidden" name="id_carrito" value="' . $item->id_carrito . '">
                                                     <input type="hidden" name="id_cliente" value="' . $cliente[0]->id_cliente . '">
                                                     <input type="hidden" name="link" value="../views/bolsas/Carrito.php">
+                                                </div>
                                                 <button type="submit" class="btn" aria-label="Close"><i class="fa-solid fa-trash"></i></button>
                                             </form>';
                                 echo '</div>';
@@ -278,14 +284,17 @@
                         echo '<hr>';
                         $iva = $subtotal[0]->subtotal * 0.16;
                         $total = $subtotal[0]->subtotal + $iva;
+
                         echo '
                           
                         <form id="pedidoForm" action="../../scripts/ecommerce/pedido.php" method="POST" onsubmit="return confirmarPedido()">
+                        <div class="d-none">
                                  <input type="hidden" name="id_mp" value="' . $mp->id_mp . '">
-                            <input type="hidden" id="hiddenIdDomicilio" name="id_domicilio" value="' .  $DOMICIOLIO . '">
+                                <input type="hidden" id="hiddenIdDomicilio" name="id_domicilio" value="' .  $DOMICIOLIO . '">
                                <input type="hidden" name="id_cliente" value="' . $cliente[0]->id_cliente . '">
-                            <p>Total: <span class="float-end fw-bold">$' . $total . '</span></p>
-                            <p class="small text-muted">* No incluye los gastos de envío.</p>
+                                <p>Total: <span class="float-end fw-bold">$' . $total . '</span></p>
+                                </div>
+                                <p class="small text-muted">* No incluye los gastos de envío.</p>
                                 <button type="submit" class="btn btn-dark w-100">Realizar pedido</button>
                         </form>
 

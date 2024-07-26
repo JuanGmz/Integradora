@@ -93,7 +93,7 @@ if ($result) {
             </div>
         </nav>
         <!-- NavBar End -->
-        
+
         <!-- Contenido -->
         <div class="container-fluid m-0 p-0" style="background: var(--color2);">
             <div class="row p-0 m-0">
@@ -197,19 +197,24 @@ if ($result) {
                                         <p class='product-text fw-bold'>{$bolsacafe[0]->cuerpo}</p>
                                     </div>
                                 <form action='../../scripts/agregar_carrito.php' method='POST' class='form-inline'>";
+                echo "<div class='d-none'>";
                 if (isset($_SESSION['usuario'])) {
+
                     echo "  <input type='hidden' name='id_cliente' value='{$cliente[0]->id_cliente}'> <!-- ID del cliente -->";
                 }
 
-
+                echo "</div>";
+                echo "<div class='d-none'>";
                 echo "  <input type='hidden' name='id_dbc' value='{$bolsacafe[0]->id_bolsa}'> <!-- ID del producto -->
+                    </div>";
+                echo "
                                     <div class='row d-flex p-4'>
                                         <div class='col-6'>
                                          <label for='peso' class='form-label fw-bold'>Peso</label>
                                             <select class='form-select' id='peso' name='peso'>";
-                                            
-                                            
-                                        
+
+
+
 
                 foreach ($peso as $pesos) {
 
@@ -299,31 +304,37 @@ if ($result) {
                         echo '      </div>';
                         echo '      <div class="ms-3">';
                         echo '          <form action="../../scripts/actualizar_carrito.php" method="POST" style="display: inline;">';
+                        echo '              <div class="d-none">';
                         echo '              <input type="hidden" name="id_cliente" value="' . $cliente[0]->id_cliente  . '">';
                         echo '              <input type="hidden" name="peso" value="' . $item->precio . '">';
                         echo '              <input type="hidden" name="id_carrito" value="' . $item->id_carrito . '">';
                         echo '              <input type="hidden" name="id_dbc" value="' . $item->id_dbc . '">';
                         echo '              <input type="hidden" name="link" value="../views/bolsas/bolsas.php?id=' . $item->id_dbc . '">';
                         echo '              <input type="hidden" name="operacion" value="decrementar">';
+                        echo '              </div>';
                         echo '              <button type="submit" class="btn fw-bold btn-dark fs-5 p-0" style="height: 35px; width: 35px">-</button>';
                         echo '          </form>';
                         echo '          <span class="mx-2 p-1">' . $item->cantidad . '</span>';
                         echo '          <form action="../../scripts/actualizar_carrito.php" method="POST" style="display: inline;">';
+                        echo '              <div class="d-none">';
                         echo '              <input type="hidden" name="id_cliente" value="' . $cliente[0]->id_cliente . '">';
                         echo '              <input type="hidden" name="peso" value="' . $item->precio . '">';
                         echo '              <input type="hidden" name="id_carrito" value="' . $item->id_carrito . '">';
                         echo '              <input type="hidden" name="id_dbc" value="' . $item->id_dbc . '">';
                         echo '              <input type="hidden" name="link" value="../views/bolsas/bolsas.php?id=' . $item->id_dbc . '">';
                         echo '              <input type="hidden" name="operacion" value="incrementar">';
+                        echo '              </div>';
                         echo '              <button type="submit" class="btn fw-bold btn-dark fs-5 p-0" style="height: 35px; width: 35px">+</button>';
                         echo '          </form>';
                         echo '      </div>';
                         echo '  </div>';
                         echo '   <form action="../../scripts/eliminar_producto.php" method="POST" style="display:inline;">
+                                <div class="d-none">
                                     <input type="hidden" name="item_id" value="' . $item->id_dbc . '">
                                     <input type="hidden" name="id_carrito" value="' . $item->id_carrito . '">
                                     <input type="hidden" name="id_cliente" value="' . $cliente[0]->id_cliente . '">
                                     <input type="hidden" name="link" value="../views/bolsas/bolsas.php?id=' . $item->id_dbc . '">
+                                </div>
                                         <button type="submit" class="btn" aria-label="Close"><i class="fa-solid fa-trash"></i></button>
                                 </form>';
                         echo '</div>';
