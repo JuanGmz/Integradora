@@ -9,16 +9,16 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="shortcut icon" href="../img/Sinfonía-Café-y-Cultura.webp">
     <?php
-        include_once ("../class/database.php");
-        $db = new Database();
-        $db->conectarDB();
-        session_start();
-        if (isset($_SESSION["usuario"])) {
-            $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE p.usuario = '$_SESSION[usuario]'";
-            $rol = $db->select($rolUsuario);
-        } else {
-            $rol = null;
-        }
+    include_once("../class/database.php");
+    $db = new Database();
+    $db->conectarDB();
+    session_start();
+    if (isset($_SESSION["usuario"])) {
+        $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE p.usuario = '$_SESSION[usuario]'";
+        $rol = $db->select($rolUsuario);
+    } else {
+        $rol = null;
+    }
     ?>
 </head>
 
@@ -30,8 +30,7 @@
                 <a class="navbar-brand" href="../index.php">
                     <img src="../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
                 </a>
-                <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1"
-                    id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                     <div class="offcanvas-header">
                         <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura
                         </h5>
@@ -82,10 +81,10 @@
                 <?php
                 }
                 ?>
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
     </div>
     </nav>
     <!-- NavBar End -->
@@ -109,11 +108,10 @@
                 </div>
                 <!--botónes de categorias-->
                 <div class="d-flex justify-content-center">
-                    <ul class="nav nav-tabs justify-content-center  " id="ex1" role="tablist"
-                        style="border-bottom: none;">
+                    <ul class="nav nav-tabs justify-content-center  " id="ex1" role="tablist" style="border-bottom: none;">
 
                         <?php
-                        include_once ("../class/database.php");
+                        include_once("../class/database.php");
                         $conexion = new Database();
                         $conexion->conectarDB();
                         $query = 'SELECT 
@@ -150,27 +148,32 @@
                     <?php
                     $conexion->conectarDB();
                     $query = 'SELECT 
-                    categorias.id_categoria as cat_id, eventos.nombre, eventos.tipo, eventos.descripcion, eventos.img_url, eventos.fecha_evento, eventos.hora_inicio, eventos.hora_fin
-                    FROM 
-                     categorias 
-                    JOIN 
-                    eventos ON categorias.id_categoria = eventos.id_categoria
-                    WHERE 
-                    categorias.tipo = "Evento"';
+                        categorias.id_categoria as cat_id,eventos.id_evento, eventos.nombre, eventos.tipo, eventos.descripcion, eventos.img_url, eventos.fecha_evento, eventos.hora_inicio, eventos.hora_fin
+                        FROM 
+                        categorias 
+                        JOIN 
+                        eventos ON categorias.id_categoria = eventos.id_categoria
+                        WHERE 
+                        categorias.tipo = "Evento"';
                     $categorias = $conexion->select($query);
                     $active = "active";
+
                     foreach ($categorias as $categoria) {
-                        echo " <div class='tab-pane fade $active' id='ex1-tabs-{$categoria->cat_id}' role='tabpanel' aria-labelledby='ex1-tab-{$categoria->cat_id}'>";
+
+                        echo "<div class='tab-pane fade $active' id='ex1-tabs-{$categoria->cat_id}' role='tabpanel' aria-labelledby='ex1-tab-{$categoria->cat_id}'>";
                         echo "  <div class='row justify-content-center mb-5'>";
                         echo "      <div class='col-12 col-md-8 d-flex align-items-center'>";
                         echo "          <div class='d-flex flex-wrap w-100 d-flex justify-content-center'>";
                         echo "              <div class='col-12 col-md-6 p-2 col-sm-6'>";
-                        echo "                  <img src='../img/eventos/{$categoria->img_url}' class='card-img-top img-fluid' alt='...' style='height: 300px; object-fit: cover;'>";
+                        echo "                  <img src='../{$categoria->img_url}' class='card-img-top img-fluid' alt='...' style='height: 300px; object-fit: cover;'>";
                         echo "              </div>";
                         echo "              <div class='col-9 col-sm-9 col-md-6 p-2 d-flex flex-column justify-content-cente p-lg-2'>";
                         echo "                  <h5 class='fw-bold mb-3' style='letter-spacing: 1px;'>{$categoria->nombre}</h5>";
                         echo "                  <p class='text-dark-emphasis mb-4 '>{$categoria->descripcion}</p>";
-                        echo "                  <a href='html/eventos.html' class='btn text-light shadow-lg align-self-start col-12 col-sm-12 col-md-6 col-lg-6' style='background: var(--primario);'>Ver Eventos</a>";
+                        echo "                  <form action='../views/eventos/detalle_eventos.php?id={$categoria->id_evento}' method='post'>";
+                        echo "                      <input type='hidden' name='id_evento' value='{$categoria->id_evento}'>";
+                        echo "                      <input type='submit' class='btn btn-cafe w-75' value='Ver Detalles'>";
+                        echo "                  </form>";
                         echo "              </div>";
                         echo "          </div>";
                         echo "      </div>";
