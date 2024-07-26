@@ -826,17 +826,17 @@ END //
 DELIMITER ;
 
 
-
 -- Procedimiento almacenado para realizar pedido.
-delimiter //
+DELIMITER //
 CREATE PROCEDURE SP_Realizar_Pedido(
     IN p_id_cliente INT,
     IN p_id_domicilio INT,
     IN p_id_mp INT
 )
 BEGIN 
-    DECLARE v_monto_total double;
+    DECLARE v_monto_total DOUBLE;
     DECLARE v_count INT;
+    DECLARE v_id_pedido INT;
 
     -- Verifica si el carrito tiene artículos para el cliente especificado
     SELECT COUNT(*) INTO v_count FROM carrito WHERE id_cliente = p_id_cliente;
@@ -849,10 +849,14 @@ BEGIN
         INSERT INTO pedidos(id_cliente, id_domicilio, id_mp, monto_total)
         VALUES (p_id_cliente, p_id_domicilio, p_id_mp, v_monto_total);
         
-        Select 'Pedido realizado.' as mensaje;
+        -- Obtiene el ID del pedido recién creado
+        SET v_id_pedido = LAST_INSERT_ID();
+        
+        -- Devuelve el ID del pedido y un mensaje
+        SELECT v_id_pedido AS id_pedido, 'Pedido realizado.' AS mensaje;
     ELSE
-        -- Lanza un error si el carrito está vacío
-       Select 'El carrito esta vacio.' as mensaje;
+        -- Devuelve un mensaje si el carrito está vacío
+        SELECT NULL AS id_pedido, 'El carrito está vacío.' AS mensaje;
     END IF;
 END //
 DELIMITER ;
