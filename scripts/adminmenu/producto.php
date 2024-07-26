@@ -5,16 +5,16 @@
 
     extract($_POST);
 
-    if (isset($_POST['imagen']) && isset($_POST['medida']) && isset($_POST['precio']) && isset($_POST['nombre']) && isset($_POST['descripcion']) && isset($_POST['categoria'])) {
+    if (isset($_FILES['imagen']) && isset($_POST['medida']) && isset($_POST['precio']) && isset($_POST['nombre']) && isset($_POST['descripcion']) && isset($_POST['categoria'])) {
 
         // Directorio donde se guardarán las imágenes
-        $subirDir = "../../img/menu/";
+        
 
         // Nombre del archivo subido
         $nombreImagen = basename($_FILES['imagen']['name']);
 
         // Ruta completa del archivo a ser guardado
-        $imagen = $subirDir . $nombreImagen;
+        $imagen = "../../img/menu/". $nombreImagen;
 
         // Mover el archivo subido a la carpeta de destino
         if (move_uploaded_file($_FILES['imagen']['tmp_name'], $imagen)) {
@@ -29,11 +29,16 @@
         } else {
             echo "Error al subir la imagen.";
         }
+        header('Location: ../../views/adminMenu.php');
     }
+    else{
+        header('Location: ../../views/adminInicio.php'); // si te manda al inicio, significa que tuviste un error al momento de recibir los datos
+    }
+    
 
     // Desconectar la base de datos
     $conexion->desconectarDB();
 
     // Redireccionar después de la inserción exitosa
-    header('Location: ../../views/adminMenu.php');
+    
     exit;

@@ -58,7 +58,8 @@
                             <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-menu" aria-expanded="false" aria-controls="flush-menu">
                                 <div class="col-8">
                                     <i class="fa-solid fa-table me-3"></i>
-                                    Menú
+                                   Menú
+                                    
                                 </div>
                                 <div class="col-4 text-end">
                                     <i class="fa-solid fa-chevron-down"></i>
@@ -453,7 +454,7 @@
                                     </thead>
                                     <tbody class='table-group-divider table-light'>";
                                 foreach ($productos as $producto) {
-                                echo "
+                                echo /*html*/ "
                                         <tr>
                                         <td>$producto->nombre</td>
                                             <td class='d-flex flex-row align-items-center justify-content-center gap-1'>
@@ -520,7 +521,7 @@
                                                                         $queryMedidas = "SELECT medida, precio FROM detalle_productos_menu WHERE id_pm = $producto->id_pm";
                                                                         $medidas = $db->select($queryMedidas);
                                                                         foreach ($medidas as $medida_precio) {
-                                                                            echo "<tr>
+                                                                            echo /*html*/"<tr>
                                                                                     <td>$medida_precio->medida</td>
                                                                                     <td>$medida_precio->precio</td>
                                                                                     <td>
@@ -532,7 +533,7 @@
                                                                                         </form>
                                                                                 </tr>";
                                                                         }
-                                                                        echo "
+                                                                        echo /*html*/ "
                                                                     </tbody>
                                                                 </table>
                                                                 <div class='row'>
@@ -578,7 +579,7 @@
                                                                     <div class='row'>
                                                                         <div class='col-12 mb-3'>
                                                                             <label class='form-label'>Nombre</label>
-                                                                            <input type='text' maxlength='15' name='nombre' class='form-control' value='$producto->nombre' required>
+                                                                            <input type='text' maxlength='75' name='nombre' class='form-control' value='$producto->nombre' required>
                                                                         </div>
                                                                         <div class='col-12 mb-3'>
                                                                             <label class='form-label'>Descripción</label>
@@ -586,12 +587,12 @@
                                                                         </div>
                                                                         <div class='col-12 mb-3'>
                                                                             <label class='form-label'>Categoría</label>
-                                                                            <select type='text' maxlength='15' name='categoria' class='form-control' value='$producto->categoria' required>";
+                                                                            <select type='text' maxlength='30' name='categoria' class='form-control' value='$producto->categoria' required>";
                                                                                 foreach ($categorias as $categoria) {
                                                                                     $selected = (isset($_POST['categoria']) && $_POST['categoria'] == $categoria->id_categoria) ? 'selected' : '';
                                                                                     echo "<option value='" . htmlspecialchars($categoria->id_categoria) . "' $selected>" . htmlspecialchars($categoria->nombre) . "</option>";
                                                                                 }
-                                                                        echo "</select>
+                                                                        echo /*html*/"</select>
                                                                         </div>
                                                                         <div class='col-12 mt-3 text-end'>
                                                                             <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
@@ -612,6 +613,7 @@
                         echo "<div>Seleccione una categoria</div>";
                     }
                     ?>
+                    
                 </div>
             </div>
         </div>
