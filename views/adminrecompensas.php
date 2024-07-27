@@ -368,7 +368,7 @@ if ($_POST) {
                         <div id="flush-rewards" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
                             <div class="accordion-body bg-dark">
                                 <a href="adminRecompensas.php" class="fw-bold fs-6 ms-5 text-light text-decoration-none" aria-current="true">
-                                    Administrar Recompensa
+                                    Administrar Recompensas
                                 </a>
                             </div>
                         </div>
