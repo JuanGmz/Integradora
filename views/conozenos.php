@@ -17,8 +17,18 @@
             text-align: center;
             padding: 100px 0;
         }
+        .header-section2 {
+            position: relative;
+            background: url('../img/publicaciones/sinfo.webp') no-repeat center center;
+            background-size: cover;
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+        }
 
-        .header-section::before {
+
+        .header-section::before,
+        .header-section2::before {
             content: "";
             position: absolute;
             top: 0;
@@ -30,12 +40,14 @@
             z-index: 1;
         }
 
-        .header-section .container {
+        .header-section .container,
+        .header-section2 .container{
             position: relative;
             z-index: 2;
         }
 
-        .header-section h1 {
+        .header-section h1,
+        .header-section2 h1 {
             font-size: 3rem;
             margin-bottom: 20px;
         }
@@ -135,20 +147,20 @@
     <header class="header-section justify-content-center d-flex">
         <div class="container col-6  text-center m-5 ">
             <h1>El Legado del Buen Café</h1>
-            <p>Nuestro legado del buen café comenzó en 1938 en la ciudad de Guadalajara, justo en la esquina de las calles Santa Mónica e Independencia, en donde se sirvieron nuestras primeras tazas de Café La Flor de Córdoba®. Por generaciones nos hemos especializado en la selección de los mejores granos verdes mexicanos para llevarlos a un perfecto proceso de tueste para entregar a nuestros clientes el mejor café de altura con nuestro inconfundible sabor.</p>
+            <p class="p-3 fs-4">Nuestro legado del buen café comenzó en 2014 en la ciudad de Torreon, en donde se sirvieron nuestras primeras tazas de Café La Flor de Córdoba®. Nos hemos especializado en la selección de los mejores granos verdes mexicanos para llevarlos a un perfecto proceso de tueste para entregar a nuestros clientes el mejor café de altura con nuestro inconfundible sabor.</p>
         </div>
     </header>
 
-    <section class="content-section">
+    <header class="content-section">
         <div class="container-fluid container">
             <div class="row p-3">
                 <div class="col-md-6 p-3">
-                    <h2 class="fw-bold">Nuestro Café</h2>
+                    <h1 class="fw-bold">Nuestro Café</h1>
                     <ul class="p-3 m-4">
-                        <li class="p-1">Café 100% de altura.</li>
-                        <li class="p-1">Grano arábico orgullosamente mexicano proveniente de las altas regiones de Veracruz y Chiapas.</li>
-                        <li class="p-1">Los caficultores recolectan los mejores frutos del café cuando han alcanzado el punto de madurez idóneo.</li>
-                        <li class="p-1">Manejamos 2 variedades de café arábico: plenchuela y caracolillo; de los que se derivan otras especialidades como: café torrefacto, café turco, café descafeinado y soluble.</li>
+                        <li class="p-1 fs-4">Café 100% de altura.</li>
+                        <li class="p-1 fs-4">Grano arábico orgullosamente mexicano proveniente de las altas regiones de Veracruz y Chiapas.</li>
+                        <li class="p-1 fs-4">Los caficultores recolectan los mejores frutos del café cuando han alcanzado el punto de madurez idóneo.</li>
+                        <li class="p-1 fs-4">Manejamos 2 variedades de café arábico: plenchuela y caracolillo; de los que se derivan otras especialidades como: café torrefacto, café turco, café descafeinado y soluble.</li>
                     </ul>
                 </div>
                 <div class="col-md-6">
@@ -156,41 +168,34 @@
                 </div>
             </div>
         </div>
-    </section>
-    <section class="content-section header-section">
+    </header>
+    <header class="content-section header-section2">
         <div class="container-fluid container">
             <div class="row p-1">
                 <div class="col-md-6">
-                    <img src="../img/inicio.webp" alt="Café">
+                    <img src="../img/maquina.webp" alt="Café">
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 text-white">
 
-                    <h2>Nuestro Café</h2>
-                    <ul>
-                        <li>Café 100% de altura.</li>
-                        <li>Grano arábico orgullosamente mexicano proveniente de las altas regiones de Veracruz y Chiapas.</li>
-                        <li>Los caficultores recolectan los mejores frutos del café cuando han alcanzado el punto de madurez idóneo.</li>
-                        <li>Manejamos 2 variedades de café arábico: plenchuela y caracolillo; de los que se derivan otras especialidades como: café torrefacto, café turco, café descafeinado y soluble.</li>
-                    </ul>
+                    <h1 class="fw-bold p-2">Tostadores de Café Desde 1938</h1>
+                    <p class="p-5 fs-4">A lo largo de los años, hemos perfeccionado nuestro proceso de tostado para acentuar los aromas y sabores de los diferentes perfiles de café.
+
+                        Nuestros maestros tostadores tuestan diariamente nuestro café, monitoreando en todo momento, la temperatura y humedad del grano para brindar los estándares más altos de calidad.</p>
                 </div>
 
             </div>
         </div>
-    </section>
+    </header>
     <section class="content-section">
         <div class="container-fluid container">
             <div class="row p-3">
                 <div class="col-md-6 p-3">
-                    <h2 class="fw-bold">Nuestro Café</h2>
-                    <ul class="p-3 m-4">
-                        <li class="p-1">Café 100% de altura.</li>
-                        <li class="p-1">Grano arábico orgullosamente mexicano proveniente de las altas regiones de Veracruz y Chiapas.</li>
-                        <li class="p-1">Los caficultores recolectan los mejores frutos del café cuando han alcanzado el punto de madurez idóneo.</li>
-                        <li class="p-1">Manejamos 2 variedades de café arábico: plenchuela y caracolillo; de los que se derivan otras especialidades como: café torrefacto, café turco, café descafeinado y soluble.</li>
-                    </ul>
+                    <h1 class="fw-bold p-3">Nuestros expendios de café</h1>
+                    <p class="p-3 fs-4">En todas nuestras cafeterías podrás encontrar los expendios de café, donde podrás escoger el grano de café de tu preferencia o hasta crear tus propias mezclas para así solicitar el molido ideal para tu método de extracción favorito.
+                    Llevarás hasta tu casa un café recién molido y fresco.</p>
                 </div>
                 <div class="col-md-6">
-                    <img src="../img/inicio.webp" alt="Café">
+                    <img src="../img/atiende.webp" alt="Café">
                 </div>
             </div>
         </div>
