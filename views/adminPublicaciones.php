@@ -26,8 +26,8 @@
 </head>
 <body class="bg-light">
     <div class="container-fluid m-0 h-100">
-        <!-- navbar mobile -->
-        <div class="row bg-dark d-block d-lg-none">
+                <!-- navbar mobile -->
+                <div class="row bg-dark d-block d-lg-none">
             <div class="collapse m-0 p-0" id="navbarToggleExternalContent" data-bs-theme="dark">
                 <div class="bg-dark p-4 pb-1">
                     <h5 class="text-body-emphasis h4">Administrar</h5>
@@ -44,21 +44,13 @@
                                 </div>
                             </button>
                         </h2>
-                        <div class="accordion-item row m-0 p-0">
-                            <div class="accordion-header">
-                                <div class="collapsed fw-bold fs-3 bg-dark text-light p-3 ">
-                                    Componentes
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                    <!-- Componentes -->
                     <div class="accordion-item row m-0 p-0">
                         <h2 class="accordion-header row">
                             <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-menu" aria-expanded="false" aria-controls="flush-menu">
                                 <div class="col-8">
                                     <i class="fa-solid fa-table me-3"></i>
-                                    Menú
+                                   Menú
                                 </div>
                                 <div class="col-4 text-end">
                                     <i class="fa-solid fa-chevron-down"></i>
@@ -157,9 +149,6 @@
                             <div class="accordion-body bg-dark">
                                 <a href="adminRecompensas.php" class="fw-bold fs-5 ms-5 text-light text-decoration-none" aria-current="true">
                                     Administrar Recompensas
-                                </a><br><br>
-                                <a href="adminAsistencias.php" class="fw-bold fs-5 ms-5 text-light text-decoration-none" aria-current="true">
-                                    Administrar Asistencias
                                 </a>
                             </div>
                         </div>
@@ -198,9 +187,6 @@
                             <i class="fa-solid fa-house-laptop"></i>
                             Inicio
                         </a>
-                    </div>
-                    <div class="fw-bold fs-5 ms-2 mb-3 bg-dark text-light">
-                        Componentes
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header row">
@@ -282,7 +268,7 @@
                         </h2>
                         <div id="flush-blog" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
                             <div class="accordion-body bg-dark">
-                                <a href="adminPublicaciones.php" class="fw-bold fs-6 ms-5 text-light text-decoration-none">
+                                <a href="adminPublicaciones.php" class="fw-bold fs-6 ms-5 text-light text-decoration-none" aria-current="true">
                                     Administrar Publicaciones
                                 </a>
                             </div>
@@ -304,9 +290,6 @@
                             <div class="accordion-body bg-dark">
                                 <a href="adminRecompensas.php" class="fw-bold fs-6 ms-5 text-light text-decoration-none" aria-current="true">
                                     Administrar Recompensa
-                                </a><br><br>
-                                <a href="adminAsistencias.php" class="fw-bold fs-6 ms-5 text-light text-decoration-none" aria-current="true">
-                                    Administrar Asistencias
                                 </a>
                             </div>
                         </div>
