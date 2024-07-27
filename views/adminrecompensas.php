@@ -8,7 +8,6 @@ if ($_POST) {
     $db->conectarDB();
 
     $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE p.usuario = '$_SESSION[usuario]'";
-
     $rol = $db->select($rolUsuario);
 
     if ($rol[0]->rol !== 'administrador') {
@@ -66,7 +65,6 @@ if ($_POST) {
 
         if ($resultado[0]->mensaje == "No cumple con la condición de la recompensa.") {
             showAlert("¡{$resultado[0]->mensaje}!", "error");
-            echo "no cumple con la condición";
         } else if (
             $resultado[0]->mensaje == "El cupón de canje no existe."
         ) {
@@ -75,7 +73,19 @@ if ($_POST) {
         } else if ($resultado[0]->mensaje == "Recompensa canjeada correctamente.") {
             showAlert("¡{$resultado[0]->mensaje}!", "success");
         }
+    } else if (isset($_POST["actRecompensa"])) {
+        if (isset($_FILES["imagen_nueva"]["name"])) {
+            $subirDir = "../img/recompensas/";
+            $nombreImagen = basename($_FILES['imagen_nueva']['name']);
+            $imagen_nueva = $subirDir . $nombreImagen;
+            move_uploaded_file($_FILES['imagen_nueva']['tmp_name'], $imagen_nueva);
 
+            $queryAct = "UPDATE recompensas SET img_url = '$nombreImagen' WHERE id_recompensa = $id_recompensa";
+            $db->execute($queryAct);
+            showAlert("¡Imagen actualizada con éxito!", "success");
+
+        } else
+            showAlert("¡Hubo un error al subir la imagen!", "error");
     }
 }
 
@@ -376,20 +386,17 @@ if ($_POST) {
                         <div class="col-9 d-flex justify-content-end align-items-center gap-1 gap-lg-3">
                             <!-- Aquí va el botón del modal para registrar asistencias -->
                             <!-- Botón para registrar -->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#canjearRecompensa">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#canjearRecompensa">
                                 Canjear recompensa
                             </button>
                             <!-- Aquí va el botón del modal para registrar asistencias -->
                             <!-- Botón para registrar -->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#registrarAsistencias">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registrarAsistencias">
                                 Registrar Asistencia
                             </button>
                             <!-- Aquí va el botón del modal para registrar recompensas -->
                             <!-- Botón para agregar -->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#agregarRecompensa">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregarRecompensa">
                                 Agregar Recompensa
                             </button>
                             <!-- Botón para volver atras -->
@@ -406,44 +413,37 @@ if ($_POST) {
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="agregarRecompensaLabel">Agregar Recompensa</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <form method="post" action="" enctype="multipart/form-data">
                                     <div class="mb-3">
                                         <label for="recompensa" class="form-label">Recompensa</label>
-                                        <input type="text" class="form-control" id="titulo" name="recompensa"
-                                            maxlength="60" required>
+                                        <input type="text" class="form-control" id="titulo" name="recompensa" maxlength="60" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="condicion" class="form-label">Condicion</label>
-                                        <input type="number" class="form-control" id="condicion" name="condicion"
-                                            max="20" min="1" required>
+                                        <input type="number" class="form-control" id="condicion" name="condicion" max="20" min="1" required>
                                     </div>
                                     <div class="mb-3 row">
                                         <div class="col-6">
                                             <label for="fechainicio" class="form-label">Fecha Inicio</label>
-                                            <input type="date" class="form-control" id="fechainicio" name="fechainicio"
-                                                required>
+                                            <input type="date" class="form-control" id="fechainicio" name="fechainicio" required>
                                         </div>
                                         <div class="col-6">
                                             <label for="fechafin" class="form-label">Fecha Expiracion</label>
-                                            <input type="date" class="form-control" id="fechafin" name="fechafin"
-                                                required>
+                                            <input type="date" class="form-control" id="fechafin" name="fechafin" required>
                                         </div>
                                     </div>
                                     <div class="mb-3">
                                         <label for="imagen" class="form-label">Imagen</label>
-                                        <input type="file" class="form-control" id="imagen" name="imagen"
-                                            accept="image/*" required>
+                                        <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*" required>
                                     </div>
                                     <div class="mt-3 text-end">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Cancelar</button>
                                         <!-- Botón para agregar -->
-                                        <button type="submit" class="btn btn-primary" name="agRecompensa">Agregar
-                                            recompensa</button>
+                                        <button type="submit" class="btn btn-primary" name="agRecompensa">Agregar Recompensa</button>
                                     </div>
                                 </form>
                             </div>
@@ -457,22 +457,18 @@ if ($_POST) {
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="registrarAsistenciasLabel">Registrar Asistencias</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <form method="post" action="" enctype="multipart/form-data">
                                     <div class="mb-3">
                                         <label for="userid" class="form-label">Id del cliente</label>
-                                        <input type="number" class="form-control" id="userid" name="userid" min="1"
-                                            required>
+                                        <input type="number" class="form-control" id="userid" name="userid" min="1" required>
                                     </div>
                                     <div class="mt-3 text-end">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                                         <!-- Botón para agregar -->
-                                        <button type="submit" class="btn btn-primary" name="regAsistencia">Registrar
-                                            Asistencia</button>
+                                        <button type="submit" class="btn btn-primary" name="regAsistencia">Registrar Asistencia</button>
                                     </div>
                                 </form>
                             </div>
@@ -480,61 +476,183 @@ if ($_POST) {
                     </div>
                 </div>
                 <!-- Modal para canjear recompensas -->
-                <div class="modal fade" id="canjearRecompensa" tabindex="-1" aria-labelledby="canjearRecompensasLabel"
-                    aria-hidden="true">
+                <div class="modal fade" id="canjearRecompensa" tabindex="-1" aria-labelledby="canjearRecompensasLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="canjearRecompensasLabel">Canjear Recompensa</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <form method="post" action="" enctype="multipart/form-data">
                                     <div class="mb-3">
-                                        <label for="userid" class="form-label">Canje ID</label>
-                                        <input type="number" class="form-control" id="userid" name="canjeid" min="1"
-                                            required>
+                                        <label for="userid" class="form-label">Cupón de Canjeo</label>
+                                        <input type="number" class="form-control" id="userid" name="canjeid" min="1" required>
                                     </div>
                                     <div class="mt-3 text-end">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                                         <!-- Botón para agregar -->
-                                        <button type="submit" class="btn btn-primary" name="canjebtn">Canjear
-                                            Recompensa</button>
+                                        <button type="submit" class="btn btn-primary" name="canjebtn">Canjear Recompensa</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="shadow-lg bg-light row p-0 m-0 p-3">
+                <div class="row bg-dark d-lg-none py-3 d-flex justify-content-center m-0 p-0">
+                    <div class="col-6 text-center">
+                        <!-- Aquí va el botón del modal para registrar asistencias -->
+                        <!-- Botón para registrar -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#canjearRecompensa">
+                            Canjear recompensa
+                        </button>
+                    </div>
+                    <div class="col-6 text-center">
+                        <!-- Aquí va el botón del modal para registrar asistencias -->
+                        <!-- Botón para registrar -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registrarAsistencias">
+                            Registrar Asistencia
+                        </button>
+                    </div>
+                </div>
+                <div class="shadow-lg bg-light row p-0 m-0 p-2">
                     <div class="row m-1">
                         <div class="col-12">
                             <form method="post">
                                 <div class="row mb-3">
                                     <!-- Fecha Inicio -->
-                                    <div class="col-md-4 mb-3">
+                                    <div class="col-12 col-lg-4 mb-3">
                                         <label for="fechaInicio" class="form-label">Fecha Inicio</label>
-                                        <input class="form-control" type="date" name="fechaInicio" id="fechaInicio">
+                                        <input class="form-control" type="date" name="fechaInicio" id="fechaInicio" required>
                                     </div>
-
                                     <!-- Fecha Expiración -->
-                                    <div class="col-md-4 mb-3">
+                                    <div class="col-12 col-lg-4 mb-3">
                                         <label for="fechaExpiracion" class="form-label">Fecha Expiración</label>
-                                        <input class="form-control" type="date" name="fechaExpiracion"
-                                            id="fechaExpiracion">
+                                        <input class="form-control" type="date" name="fechaExpiracion" id="fechaExpiracion" required>
                                     </div>
-
                                     <!-- Botón Buscar -->
-                                    <div class="col-md-4 d-flex align-items-end">
-                                        <input type="submit" class="btn btn-primary w-100" value="Buscar">
+                                    <div class="col-12 col-lg-4 mb-2 d-flex justify-content-center align-items-center mt-4">
+                                        <input type="submit" class="btn btn-primary w-100" value="Buscar" name="btnBuscar">
                                     </div>
                                 </div>
                             </form>
+                            <?php
+                                if (isset($_POST['btnBuscar'])) {
+                                    extract($_POST);
+                                    $query = "SELECT * FROM recompensas WHERE fecha_inicio = '$fechaInicio' AND fecha_expiracion = '$fechaExpiracion'";
+                                    $recompensas = $db->select($query);
+                                }
+                            ?>
                         </div>
                     </div>
                 </div>
+                <div class="d-lg-none mb-3 m-3 m-0 p-0">
+                    <button type="button" class="btn w-100 btn-primary shadow-lg" data-bs-toggle="modal" data-bs-target="#agregarRecompensa">
+                        <i class="fa-solid fa-plus fa-2x"></i>
+                    </button>
+                </div>
+                    <div class="row mt-3 p-4 m-0">
+                        <?php
+                            if (isset($recompensas)) {
+                                if (empty($recompensas)) {
+                                    ?>
+                                    <div class="text-center row m-0 p-0 p-2 p-lg-5">No hay recompensas registradas en este periodo de tiempo.</div>
+                                    <table class="table table-dark table-striped table-hover text-center border-3 border-black border-bottom border-end border-start d-none">
+                                    <?php
+                                } else {
+                                    ?>
+                                    <table class="table table-dark table-striped table-hover text-center border-3 border-black border-bottom border-end border-start">
+                                        <thead>
+                                            <th>Recompensa</th>
+                                            <th class="d-none d-lg-table-cell">Condición</th>
+                                            <th class="d-none d-lg-table-cell">Fecha Inicio</th>
+                                            <th class="d-none d-lg-table-cell">Fecha Expiración</th>
+                                            <th>Estatus</th>
+                                            <th>Acciones</th>
+                                        </thead>
+                                        <tbody class="table-group-divider table-light">
+                                    <?php
+                                        foreach ($recompensas as $recompensa) {
+                                        ?>
+                                            <tr>
+                                                <td><?= $recompensa->recompensa ?></td>
+                                                <td class="d-none d-lg-table-cell"><?= $recompensa->condicion ?></td>
+                                                <td class="d-none d-lg-table-cell""><?= $recompensa->fecha_inicio ?></td>
+                                                <td class="d-none d-lg-table-cell"><?= $recompensa->fecha_expiracion ?></td>
+                                                <td><?= $recompensa->estatus ?></td>
+                                                <td>
+                                                    <!-- Botón para detalle recompensa -->
+                                                    <button type="button" class="btn btn-primary d-table-cell d-lg-none" data-bs-toggle="modal" data-bs-target="#detalleRecompensa<?= $recompensa->id_recompensa ?>">
+                                                        <i class="fa-solid fa-bars"></i>
+                                                    </button>
+                                                    <!-- modal de recompensa --> 
+                                                    <div class="modal fade" id="detalleRecompensa<?= $recompensa->id_recompensa ?>" tabindex="-1" aria-labelledby="detalleRecompensaLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="detalleRecompensaLabel">Recompensa</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body text-start">
+                                                                    <h2 class="d-inline fw-bold my-3">Recompensa: <span><h4 class="d-inline fw-normal"><?= $recompensa->recompensa ?></h4></span></h2><br>
+                                                                    <h2 class="d-inline fw-bold my-3">Condición: <span><h4 class="d-inline fw-normal"><?= $recompensa->condicion ?></h4></span></h2><br>
+                                                                    <h2 class="d-inline fw-bold my-3">Fecha de Inicio: <span><h4 class="d-inline fw-normal"><?= $recompensa->fecha_inicio ?></h4></span></h2><br>
+                                                                    <h2 class="d-inline fw-bold my-3">Fecha de Expiración: <span><h4 class="d-inline fw-normal"><?= $recompensa->fecha_expiracion ?></h4></span></h2><br>
+                                                                    <h2 class="d-inline fw-bold my-3">Estatus: <span><h4 class="d-inline fw-normal"><?= $recompensa->estatus ?></h4></span></h2><br>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Botón para editar imagen -->
+                                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editarRecompensa<?= $recompensa->id_recompensa ?>">
+                                                        <i class="fa-solid fa-image"></i>
+                                                    </button>
+                                                    <!-- Modal de editar recompensa -->
+                                                    <div class="modal fade" id="editarRecompensa<?= $recompensa->id_recompensa ?>" tabindex="-1" aria-labelledby="editarRecompensaLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="editarRecompensaLabel"><?= $recompensa->recompensa ?></h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body text-start">
+                                                                    <form method="post" enctype="multipart/form-data">
+                                                                        <div class='col-12 mb-3'>
+                                                                            <label for='imagen' class='form-label'>Imagen Actual</label><br>
+                                                                            <img src='../img/menu/<?= $recompensa->img_url?>' class='img-fluid' alt='imagen<?= $recompensa->recompensa ?>'><br>
+                                                                                <small>Selecciona una nueva imagen para actualizar, si es necesario.</small>
+                                                                            </div>
+                                                                            <div class='col-12 mb-3'>
+                                                                                <label for='imagen_nueva' class='form-label'>Selecciona una nueva imagen</label>
+                                                                                <input type='file' class='form-control' id='imagen_nueva' name='imagen_nueva' accept='image/*' required>
+                                                                            </div>
+                                                                            <input type='hidden' name='id_recompensa' value='<?= $recompensa->id_recompensa?>'>
+                                                                            <div class='col-12 mb-3 text-end'>
+                                                                                <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
+                                                                                <button type='submit' class='btn btn-primary' name='actRecompensa'>Actualizar</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        <?php
+                                        }
+                                        ?>
+                                        </tbody>
+                                    </table>
+                                    <?php
+                                }
+                            } else {
+                                ?>
+                                <div class="text-center row m-0 p-0 p-2">Selecciona un periodo de tiempo para ver las recompensas.</div>
+                                <?php
+                            }
+                        ?>
+                    </div>
                 <div class="alert floating-alert" id="floatingAlert">
                     <span id="alertMessage">Mensaje de la alerta.</span>
                 </div>
