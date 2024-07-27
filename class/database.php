@@ -63,23 +63,50 @@ class database
     function verifica($usuario, $contraseña)
     {
         try {
+            // Consulta para obtener la contraseña del usuario
+            $query = "SELECT contrasena FROM personas WHERE usuario = :usuario";
+            $stmt = $this->pdo->prepare($query);
 
-            $pase = false;
-            $query = "SELECT * from personas p where p.usuario = '$usuario'";
-            $resultado = $this->pdo->query($query);
+            $stmt->execute(['usuario' => $usuario]);
 
-            while ($fila = $resultado->fetch(PDO::FETCH_ASSOC)) {
+            $fila = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                if (password_verify($contraseña, $fila['contrasena'])) {
-                    $pase = true;
+            if ($fila) {
+                $contrasenaAlmacenada = $fila['contrasena'];
+
+                if (strlen($contrasenaAlmacenada) < 60) {
+                    // La contraseña está en texto claro, encripta y actualiza la contraseña
+                    $hashedPassword = password_hash($contrasenaAlmacenada, PASSWORD_DEFAULT);
+
+                    // Actualiza la contraseña en la base de datos
+                    $updateQuery = "UPDATE personas SET contrasena = :hashedPassword WHERE usuario = :usuario";
+                    $updateStmt = $this->pdo->prepare($updateQuery);
+                    $updateStmt->execute([
+                        'hashedPassword' => $hashedPassword,
+                        'usuario' => $usuario
+                    ]);
+
+                    // Establece la nueva contraseña en la variable $contrasenaAlmacenada
+                    $contrasenaAlmacenada = $hashedPassword;
+                }
+
+                $pase = false;
+                $query = "SELECT * from personas p where p.usuario = '$usuario'";
+                $resultado = $this->pdo->query($query);
+
+
+
+                while ($fila = $resultado->fetch(PDO::FETCH_ASSOC)) {
+                    if (password_verify($contraseña, $fila['contrasena'])) {
+                        $pase = true;
+                    }
+                }
+
+                if ($pase) {
+                    $_SESSION["usuario"] = $usuario;
+                    header('location: ../index.php');
                 }
             }
-
-            if ($pase) {
-                $_SESSION["usuario"] = $usuario;
-                header('location: ../index.php');
-            }
-
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
