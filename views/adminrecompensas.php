@@ -543,6 +543,7 @@ if ($_POST) {
                                     $recompensas = $db->select($query);
                                 }
                             ?>
+                            
                         </div>
                     </div>
                 </div>
