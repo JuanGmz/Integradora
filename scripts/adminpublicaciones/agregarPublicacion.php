@@ -12,7 +12,7 @@ extract($_POST);
 $subirDir = "/var/www/html/img/publicaciones/";
 
 if (!file_exists($subirDir)) {
-    mkdir($subirDir, 0775, true);
+    mkdir($subirDir, 0777, true);
 }
 
 if (is_writable($subirDir)) {
