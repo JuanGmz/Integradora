@@ -1,5 +1,5 @@
 <?php
-include("../class/database.php");
+include("../../class/database.php");
 
 $db = new Database();
 $db->conectarDB();
@@ -18,9 +18,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     descripcion = '$descripcion'
     WHERE id_lugar = '$id_lugar'";
     
-    $db->execute($consulta);
+   
     $db->desconectarDB();
-    header("location: ../views/adminlugares.php");
+    header("location: ../../views/adminlugares.php");
     exit;
 }
 ?>
