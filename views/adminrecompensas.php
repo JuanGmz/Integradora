@@ -523,12 +523,12 @@ if ($_POST) {
                                     <!-- Fecha Inicio -->
                                     <div class="col-12 col-lg-4 mb-3">
                                         <label for="fechaInicio" class="form-label">Fecha Inicio</label>
-                                        <input class="form-control" type="date" name="fechaInicio" id="fechaInicio" required>
+                                        <input class="form-control" type="date" name="fechaInicio" id="fechaInicio" required <?php if (isset($_POST['btnBuscar'])) { ?> value="<?= $_POST['fechaInicio'] ?>" <?php } ?>>
                                     </div>
                                     <!-- Fecha Expiración -->
                                     <div class="col-12 col-lg-4 mb-3">
                                         <label for="fechaExpiracion" class="form-label">Fecha Expiración</label>
-                                        <input class="form-control" type="date" name="fechaExpiracion" id="fechaExpiracion" required>
+                                        <input class="form-control" type="date" name="fechaExpiracion" id="fechaExpiracion" required <?php if (isset($_POST['btnBuscar'])) { ?> value="<?= $_POST['fechaExpiracion'] ?>" <?php } ?>>
                                     </div>
                                     <!-- Botón Buscar -->
                                     <div class="col-12 col-lg-4 mb-2 d-flex justify-content-center align-items-center mt-4">
@@ -539,7 +539,7 @@ if ($_POST) {
                             <?php
                                 if (isset($_POST['btnBuscar'])) {
                                     extract($_POST);
-                                    $query = "SELECT * FROM recompensas WHERE fecha_inicio = '$fechaInicio' AND fecha_expiracion = '$fechaExpiracion'";
+                                    $query = "SELECT * FROM recompensas WHERE fecha_inicio AND fecha_expiracion BETWEEN '$fechaInicio' AND '$fechaExpiracion'";
                                     $recompensas = $db->select($query);
                                 }
                             ?>
@@ -556,7 +556,7 @@ if ($_POST) {
                             if (isset($recompensas)) {
                                 if (empty($recompensas)) {
                                     ?>
-                                    <div class="text-center row m-0 p-0 p-2 p-lg-5">No hay recompensas registradas en este periodo de tiempo.</div>
+                                    <div class="text-center row m-0 p-0 p-2">No hay recompensas registradas en este periodo de tiempo.</div>
                                     <table class="table table-dark table-striped table-hover text-center border-3 border-black border-bottom border-end border-start d-none">
                                     <?php
                                 } else {
