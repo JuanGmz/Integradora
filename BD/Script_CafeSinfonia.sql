@@ -8,7 +8,7 @@ drop database if exists cafe_sinfonia;
 
 -- Auxiliar : aux | SELECT, INSERT, UPDATE, DELETE  
 */
-create database cafe_sinfonia;
+create database if not exists cafe_sinfonia;
 
 use cafe_sinfonia;
 
@@ -1154,6 +1154,7 @@ select cr.id_cr as canje_id,
  r.recompensa,
  r.condicion,
  cr.progreso,
+ r.img_url,
  concat(cr.progreso,' | ', r.condicion) as asistencias_completadas,
  cr.canje,
 CONCAT(DATE_FORMAT(r.fecha_inicio, '%d/%m/%Y'), ' - ', DATE_FORMAT(r.fecha_expiracion, '%d/%m/%Y')) AS periodo
@@ -1238,7 +1239,7 @@ INSERT INTO roles (rol, descripcion) VALUES
 ('Seminarios', 'Categoría para seminarios educativos', 'Evento',''),
 ('Cine', 'Categoría para proyecciones de películas', 'Evento',''),
 ('Clasicos', 'Les mostramos la diferencia de tamaños y proporciones de nuestra sección “Clásicos base a espresso” desde lo más pequeño que es un espresso sencillo hasta lo más grande que es un Latte.', 'Menu','clasicos.webp'),
-('Los métodos de Jazz Band', 'Categoría para el menú de métodos de preparación de café con alma de jazz durante todo tipo de horarios', 'Menu','jazz.webp'),-- 10
+('Los metodos de Jazz Band', 'Categoría para el menú de métodos de preparación de café con alma de jazz durante todo tipo de horarios', 'Menu','jazz.webp'),-- 10
 ('Metal Coffee', 'Metal Coffee
 3 bebidas con 3 intensidades de sabor diferentes, cada una con una cantidad de espresso combinadas con café americano una perfecta bebida para quellos que buscan emociones fueres en el café.', 'Menu','metal.webp'), 
 ('Cool and Dark', 'Déjate cautivar por nuestro exclusivo Menú Cool and Dark de Café, donde cada sorbo es una experiencia de sabor intensa y sofisticada. Disfruta de una selección de bebidas que combinan el rico aroma del café con notas profundas y indulgentes.', 'Menu','cool.webp'),
@@ -1246,7 +1247,7 @@ INSERT INTO roles (rol, descripcion) VALUES
 ('Around The World', 'Categoría para el menú de cafés de diversas partes del mundo', 'Menu',''),
 ('Sodas Italianas', 'Categoría para el menú de refrescos italianos', 'Menu',''), -- 15
 ('Frappes', 'Categoría para el menú de bebidas frappé', 'Menu',''),  
-('Té y Tisanas', 'Categoría para el menú de tés y tisanas', 'Menu',''),
+('Te y Tisanas', 'Categoría para el menú de tés y tisanas', 'Menu',''),
 ('Sweet Blues', 'Categoría para el menú de cafés dulces con un toque de blues', 'Menu','');
 
 -- Insertar productos_menu
@@ -1543,11 +1544,7 @@ VALUES
 
 -- Inserción de recompensas
 
-call sp_agregar_recompensa('10% de descuento en café', 5, '2024-07-25', '2024-07-28', 'img/descuento_cafe.jpg');
-call sp_agregar_recompensa('Bebida gratis al comprar un pastel', 10, '2024-07-25', '2024-07-28', 'img/bebida_gratis.jpg');
-call sp_agregar_recompensa('Taza conmemorativa gratis', 15, '2024-07-28', '2024-08-05', 'img/taza_conmemorativa.jpg');
-call sp_agregar_recompensa('Acceso a evento exclusivo', 20, '2024-07-28', '2024-08-07', 'img/evento_exclusivo.jpg');
-call sp_agregar_recompensa('Descuento del 20% en tu próxima compra', 25, '2024-08-05', '2024-08-15', 'img/descuento_proxima.jpg');
+-- call sp_agregar_recompensa('10% de descuento en café', 5, '2024-07-25', '2024-07-28', 'img/descuento_cafe.jpg');
 
 -- Insertar asociaciones entre todos los clientes y las recompensas activas
 

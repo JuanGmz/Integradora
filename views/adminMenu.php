@@ -491,33 +491,39 @@
                                                                 <h4 class='text-start fw-bold mb-3'>Nombre: <span class='fw-normal fs-5'>$producto->nombre</span></h4>
                                                                 <h4 class='text-start fw-bold mb-3'>Descripción: <span class='fw-normal fs-5'>$producto->descripcion</span></h4>
                                                                 <h4 class='text-start fw-bold mb-3'>Categoría: <span class='fw-normal fs-5'>{$producto->categoria}</span></h5>
-                                                                <!-- Tabla de productos -->
-                                                                <table class='table table-light border-3 border-black border-bottom border-start border-end table-striped text-center mt-4 table-hover'>
-                                                                    <thead class='table-dark'>
-                                                                        <th>Medida</th>
-                                                                        <th>Precio</th>
-                                                                        <th>Acciones</th>
-                                                                    </thead>
-                                                                    <tbody class='table-group-divider'>";
-                                                                        //Consulta de productos_menu relacionados con este detalle
+                                                                <!-- Tabla de productos -->";
                                                                         $queryMedidas = "SELECT medida, precio FROM detalle_productos_menu WHERE id_pm = $producto->id_pm";
                                                                         $medidas = $db->select($queryMedidas);
-                                                                        foreach ($medidas as $medida_precio) {
-                                                                            echo /*html*/"<tr>
-                                                                                    <td>$medida_precio->medida</td>
-                                                                                    <td>$medida_precio->precio</td>
-                                                                                    <td>
-                                                                                        <form action='../scripts/adminmenu/eliminarMedida.php' method='POST'>
-                                                                                            <input type='hidden' name='id_pm' value='$producto->id_pm'>
-                                                                                            <input type='hidden' name='medida' value='$medida_precio->medida'>
-                                                                                            <input type='hidden' name='precio' value='$medida_precio->precio'>
-                                                                                            <button type='submit' class='btn btn-danger'><i class='fa-solid fa-trash'></i></button>
-                                                                                        </form>
-                                                                                </tr>";
+                                                                        if (empty($medidas)) {
+                                                                            echo "<h4 class='text-center'>No hay medidas registradas</h4>";
+                                                                        } else {
+                                                                            echo "
+                                                                            <table class='table table-light border-3 border-black border-bottom border-start border-end table-striped text-center mt-4 table-hover'>
+                                                                                    <thead class='table-dark'>
+                                                                                        <th>Medida</th>
+                                                                                        <th>Precio</th>
+                                                                                        <th>Acciones</th>
+                                                                                    </thead>
+                                                                                <tbody class='table-group-divider'>";
+                                                                            foreach ($medidas as $medida_precio) {
+                                                                                echo /*html*/"<tr>
+                                                                                        <td>$medida_precio->medida</td>
+                                                                                        <td>$medida_precio->precio</td>
+                                                                                        <td>
+                                                                                            <form action='../scripts/adminmenu/eliminarMedida.php' method='POST'>
+                                                                                                <input type='hidden' name='id_pm' value='$producto->id_pm'>
+                                                                                                <input type='hidden' name='medida' value='$medida_precio->medida'>
+                                                                                                <input type='hidden' name='precio' value='$medida_precio->precio'>
+                                                                                                <button type='submit' class='btn btn-danger'><i class='fa-solid fa-trash'></i></button>
+                                                                                            </form>
+                                                                                    </tr>";
+                                                                            }
+                                                                            echo "
+                                                                            </tbody>
+                                                                            </table>
+                                                                            ";
                                                                         }
-                                                                        echo /*html*/ "
-                                                                    </tbody>
-                                                                </table>
+                                                                    echo "
                                                                 <div class='row'>
                                                                     <div class='col-12'>
                                                                         <form class='text-start' method='POST' action='../scripts/adminmenu/medidaextra.php'>

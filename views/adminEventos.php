@@ -170,7 +170,7 @@
                         </h2>
                         <div id="flush-rewards" class="accordion-collapse collapse" data-bs-parent="#accordionMobile">
                             <div class="accordion-body bg-dark">
-                                <a href="adminRecompensas.php" class="fw-bold fs-5 ms-5 text-light text-decoration-none" aria-current="true">
+                                <a href="adminrecompensas.php" class="fw-bold fs-5 ms-5 text-light text-decoration-none" aria-current="true">
                                     Administrar Recompensas
                                 </a>
                             </div>
