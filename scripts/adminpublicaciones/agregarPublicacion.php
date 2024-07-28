@@ -9,7 +9,7 @@ $conexion->conectarDB();
 extract($_POST);
 
 // Directorio donde se guardarán las imágenes
-$subirDir = "../../img/";
+$subirDir = "../../img/publicaciones/";
 
 if (!file_exists($subirDir)) {
     mkdir($subirDir, 0777, true);
