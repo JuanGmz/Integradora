@@ -298,207 +298,174 @@
                     </div>
                 </div>
             </div>
-
-            <!-- AQUI VA EL CONTENIDOOOOOOOO -->
-            <div class="col-lg-9 offset-lg-3 p-3">
-
-                <!-- Título de la página -->
-                <div class="container-fluid d-flex justify-content-between align-items-center p-2 border-bottom">
-                    <h1 class="fw-bold">Administrador de usuarios</h1>
-                    <a class="text-decoration-none text-dark" href="../index.html">
-                        <i class="fa-solid fa-house fa-2x ms-auto"></i>
-                    </a>
-                </div>
-                <div class="container-fluid p-1">
-                    <div class="col bg-body-tertiary p-3 rounded">
-                        <!-- Formulario para filtrar por -->
-                        <form class="row row-cols-lg-auto g-3 align-items-center">
-                            <div class="col-sm-6 col-lg-4">
-                                <label class="visually-hidden" for="inlineFormSelectPref">Preference</label>
-                                <select class="form-select" id="inlineFormSelectPref">
-                                    <option selected>Filtrar Por</option>
-                                    <option value="1">Id</option>
-                                    <option value="2">Nombre</option>
-                                    <option value="3">Correo</option>
-                                    <option value="3">Rol</option>
-                                </select>
-                            </div>
-
-                            <div class="col-sm-6 col-lg-4">
-                                <label class="visually-hidden" for="inlineFormInputGroupUsername">Buscar</label>
-                                <div class="input-group">
-                                    <div class="input-group-text"><i class="fa fa-search"></i></div>
-                                    <input type="text" class="form-control" id="inlineFormInputGroupUsername"
-                                        placeholder="Buscar">
-                                </div>
-                            </div>
-
-                        </form>
-
-                    </div>
-                </div>
-
-                <!-- Tabla de usuarios -->
-                <div class="container-fluid mt-5">
-                    <table class="table table-light table-striped text-center" border="1">
-                        <thead class="table-dark">
-                            <tr>
-                                <th scope="col">Folio</th>
-                                <th scope="col">Usuario</th>
-                                <th scope="col">Correo</th>
-                                <th scope="col">Rol</th>
-
-                            </tr>
-                        </thead>
-                        <tbody class="table-group-divider">
-                            <tr style="line-height: 3;">
-                                <th scope="row">1</th>
-                                <td>Luis Felipe</td>
-                                <td>Luis@gmail.com</td>
-
-
-
-                                <td>Usuario
-
-
-
-                                    <!-- Botón que activa el modal de editar la Usuario -->
-                                    <button type="button" class="btn flex-column" data-bs-toggle="modal"
-                                        data-bs-target="#editarUsuario">
-                                        <i class="fa-solid fa-pen-to-square "></i>
-                                    </button>
-                                    <!-- Modal de editar Usuario -->
-                                    <div class="modal fade" id="editarUsuario" tabindex="-1"
-                                        aria-labelledby="headerEditarUsuario" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <!-- Aquí va el título del modal -->
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="headerEditarCategoria">Editar Rol
-                                                        Usuario</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
-                                                <!-- Aquí va el contenido del modal -->
-                                                <div class="modal-body">
-                                                    <form class="text-start">
-                                                        <div class="mb-1">
-                                                            <!-- Aquí van los Roles como radio buttons -->
-                                                            <div class="row">
-
-                                                                <div class="col-6  col-sm-6 col-md-4">
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio"
-                                                                            name="role" id="roleAdmin" value="admin">
-                                                                        <label class="form-check-label"
-                                                                            for="roleAdmin">Administrador</label>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-6 col-sm-6 col-md-4">
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio"
-                                                                            name="role" id="roleSuperior"
-                                                                            value="Superior">
-                                                                        <label class="form-check-label"
-                                                                            for="roleSuperior">Superior</label>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-6 col-sm-6 col-md-4">
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio"
-                                                                            name="role" id="rolePosAdmin"
-                                                                            value="posAdmin">
-                                                                        <label class="form-check-label"
-                                                                            for="rolePosAdmin">Punto de venta</label>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-6 col-sm-6 col-md-4">
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio"
-                                                                            name="role" id="roleMenu" value="Menu">
-                                                                        <label class="form-check-label"
-                                                                            for="roleMenu">Menu</label>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-6  col-sm-6 col-md-4">
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio"
-                                                                            name="role" id="roleEventos"
-                                                                            value="Eventos">
-                                                                        <label class="form-check-label"
-                                                                            for="roleEventos">Eventos</label>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-6  col-sm-6 col-md-4">
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio"
-                                                                            name="role" id="roleproductos"
-                                                                            value="productos">
-                                                                        <label class="form-check-label"
-                                                                            for="roleproductos">productos</label>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-6  col-sm-6 col-md-4">
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio"
-                                                                            name="role" id="rolePublicaciones"
-                                                                            value="Publicaciones">
-                                                                        <label class="form-check-label"
-                                                                            for="rolePublicaciones">Publicaciones</label>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-6  col-sm-6 col-md-4">
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio"
-                                                                            name="role" id="rolenArtista"
-                                                                            value="Artista">
-                                                                        <label class="form-check-label"
-                                                                            for="roleArtista">Artista</label>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-6 col-sm-6 col-md-4">
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio"
-                                                                            name="role" id="roleUser" value="user">
-                                                                        <label class="form-check-label"
-                                                                            for="roleUser">Usuario</label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="text-end mt-2 p-1">
-                                                            <button type="submit" class="btn btn-primary">Guardar
-                                                                Cambios</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Cerrar</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                </td>
-
-
-
-
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+ <!-- AQUI VA EL CONTENIDO -->
+<div class="col-lg-9 offset-lg-3 p-0">
+    <!-- AQUI VA EL CONTENIDO DE LA PAGINA -->
+    <div class="row p-0 m-0 bg-dark">
+        <div class="row p-3 m-0 shadow-lg d-none d-lg-flex">
+            <div class="col-3">
+                <h1 class="text-light fw-bold">Usuarios</h1>
+            </div>
+            <div class="col-9 d-flex justify-content-end align-items-center gap-3">
+                <!-- Botón para volver atrás -->
+                <a href="../index.php" class="text-decoration-none d-none d-lg-block">
+                    <i class="fa-solid fa-house fa-2x text-light"></i>
+                </a>
             </div>
         </div>
     </div>
-
+    <!-- Formulario de búsqueda -->
+    <div class="shadow-lg bg-light container-fluid p-3">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10 col-sm-12">
+                <form method="post">
+                    <div class="row">
+                        <div class="col-md-8 col-sm-12 mb-2">
+                            <input type="text" class="form-control" name="busqueda" placeholder="Ingresa folio, usuario o teléfono" value="<?php echo isset($_POST['busqueda']) ? htmlspecialchars($_POST['busqueda']) : ''; ?>">
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <input type="submit" class="btn btn-primary w-100" value="Buscar">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
+    <!-- Tabla de usuarios -->
+    <div class="row">
+        <div class="row mt-lg-3 p-3 p-lg-4 m-0">
+            <?php
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $busqueda = $_POST['busqueda'];
+                $query = "CALL SP_filtrar_usuarios('$busqueda')";
+                $result = $db->select($query);
+                $query_roles = "SELECT id_rol, rol FROM roles";
+                $roles_result = $db->select($query_roles);
 
+                if (empty($result)) {
+                    echo "<div class='alert alert-warning' role='alert'>No hay usuarios registrados con este folio, usuario o teléfono.</div>";
+                } else {
+                    echo "
+                    <table class='table table-striped table-hover table-dark text-center border-3 border-black border-bottom border-start border-end'>
+                        <thead>
+                            <tr>
+                                <th scope='col'>ID Usuario</th>
+                                <th scope='col'>Nombre</th>
+                                <th scope='col'>Roles</th>
+                                <th scope='col'>Acciones</th>
+                            </tr>
+                        </thead>
+                    <tbody class='table-group-divider table-light'>";
+
+                    foreach ($result as $usuario) {
+                        $highlight = "";
+                        if (isset($_SESSION['last_user_id']) && $_SESSION['last_user_id'] == $usuario->id_usuario) {
+                            $highlight = "table-success";
+                            unset($_SESSION['last_user_id']); 
+                        }
+                        echo "
+                        <tr class='$highlight'>
+                            <td>{$usuario->id_usuario}</td>
+                            <td>{$usuario->nombres} {$usuario->apellido_paterno} {$usuario->apellido_materno}</td>
+                            <td>{$usuario->roles}</td>
+                            <td>
+                                <!-- Botón para ver detalles del usuario -->
+                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#detalleUsuario_{$usuario->id_usuario}'>
+                                    <i class='fa-solid fa-bars'></i>
+                                </button>
+                                <!-- Modal para mostrar los detalles del usuario -->
+                                <div class='modal fade' id='detalleUsuario_{$usuario->id_usuario}' tabindex='-1' aria-labelledby='detalleUsuarioLabel' aria-hidden='true'>
+                                    <div class='modal-dialog'>
+                                        <div class='modal-content'>
+                                            <div class='modal-header'>
+                                                <h1 class='modal-title fs-5' id='detalleUsuarioLabel'>Detalles del usuario</h1>
+                                                <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                            </div>
+                                            <div class='modal-body'>
+                                                <h4 class='text-start fw-bolder mb-3'>Nombre: <span class='fw-normal fs-4'>{$usuario->nombres} {$usuario->apellido_paterno} {$usuario->apellido_materno}</span></h4>
+                                                <h4 class='text-start fw-bolder mb-3'>Correo: <span class='fw-normal fs-4'>{$usuario->correo}</span></h4>
+                                                <h4 class='text-start fw-bolder mb-3'>Teléfono: <span class='fw-normal fs-4'>{$usuario->telefono}</span></h4>
+                                                <h4 class='text-start fw-bolder mb-3'>Roles: <span class='fw-normal fs-4'>{$usuario->roles}</span></h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Botón para editar el usuario -->
+                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#editarUsuario_{$usuario->id_usuario}'>
+                                    <i class='fa-solid fa-pen-to-square'></i>
+                                </button>
+                                <!-- Modal para editar el usuario -->
+                                <div class='modal fade' id='editarUsuario_{$usuario->id_usuario}' tabindex='-1' aria-labelledby='editarUsuarioLabel' aria-hidden='true'>
+                                    <div class='modal-dialog'>
+                                        <div class='modal-content'>
+                                            <div class='modal-header'>
+                                                <h1 class='modal-title fs-5' id='editarUsuarioLabel'>Editar usuario</h1>
+                                                <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                            </div>
+                                            <div class='modal-body text-start'>
+                                                <form action='../scripts/editarusuario.php' method='post'>
+                                                    <input type='hidden' name='id_usuario' value='{$usuario->id_usuario}' readonly>
+                                                    <div class='mb-3'>
+                                                        <label for='nombre' class='form-label'>Nombre: </label>
+                                                        <input type='text' class='form-control' id='nombre' name='nombres' value='{$usuario->nombres} {$usuario->apellido_paterno} {$usuario->apellido_materno}' readonly>
+                                                    </div>";
+                                                    
+                                                    // Mostrar roles actuales y permitir eliminar si hay más de uno
+                                                    $roles = explode(', ', $usuario->roles);
+                                                    for ($i = 0; $i < count($roles); $i++) {
+                                                        $rol_actual = $roles[$i];
+                                                        echo "
+                                                        <div class='mt-2 d-flex align-items-center'>
+                                                            <label for='rol_$i' class='form-label me-2'>Rol " . ($i + 1) . "</label>
+                                                            <input type='text' class='form-control' value='$rol_actual' readonly>
+                                                            <button type='submit' name='eliminar_rol' value='$rol_actual' class='btn btn-danger ms-2'>Eliminar</button>
+                                                        </div>";
+                                                    }
+
+                                                    // Mostrar roles disponibles para agregar solo si tiene menos de 3 roles
+                                                    if (count($roles) < 3) {
+                                                        echo "
+                                                        <div class='mt-3'>
+                                                            <label for='rol_nuevo' class='form-label'>Agregar Rol</label>
+                                                            <select name='rol_nuevo' id='rol_nuevo' class='form-select'>
+                                                                <option value=''>Selecciona un rol</option>";
+                                                                $roles_actuales = array_map('trim', explode(',', $usuario->roles));
+                                                                foreach ($roles_result as $rol) {
+                                                                    if (!in_array($rol->rol, $roles_actuales)) {
+                                                                        echo "<option value='{$rol->id_rol}'>{$rol->rol}</option>";
+                                                                    }
+                                                                }
+                                                                echo "
+                                                            </select>
+                                                        </div>";
+                                                    }
+                                                    echo "
+                                                    <div class='modal-footer'>
+                                                        <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cerrar</button>
+                                                        <button type='submit' class='btn btn-primary'>Guardar cambios</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>";
+                    }
+                    echo "
+                    </tbody>
+                </table>";
+                }
+            }
+            ?>
+        </div>
     </div>
+</div>
 
+
+            </div>
+        </div>
+    </div>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/b820f07375.js" crossorigin="anonymous"></script>
 </body>
