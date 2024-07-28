@@ -539,11 +539,11 @@ if ($_POST) {
                             <?php
                                 if (isset($_POST['btnBuscar'])) {
                                     extract($_POST);
-                                    $query = "SELECT * FROM recompensas WHERE fecha_inicio AND fecha_expiracion BETWEEN '$fechaInicio' AND '$fechaExpiracion'";
+                                    $query = "SELECT * FROM recompensas WHERE fecha_inicio AND fecha_expiracion BETWEEN '$fechaInicio' AND '$fechaExpiracion' ORDER BY fecha_inicio ASC";
                                     $recompensas = $db->select($query);
                                 }
                             ?>
-                            
+
                         </div>
                     </div>
                 </div>
