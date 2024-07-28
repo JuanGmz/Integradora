@@ -119,7 +119,7 @@
             <ol class="breadcrumb mt-4">
                 <li class="breadcrumb-item"><a href="../../../index.php">Inicio</a></li>
                 <li class="breadcrumb-item"><a href="../../menu.php">Menú</a></li>
-                <li class="breadcrumb-item" aria-current="page"><a href="../<?php echo str_replace(' ', '', $producto[0]->categoria)?>.php"><?php echo $producto[0]->categoria?></a></li>
+                <li class="breadcrumb-item" aria-current="page"><a href="../<?php echo mb_strtolower(str_replace(' ', '', $producto[0]->categoria), 'UTF-8')?>.php"><?php echo $producto[0]->categoria?></a></li>
                 <li class="breadcrumb-item active" aria-current="page"><?php echo $producto[0]->nombre?></li>
             </ol>
         </nav>
