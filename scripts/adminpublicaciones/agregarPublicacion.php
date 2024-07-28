@@ -21,6 +21,7 @@ if (is_writable($subirDir)) {
     if (move_uploaded_file($_FILES['imagen']['tmp_name'], $imagen)) {
         $query = "INSERT INTO publicaciones(titulo, descripcion, img_url, tipo) VALUES ('$titulo', '$descripcion', '$nombreImagen', '$tipo')";
         $conexion->execute($query);
+        echo "¡Publicación registrada con éxito!";
     } else {
         echo "Error al mover el archivo. Detalles: " . error_get_last()['message'];
     }
