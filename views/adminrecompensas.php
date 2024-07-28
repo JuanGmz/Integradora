@@ -620,7 +620,7 @@ if ($_POST) {
                                                                     <form method="post" enctype="multipart/form-data">
                                                                         <div class='col-12 mb-3'>
                                                                             <label for='imagen' class='form-label'>Imagen Actual</label><br>
-                                                                            <img src='../img/menu/<?= $recompensa->img_url?>' class='img-fluid' alt='imagen<?= $recompensa->recompensa ?>'><br>
+                                                                            <img src='../img/recompensas/<?= $recompensa->img_url?>' class='img-fluid' alt='imagen<?= $recompensa->recompensa ?>'><br>
                                                                                 <small>Selecciona una nueva imagen para actualizar, si es necesario.</small>
                                                                             </div>
                                                                             <div class='col-12 mb-3'>
