@@ -134,7 +134,7 @@ if (isset($_SESSION["usuario"])) {
                     <div class="col-12 col-md-6 col-lg-4 mt-3">
                         <div class="card">
                             <div class="card-body">
-                                <img src="../assets/img/recompensas/<?php echo $recompensa->imagen ?>" class="card-img-top">
+                                <img src="../img/recompensas/<?php echo $recompensa->imagen ?>" class="card-img-top">
                                 <h3 class="card-title fw-bold text-center"><?php echo $recompensa->recompensa ?></h3>
                                 <h5 class="card-text text-center">Asistencias completadas:
                                     <?php echo $recompensa->asistencias_completadas ?>
