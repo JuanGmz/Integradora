@@ -1247,7 +1247,7 @@ INSERT INTO roles (rol, descripcion) VALUES
 ('Around The World', 'Categoría para el menú de cafés de diversas partes del mundo', 'Menu',''),
 ('Sodas Italianas', 'Categoría para el menú de refrescos italianos', 'Menu',''), -- 15
 ('Frappes', 'Categoría para el menú de bebidas frappé', 'Menu',''),  
-('Té y Tisanas', 'Categoría para el menú de tés y tisanas', 'Menu',''),
+('Te y Tisanas', 'Categoría para el menú de tés y tisanas', 'Menu',''),
 ('Sweet Blues', 'Categoría para el menú de cafés dulces con un toque de blues', 'Menu','');
 
 -- Insertar productos_menu

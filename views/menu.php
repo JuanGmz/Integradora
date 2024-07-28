@@ -192,7 +192,7 @@
         </div>
         <div class="row mb-3">
             <div class="col-6 col-lg-3">
-                <a href="menu/téytisanas.php">
+                <a href="menu/teytisanas.php">
                     <div class="card border-0" style="background: var(--color6)">
                         <img src="../img/cafes/bolsa1.webp" class="card-img-top rounded-5" alt="teytisanas">
                         <div class="cblog-card p-2">

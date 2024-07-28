@@ -104,7 +104,7 @@
 
         <div class="row mb-3">
             <?php
-                $query = "CALL listar_productos_menu('Té y Tisanas')";
+                $query = "CALL listar_productos_menu('Te y Tisanas')";
 
                 $tYtisanas = $db->select($query);
 
