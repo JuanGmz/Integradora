@@ -329,7 +329,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row p-0 m-0">
                     <!-- Tabla de pedidos AQUI -->
                     <div class="row mt-lg-3 p-3 p-lg-4 m-0">
                         <?php
@@ -348,7 +348,7 @@
                                         <tr>
                                             <th scope='col'>Folio</th>
                                             <th scope='col'>Nombre</th>
-                                            <th scope='col'>Domicilio</th>
+                                            <th scope='col' class='d-none d-lg-table-cell'>Domicilio</th>
                                             <th scope='col'>Acciones</th>
                                         </tr>
                                     </thead>
@@ -365,7 +365,7 @@
                                         <tr>
                                             <td>{$pedido->id_pedido}</td>
                                             <td>{$pedido->cliente}</td>
-                                            <td>{$pedido->domicilio}</td>
+                                            <td class='d-none d-lg-table-cell'>{$pedido->domicilio}</td>
                                             <td class='d-flex flex-row align-items-center justify-content-center gap-1'>
                                                 <!-- Botón para ver detalles del pedido -->
                                                 <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#detalleProducto_{$pedido->id_pedido}'>
@@ -401,18 +401,18 @@
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>";
-                                        foreach ($result as $detalle) {
-                                            if ($detalle->id_pedido == $pedido->id_pedido) {
-                                                echo "
-                                                    <tr>
-                                                        <td>{$detalle->bolsa}</td>
-                                                        <td>{$detalle->medida}</td>
-                                                        <td>{$detalle->cantidad}</td>
-                                                    </tr>";
-                                            }
-                                        }
+                                                                        foreach ($result as $detalle) {
+                                                                            if ($detalle->id_pedido == $pedido->id_pedido) {
+                                                                                echo "
+                                                                                    <tr>
+                                                                                        <td>{$detalle->bolsa}</td>
+                                                                                        <td>{$detalle->medida}</td>
+                                                                                        <td>{$detalle->cantidad}</td>
+                                                                                    </tr>";
+                                                                            }
+                                                                        }
 
-                                        echo "
+                                                                        echo "
                                                                     </tbody>
                                                                 </table>
                                                             </div>
@@ -432,44 +432,40 @@
                                                                 <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                                                             </div>
                                                             <div class='modal-body text-start'>
-                                                                <form action='../scripts/editarpedido.php' method='post'>
-                                                                    <input type='hidden' name='id_pedido' value='{$pedido->id_pedido}' readonly>
-                                                                    <div>
-                                                                        <label for='titulo' class='form-label'>Cliente: </label>
-                                                                        <input type='text' class='form-control' id='titulo' name='cliente' value='{$pedido->cliente}' readonly >
-                                                                    </div>
-                                                                    <div>
-                                                                        <label for='descripcion' class='form-label'>Bolsa</label>
-                                                                        <input type='text' class='form-control' id='descripcion' name='bolsa' value='{$pedido->bolsa}' readonly>
-                                                                    </div>
+                                                                <form action='../scripts/editarpedido.php' method='post' enctype='multipart/form-data'>
+                                                                    <input type='hidden' name='id_pedido' value='{$pedido->id_pedido}'>
                                                                     <div class='row'>
-                                                                        <div class='col-4'>
-                                                                            <label for='cap' class='form-label'>Monto total</label>
-                                                                            <input type='text' min='1' class='form-control' id='cap' name='montototal' value='{$pedido->monto_total}' readonly>
-                                                                        </div>
-                                                                        <div class='col-4'>
+                                                                        <div class='col-6'>
                                                                             <label for='costo' class='form-label'>Costo de envio</label>
-                                                                            <input type='number' min='0' class='form-control' id='costo' name='costo' value='{$pedido->costo_envio}'>                                                                        
+                                                                            <input type='number' min='0' class='form-control' id='costo' name='costo' value='{$pedido->costo_envio}' required>                                                                        
                                                                         </div>
-                                                                        <div class='col-4'>
+                                                                        <div class='col-6'>
                                                                             <label for='estatus' class='form-label'>Estatus</label>
-                                                                            <select name='estatus' id='estatus' class='form-select'>
-                                                                                <option value='{$pedido->estatus}' selected>{$pedido->estatus}</option>
-                                                                                <option value='Pendiente' " . ($pedido->estatus == 'Cancelado' ? 'disabled' : '') . ">Pendiente</option>
-                                                                                <option value='Finalizado' " . ($pedido->estatus == 'Cancelado' ? 'disabled' : '') . ">Finalizado</option>
+                                                                            <select name='estatus' id='estatus' class='form-select'>";
+                                                                                $estados = array('Finalizado', 'Pendiente', 'Cancelado');
+                                                                                foreach ($estados as $estado) {
+                                                                                    if ($estado == $pedido->estatus) {
+                                                                                        echo "<option value='{$estado}' " . (($pedido->estatus == 'Cancelado' || $pedido->estatus == 'Finalizado') ? 'disabled' : '')  . " selected>{$estado}</option>";
+
+                                                                                    } else {
+                                                                                        echo "<option value='{$estado}' " . ($pedido->estatus == 'Cancelado' || $pedido->estatus == 'Finalizado' ? 'disabled' : '') . ">{$estado}</option>";
+                                                                                    }
+                                                                                }
+                                                                                echo "
                                                                             </select>
                                                                         </div>
                                                                     </div>
                                                                     <div>
                                                                         <label for='imagen' class='form-label'>Guia de envío</label>
-                                                                        <input type='file' class='form-control' id='imagen' name='guia' value='{$pedido->guia_de_envio}'>
+                                                                        <input type='text' class='form-control' maxlength='50' id='imagen' name='guia' value='{$pedido->guia_de_envio}'>
                                                                     </div>
                                                                     <div>
                                                                         <label for='fecha' class='form-label'>Documento</label>
-                                                                        <input type='file' class='form-control' id='fecha' name='documento' value='{$pedido->documento_url}'>
+                                                                        <input type='file' class='form-control' id='fecha' name='documento' value='{$pedido->documento_url}' required>
                                                                     </div>
                                                                     <div class='row'>
                                                                         <div class='col-12 text-end'>
+                                                                            <button type='button' class='btn btn-secondary mt-3' data-bs-dismiss='modal'>Cancelar</button>
                                                                             <button type='submit' class='btn btn-primary mt-3'>Actualizar</button>
                                                                         </div>
                                                                     </div> 

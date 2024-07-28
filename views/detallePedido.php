@@ -19,11 +19,20 @@
         $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE p.usuario = '$_SESSION[usuario]'";
         $rol = $db->select($rolUsuario);
 
+        extract($_POST);
+
         if (isset($_POST['verDetalles'])) {
-            extract($_POST);
             $queryPed = "SELECT * FROM vw_pedidos_clientes WHERE folio = $id_pedido";
             $pedido = $db->select($queryPed);
+
+            $queryPedido = "SELECT id_pedido FROM pedidos WHERE id_pedido = $id_pedido";
+            $pedProd = $db->select($queryPedido);
         }
+        if (isset($_POST['verDetalles']) AND isset($_POST['cancelarPedido'])) {
+            $cancelar = "UPDATE pedidos SET estatus = 'Cancelado' WHERE id_pedido = $id_pedido";
+            $db->execute($cancelar);
+        }
+        echo var_dump($pedido);
     } else {
         header("location: ../index.php");
     }
@@ -103,7 +112,14 @@
                 <li class="breadcrumb-item"><a href="../index.php">Inicio</a></li>
                 <li class="breadcrumb-item" aria-current="page"><a href="perfil.php">Perfil</a></li>
                 <li class="breadcrumb-item"><a href="pedidos.php">Pedidos</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Pedido #<?php echo $pedido[0]->folio; ?></li>
+                <?php
+                    if($pedido === null) {
+                        $pedido = "SELECT * FROM pedidos WHERE id_pedido = $id_pedido";
+                        echo var_dump($pedido);
+                        echo "hOLA PUTO";
+                    }
+                    ?>
+                <li class="breadcrumb-item active" aria-current="page">Pedido #<?= $pedido[0]->folio; ?></li>
             </ol>
         </nav>
 
@@ -131,7 +147,25 @@
                 <div class="col-12 col-lg-6">
                     <h3>Resúmen del pedido</h3>
                     <h4 class="fw-bold d-inline">Costo de Envío: <span class="fw-normal"><h5 class="d-inline-block">$<?= $pedido[0]->costo_envio ?></h5></span></h4><br>
-                    <h4 class="fw-bold d-inline">Monto Total: <span class="fw-normal"><h5 class="d-inline-block">$<?= $pedido[0]->monto_total ?></h5></span></h4><br>
+                    <h4 class="fw-bold d-inline">Costo de Productos: <span class="fw-normal"><h5 class="d-inline-block">$<?= $pedido[0]->monto_total ?></h5></span></h4><br>
+                    <?php
+                        $monto_total = $pedido[0]->costo_envio + $pedido[0]->monto_total;
+                    ?>
+                    <h4 class="fw-bold d-inline">Monto Total: <span class="fw-normal"><h5 class="d-inline-block">$<?= $monto_total ?></h5></span></h4><br>
+                    <form method="post" enctype="multipart/form-data">
+                        <?php
+                            if($pedido[0]->estatus === "Cancelado" OR $pedido[0]->estatus === "Finalizado") {
+                                ?>
+                                <button disabled type="submit" class="btn btn-primary btn-block m-2 mt-0 mb-0 w-100">Cancelar</button>
+                                <?php
+                            } else {
+                                ?>
+                                <input type="hidden" name="id_pedido" value="<?= $pedProd[0]->id_pedido ?>">
+                                <button type="submit" class="btn btn-primary btn-block m-2 mt-0 mb-0 w-100" name="cancelarPedido">Cancelar</button>
+                                <?php
+                            }
+                        ?>
+                    </form>
                 </div>
             </div>
             <hr class="m-0">
@@ -141,6 +175,10 @@
             <hr>
             <div class="row">
             </div>
+        </div>
+        <!-- Alerta -->
+        <div class="alert floating-alert" id="floatingAlert">
+            <span id="alertMessage">Mensaje de la alerta.</span>
         </div>
     </div>
 

@@ -19,6 +19,9 @@
         $queryDirecciones = "SELECT d.* FROM domicilios d JOIN clientes c ON d.id_cliente = c.id_cliente JOIN personas p ON c.id_persona = p.id_persona WHERE p.usuario = '$_SESSION[usuario]'";
         $direcciones = $db->select($queryDirecciones);
 
+        $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE p.usuario = '$_SESSION[usuario]'";
+        $rol = $db->select($rolUsuario);
+
         $cliente = "SELECT id_cliente FROM clientes c JOIN personas p ON c.id_persona = p.id_persona WHERE p.usuario = '$_SESSION[usuario]'";
         $id_cliente = $db->select($cliente);
 
@@ -126,7 +129,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
                     <a class="dropdown-item" href="perfil.php">Mi perfil</a>
-                    <?php if ($_SESSION['usuario'] == 'ADMIN') { ?>
+                    <?php if ($rol[0]->rol === 'administrador') { ?>
                         <a class="dropdown-item" href="../views/adminInicio.php">Administrar</a>
                         <div class="dropdown-divider"></div>
                     <?php } ?>
