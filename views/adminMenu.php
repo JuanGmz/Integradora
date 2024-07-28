@@ -547,11 +547,11 @@ if (isset($_SESSION["usuario"])) {
                                                                         <th>Acciones</th>
                                                                     </thead>
                                                                     <tbody class='table-group-divider'>";
-                                //Consulta de productos_menu relacionados con este detalle
-                                $queryMedidas = "SELECT medida, precio FROM detalle_productos_menu WHERE id_pm = $producto->id_pm";
-                                $medidas = $db->select($queryMedidas);
-                                foreach ($medidas as $medida_precio) {
-                                    echo /*html*/ "<tr>
+                                                                        //Consulta de productos_menu relacionados con este detalle
+                                                                        $queryMedidas = "SELECT medida, precio FROM detalle_productos_menu WHERE id_pm = $producto->id_pm";
+                                                                        $medidas = $db->select($queryMedidas);
+                                                                        foreach ($medidas as $medida_precio) {
+                                                                            echo /*html*/"<tr>
                                                                                     <td>$medida_precio->medida</td>
                                                                                     <td>$medida_precio->precio</td>
                                                                                     <td>
@@ -562,8 +562,8 @@ if (isset($_SESSION["usuario"])) {
                                                                                             <button type='submit' class='btn btn-danger'><i class='fa-solid fa-trash'></i></button>
                                                                                         </form>
                                                                                 </tr>";
-                                }
-                                echo /*html*/ "
+                                                                        }
+                                                                        echo /*html*/ "
                                                                     </tbody>
                                                                 </table>
                                                                 <div class='row'>

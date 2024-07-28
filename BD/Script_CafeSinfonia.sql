@@ -1659,3 +1659,35 @@ JOIN
 	clientes c ON p.id_cliente = c.id_cliente
 JOIN
 	personas per ON c.id_persona = per.id_persona;
+    
+DELIMITER $$
+
+create PROCEDURE SP_filtrar_usuarios(
+    IN p_busqueda NVARCHAR(100)
+)
+BEGIN
+    SELECT
+        p.id_persona,
+        p.id_usuario,
+        p.usuario,
+        p.correo,
+        p.telefono,
+        p.nombres,
+        p.apellido_paterno,
+        p.apellido_materno,
+        GROUP_CONCAT(r.rol ORDER BY r.id_rol SEPARATOR ', ') AS roles
+    FROM
+        personas p
+        JOIN usuarios u ON p.id_usuario = u.id_usuario
+        LEFT JOIN roles_usuarios ru ON u.id_usuario = ru.id_usuario
+        LEFT JOIN roles r ON ru.id_rol = r.id_rol
+    WHERE
+        p.id_usuario = p_busqueda OR
+        p.usuario = p_busqueda OR
+        p.telefono = p_busqueda
+    GROUP BY
+        p.id_persona, p.id_usuario, p.usuario, p.correo, p.telefono, p.nombres, p.apellido_paterno, p.apellido_materno;
+END $$
+
+DELIMITER ;
+call SP_filtrar_usuarios('noe134');

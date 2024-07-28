@@ -19,6 +19,8 @@
             extract($_POST);
             $query = "SELECT CONCAT_WS(' ', nombres, apellido_paterno, apellido_materno) AS nombre, correo, telefono, contrasena, id_persona FROM personas WHERE usuario = '$_SESSION[usuario]'";
             $datos = $db->select($query);
+            $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE p.usuario = '$_SESSION[usuario]'";
+            $rol = $db->select($rolUsuario);
 
             $queryCel = "SELECT telefono FROM personas";
 
@@ -98,7 +100,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
                     <a class="dropdown-item" href="perfil.php">Mi perfil</a>
-                    <?php if ($_SESSION['usuario'] == 'ADMIN') { ?>
+                    <?php if ($rol[0]->rol === 'administrador') { ?>
                         <a class="dropdown-item" href="../views/adminInicio.php">Administrar</a>
                         <div class="dropdown-divider"></div>
                     <?php } ?>
