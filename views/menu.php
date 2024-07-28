@@ -159,7 +159,7 @@
                 </a>
             </div>
             <div class="col-6 col-lg-3">
-                <a href="menu/losmétodosdejazzband.php">
+                <a href="menu/losmetodosdejazzband.php">
                     <div class="card border-0" style="background: var(--color6)">
                         <img src="../img/categorias/jazz.webp" class="card-img-top rounded-5" alt="jazzband">
                         <div class="cblog-card p-2">
