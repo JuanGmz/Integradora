@@ -1,15 +1,17 @@
 <?php
 
-    include("../../class/database.php");
-    $conexion = new Database();
-    $conexion->conectarDB();
+include ("../../class/database.php");
+$conexion = new Database();
+$conexion->conectarDB();
 
-    extract($_POST);
+extract($_POST);
 
-    $query = "UPDATE productos_menu SET nombre = '$nombre', descripcion = '$descripcion', id_categoria = $categoria WHERE id_pm = $id_pm";
-    $conexion->execute($query);
+$estatus = isset($_POST['estatus']) ? 1 : 0;
 
-    $conexion->desconectarDB();
+$query = "UPDATE productos_menu SET nombre = '$nombre', descripcion = '$descripcion', id_categoria = $categoria, estatus = $estatus WHERE id_pm = $id_pm";
+$conexion->execute($query);
 
-    header('Location: ../../views/adminMenu.php');
-    exit;
+$conexion->desconectarDB();
+
+header('Location: ../../views/adminMenu.php');
+exit;
