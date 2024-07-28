@@ -1544,11 +1544,7 @@ VALUES
 
 -- Inserción de recompensas
 
-call sp_agregar_recompensa('10% de descuento en café', 5, '2024-07-25', '2024-07-28', 'img/descuento_cafe.jpg');
-call sp_agregar_recompensa('Bebida gratis al comprar un pastel', 10, '2024-07-25', '2024-07-28', 'img/bebida_gratis.jpg');
-call sp_agregar_recompensa('Taza conmemorativa gratis', 15, '2024-07-28', '2024-08-05', 'img/taza_conmemorativa.jpg');
-call sp_agregar_recompensa('Acceso a evento exclusivo', 20, '2024-07-28', '2024-08-07', 'img/evento_exclusivo.jpg');
-call sp_agregar_recompensa('Descuento del 20% en tu próxima compra', 25, '2024-08-05', '2024-08-15', 'img/descuento_proxima.jpg');
+-- call sp_agregar_recompensa('10% de descuento en café', 5, '2024-07-25', '2024-07-28', 'img/descuento_cafe.jpg');
 
 -- Insertar asociaciones entre todos los clientes y las recompensas activas
 
