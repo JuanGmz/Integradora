@@ -319,7 +319,7 @@
                                 <form method="post">
                                     <div class="row">
                                     <div class="col-8 col-lg-4">
-                                            <input type="text" class="form-control" name="busqueda" placeholder="Ingresa usuario o teléfono" value="<?php echo isset($_POST['busqueda']) ? htmlspecialchars($_POST['busqueda']) : ''; ?>">
+                                            <input type="text" required class="form-control" name="busqueda" placeholder="Ingresa ID, Usuario o Teléfono" value="<?php echo isset($_POST['busqueda']) ? htmlspecialchars($_POST['busqueda']) : ''; ?>">
                                         </div>
                                         <div class="col-4 col-lg-2">
                                         <input type="submit" class="btn btn-primary w-100" value="Buscar">
@@ -332,6 +332,9 @@
                     <!-- Tabla de usuarios -->
                     <div class="row mt-3 p-4 m-0">
     <?php
+    if(!isset($_POST['busqueda'])){
+        echo "<div class='p-3 pt-0'>Busca un usuario para poder ver sus datos.</div>";
+    }
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $busqueda = $_POST['busqueda'];
         $query = "CALL SP_filtrar_usuarios('$busqueda')";
@@ -346,7 +349,8 @@
             <table class='table table-striped table-hover table-dark text-center border-3 border-black border-bottom border-start border-end'>
                 <thead>
                     <tr>
-                        <th scope='col'>Nombre</th>
+                        <th scope='col'>Usuario</th>
+                        <th scope='col' class='d-none d-md-table-cell'>Nombre</th>
                         <th scope='col' class='d-none d-md-table-cell'>Roles</th>
                         <th scope='col'>Acciones</th>
                     </tr>
@@ -361,7 +365,8 @@
                 }
                 echo "
                 <tr class='$highlight'>
-                    <td>{$usuario->nombres} {$usuario->apellido_paterno} {$usuario->apellido_materno}</td>
+                    <th>{$usuario->usuario}</th>
+                    <td class='d-none d-md-table-cell'>{$usuario->nombres} {$usuario->apellido_paterno} {$usuario->apellido_materno}</td>
                     <td class='d-none d-md-table-cell'>{$usuario->roles}</td>
                     <td>
                         <!-- Botón para ver detalles del usuario -->
@@ -378,6 +383,7 @@
                                     </div>
                                     <div class='modal-body'>
                                         <h4 class='text-start fw-bolder mb-3'>ID: <span class='fw-normal fs-4'>{$usuario->id_usuario}</span></h4>
+                                        <h4 class='text-start fw-bolder mb-3'>Usuario: <span class='fw-normal fs-4'>{$usuario->usuario}</span></h4>
                                         <h4 class='text-start fw-bolder mb-3'>Nombre: <span class='fw-normal fs-4'>{$usuario->nombres} {$usuario->apellido_paterno} {$usuario->apellido_materno}</span></h4>
                                         <h4 class='text-start fw-bolder mb-3'>Correo: <span class='fw-normal fs-4'>{$usuario->correo}</span></h4>
                                         <h4 class='text-start fw-bolder mb-3'>Teléfono: <span class='fw-normal fs-4'>{$usuario->telefono}</span></h4>
