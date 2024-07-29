@@ -140,11 +140,9 @@
                             <div class="col-12 mb-4">
                                 <div class="card shadow-lg">
                                     <div class="row no-gutters">
-                                        <!-- Imagen a la izquierda -->
                                         <div class="col-md-4">
                                             <img src='../../img/publicaciones/<?php echo $publicacion->img_url; ?>' class='img-fluid' alt='<?php echo $publicacion->titulo ?>' style="border-radius: 5% 0 0 5%; height: 100%; width: 100%; object-fit: cover;">
                                         </div>
-                                        <!-- Contenido de texto a la derecha -->
                                         <div class="col-md-8 d-flex flex-column justify-content-center p-3">
                                             <h5 class='card-title'><?php echo $publicacion->titulo; ?></h5>
                                             <p class='card-text' style="color:black;"><?php echo $publicacion->descripcion; ?></p>
