@@ -429,7 +429,7 @@
                                                 echo "
                                                 <div class='mt-3'>
                                                     <label for='rol_nuevo' class='form-label'>Agregar Rol</label>
-                                                    <select name='rol_nuevo' id='rol_nuevo' class='form-select' required>
+                                                    <select name='rol_nuevo' id='rol_nuevo' class='form-select'>
                                                         <option value=''>Selecciona un rol</option>";
                                                         $roles_actuales = array_map('trim', explode(',', $usuario->roles));
                                                         foreach ($roles_result as $rol) {
