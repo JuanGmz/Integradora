@@ -356,7 +356,7 @@
             foreach ($result as $usuario) {
                 $highlight = "";
                 if (isset($_SESSION['last_user_id']) && $_SESSION['last_user_id'] == $usuario->id_usuario) {
-                    $highlight = "table-success";
+                    $highlight = "table-light";
                     unset($_SESSION['last_user_id']);
                 }
                 echo "
