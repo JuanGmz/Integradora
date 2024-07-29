@@ -24,15 +24,10 @@
         if (isset($_POST['verDetalles'])) {
             $queryPed = "SELECT * FROM vw_pedidos_clientes WHERE folio = $id_pedido";
             $pedido = $db->select($queryPed);
-
+    
             $queryPedido = "SELECT id_pedido FROM pedidos WHERE id_pedido = $id_pedido";
             $pedProd = $db->select($queryPedido);
         }
-        if (isset($_POST['verDetalles']) AND isset($_POST['cancelarPedido'])) {
-            $cancelar = "UPDATE pedidos SET estatus = 'Cancelado' WHERE id_pedido = $id_pedido";
-            $db->execute($cancelar);
-        }
-        echo var_dump($pedido);
     } else {
         header("location: ../index.php");
     }
@@ -86,15 +81,15 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
                         <a class="dropdown-item" href="../perfil.php">Mi perfil</a>
                         <?php if ($rol[0]->rol === 'administrador') { ?>
-                            <a class="dropdown-item" href="../adminInicio.php">Administrar</a>
+                            <a class="dropdown-item" href="adminInicio.php">Administrar</a>
                             <div class="dropdown-divider"></div>
                         <?php } ?>
-                        <a class="dropdown-item" href="../../scripts/login/cerrarsesion.php">Cerrar sesión</a>
+                        <a class="dropdown-item" href="../scripts/login/cerrarsesion.php">Cerrar sesión</a>
                     </div>
                 <?php
                 } else {
                 ?>
-                    <a href="../login.php" class="login-button ms-auto">Iniciar Sesión</a>
+                    <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
                 <?php
                 }
                 ?>
@@ -114,8 +109,7 @@
                 <li class="breadcrumb-item"><a href="pedidos.php">Pedidos</a></li>
                 <?php
                     if($pedido === null) {
-                        $pedido = "SELECT * FROM pedidos WHERE id_pedido = $id_pedido";
-                        echo var_dump($pedido);
+                        showAlert("error", "No se puede cancelar el pedido");
                         echo "hOLA PUTO";
                     }
                     ?>
@@ -152,20 +146,6 @@
                         $monto_total = $pedido[0]->costo_envio + $pedido[0]->monto_total;
                     ?>
                     <h4 class="fw-bold d-inline">Monto Total: <span class="fw-normal"><h5 class="d-inline-block">$<?= $monto_total ?></h5></span></h4><br>
-                    <form method="post" enctype="multipart/form-data">
-                        <?php
-                            if($pedido[0]->estatus === "Cancelado" OR $pedido[0]->estatus === "Finalizado") {
-                                ?>
-                                <button disabled type="submit" class="btn btn-primary btn-block m-2 mt-0 mb-0 w-100">Cancelar</button>
-                                <?php
-                            } else {
-                                ?>
-                                <input type="hidden" name="id_pedido" value="<?= $pedProd[0]->id_pedido ?>">
-                                <button type="submit" class="btn btn-primary btn-block m-2 mt-0 mb-0 w-100" name="cancelarPedido">Cancelar</button>
-                                <?php
-                            }
-                        ?>
-                    </form>
                 </div>
             </div>
             <hr class="m-0">
@@ -174,6 +154,10 @@
             </div>
             <hr>
             <div class="row">
+                <div class="col-lg-6">
+                    <img src="../img/" alt="">
+                </div>
+                    
             </div>
         </div>
         <!-- Alerta -->
