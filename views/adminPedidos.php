@@ -351,8 +351,9 @@
                                     <thead>
                                         <tr>
                                             <th scope='col'>Folio</th>
-                                            <th scope='col'>Nombre</th>
-                                            <th scope='col' class='d-none d-lg-table-cell'>Domicilio</th>
+                                            <th scope='col'>Cliente</th>
+                                            <th scope='col' class='d-none d-md-table-cell'>Domicilio</th>
+                                            <th scope='col' class='d-none d-md-table-cell'>Estatus</th>
                                             <th scope='col'>Acciones</th>
                                         </tr>
                                     </thead>
@@ -369,7 +370,8 @@
                                         <tr>
                                             <td>{$pedido->id_pedido}</td>
                                             <td>{$pedido->cliente}</td>
-                                            <td class='d-none d-lg-table-cell'>{$pedido->domicilio}</td>
+                                            <td class='d-none d-md-table-cell'>{$pedido->domicilio}</td>
+                                            <td class='d-none d-md-table-cell'>{$pedido->estatus}</td>
                                             <td class='d-flex flex-row align-items-center justify-content-center gap-1'>
                                                 <!-- Botón para ver detalles del pedido -->
                                                 <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#detalleProducto_{$pedido->id_pedido}'>
@@ -423,6 +425,13 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                ";
+                                                if ($pedido->estatus == 'Cancelado') {
+                                                    echo "
+                                                    <button disabled type='submit' class='btn btn-secondary btn-block'><i class='fa-solid fa-pen-to-square'></i></button>
+                                                    ";
+                                                } else {
+                                                echo "
                                                 <!-- Botón para editar el pedido -->
                                                 <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#editarProducto_{$pedido->id_pedido}'>
                                                     <i class='fa-solid fa-pen-to-square'></i>
@@ -478,6 +487,9 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                ";
+                                                }
+                                                echo "
                                             </td>
                                         </tr>";
                                         $pedidosMostrados[] = $pedido->id_pedido;

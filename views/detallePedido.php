@@ -24,6 +24,9 @@
         if (isset($_POST['verDetalles'])) {
             $queryPed = "SELECT * FROM vw_pedidos_clientes WHERE folio = $id_pedido";
             $pedido = $db->select($queryPed);
+
+            $queryProductos = "SELECT * FROM vw_pedido_productos WHERE id_pedido = $id_pedido";
+            $productos = $db->select($queryProductos);
     
             $queryPedido = "SELECT id_pedido FROM pedidos WHERE id_pedido = $id_pedido";
             $pedProd = $db->select($queryPedido);
@@ -150,14 +153,29 @@
             </div>
             <hr class="m-0">
             <div class="row">
-                <h1>Productos</h1>
+                <h1 class="text-center">Productos</h1>
             </div>
             <hr>
-            <div class="row">
-                <div class="col-lg-6">
-                    <img src="../img/" alt="">
+            <div class="container mb-3">
+                <div class="row">
+                    <?php foreach ($productos as $producto) : ?>
+                        <div class="col-12 mb-4"> 
+                            <div class="card shadow-lg">
+                                <div class="row no-gutters">
+                                    <div class="col-md-4">
+                                        <img src='../img/bolsas/<?php echo $producto->img_url; ?>' class='img-fluid rounded" alt='<?php echo $producto->nombre ?>' style="border-radius: 5% 0 0 5%; height: 100%; width: 100%; object-fit: cover;">
+                                    </div>
+                                    <div class="col-md-8 d-flex flex-column justify-content-center align-items-center p-3">
+                                        <h1 class='card-title'><?php echo $producto->nombre; ?> (<?php echo $producto->proceso; ?>)</h1>
+                                        <h3 class='card-text ' style="color:black;">Cantidad: <?php echo $producto->cantidad; ?></h3>
+                                        <h3 class='card-text ' style="color:black;">Medida: <?php echo $producto->medida; ?></h3>
+                                        <h3 class='card-text ' style="color:black;">Precio: $<?php echo $producto->monto; ?></3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
-                    
             </div>
         </div>
         <!-- Alerta -->

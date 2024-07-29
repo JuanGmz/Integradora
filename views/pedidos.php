@@ -79,12 +79,12 @@
                         <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
-                        <a class="dropdown-item" href="../perfil.php">Mi perfil</a>
+                        <a class="dropdown-item" href="perfil.php">Mi perfil</a>
                         <?php if ($rol[0]->rol === 'administrador') { ?>
-                            <a class="dropdown-item" href="../adminInicio.php">Administrar</a>
+                            <a class="dropdown-item" href="adminInicio.php">Administrar</a>
                             <div class="dropdown-divider"></div>
                         <?php } ?>
-                        <a class="dropdown-item" href="../../scripts/login/cerrarsesion.php">Cerrar sesión</a>
+                        <a class="dropdown-item" href="../scripts/login/cerrarsesion.php">Cerrar sesión</a>
                     </div>
                 <?php
                 } else {
