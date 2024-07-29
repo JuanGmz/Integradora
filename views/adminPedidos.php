@@ -319,7 +319,7 @@
                             <form method="post">
                                 <div class="row">
                                     <div class="col-8 col-lg-4">
-                                    <input type="text" class="form-control" name="busqueda" placeholder="Ingresa folio, usuario o teléfono" value="<?php echo isset($_POST['busqueda']) ? htmlspecialchars($_POST['busqueda']) : ''; ?>">
+                                    <input type="text" class="form-control" name="busqueda" required placeholder="Ingresa Folio, Usuario o Teléfono" value="<?php echo isset($_POST['busqueda']) ? htmlspecialchars($_POST['busqueda']) : ''; ?>">
                                     </div>
                                     <div class="col-4 col-lg-2">
                                         <input type="submit" class="btn btn-primary w-100" value="Buscar">
@@ -479,6 +479,8 @@
                                                                     <div class='row'>
                                                                         <div class='col-12 text-end'>
                                                                             <button type='button' class='btn btn-secondary mt-3' data-bs-dismiss='modal'>Cancelar</button>
+                                                                            ";
+                                                                            ?>
                                                                             <button type='submit' class='btn btn-primary mt-3'>Actualizar</button>
                                                                         </div>
                                                                     </div> 
@@ -487,7 +489,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                ";
+                                                <?php
                                                 }
                                                 echo "
                                             </td>

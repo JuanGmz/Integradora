@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     WHERE id_pedido = '$id_pedido'";
     $db->execute($consulta);
     $db->desconectarDB();
-    header("location: ../views/adminpedidos.php");
+    header("location: ../views/adminPedidos.php");
     exit;
 }
 ?>

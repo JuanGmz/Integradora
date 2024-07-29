@@ -149,6 +149,8 @@
                         $monto_total = $pedido[0]->costo_envio + $pedido[0]->monto_total;
                     ?>
                     <h4 class="fw-bold d-inline">Monto Total: <span class="fw-normal"><h5 class="d-inline-block">$<?= $monto_total ?></h5></span></h4><br>
+                    <p class="text-muted mb-0">Con la siguiente guía de envío podrás verificar el estado del pedido</p>
+                    <h4 class="fw-bold d-inline">Guía de envío: <span class="fw-normal"><h5 class="d-inline-block"><?= $pedido[0]->guia_de_envio ?></h5></span></h4><br>
                 </div>
             </div>
             <hr class="m-0">
@@ -159,11 +161,11 @@
             <div class="container mb-3">
                 <div class="row">
                     <?php foreach ($productos as $producto) : ?>
-                        <div class="col-12 mb-4"> 
-                            <div class="card shadow-lg">
-                                <div class="row no-gutters">
+                        <div class="col-12 mb-4 rounded"> 
+                            <div class="card shadow-lg rounded">
+                                <div class="row no-gutters rounded">
                                     <div class="col-md-4">
-                                        <img src='../img/bolsas/<?php echo $producto->img_url; ?>' class='img-fluid rounded" alt='<?php echo $producto->nombre ?>' style="border-radius: 5% 0 0 5%; height: 100%; width: 100%; object-fit: cover;">
+                                        <img src='../img/bolsas/<?php echo $producto->img_url; ?>' class='img-fluid" alt='<?php echo $producto->nombre ?>' style="height: 100%; width: 100%; object-fit: cover;">
                                     </div>
                                     <div class="col-md-8 d-flex flex-column justify-content-center align-items-center p-3">
                                         <h1 class='card-title'><?php echo $producto->nombre; ?> (<?php echo $producto->proceso; ?>)</h1>
@@ -176,6 +178,9 @@
                         </div>
                     <?php endforeach; ?>
                 </div>
+            </div>
+            <div class="row">
+                <div>Descarga el siguiente documento para verificar el estado del pedido: <?=$pedido[0]->documento_url?></div>
             </div>
         </div>
         <!-- Alerta -->

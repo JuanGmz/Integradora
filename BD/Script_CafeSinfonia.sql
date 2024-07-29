@@ -1638,6 +1638,8 @@ SELECT
 	p.fecha_hora_pedido,
 	p.monto_total,
 	p.envio,
+	p.guia_de_envio,
+	p.documento_url,
     p.costo_envio,
     d.referencia,
     d.estado,
@@ -1658,7 +1660,6 @@ JOIN
 JOIN
 	personas per ON c.id_persona = per.id_persona;
     
-USE cafe_sinfonia;
 DROP PROCEDURE IF EXISTS SP_filtrar_usuarios;
 DELIMITER $$
 create PROCEDURE SP_filtrar_usuarios(

@@ -136,7 +136,7 @@
                                                 <?php
                                                     if($pedido->estatus === "Cancelado" OR $pedido->estatus === "Finalizado") {
                                                         ?>
-                                                        <button disabled type="submit" class="btn btn-secondary btn-block m-2 mt-0 mb-0 w-100">Pedido cancelado</button>
+                                                        <button disabled type="submit" class="btn btn-secondary btn-block m-2 mt-0 mb-0 w-100 p-2">Cancelar</button>
                                                         <?php
                                                     } else {
                                                         ?>
