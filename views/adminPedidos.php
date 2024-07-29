@@ -313,13 +313,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="shadow-lg bg-light container-fluid p-3">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8 col-md-10 col-sm-12">
+                <div class="shadow-lg bg-light row p-0 m-0 p-3">
+                <div class="row m-1">
+                <div class="col-12">
                             <form method="post">
                                 <div class="row">
-                                    <div class="col-md-8 col-sm-12 mb-2">
-                                        <input type="text" class="form-control" name="busqueda" placeholder="Ingresa folio, usuario o teléfono" value="<?php echo isset($_POST['busqueda']) ? htmlspecialchars($_POST['busqueda']) : ''; ?>">
+                                <div class="col-8 col-lg-4">
+                                <input type="text" class="form-control" name="busqueda" placeholder="Ingresa folio, usuario o teléfono" value="<?php echo isset($_POST['busqueda']) ? htmlspecialchars($_POST['busqueda']) : ''; ?>">
                                     </div>
                                     <div class="col-md-4 col-sm-12">
                                         <input type="submit" class="btn btn-primary w-100" value="Buscar">
