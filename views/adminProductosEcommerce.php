@@ -479,21 +479,20 @@ if ($rol[0]->rol !== 'administrador') {
                                                             </div>
                                                             <div class='modal-body mb-3'>
                                                                 <!-- Aquí se está mostrando la imagen -->
-                                                                <form action='../scripts/adminmenu/editarImagen.php' method='POST' enctype='multipart/form-data'>
+                                                                <form action='../scripts/adminecomerce/editarimagen.php' method='POST' enctype='multipart/form-data'>
                                                                     <div class='col-12 mb-3'>
                                                                         <label for='imagen' class='form-label'>Imagen Actual</label><br>
                                                                         <img src='../img/bolsas/$bolsita->img_url' class='img-fluid' alt='imagen$bolsita->nombre'><br>
-                                                                            <small>Selecciona una nueva imagen para actualizar, si es necesario.</small>
-                                                                        </div>
-                                                                        <div class='col-12 mb-3'>
-                                                                            <label for='imagen_nueva' class='form-label'>Selecciona una nueva imagen</label>
-                                                                            <input type='file' class='form-control' id='imagen_nueva' name='imagen_nueva' accept='image/*' required>
-                                                                        </div>
-                                                                        <input type='hidden' name='id_bolsa' value='$bolsita->id_bolsa'>
-                                                                        <div class='col-12 mb-3 text-end'>
-                                                                            <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
-                                                                            <button type='submit' class='btn btn-primary'>Actualizar</button>
-                                                                        </div>
+                                                                        <small>Selecciona una nueva imagen para actualizar, si es necesario.</small>
+                                                                    </div>
+                                                                    <div class='col-12 mb-3'>
+                                                                        <label for='imagen_nueva' class='form-label'>Selecciona una nueva imagen</label>
+                                                                        <input type='file' class='form-control' id='imagen_nueva' name='imagen_nueva' accept='image/*' required>
+                                                                    </div>
+                                                                    <input type='hidden' name='id_bolsa' value='$bolsita->id_bolsa'>
+                                                                    <div class='col-12 mb-3 text-end'>
+                                                                        <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
+                                                                        <button type='submit' class='btn btn-primary'>Actualizar</button>
                                                                     </div>
                                                                 </form>
                                                             </div>
@@ -569,10 +568,10 @@ if ($rol[0]->rol !== 'administrador') {
 
                                 if (!empty($medidasDisponibles)) {
                                     echo "
-                <!-- Botón para abrir el modal de agregar medida -->
-                <button type='button' class='btn btn-primary mt-3' data-bs-toggle='modal' data-bs-target='#agregarMedidaModal_$bolsita->id_bolsa'>
-                    Agregar Medida
-                </button>";
+                        <!-- Botón para abrir el modal de agregar medida -->
+                        <button type='button' class='btn btn-primary mt-3' data-bs-toggle='modal' data-bs-target='#agregarMedidaModal_$bolsita->id_bolsa'>
+                            Agregar Medida
+                        </button>";
                                 }
 
                                 echo "
@@ -686,10 +685,10 @@ if ($rol[0]->rol !== 'administrador') {
                                                                         <div class=' mb-2'>
                                                                     <input type='number' step='0.01' name='puntaje_catacion' class='form-control' value='$bolsita->puntaje_catacion' required>
                                                                     </div>
-                                                                    <div class=' mb-2'>
-                                                                        <label class='form-label'>Imagen URL</label>
-                                                                        <input type='text' maxlength='255' name='img_url' class='form-control' value='$bolsita->img_url' required>
-                                                                    </div>
+                                                                    
+
+                                                                        <input type='hidden' maxlength='255' name='img_url' class='form-control' value='$bolsita->img_url' required>
+                                                                    
                                                                     <div class=' mt-2 text-end'>
                                                                         <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
                                                                         <button type='submit' class='btn btn-primary'>Guardar Cambios</button>
