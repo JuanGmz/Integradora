@@ -134,23 +134,28 @@
                               LIMIT ' . $offset . ', ' . $results_per_page;
                 $publicaciones = $conexion->select($query);
                 ?>
-                <div class="container mb-3 ">
-                    <div class="row justify-content-center d-flex">
+                <div class="container mb-3">
+                    <div class="row">
                         <?php foreach ($publicaciones as $publicacion) : ?>
-                            <div class='col-md-6 p-2 col-10 col-sm-6 col-lg-4 '>
-                                <div class='card blog-card shadow-lg' style="border-radius: 5% 5% 0% 0%;">
-                                    <img src='../../img/publicaciones/<?php echo $publicacion->img_url; ?>' class='coffee-image' alt='<?php echo $publicacion->titulo ?>'>
-                                    <div class='cblog-card product-card-body'>
-                                        <h5 class='blog-card-title'><?php echo $publicacion->titulo; ?></h5>
-                                        <p class='blog-card-text' style="color:black;"><?php echo $publicacion->descripcion; ?></p>
-                                        <h6 class='blog-card-subtitle mb-2 text-muted'><?php echo $publicacion->fecha; ?></h6>
+                            <div class="col-12 mb-4">
+                                <div class="card shadow-lg">
+                                    <div class="row no-gutters">
+                                        <!-- Imagen a la izquierda -->
+                                        <div class="col-md-4">
+                                            <img src='../../img/publicaciones/<?php echo $publicacion->img_url; ?>' class='img-fluid' alt='<?php echo $publicacion->titulo ?>' style="border-radius: 5% 0 0 5%; height: 100%; width: 100%; object-fit: cover;">
+                                        </div>
+                                        <!-- Contenido de texto a la derecha -->
+                                        <div class="col-md-8 d-flex flex-column justify-content-center p-3">
+                                            <h5 class='card-title'><?php echo $publicacion->titulo; ?></h5>
+                                            <p class='card-text' style="color:black;"><?php echo $publicacion->descripcion; ?></p>
+                                            <h6 class='card-subtitle mb-2 text-muted'><?php echo $publicacion->fecha; ?></h6>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         <?php endforeach; ?>
                     </div>
                 </div>
-
                 <nav aria-label="Page navigation example">
                     <ul class="pagination d-flex justify-content-center">
                         <li class="page-item<?php if ($page <= 1) {
