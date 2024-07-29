@@ -152,6 +152,40 @@ primary key(id_dbc),
 foreign key(id_bolsa) references bolsas_cafe(id_bolsa)
 );
 
+-- Procedimientos Almacenados Para Obtener Detalles de una bolsa
+DELIMITER //
+
+CREATE PROCEDURE ObtenerDetallesPorProceso(IN procesoCafe VARCHAR(100))
+BEGIN
+    SELECT 
+        bc.id_bolsa,
+        bc.nombre,
+        bc.años_cosecha,
+        bc.productor_finca,
+        bc.proceso,
+        bc.variedad,
+        bc.altura,
+        bc.aroma,
+        bc.acidez,
+        bc.sabor,
+        bc.cuerpo,
+        bc.puntaje_catacion,
+        bc.img_url,
+        GROUP_CONCAT(CONCAT(dbc.medida, ': $', dbc.precio, ' (Stock: ', dbc.stock, ')') SEPARATOR '; ') AS detalles_medidas
+    FROM 
+        bolsas_cafe bc
+    JOIN 
+        detalle_bc dbc
+    ON 
+        bc.id_bolsa = dbc.id_bolsa
+    WHERE 
+        bc.proceso = procesoCafe
+    GROUP BY
+        bc.id_bolsa;
+END //
+
+DELIMITER ;
+
 -- procedimiento almacenado para agregar una bolsa
 delimiter //
 create procedure SP_Agregar_producto_ecomerce(
@@ -333,6 +367,7 @@ id_categoria int not null,
 nombre nvarchar(150) not null,
 descripcion nvarchar (300) not null,
 img_url nvarchar(255)not null,
+estatus boolean default true,
 primary key(id_pm),
 foreign key (id_categoria) references categorias(id_categoria)
 );
@@ -1138,7 +1173,8 @@ BEGIN
 	JOIN
 		categorias AS c ON pm.id_categoria = c.id_categoria
 	WHERE
-		c.nombre = categoria
+		c.nombre = categoria and
+        pm.estatus = true 
 	ORDER BY 
 		pm.nombre ASC;
 END//
@@ -1459,11 +1495,11 @@ INSERT INTO productos_menu (id_categoria, nombre, descripcion, img_url) VALUES
 (74, null, 70), -- Pastel Red Velvet
 (75, null, 40); -- Rollos de Canela con Glaseado
 
-call SP_Registrar_usuariosAdministradores('Noe Abel','Vargas','Lopez','noe134','noelopez191119@gmail.com','micontraseñasupersegura','8715083731');
+call SP_Registrar_usuariosAdministradores('Noe Abel','Vargas','Lopez','noe134','noelopez191119@gmail.com','elseñordelosarcoiris','8715083731');
 call SP_Registrar_usuariosAdministradores('Tobias Gabriel','Rodriguez','Lujan','tlujan','totilotegabriel@gmail.com','miperro123','8716764502');
 call SP_Registrar_usuariosAdministradores('Iker Jesus','Flores','Luna','iker','iker@gmail.com','elgato123','8713923040');
 call SP_Registrar_usuariosAdministradores('Juan Alfredo','Gomez','Gonzalez','juangmz','juan@gmail.com','123juan123','8718451815');
-call SP_Registrar_usuariosClientes('Dante Raziel','Basurto','Saucedo','bune','dantin@gmail.com','lagallina123','8714307468');
+call SP_Registrar_usuariosClientes('Dante Raziel','Basurto','Saucedo','bune','dantin@gmail.com','XD123','8714307468');
 call SP_Registrar_usuariosAdministradores('Hector Armando','Caballero','Serna','hector','hector@gmail.com','123sinfonia123','8715066618');
 
 -- Ingresar domicilios
