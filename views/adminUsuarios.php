@@ -8,8 +8,7 @@
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="shortcut icon" href="../img/Sinfonía-Café-y-Cultura.webp">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/scrollbar.css">
-    <?php
+        <?php
     session_start();
     require_once '../class/database.php';
     include_once ("../scripts/funciones/funciones.php");
@@ -298,171 +297,172 @@
                     </div>
                 </div>
             </div>
- <!-- AQUI VA EL CONTENIDO -->
-<div class="col-lg-9 offset-lg-3 p-0">
-    <!-- AQUI VA EL CONTENIDO DE LA PAGINA -->
-    <div class="row p-0 m-0 bg-dark">
-        <div class="row p-3 m-0 shadow-lg d-none d-lg-flex">
-            <div class="col-3">
-                <h1 class="text-light fw-bold">Usuarios</h1>
-            </div>
-            <div class="col-9 d-flex justify-content-end align-items-center gap-3">
-                <!-- Botón para volver atrás -->
-                <a href="../index.php" class="text-decoration-none d-none d-lg-block">
-                    <i class="fa-solid fa-house fa-2x text-light"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-    <!-- Formulario de búsqueda -->
-    <div class="shadow-lg bg-light container-fluid p-3">
-        <div class="row justify-content-center">
-            <div class="col-lg-8 col-md-10 col-sm-12">
-                <form method="post">
-                    <div class="row">
-                        <div class="col-md-8 col-sm-12 mb-2">
-                            <input type="text" class="form-control" name="busqueda" placeholder="Ingresa folio, usuario o teléfono" value="<?php echo isset($_POST['busqueda']) ? htmlspecialchars($_POST['busqueda']) : ''; ?>">
-                        </div>
-                        <div class="col-md-4 col-sm-12">
-                            <input type="submit" class="btn btn-primary w-100" value="Buscar">
+            <div class="col-lg-9 offset-lg-3 p-0">
+                    <!-- AQUI VA EL CONTENIDO DE LA PAGINA -->
+                    <div class="row p-0 m-0 bg-dark">
+                        <div class="row p-3 m-0 shadow-lg bg-dark d-none d-lg-flex">
+                            <div class="col-3">
+                            <h1 class="fw-bold text-light d-none d-lg-block">Usuarios</h1>
+                             </div>
+                             <div class="col-9 d-flex justify-content-end align-items-center gap-3">
+                                <!-- Botón para volver atrás -->
+                                <a href="../index.php" class="text-decoration-none d-none d-lg-block">
+                                    <i class="fa-solid fa-house fa-2x text-light"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!-- Tabla de usuarios -->
-    <div class="row">
-        <div class="row mt-lg-3 p-3 p-lg-4 m-0">
-            <?php
-            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                $busqueda = $_POST['busqueda'];
-                $query = "CALL SP_filtrar_usuarios('$busqueda')";
-                $result = $db->select($query);
-                $query_roles = "SELECT id_rol, rol FROM roles";
-                $roles_result = $db->select($query_roles);
-
-                if (empty($result)) {
-                    echo "<div class='alert alert-warning' role='alert'>No hay usuarios registrados con este folio, usuario o teléfono.</div>";
-                } else {
-                    echo "
-                    <table class='table table-striped table-hover table-dark text-center border-3 border-black border-bottom border-start border-end'>
-                        <thead>
-                            <tr>
-                                <th scope='col'>ID Usuario</th>
-                                <th scope='col'>Nombre</th>
-                                <th scope='col'>Roles</th>
-                                <th scope='col'>Acciones</th>
-                            </tr>
-                        </thead>
-                    <tbody class='table-group-divider table-light'>";
-
-                    foreach ($result as $usuario) {
-                        $highlight = "";
-                        if (isset($_SESSION['last_user_id']) && $_SESSION['last_user_id'] == $usuario->id_usuario) {
-                            $highlight = "table-success";
-                            unset($_SESSION['last_user_id']); 
-                        }
-                        echo "
-                        <tr class='$highlight'>
-                            <td>{$usuario->id_usuario}</td>
-                            <td>{$usuario->nombres} {$usuario->apellido_paterno} {$usuario->apellido_materno}</td>
-                            <td>{$usuario->roles}</td>
-                            <td>
-                                <!-- Botón para ver detalles del usuario -->
-                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#detalleUsuario_{$usuario->id_usuario}'>
-                                    <i class='fa-solid fa-bars'></i>
-                                </button>
-                                <!-- Modal para mostrar los detalles del usuario -->
-                                <div class='modal fade' id='detalleUsuario_{$usuario->id_usuario}' tabindex='-1' aria-labelledby='detalleUsuarioLabel' aria-hidden='true'>
-                                    <div class='modal-dialog'>
-                                        <div class='modal-content'>
-                                            <div class='modal-header'>
-                                                <h1 class='modal-title fs-5' id='detalleUsuarioLabel'>Detalles del usuario</h1>
-                                                <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                                            </div>
-                                            <div class='modal-body'>
-                                                <h4 class='text-start fw-bolder mb-3'>Nombre: <span class='fw-normal fs-4'>{$usuario->nombres} {$usuario->apellido_paterno} {$usuario->apellido_materno}</span></h4>
-                                                <h4 class='text-start fw-bolder mb-3'>Correo: <span class='fw-normal fs-4'>{$usuario->correo}</span></h4>
-                                                <h4 class='text-start fw-bolder mb-3'>Teléfono: <span class='fw-normal fs-4'>{$usuario->telefono}</span></h4>
-                                                <h4 class='text-start fw-bolder mb-3'>Roles: <span class='fw-normal fs-4'>{$usuario->roles}</span></h4>
-                                            </div>
+                    <!-- Formulario de búsqueda -->
+                    <div class="shadow-lg bg-light row p-0 m-0 p-3">
+                    <div class="row m-1">
+                        <div class="col-12">
+                                <form method="post">
+                                    <div class="row">
+                                    <div class="col-8 col-lg-4">
+                                            <input type="text" class="form-control" name="busqueda" placeholder="Ingresa usuario o teléfono" value="<?php echo isset($_POST['busqueda']) ? htmlspecialchars($_POST['busqueda']) : ''; ?>">
+                                        </div>
+                                        <div class="col-4 col-lg-2">
+                                        <input type="submit" class="btn btn-primary w-100" value="Buscar">
                                         </div>
                                     </div>
-                                </div>
-                                <!-- Botón para editar el usuario -->
-                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#editarUsuario_{$usuario->id_usuario}'>
-                                    <i class='fa-solid fa-pen-to-square'></i>
-                                </button>
-                                <!-- Modal para editar el usuario -->
-                                <div class='modal fade' id='editarUsuario_{$usuario->id_usuario}' tabindex='-1' aria-labelledby='editarUsuarioLabel' aria-hidden='true'>
-                                    <div class='modal-dialog'>
-                                        <div class='modal-content'>
-                                            <div class='modal-header'>
-                                                <h1 class='modal-title fs-5' id='editarUsuarioLabel'>Editar usuario</h1>
-                                                <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                                            </div>
-                                            <div class='modal-body text-start'>
-                                                <form action='../scripts/editarusuario.php' method='post'>
-                                                    <input type='hidden' name='id_usuario' value='{$usuario->id_usuario}' readonly>
-                                                    <div class='mb-3'>
-                                                        <label for='nombre' class='form-label'>Nombre: </label>
-                                                        <input type='text' class='form-control' id='nombre' name='nombres' value='{$usuario->nombres} {$usuario->apellido_paterno} {$usuario->apellido_materno}' readonly>
-                                                    </div>";
-                                                    
-                                                    // Mostrar roles actuales y permitir eliminar si hay más de uno
-                                                    $roles = explode(', ', $usuario->roles);
-                                                    for ($i = 0; $i < count($roles); $i++) {
-                                                        $rol_actual = $roles[$i];
-                                                        echo "
-                                                        <div class='mt-2 d-flex align-items-center'>
-                                                            <label for='rol_$i' class='form-label me-2'>Rol " . ($i + 1) . "</label>
-                                                            <input type='text' class='form-control' value='$rol_actual' readonly>
-                                                            <button type='submit' name='eliminar_rol' value='$rol_actual' class='btn btn-danger ms-2'>Eliminar</button>
-                                                        </div>";
-                                                    }
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tabla de usuarios -->
+                    <div class="row mt-3 p-4 m-0">
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $busqueda = $_POST['busqueda'];
+        $query = "CALL SP_filtrar_usuarios('$busqueda')";
+        $result = $db->select($query);
+        $query_roles = "SELECT id_rol, rol FROM roles";
+        $roles_result = $db->select($query_roles);
 
-                                                    // Mostrar roles disponibles para agregar solo si tiene menos de 3 roles
-                                                    if (count($roles) < 3) {
-                                                        echo "
-                                                        <div class='mt-3'>
-                                                            <label for='rol_nuevo' class='form-label'>Agregar Rol</label>
-                                                            <select name='rol_nuevo' id='rol_nuevo' class='form-select'>
-                                                                <option value=''>Selecciona un rol</option>";
-                                                                $roles_actuales = array_map('trim', explode(',', $usuario->roles));
-                                                                foreach ($roles_result as $rol) {
-                                                                    if (!in_array($rol->rol, $roles_actuales)) {
-                                                                        echo "<option value='{$rol->id_rol}'>{$rol->rol}</option>";
-                                                                    }
-                                                                }
-                                                                echo "
-                                                            </select>
-                                                        </div>";
+        if (empty($result)) {
+            echo "<div>No hay usuarios registrados con este ID, Usuario o Teléfono.</div>";
+        } else {
+            echo "
+            <table class='table table-striped table-hover table-dark text-center border-3 border-black border-bottom border-start border-end'>
+                <thead>
+                    <tr>
+                        <th scope='col'>Nombre</th>
+                        <th scope='col' class='d-none d-md-table-cell'>Roles</th>
+                        <th scope='col'>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class='table-group-divider table-light'>";
+
+            foreach ($result as $usuario) {
+                $highlight = "";
+                if (isset($_SESSION['last_user_id']) && $_SESSION['last_user_id'] == $usuario->id_usuario) {
+                    $highlight = "table-success";
+                    unset($_SESSION['last_user_id']);
+                }
+                echo "
+                <tr class='$highlight'>
+                    <td>{$usuario->nombres} {$usuario->apellido_paterno} {$usuario->apellido_materno}</td>
+                    <td class='d-none d-md-table-cell'>{$usuario->roles}</td>
+                    <td>
+                        <!-- Botón para ver detalles del usuario -->
+                        <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#detalleUsuario_{$usuario->id_usuario}'>
+                            <i class='fa-solid fa-bars'></i>
+                        </button>
+                        <!-- Modal para mostrar los detalles del usuario -->
+                        <div class='modal fade' id='detalleUsuario_{$usuario->id_usuario}' tabindex='-1' aria-labelledby='detalleUsuarioLabel' aria-hidden='true'>
+                            <div class='modal-dialog'>
+                                <div class='modal-content'>
+                                    <div class='modal-header'>
+                                        <h1 class='modal-title fs-5' id='detalleUsuarioLabel'>Detalles del usuario</h1>
+                                        <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                    </div>
+                                    <div class='modal-body'>
+                                        <h4 class='text-start fw-bolder mb-3'>ID: <span class='fw-normal fs-4'>{$usuario->id_usuario}</span></h4>
+                                        <h4 class='text-start fw-bolder mb-3'>Nombre: <span class='fw-normal fs-4'>{$usuario->nombres} {$usuario->apellido_paterno} {$usuario->apellido_materno}</span></h4>
+                                        <h4 class='text-start fw-bolder mb-3'>Correo: <span class='fw-normal fs-4'>{$usuario->correo}</span></h4>
+                                        <h4 class='text-start fw-bolder mb-3'>Teléfono: <span class='fw-normal fs-4'>{$usuario->telefono}</span></h4>
+                                        <h4 class='text-start fw-bolder mb-3'>Roles: <span class='fw-normal fs-4'>{$usuario->roles}</span></h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Botón para editar el usuario -->
+                        <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#editarUsuario_{$usuario->id_usuario}'>
+                            <i class='fa-solid fa-pen-to-square'></i>
+                        </button>
+                        <!-- Modal para editar el usuario -->
+                        <div class='modal fade' id='editarUsuario_{$usuario->id_usuario}' tabindex='-1' aria-labelledby='editarUsuarioLabel' aria-hidden='true'>
+                            <div class='modal-dialog'>
+                                <div class='modal-content'>
+                                    <div class='modal-header'>
+                                        <h1 class='modal-title fs-5' id='editarUsuarioLabel'>Editar usuario</h1>
+                                        <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                    </div>
+                                    <div class='modal-body text-start'>
+                                        <form action='../scripts/editarusuario.php' method='post'>
+                                            <input type='hidden' name='id_usuario' value='{$usuario->id_usuario}' readonly>
+                                            <div class='mb-3'>
+                                                <label for='nombre' class='form-label'>Nombre: </label>
+                                                <input type='text' class='form-control' id='nombre' name='nombres' value='{$usuario->nombres} {$usuario->apellido_paterno} {$usuario->apellido_materno}' readonly>
+                                            </div>";
+
+                                            // Mostrar roles actuales y permitir eliminar si hay más de uno
+                                            $roles = explode(', ', $usuario->roles);
+                                            for ($i = 0; $i < count($roles); $i++) {
+                                                $rol_actual = $roles[$i];
+                                                echo "
+                                                <div class='mt-2 d-flex align-items-center'>
+                                                    <label for='rol_$i' class='form-label me-2'>Rol " . ($i + 1) . "</label>
+                                                    <input type='text' class='form-control' value='$rol_actual' readonly>
+                                                    ";
+                                                    if (count($roles) === 1) {
+                                                        echo "<button type='submit' name='eliminar_rol' value='$rol_actual' class='btn btn-danger ms-2' disabled>Eliminar</button>";
+                                                    } else {
+                                                        echo "<button type='submit' name='eliminar_rol' value='$rol_actual' class='btn btn-danger ms-2'>Eliminar</button>";
                                                     }
                                                     echo "
-                                                    <div class='modal-footer'>
-                                                        <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cerrar</button>
-                                                        <button type='submit' class='btn btn-primary'>Guardar cambios</button>
-                                                    </div>
-                                                </form>
+                                                </div>";
+                                            }
+
+                                            // Mostrar roles disponibles para agregar solo si tiene menos de 3 roles
+                                            if (count($roles) < 3) {
+                                                echo "
+                                                <div class='mt-3'>
+                                                    <label for='rol_nuevo' class='form-label'>Agregar Rol</label>
+                                                    <select name='rol_nuevo' id='rol_nuevo' class='form-select'>
+                                                        <option value=''>Selecciona un rol</option>";
+                                                        $roles_actuales = array_map('trim', explode(',', $usuario->roles));
+                                                        foreach ($roles_result as $rol) {
+                                                            if (!in_array($rol->rol, $roles_actuales)) {
+                                                                echo "<option value='{$rol->id_rol}'>{$rol->rol}</option>";
+                                                            }
+                                                        }
+                                                        echo "
+                                                    </select>
+                                                </div>";
+                                            }
+                                            echo "
+                                            <div class='modal-footer'>
+                                                <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cerrar</button>
+                                                <button type='submit' class='btn btn-primary'>Guardar cambios</button>
                                             </div>
-                                        </div>
+                                        </form>
                                     </div>
                                 </div>
-                            </td>
-                        </tr>";
-                    }
-                    echo "
-                    </tbody>
-                </table>";
-                }
+                            </div>
+                        </div>
+                    </td>
+                </tr>";
             }
-            ?>
-        </div>
-    </div>
+            echo "
+                </tbody>
+            </table>";
+        }
+    }
+    ?>
 </div>
 
-
+                </div>
             </div>
         </div>
     </div>

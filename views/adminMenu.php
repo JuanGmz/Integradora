@@ -334,7 +334,7 @@ if (isset($_SESSION["usuario"])) {
             </div>
 
             <div class="col-lg-9 offset-lg-3 p-0">
-                <!-- AQUI VA EL CONTENIDO DE LA PAGINAAAAAAAAAAAA -->
+                <!-- AQUI VA EL CONTENIDO DE LA PAGINA -->
                 <div class="row p-0 m-0 bg-dark">
                     <div class="row p-3 m-0 shadow-lg bg-dark d-none d-lg-flex">
                         <div class="col-3">
