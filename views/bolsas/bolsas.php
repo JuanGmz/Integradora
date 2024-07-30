@@ -30,7 +30,7 @@ if ($result) {
         <link rel="stylesheet" href="../../css/style.css">
     </head>
 
-    <body>
+    <body class="bagr-cafe3">
         <!-- NavBar -->
         <nav class="navbar navbar-expand-lg shadow-lg ">
             <div class="container-fluid show">
@@ -95,10 +95,14 @@ if ($result) {
         <!-- NavBar End -->
 
         <!-- Contenido -->
-        <div class="container-fluid m-0 p-0" style="background: var(--color2);">
+        <div class="container mb-5">
             <div class="row p-0 m-0">
                 <!-- E-Commerce-->
-
+                <div class='container-fluid p-3'>
+                    <!-- Título -->
+                    
+                    
+                    
 
                 <?php
 
@@ -135,28 +139,24 @@ if ($result) {
                 $bolsacafe = $conexion->select($query);
 
                 echo "
-                <div class='container-fluid bagr-cafe3 p-3'>
-                    <!-- Título -->
-                    <div class='row align-items-center'>
-                        <nav aria-label='breadcrumb' class='col-12 justify-content-center d-flex col-lg-4 col-md-7 col-sm-10'>
-                <ol class='breadcrumb mt-4'>
-                    <li class='breadcrumb-item fw-bold'><a href='../../index.php'>Inicio</a></li>
-                    <li class='breadcrumb-item fw-bold'><a href='../ecommerce.php'>Ecommerce</a></li>
-                    <li class='breadcrumb-item active' aria-current='page'>{$bolsacafe[0]->nombre}</li>
-                </ol>
-            </nav>
-                        <div class='col-12 text-center'>
+                <nav aria-label='breadcrumb' class='col-12'>
+                        <ol class='breadcrumb mt-4'>
+                        <li class='breadcrumb-item fw-bold'><a href='../../index.php'>Inicio</a></li>
+                        <li class='breadcrumb-item fw-bold'><a href='../ecommerce.php'>Ecommerce</a></li>
+                        <li class='breadcrumb-item active' aria-current='page'>{$bolsacafe[0]->nombre}</li>
+                        </ol>
+                    </nav>
+                    <div class='col-12 text-center'>
                             <h1 class='product-title mb-0'>{$bolsacafe[0]->nombre}</h1>
                             <h2 class='product-subtitle'>CH I A P A S</h2>
-                        </div>
                     </div>
                     <div class='container mt-5'>
                         <div class='row d-flex justify-content-center'>
-                            <div class='col-9 col-md-6 col-lg-4 text-sm-center'>
-                                <img src='../../img/cafes/bolsa3.webp' class='img-fluid rounded coffee-image' alt='Producto'>
+                            <div class='col-9 col-sm-5 col-md-6 col-lg-4 text-sm-center'>
+                                <img src='../../img/bolsas/{$bolsacafe[0]->img_url}' class=' rounded coffee-image' alt='Producto'>
                                 <p class='mt-3'><strong>Puntaje de catacion:</strong>{$bolsacafe[0]->puntaje_catacion}<pts</p>
                                 <div class='col-12 text-center'>
-                                    <p class='product-price' id='productPrice'>85$</p>
+                                    <p class='product-price' id='productPrice'>$" . $peso[0]->precio . ".00</p>
                                 </div>
                             </div>
                             <div class='col-12 col-md-6'>
@@ -302,7 +302,7 @@ if ($result) {
                         echo '          <span>$' . $item->precio . '</span>';
                         echo '          <span class="text-muted d-block">' . $item->proceso . '</span>';
                         echo '      </div>';
-                        echo '      <div class="ms-3">';
+                        echo '      <div class="ms-3 ">';
                         echo '          <form action="../../scripts/actualizar_carrito.php" method="POST" style="display: inline;">';
                         echo '              <div class="d-none">';
                         echo '              <input type="hidden" name="id_cliente" value="' . $cliente[0]->id_cliente  . '">';
@@ -327,7 +327,11 @@ if ($result) {
                         echo '              <button type="submit" class="btn fw-bold btn-dark fs-5 p-0" style="height: 35px; width: 35px">+</button>';
                         echo '          </form>';
                         echo '      </div>';
-                        echo '  </div>';
+                        echo '    </div>';
+                        echo '          <div class="ms-0 m-0 text-center">';
+                        echo '             <h6 class="mb-0 fw-bold">subtotal</h6>';
+                        echo '             <p class="mb-0 ">$' . $item->subtotal . '</p>';
+                        echo '          </div>';
                         echo '   <form action="../../scripts/eliminar_producto.php" method="POST" style="display:inline;">
                                 <div class="d-none">
                                     <input type="hidden" name="item_id" value="' . $item->id_dbc . '">

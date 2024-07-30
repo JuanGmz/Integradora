@@ -205,6 +205,10 @@ if (isset($_SESSION["usuario"])) {
                     echo '          </form>';
                     echo '      </div>';
                     echo '  </div>';
+                    echo '          <div class="ms-0 m-0 text-center">';
+                    echo '             <h6 class="mb-0 fw-bold">subtotal</h6>';
+                    echo '             <p class="mb-0 ">$' . $item->subtotal . '</p>';
+                    echo '          </div>';
                     echo '   <form action="../scripts/eliminar_producto.php" method="POST" style="display:inline;">
                         <div class="d-none">
                             <input type="hidden" name="item_id" value="' . $item->id_dbc . '">
