@@ -173,6 +173,9 @@ if ($_POST) {
                                 </a><br><br>
                                 <a href="adminReservas.php" class="text-light fw-bold fs-5 text-decoration-none ms-5">
                                     Administar Reservas
+                                </a><br><br>
+                                <a href="adminLugares.php" class="text-light fw-bold fs-6 text-decoration-none ms-5">
+                                    Administar Lugares
                                 </a>
                             </div>
                         </div>
@@ -332,6 +335,9 @@ if ($_POST) {
                                 </a><br><br>
                                 <a href="adminReservas.php" class="text-light fw-bold fs-6 text-decoration-none ms-5">
                                     Administar Reservas
+                                </a><br><br>
+                                <a href="adminLugares.php" class="text-light fw-bold fs-6 text-decoration-none ms-5">
+                                    Administar Lugares
                                 </a>
                             </div>
                         </div>

@@ -1,17 +1,17 @@
 <?php
-    session_start();
-    require_once '../class/database.php';
-    include_once ("../scripts/funciones/funciones.php");
-    $db = new database();
-    $db->conectarDB();
+session_start();
+require_once '../class/database.php';
+include_once ("../scripts/funciones/funciones.php");
+$db = new database();
+$db->conectarDB();
 
-    $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE p.usuario = '$_SESSION[usuario]'";
+$rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE p.usuario = '$_SESSION[usuario]'";
 
-    $rol = $db->select($rolUsuario);
+$rol = $db->select($rolUsuario);
 
-    if ($rol[0]->rol !== 'administrador') {
-        header('Location: ../index.php');
-    } 
+if ($rol[0]->rol !== 'administrador') {
+    header('Location: ../index.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -27,8 +27,8 @@
 
 <body class="bg-light">
     <div class="container-fluid m-0 h-100">
-                <!-- navbar mobile -->
-                <div class="row bg-dark d-block d-lg-none">
+        <!-- navbar mobile -->
+        <div class="row bg-dark d-block d-lg-none">
             <div class="collapse m-0 p-0" id="navbarToggleExternalContent" data-bs-theme="dark">
                 <div class="bg-dark p-4 pb-1">
                     <h5 class="text-body-emphasis h4">Administrar</h5>
@@ -36,7 +36,9 @@
                 <div class="accordion accordion-flush" id="accordionMobile">
                     <div class="accordion-item m-0 p-0 row">
                         <h2 class="accordion-header">
-                            <button class="row accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"data-bs-toggle="collapse" data-bs-target="#flush-inicio" aria-expanded="false" aria-controls="flush-inicio">
+                            <button class="row accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-inicio" aria-expanded="false"
+                                aria-controls="flush-inicio">
                                 <div class="col-6">
                                     <a href="adminInicio.php" class="text-light fw-bold text-decoration-none">
                                         <i class="fa-solid fa-house-laptop me-1"></i>
@@ -48,10 +50,12 @@
                     </div>
                     <div class="accordion-item row m-0 p-0">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-menu" aria-expanded="false" aria-controls="flush-menu">
+                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-menu" aria-expanded="false"
+                                aria-controls="flush-menu">
                                 <div class="col-8">
                                     <i class="fa-solid fa-table me-3"></i>
-                                   Menú
+                                    Menú
                                 </div>
                                 <div class="col-4 text-end">
                                     <i class="fa-solid fa-chevron-down"></i>
@@ -60,7 +64,8 @@
                         </h2>
                         <div id="flush-menu" class="accordion-collapse collapse" data-bs-parent="#accordionMobile">
                             <div class="accordion-body bg-dark">
-                                <a href="adminMenu.php" class="ms-5 text-light fw-bold fs-5 text-decoration-none" aria-current="true">
+                                <a href="adminMenu.php" class="ms-5 text-light fw-bold fs-5 text-decoration-none"
+                                    aria-current="true">
                                     Administrar Menú
                                 </a>
                             </div>
@@ -68,7 +73,9 @@
                     </div>
                     <div class="accordion-item row m-0 p-0">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-events" aria-expanded="false" aria-controls="flush-events">
+                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-events" aria-expanded="false"
+                                aria-controls="flush-events">
                                 <div class="col-8">
                                     <i class="fa-solid fa-bullhorn me-3"></i>
                                     Eventos
@@ -80,18 +87,24 @@
                         </h2>
                         <div id="flush-events" class="accordion-collapse collapse" data-bs-parent="#accordionMobile">
                             <div class="accordion-body bg-dark">
-                                <a href="adminEventos.php" class="text-light fw-bold fs-5 text-decoration-none ms-5" aria-current="true">
+                                <a href="adminEventos.php" class="text-light fw-bold fs-5 text-decoration-none ms-5"
+                                    aria-current="true">
                                     Administrar Eventos
                                 </a><br><br>
                                 <a href="adminReservas.php" class="text-light fw-bold fs-5 text-decoration-none ms-5">
                                     Administar Reservas
+                                </a><br><br>
+                                <a href="adminLugares.php" class="text-light fw-bold fs-5 text-decoration-none ms-5">
+                                    Administar Lugares
                                 </a>
                             </div>
                         </div>
                     </div>
                     <div class="accordion-item row m-0 p-0">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-ecommerce" aria-expanded="false" aria-controls="flush-ecommerce">
+                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-ecommerce" aria-expanded="false"
+                                aria-controls="flush-ecommerce">
                                 <div class="col-8">
                                     <i class="fa-solid fa-cart-arrow-down me-3"></i>
                                     E-Commerce
@@ -103,7 +116,8 @@
                         </h2>
                         <div id="flush-ecommerce" class="accordion-collapse collapse" data-bs-parent="#accordionMobile">
                             <div class="accordion-body bg-dark">
-                                <a href="adminPedidos.php" class="fw-bold fs-5 ms-5 text-light text-decoration-none" aria-current="true">
+                                <a href="adminPedidos.php" class="fw-bold fs-5 ms-5 text-light text-decoration-none"
+                                    aria-current="true">
                                     Administrar Pedidos
                                 </a><br><br>
                                 <a href="adminProductosEcommerce.php"
@@ -115,7 +129,9 @@
                     </div>
                     <div class="accordion-item row m-0 p-0">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-blog" aria-expanded="false" aria-controls="flush-blog">
+                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-blog" aria-expanded="false"
+                                aria-controls="flush-blog">
                                 <div class="col-8">
                                     <i class="fa-solid fa-blog me-3"></i>
                                     Publicaciones
@@ -127,8 +143,8 @@
                         </h2>
                         <div id="flush-blog" class="accordion-collapse collapse" data-bs-parent="#accordionMobile">
                             <div class="accordion-body bg-dark">
-                                <a href="adminPublicaciones.php" class="fw-bold fs-5 ms-5 text-light text-decoration-none"
-                                    aria-current="true">
+                                <a href="adminPublicaciones.php"
+                                    class="fw-bold fs-5 ms-5 text-light text-decoration-none" aria-current="true">
                                     Administrar Publicaciones
                                 </a>
                             </div>
@@ -136,7 +152,9 @@
                     </div>
                     <div class="accordion-item row m-0 p-0">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-rewards" aria-expanded="false" aria-controls="flush-rewards">
+                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-rewards" aria-expanded="false"
+                                aria-controls="flush-rewards">
                                 <div class="col-8">
                                     <i class="fa-solid fa-medal me-3"></i>
                                     Recompensas
@@ -148,7 +166,8 @@
                         </h2>
                         <div id="flush-rewards" class="accordion-collapse collapse" data-bs-parent="#accordionMobile">
                             <div class="accordion-body bg-dark">
-                                <a href="adminRecompensas.php" class="fw-bold fs-5 ms-5 text-light text-decoration-none" aria-current="true">
+                                <a href="adminRecompensas.php" class="fw-bold fs-5 ms-5 text-light text-decoration-none"
+                                    aria-current="true">
                                     Administrar Recompensas
                                 </a>
                             </div>
@@ -158,7 +177,9 @@
             </div>
             <nav class="navbar navbar-dark bg-dark">
                 <div class="container-fluid">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <h1 class="fw-bold text-light pt-2 me-auto">Pedidos</h1>
@@ -191,7 +212,9 @@
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-menu" aria-expanded="false" aria-controls="flush-menu">
+                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-menu" aria-expanded="false"
+                                aria-controls="flush-menu">
                                 <div class="col-6">
                                     <i class="fa-solid fa-table me-1"></i>
                                     Menú
@@ -203,7 +226,8 @@
                         </h2>
                         <div id="flush-menu" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
                             <div class="accordion-body bg-dark">
-                                <a href="adminMenu.php" class="ms-5 text-light fw-bold fs-6 text-decoration-none" aria-current="true">
+                                <a href="adminMenu.php" class="ms-5 text-light fw-bold fs-6 text-decoration-none"
+                                    aria-current="true">
                                     Administrar Menú
                                 </a>
                             </div>
@@ -211,7 +235,9 @@
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-events" aria-expanded="false" aria-controls="flush-events">
+                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-events" aria-expanded="false"
+                                aria-controls="flush-events">
                                 <div class="col-6">
                                     <i class="fa-solid fa-bullhorn me-1"></i>
                                     Eventos
@@ -223,18 +249,24 @@
                         </h2>
                         <div id="flush-events" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
                             <div class="accordion-body bg-dark">
-                                <a href="adminEventos.php" class="text-light fw-bold fs-6 text-decoration-none ms-5" aria-current="true">
+                                <a href="adminEventos.php" class="text-light fw-bold fs-6 text-decoration-none ms-5"
+                                    aria-current="true">
                                     Administrar Eventos
                                 </a><br><br>
                                 <a href="adminReservas.php" class="text-light fw-bold fs-6 text-decoration-none ms-5">
                                     Administar Reservas
+                                </a><br><br>
+                                <a href="adminLugares.php" class="text-light fw-bold fs-6 text-decoration-none ms-5">
+                                    Administar Lugares
                                 </a>
                             </div>
                         </div>
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-ecommerce" aria-expanded="false" aria-controls="flush-ecommerce">
+                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-ecommerce" aria-expanded="false"
+                                aria-controls="flush-ecommerce">
                                 <div class="col-8">
                                     <i class="fa-solid fa-cart-arrow-down me-1"></i>
                                     E-Commerce
@@ -246,10 +278,12 @@
                         </h2>
                         <div id="flush-ecommerce" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
                             <div class="accordion-body bg-dark">
-                                <a href="adminPedidos.php" class="fw-bold fs-6 ms-5 text-light text-decoration-none" aria-current="true">
+                                <a href="adminPedidos.php" class="fw-bold fs-6 ms-5 text-light text-decoration-none"
+                                    aria-current="true">
                                     Administrar Pedidos
                                 </a><br><br>
-                                <a href="adminProductosEcommerce.php" class="fw-bold fs-6 ms-5 text-light text-decoration-none">
+                                <a href="adminProductosEcommerce.php"
+                                    class="fw-bold fs-6 ms-5 text-light text-decoration-none">
                                     Administrar Productos
                                 </a>
                             </div>
@@ -257,7 +291,9 @@
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-blog" aria-expanded="false" aria-controls="flush-blog">
+                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-blog" aria-expanded="false"
+                                aria-controls="flush-blog">
                                 <div class="col-8">
                                     <i class="fa-solid fa-blog me-1"></i>
                                     Publicaciones
@@ -269,7 +305,8 @@
                         </h2>
                         <div id="flush-blog" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
                             <div class="accordion-body bg-dark">
-                                <a href="adminPublicaciones.php" class="fw-bold fs-6 ms-5 text-light text-decoration-none" aria-current="true">
+                                <a href="adminPublicaciones.php"
+                                    class="fw-bold fs-6 ms-5 text-light text-decoration-none" aria-current="true">
                                     Administrar Publicaciones
                                 </a>
                             </div>
@@ -277,7 +314,9 @@
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-rewards" aria-expanded="false" aria-controls="flush-rewards">
+                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-rewards" aria-expanded="false"
+                                aria-controls="flush-rewards">
                                 <div class="col-8">
                                     <i class="fa-solid fa-medal me-1"></i>
                                     Recompensas
@@ -289,7 +328,8 @@
                         </h2>
                         <div id="flush-rewards" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
                             <div class="accordion-body bg-dark">
-                                <a href="adminRecompensas.php" class="fw-bold fs-6 ms-5 text-light text-decoration-none" aria-current="true">
+                                <a href="adminRecompensas.php" class="fw-bold fs-6 ms-5 text-light text-decoration-none"
+                                    aria-current="true">
                                     Administrar Recompensa
                                 </a>
                             </div>
@@ -319,7 +359,9 @@
                             <form method="post">
                                 <div class="row">
                                     <div class="col-8 col-lg-4">
-                                    <input type="text" class="form-control" name="busqueda" required placeholder="Ingresa Folio, Usuario o Teléfono" value="<?php echo isset($_POST['busqueda']) ? htmlspecialchars($_POST['busqueda']) : ''; ?>">
+                                        <input type="text" class="form-control" name="busqueda" required
+                                            placeholder="Ingresa Folio, Usuario o Teléfono"
+                                            value="<?php echo isset($_POST['busqueda']) ? htmlspecialchars($_POST['busqueda']) : ''; ?>">
                                     </div>
                                     <div class="col-4 col-lg-2">
                                         <input type="submit" class="btn btn-primary w-100" value="Buscar">
@@ -407,18 +449,18 @@
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>";
-                                                                        foreach ($result as $detalle) {
-                                                                            if ($detalle->id_pedido == $pedido->id_pedido) {
-                                                                                echo "
+                                        foreach ($result as $detalle) {
+                                            if ($detalle->id_pedido == $pedido->id_pedido) {
+                                                echo "
                                                                                     <tr>
                                                                                         <td>{$detalle->bolsa}</td>
                                                                                         <td>{$detalle->medida}</td>
                                                                                         <td>{$detalle->cantidad}</td>
                                                                                     </tr>";
-                                                                            }
-                                                                        }
+                                            }
+                                        }
 
-                                                                        echo "
+                                        echo "
                                                                     </tbody>
                                                                 </table>
                                                             </div>
@@ -426,12 +468,12 @@
                                                     </div>
                                                 </div>
                                                 ";
-                                                if ($pedido->estatus == 'Cancelado') {
-                                                    echo "
+                                        if ($pedido->estatus == 'Cancelado') {
+                                            echo "
                                                     <button disabled type='submit' class='btn btn-secondary btn-block'><i class='fa-solid fa-pen-to-square'></i></button>
                                                     ";
-                                                } else {
-                                                echo "
+                                        } else {
+                                            echo "
                                                 <!-- Botón para editar el pedido -->
                                                 <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#editarProducto_{$pedido->id_pedido}'>
                                                     <i class='fa-solid fa-pen-to-square'></i>
@@ -455,16 +497,16 @@
                                                                         <div class='col-6'>
                                                                             <label for='estatus' class='form-label'>Estatus</label>
                                                                             <select name='estatus' id='estatus' class='form-select'>";
-                                                                                $estados = array('Finalizado', 'Pendiente', 'Cancelado');
-                                                                                foreach ($estados as $estado) {
-                                                                                    if ($estado == $pedido->estatus) {
-                                                                                        echo "<option value='{$estado}' " . (($pedido->estatus == 'Cancelado' || $pedido->estatus == 'Finalizado') ? 'disabled' : '')  . " selected>{$estado}</option>";
+                                            $estados = array('Finalizado', 'Pendiente', 'Cancelado');
+                                            foreach ($estados as $estado) {
+                                                if ($estado == $pedido->estatus) {
+                                                    echo "<option value='{$estado}' " . (($pedido->estatus == 'Cancelado' || $pedido->estatus == 'Finalizado') ? 'disabled' : '') . " selected>{$estado}</option>";
 
-                                                                                    } else {
-                                                                                        echo "<option value='{$estado}' " . ($pedido->estatus == 'Cancelado' || $pedido->estatus == 'Finalizado' ? 'disabled' : '') . ">{$estado}</option>";
-                                                                                    }
-                                                                                }
-                                                                                echo "
+                                                } else {
+                                                    echo "<option value='{$estado}' " . ($pedido->estatus == 'Cancelado' || $pedido->estatus == 'Finalizado' ? 'disabled' : '') . ">{$estado}</option>";
+                                                }
+                                            }
+                                            echo "
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -480,18 +522,18 @@
                                                                         <div class='col-12 text-end'>
                                                                             <button type='button' class='btn btn-secondary mt-3' data-bs-dismiss='modal'>Cancelar</button>
                                                                             ";
-                                                                            ?>
-                                                                            <button type='submit' class='btn btn-primary mt-3'>Actualizar</button>
-                                                                        </div>
-                                                                    </div> 
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <?php
-                                                }
-                                                echo "
+                                            ?>
+                                            <button type='submit' class='btn btn-primary mt-3'>Actualizar</button>
+                                        </div>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        <?php
+                                        }
+                                        echo "
                                             </td>
                                         </tr>";
                                         $pedidosMostrados[] = $pedido->id_pedido;
@@ -502,31 +544,31 @@
                             }
                         }
                         ?>
-                </div>
-            </div>
-        </div>
-     </div>
+    </div>
+    </div>
+    </div>
+    </div>
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const estado = document.getElementById('estado');
-        const form = document.getElementById('pedidoForm');
-        
-        function toggleForm(disabled) {
-            const inputs = form.querySelectorAll('input, select, textarea, button:not([type="submit"])');
-            inputs.forEach(input => input.disabled = disabled);
-        }
+        document.addEventListener('DOMContentLoaded', function () {
+            const estado = document.getElementById('estado');
+            const form = document.getElementById('pedidoForm');
 
-        estado.addEventListener('change', function() {
+            function toggleForm(disabled) {
+                const inputs = form.querySelectorAll('input, select, textarea, button:not([type="submit"])');
+                inputs.forEach(input => input.disabled = disabled);
+            }
+
+            estado.addEventListener('change', function () {
+                toggleForm(estado.value === 'cancelado');
+            });
+
+            // Verificar el estado inicial al cargar la página
             toggleForm(estado.value === 'cancelado');
         });
-
-        // Verificar el estado inicial al cargar la página
-        toggleForm(estado.value === 'cancelado');
-    });
-</script>
-        <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://kit.fontawesome.com/b820f07375.js" crossorigin="anonymous"></script>
-        <script src="../script/script.js"></script>
+    </script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/b820f07375.js" crossorigin="anonymous"></script>
+    <script src="../script/script.js"></script>
 </body>
 
 </html>

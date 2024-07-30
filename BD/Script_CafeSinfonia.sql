@@ -271,9 +271,9 @@ id_lugar INT AUTO_INCREMENT PRIMARY KEY,
 nombre NVARCHAR(100) NOT NULL,
 ciudad NVARCHAR(100) NOT NULL,
 estado NVARCHAR(100) NOT NULL,
-codigo_postal NVARCHAR(10),
-calle nvarchar(100), 
-colonia nvarchar(100),
+codigo_postal NVARCHAR(10) not null,
+calle nvarchar(100) not null, 
+colonia nvarchar(100) not null,
 descripcion NVARCHAR(255)
 );
 
@@ -287,7 +287,7 @@ descripcion nvarchar(200) not null,
 fecha_evento date not null,
 hora_inicio time not null,      
 hora_fin time not null,
-capacidad int not null,
+boletos int not null,
 precio_boleto double not null, 
 disponibilidad int,
 img_url nvarchar(255)not null,
@@ -1483,15 +1483,15 @@ call SP_insert_domicilios(5, 'Luisa Cruz', 'Coahuila', 'Torreón', '27090', 'Las
 (13, 'Patricia Rojas', 'Coahuila', 'Torreón', '27170', 'Villa Florida', 'Boulevard de las Rosas #3839', '8712345695')
 (14, 'Roberto Vazquez', 'Coahuila', 'Torreón', '27180', 'Los Ángeles', 'Calle de los Sauces #4041', '8712345696');
 */
-INSERT INTO ubicacion_lugares (nombre, ciudad, estado, descripcion)
-VALUES 
-('Cafetería Sinfonía Café', 'Torreón', 'Coahuila', 'Cafetería acogedora con ambiente musical.'),
-('Teatro Nazas', 'Torreón', 'Coahuila', 'Teatro emblemático de la ciudad, conocido por sus eventos culturales.'),
-('Teatro Isauro Martínez', 'Torreón', 'Coahuila', 'Teatro histórico y culturalmente importante en Torreón.');
+INSERT INTO ubicacion_lugares (nombre, ciudad, estado, codigo_postal, calle, colonia, descripcion)
+VALUES
+('Cafetería Sinfonía Café', 'Torreón', 'Coahuila', '27000', 'Av. Matamoros 1102', 'Centro', 'Cafetería acogedora con ambiente musical.'),
+('Teatro Nazas', 'Torreón', 'Coahuila', '27435', 'Cepeda 155', 'Centro', 'Teatro emblemático de la ciudad, conocido por sus eventos culturales.'),
+('Teatro Isauro Martínez', 'Torreón', 'Coahuila', '27000', 'Avenida Matamoros 266', 'Centro', 'Teatro histórico y culturalmente importante en Torreón.');
 
 INSERT INTO eventos (
     id_lugar, id_categoria, nombre, tipo, descripcion, fecha_evento, 
-    hora_inicio, hora_fin, capacidad, precio_boleto, disponibilidad, 
+    hora_inicio, hora_fin, boletos, precio_boleto, disponibilidad, 
     img_url, fecha_publicacion
 ) VALUES
 (1, 1, 'Noches de Jazz', 'Gratuito', 'Disfruta de una velada con música jazz en vivo.', '2024-08-15', '19:00:00', '21:00:00', 50, 0.0, 50, 'img/jazz.jpg', '2024-07-09'),

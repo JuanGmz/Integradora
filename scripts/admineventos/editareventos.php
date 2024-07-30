@@ -18,9 +18,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         fecha_evento = '$fecha', 
         hora_inicio = '$horainicio', 
         hora_fin = '$horafin',
-        capacidad = '$cap', 
+        boletos = '$boletos', 
         precio_boleto = '$costo', 
-        disponibilidad = '$cap',
         fecha_publicacion = '$fechaPub'
         WHERE id_evento = '$id_evento'";
     $db->execute($consulta);
