@@ -94,6 +94,9 @@ if (isset($_SESSION["usuario"])) {
                                 </a><br><br>
                                 <a href="adminReservas.php" class="text-light fw-bold fs-5 text-decoration-none ms-5">
                                     Administar Reservas
+                                </a><br><br>
+                                <a href="adminlugares.php" class="text-light fw-bold fs-5 text-decoration-none ms-5">
+                                    Administar Lugares
                                 </a>
                             </div>
                         </div>
@@ -253,6 +256,9 @@ if (isset($_SESSION["usuario"])) {
                                 </a><br><br>
                                 <a href="adminReservas.php" class="text-light fw-bold fs-6 text-decoration-none ms-5">
                                     Administar Reservas
+                                </a><br><br>
+                                <a href="adminlugares.php" class="text-light fw-bold fs-6 text-decoration-none ms-5">
+                                    Administar Lugares
                                 </a>
                             </div>
                         </div>
@@ -547,11 +553,11 @@ if (isset($_SESSION["usuario"])) {
                                                                         <th>Acciones</th>
                                                                     </thead>
                                                                     <tbody class='table-group-divider'>";
-                                                                        //Consulta de productos_menu relacionados con este detalle
-                                                                        $queryMedidas = "SELECT medida, precio FROM detalle_productos_menu WHERE id_pm = $producto->id_pm";
-                                                                        $medidas = $db->select($queryMedidas);
-                                                                        foreach ($medidas as $medida_precio) {
-                                                                            echo /*html*/"<tr>
+                                //Consulta de productos_menu relacionados con este detalle
+                                $queryMedidas = "SELECT medida, precio FROM detalle_productos_menu WHERE id_pm = $producto->id_pm";
+                                $medidas = $db->select($queryMedidas);
+                                foreach ($medidas as $medida_precio) {
+                                    echo /*html*/ "<tr>
                                                                                     <td>$medida_precio->medida</td>
                                                                                     <td>$medida_precio->precio</td>
                                                                                     <td>
@@ -562,8 +568,8 @@ if (isset($_SESSION["usuario"])) {
                                                                                             <button type='submit' class='btn btn-danger'><i class='fa-solid fa-trash'></i></button>
                                                                                         </form>
                                                                                 </tr>";
-                                                                        }
-                                                                        echo /*html*/ "
+                                }
+                                echo /*html*/ "
                                                                     </tbody>
                                                                 </table>
                                                                 <div class='row'>
@@ -618,13 +624,13 @@ if (isset($_SESSION["usuario"])) {
                                                                             <div class='col-12 mb-3'>
                                                                                 <label class='form-label'>Categoría</label>
                                                                                 <select type='text' maxlength='30' name='categoria' class='form-control' value='$producto->categoria' required>";
-                                    foreach ($categorias as $categoria) {
-                                        $selected = (isset($_POST['categoria']) && $_POST['categoria'] == $categoria->id_categoria) ? 'selected' : '';
-                                        echo "<option value='" . htmlspecialchars($categoria->id_categoria) . "' $selected>" . htmlspecialchars($categoria->nombre) . "</option>";
-                                    }
-                                    $checked = ($producto->estatus == 1) ? 'checked' : '';
-                                    $labelText = ($producto->estatus == 1) ? 'Activo' : 'Inactivo';
-                                    echo /*html*/ "</select>
+                                foreach ($categorias as $categoria) {
+                                    $selected = (isset($_POST['categoria']) && $_POST['categoria'] == $categoria->id_categoria) ? 'selected' : '';
+                                    echo "<option value='" . htmlspecialchars($categoria->id_categoria) . "' $selected>" . htmlspecialchars($categoria->nombre) . "</option>";
+                                }
+                                $checked = ($producto->estatus == 1) ? 'checked' : '';
+                                $labelText = ($producto->estatus == 1) ? 'Activo' : 'Inactivo';
+                                echo /*html*/ "</select>
                                                                             </div>
                                                                             <div class='col-12 mb-3'>
                                                                             <div class='form-check form-switch'>
