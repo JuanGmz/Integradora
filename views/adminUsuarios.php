@@ -359,9 +359,7 @@
                             <form method="post">
                                 <div class="row">
                                     <div class="col-8 col-lg-4">
-                                        <input type="text" required class="form-control" name="busqueda"
-                                            placeholder="Ingresa ID, Usuario o Teléfono"
-                                            value="<?php echo isset($_POST['busqueda']) ? htmlspecialchars($_POST['busqueda']) : ''; ?>">
+                                        <input type="text" required class="form-control" name="busqueda" placeholder="Ingresa ID, Usuario o Teléfono" value="<?php echo isset($_POST['busqueda']) ? htmlspecialchars($_POST['busqueda']) : ''; ?>">
                                     </div>
                                     <div class="col-4 col-lg-2">
                                         <input type="submit" class="btn btn-primary w-100" value="Buscar">
@@ -388,16 +386,16 @@
                             echo "<div>No hay usuarios registrados con este ID, Usuario o Teléfono.</div>";
                         } else {
                             echo "
-            <table class='table table-striped table-hover table-dark text-center border-3 border-black border-bottom border-start border-end'>
-                <thead>
-                    <tr>
-                        <th scope='col'>Usuario</th>
-                        <th scope='col' class='d-none d-md-table-cell'>Nombre</th>
-                        <th scope='col' class='d-none d-md-table-cell'>Roles</th>
-                        <th scope='col'>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody class='table-group-divider table-light'>";
+                            <table class='table table-striped table-hover table-dark text-center border-3 border-black border-bottom border-start border-end'>
+                                <thead>
+                                    <tr>
+                                        <th scope='col'>Usuario</th>
+                                        <th scope='col' class='d-none d-md-table-cell'>Nombre</th>
+                                        <th scope='col' class='d-none d-md-table-cell'>Roles</th>
+                                        <th scope='col'>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody class='table-group-divider table-light'>";
 
                             foreach ($result as $usuario) {
                                 $highlight = "";
@@ -406,79 +404,79 @@
                                     unset($_SESSION['last_user_id']);
                                 }
                                 echo "
-                <tr class='$highlight'>
-                    <th>{$usuario->usuario}</th>
-                    <td class='d-none d-md-table-cell'>{$usuario->nombres} {$usuario->apellido_paterno} {$usuario->apellido_materno}</td>
-                    <td class='d-none d-md-table-cell'>{$usuario->roles}</td>
-                    <td>
-                        <!-- Botón para ver detalles del usuario -->
-                        <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#detalleUsuario_{$usuario->id_usuario}'>
-                            <i class='fa-solid fa-bars'></i>
-                        </button>
-                        <!-- Modal para mostrar los detalles del usuario -->
-                        <div class='modal fade' id='detalleUsuario_{$usuario->id_usuario}' tabindex='-1' aria-labelledby='detalleUsuarioLabel' aria-hidden='true'>
-                            <div class='modal-dialog'>
-                                <div class='modal-content'>
-                                    <div class='modal-header'>
-                                        <h1 class='modal-title fs-5' id='detalleUsuarioLabel'>Detalles del usuario</h1>
-                                        <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                                    </div>
-                                    <div class='modal-body'>
-                                        <h4 class='text-start fw-bolder mb-3'>ID: <span class='fw-normal fs-4'>{$usuario->id_usuario}</span></h4>
-                                        <h4 class='text-start fw-bolder mb-3'>Usuario: <span class='fw-normal fs-4'>{$usuario->usuario}</span></h4>
-                                        <h4 class='text-start fw-bolder mb-3'>Nombre: <span class='fw-normal fs-4'>{$usuario->nombres} {$usuario->apellido_paterno} {$usuario->apellido_materno}</span></h4>
-                                        <h4 class='text-start fw-bolder mb-3'>Correo: <span class='fw-normal fs-4'>{$usuario->correo}</span></h4>
-                                        <h4 class='text-start fw-bolder mb-3'>Teléfono: <span class='fw-normal fs-4'>{$usuario->telefono}</span></h4>
-                                        <h4 class='text-start fw-bolder mb-3'>Roles: <span class='fw-normal fs-4'>{$usuario->roles}</span></h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Botón para editar el usuario -->
-                        <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#editarUsuario_{$usuario->id_usuario}'>
-                            <i class='fa-solid fa-pen-to-square'></i>
-                        </button>
-                        <!-- Modal para editar el usuario -->
-                        <div class='modal fade' id='editarUsuario_{$usuario->id_usuario}' tabindex='-1' aria-labelledby='editarUsuarioLabel' aria-hidden='true'>
-                            <div class='modal-dialog'>
-                                <div class='modal-content'>
-                                    <div class='modal-header'>
-                                        <h1 class='modal-title fs-5' id='editarUsuarioLabel'>Editar usuario</h1>
-                                        <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                                    </div>
-                                    <div class='modal-body text-start'>
-                                        <form action='../scripts/editarusuario.php' method='post'>
-                                            <input type='hidden' name='id_usuario' value='{$usuario->id_usuario}' readonly>
-                                            <div class='mb-3'>
-                                                <label for='nombre' class='form-label'>Nombre: </label>
-                                                <input type='text' class='form-control' id='nombre' name='nombres' value='{$usuario->nombres} {$usuario->apellido_paterno} {$usuario->apellido_materno}' readonly>
-                                            </div>";
+                                <tr class='$highlight'>
+                                    <th>{$usuario->usuario}</th>
+                                    <td class='d-none d-md-table-cell'>{$usuario->nombres} {$usuario->apellido_paterno} {$usuario->apellido_materno}</td>
+                                    <td class='d-none d-md-table-cell'>{$usuario->roles}</td>
+                                    <td>
+                                        <!-- Botón para ver detalles del usuario -->
+                                        <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#detalleUsuario_{$usuario->id_usuario}'>
+                                            <i class='fa-solid fa-bars'></i>
+                                        </button>
+                                        <!-- Modal para mostrar los detalles del usuario -->
+                                        <div class='modal fade' id='detalleUsuario_{$usuario->id_usuario}' tabindex='-1' aria-labelledby='detalleUsuarioLabel' aria-hidden='true'>
+                                            <div class='modal-dialog'>
+                                                <div class='modal-content'>
+                                                    <div class='modal-header'>
+                                                        <h1 class='modal-title fs-5' id='detalleUsuarioLabel'>Detalles del usuario</h1>
+                                                        <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                                    </div>
+                                                    <div class='modal-body'>
+                                                        <h4 class='text-start fw-bolder mb-3'>ID: <span class='fw-normal fs-4'>{$usuario->id_usuario}</span></h4>
+                                                        <h4 class='text-start fw-bolder mb-3'>Usuario: <span class='fw-normal fs-4'>{$usuario->usuario}</span></h4>
+                                                        <h4 class='text-start fw-bolder mb-3'>Nombre: <span class='fw-normal fs-4'>{$usuario->nombres} {$usuario->apellido_paterno} {$usuario->apellido_materno}</span></h4>
+                                                        <h4 class='text-start fw-bolder mb-3'>Correo: <span class='fw-normal fs-4'>{$usuario->correo}</span></h4>
+                                                        <h4 class='text-start fw-bolder mb-3'>Teléfono: <span class='fw-normal fs-4'>{$usuario->telefono}</span></h4>
+                                                        <h4 class='text-start fw-bolder mb-3'>Roles: <span class='fw-normal fs-4'>{$usuario->roles}</span></h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Botón para editar el usuario -->
+                                        <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#editarUsuario_{$usuario->id_usuario}'>
+                                            <i class='fa-solid fa-pen-to-square'></i>
+                                        </button>
+                                        <!-- Modal para editar el usuario -->
+                                        <div class='modal fade' id='editarUsuario_{$usuario->id_usuario}' tabindex='-1' aria-labelledby='editarUsuarioLabel' aria-hidden='true'>
+                                            <div class='modal-dialog'>
+                                                <div class='modal-content'>
+                                                    <div class='modal-header'>
+                                                        <h1 class='modal-title fs-5' id='editarUsuarioLabel'>Editar usuario</h1>
+                                                        <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                                    </div>
+                                                    <div class='modal-body text-start'>
+                                                        <form action='../scripts/editarusuario.php' method='post'>
+                                                            <input type='hidden' name='id_usuario' value='{$usuario->id_usuario}' readonly>
+                                                            <div class='mb-3'>
+                                                                <label for='nombre' class='form-label'>Nombre: </label>
+                                                                <input type='text' class='form-control' id='nombre' name='nombres' value='{$usuario->nombres} {$usuario->apellido_paterno} {$usuario->apellido_materno}' readonly>
+                                                            </div>";
 
                                 // Mostrar roles actuales y permitir eliminar si hay más de uno
                                 $roles = explode(', ', $usuario->roles);
                                 for ($i = 0; $i < count($roles); $i++) {
                                     $rol_actual = $roles[$i];
                                     echo "
-                                                <div class='mt-2 d-flex align-items-center'>
-                                                    <label for='rol_$i' class='form-label me-2'>Rol " . ($i + 1) . "</label>
-                                                    <input type='text' class='form-control' value='$rol_actual' readonly>
-                                                    ";
-                                    if (count($roles) === 1) {
+                                    <div class='mt-2 d-flex align-items-center'>
+                                        <label for='rol_$i' class='form-label me-2'>Rol " . ($i + 1) . "</label>
+                                        <input type='text' class='form-control' value='$rol_actual' readonly>
+                                        ";
+                                    if (count($roles) === 1 || $rol_actual === 'cliente') {
                                         echo "<button type='submit' name='eliminar_rol' value='$rol_actual' class='btn btn-danger ms-2' disabled>Eliminar</button>";
                                     } else {
                                         echo "<button type='submit' name='eliminar_rol' value='$rol_actual' class='btn btn-danger ms-2'>Eliminar</button>";
                                     }
                                     echo "
-                                                </div>";
+                                    </div>";
                                 }
 
                                 // Mostrar roles disponibles para agregar solo si tiene menos de 3 roles
                                 if (count($roles) < 3) {
                                     echo "
-                                                <div class='mt-3'>
-                                                    <label for='rol_nuevo' class='form-label'>Agregar Rol</label>
-                                                    <select name='rol_nuevo' id='rol_nuevo' class='form-select'>
-                                                        <option value=''>Selecciona un rol</option>";
+                                    <div class='mt-3'>
+                                        <label for='rol_nuevo' class='form-label'>Agregar Rol</label>
+                                        <select name='rol_nuevo' id='rol_nuevo' class='form-select'>
+                                            <option value=''>Selecciona un rol</option>";
                                     $roles_actuales = array_map('trim', explode(',', $usuario->roles));
                                     foreach ($roles_result as $rol) {
                                         if (!in_array($rol->rol, $roles_actuales)) {
@@ -486,31 +484,31 @@
                                         }
                                     }
                                     echo "
-                                                    </select>
-                                                </div>";
+                                        </select>
+                                    </div>";
                                 }
                                 echo "
-                                            <div class='modal-footer'>
-                                                <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cerrar</button>
-                                                <button type='submit' class='btn btn-primary'>Guardar cambios</button>
+                                                            <div class='modal-footer'>
+                                                                <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cerrar</button>
+                                                                <button type='submit' class='btn btn-primary'>Guardar cambios</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>";
+                                        </div>
+                                    </td>
+                                </tr>";
                             }
                             echo "
-                </tbody>
-            </table>";
+                                </tbody>
+                            </table>";
                         }
                     }
                     ?>
                 </div>
-
             </div>
+
         </div>
     </div>
     </div>
