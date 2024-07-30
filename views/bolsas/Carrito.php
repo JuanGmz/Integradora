@@ -219,8 +219,12 @@
                                 echo '<div class="container p-0">';
                                 echo '<div class="d-flex justify-content-between align-items-center mb-3">';
                                 echo '  <div class="d-flex align-items-center">';
-                                echo '      <img src="../../img/cafes/bolsa2.webp" class="img-fluid rounded w-25 h-25" alt="Producto">';
-                                echo '      <div class="ms-3 w-25">';
+                                echo '  <div class="carousel-item-wrapper w-25 h-25">';
+                                echo '      <img src="../../img/bolsas/' . $item->img_url . '" class="img-fluid rounded w-100 h-100" alt="Producto">';
+                                echo '      <div class="overlay">';
+                                echo '      <h4 class="medida text-white">' . $item->medida . '</h4>';
+                                echo '      </div>';
+                                echo '  </div>';                                echo '      <div class="ms-3 w-25">';
                                 echo '          <h6 class="mb-0 fw-bold">' . $item->producto . '</h6>';
                                 echo '          <span>$' . $item->precio . '</span>';
                                 echo '          <span class="text-muted d-block">' . $item->proceso . '</span>';
