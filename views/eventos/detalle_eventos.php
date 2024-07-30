@@ -1,7 +1,8 @@
 <?php
 session_start();
 
-include("../../class/database.php");
+include ("../../class/database.php");
+include ("../../scripts/funciones/funciones.php");
 
 // Crear una nueva instancia de la clase Database y conectar a la base de datos
 $conexion = new Database();
@@ -10,13 +11,25 @@ $conexion->conectarDB();
 // Obtener el ID del evento desde la URL
 $id_evento = $_GET['id'];
 // Consultar los detalles del evento desde la base de datos
-$sql = "SELECT * FROM eventos WHERE id_evento = $id_evento ";
+$sql = "SELECT e.*,
+        ul.nombre as lugar, 
+        ul.descripcion as ul_desc,
+        ul.colonia,
+        ul.ciudad,
+        ul.estado,
+        ul.codigo_postal,
+        ul.calle,
+        ul.lat,
+        ul.lng
+        from eventos e 
+        join ubicacion_lugares ul on e.id_lugar = ul.id_lugar 
+        where e.id_evento = $id_evento";
 $result = $conexion->select($sql);
 
 if ($result) {
     // Si se encontró el evento, mostrar sus detalles
     $evento = $result[0]; // Asumimos que select devuelve una matriz de resultados
-?>
+    ?>
     <!DOCTYPE html>
     <html lang="en">
 
@@ -27,7 +40,13 @@ if ($result) {
         <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="../../css/style.css">
         <link rel="shortcut icon" href="../../img/Sinfonía-Café-y-Cultura.webp">
-
+        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+        <style>
+            #map {
+                height: 450px;
+                width: 600px;
+            }
+        </style>
     </head>
 
     <body>
@@ -37,7 +56,8 @@ if ($result) {
                 <a class="navbar-brand" href="../index.php">
                     <img src="../../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
                 </a>
-                <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar"
+                    aria-labelledby="offcanvasNavbarLabel">
                     <div class="offcanvas-header">
                         <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -67,12 +87,14 @@ if ($result) {
                 </div>
                 <?php
                 if (isset($_SESSION["usuario"])) {
-                ?>
+                    ?>
                     <!-- Navbar con dropdown -->
-                    <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
+                        style="left: auto; right: 30px; top: 60px">
                         <a class="dropdown-item" href="../../views/perfil.php">Mi perfil</a>
                         <?php if ($_SESSION['usuario'] == 'ADMIN') { ?>
                             <a class="dropdown-item" href="../../views/adminInicio.php">Administrar</a>
@@ -80,14 +102,15 @@ if ($result) {
                         <?php } ?>
                         <a class="dropdown-item" href="../../scripts/login/cerrarsesion.php">Cerrar sesión</a>
                     </div>
-                <?php
+                    <?php
                 } else {
-                ?>
+                    ?>
                     <a href="../../views/login.php" class="login-button ms-auto">Iniciar Sesión</a>
-                <?php
+                    <?php
                 }
                 ?>
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                    aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
             </div>
@@ -95,7 +118,6 @@ if ($result) {
         <!-- NavBar End -->
 
         <?php
-
         if (isset($_SESSION["usuario"])) {
             $cliente = "SELECT 
                 c.id_cliente 
@@ -116,179 +138,145 @@ if ($result) {
                     <li class="breadcrumb-item fw-bold"><a href="../../views/eventos.php">Eventos</a></li>
                     <?php
                     echo "  <li class='breadcrumb-item active' aria-current='page'>" . $evento->nombre . "</li>"
-                    ?>
-
+                        ?>
                 </ol>
             </nav>
-            <!-- Título -->
-            <div class="fw-bold fs-3 mt-3 mb-4">
-                <?php
-                echo "  <h1 class='h1contact'>" . $evento->nombre . "</h1>"
-                ?>
+            <?php
+            $horaInicio = formatHora($evento->hora_inicio);
+            $horaFin = formatHora($evento->hora_fin);
+            $precio_boleto = formatPrecio($evento->precio_boleto);
+            if ($evento->tipo == "De Pago" && $evento->disponibilidad > 0) {
+                $labelText_precio = " <h4 class='text-center'>Precio por boleto: {$precio_boleto} $</h4>";
+            } else if ($evento->tipo == "De Pago" && $evento->disponibilidad == 0) {
+                $labelText_precio = "<h4 class='text-center'> ¡Lo sentimos, los boletos se han agotado! </h4>";
+            } else if ($evento->tipo == "Gratuito") {
+                $labelText_precio = "";
+            }
+            ?>
+            <div class="row">
+                <div class="col-6">
+                    <img src="../../img/eventos/<?php echo $evento->img_url; ?>" class="img-fluid mb-5" alt="...">
+                </div>
+                <div class="col-6">
+                    <div>
+                        <h1 class="fw-bold mt-3"><?php echo $evento->nombre; ?></h1>
+                        <p class="lead my-4 text-center"><?php echo $evento->descripcion; ?></p>
+                    </div>
+                    <hr class=" my-4">
+                    <div class="d-flex align-items-center">
+                        <i class="fa-solid fa-circle-info fa-2x me-2"></i>
+                        <h2 class="mb-0">Detalles</h2>
+                    </div>
+                    <div class="d-flex justify-content-center flex-column">
+                        <h4 class="text-center">Tipo de evento: <?php echo $evento->tipo; ?></h4>
+                        <?php echo $labelText_precio; ?>
+                    </div>
+                    <hr class=" my-4">
+                    <div class="d-flex align-items-center">
+                        <i class="fa-solid fa-calendar-days fa-2x me-2"></i>
+                        <h2 class="mb-0">Horario </h2>
+                    </div>
+                    <div class="d-flex justify-content-center flex-column">
+                        <h4 class="text-center m-3"><?php echo formatFecha($evento->fecha_evento); ?></h4>
+                        <h4 class="text-center""><?php echo "De " . $horaInicio . " a " . $horaFin; ?></h4>
+                    </div>
+                    <hr class=" my-4">
+                            <?php
+                            $lat = $evento->lat; // Reemplaza con la latitud de la dirección
+                            $lng = $evento->lng; // Reemplaza con la longitud de la dirección
+                            ?>
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fa-solid fa-location-dot fa-2x me-2"></i>
+                                <h2 class="mb-0">Ubicación</h2>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <div class="text-center">
+                                    <h5>
+                                        <?php
+                                        echo "{$evento->calle}, {$evento->colonia}, {$evento->ciudad}, {$evento->estado}, C.P. {$evento->codigo_postal}";
+                                        ?>
+                                    </h5>
+                                    <!-- Insertar el mapa aquí -->
+                                    <div id="map"></div>
+                                </div>
+                            </div>
+
+                    </div>
+                </div>
             </div>
             <div class="row">
-                <!-- Imagen y descripción del evento -->
-                <div class="col-md-7">
-                    <div class="text-white d-flex align-items-center">
-                        <?php
-                        echo "  <img src='../../" . $evento->img_url . "' class='w-100' loading='lazy'>"
-                        ?>
-                    </div>
-                    <?php
-                    echo "<p class='mt-3'>" . $evento->fecha_publicacion . "</p>";
-                    echo "<p class='mt-3'>" . $evento->descripcion . "</p>"
-                    ?>
-                </div>
-                <!-- Detalles del evento -->
-                <div class="col-md-4 border-start">
-                    <?php
-                    echo "<h3 class='text-center text-cafe fw-bold'>Detalles del evento</h3>";
-                    echo "<hr>";
-                    echo "<h4 class=' fw-bold'>Nombre:</h4>";
-                    echo "<p>" . $evento->nombre . "</p>";
-                    echo "<h4 class=' fw-bold'>Fecha de evento:</h4>";
-                    echo "<p>" . $evento->fecha_evento . "</p>";
-                    echo "<h4 class=' fw-bold'>Hora de inicio:</h4>";
-                    echo "<p>" . $evento->hora_inicio . "</p>";
-                    echo "<h4 class=' fw-bold'>Hora de fin:</h4>";
-                    echo "<p>" . $evento->hora_fin . "</p>";
-                    echo "<h4 class=' fw-bold'>Capacidad:</h4>";
-                    echo "<p>" . $evento->capacidad . "</p>";
-                    echo "<hr>";
-
-                    echo "<h3 class='text-center text-cafe fw-bold'>Reservar</h3>";
-
-                    if ($evento->disponibilidad <= 0) {
-                        echo "<p class='fw-bold'>Cupo Total: <span>" . $evento->capacidad . "</span></p>";
-                        echo "<p class='fw-bold text-danger'>No se pueden realizar más reservas. El evento está completo.</p>";
-                    } else {
-                        echo "<p class='fw-bold'>Cupo Total: <span>" . $evento->capacidad . "</span></p>";
-
-                        if ($evento->tipo != "Gratuito") {
-                            echo "<p class='fw-bold'>Cupo Disponible: <span>" . $evento->disponibilidad . "</span></p>";
-                            echo "<p class='fw-bold'>Costo por persona: <span>$" . $evento->precio_boleto . "</span></p>";
-                            echo "<p class='fw-bold'>Tipo de evento: <span>" . $evento->tipo . "</span></p>";
-
-                            // Aquí puedes agregar el botón de reservar si lo deseas
-                            echo "<button type='button' class='btn btn-cafe w-100' data-bs-toggle='modal' data-bs-target='#reservaModal'>Realizar reserva</button>";
-                            echo '
-                                <div class="modal fade" id="reservaModal" tabindex="-1" aria-labelledby="reservaModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="reservaModalLabel">Reservar Boletos</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form id="reservaForm" action="../../scripts/eventos/reservar_boletos.php" method="POST">
-                                                <div class="mb-3">';
-
-                            // Archivo para obtener métodos de pago
-
-                            $query = "SELECT id_mp, metodo_pago FROM metodos_pago";
-                            $result = $conexion->select($query);
-                            if (isset($_SESSION['usuario'])) {
-
-                                echo "  <input type='hidden' name='id_cliente' value='{$cliente[0]->id_cliente}'> <!-- ID del cliente -->";
-                            } else {
-
-                                echo "  <input type='hidden' name='id_cliente' value='0'> <!-- ID del cliente -->";
-                            }
-
-                    ?>
-                            <label class="form-label fw-bold" for="paymentMethodSelect">Método de Pago</label>
-                            <select class="form-control form-select" id="paymentMethodSelect" name="id_mp">
-                                <?php
-                                if ($result) {
-                                    foreach ($result as $mp) {
-                                        echo "<option value='" . $mp->id_mp . "'>" . $mp->metodo_pago . "</option>";
-                                    }
-                                } else {
-                                    echo "<option value=''>No se encontraron métodos de pago</option>";
-                                }
-                                ?>
-                            </select>
-
-
-                    <?php
-                            echo '                 </div>
-                                                    <div class="mb-3">
-                                                        <label class="form-label fw-bold" for="cantidadBoletos" class="form-label">Cantidad de Boletos</label>
-                                                        <select class="form-select" id="cantidadBoletos" name="c_boletos" required>';
-                            $i = 1;
-                            while ($i <= $evento->disponibilidad) {
-                                echo "<option value='$i'>$i</option>";
-                                $i++;
-                            }
-                            echo '                      </select>
-                                                    </div>
-                                                    <input type="hidden" name="id_evento" value="' . $evento->id_evento . '">
-                                                    <input type="hidden" name="id_cliente" value="' . $cliente[0]->id_cliente . '">
-                                                    <input type="hidden" name="id_mp" value="' . $mp->id_mp . '">
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                        <button type="submit" class="btn btn-categorias">Reservar</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                ';
-                        } else {
-                            echo "<p class='fw-bold'>Tipo de evento: <span>" . $evento->tipo . "</span></p>";
-                        }
-                    }
-
-                    ?>
-
+                <div class="col-6">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae voluptatem nam dolor
+                        inventore, nesciunt laborum doloribus eius repellendus omnis magni iure autem consequatur
+                        nihil ducimus minima nemo rerum libero ratione!</p>
                 </div>
             </div>
-        </div>
 
-
-
-        <!-- Footer -->
-        <footer>
-            <div class="container-fluid p-5 " style="background: var(--negroclaro);">
-                <h2 class="text-center text-light mb-5">SinfoníaCafé&Cultura</h2>
-                <hr class="text-light">
-                <div class="container-fluid d-flex justify-content-center align-items-center flex-column p-4">
-                    <div class="row m-3 text-center">
-                        <div class="col-3">
-                            <a href="https://www.facebook.com/SinfoniaCoffee">
-                                <i class="fa-brands fa-facebook text-light fa-2x text-center"></i>
-                            </a>
+            <!-- Footer -->
+            <footer>
+                <div class="container-fluid p-5 " style="background: var(--negroclaro);">
+                    <h2 class="text-center text-light mb-5">SinfoníaCafé&Cultura</h2>
+                    <hr class="text-light">
+                    <div class="container-fluid d-flex justify-content-center align-items-center flex-column p-4">
+                        <div class="row m-3 text-center">
+                            <div class="col-3">
+                                <a href="https://www.facebook.com/SinfoniaCoffee">
+                                    <i class="fa-brands fa-facebook text-light fa-2x text-center"></i>
+                                </a>
+                            </div>
+                            <div class="col-3">
+                                <a href="https://x.com/SinfoniaCoffee">
+                                    <i class="fa-brands fa-twitter text-light fa-2x text-center"></i>
+                                </a>
+                            </div>
+                            <div class="col-3">
+                                <a href="https://www.instagram.com/sinfoniacoffee/">
+                                    <i class="fa-brands fa-instagram text-light fa-2x text-center"></i>
+                                </a>
+                            </div>
+                            <div class="col-3">
+                                <i class="fa-brands fa-youtube text-light fa-2x text-center"></i>
+                            </div>
                         </div>
-                        <div class="col-3">
-                            <a href="https://x.com/SinfoniaCoffee">
-                                <i class="fa-brands fa-twitter text-light fa-2x text-center"></i>
-                            </a>
+                        <div class="row m-3">
+                            <p class="text-center fw-bold text-light">Copyright © 2024
+                                SinfoníaCafé&Cultura</p>
                         </div>
-                        <div class="col-3">
-                            <a href="https://www.instagram.com/sinfoniacoffee/">
-                                <i class="fa-brands fa-instagram text-light fa-2x text-center"></i>
-                            </a>
-                        </div>
-                        <div class="col-3">
-                            <i class="fa-brands fa-youtube text-light fa-2x text-center"></i>
-                        </div>
-                    </div>
-                    <div class="row m-3">
-                        <p class="text-center fw-bold text-light">Copyright © 2024 SinfoníaCafé&Cultura</p>
                     </div>
                 </div>
-            </div>
-        </footer>
-        <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://kit.fontawesome.com/45ef8dbe96.js" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+            </footer>
+            <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="https://kit.fontawesome.com/45ef8dbe96.js" crossorigin="anonymous"></script>
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+            <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    var map = L.map('map').setView([<?php echo $evento->lat; ?>, <?php echo $evento->lng; ?>], 13);
+
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '© OpenStreetMap contributors'
+                    }).addTo(map);
+
+                    var popupContent = `
+                        <b><?php echo $evento->lugar; ?></b><br>
+                        <?php echo $evento->calle; ?><br>
+                        <?php echo $evento->ciudad; ?><br>
+                        <?php echo $evento->estado; ?>             <?php echo $evento->codigo_postal; ?>
+                    `;
+
+                    L.marker([<?php echo $evento->lat; ?>, <?php echo $evento->lng; ?>]).addTo(map)
+                        .bindPopup(popupContent)
+                        .openPopup();
+                });
+            </script>
+
+
     </body>
 
     </html>
-<?php
+    <?php
 } else {
     echo "Producto no encontrado.";
 }
