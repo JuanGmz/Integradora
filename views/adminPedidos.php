@@ -425,6 +425,13 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                ";
+                                                if ($pedido->estatus == 'Cancelado') {
+                                                    echo "
+                                                    <button disabled type='submit' class='btn btn-secondary btn-block'><i class='fa-solid fa-pen-to-square'></i></button>
+                                                    ";
+                                                } else {
+                                                echo "
                                                 <!-- Botón para editar el pedido -->
                                                 <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#editarProducto_{$pedido->id_pedido}'>
                                                     <i class='fa-solid fa-pen-to-square'></i>
@@ -467,7 +474,7 @@
                                                                     </div>
                                                                     <div>
                                                                         <label for='fecha' class='form-label'>Documento</label>
-                                                                        <input type='file' class='form-control' id='fecha' name='documento' value='{$pedido->documento_url}'>
+                                                                        <input type='file' class='form-control' id='fecha' name='documento' value='{$pedido->documento_url}' required>
                                                                     </div>
                                                                     <div class='row'>
                                                                         <div class='col-12 text-end'>
@@ -483,6 +490,7 @@
                                                     </div>
                                                 </div>
                                                 <?php
+                                                }
                                                 echo "
                                             </td>
                                         </tr>";
