@@ -1,5 +1,5 @@
 <?php
-include("../../class/database.php");
+include ("../../class/database.php");
 
 $db = new Database();
 $db->conectarDB();
@@ -15,10 +15,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     codigo_postal = '$codigoP',
     calle = '$calle', 
     colonia = '$colonia',
-    descripcion = '$descripcion'
+    descripcion = '$descripcion',
+    lat = $lat,
+    lng = $lng
     WHERE id_lugar = '$id_lugar'";
-    
-   
+
+    $db->execute($consulta);
+
     $db->desconectarDB();
     header("location: ../../views/adminlugares.php");
     exit;

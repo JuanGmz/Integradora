@@ -400,6 +400,16 @@ if ($rol[0]->rol !== 'administrador') {
                                                         <input type="text" class="form-control" id="CodigoP"
                                                             name="CodigoP" maxlength="5" required>
                                                     </div>
+                                                    <div class="mb-3 col-6">
+                                                        <label for="lat" class="form-label">Latitud</label>
+                                                        <input type="number" class="form-control" id="lat" name="lat"
+                                                            required>
+                                                    </div>
+                                                    <div class="mb-3 col-6">
+                                                        <label for="lng" class="form-label">Longitud</label>
+                                                        <input type="number" class="form-control" id="lng" name="lng"
+                                                            required>
+                                                    </div>
                                                     <div class="mb-3">
                                                         <label for="descripcion" class="form-label">Descripción</label>
                                                         <textarea type="text" class="form-control" name="descripcion"
@@ -509,6 +519,14 @@ if ($rol[0]->rol !== 'administrador') {
                                                                         <div class='col-4 mb-3'>
                                                                             <label class='form-label'>C.P</label>
                                                                             <input type='text' maxlength='15' name='codigoP' class='form-control' value='$producto->codigo_postal' >
+                                                                        </div>
+                                                                        <div class='mb-3 col-6'>
+                                                                            <label for='lat' class='form-label'>Latitud</label>
+                                                                            <input type='number' class='form-control' id='lat' name='lat' value='$producto->lat' required>
+                                                                        </div>
+                                                                        <div class='mb-3 col-6'>
+                                                                            <label for='lng' class='form-label'>Longitud</label>
+                                                                            <input type='number' class='form-control' id='lng' name='lng'  value='$producto->lng' required>
                                                                         </div>
                                                                         </div>
                                                                         <div class='col-12 mb-3'>
