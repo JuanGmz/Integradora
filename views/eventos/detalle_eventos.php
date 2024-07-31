@@ -26,9 +26,6 @@ $sql = "SELECT e.*,
         where e.id_evento = $id_evento";
 $result = $conexion->select($sql);
 
-if(){
-    
-}
 
 if ($result) {
     // Si se encontró el evento, mostrar sus detalles
@@ -191,7 +188,7 @@ if ($result) {
             $labelText_botonreservar = "";
             $total = 0;
             if ($evento->tipo == "De Pago" && $evento->disponibilidad > 0) {
-                $labelText_precio = " <h4 class='text-center m-4'>Precio por boleto: {$precio_boleto} $</h4>";
+                $labelText_precio = " <h4>Precio por boleto: {$precio_boleto} $</h4>";
                 $labelText_botonreservar = "<button type='button' class='btn btn-cafe fs-4' data-bs-toggle='modal'
                             data-bs-target='#exampleModal'>
                             Reservar Boletos
@@ -247,7 +244,8 @@ if ($result) {
             ?>
             <div class="row">
                 <div class="col mb-lg-0 text-center empty-side">
-                    <img src="../../img/eventos/<?php echo $evento->img_url; ?>" class="img-fluid w-50" alt="...">
+                    <img src="../../img/eventos/<?php echo $evento->img_url; ?>" class="img-fluid w-50"
+                        alt="Imagen del evento.">
                 </div>
             </div>
             <div class="row justify-content-center">
@@ -260,27 +258,6 @@ if ($result) {
             </div>
             <hr class="my-4">
             <div class="row">
-                <div class="col-6">
-                    <div class="d-flex align-items-center">
-                        <i class="fa-solid fa-circle-info fa-2x me-2"></i>
-                        <h2 class="mb-0">Detalles</h2>
-                    </div>
-                    <div class="d-flex justify-content-center flex-column">
-                        <h4 class="text-center m-4">Tipo de evento: <?php echo $evento->tipo; ?></h4>
-                        <?php echo $labelText_precio;
-                        echo $labelText_botonreservar;
-                        ?>
-                    </div>
-                    <hr class=" my-4">
-                    <div class="d-flex align-items-center">
-                        <i class="fa-solid fa-calendar-days fa-2x me-2"></i>
-                        <h2 class="mb-0">Horario </h2>
-                    </div>
-                    <div class="d-flex justify-content-center flex-column align-items-center">
-                        <h4 class="m-4"><?php echo formatFecha($evento->fecha_evento); ?></h4>
-                        <h4 class=" m-4"><?php echo "De " . $horaInicio . " a " . $horaFin; ?></h4>
-                    </div>
-                </div>
                 <div class=" col-6">
                     <div class="d-flex align-items-center mb-3">
                         <i class="fa-solid fa-location-dot fa-2x me-2"></i>
@@ -302,6 +279,35 @@ if ($result) {
                         </div>
                     </div>
                 </div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="d-flex align-items-center">
+                            <i class="fa-solid fa-calendar-days fa-2x me-2"></i>
+                            <h2 class="mb-0">Horario </h2>
+                        </div>
+                        <div class="d-flex justify-content-center flex-column align-items-center">
+                            <h4 class="m-4"><?php echo formatFecha($evento->fecha_evento); ?></h4>
+                            <h4 class=" m-4"><?php echo "De " . $horaInicio . " a " . $horaFin; ?></h4>
+                        </div>
+                    </div>
+                    <hr class=" my-4">
+                    <div class="row d-flex justify-content-center gap-5">
+                        <div class="d-flex align-items-center">
+                            <i class="fa-solid fa-circle-info fa-2x me-2"></i>
+                            <h2 class="mb-0">Detalles</h2>
+                        </div>
+                        <div class="text-center">
+                            <h4>Tipo de evento: <?php echo $evento->tipo; ?></h4>
+                        </div>
+                        <div class="text-center">
+                            <?php echo $labelText_precio; ?>
+                        </div>
+                        <div class="d-flex justify-content-center flex-column">
+                            <?php echo $labelText_botonreservar; ?>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
         <!-- Footer -->
@@ -352,11 +358,11 @@ if ($result) {
                 }).addTo(map);
 
                 var popupContent = `
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <b><?php echo $evento->lugar; ?></b><br>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <?php echo $evento->calle; ?><br>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <?php echo $evento->ciudad; ?><br>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <?php echo $evento->estado; ?>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     <?php echo $evento->codigo_postal; ?>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            `;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <b><?php echo $evento->lugar; ?></b><br>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <?php echo $evento->calle; ?><br>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <?php echo $evento->ciudad; ?><br>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <?php echo $evento->estado; ?>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 <?php echo $evento->codigo_postal; ?>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        `;
 
                 L.marker([<?php echo $evento->lat; ?>, <?php echo $evento->lng; ?>]).addTo(map)
                     .bindPopup(popupContent)
