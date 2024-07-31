@@ -1515,7 +1515,7 @@ call SP_insert_domicilios(5, 'Luisa Cruz', 'Coahuila', 'Torreón', '27090', 'Las
 (11, 'Sofia Silva', 'Coahuila', 'Torreón', '27150', 'Mirasierra', 'Calle del Monte #3435', '8712345693')
 (12, 'Fernando Romero', 'Coahuila', 'Torreón', '27160', 'San Agustín', 'Avenida del Río #3637', '8712345694')
 (13, 'Patricia Rojas', 'Coahuila', 'Torreón', '27170', 'Villa Florida', 'Boulevard de las Rosas #3839', '8712345695')
-(14, 'Roberto Vazquez', 'Coahuila', 'Torreón', '27180', 'Los Ángeles', 'Calle de los Sauces #4041', '8712345696');
+(14, 'Roberto Vazquez', 'Coahuilja', 'Torreón', '27180', 'Los Ángeles', 'Calle de los Sauces #4041', '8712345696');
 */
 INSERT INTO ubicacion_lugares (nombre, ciudad, estado, codigo_postal, calle, colonia, descripcion,lat,lng)
 VALUES
