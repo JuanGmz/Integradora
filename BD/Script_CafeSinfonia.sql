@@ -181,39 +181,7 @@ begin
 end //
 delimiter ;
 
--- Procedimientos Almacenados Para Obtener Detalles de una bolsa
-DELIMITER //
 
-CREATE PROCEDURE ObtenerDetallesPorProceso(IN procesoCafe VARCHAR(100))
-BEGIN
-    SELECT 
-        bc.id_bolsa,
-        bc.nombre,
-        bc.años_cosecha,
-        bc.productor_finca,
-        bc.proceso,
-        bc.variedad,
-        bc.altura,
-        bc.aroma,
-        bc.acidez,
-        bc.sabor,
-        bc.cuerpo,
-        bc.puntaje_catacion,
-        bc.img_url,
-        GROUP_CONCAT(CONCAT(dbc.medida, ': $', dbc.precio, ' (Stock: ', dbc.stock, ')') SEPARATOR '; ') AS detalles_medidas
-    FROM 
-        bolsas_cafe bc
-    JOIN 
-        detalle_bc dbc
-    ON 
-        bc.id_bolsa = dbc.id_bolsa
-    WHERE 
-        bc.proceso = procesoCafe
-    GROUP BY
-        bc.id_bolsa;
-END //
-
-DELIMITER ;
 -- procedimiento almacenado para agregar una medida a las bolsas
 delimiter //
 create procedure SP_Agregar_medida_bolsa_ecomerce(
@@ -299,17 +267,15 @@ foreign key (id_dbc) references detalle_bc(id_dbc)
 -- Eventos
 
 create table ubicacion_lugares(
-id_lugar INT AUTO_INCREMENT PRIMARY KEY,
+(255)
+);id_lugar INT AUTO_INCREMENT PRIMARY KEY,
 nombre NVARCHAR(100) NOT NULL,
 ciudad NVARCHAR(100) NOT NULL,
 estado NVARCHAR(100) NOT NULL,
-codigo_postal NVARCHAR(10) not null,
-calle nvarchar(100) not null, 
-colonia nvarchar(100) not null,
-descripcion NVARCHAR(255),
-lat double,
-lng double
-);
+codigo_postal NVARCHAR(10),
+calle nvarchar(100), 
+colonia nvarchar(100),
+descripcion NVARCHAR
 
 create table eventos(
 id_evento int auto_increment not null,
@@ -321,7 +287,7 @@ descripcion nvarchar(200) not null,
 fecha_evento date not null,
 hora_inicio time not null,      
 hora_fin time not null,
-boletos int not null,
+capacidad int not null,
 precio_boleto double not null, 
 disponibilidad int,
 img_url nvarchar(255)not null,
@@ -1496,8 +1462,8 @@ INSERT INTO productos_menu (id_categoria, nombre, descripcion, img_url) VALUES
 call SP_Registrar_usuariosAdministradores('Noe Abel','Vargas','Lopez','noe134','noelopez191119@gmail.com','micontraseñasupersegura','8715083731');
 call SP_Registrar_usuariosAdministradores('Tobias Gabriel','Rodriguez','Lujan','tlujan','totilotegabriel@gmail.com','miperro123','8716764502');
 call SP_Registrar_usuariosAdministradores('Iker Jesus','Flores','Luna','iker','iker@gmail.com','elgato123','8713923040');
-call SP_Registrar_usuariosClientes('Juan Alfredo','Gomez','Gonzalez','juangmz','juan@gmail.com','123juanita123','8718451815');
-call SP_Registrar_usuariosAdministradores('Dante Raziel','Basurto','Saucedo','bune','dantin@gmail.com','123456','8714307468');
+call SP_Registrar_usuariosAdministradores('Juan Alfredo','Gomez','Gonzalez','juangmz','juan@gmail.com','123juan123','8718451815');
+call SP_Registrar_usuariosClientes('Dante Raziel','Basurto','Saucedo','bune','dantin@gmail.com','lagallina123','8714307468');
 call SP_Registrar_usuariosAdministradores('Hector Armando','Caballero','Serna','hector','hector@gmail.com','123sinfonia123','8715066618');
 
 -- Ingresar domicilios
@@ -1517,27 +1483,27 @@ call SP_insert_domicilios(5, 'Luisa Cruz', 'Coahuila', 'Torreón', '27090', 'Las
 (13, 'Patricia Rojas', 'Coahuila', 'Torreón', '27170', 'Villa Florida', 'Boulevard de las Rosas #3839', '8712345695')
 (14, 'Roberto Vazquez', 'Coahuila', 'Torreón', '27180', 'Los Ángeles', 'Calle de los Sauces #4041', '8712345696');
 */
-INSERT INTO ubicacion_lugares (nombre, ciudad, estado, codigo_postal, calle, colonia, descripcion,lat,lng)
-VALUES
-('Cafetería Sinfonía Café', 'Torreón', 'Coahuila', '27000', 'Av. Matamoros 1102', 'Centro', 'Cafetería acogedora con ambiente musical.',25.54043630354892, -103.4603079071903),
-('Teatro Nazas', 'Torreón', 'Coahuila', '27435', 'Cepeda 155', 'Centro', 'Teatro emblemático de la ciudad, conocido por sus eventos culturales.',25.53989636512453, -103.46147306615788),
-('Teatro Isauro Martínez', 'Torreón', 'Coahuila', '27000', 'Avenida Matamoros 266', 'Centro', 'Teatro histórico y culturalmente importante en Torreón.',25.5405763446744, -103.45154125691407);
+INSERT INTO ubicacion_lugares (nombre, ciudad, estado, descripcion)
+VALUES 
+('Cafetería Sinfonía Café', 'Torreón', 'Coahuila', 'Cafetería acogedora con ambiente musical.'),
+('Teatro Nazas', 'Torreón', 'Coahuila', 'Teatro emblemático de la ciudad, conocido por sus eventos culturales.'),
+('Teatro Isauro Martínez', 'Torreón', 'Coahuila', 'Teatro histórico y culturalmente importante en Torreón.');
 
 INSERT INTO eventos (
     id_lugar, id_categoria, nombre, tipo, descripcion, fecha_evento, 
-    hora_inicio, hora_fin, boletos, precio_boleto, disponibilidad, 
+    hora_inicio, hora_fin, capacidad, precio_boleto, disponibilidad, 
     img_url, fecha_publicacion
 ) VALUES
-(1, 1, 'Noches de Jazz', 'Gratuito', 'Disfruta de una velada con música jazz en vivo.', '2024-08-15', '19:00:00', '21:00:00', 50, 0.0, 50, 'jazz.jpg', '2024-07-09'),
-(1, 3, 'Tarde de Poesía', 'Gratuito', 'Recital de poesía acompañado de café y pastelería artesanal.', '2024-08-20', '17:00:00', '19:00:00', 30, 0.0, 30, 'poesia.jpg', '2024-07-09'),
-(1, 6, 'Exposición de Arte Local', 'Gratuito', 'Exhibición de obras de artistas locales con un ambiente cultural.', '2024-09-05', '10:00:00', '18:00:00', 80, 0.0, 80, 'arte.jpg', '2024-07-09'),
-(1, 4, 'Degustación de Café', 'De Pago', 'Aprende sobre variedades de café y métodos de preparación.', '2024-09-10', '10:00:00', '12:00:00', 20, 15.0, 20, 'degustacion.jpg', '2024-07-09'),
-(1, 1, 'Cata de Vinos y Quesos', 'De Pago', 'Descubre la combinación perfecta entre vinos, quesos y café.', '2024-09-25', '18:00:00', '20:00:00', 40, 25.0, 40, 'cata.jpg', '2024-07-09'),
-(1, 8, 'Noche de Cine Independiente', 'Gratuito', 'Proyección de películas independientes acompañadas de café gourmet.', '2024-10-05', '20:00:00', '22:00:00', 25, 0.0, 25, 'cine.jpg', '2024-07-09'),
-(1, 4, 'Taller de Cocina Saludable', 'De Pago', 'Aprende a preparar platillos saludables con ingredientes locales.', '2024-10-15', '09:00:00', '11:00:00', 15, 20.0, 15, 'cocina.jpg', '2024-07-09'),
-(1, 1, 'Concierto Acústico', 'Gratuito', 'Concierto íntimo con artistas locales en un ambiente acogedor.', '2024-11-01', '18:00:00', '20:00:00', 50, 0.0, 50, 'concierto.jpg', '2024-07-09'),
-(3, 7, 'Charla sobre Café y Cultura', 'Gratuito', 'Discusión sobre la historia y la influencia cultural del café en nuestra sociedad.', '2024-11-10', '17:00:00', '19:00:00', 30, 0.0, 30, 'charla.jpg', '2024-07-09'),
-(2, 5, 'Feria de Libros Antiguos', 'Gratuito', 'Venta y exhibición de libros antiguos acompañados de café y música en vivo.', '2024-12-01', '10:00:00', '16:00:00', 50, 0.0, 50, 'libros.jpg', '2024-07-09');
+(1, 1, 'Noches de Jazz', 'Gratuito', 'Disfruta de una velada con música jazz en vivo.', '2024-08-15', '19:00:00', '21:00:00', 50, 0.0, 50, 'img/jazz.jpg', '2024-07-09'),
+(1, 3, 'Tarde de Poesía', 'Gratuito', 'Recital de poesía acompañado de café y pastelería artesanal.', '2024-08-20', '17:00:00', '19:00:00', 30, 0.0, 30, 'img/poesia.jpg', '2024-07-09'),
+(1, 6, 'Exposición de Arte Local', 'Gratuito', 'Exhibición de obras de artistas locales con un ambiente cultural.', '2024-09-05', '10:00:00', '18:00:00', 80, 0.0, 80, 'img/arte.jpg', '2024-07-09'),
+(1, 4, 'Degustación de Café', 'De Pago', 'Aprende sobre variedades de café y métodos de preparación.', '2024-09-10', '10:00:00', '12:00:00', 20, 15.0, 20, 'img/degustacion.jpg', '2024-07-09'),
+(1, 1, 'Cata de Vinos y Quesos', 'De Pago', 'Descubre la combinación perfecta entre vinos, quesos y café.', '2024-09-25', '18:00:00', '20:00:00', 40, 25.0, 40, 'img/cata.jpg', '2024-07-09'),
+(1, 8, 'Noche de Cine Independiente', 'Gratuito', 'Proyección de películas independientes acompañadas de café gourmet.', '2024-10-05', '20:00:00', '22:00:00', 25, 0.0, 25, 'img/cine.jpg', '2024-07-09'),
+(1, 4, 'Taller de Cocina Saludable', 'De Pago', 'Aprende a preparar platillos saludables con ingredientes locales.', '2024-10-15', '09:00:00', '11:00:00', 15, 20.0, 15, 'img/cocina.jpg', '2024-07-09'),
+(1, 1, 'Concierto Acústico', 'Gratuito', 'Concierto íntimo con artistas locales en un ambiente acogedor.', '2024-11-01', '18:00:00', '20:00:00', 50, 0.0, 50, 'img/concierto.jpg', '2024-07-09'),
+(3, 7, 'Charla sobre Café y Cultura', 'Gratuito', 'Discusión sobre la historia y la influencia cultural del café en nuestra sociedad.', '2024-11-10', '17:00:00', '19:00:00', 30, 0.0, 30, 'img/charla.jpg', '2024-07-09'),
+(2, 5, 'Feria de Libros Antiguos', 'Gratuito', 'Venta y exhibición de libros antiguos acompañados de café y música en vivo.', '2024-12-01', '10:00:00', '16:00:00', 50, 0.0, 50, 'img/libros.jpg', '2024-07-09');
 
 INSERT INTO bolsas_cafe(
 	nombre,
@@ -1740,3 +1706,37 @@ JOIN
 	detalle_bc dbc ON bc.id_bolsa = dbc.id_bolsa
 JOIN
 	detalle_pedidos dp ON dbc.id_dbc = dp.id_dbc;
+
+    -- Procedimientos Almacenados Para Obtener Detalles de una bolsa
+DELIMITER //
+
+CREATE PROCEDURE ObtenerDetallesPorProceso(IN procesoCafe VARCHAR(100))
+BEGIN
+    SELECT 
+        bc.id_bolsa,
+        bc.nombre,
+        bc.años_cosecha,
+        bc.productor_finca,
+        bc.proceso,
+        bc.variedad,
+        bc.altura,
+        bc.aroma,
+        bc.acidez,
+        bc.sabor,
+        bc.cuerpo,
+        bc.puntaje_catacion,
+        bc.img_url,
+        GROUP_CONCAT(CONCAT(dbc.medida, ': $', dbc.precio, ' (Stock: ', dbc.stock, ')') SEPARATOR '; ') AS detalles_medidas
+    FROM 
+        bolsas_cafe bc
+    JOIN 
+        detalle_bc dbc
+    ON 
+        bc.id_bolsa = dbc.id_bolsa
+    WHERE 
+        bc.proceso = procesoCafe
+    GROUP BY
+        bc.id_bolsa;
+END //
+
+DELIMITER ;
