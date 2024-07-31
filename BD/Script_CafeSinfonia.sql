@@ -181,7 +181,39 @@ begin
 end //
 delimiter ;
 
+-- Procedimientos Almacenados Para Obtener Detalles de una bolsa
+DELIMITER //
 
+CREATE PROCEDURE ObtenerDetallesPorProceso(IN procesoCafe VARCHAR(100))
+BEGIN
+    SELECT 
+        bc.id_bolsa,
+        bc.nombre,
+        bc.años_cosecha,
+        bc.productor_finca,
+        bc.proceso,
+        bc.variedad,
+        bc.altura,
+        bc.aroma,
+        bc.acidez,
+        bc.sabor,
+        bc.cuerpo,
+        bc.puntaje_catacion,
+        bc.img_url,
+        GROUP_CONCAT(CONCAT(dbc.medida, ': $', dbc.precio, ' (Stock: ', dbc.stock, ')') SEPARATOR '; ') AS detalles_medidas
+    FROM 
+        bolsas_cafe bc
+    JOIN 
+        detalle_bc dbc
+    ON 
+        bc.id_bolsa = dbc.id_bolsa
+    WHERE 
+        bc.proceso = procesoCafe
+    GROUP BY
+        bc.id_bolsa;
+END //
+
+DELIMITER ;
 -- procedimiento almacenado para agregar una medida a las bolsas
 delimiter //
 create procedure SP_Agregar_medida_bolsa_ecomerce(
@@ -1464,8 +1496,8 @@ INSERT INTO productos_menu (id_categoria, nombre, descripcion, img_url) VALUES
 call SP_Registrar_usuariosAdministradores('Noe Abel','Vargas','Lopez','noe134','noelopez191119@gmail.com','micontraseñasupersegura','8715083731');
 call SP_Registrar_usuariosAdministradores('Tobias Gabriel','Rodriguez','Lujan','tlujan','totilotegabriel@gmail.com','miperro123','8716764502');
 call SP_Registrar_usuariosAdministradores('Iker Jesus','Flores','Luna','iker','iker@gmail.com','elgato123','8713923040');
-call SP_Registrar_usuariosAdministradores('Juan Alfredo','Gomez','Gonzalez','juangmz','juan@gmail.com','123juan123','8718451815');
-call SP_Registrar_usuariosClientes('Dante Raziel','Basurto','Saucedo','bune','dantin@gmail.com','lagallina123','8714307468');
+call SP_Registrar_usuariosClientes('Juan Alfredo','Gomez','Gonzalez','juangmz','juan@gmail.com','123juanita123','8718451815');
+call SP_Registrar_usuariosClientes('Dante Raziel','Basurto','Saucedo','bune','dantin@gmail.com','123456','8714307468');
 call SP_Registrar_usuariosAdministradores('Hector Armando','Caballero','Serna','hector','hector@gmail.com','123sinfonia123','8715066618');
 
 -- Ingresar domicilios
