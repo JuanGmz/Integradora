@@ -267,16 +267,18 @@ foreign key (id_dbc) references detalle_bc(id_dbc)
 -- Eventos
 
 create table ubicacion_lugares(
-(255)
-);id_lugar INT AUTO_INCREMENT PRIMARY KEY,
+id_lugar INT AUTO_INCREMENT PRIMARY KEY,
 nombre NVARCHAR(100) NOT NULL,
 ciudad NVARCHAR(100) NOT NULL,
 estado NVARCHAR(100) NOT NULL,
-codigo_postal NVARCHAR(10),
-calle nvarchar(100), 
-colonia nvarchar(100),
-descripcion NVARCHAR
-
+codigo_postal NVARCHAR(10) not null,
+calle nvarchar(100) not null, 
+colonia nvarchar(100) not null,
+descripcion NVARCHAR(255),
+lat double,
+lng double
+);
+-- Eventos
 create table eventos(
 id_evento int auto_increment not null,
 id_lugar int not null,

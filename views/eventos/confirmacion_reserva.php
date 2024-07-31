@@ -136,7 +136,6 @@ if (is_array($cliente_result) && count($cliente_result) > 0) {
                 <!-- Contenido -->
                 <?php
 
-
                 if (isset($_SESSION["usuario"])) {
                     $cliente = "SELECT 
                                 c.id_cliente 
@@ -151,7 +150,7 @@ if (is_array($cliente_result) && count($cliente_result) > 0) {
                     echo '
         <div class="container mt-5 text-center">
            
-        <h1 class="mt-4 p-3">Su Folio es: <strong>' . $id_reserva . '</strong></h1>
+        <h1 class="mt-4 p-3">Su Folio es: <strong>' . "hola" . '</strong></h1>
                 <p class="mt-4 text-center">Para realizar el pago de la compra contacte con nuestro siguiente número entre las 9:00AM y 8:00PM para acordar el método de pago</p>
         <div class="d-flex justify-content-center align-items-center my-4 p-2">
             <i class="fa-solid fa-phone fs-3 me-3"></i>
