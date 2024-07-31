@@ -507,7 +507,7 @@ if ($rol[0]->rol !== 'administrador') {
                         extract($_POST);
                         $proceso = $_POST['proceso'];
 
-                        $consulta = "CALL obtenerDetallesPorProceso('$proceso');";
+                        $consulta = "CALL ObtenerDetallesPorProceso('$proceso');";
                         $bolsa = $db->select($consulta);
 
                         if (empty($procesos)) {

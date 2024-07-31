@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="shortcut icon" href="../img/Sinfonía-Café-y-Cultura.webp">
+
     <?php
-    include_once ("../class/database.php");
+    include_once("../class/database.php");
     $db = new Database();
     $db->conectarDB();
     session_start();
@@ -30,8 +31,7 @@
                 <a class="navbar-brand" href="../index.php">
                     <img src="../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
                 </a>
-                <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1"
-                    id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                     <div class="offcanvas-header">
                         <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura
                         </h5>
@@ -62,14 +62,12 @@
                 </div>
                 <?php
                 if (isset($_SESSION["usuario"])) {
-                    ?>
+                ?>
                     <!-- Navbar con dropdown -->
-                    <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
-                        style="left: auto; right: 30px; top: 60px">
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
                         <a class="dropdown-item" href="perfil.php">Mi perfil</a>
                         <?php if ($rol[0]->rol === 'administrador') { ?>
                             <a class="dropdown-item" href="../views/adminInicio.php">Administrar</a>
@@ -77,15 +75,14 @@
                         <?php } ?>
                         <a class="dropdown-item" href="../scripts/login/cerrarsesion.php">Cerrar sesión</a>
                     </div>
-                    <?php
+                <?php
                 } else {
-                    ?>
+                ?>
                     <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
-                    <?php
+                <?php
                 }
                 ?>
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
             </div>
@@ -110,84 +107,116 @@
                 <div class="fw-bold fs-3 mt-3 mb-4">
                     <h1 class="h1contact">Eventos</h1>
                 </div>
-                <!--botónes de categorias-->
+                <!-- Botones de categorías -->
                 <div class="d-flex justify-content-center">
-                    <ul class="nav nav-tabs justify-content-center  " id="ex1" role="tablist"
-                        style="border-bottom: none;">
-
+                    <ul class="nav nav-tabs justify-content-center" id="ex1" role="tablist" style="border-bottom: none;">
                         <?php
-                        include_once ("../class/database.php");
+                        include_once("../class/database.php");
                         $conexion = new Database();
                         $conexion->conectarDB();
-                        $query = 'SELECT 
-                        categorias.id_categoria,
-                        categorias.nombre
-                        FROM 
-                        categorias 
-                        WHERE 
-                        categorias.tipo = "Evento"';
+                        $query = 'SELECT categorias.id_categoria, categorias.nombre FROM categorias WHERE categorias.tipo = "Evento"';
                         $categorias = $conexion->select($query);
                         $tru = "true";
                         $active = "active";
                         foreach ($categorias as $categoria) {
-                            echo "<li class='row nav-item col-5 col-sm-5 col-md-3 col-lg-auto mb-2 mb-lg-0  me-0 text-center justify-content-center d-flex m-2 p-0 p-md-1 me-md-2' role='presentation'>";
+                            $isActive = (isset($_GET['categoria']) && $_GET['categoria'] == $categoria->id_categoria) ? 'active' : '';
+                            echo "<li class='row nav-item col-5 col-sm-5 col-md-3 col-lg-auto mb-2 mb-lg-0 me-0 text-center justify-content-center d-flex m-2 p-0 p-md-1 me-md-2' role='presentation'>";
                             echo "<a data-mdb-tab-init class='btn-categorias w-100 h-100' id='ex1-tabs-{$categoria->id_categoria}' href='#ex1-tabs-{$categoria->id_categoria}' role='tab' aria-controls='ex1-tabs-{$categoria->id_categoria}' aria-selected='$tru'>{$categoria->nombre}</a>";
                             echo "</li>";
                             $tru = "false";
                             $active = "";
-
-                            /*
-                        echo " <li class='mx-3 nav-item col-5 col-sm-5 col-md-4 col-lg-auto mb-2 mb-lg-0' role='presentation'>";
-                        echo "<button class='btn-categorias w-100' id='{$categoria->id_categoria}-tab' data-bs-toggle='tab' data-bs-target='#{$categoria->id_categoria}' type='button' role='tab' aria-controls='{$categoria->id_categoria}' aria-selected='true'>{$categoria->nombre}</button>";
-                        echo "</li>";
-                        */
                         }
                         $conexion->desconectarDB();
                         ?>
-
                     </ul>
                 </div>
-                <!-- Contenido de las categorias -->
-                <div class="tab-content col-12 p-1" id="ex1-content">
 
+                <!-- Contenido de las categorías -->
+                <div class="tab-content col-12 p-1" id="ex1-content" style="min-height: 400px;">
                     <?php
                     $conexion->conectarDB();
-                    $query = "SELECT 
-                        categorias.id_categoria as cat_id,eventos.id_evento, eventos.nombre, eventos.tipo, eventos.descripcion, eventos.img_url, eventos.fecha_evento, eventos.hora_inicio, eventos.hora_fin
-                        FROM 
-                        categorias 
-                        JOIN 
-                        eventos ON categorias.id_categoria = eventos.id_categoria
-                        WHERE 
-                        categorias.tipo = 'Evento' and eventos.fecha_publicacion <= NOW()";
-                    $categorias = $conexion->select($query);
-                    $active = "active";
-
+                    $eventosPorCategoria = [];
                     foreach ($categorias as $categoria) {
-                        echo "<div class='tab-pane fade $active' id='ex1-tabs-{$categoria->cat_id}' role='tabpanel' aria-labelledby='ex1-tab-{$categoria->cat_id}'>";
-                        echo "  <div class='row justify-content-center mb-5'>";
-                        echo "      <div class='col-12 col-md-8 d-flex align-items-center'>";
-                        echo "          <div class='d-flex flex-wrap w-100 d-flex justify-content-center'>";
-                        echo "              <div class='col-12 col-md-6 p-2 col-sm-6'>";
-                        echo "                  <img src='../img/eventos/{$categoria->img_url}' class='card-img-top img-fluid' alt='...' style='height: 300px; object-fit: cover;'>";
-                        echo "              </div>";
-                        echo "              <div class='col-9 col-sm-9 col-md-6 p-2 d-flex flex-column justify-content-cente p-lg-2'>";
-                        echo "                  <h5 class='fw-bold mb-3' style='letter-spacing: 1px;'>{$categoria->nombre}</h5>";
-                        echo "                  <p class='text-dark-emphasis mb-4 '>{$categoria->descripcion}</p>";
-                        echo "                  <form action='../views/eventos/detalle_eventos.php?id={$categoria->id_evento}' method='post'>";
-                        echo "                      <input type='hidden' name='id_evento' value='{$categoria->id_evento}'>";
-                        echo "                      <input type='submit' class='btn btn-cafe w-75' value='Ver Detalles'>";
-                        echo "                  </form>";
-                        echo "              </div>";
-                        echo "          </div>";
-                        echo "      </div>";
-                        echo "  </div>";
+                        $categoria_id = $categoria->id_categoria;
+                        $page = isset($_GET['page_' . $categoria_id]) ? (int)$_GET['page_' . $categoria_id] : 1;
+                        $perPage = 3;
+                        $offset = ($page - 1) * $perPage;
+
+                        $query = "SELECT 
+                    SQL_CALC_FOUND_ROWS 
+                    eventos.id_evento, eventos.nombre, eventos.descripcion, eventos.img_url, eventos.fecha_evento, eventos.hora_inicio, eventos.hora_fin,eventos.boletos, eventos.fecha_publicacion
+                    FROM 
+                    eventos 
+                    WHERE 
+                    eventos.id_categoria = $categoria_id AND eventos.fecha_publicacion <= NOW() 
+                    LIMIT $perPage OFFSET $offset";
+                        $eventos = $conexion->select($query);
+                        $eventosPorCategoria[$categoria_id] = $eventos;
+
+                        // Obtener el total de registros
+                        $totalQuery = "SELECT FOUND_ROWS() as total";
+                        $totalResult = $conexion->select($totalQuery);
+                        $totalEventos = $totalResult[0]->total;
+                        $totalPages = ceil($totalEventos / $perPage);
+
+                        // Establecer la pestaña activa
+                        $active = (isset($_GET['categoria']) && $_GET['categoria'] == $categoria_id) ? 'active show' : '';
+
+                        echo "<div class='tab-pane fade $active' id='ex1-tabs-{$categoria_id}' role='tabpanel' aria-labelledby='ex1-tab-{$categoria_id}'>";
+
+                        if (!empty($eventos)) {
+                            foreach ($eventos as $evento) {
+                                echo "  <div class='row justify-content-center mb-4 p-2'>";
+                                echo "      <div class='col-12 col-md-8 d-flex align-items-center'>";
+                                echo "          <div class='d-flex flex-wrap w-100 d-flex justify-content-center'>";
+                                echo "              <div class='col-12 col-md-11 p-2 col-sm-10 col-lg-6'>";
+                                echo "                  <img src='../img/eventos/{$evento->img_url}' class='card-img-top img-fluid' alt='...' style='height: 300px; object-fit: cover;'>";
+                                echo "              </div>";
+                                echo "              <div class='col-12 col-sm-9 col-md-11 col-lg-6 p-2 d-flex flex-column justify-content-cente p-lg-2'>";
+                                echo "                  <h5 class='fw-bold mb-3' style='letter-spacing: 1px;'>{$evento->nombre}</h5>";
+                                echo "                  <p class='text-dark-emphasis mb-4 '>{$evento->fecha_publicacion}</p>";
+                                echo "                  <span class='text-dark-emphasis mb-4 '>{$evento->descripcion}</span>";
+                                echo "                  <form action='../views/eventos/detalle_eventos.php?id={$evento->id_evento}' method='post'>";
+                                echo "                      <input type='hidden' name='id_evento' value='{$evento->id_evento}'>";
+                                echo "                      <input type='submit' class='btn btn-cafe w-75' value='Ver Detalles'>";
+                                echo "                  </form>";
+                                echo "              </div>";
+                                echo "          </div>";
+                                echo "      </div>";
+                                echo "  </div>";
+                            }
+
+                            // Paginación
+                            echo "<nav aria-label='Page navigation example'>";
+                            echo "  <ul class='pagination d-flex justify-content-center'>";
+                            echo "      <li class='page-item" . ($page <= 1 ? ' disabled' : '') . "'>";
+                            echo "          <a class='page-link custom-page-link' href='?categoria=$categoria_id&page_$categoria_id=" . ($page - 1) . "#ex1-tabs-$categoria_id' aria-label='Previous'>";
+                            echo "              <span aria-hidden='true'>&laquo;</span>";
+                            echo "          </a>";
+                            echo "      </li>";
+                            for ($i = 1; $i <= $totalPages; $i++) {
+                                echo "<li class='page-item custom-page-item" . ($page == $i ? ' active' : '') . "'>";
+                                echo "  <a class='page-link custom-page-link' href='?categoria=$categoria_id&page_$categoria_id=$i#ex1-tabs-$categoria_id'>$i</a>";
+                                echo "</li>";
+                            }
+                            echo "      <li class='page-item" . ($page >= $totalPages ? ' disabled' : '') . "'>";
+                            echo "          <a class='page-link custom-page-link' href='?categoria=$categoria_id&page_$categoria_id=" . ($page + 1) . "#ex1-tabs-$categoria_id' aria-label='Next'>";
+                            echo "              <span aria-hidden='true'>&raquo;</span>";
+                            echo "          </a>";
+                            echo "      </li>";
+                            echo "  </ul>";
+                            echo "</nav>";
+                        } else {
+                            echo "<div class='d-flex flex-column align-items-center justify-content-center' style='height: 300px;'>";
+                            echo "  <div><i class='fa-solid fa-circle-exclamation fa-3x text-muted'></i></div>";
+                            echo "  <div class='text-center mt-3'>No hay publicaciones disponibles en esta categoría.</div>";
+                            echo "</div>";
+                        }
+
                         echo "</div>";
-                        $active = "";
                     }
                     $conexion->desconectarDB();
                     ?>
-
                 </div>
 
             </div>
