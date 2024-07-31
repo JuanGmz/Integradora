@@ -267,19 +267,7 @@ if ($result) {
                     <h5 class="offcanvas-title fs-3 mx-auto me-5" id="offcanvasRightLabel">Carrito <i class="fa-solid fa-bag-shopping m-3"></i></h5>
                     <button type="button" class="btn-close text-reset m-3" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
-                <style>
-                    .overlay2 {
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        background-color: rgba(0, 0, 0, 0.5);
-                        opacity: 0;
-                        transition: opacity 0.3s ease;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                    }
-                </style>
+                
                 <!--Contenido-->
 
                 <?php

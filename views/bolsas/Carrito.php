@@ -224,7 +224,8 @@
                                 echo '      <div class="overlay">';
                                 echo '      <h4 class="medida text-white">' . $item->medida . '</h4>';
                                 echo '      </div>';
-                                echo '  </div>';                                echo '      <div class="ms-3 w-25">';
+                                echo '  </div>';                                
+                                echo '      <div class="ms-3 w-25">';
                                 echo '          <h6 class="mb-0 fw-bold">' . $item->producto . '</h6>';
                                 echo '          <span>$' . $item->precio . '</span>';
                                 echo '          <span class="text-muted d-block">' . $item->proceso . '</span>';
@@ -241,7 +242,7 @@
                                 echo '              </div>';
                                 echo '              <button type="submit" class="btn fw-bold btn-dark fs-5 p-0" style="height: 35px; width: 35px">-</button>';
                                 echo '          </form>';
-                                echo '          <span class="mx-2 p-1">' . $item->cantidad . '</span>';
+                                echo '          <span class="mx-1 p-1">' . $item->cantidad . '</span>';
                                 echo '          <form action="../../scripts/actualizar_carrito.php" method="POST" style="display: inline;">';
                                 echo '              <div class="d-none">';
                                 echo '              <input type="hidden" name="id_cliente" value="' . $cliente[0]->id_cliente . '">';
@@ -253,13 +254,16 @@
                                 echo '              </div>';
                                 echo '              <button type="submit" class="btn fw-bold btn-dark fs-5 p-0" style="height: 35px; width: 35px">+</button>';
                                 echo '          </form>';
+                                echo '          <div class="text-center mt-2 d-md-none">';  // Mostrar en resoluciones medianas hacia abajo
+                                echo '             <h6 class="mb-0 fw-bold">subtotal</h6>';
+                                echo '             <p class="mb-0 ">$' . $item->subtotal . '</p>';
+                                echo '          </div>';
                                 echo '      </div>';
-                                echo '          <div class="ms-5 m-0 p-1 text-center">';
+                                echo '          <div class="text-center w-25 mt-1 p-lg-4 d-none d-lg-block">';  // Mostrar solo en resoluciones grandes
                                 echo '             <h6 class="mb-0 fw-bold">subtotal</h6>';
                                 echo '             <p class="mb-0 ">$' . $item->subtotal . '</p>';
                                 echo '          </div>';
                                 echo '  </div>';
-
                                 echo '  <form action="../../scripts/eliminar_producto.php" method="POST" style="display:inline;">
                                                 <div class="d-none">
                                                     <input type="hidden" name="item_id" value="' . $item->id_dbc . '">
