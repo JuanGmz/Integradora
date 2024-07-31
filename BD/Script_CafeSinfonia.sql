@@ -310,7 +310,7 @@ descripcion NVARCHAR(255),
 lat double,
 lng double
 );
-
+-- Eventos
 create table eventos(
 id_evento int auto_increment not null,
 id_lugar int not null,
