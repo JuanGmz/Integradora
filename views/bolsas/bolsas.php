@@ -7,6 +7,13 @@ include("../../class/database.php");
 $conexion = new Database();
 $conexion->conectarDB();
 
+
+if (isset($_SESSION["usuario"])) {
+    $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE p.usuario = '$_SESSION[usuario]'";
+    $rol = $conexion->select($rolUsuario);
+} else {
+    $rol = null;
+}
 // Obtener el ID del producto desde la URL
 $id_bolsas = $_GET['id'];
 // Consultar los detalles del producto desde la base de datos
@@ -33,7 +40,7 @@ if ($result) {
     <body class="bagr-cafe3">
         <!-- NavBar -->
         <nav class="navbar navbar-expand-lg shadow-lg ">
-            <div class="container-fluid show">
+            <div class="container-fluid">
                 <a class="navbar-brand" href="../../index.php">
                     <img src="../../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
                 </a>
@@ -73,8 +80,8 @@ if ($result) {
                         <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
-                        <a class="dropdown-item" href="../../views/perfil.php">Mi perfil</a>
-                        <?php if ($_SESSION['usuario'] == 'ADMIN') { ?>
+                        <a class="dropdown-item" href="../perfil.php">Mi perfil</a>
+                        <?php if ($rol[0]->rol === 'administrador') { ?>
                             <a class="dropdown-item" href="../../views/adminInicio.php">Administrar</a>
                             <div class="dropdown-divider"></div>
                         <?php } ?>
@@ -83,7 +90,7 @@ if ($result) {
                 <?php
                 } else {
                 ?>
-                    <a href="../../views/login.php" class="login-button ms-auto">Iniciar Sesión</a>
+                    <a href="../login.php" class="login-button ms-auto">Iniciar Sesión</a>
                 <?php
                 }
                 ?>
