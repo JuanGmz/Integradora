@@ -32,3 +32,8 @@ function formatPrecio($precio)
     // Convierte el precio a un formato con dos decimales y separador de miles
     return number_format($precio, 2, '.', ',');
 }
+function convertTo24Hour($time12)
+{
+    $time = DateTime::createFromFormat('h:i A', $time12);
+    return $time ? $time->format('H:i') : $time12;
+}

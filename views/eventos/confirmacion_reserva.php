@@ -10,7 +10,6 @@ if (!isset($_GET['id'])) {
 } else {
     $id_reserva = $_GET['id'];
 }
-
 // Obtener el ID del cliente autenticado
 $cliente_query = "SELECT c.id_cliente 
                   FROM clientes AS c 
@@ -23,13 +22,13 @@ if (is_array($cliente_result) && count($cliente_result) > 0) {
     $id_cliente_autenticado = $cliente_result[0]->id_cliente;
 
     // Verificar que el pedido pertenece al cliente autenticado
-    $pedido_query = "SELECT id_cliente FROM eventos_reservas WHERE id_reserva = $id_reserva";
-    $pedido_result = $db->select($pedido_query);
+    $reserva_query = "SELECT id_cliente FROM eventos_reservas WHERE id_reserva = $id_reserva";
+    $reserva_result = $db->select($reserva_query);
 
-    if (is_array($pedido_result) && count($pedido_result) > 0) {
-        $id_cliente_pedido = $pedido_result[0]->id_cliente;
+    if (is_array($reserva_result) && count($reserva_result) > 0) {
+        $id_cliente_reserva = $reserva_result[0]->id_cliente;
 
-        if ($id_cliente_autenticado == $id_cliente_pedido) {
+        if ($id_cliente_autenticado == $id_cliente_reserva) {
             // El pedido pertenece al cliente autenticado, mostrar el folio
             ?>
 
@@ -189,10 +188,10 @@ if (is_array($cliente_result) && count($cliente_result) > 0) {
                     <p class="card-text">Su folio es: <strong>' . htmlspecialchars($id_reserva) . '</strong></p>
                     <p class="card-text">Para completar su reserva, deberá realizar un depósito o transferencia a la siguiente cuenta:</p>
                     <ul class="list-unstyled">
-                        <li><strong>Banco:</strong> [Nombre del Banco]</li>
-                        <li><strong>Cuenta:</strong> [Número de Cuenta]</li>
-                        <li><strong>CLABE:</strong> [Número CLABE]</li>
-                        <li><strong>Nombre del Titular:</strong> [Nombre del Titular]</li>
+                        <li><strong>Banco:</strong> Bancomer</li>
+                        <li><strong>Cuenta:</strong> 1234567890 </li>
+                        <li><strong>CLABE:</strong> 012345678901234567</li>
+                        <li><strong>Nombre del Titular:</strong> Héctor Armando Caballero Serna</li>
                     </ul>
                     <p class="card-text">Después de realizar el pago, por favor suba el comprobante de pago a través de su perfil en "Reservas":</p>
                     <div class="mt-4">

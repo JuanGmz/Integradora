@@ -1492,11 +1492,11 @@ INSERT INTO productos_menu (id_categoria, nombre, descripcion, img_url) VALUES
 (74, null, 70), -- Pastel Red Velvet
 (75, null, 40); -- Rollos de Canela con Glaseado
 
-call SP_Registrar_usuariosAdministradores('Noe Abel','Vargas','Lopez','noe134','noelopez191119@gmail.com','micontraseñasupersegura','8715083731');
+call SP_Registrar_usuariosAdministradores('Noe Abel','Vargas','Lopez','noah','noelopez191119@gmail.com','123pass123','8715083731');
 call SP_Registrar_usuariosAdministradores('Tobias Gabriel','Rodriguez','Lujan','tlujan','totilotegabriel@gmail.com','miperro123','8716764502');
 call SP_Registrar_usuariosAdministradores('Iker Jesus','Flores','Luna','iker','iker@gmail.com','elgato123','8713923040');
-call SP_Registrar_usuariosClientes('Juan Alfredo','Gomez','Gonzalez','juangmz','juan@gmail.com','123juanita123','8718451815');
-call SP_Registrar_usuariosAdministradores('Dante Raziel','Basurto','Saucedo','bune','dantin@gmail.com','123456','8714307468');
+call SP_Registrar_usuariosAdministradores('Juan Alfredo','Gomez','Gonzalez','juangmz','imjuantrc@gmail.com','123juanita123','8718451815');
+call SP_Registrar_usuariosAdministradores('Dante Raziel','Basurto','Saucedo','bune','Bune_assassin@hotmail.com','123456','8714307468');
 call SP_Registrar_usuariosAdministradores('Hector Armando','Caballero','Serna','hector','hector@gmail.com','123sinfonia123','8715066618');
 
 -- Ingresar domicilios
