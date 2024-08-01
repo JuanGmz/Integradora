@@ -219,7 +219,7 @@ if (isset($_SESSION["usuario"])) {
                             <input type="hidden" name="item_id" value="' . $item->id_dbc . '">
                             <input type="hidden" name="id_carrito" value="' . $item->id_carrito . '">
                             <input type="hidden" name="id_cliente" value="' . $cliente[0]->id_cliente . '">
-                            <input type="hidden" name="link" value=../views/bolsas/ecommerce.php">
+                            <input type="hidden" name="link" value="../views/ecommerce.php">
                         </div>
                                 <button type="submit" class="btn" aria-label="Close"><i class="fa-solid fa-trash"></i></button>
                         </form>';

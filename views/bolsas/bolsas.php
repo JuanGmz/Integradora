@@ -267,7 +267,7 @@ if ($result) {
                     <h5 class="offcanvas-title fs-3 mx-auto me-5" id="offcanvasRightLabel">Carrito <i class="fa-solid fa-bag-shopping m-3"></i></h5>
                     <button type="button" class="btn-close text-reset m-3" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
-                
+
                 <!--Contenido-->
 
                 <?php
@@ -431,6 +431,10 @@ if ($result) {
                     </div>
                 </div>
             </footer>
+            <!-- jQuery -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <!-- Bootstrap JS -->
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
             <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
             <script src="https://kit.fontawesome.com/b820f07375.js" crossorigin="anonymous"></script>

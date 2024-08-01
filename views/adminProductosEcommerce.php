@@ -613,14 +613,20 @@ if ($rol[0]->rol !== 'administrador') {
                                                                     <td>$medida_precio->medida</td>
                                                                     <td>$medida_precio->precio</td>
                                                                     <td>
-                                                                        <form action='../scripts/adminecomerce/eliminarMedida.php' method='POST'>
+                                                                        <form action='../scripts/adminecomerce/eliminarMedida.php' method='POST' onsubmit='return confirmDelete()'>
                                                                             <input type='hidden' name='id_bolsa' value='$bolsita->id_bolsa'>
                                                                             <input type='hidden' name='medida' value='$medida_precio->medida'>
                                                                             <input type='hidden' name='precio' value='$medida_precio->precio'>
                                                                             <button type='submit' class='btn btn-danger'><i class='fa-solid fa-trash'></i></button>
                                                                         </form>
                                                                     </td>
-                                                                </tr>";
+                                                                </tr>
+                                                                <script>
+function confirmDelete() {
+    return confirm('¿Está seguro que quiere eliminar esta medida? Esto también eliminará la medida de los carritos de los usuarios.');
+}
+</script>";
+                                                                
                                     }
                                     echo "
                                                             </tbody>
