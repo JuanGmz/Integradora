@@ -165,6 +165,7 @@ a:hover {
   padding: 20px;
   background: #fff;
   overflow: auto;
+
   border-radius: 4px;
 }
 
@@ -817,4 +818,103 @@ a:hover {
 .alert-warning {
   background-color: #ffc107;
   /* Color amarillo */
+}
+/*-----------------------------------------------------------------------------*/
+.cardss {
+  width: 40rem;
+  height: 46rem;
+  border-radius: 10px;
+  position: relative;
+  color: var(--color6);
+  box-shadow: 0 10px 30px 5px rgba(0, 0, 0, 0.2);
+  /* Se puede eliminar el color de fondo si no es necesario */
+}
+
+.cardss img {
+  position: absolute;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0.9;
+  transition: opacity .2s ease-out;
+}
+
+.cardss h2 {
+  position: absolute;
+  inset: auto auto 50px 30px;
+  margin: 0;
+  transition: inset .3s .3s ease-out;
+  font-weight: normal;
+  text-transform: uppercase;
+}
+
+.cardss p, .cardss a {
+  position: absolute;
+  opacity: 0;
+  max-width: 80%;
+  transition: opacity .3s ease-out;
+}
+
+.cardss p {
+  inset: auto auto 80px 30px;
+}
+
+.cardss a {
+  inset: auto auto 40px 30px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.cardss:hover h2 {
+  inset: auto auto 260px 30px;
+  transition: inset .3s ease-out;
+}
+
+.cardss:hover p, .cardss:hover a {
+  opacity: 1;
+  transition: opacity .5s .1s ease-in;
+}
+
+.cardss:hover img {
+  transition: opacity .3s ease-in;
+  opacity: 1;
+}
+
+/* Nuevo CSS para el efecto de superposición más oscuro */
+.cardss::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7); /* Superposición más oscura */
+  opacity: 0;
+  transition: opacity .3s ease-in;
+}
+
+.cardss:hover::before {
+  opacity: 1;
+}
+
+.material-symbols-outlined {
+  vertical-align: middle;
+}
+/* Responsivo para pantallas pequeñas */
+@media (max-width: 767.98px) {
+
+  .cardss:hover h2 {
+    inset: auto auto 323px 20px; /* Ajuste para pantallas pequeñas */
+  }
+}
+/* Responsivo para pantallas medianas */
+@media (min-width: 800px) and (max-width: 1300px) {
+  
+
+  .cardss:hover h2 {
+    inset: auto auto 310px 20px; /* Ajuste para pantallas medianas */
+  }
+
 }

@@ -7,6 +7,13 @@ include("../../class/database.php");
 $conexion = new Database();
 $conexion->conectarDB();
 
+
+if (isset($_SESSION["usuario"])) {
+    $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE p.usuario = '$_SESSION[usuario]'";
+    $rol = $conexion->select($rolUsuario);
+} else {
+    $rol = null;
+}
 // Obtener el ID del producto desde la URL
 $id_bolsas = $_GET['id'];
 // Consultar los detalles del producto desde la base de datos
@@ -33,7 +40,7 @@ if ($result) {
     <body class="bagr-cafe3">
         <!-- NavBar -->
         <nav class="navbar navbar-expand-lg shadow-lg ">
-            <div class="container-fluid show">
+            <div class="container-fluid">
                 <a class="navbar-brand" href="../../index.php">
                     <img src="../../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
                 </a>
@@ -73,8 +80,8 @@ if ($result) {
                         <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
-                        <a class="dropdown-item" href="../../views/perfil.php">Mi perfil</a>
-                        <?php if ($_SESSION['usuario'] == 'ADMIN') { ?>
+                        <a class="dropdown-item" href="../perfil.php">Mi perfil</a>
+                        <?php if ($rol[0]->rol === 'administrador') { ?>
                             <a class="dropdown-item" href="../../views/adminInicio.php">Administrar</a>
                             <div class="dropdown-divider"></div>
                         <?php } ?>
@@ -83,7 +90,7 @@ if ($result) {
                 <?php
                 } else {
                 ?>
-                    <a href="../../views/login.php" class="login-button ms-auto">Iniciar Sesión</a>
+                    <a href="../login.php" class="login-button ms-auto">Iniciar Sesión</a>
                 <?php
                 }
                 ?>
@@ -267,19 +274,7 @@ if ($result) {
                     <h5 class="offcanvas-title fs-3 mx-auto me-5" id="offcanvasRightLabel">Carrito <i class="fa-solid fa-bag-shopping m-3"></i></h5>
                     <button type="button" class="btn-close text-reset m-3" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
-                <style>
-                    .overlay2 {
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        background-color: rgba(0, 0, 0, 0.5);
-                        opacity: 0;
-                        transition: opacity 0.3s ease;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                    }
-                </style>
+
                 <!--Contenido-->
 
                 <?php
@@ -443,6 +438,10 @@ if ($result) {
                     </div>
                 </div>
             </footer>
+            <!-- jQuery -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <!-- Bootstrap JS -->
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
             <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
             <script src="https://kit.fontawesome.com/b820f07375.js" crossorigin="anonymous"></script>
