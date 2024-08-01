@@ -12,11 +12,13 @@ $rol = $db->select($rolUsuario);
 if ($rol[0]->rol !== 'administrador') {
     header('Location: ../index.php');
 }
-if (isset($_POST["btnactualizar"])) {
-    $costo = 0;
-    $cantidadBoletos = 0;
+
+if (isset($_POST['btnactualizar'])) {
 
     extract($_POST);
+
+    $cantidadBoletos = isset($_POST["cantidadBoletos"]) ? $_POST["cantidadBoletos"] : 0;
+    $costo = isset($_POST["costo"]) ? $_POST["costo"] : 0;
 
     // Asegúrate de que id_evento es un número entero
     $id_evento = intval($id_evento);
@@ -46,6 +48,8 @@ if (isset($_POST["btnactualizar"])) {
 
     if ($fechaEvento < $fechaPub) {
         showAlert("La fecha del evento no puede ser anterior a la fecha de publicación.", "error");
+    } else if ($horaFin <= $horaIni) {
+        showAlert("La hora de fin no puede ser menor o igual a la hora de inicio.", "error");
     } else if ($tipo == "De Pago") {
         if ($cantidadBoletos > $capacidad) {
             showAlert("La cantidad de boletos no puede ser mayor a la capacidad.", "error");
@@ -55,13 +59,10 @@ if (isset($_POST["btnactualizar"])) {
             $db->execute($consultapago);
             showAlert("Actualización exitosa.", "success");
         }
-    } else if ($horaFin <= $horaIni) {
-        showAlert("La hora de fin no puede ser menor o igual a la hora de inicio.", "error");
     } else {
         $db->execute($consultagratuito);
         showAlert("Actualización exitosa.", "success");
     }
-    $db->desconectarDB();
 }
 
 ?>
@@ -615,14 +616,14 @@ if (isset($_POST["btnactualizar"])) {
                                     <table class='table table-striped table-hover table-dark text-center border-3 border-black border-bottom border-start border-end'>
                                         <thead>
                                             <tr>
-                                            <th scope='col'>Nombre</th>
-                                            <th scope='col'>Acciones</th>
-                                        </tr>
+                                                <th scope='col'>Nombre</th>
+                                                <th scope='col'>Acciones</th>
+                                            </tr>
                                     </thead>
                                     <tbody class='table-group-divider table-light'>";
                             foreach ($eventos as $evento) {
                                 echo "
-                                        <tr>
+                                <tr>
                                         <td>$evento->nombre</td>
                                             <td class='d-flex flex-row align-items-center justify-content-center gap-1'>
                                                 <!-- Imagen -->
@@ -639,7 +640,7 @@ if (isset($_POST["btnactualizar"])) {
                                                             </div>
                                                             <div class='modal-body mb-3'>
                                                                 <!-- Aquí se está mostrando la imagen -->
-                                                                <form action='../scripts/admineventos/editarimagen.php' method='POST' enctype='multipart/form-data' onsubmit='return validateForm()'>
+                                                                <form action='../scripts/admineventos/editarimagen.php' method='POST' enctype='multipart/form-data'>
                                                                     <div class='col-12 mb-3'>
                                                                         <label for='imagen' class='form-label'>Imagen Actual</label><br>
                                                                         <img src='../img/eventos/$evento->img_url' class='img-fluid' alt='imagen$evento->nombre'><br>
@@ -686,7 +687,7 @@ if (isset($_POST["btnactualizar"])) {
                                     $inputs_evento_pago = "
                                     <div class='col-6'>
                                         <label for='cantidadboletos' class='form-label'>Boletos</label>
-                                        <input type='number' min='1' max='300' class='form-control' id='cantidadBoletos name='cantidadBoletos' value='$evento->boletos'>
+                                        <input type='number' min='1' max='300' class='form-control' id='cantidadBoletos' name='cantidadBoletos' value='$evento->boletos'>
                                     </div>
                                     <div class='col-6'>
                                         <label for='costo' class='form-label'>Costo por boleto</label>
@@ -700,34 +701,28 @@ if (isset($_POST["btnactualizar"])) {
                                 }
                                 echo "
                                 <div class='modal-body'>
-                                    <h4 class='text-start fw-bold mb-3'>Nombre: <span class='fw-normal fs-5'> <?php
-                                    echo htmlspecialchars($evento->nombre); ?></span></h4>
-                                    <h4 class='text-start fw-bold mb-3'>Descripción: <span class='fw-normal fs-5'><?php
-                                    echo htmlspecialchars($evento->descripcion); ?></span></h4>
-                                    <h4 class='text-start fw-bold mb-3'>Categoria: <span class='fw-normal fs-5'><?php
-                                    echo htmlspecialchars($evento->categoria); ?></span></h5>
-                                        <h4 class='text-start fw-bold mb-3'>Lugar: <span class='fw-normal fs-5'><?php
-                                        echo htmlspecialchars($evento->lugar_nombre); ?></span></h5>
+                                    <h4 class='text-start fw-bold mb-3'>Nombre: <span class='fw-normal fs-5'>$evento->nombre</span></h4>
+                                    <h4 class='text-start fw-bold mb-3'>Descripción: <span class='fw-normal fs-5'>$evento->descripcion</span></h4>
+                                    <h4 class='text-start fw-bold mb-3'>Categoria: <span class='fw-normal fs-5'>$evento->categoria</span></h5>
+                                        <h4 class='text-start fw-bold mb-3'>Lugar: <span class='fw-normal fs-5'>$evento->lugar_nombre</span></h5>
                                             <hr class='my-4'>
                                             <h4 class='text-start fw-bold mb-3'>Fecha evento: <span
-                                                    class='fw-normal fs-5'><?php echo $fechaEvento ?></span></h5>
+                                                    class='fw-normal fs-5'> $fechaEvento</span></h5>
                                                 <h4 class='text-start fw-bold mb-3'>Hora: <span class='fw-normal fs-5'><?php echo $horaInicio
-                                                    . " - " . $horaFin ?></span></h5>
+                                                    . ' - ' . $horaFin ?></span></h5>
                                                     <hr class='my-4'>
                                                     <div class='row'>
                                                         <div class='col-6'>
                                                             <h4 class='text-start fw-bold mb-3'>Tipo: <span
-                                                                    class='fw-normal fs-5'><?php echo $evento->tipo ?></span></h5>
+                                                                    class='fw-normal fs-5'> $evento->tipo</span></h5>
                                                         </div>
                                                         <div class='col-6'>
                                                             <h4 class='text-start fw-bold mb-3'>Capacidad: <span
-                                                                    class='fw-normal fs-5'><?php echo htmlspecialchars($evento->capacidad)
-                                                                        ?></span></h5>
+                                                                    class='fw-normal fs-5'>$evento->capacidad</span></h5>
                                                         </div>
-                                                        <div class='col-6'><?php echo $labelText_precio ?></div>
-                                                        <div class='col-6'><?php echo $labelText_boletos_disponibles ?></div>
+                                                        <div class='col-6'> $labelText_precio</div>
+                                                        <div class='col-6'> $labelText_boletos_disponibles</div>
                                                     </div>
-                                                    <!-- Tabla de productos -->
                                 </div>
                             </div>
                         </div>
@@ -747,104 +742,93 @@ if (isset($_POST["btnactualizar"])) {
                                 </div>
                                 <!-- Aquí va el contenido del modal -->
                                 <div class='modal-body text-start'>
-                                    <form action='' method='post' enctype='multipart/form-data'>
-                                        <input type='hidden' name='id_evento' value='<?php echo $evento->id_evento; ?>'>
+                                    <form method='post' enctype='multipart/form-data'>
+                                        <input type='hidden' name='id_evento' value=$evento->id_evento>
+                                        <input type='hidden' name='tipo' value='$evento->tipo'>
                                         <div class='mb-3'>
                                             <label for='nombre' class='form-label'>Editar Titulo</label>
                                             <input type='text' maxlength='50' class='form-control' id='nombre' name='nombre'
-                                                value='<?php echo $evento->nombre; ?>'>
+                                                value='$evento->nombre'>
                                         </div>
                                         <div class='mb-3'>
                                             <label for='descripcion' class='form-label'>Descripcion</label>
                                             <textarea name='descripcion' id='descripcion' name='descripcion'
-                                                class='form-control'><?php echo $evento->descripcion; ?></textarea>
+                                                class='form-control'>$evento->descripcion</textarea>
                                         </div>
                                         <div class='row'>
                                             <div class='col-6 mb-3'>
                                                 <label for='categoria' class='form-label'>Categoría</label>
                                                 <select name='categoria' id='categoria' class='form-select'>
                                                     <?php
-                                                    $consulta = "SELECT id_categoria, nombre FROM categorias WHERE tipo = 'evento'";
-                                                    $categorias = $db->select($consulta);
-                                                    foreach ($categorias as $categoria) {
-                                                        echo "<option value='{$categoria->id_categoria}'>{$categoria->nombre}</option>";
-                                                    }
-                                                    echo "</select>
+                                                    $consulta = 'SELECT id_categoria, nombre FROM categorias WHERE tipo = 'evento'";
+                                $categorias = $db->select($consulta);
+                                foreach ($categorias as $categoria) {
+                                    echo "<option value='{$categoria->id_categoria}'>{$categoria->nombre}</option>";
+                                }
+                                echo "</select>
                                                 </div>
                                                 <div class='col-6 mb-3'>
                                                     <label for='lugar' class='form-label'>Lugar</label>
                                                     <select name='lugar' id='lugar' class='form-select'> ";
-                                                    $consulta = "SELECT id_lugar, nombre FROM ubicacion_lugares";
-                                                    $lugares = $db->select($consulta);
-                                                    foreach ($lugares as $lugar) {
-                                                        echo "<option value='{$lugar->id_lugar}'>{$lugar->nombre}</option>";
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <hr class='my-4'>
-                                        <div class='row'>
-                                            <div class='col-6 mb-3'>
-                                                <label for='fecha' class='form-label '>Fecha del Evento</label>
-                                                <input type='date' class='form-control' id='fechaEvento' name='fechaEvento'
-                                                    value='<?php echo $evento->fecha_evento ?>' required>
-                                            </div>
-                                            <div class='col-6'>
-                                                <label for='fechaPub' class='form-label'>Fecha de publicación</label>
-                                                <input type='date' class='form-control' id='fechaPub' name='fechaPub'
-                                                    value='<?php echo $evento->fecha_publicacion; ?>' required>
-                                            </div>
-                                        </div>
-                                        <div class="">
-                                            <p><?php echo $hora_inicio_24 . ' - ' . $hora_fin_24 ?></p>
-                                        </div>
-                                        <div class='row mb-3'>
-                                            <div class='col-6'>
-                                                <label for='horaFin' class='form-label'>Hora de Inicio</label>
-                                                <input type='time' min='11:00' max='21:00' class='form-control' id='horaIni'
-                                                    name='horaIni' value='<?php echo htmlspecialchars($evento->hora_inicio); ?>'
-                                                    required>
-                                            </div>
-                                            <div class='col-6'>
-                                                <label for='horaFin' class='form-label'>Hora de Fin</label>
-                                                <input type='time' min='11:00' max='21:00' class='form-control' id='horaFin'
-                                                    name='horaFin' value='<?php echo $evento->hora_fin; ?>' required>
-                                            </div>
-                                        </div>
-                                        <hr class='my-4'>
-                                        <div class="row">
-                                            <div class="col-6 mb-3">
-                                                <label for="tipo" class="form-label">Tipo</label>
-                                                <select name="tipo" id="tipo" class="form-select" disabled required>
-                                                    <option value="<?php echo $evento->tipo; ?>"><?php echo $evento->tipo; ?>
-                                                    </option>
-                                                </select>
-                                            </div>
-                                            <div class='col-6 mb-3'>
-                                                <label for='cap' class='form-label'>Capacidad</label>
-                                                <input type='number' min='1' max='300' class='form-control' id='capacidad'
-                                                    name='capacidad' value='<?php echo $evento->capacidad; ?>' required>
-                                            </div>
-                                        </div>
-                                        <div class='row'>
-                                            <?php echo $inputs_evento_pago; ?>
-                                        </div>
-                                        <div class='mt-3 text-end'>
-                                            <button type='button' class='btn btn-secondary'
-                                                data-bs-dismiss='modal'>Cancelar</button>
-                                            <button type="submit" class="btn btn-primary" name="btnactualizar"
-                                                id="btnactualizar">Actualizar</button>
-                                        </div>
-                                    </form>
-                                </div>
+                                $consulta = "SELECT id_lugar, nombre FROM ubicacion_lugares";
+                                $lugares = $db->select($consulta);
+                                foreach ($lugares as $lugar) {
+                                    echo "<option value='{$lugar->id_lugar}'>{$lugar->nombre}</option>";
+                                }
+                                echo "
+                                </select>
                             </div>
                         </div>
+                        <hr class='my-4'>
+                        <div class='row'>
+                            <div class='col-6 mb-3'>
+                                <label for='fecha' class='form-label '>Fecha del Evento</label>
+                                <input type='date' class='form-control' id='fechaEvento' name='fechaEvento'
+                                    value='$evento->fecha_evento' required>
+                            </div>
+                            <div class='col-6'>
+                                <label for='fechaPub' class='form-label'>Fecha de publicación</label>
+                                <input type='date' class='form-control' id='fechaPub' name='fechaPub'
+                                    value='$evento->fecha_publicacion' required>
+                            </div>
+                        </div>
+                        <div class='row mb-3'>
+                            <div class='col-6'>
+                                <label for='horaFin' class='form-label'>Hora de Inicio</label>
+                                <input type='time' min='11:00' max='21:00' class='form-control' id='horaIni' name='horaIni'
+                                    value='$evento->hora_inicio' required>
+                            </div>
+                            <div class='col-6'>
+                                <label for='horaFin' class='form-label'>Hora de Fin</label>
+                                <input type='time' min='11:00' max='21:00' class='form-control' id='horaFin' name='horaFin'
+                                    value='$evento->hora_fin' required>
+                            </div>
+                        </div>
+                        <hr class='my-4'>
+                        <div class='row'>
+                            <div class='col-12 mb-3'>
+                                <label for='cap' class='form-label'>Capacidad</label>
+                                <input type='number' min='1' max='300' class='form-control' id='capacidad' name='capacidad'
+                                    value='$evento->capacidad' required>
+                            </div>
+                        </div>
+                        <div class='row'>
+                         $inputs_evento_pago
+                                </div>
+                        <div class='mt-3 text-end'>
+                            <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
+                            <button type='submit' class='btn btn-primary' name='btnactualizar'
+                                id='btnactualizar'>Actualizar</button>
+                        </div>
+                        </form>
                     </div>
-                    </td>
-                    </tr>
-                    <?php
+               </div>
+                    </div>
+                    </div>
+                </td>
+                </tr>";
                             }
+
                             echo "</tbody></table>";
                         }
                     } else {
@@ -852,9 +836,9 @@ if (isset($_POST["btnactualizar"])) {
                     }
                     $db->desconectarDB()
                         ?>
-    </div>
-    </div>
-    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div id="floatingAlert" class="floating-alert" style="display: none;"></div>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -907,3 +891,5 @@ if (isset($_POST["btnactualizar"])) {
 </body>
 
 </html>
+<?php
+$db->desconectarDB();
