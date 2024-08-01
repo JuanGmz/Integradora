@@ -698,7 +698,7 @@ if (isset($_POST["btnactualizar"])) {
                                     $labelText_boletos_disponibles = "";
                                     $inputs_evento_pago = "";
                                 }
-                                ?>
+                                echo "
                                 <div class='modal-body'>
                                     <h4 class='text-start fw-bold mb-3'>Nombre: <span class='fw-normal fs-5'> <?php
                                     echo htmlspecialchars($evento->nombre); ?></span></h4>
