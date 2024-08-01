@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-include ("../../class/database.php");
-include ("../../scripts/funciones/funciones.php");
+include("../../class/database.php");
+include("../../scripts/funciones/funciones.php");
 // Crear una nueva instancia de la clase Database y conectar a la base de datos
 $conexion = new Database();
 $conexion->conectarDB();
@@ -61,7 +61,7 @@ if (isset($_POST["btnReservar"])) {
 if ($result) {
     // Si se encontró el evento, mostrar sus detalles
     $evento = $result[0]; // Asumimos que select devuelve una matriz de resultados
-    ?>
+?>
     <!DOCTYPE html>
     <html lang="en">
 
@@ -127,8 +127,7 @@ if ($result) {
                 <a class="navbar-brand" href="../../index.php">
                     <img src="../../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
                 </a>
-                <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar"
-                    aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                     <div class="offcanvas-header">
                         <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -158,14 +157,12 @@ if ($result) {
                 </div>
                 <?php
                 if (isset($_SESSION["usuario"])) {
-                    ?>
+                ?>
                     <!-- Navbar con dropdown -->
-                    <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
-                        style="left: auto; right: 30px; top: 60px">
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
                         <a class="dropdown-item" href="../../views/perfil.php">Mi perfil</a>
                         <?php if ($_SESSION['usuario'] == 'ADMIN') { ?>
                             <a class="dropdown-item" href="../../views/adminInicio.php">Administrar</a>
@@ -173,15 +170,14 @@ if ($result) {
                         <?php } ?>
                         <a class="dropdown-item" href="../../scripts/login/cerrarsesion.php">Cerrar sesión</a>
                     </div>
-                    <?php
+                <?php
                 } else {
-                    ?>
+                ?>
                     <a href="../../views/login.php" class="login-button ms-auto">Iniciar Sesión</a>
-                    <?php
+                <?php
                 }
                 ?>
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-                    aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
             </div>
@@ -194,7 +190,7 @@ if ($result) {
                     <li class="breadcrumb-item fw-bold"><a href="../../views/eventos.php">Eventos</a></li>
                     <?php
                     echo "  <li class='breadcrumb-item active' aria-current='page'>" . $evento->nombre . "</li>"
-                        ?>
+                    ?>
                 </ol>
             </nav>
             <?php
@@ -206,7 +202,7 @@ if ($result) {
             if ($evento->tipo == "De Pago" && $evento->boletos > 0) {
                 if (isset($_SESSION["usuario"])) {
                     $labelText_precio = " <h4>Precio por boleto: {$precio_boleto} $</h4>";
-                    $labelText_botonreservar = "<button type='button' class='btn btn-cafe fs-4' data-bs-toggle='modal'
+                    $labelText_botonreservar = "<button type='button' class='btn btn-cafe fs-4 col-12' data-bs-toggle='modal'
                             data-bs-target='#exampleModal'>
                             Reservar Boletos
                         </button>
@@ -257,20 +253,20 @@ if ($result) {
                     $labelText_botonreservar = "<h4 class='text-center'> ¡Iniciar Sesión para reservar boletos! </h4>";
                 }
                 $labelText_precio = " <h4>Precio por boleto: {$precio_boleto} $</h4>";
-
             } else if ($evento->tipo == "De Pago" && $evento->boletos == 0) {
                 $labelText_precio = "<h4 class='text-center'> ¡Lo sentimos, los boletos se han agotado! </h4>";
             } else if ($evento->tipo == "Gratuito") {
                 $labelText_precio = "";
             }
             ?>
+            <!-- Imagen -->
             <div class="row">
                 <div class="col mb-lg-0 text-center empty-side">
-                    <img src="../../img/eventos/<?php echo $evento->img_url; ?>" class="img-fluid w-50"
-                        alt="Imagen del evento.">
+                    <img src="../../img/eventos/<?php echo $evento->img_url; ?>" class="img-fluid w-50" alt="Imagen del evento.">
                 </div>
             </div>
-            <div class="row justify-content-center">
+            <!-- Nombre y descripción -->
+            <div class="row justify-content-center col-12">
                 <div class="col-md-6 text-center">
                     <div>
                         <h1 class="fw-bold mt-3"><?php echo $evento->nombre; ?></h1>
@@ -278,16 +274,21 @@ if ($result) {
                     </div>
                 </div>
             </div>
+
             <hr class="my-4">
-            <div class="row">
-                <div class=" col-6">
-                    <div class="d-flex align-items-center mb-3">
+            <!-- Ubicación -->
+            <div class="row ">
+                <!-- Mapa -->
+                <div class="col-12 col-md-7 col-lg-6 ">
+                    <!-- Ubicación -->
+                    <div class="d-flex align-items-center mb-3 justify-content-center">
                         <i class="fa-solid fa-location-dot fa-2x me-2"></i>
                         <h2 class="mb-0">Ubicación</h2>
                     </div>
+                    <!-- Mapa -->
                     <div class="d-flex justify-content-center">
                         <div class="text-center">
-                            <h5 class="text-center mb-3">
+                            <h5 class="text-center mb-3 p-1">
                                 <?php
                                 echo "{$evento->lugar}, {$evento->calle}, {$evento->colonia}, {$evento->ciudad}, {$evento->estado}, C.P. {$evento->codigo_postal}";
                                 ?>
@@ -297,13 +298,16 @@ if ($result) {
                             $lat = $evento->lat; // Reemplaza con la latitud de la dirección
                             $lng = $evento->lng; // Reemplaza con la longitud de la dirección
                             ?>
-                            <div id="map"></div>
+                            <div class="map-container" id="map"></div>
                         </div>
                     </div>
                 </div>
-                <div class="col-6">
+                <hr class="my-4 d-block d-md-none">
+                <!-- Horario y Detalles -->
+                <div class="col-12 col-md-5 col-lg-6">
+                    <!-- Horario -->
                     <div class="row">
-                        <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-calendar-days fa-2x me-2"></i>
                             <h2 class="mb-0">Horario </h2>
                         </div>
@@ -313,8 +317,9 @@ if ($result) {
                         </div>
                     </div>
                     <hr class=" my-4">
-                    <div class="row d-flex justify-content-center gap-5">
-                        <div class="d-flex align-items-center">
+                    <!-- Detalles -->
+                    <div class="row justify-content-center gap-md-5 gap-2 ">
+                        <div class="d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-circle-info fa-2x me-2"></i>
                             <h2 class="mb-0">Detalles</h2>
                         </div>
@@ -324,11 +329,14 @@ if ($result) {
                         <div class="text-center">
                             <?php echo $labelText_precio; ?>
                         </div>
-                        <div class="d-flex justify-content-center flex-column">
+                        <div class="d-flex justify-content-center col-12">
                             <?php echo $labelText_botonreservar; ?>
                         </div>
                     </div>
                 </div>
+
+
+
 
             </div>
         </div>
@@ -372,7 +380,7 @@ if ($result) {
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
+            document.addEventListener('DOMContentLoaded', function() {
                 var map = L.map('map').setView([<?php echo $evento->lat; ?>, <?php echo $evento->lng; ?>], 13);
 
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -392,7 +400,7 @@ if ($result) {
             });
         </script>
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
+            document.addEventListener('DOMContentLoaded', function() {
                 var precioBoleto = <?php echo $precio_boleto; ?>; // Asegúrate de que esto sea un número
                 // Obtener elementos del DOM
                 var cantidadSelect = document.getElementById('cantidad');
@@ -417,7 +425,7 @@ if ($result) {
     </body>
 
     </html>
-    <?php
+<?php
 } else {
     echo "Producto no encontrado.";
 }
