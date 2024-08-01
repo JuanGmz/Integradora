@@ -861,7 +861,9 @@ DELIMITER ;
 
 
 -- Procedimiento almacenado para realizar pedido.
+
 DELIMITER //
+
 CREATE PROCEDURE SP_Realizar_Pedido(
     IN p_id_cliente INT,
     IN p_id_domicilio INT,
@@ -870,29 +872,45 @@ CREATE PROCEDURE SP_Realizar_Pedido(
 BEGIN 
     DECLARE v_monto_total DOUBLE;
     DECLARE v_count INT;
+    DECLARE v_pedidos_pendientes INT;
     DECLARE v_id_pedido INT;
+    DECLARE v_mensaje VARCHAR(255);
 
-    -- Verifica si el carrito tiene artículos para el cliente especificado
-    SELECT COUNT(*) INTO v_count FROM carrito WHERE id_cliente = p_id_cliente;
-    
-    IF v_count > 0 THEN
-        -- Calcula el monto total del carrito
-        SELECT SUM(monto) INTO v_monto_total FROM carrito WHERE id_cliente = p_id_cliente;
-        
-        -- Inserta el pedido en la tabla pedidos
-        INSERT INTO pedidos(id_cliente, id_domicilio, id_mp, monto_total)
-        VALUES (p_id_cliente, p_id_domicilio, p_id_mp, v_monto_total);
-        
-        -- Obtiene el ID del pedido recién creado
-        SET v_id_pedido = LAST_INSERT_ID();
-        
-        -- Devuelve el ID del pedido y un mensaje
-        SELECT v_id_pedido AS id_pedido, 'Pedido realizado.' AS mensaje;
+    -- Contar los pedidos pendientes del cliente
+    SELECT COUNT(*) INTO v_pedidos_pendientes
+    FROM pedidos
+    WHERE id_cliente = p_id_cliente AND estatus = 'Pendiente';
+
+    -- Verificar si el cliente ya tiene 5 pedidos pendientes
+    IF v_pedidos_pendientes >= 5 THEN
+        SET v_mensaje = 'Ya tienes 5 pedidos pendientes. No puedes realizar más pedidos hasta que se cancele o finalice alguno.';
+        SELECT NULL AS id_pedido, v_mensaje AS mensaje;
     ELSE
-        -- Devuelve un mensaje si el carrito está vacío
-        SELECT NULL AS id_pedido, 'El carrito está vacío.' AS mensaje;
+        -- Verifica si el carrito tiene artículos para el cliente especificado
+        SELECT COUNT(*) INTO v_count FROM carrito WHERE id_cliente = p_id_cliente;
+
+        IF v_count > 0 THEN
+            -- Calcula el monto total del carrito
+            SELECT SUM(monto) INTO v_monto_total FROM carrito WHERE id_cliente = p_id_cliente;
+
+            -- Inserta el pedido en la tabla pedidos
+            INSERT INTO pedidos(id_cliente, id_domicilio, id_mp, monto_total)
+            VALUES (p_id_cliente, p_id_domicilio, p_id_mp, v_monto_total);
+
+            -- Obtiene el ID del pedido recién creado
+            SET v_id_pedido = LAST_INSERT_ID();
+
+            -- Devuelve el ID del pedido y un mensaje
+            SET v_mensaje = 'Pedido realizado con éxito';
+            SELECT v_id_pedido AS id_pedido, v_mensaje AS mensaje;
+        ELSE
+            -- Devuelve un mensaje si el carrito está vacío
+            SET v_mensaje = 'El carrito está vacío';
+            SELECT NULL AS id_pedido, v_mensaje AS mensaje;
+        END IF;
     END IF;
 END //
+
 DELIMITER ;
 
 -- Evento para cancelar pedidos no pagados dentro del tiempo establecido.

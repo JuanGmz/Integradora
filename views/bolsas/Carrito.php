@@ -320,19 +320,14 @@ if (isset($_SESSION["usuario"])) {
                                 </div>
                                 <p class="small text-muted">* No incluye los gastos de envío.</p>
                                 <button type="submit" class="btn btn-dark w-100">Realizar pedido</button>
-                        </form>
-
-                            <script>
-                            function confirmarPedido() {
-                                return confirm("¿Realmente desea realizar el pedido?");
-                            }
-                            </script>';
+                        </form>';
                         echo '</div>';
                         ?>
 
                     </div>
 
                 </div>
+                
                 <!-- Script para actualizar el campo oculto con el ID del domicilio -->
                 <script>
                     document.getElementById('direccion').addEventListener('change', function(event) {
@@ -370,28 +365,30 @@ if (isset($_SESSION["usuario"])) {
                     });
                 </script>
                 <!-- script para habilitar el botón de envío cuando se seleccione un domicilio -->
-                <script>
-                    function confirmarPedido() {
-                        // Obtén el valor del domicilio
-                        var domicilio = document.getElementById('hiddenIdDomicilio').value;
+                
+<script>
+function confirmarPedido() {
+    // Obtén el valor del domicilio
+    var domicilio = document.getElementById('hiddenIdDomicilio').value;
 
-                        // Si no hay domicilio seleccionado, muestra un mensaje y previene el envío
-                        if (!domicilio) {
-                            alert('Por favor, selecciona o crea un domicilio antes de realizar el pedido.');
-                            return false; // Previene el envío del formulario
-                        }
+    // Si no hay domicilio seleccionado, muestra un mensaje y previene el envío
+    if (!domicilio) {
+        alert('Por favor, selecciona o crea un domicilio antes de realizar el pedido.');
+        return false; // Previene el envío del formulario
+    }
 
-                        return true; // Permite el envío del formulario si el domicilio está seleccionado
-                    }
+    // Muestra la confirmación de pedido
+    return confirm("¿Realmente desea realizar el pedido?");
+}
 
-                    // Función para habilitar el botón de envío cuando se seleccione un domicilio
-                    function seleccionarDomicilio(idDomicilio) {
-                        document.getElementById('hiddenIdDomicilio').value = idDomicilio;
-                        document.getElementById('submitButton').disabled = false; // Habilita el botón
-                    }
+// Función para habilitar el botón de envío cuando se seleccione un domicilio
+function seleccionarDomicilio(idDomicilio) {
+    document.getElementById('hiddenIdDomicilio').value = idDomicilio;
+    document.getElementById('submitButton').disabled = false; // Habilita el botón
+}
 
-                    // Puedes tener un evento o lógica para llamar a seleccionarDomicilio con el id del domicilio
-                </script>
+// Puedes tener un evento o lógica para llamar a seleccionarDomicilio con el id del domicilio
+</script>
 
         <?php
             } else {
