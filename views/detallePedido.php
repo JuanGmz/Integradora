@@ -110,77 +110,103 @@
                 <li class="breadcrumb-item"><a href="../index.php">Inicio</a></li>
                 <li class="breadcrumb-item" aria-current="page"><a href="perfil.php">Perfil</a></li>
                 <li class="breadcrumb-item"><a href="pedidos.php">Pedidos</a></li>
-                <?php
-                    if($pedido === null) {
-                        showAlert("error", "No se puede cancelar el pedido");
-                        echo "hOLA PUTO";
-                    }
-                    ?>
-                <li class="breadcrumb-item active" aria-current="page">Pedido #<?= $pedido[0]->folio; ?></li>
+                <li class="breadcrumb-item active" aria-current="page">Detalle del Pedido</li>
             </ol>
         </nav>
 
-        <div class="row">
-            <div class="row text-center">
-                <div class="col-12 col-lg-6">
-                    <h2>Detalles del Pedido</h2>
-                    <h4>Fecha y Hora: <?= $pedido[0]->fecha_hora_pedido ?></h4>
-                </div>
-                <div class="col-12 col-lg-6 d-flex flex-column justify-content-center">
-                    <h3>Pedido # <?= $pedido[0]->folio ?></h3>
-                </div>
+        <div class="row m-3 m-lg-0">
+            <div class="col-12 col-lg-7 me-5">
+                <?php
+                foreach ($productos as $producto) {
+                ?>
+                    <div class="row p-3 mb-3 bg-body rounded shadow-lg d-lg-flex justify-content-center align-items-center">
+                        <div class="col-8">
+                            <p><?= $producto->nombre ?> (<?= $producto->proceso ?>)</p>
+                            <p>Cantidad: <?= $producto->cantidad ?></p>
+                            <p>Medida: <?= $producto->medida ?></p>
+                            <p>Costo: $<?= $producto->monto ?></p>
+                        </div>
+                        <div class="col-4 text-end">
+                            <img src="../img/bolsas/<?php echo $producto->img_url; ?>" class="img-fluid rounded" alt="Producto" style="width: 100px; height: 100px;">
+                        </div>
+                    </div>
+                <?php
+                }
+            ?>
             </div>
-            <hr>
-            <div class="row text-center">
-                <div class="col-12 col-lg-6">
-                    <h3>Dirección de envío</h3>
-                    <h4 class="fw-bold d-inline">Referencia: <span class="fw-normal"><h5 class="d-inline-block"><?= $pedido[0]->referencia ?></h5></span></h4><br>
-                    <h4 class="fw-bold d-inline">Ciudad y Estado: <span class="fw-normal"><h5 class="d-inline-block"><?= $pedido[0]->ciudad ?>, <?= $pedido[0]->estado ?></h5></span></h4><br>
-                    <h4 class="fw-bold d-inline">Código Postal: <span class="fw-normal"><h5 class="d-inline-block"><?= $pedido[0]->codigo_postal ?></h5></span></h4><br>
-                    <h4 class="fw-bold d-inline">Colonia: <span class="fw-normal"><h5 class="d-inline-block"><?= $pedido[0]->colonia ?></h5></span></h4><br>
-                    <h4 class="fw-bold d-inline">Calle: <span class="fw-normal"><h5 class="d-inline-block"><?= $pedido[0]->calle ?></h5></span></h4><br>
-                </div>
-                <hr class="d-block d-lg-none">
-                <div class="col-12 col-lg-6">
-                    <h3>Resúmen del pedido</h3>
-                    <h4 class="fw-bold d-inline">Costo de Envío: <span class="fw-normal"><h5 class="d-inline-block">$<?= $pedido[0]->costo_envio ?></h5></span></h4><br>
-                    <h4 class="fw-bold d-inline">Costo de Productos: <span class="fw-normal"><h5 class="d-inline-block">$<?= $pedido[0]->monto_total ?></h5></span></h4><br>
-                    <?php
-                        $monto_total = $pedido[0]->costo_envio + $pedido[0]->monto_total;
-                    ?>
-                    <h4 class="fw-bold d-inline">Monto Total: <span class="fw-normal"><h5 class="d-inline-block">$<?= $monto_total ?></h5></span></h4><br>
-                    <p class="text-muted mb-0">Con la siguiente guía de envío podrás verificar el estado del pedido</p>
-                    <h4 class="fw-bold d-inline">Guía de envío: <span class="fw-normal"><h5 class="d-inline-block"><?= $pedido[0]->guia_de_envio ?></h5></span></h4><br>
-                </div>
-            </div>
-            <hr class="m-0">
-            <div class="row">
-                <h1 class="text-center">Productos</h1>
-            </div>
-            <hr>
-            <div class="container mb-3">
-                <div class="row">
-                    <?php foreach ($productos as $producto) : ?>
-                        <div class="col-12 mb-4 rounded"> 
-                            <div class="card shadow-lg rounded">
-                                <div class="row no-gutters rounded">
-                                    <div class="col-md-4">
-                                        <img src='../img/bolsas/<?php echo $producto->img_url; ?>' class='img-fluid" alt='<?php echo $producto->nombre ?>' style="height: 100%; width: 100%; object-fit: cover;">
-                                    </div>
-                                    <div class="col-md-8 d-flex flex-column justify-content-center align-items-center p-3">
-                                        <h1 class='card-title'><?php echo $producto->nombre; ?> (<?php echo $producto->proceso; ?>)</h1>
-                                        <h3 class='card-text ' style="color:black;">Cantidad: <?php echo $producto->cantidad; ?></h3>
-                                        <h3 class='card-text ' style="color:black;">Medida: <?php echo $producto->medida; ?></h3>
-                                        <h3 class='card-text ' style="color:black;">Precio: $<?php echo $producto->monto; ?></3>
-                                    </div>
+            <div class="col-lg-4">
+                <div class="row bg-body rounded shadow-lg p-3">
+                    <div class="col-12">
+                        <div class="row mb-0">
+                            <div class="col-7">
+                                <h4>Detalles del pedido</h4>
+                            </div>
+                            <div class="col-5 text-end">
+                            <?php
+                                if ($pedido[0]->estatus === 'Cancelado') {
+                            ?>
+                                    <span class="badge bg-danger fs-6 fw-bold">Cancelado</span>
+                            <?php
+                                } else if ($pedido[0]->estatus === 'Finalizado') {
+                            ?>
+                                    <span class="badge bg-success fs-6 fw-bold">Finalizado</span>
+                            <?php
+                                } else {
+                            ?>
+                                    <span class="badge bg-warning fs-6 fw-bold">Pendiente</span>
+                            <?php
+
+                                }
+                            ?>
+                            </div>
+                            <div class="row mb-0">
+                                <div class="col-10">
+                                    <p>Fecha del pedido: <?= $pedido[0]->fecha_hora_pedido ?></p>
+                                </div>
+                                <div class="col-2 mb-0">
+                                    <p>#<?= $pedido[0]->folio ?></p>
                                 </div>
                             </div>
                         </div>
-                    <?php endforeach; ?>
+                        <hr class="m-0">
+                        <?php
+                            ?>
+                                <div class="row mt-3">
+                                    <div class="col-12">
+                                        <p>Productos: $<?= $pedido[0]->monto_total ?></p>
+                                        <?php
+                                            if ($pedido[0]->costo_envio > 0) {
+                                                ?>
+                                                <p>Envío: $<?= $pedido[0]->costo_envio ?> </p>
+                                                <?php
+                                            }
+                                        $total = $pedido[0]->monto_total + $pedido[0]->costo_envio;
+                                        ?>
+                                    </div>
+                                </div>
+                                <hr class="m-0">
+                                <div class="row mt-3">
+                                    <div class="col-12">
+                                        <p>Total: $<?= $total ?></p>
+                                    </div>
+                                </div>
+                                <?php
+                                if ($pedido[0]->costo_envio > 0) {
+                                ?>
+                                    <hr class="m-0">
+                                    <div class="row mt-3">
+                                        <div class="col-12">
+                                            <p>Rastrear Pedido: <?= $pedido[0]->guia_de_envio ?></p>
+                                        </div>
+                                        <div class="col-12">
+                                            <p>Descargar Archivo de Envío: <?= $pedido[0]->documento_url ?></p>
+                                        </div>
+                                    </div>
+                                <?php
+                                }
+                        ?>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div>Descarga el siguiente documento para verificar el estado del pedido: <?=$pedido[0]->documento_url?></div>
             </div>
         </div>
         <!-- Alerta -->

@@ -1483,13 +1483,13 @@ call SP_insert_domicilios(5, 'Luisa Cruz', 'Coahuila', 'Torreón', '27090', 'Las
 (11, 'Sofia Silva', 'Coahuila', 'Torreón', '27150', 'Mirasierra', 'Calle del Monte #3435', '8712345693')
 (12, 'Fernando Romero', 'Coahuila', 'Torreón', '27160', 'San Agustín', 'Avenida del Río #3637', '8712345694')
 (13, 'Patricia Rojas', 'Coahuila', 'Torreón', '27170', 'Villa Florida', 'Boulevard de las Rosas #3839', '8712345695')
-(14, 'Roberto Vazquez', 'Coahuila', 'Torreón', '27180', 'Los Ángeles', 'Calle de los Sauces #4041', '8712345696');
+(14, 'Roberto Vazquez', 'Coahuilja', 'Torreón', '27180', 'Los Ángeles', 'Calle de los Sauces #4041', '8712345696');
 */
-INSERT INTO ubicacion_lugares (nombre, ciudad, estado, descripcion)
-VALUES 
-('Cafetería Sinfonía Café', 'Torreón', 'Coahuila', 'Cafetería acogedora con ambiente musical.'),
-('Teatro Nazas', 'Torreón', 'Coahuila', 'Teatro emblemático de la ciudad, conocido por sus eventos culturales.'),
-('Teatro Isauro Martínez', 'Torreón', 'Coahuila', 'Teatro histórico y culturalmente importante en Torreón.');
+INSERT INTO ubicacion_lugares (nombre, ciudad, estado, codigo_postal, calle, colonia, descripcion,lat,lng)
+VALUES
+('Cafetería Sinfonía Café', 'Torreón', 'Coahuila', '27000', 'Av. Matamoros 1102', 'Centro', 'Cafetería acogedora con ambiente musical.',25.54043630354892, -103.4603079071903),
+('Teatro Nazas', 'Torreón', 'Coahuila', '27435', 'Cepeda 155', 'Centro', 'Teatro emblemático de la ciudad, conocido por sus eventos culturales.',25.53989636512453, -103.46147306615788),
+('Teatro Isauro Martínez', 'Torreón', 'Coahuila', '27000', 'Avenida Matamoros 266', 'Centro', 'Teatro histórico y culturalmente importante en Torreón.',25.5405763446744, -103.45154125691407);
 
 INSERT INTO eventos (
     id_lugar, id_categoria, nombre, tipo, descripcion, fecha_evento, 
