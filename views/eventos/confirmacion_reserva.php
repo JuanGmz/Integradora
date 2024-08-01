@@ -2,19 +2,21 @@
 session_start();
 include_once ("../../class/database.php");
 
-
-$id_reserva = $_GET['id_reserva'];
 $db = new Database();
 $db->conectarDB();
 
-if (!isset($_GET['id_reserva'])) {
-    die("No se ha proporcionado un ID de pedido.");
+if (!isset($_GET['id'])) {
+    die("No se ha proporcionado un ID reserva.");
+} else {
+    $id_reserva = $_GET['id'];
 }
+
 // Obtener el ID del cliente autenticado
 $cliente_query = "SELECT c.id_cliente 
                   FROM clientes AS c 
                   JOIN personas AS p ON c.id_persona = p.id_persona 
                   WHERE p.usuario = '" . $_SESSION["usuario"] . "'";
+
 $cliente_result = $db->select($cliente_query);
 
 if (is_array($cliente_result) && count($cliente_result) > 0) {
@@ -42,7 +44,6 @@ if (is_array($cliente_result) && count($cliente_result) > 0) {
                 <link rel="stylesheet" href="../../css/style.css">
                 <link rel="shortcut icon" href="../../img/Sinfonía-Café-y-Cultura.webp">
                 <?php
-
                 include_once ("../../scripts/funciones/funciones.php");
 
                 if (isset($_SESSION['usuario'])) {
@@ -51,12 +52,53 @@ if (is_array($cliente_result) && count($cliente_result) > 0) {
                 }
                 ?>
             </head>
+            <style>
+                .card {
+                    border-radius: 10px;
+                }
+
+                .card img {
+                    width: 100%;
+                    height: auto;
+                    border-radius: 10px;
+                }
+
+                .position-relative {
+                    position: relative;
+                }
+
+                .image-wrapper {
+                    position: relative;
+                    overflow: hidden;
+                }
+
+                .gradient-overlay {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: linear-gradient(to left, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 1) 100%);
+                    pointer-events: none;
+                    /* Ensures the overlay doesn't interfere with any interactions */
+                    z-index: 1;
+                    /* Makes sure the gradient overlay is on top of the image */
+                }
+
+                .card-no-border {
+                    border: none;
+                }
+
+                .card-custom-shadow {
+                    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
+                }
+            </style>
 
             <body>
                 <!-- NavBar -->
                 <nav class="navbar navbar-expand-lg shadow-lg ">
                     <div class="container-fluid">
-                        <a class="navbar-brand" href="../index.php">
+                        <a class="navbar-brand" href="../../index.php">
                             <img src="../../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
                         </a>
                         <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar"
@@ -99,7 +141,7 @@ if (is_array($cliente_result) && count($cliente_result) > 0) {
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
                                 style="left: auto; right: 30px; top: 60px">
                                 <a class="dropdown-item" href="../../views/perfil.php">Mi perfil</a>
-                                <?php if ($_SESSION['usuario'] == 'ADMIN') { ?>
+                                <?php if ($_SESSION['usuario'] == 'Administrador') { ?>
                                     <a class="dropdown-item" href="../../views/adminInicio.php">Administrar</a>
                                     <div class="dropdown-divider"></div>
                                 <?php } ?>
@@ -124,66 +166,53 @@ if (is_array($cliente_result) && count($cliente_result) > 0) {
                         <ol class="breadcrumb mt-4">
                             <li class="breadcrumb-item fw-bold"><a href="../../index.php">Inicio</a></li>
                             <li class="breadcrumb-item fw-bold"><a href="../../views/eventos.php">Eventos</a></li>
-                            <li class="breadcrumb-item active" aria-current="page"></li>Mi Reserva</li>
+                            <li class="breadcrumb-item active" aria-current="page">Mi Reserva</li>
                         </ol>
                     </nav>
-                    <!-- Título -->
-                    <div class="fw-bold ">
-                        <h1 class="h1contact">Folio</h1>
+                    <!-- Título -->
+                    <div class="fw-bold">
+                        <h1 class="h1contact">Mi reserva</h1>
                     </div>
                 </div>
 
                 <!-- Contenido -->
                 <?php
-
                 if (isset($_SESSION["usuario"])) {
-                    $cliente = "SELECT 
-                                c.id_cliente 
-                            FROM 
-                                clientes AS c 
-                            JOIN
-                                personas AS p ON c.id_persona = p.id_persona 
-                            WHERE p.usuario = '" . $_SESSION["usuario"] . "'";
-                    $cliente = $db->select($cliente);
                     $id_reserva = htmlspecialchars($id_reserva);
-
                     echo '
-        <div class="container mt-5 text-center">
-           
-        <h1 class="mt-4 p-3">Su Folio es: <strong>' . "hola" . '</strong></h1>
-                <p class="mt-4 text-center">Para realizar el pago de la compra contacte con nuestro siguiente número entre las 9:00AM y 8:00PM para acordar el método de pago</p>
-        <div class="d-flex justify-content-center align-items-center my-4 p-2">
-            <i class="fa-solid fa-phone fs-3 me-3"></i>
-            <span class="fs-3 ">871-641-32147</span>
-        </div>
-                <div class="d-flex justify-content-center col-12 p-5">
-                    <i class="fa-solid fa-wand-magic-sparkles fa-4x"></i>
+<div class="container m-5">
+    <div class="card card-no-border card-custom-shadow">
+        <div class="row g-0">
+            <div class="col-md-6">
+                <div class="card-body">
+                    <h5 class="card-title">¡Gracias por su reserva!</h5>
+                    <p class="card-text">Su folio es: <strong>' . htmlspecialchars($id_reserva) . '</strong></p>
+                    <p class="card-text">Para completar su reserva, deberá realizar un depósito o transferencia a la siguiente cuenta:</p>
+                    <ul class="list-unstyled">
+                        <li><strong>Banco:</strong> [Nombre del Banco]</li>
+                        <li><strong>Cuenta:</strong> [Número de Cuenta]</li>
+                        <li><strong>CLABE:</strong> [Número CLABE]</li>
+                        <li><strong>Nombre del Titular:</strong> [Nombre del Titular]</li>
+                    </ul>
+                    <p class="card-text">Después de realizar el pago, por favor suba el comprobante de pago a través de su perfil en "Reservas":</p>
+                    <div class="mt-4">
+                        <a href="../reservas.php" class="btn btn-secondary">Ir a mis reservas</a>
+                        <a href="../eventos.php" class="btn btn-secondary ms-2">Volver a Eventos</a>
+                    </div>
                 </div>
-                <div class="d-flex justify-content-center p-2">
-                    <a href="../../index.php" class="btn btn-cafe w-25">Volver al inicio</a>
+            </div>
+            <div class="col-md-6 position-relative">
+                <div class="image-wrapper">
+                    <img src="../../img/background_reservas.jpg" class="img-fluid rounded-start" alt="Imagen de Reserva">
+                    <div class="gradient-overlay"></div>
                 </div>
-                <div class="d-flex justify-content-center p-2">
-                    <a href="../eventos.php" class="btn btn-cafe w-25">Volver a eventos</a>
-                </div>
-            <p class="text-center">Nos puede contactar por los siguientes medios</p>
-                <div class="d-flex justify-content-center p-2">
-            <a href="https://www.facebook.com/SinfoniaCoffee" class="text-decoration-none mx-2 blog-card-link">
-                <i class="fa-brands fa-facebook m-3"></i> Sinfonia@facebook.com
-            </a>
-            <a href="mailto:Sinfonia@gmail.com" class="text-decoration-none mx-2 blog-card-link">
-                <i class="fa-solid fa-envelope m-3"></i>Sinfonia@gmail.com
-            </a>
             </div>
         </div>
-        ';
-                } else {
-                    echo '<div class="container text-center mt-3 p-5">
-            <h4 class="fw-bold p-2">Para realizar el Reserva primero debe iniciar sesión</h4>
-            <a href="../login.php" class="btn btn-dark mt-3">Iniciar sesión</a>
-        </div>';
+    </div>
+</div>
+';
                 }
                 ?>
-
                 <!-- Footer -->
                 <footer>
                     <div class="container-fluid p-5 " style="background: var(--negroclaro);">
@@ -211,39 +240,26 @@ if (is_array($cliente_result) && count($cliente_result) > 0) {
                                 </div>
                             </div>
                             <div class="row m-3">
-                                <p class="text-center fw-bold text-light">Copyright © 2024 SinfoníaCafé&Cultura</p>
+                                <p class="text-center fw-bold text-light">Copyright © 2024
+                                    SinfoníaCafé&Cultura</p>
                             </div>
                         </div>
                     </div>
                 </footer>
-
                 <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
                 <script src="https://kit.fontawesome.com/45ef8dbe96.js" crossorigin="anonymous"></script>
-                <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
                 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
             </body>
 
             </html>
             <?php
         } else {
-            // El pedido no pertenece al cliente autenticado
-            echo '<div class="container text-center mt-3 p-5">
-                    <h4 class="fw-bold p-2">No tiene permiso para ver este pedido</h4>
-                </div>';
+            echo "<p>La reserva no pertenece al cliente autenticado.</p>";
         }
     } else {
-        // El pedido no existe
-        echo '<div class="container text-center mt-3 p-5">
-                <h4 class="fw-bold p-2">El pedido no existe</h4>
-            </div>';
+        echo "<p>Reserva no encontrada.</p>";
     }
 } else {
-    // El cliente autenticado no se encontró en la base de datos
-    echo '<div class="container text-center mt-3 p-5">
-            <h4 class="fw-bold p-2">Error al verificar el cliente autenticado</h4>
-        </div>';
+    echo "<p>Cliente no autenticado.</p>";
 }
-
-$db->desconectarDB();
 ?>

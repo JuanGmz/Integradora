@@ -18,6 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         fecha_evento = '$fecha', 
         hora_inicio = '$horainicio', 
         hora_fin = '$horafin',
+        capacidad = '$capacidad',
         boletos = '$boletos', 
         precio_boleto = '$costo', 
         fecha_publicacion = '$fechaPub'

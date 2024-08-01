@@ -18,8 +18,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Mover el archivo subido a la carpeta de destino
     if (move_uploaded_file($_FILES['imgEvento']['tmp_name'], $imagen)) {
-        $consulta = "INSERT INTO EVENTOS (id_lugar, id_categoria, nombre, tipo, descripcion, fecha_evento, hora_inicio, hora_fin, boletos, precio_boleto, disponibilidad, img_url, fecha_publicacion)
-        VALUES ('$lugar', '$categoria', '$evento', '$tipo', '$descripcion', '$fechaEvento', '$horaIni', '$horaFin', '$boletos', '$costo', '$boletos', '$nombreImagen', '$fechaPub')";
+        $consulta = "INSERT INTO EVENTOS (id_lugar, id_categoria, nombre, tipo, descripcion, fecha_evento, hora_inicio, hora_fin, capacidad, precio_boleto, boletos, img_url, fecha_publicacion)
+        VALUES ('$lugar', '$categoria', '$evento', '$tipo', '$descripcion', '$fechaEvento', '$horaIni', '$horaFin', '$capacidad', '$costo', '$boletos', '$nombreImagen', '$fechaPub')";
 
         if ($db->execute($consulta)) {
             echo "Inserción exitosa.";

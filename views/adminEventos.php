@@ -407,15 +407,35 @@ if ($rol[0]->rol !== 'administrador') {
                                             required>
                                     </div>
                                     <div class="col-12 mb-3">
+                                        <label for="categoria" class="form-label">CATEGORIA</label><br>
+                                        <select name="categoria" id="categoria" class="form-select" required>
+                                            <?php
+                                            $consulta = "SELECT id_categoria, nombre FROM categorias WHERE tipo = 'evento'";
+                                            $tabla = $db->select($consulta);
+                                            foreach ($tabla as $categoria) {
+                                                echo "<option value='{$categoria->id_categoria}'>{$categoria->nombre}</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 mb-3">
                                         <label for="img" class="form-label">Imagen</label>
                                         <input type="file" class="form-control" id="img" name="imgEvento">
                                     </div>
                                     <div class="col-12 text-center">
                                         <h4 class="fw-bold">Fecha y Hora</h4>
                                     </div>
-                                    <div class="col-12 mb-3">
-                                        <label for="fecha" class="form-label">Fecha del Evento</label>
-                                        <input type="date" class="form-control" id="fecha" name="fechaEvento" required>
+                                    <div class="row">
+                                        <div class="col-6 mb-3">
+                                            <label for="fecha" class="form-label">Fecha del Evento</label>
+                                            <input type="date" class="form-control" id="fecha" name="fechaEvento"
+                                                required>
+                                        </div>
+                                        <div class="col-6 mb-3">
+                                            <label for="fechaPub" class="form-label">Fecha de publicación</label>
+                                            <input type="date" class="form-control" id="fechaPub" name="fechaPub"
+                                                required>
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6 mb-3">
@@ -433,7 +453,7 @@ if ($rol[0]->rol !== 'administrador') {
                                         <h4 class="fw-bold">Ubicación</h4>
                                     </div>
                                     <div class="col-12 mb-3">
-                                        <label for="lugar" class="form-label">Nombre del Lugar</label>
+                                        <label for="lugar" class="form-label">Lugar</label>
                                         <select name="lugar" id="lugar" class="form-select" required>
                                             <option selected disabled value="">Seleccionar Lugar</option>
                                             <?php
@@ -446,7 +466,7 @@ if ($rol[0]->rol !== 'administrador') {
                                         </select>
                                     </div>
                                     <div class="col-12 mb-3 text-center">
-                                        <h4 class="fw-bold">Costo del Evento</h4>
+                                        <h4 class="fw-bold">Detalles del evento</h4>
                                     </div>
                                     <div class="row">
                                         <div class="col-6 mb-3">
@@ -457,36 +477,28 @@ if ($rol[0]->rol !== 'administrador') {
                                             </select>
                                         </div>
                                         <div class="col-6 mb-3">
-                                            <label for="costo" class="form-label">Costo por boleto</label>
-                                            <input type="number" min="1" class="form-control" id="costo" name="costo"
-                                                required>
+                                            <label for="capacidad" class="form-label">Capacidad</label>
+                                            <input type="number" min="1" max="300" class="form-control" id="capacidad"
+                                                name="capacidad" required>
                                         </div>
                                     </div>
-                                    <div class="col-12 mb-3">
-                                        <label for="categoria" class="form-label">CATEGORIA</label><br>
-                                        <select name="categoria" id="categoria" class="form-select" required>
-                                            <?php
-                                            $consulta = "SELECT id_categoria, nombre FROM categorias WHERE tipo = 'evento'";
-                                            $tabla = $db->select($consulta);
-                                            foreach ($tabla as $categoria) {
-                                                echo "<option value='{$categoria->id_categoria}'>{$categoria->nombre}</option>";
-                                            }
-                                            ?>
-                                        </select>
+                                    <div class="row">
+                                        <div class="col-6 mb-3">
+                                            <label for="costo" class="form-label">Costo por boleto</label>
+                                            <input type="number" min="1" max="5000" class="form-control" id="costo"
+                                                name="costo" required>
+                                        </div>
+
+                                        <div class="col-6 mb-3">
+                                            <label for="cantidadBoletos" class="form-label">Cantidad de boletos</label>
+                                            <input type="number" min="1" max="300" class="form-control"
+                                                id="cantidadBoletos" name="boletos" required>
+                                        </div>
                                     </div>
-                                    <div class="col-12 mb-3">
-                                        <label for="cantidadBoletos" class="form-label">Cantidad de boletos</label>
-                                        <input type="number" min="1" max="100" class="form-control" id="cantidadBoletos"
-                                            name="boletos" required>
-                                    </div>
-                                    <div class="col-12 mb-3">
-                                        <label for="fechaPub" class="form-label">Fecha de publicación</label>
-                                        <input type="date" class="form-control" id="fechaPub" name="fechaPub" required>
-                                    </div>
-                                    <div class="text-end mb-3">
-                                        <button class="btn btn-primary" type="submit" id="btn-agregar">
-                                            Agregar Evento
-                                        </button>
+                                    <div class='mt-3 text-end'>
+                                        <button type='button' class='btn btn-secondary'
+                                            data-bs-dismiss='modal'>Cancelar</button>
+                                        <button type='submit' class='btn btn-primary'>Agregar</button>
                                     </div>
                                 </form>
                             </div>
@@ -617,11 +629,9 @@ if ($rol[0]->rol !== 'administrador') {
                                 if ($evento->tipo == "De Pago") {
 
                                     $labelText_precio = " <h4 class='text-start fw-bold mb-3'>Costo boleto: <span class='fw-normal fs-5'>" . htmlspecialchars($precio_boleto) . "$</span></h5>";
-                                    $labelText_boletos = " <h4 class='text-start fw-bold mb-3'>Boletos: <span class='fw-normal fs-5'>" . htmlspecialchars($evento->boletos) . "</span></h5>";
-                                    $labelText_boletos_disponibles = " <h4 class='text-start fw-bold mb-3'>Disponibilidad: <span class='fw-normal fs-5'>" . htmlspecialchars($evento->disponibilidad) . "</span></h5>";
+                                    $labelText_boletos_disponibles = " <h4 class='text-start fw-bold mb-3'>Boletos: <span class='fw-normal fs-5'>" . htmlspecialchars($evento->boletos) . "</span></h5>";
                                 } else {
                                     $labelText_precio = "";
-                                    $labelText_boletos = "";
                                     $labelText_boletos_disponibles = "";
                                 }
                                 echo "
@@ -638,8 +648,8 @@ if ($rol[0]->rol !== 'administrador') {
                                                                 <div class='col-6'>
                                                                 <h4 class='text-start fw-bold mb-3'>Tipo: <span class='fw-normal fs-5'>{$evento->tipo}</span></h5>
                                                                 </div>
-                                                                <div class='col-6'>{$labelText_precio}</div>  
-                                                                <div class='col-6'>{$labelText_boletos}</div>
+                                                                <div class='col-6'><h4 class='text-start fw-bold mb-3'>Capacidad: <span class='fw-normal fs-5'>" . htmlspecialchars($evento->capacidad) . "</span></h5></div>
+                                                                <div class='col-6'>{$labelText_precio}</div> 
                                                                 <div class='col-6'>{$labelText_boletos_disponibles}</div>
                                                                 </div>  
                                                                 <!-- Tabla de productos -->
@@ -662,36 +672,20 @@ if ($rol[0]->rol !== 'administrador') {
                                                             <div class='modal-body text-start'>
                                                                 <form action='../scripts/admineventos/editareventos.php' method='post'>
                                             <input type='hidden' name='id_evento' value='$evento->id_evento'>
-                                                <div>
+                                                <div class='mb-3'> 
                                                     <label for='titulo' class='form-label'>Editar Titulo</label>
                                                     <input type='text' maxlength='50'  class='form-control' id='titulo' name='titulo' value=$evento->nombre>
                                                 </div>
-                                                <div>
-                                                    <label for='lugar' class='form-label'>Lugar</label>
-                                                    <select name='lugar' id='lugar' class='form-select'> ";
-                                $consulta = "SELECT id_lugar, nombre FROM ubicacion_lugares";
-                                $lugares = $db->select($consulta);
-                                foreach ($lugares as $lugar) {
-                                    echo "<option value='{$lugar->id_lugar}'>{$lugar->nombre}</option>";
-                                }
-                                echo " </select>
-                                                    </div>
-                                                <div>
+                                                <div class='mb-3'>
                                                     <label for='descripcion' class='form-label'>Descripcion</label>
                                                     <textarea name='descripcion' id='descripcion' name='descripcion' class='form-control'>$evento->descripcion</textarea>
                                                 </div>
+                                                <div class='mb-3'>
+                                                    <label for='imagen' class='form-label'>Imagen</label>
+                                                    <input type='file' class='form-control' id='imagen' name='imagen' value=$evento->img_url>
+                                                </div> 
                                                 <div class='row'>
-                                                <div class='col-6'>
-                                                    <label for='cap' class='form-label'>Boletos</label>
-                                                    <input type='number' min='1' max='80' class='form-control' id='cap' name='cap' value=$evento->boletos>
-                                                </div>
-                                                <div class='col-6'>
-                                                    <label for='costo' class='form-label'>Costo por boleto</label>
-                                                    <input type='number' min='1' class='form-control' id='costo' name='costo' value=$evento->precio_boleto>
-                                                    </div>
-                                                </div>
-                                                <div class='row'>
-                                                <div class='col-6'>
+<div class='col-6 mb-3'>
                                                 <label for='categoria' class='form-label'>Categoría</label>
                                                 <select name='categoria' id='categoria' class='form-select'>";
                                 $consulta = "SELECT id_categoria, nombre FROM categorias WHERE tipo = 'evento'";
@@ -702,47 +696,61 @@ if ($rol[0]->rol !== 'administrador') {
 
                                 echo "</select>
                                                 </div>
-                                                <div class='col-6'>
-                                                <label for='tipo' class='form-label'>Tipo</label>
-                                                <select name='tipo' id='tipo' class='form-select'>
-                                                    <option value=$evento->tipo>$evento->tipo</option>
-                                                    <option value='Gratuito'>Gratuito</option>
-                                                    <option value='De Pago'>De Pago</option>
-                                                </select>
-                                                </div>
-                                                 </div>         
-                                                 <div>
-                                                    <label for='imagen' class='form-label'>Imagen</label>
-                                                    <input type='file' class='form-control' id='imagen' name='imagen' value=$evento->img_url>
-                                               </div> 
-                                               <div class='row'>
-                                                <div class='col-6'>
-                                                    <label for='fecha' class='form-label '>Fecha del Evento</label>
-                                                    <input type='date' class='form-control' id='fecha' name='fecha' value=$evento->fecha_evento>
-                                                </div>
-                                                <div class='col-6'>
-                                                    <label for='fechaPub' class='form-label'>Fecha de publicación</label>
-                                                    <input type='date' class='form-control' id='fechaPub' name='fechaPub' value=$evento->fecha_publicacion>
+                                                <div class='col-6 mb-3'>
+                                                    <label for='lugar' class='form-label'>Lugar</label>
+                                                    <select name='lugar' id='lugar' class='form-select'> ";
+                                $consulta = "SELECT id_lugar, nombre FROM ubicacion_lugares";
+                                $lugares = $db->select($consulta);
+                                foreach ($lugares as $lugar) {
+                                    echo "<option value='{$lugar->id_lugar}'>{$lugar->nombre}</option>";
+                                }
+                                echo " </select>
                                                     </div>
+                                                </div>
+                                                <hr class='my-4'>
+                                                <div class='row'>
+                                                <div class='col-6 mb-3'>
+                                                         <label for='fecha' class='form-label '>Fecha del Evento</label>
+                                                         <input type='date' class='form-control' id='fecha' name='fecha' value=$evento->fecha_evento>
+                                                     </div>
+                                                     <div class='col-6'>
+                                                         <label for='fechaPub' class='form-label'>Fecha de publicación</label>
+                                                         <input type='date' class='form-control' id='fechaPub' name='fechaPub' value=$evento->fecha_publicacion>
+                                                    </div>
+                                                </div>
+                                                     
+                                                    <div class='row mb-3'>
+                                                      <div class='col-6'>
+                                                         <label for='hora' class='form-label'>Hora de Inicio</label>
+                                                         <input type='time' min='11:00' max='21:00' class='form-control' id='horainicio' name='horainicio' value=$evento->hora_inicio>
+                                                     </div>
+                                                     <div class='col-6'>
+                                                        <label for='hora' class='form-label'>Hora de Fin</label>
+                                                        <input type='time' min='11:00' max='21:00' class='form-control' id='horafin' name='horafin' value=$evento->hora_fin>
+                                                     </div>
+                                                    </div>
+                                                    <hr class='my-4'>
+                                                    <div class='mb-3'>
+                                                    <label for='cap' class='form-label'>Capacidad</label>
+                                                    <input type='number' min='1' max='300' class='form-control' id='cap' name='cap' value=$evento->capacidad>
                                                 </div>
                                                 <div class='row'>
                                                 <div class='col-6'>
-                                                    <label for='hora' class='form-label'>Hora de Inicio</label>
-                                                    <input type='time' min='11:00' max='21:00' class='form-control' id='horainicio' name='horainicio' value=$evento->hora_inicio>
+                                                    <label for='boletos' class='form-label'>Boletos</label>
+                                                    <input type='number' min='1' max='300' class='form-control' id='cap' name='boletos' value=$evento->boletos>
                                                 </div>
                                                 <div class='col-6'>
-                                                    <label for='hora' class='form-label'>Hora de Fin</label>
-                                                    <input type='time' min='11:00' max='21:00' class='form-control' id='horafin' name='horafin' value=$evento->hora_fin>
-                                                    </div>
-                                                </div>
+                                                    <label for='costo' class='form-label'>Costo por boleto</label>
+                                                    <input type='number' min='1' max='5000' class='form-control' id='costo' name='costo' value=$evento->precio_boleto>
+                                                 </div>
+                                                </div>       
 
-                                                <div class='row'>
-                                                <div class='col-12 text-end'>
-                                                    <button type='submit' class='btn btn-primary mt-3'>Actualizar</button>
-                                                </div>
-                                                </div> 
+                                                <div class='mt-3 text-end'>
+                                        <button type='button' class='btn btn-secondary'
+                                            data-bs-dismiss='modal'>Cancelar</button>
+                                        <button type='submit' class='btn btn-primary'>Actualizar</button>
+                                    </div>
                                                 </form>
-
                                                             </div>
                                                         </div>
                                                     </div>
