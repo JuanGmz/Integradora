@@ -27,7 +27,7 @@
 
             $queryProductos = "SELECT * FROM vw_pedido_productos WHERE id_pedido = $id_pedido";
             $productos = $db->select($queryProductos);
-    
+
             $queryPedido = "SELECT id_pedido FROM pedidos WHERE id_pedido = $id_pedido";
             $pedProd = $db->select($queryPedido);
         }
@@ -75,28 +75,31 @@
                 </div>
             </div>
             <?php
-                if (isset($_SESSION["usuario"])) {
+            if (isset($_SESSION["usuario"])) {
                 ?>
-                    <!-- Navbar con dropdown -->
-                    <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
-                        <a class="dropdown-item" href="../perfil.php">Mi perfil</a>
-                        <?php if ($rol[0]->rol === 'administrador') { ?>
-                            <a class="dropdown-item" href="adminInicio.php">Administrar</a>
-                            <div class="dropdown-divider"></div>
-                        <?php } ?>
-                        <a class="dropdown-item" href="../scripts/login/cerrarsesion.php">Cerrar sesión</a>
-                    </div>
+                <!-- Navbar con dropdown -->
+                <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
+                    style="left: auto; right: 30px; top: 60px">
+                    <a class="dropdown-item" href="../perfil.php">Mi perfil</a>
+                    <?php if ($rol[0]->rol === 'administrador') { ?>
+                        <a class="dropdown-item" href="adminInicio.php">Administrar</a>
+                        <div class="dropdown-divider"></div>
+                    <?php } ?>
+                    <a class="dropdown-item" href="../scripts/login/cerrarsesion.php">Cerrar sesión</a>
+                </div>
                 <?php
-                } else {
+            } else {
                 ?>
-                    <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
+                <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
                 <?php
-                }
-                ?>
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            }
+            ?>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
@@ -118,7 +121,7 @@
             <div class="col-12 col-lg-7 me-5">
                 <?php
                 foreach ($productos as $producto) {
-                ?>
+                    ?>
                     <div class="row p-3 mb-3 bg-body rounded shadow-lg d-lg-flex justify-content-center align-items-center">
                         <div class="col-8">
                             <p><?= $producto->nombre ?> (<?= $producto->proceso ?>)</p>
@@ -127,12 +130,13 @@
                             <p>Costo: $<?= $producto->monto ?></p>
                         </div>
                         <div class="col-4 text-end">
-                            <img src="../img/bolsas/<?php echo $producto->img_url; ?>" class="img-fluid rounded" alt="Producto" style="width: 100px; height: 100px;">
+                            <img src="../img/bolsas/<?php echo $producto->img_url; ?>" class="img-fluid rounded"
+                                alt="Producto" style="width: 100px; height: 100px;">
                         </div>
                     </div>
-                <?php
+                    <?php
                 }
-            ?>
+                ?>
             </div>
             <div class="col-lg-4">
                 <div class="row bg-body rounded shadow-lg p-3">
@@ -142,22 +146,22 @@
                                 <h4>Detalles del pedido</h4>
                             </div>
                             <div class="col-5 text-end">
-                            <?php
+                                <?php
                                 if ($pedido[0]->estatus === 'Cancelado') {
-                            ?>
+                                    ?>
                                     <span class="badge bg-danger fs-6 fw-bold">Cancelado</span>
-                            <?php
+                                    <?php
                                 } else if ($pedido[0]->estatus === 'Finalizado') {
-                            ?>
-                                    <span class="badge bg-success fs-6 fw-bold">Finalizado</span>
-                            <?php
+                                    ?>
+                                        <span class="badge bg-success fs-6 fw-bold">Finalizado</span>
+                                    <?php
                                 } else {
-                            ?>
-                                    <span class="badge bg-warning fs-6 fw-bold">Pendiente</span>
-                            <?php
+                                    ?>
+                                        <span class="badge bg-warning fs-6 fw-bold">Pendiente</span>
+                                    <?php
 
                                 }
-                            ?>
+                                ?>
                             </div>
                             <div class="row mb-0">
                                 <div class="col-10">
@@ -170,41 +174,88 @@
                         </div>
                         <hr class="m-0">
                         <?php
-                            ?>
-                                <div class="row mt-3">
-                                    <div class="col-12">
-                                        <p>Productos: $<?= $pedido[0]->monto_total ?></p>
-                                        <?php
-                                            if ($pedido[0]->costo_envio > 0) {
-                                                ?>
-                                                <p>Envío: $<?= $pedido[0]->costo_envio ?> </p>
-                                                <?php
-                                            }
-                                        $total = $pedido[0]->monto_total + $pedido[0]->costo_envio;
-                                        ?>
-                                    </div>
-                                </div>
-                                <hr class="m-0">
-                                <div class="row mt-3">
-                                    <div class="col-12">
-                                        <p>Total: $<?= $total ?></p>
-                                    </div>
-                                </div>
-                                <?php
-                                if ($pedido[0]->costo_envio > 0) {
-                                ?>
-                                    <hr class="m-0">
-                                    <div class="row mt-3">
-                                        <div class="col-12">
-                                            <p>Rastrear Pedido: <?= $pedido[0]->guia_de_envio ?></p>
-                                        </div>
-                                        <div class="col-12">
-                                            <p>Descargar Archivo de Envío: <?= $pedido[0]->documento_url ?></p>
-                                        </div>
-                                    </div>
-                                <?php
-                                }
                         ?>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <p>Productos: $<?= $pedido[0]->monto_total ?></p>
+                                <?php
+                                    if ($pedido[0]->costo_envio > 0) {
+                                        ?>
+                                        <p>Envío: $<?= $pedido[0]->costo_envio ?></p>
+                                        <?php   
+                                    } else {
+                                        ?>
+                                        <p>Envío: Aún no se registra el costo de envío</p>
+                                        <?php
+                                    }
+                                ?>
+                                <?php
+                                $total = $pedido[0]->monto_total + $pedido[0]->costo_envio;
+                                ?>
+                            </div>
+                        </div>
+                        <hr class="m-0">
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <p>Total: $<?= $total ?></p>
+                            </div>
+                        </div>
+                        <hr class="m-0">
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <?php
+                                    if ($pedido[0]->guia_de_envio === null) {
+                                        ?>
+                                        <p>Guía de Envío: Aún no se registra la guía de envío</p>
+                                        <?php
+                                    } else {
+                                        ?>
+                                        <p>Guía de Envío: <?= $pedido[0]->guia_de_envio ?></p>
+                                        <?php
+                                    }
+                                ?>
+                            </div>
+                            <div class="col-12">
+                                <?php
+                                    if ($pedido[0]->documento_url === null) {
+                                        ?>
+                                        <p>Archivo de Envío: Aún no se registra el archivo de envío</p>
+                                        <?php
+                                    } else {
+                                        ?>
+                                        <p>Archivo de Envío: <?= $pedido[0]->documento_url ?></p>
+                                        <?php
+                                    }
+                                ?>
+                            </div>
+                        </div>
+                        <hr class="m-0">
+                        <div class="row my-1">
+                            <div class="col-12">
+                                <h4 class="m-0">Dirección de Envío</h4>
+                            </div>
+                        </div>
+                        <hr class="m-0">
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <p>Referencía: <?= $pedido[0]->referencia ?></p>
+                            </div>
+                            <div class="col-12">
+                                <p>Ciudad: <?= $pedido[0]->ciudad ?></p>
+                            </div>
+                            <div class="col-12">
+                                <p>Estado: <?= $pedido[0]->estado ?></p>
+                            </div>
+                            <div class="col-12">
+                                <p>Colonia: <?= $pedido[0]->codigo_postal ?></p>
+                            </div>
+                            <div class="col-12">
+                                <p>C.P: <?= $pedido[0]->colonia ?></p>
+                            </div>
+                            <div class="col-12">
+                                <p>Pais: <?= $pedido[0]->calle ?></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
