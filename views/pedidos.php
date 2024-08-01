@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pedidos</title>
+    <title>Mis Pedidos</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="shortcut icon" href="../img/Sinfonía-Café-y-Cultura.webp">
@@ -19,9 +19,11 @@
         $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE p.usuario = '$_SESSION[usuario]'";
         $rol = $db->select($rolUsuario);
 
+        extract($_POST);
+        
         if(isset($_POST['cancelarPedido'])) {
             $id_pedido = $_POST['id_pedido'];
-            $cancelar = "UPDATE pedidos SET estatus = 'Cancelado' WHERE id_pedido = '$id_pedido'";
+            $cancelar = "UPDATE pedidos SET estatus = 'Cancelado' WHERE id_pedido = $id_pedido";
             $db->execute($cancelar);
             showAlert("El pedido ha sido cancelado con éxito!", "success");
         }
@@ -119,64 +121,96 @@
                 echo "<h3>Aún no se ha realizado ningún pedido</h3>";
             } else {
                 foreach ($pedidos as $pedido) {
+                $id = $pedido->folio;
+                $queryProd = "SELECT * FROM vw_pedido_productos WHERE id_pedido = $id";
+                $productos = $db->select($queryProd);
             ?>
-                <div class="col-12 col-lg-6 mb-4">
+                <div class="col-12 mb-4">
                     <div class="card shadow">
                         <div class="card-body">
-                            <div class="row p-3">
+                            <div class="row p-3 d-flex flex-column justify-content-between">
                                 <div class="col-12 d-flex flex-column">
-                                    <h1 class="card-title m-2">Folio de Pedido: <?= $pedido->folio ?></h1>
-                                    <h3 class="card-subtitle m-2 text-muted">Fecha y Hora: <?= $pedido->fecha_hora_pedido ?></h3>
-                                    <h4 class="card-subtitle m-2 text-muted">Estatus: <?= $pedido->estatus ?></h4>
-                                    <h4 class="card-subtitle m-2 mb-3 text-muted">Monto Total: $<?= $pedido->monto_total ?></h4>
-                                    <!-- Button trigger modal -->
-                                     <div class="row">
-                                        <div class="col-6">
-                                            <form method="post" enctype="multipart/form-data">
-                                                <?php
-                                                    if($pedido->estatus === "Cancelado" OR $pedido->estatus === "Finalizado") {
+                                    <div class="card-title d-flex justify-content-between">
+                                        <p class="card-title m-0 p-0">Fecha: <?= $pedido->fecha_hora_pedido ?></p>
+                                        <p class="card-title m-0 p-0">Folio de Pedido: <?= $pedido->folio ?></p>
+                                    </div>
+                                    <hr>
+                                    <div class="row d-block d-lg-flex flex-row justify-content-between">
+                                        <div class="col-12 col-lg-10 m-0 ps-1">
+                                            <h4 class="card-subtitle m-2 text-muted">
+                                                <?php 
+                                                    if ($pedido->estatus === "Cancelado") {
                                                         ?>
-                                                        <button disabled type="submit" class="btn btn-secondary btn-block m-2 mt-0 mb-0 w-100 p-2">Cancelar</button>
+                                                        <span class="badge bg-danger">Cancelado</span>
+                                                        <?php
+                                                    } else if ($pedido->estatus === "Finalizado") {
+                                                        ?>
+                                                        <span class="badge bg-success">Finalizado</span>
                                                         <?php
                                                     } else {
                                                         ?>
-                                                        <input type="hidden" name="id_pedido" value="<?= $pedido->folio ?>"/>
-                                                        <!-- boton que activa modal de prevencion -->
-                                                         <button type="button" class="btn btn-danger btn-block m-2 mt-0 mb-0 w-100 p-2" data-bs-toggle="modal" data-bs-target="#cancelarPedido<?= $pedido->folio ?>">
-                                                            Cancelar Pedido
-                                                        </button>
-                                                        <!-- Modal de prevencion -->
-                                                        <div class="modal fade" id="cancelarPedido<?= $pedido->folio ?>" tabindex="-1" aria-labelledby="cancelarModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h1 class="modal-title fs-5" id="cancelarModalLabel">Cancelar pedido</h1>
-                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <h5 class="mb-3">¿Estas seguro de que deseas cancelar este pedido?</h5>
-                                                                        <div class="text-end">
-                                                                        <button class="btn btn-secondary btn-block" data-bs-dismiss="modal">Cerrar</button></button>
-                                                                        <button type="submit" class="btn btn-danger" name="cancelarPedido">Cancelar Pedido</button>
+                                                        <span class="badge bg-warning">Pendiente</span>
+                                                        <?php
+                                                    }
+                                                ?>
+                                            </h4>
+                                                    <?php 
+                                                        foreach ($productos as $producto) { 
+                                                            if (COUNT($productos) === 1) {
+                                                                ?>
+                                                                <p class="m-3 m-lg-0 ms-lg-2"> <?= $producto->nombre ?> (<?= $producto->proceso ?>)</p>
+                                                                <?php
+                                                            } else {
+                                                                ?>
+                                                                <p class="m-3 p-0 m-lg-0 ms-lg-2 d-lg-inline"><?= $producto->nombre ?> (<?= $producto->proceso ?>).</p>
+                                                                <?php
+                                                            }
+                                                        } ?>
+                                        </div>
+                                        <div class="col-lg-2 m-0 p-0 pe-3">
+                                                <form method="post" enctype="multipart/form-data" class="m-1">
+                                                    <?php
+                                                        if($pedido->estatus === "Cancelado" OR $pedido->estatus === "Finalizado") {
+                                                            ?>
+                                                            <button disabled type="submit" class="btn btn-secondary btn-block m-2 mt-0 mb-0 w-100">Cancelar</button>
+                                                            <?php
+                                                        } else {
+                                                            ?>
+                                                            <input type="hidden" name="id_pedido" value="<?= $pedido->folio ?>"/>
+                                                            <!-- boton que activa modal de prevencion -->
+                                                            <button type="button" class="btn btn-danger btn-block m-2 mt-0 mb-0 w-100" data-bs-toggle="modal" data-bs-target="#cancelarPedido<?= $pedido->folio ?>">
+                                                                Cancelar Pedido
+                                                            </button>
+                                                            <!-- Modal de prevencion -->
+                                                            <div class="modal fade" id="cancelarPedido<?= $pedido->folio ?>" tabindex="-1" aria-labelledby="cancelarModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h1 class="modal-title fs-5" id="cancelarModalLabel">Cancelar pedido</h1>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <h5 class="mb-3">¿Estas seguro de que deseas cancelar este pedido?</h5>
+                                                                            <div class="text-end">
+                                                                            <button class="btn btn-secondary btn-block" data-bs-dismiss="modal">Cerrar</button></button>
+                                                                            <button type="submit" class="btn btn-danger" name="cancelarPedido">Cancelar Pedido</button>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <?php
-                                                    }
-                                                ?>
-                                            </form>
+                                                            <?php
+                                                        }
+                                                    ?>
+                                                </form>
+                                                <form action="detallePedido.php" method="post" enctype="multipart/form-data" class="m-1">
+                                                    <input type="hidden" name="id_pedido" value="<?= $pedido->folio ?>"/>
+                                                    <button type="submit" class="btn btn-primary m-2 mt-0 mb-0 w-100" name="verDetalles">
+                                                        Ver Detalles
+                                                    </button>
+                                                </form>
+                                            </div>
                                         </div>
-                                        <div class="col-6">
-                                            <form action="detallePedido.php" method="post" enctype="multipart/form-data">
-                                                <input type="hidden" name="id_pedido" value="<?= $pedido->folio ?>"/>
-                                                <button type="submit" class="btn btn-primary m-2 mt-0 mb-0 w-100 p-2" name="verDetalles">
-                                                    Ver Detalles
-                                                </button>
-                                            </form>
-                                        </div>
-                                     </div>
                                 </div>
                             </div>
                         </div>

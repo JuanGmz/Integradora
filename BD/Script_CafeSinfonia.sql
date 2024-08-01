@@ -181,39 +181,7 @@ begin
 end //
 delimiter ;
 
--- Procedimientos Almacenados Para Obtener Detalles de una bolsa
-DELIMITER //
 
-CREATE PROCEDURE ObtenerDetallesPorProceso(IN procesoCafe VARCHAR(100))
-BEGIN
-    SELECT 
-        bc.id_bolsa,
-        bc.nombre,
-        bc.años_cosecha,
-        bc.productor_finca,
-        bc.proceso,
-        bc.variedad,
-        bc.altura,
-        bc.aroma,
-        bc.acidez,
-        bc.sabor,
-        bc.cuerpo,
-        bc.puntaje_catacion,
-        bc.img_url,
-        GROUP_CONCAT(CONCAT(dbc.medida, ': $', dbc.precio, ' (Stock: ', dbc.stock, ')') SEPARATOR '; ') AS detalles_medidas
-    FROM 
-        bolsas_cafe bc
-    JOIN 
-        detalle_bc dbc
-    ON 
-        bc.id_bolsa = dbc.id_bolsa
-    WHERE 
-        bc.proceso = procesoCafe
-    GROUP BY
-        bc.id_bolsa;
-END //
-
-DELIMITER ;
 -- procedimiento almacenado para agregar una medida a las bolsas
 delimiter //
 create procedure SP_Agregar_medida_bolsa_ecomerce(
@@ -860,7 +828,9 @@ DELIMITER ;
 
 
 -- Procedimiento almacenado para realizar pedido.
+
 DELIMITER //
+
 CREATE PROCEDURE SP_Realizar_Pedido(
     IN p_id_cliente INT,
     IN p_id_domicilio INT,
@@ -869,29 +839,45 @@ CREATE PROCEDURE SP_Realizar_Pedido(
 BEGIN 
     DECLARE v_monto_total DOUBLE;
     DECLARE v_count INT;
+    DECLARE v_pedidos_pendientes INT;
     DECLARE v_id_pedido INT;
+    DECLARE v_mensaje VARCHAR(255);
 
-    -- Verifica si el carrito tiene artículos para el cliente especificado
-    SELECT COUNT(*) INTO v_count FROM carrito WHERE id_cliente = p_id_cliente;
-    
-    IF v_count > 0 THEN
-        -- Calcula el monto total del carrito
-        SELECT SUM(monto) INTO v_monto_total FROM carrito WHERE id_cliente = p_id_cliente;
-        
-        -- Inserta el pedido en la tabla pedidos
-        INSERT INTO pedidos(id_cliente, id_domicilio, id_mp, monto_total)
-        VALUES (p_id_cliente, p_id_domicilio, p_id_mp, v_monto_total);
-        
-        -- Obtiene el ID del pedido recién creado
-        SET v_id_pedido = LAST_INSERT_ID();
-        
-        -- Devuelve el ID del pedido y un mensaje
-        SELECT v_id_pedido AS id_pedido, 'Pedido realizado.' AS mensaje;
+    -- Contar los pedidos pendientes del cliente
+    SELECT COUNT(*) INTO v_pedidos_pendientes
+    FROM pedidos
+    WHERE id_cliente = p_id_cliente AND estatus = 'Pendiente';
+
+    -- Verificar si el cliente ya tiene 5 pedidos pendientes
+    IF v_pedidos_pendientes >= 5 THEN
+        SET v_mensaje = 'Ya tienes 5 pedidos pendientes. No puedes realizar más pedidos hasta que se cancele o finalice alguno.';
+        SELECT NULL AS id_pedido, v_mensaje AS mensaje;
     ELSE
-        -- Devuelve un mensaje si el carrito está vacío
-        SELECT NULL AS id_pedido, 'El carrito está vacío.' AS mensaje;
+        -- Verifica si el carrito tiene artículos para el cliente especificado
+        SELECT COUNT(*) INTO v_count FROM carrito WHERE id_cliente = p_id_cliente;
+
+        IF v_count > 0 THEN
+            -- Calcula el monto total del carrito
+            SELECT SUM(monto) INTO v_monto_total FROM carrito WHERE id_cliente = p_id_cliente;
+
+            -- Inserta el pedido en la tabla pedidos
+            INSERT INTO pedidos(id_cliente, id_domicilio, id_mp, monto_total)
+            VALUES (p_id_cliente, p_id_domicilio, p_id_mp, v_monto_total);
+
+            -- Obtiene el ID del pedido recién creado
+            SET v_id_pedido = LAST_INSERT_ID();
+
+            -- Devuelve el ID del pedido y un mensaje
+            SET v_mensaje = 'Pedido realizado con éxito';
+            SELECT v_id_pedido AS id_pedido, v_mensaje AS mensaje;
+        ELSE
+            -- Devuelve un mensaje si el carrito está vacío
+            SET v_mensaje = 'El carrito está vacío';
+            SELECT NULL AS id_pedido, v_mensaje AS mensaje;
+        END IF;
     END IF;
 END //
+
 DELIMITER ;
 
 -- Evento para cancelar pedidos no pagados dentro del tiempo establecido.
@@ -1495,8 +1481,8 @@ INSERT INTO productos_menu (id_categoria, nombre, descripcion, img_url) VALUES
 call SP_Registrar_usuariosAdministradores('Noe Abel','Vargas','Lopez','noah','noelopez191119@gmail.com','123pass123','8715083731');
 call SP_Registrar_usuariosAdministradores('Tobias Gabriel','Rodriguez','Lujan','tlujan','totilotegabriel@gmail.com','miperro123','8716764502');
 call SP_Registrar_usuariosAdministradores('Iker Jesus','Flores','Luna','iker','iker@gmail.com','elgato123','8713923040');
-call SP_Registrar_usuariosAdministradores('Juan Alfredo','Gomez','Gonzalez','juangmz','imjuantrc@gmail.com','123juanita123','8718451815');
-call SP_Registrar_usuariosAdministradores('Dante Raziel','Basurto','Saucedo','bune','Bune_assassin@hotmail.com','123456','8714307468');
+call SP_Registrar_usuariosClientes('Juan Alfredo','Gomez','Gonzalez','juangmz','juan@gmail.com','123juanita123','8718451815');
+call SP_Registrar_usuariosAdministradores('Dante Raziel','Basurto','Saucedo','bune','dantin@gmail.com','123456','8714307468');
 call SP_Registrar_usuariosAdministradores('Hector Armando','Caballero','Serna','hector','hector@gmail.com','123sinfonia123','8715066618');
 
 -- Ingresar domicilios
@@ -1524,19 +1510,19 @@ VALUES
 
 INSERT INTO eventos (
     id_lugar, id_categoria, nombre, tipo, descripcion, fecha_evento, 
-    hora_inicio, hora_fin, capacidad, precio_boleto, boletos, 
+    hora_inicio, hora_fin, boletos, precio_boleto, disponibilidad, 
     img_url, fecha_publicacion
 ) VALUES
-(1, 1, 'Noches de Jazz', 'Gratuito', 'Disfruta de una velada con música jazz en vivo.', '2024-08-15', '19:00:00', '21:00:00', 50, 0.0, 0, 'jazz.jpg', '2024-07-09'),
-(1, 3, 'Tarde de Poesía', 'Gratuito', 'Recital de poesía acompañado de café y pastelería artesanal.', '2024-08-20', '17:00:00', '19:00:00', 30, 0.0, 0, 'poesia.jpg', '2024-07-09'),
-(1, 6, 'Exposición de Arte Local', 'Gratuito', 'Exhibición de obras de artistas locales con un ambiente cultural.', '2024-09-05', '10:00:00', '18:00:00', 80, 0.0, 0, 'arte.jpg', '2024-07-09'),
+(1, 1, 'Noches de Jazz', 'Gratuito', 'Disfruta de una velada con música jazz en vivo.', '2024-08-15', '19:00:00', '21:00:00', 50, 0.0, 50, 'jazz.jpg', '2024-07-09'),
+(1, 3, 'Tarde de Poesía', 'Gratuito', 'Recital de poesía acompañado de café y pastelería artesanal.', '2024-08-20', '17:00:00', '19:00:00', 30, 0.0, 30, 'poesia.jpg', '2024-07-09'),
+(1, 6, 'Exposición de Arte Local', 'Gratuito', 'Exhibición de obras de artistas locales con un ambiente cultural.', '2024-09-05', '10:00:00', '18:00:00', 80, 0.0, 80, 'arte.jpg', '2024-07-09'),
 (1, 4, 'Degustación de Café', 'De Pago', 'Aprende sobre variedades de café y métodos de preparación.', '2024-09-10', '10:00:00', '12:00:00', 20, 15.0, 20, 'degustacion.jpg', '2024-07-09'),
 (1, 1, 'Cata de Vinos y Quesos', 'De Pago', 'Descubre la combinación perfecta entre vinos, quesos y café.', '2024-09-25', '18:00:00', '20:00:00', 40, 25.0, 40, 'cata.jpg', '2024-07-09'),
-(1, 8, 'Noche de Cine Independiente', 'Gratuito', 'Proyección de películas independientes acompañadas de café gourmet.', '2024-10-05', '20:00:00', '22:00:00', 25, 0.0, 0, 'cine.jpg', '2024-07-09'),
+(1, 8, 'Noche de Cine Independiente', 'Gratuito', 'Proyección de películas independientes acompañadas de café gourmet.', '2024-10-05', '20:00:00', '22:00:00', 25, 0.0, 25, 'cine.jpg', '2024-07-09'),
 (1, 4, 'Taller de Cocina Saludable', 'De Pago', 'Aprende a preparar platillos saludables con ingredientes locales.', '2024-10-15', '09:00:00', '11:00:00', 15, 20.0, 15, 'cocina.jpg', '2024-07-09'),
-(1, 1, 'Concierto Acústico', 'Gratuito', 'Concierto íntimo con artistas locales en un ambiente acogedor.', '2024-11-01', '18:00:00', '20:00:00', 50, 0.0, 0, 'concierto.jpg', '2024-07-09'),
-(3, 7, 'Charla sobre Café y Cultura', 'Gratuito', 'Discusión sobre la historia y la influencia cultural del café en nuestra sociedad.', '2024-11-10', '17:00:00', '19:00:00', 30, 0.0, 0, 'charla.jpg', '2024-07-09'),
-(2, 5, 'Feria de Libros Antiguos', 'Gratuito', 'Venta y exhibición de libros antiguos acompañados de café y música en vivo.', '2024-12-01', '10:00:00', '16:00:00', 50, 0.0, 0, 'libros.jpg', '2024-07-09');
+(1, 1, 'Concierto Acústico', 'Gratuito', 'Concierto íntimo con artistas locales en un ambiente acogedor.', '2024-11-01', '18:00:00', '20:00:00', 50, 0.0, 50, 'concierto.jpg', '2024-07-09'),
+(3, 7, 'Charla sobre Café y Cultura', 'Gratuito', 'Discusión sobre la historia y la influencia cultural del café en nuestra sociedad.', '2024-11-10', '17:00:00', '19:00:00', 30, 0.0, 30, 'charla.jpg', '2024-07-09'),
+(2, 5, 'Feria de Libros Antiguos', 'Gratuito', 'Venta y exhibición de libros antiguos acompañados de café y música en vivo.', '2024-12-01', '10:00:00', '16:00:00', 50, 0.0, 50, 'libros.jpg', '2024-07-09');
 
 INSERT INTO bolsas_cafe(
 	nombre,
@@ -1739,3 +1725,37 @@ JOIN
 	detalle_bc dbc ON bc.id_bolsa = dbc.id_bolsa
 JOIN
 	detalle_pedidos dp ON dbc.id_dbc = dp.id_dbc;
+
+    -- Procedimientos Almacenados Para Obtener Detalles de una bolsa
+DELIMITER //
+
+CREATE PROCEDURE ObtenerDetallesPorProceso(IN procesoCafe VARCHAR(100))
+BEGIN
+    SELECT 
+        bc.id_bolsa,
+        bc.nombre,
+        bc.años_cosecha,
+        bc.productor_finca,
+        bc.proceso,
+        bc.variedad,
+        bc.altura,
+        bc.aroma,
+        bc.acidez,
+        bc.sabor,
+        bc.cuerpo,
+        bc.puntaje_catacion,
+        bc.img_url,
+        GROUP_CONCAT(CONCAT(dbc.medida, ': $', dbc.precio, ' (Stock: ', dbc.stock, ')') SEPARATOR '; ') AS detalles_medidas
+    FROM 
+        bolsas_cafe bc
+    JOIN 
+        detalle_bc dbc
+    ON 
+        bc.id_bolsa = dbc.id_bolsa
+    WHERE 
+        bc.proceso = procesoCafe
+    GROUP BY
+        bc.id_bolsa;
+END //
+
+DELIMITER ;

@@ -1,3 +1,20 @@
+<?php
+session_start();
+
+include("../../class/database.php");
+
+// Crear una nueva instancia de la clase Database y conectar a la base de datos
+$conexion = new Database();
+$conexion->conectarDB();
+
+
+if (isset($_SESSION["usuario"])) {
+    $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE p.usuario = '$_SESSION[usuario]'";
+    $rol = $conexion->select($rolUsuario);
+} else {
+    $rol = null;
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -8,12 +25,6 @@
     <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="shortcut icon" href="../../img/Sinfonía-Café-y-Cultura.webp">
-    <?php
-    session_start();
-
-    ?>
-
-
 </head>
 
 <body>
@@ -59,8 +70,8 @@
                     <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
-                    <a class="dropdown-item" href="../../views/perfil.php">Mi perfil</a>
-                    <?php if ($_SESSION['usuario'] == 'ADMIN') { ?>
+                    <a class="dropdown-item" href="../perfil.php">Mi perfil</a>
+                    <?php if ($rol[0]->rol === 'administrador') { ?>
                         <a class="dropdown-item" href="../../views/adminInicio.php">Administrar</a>
                         <div class="dropdown-divider"></div>
                     <?php } ?>
@@ -69,7 +80,7 @@
             <?php
             } else {
             ?>
-                <a href="../../views/login.php" class="login-button ms-auto">Iniciar Sesión</a>
+                <a href="../login.php" class="login-button ms-auto">Iniciar Sesión</a>
             <?php
             }
             ?>
@@ -224,7 +235,8 @@
                                 echo '      <div class="overlay">';
                                 echo '      <h4 class="medida text-white">' . $item->medida . '</h4>';
                                 echo '      </div>';
-                                echo '  </div>';                                echo '      <div class="ms-3 w-25">';
+                                echo '  </div>';
+                                echo '      <div class="ms-3 w-25">';
                                 echo '          <h6 class="mb-0 fw-bold">' . $item->producto . '</h6>';
                                 echo '          <span>$' . $item->precio . '</span>';
                                 echo '          <span class="text-muted d-block">' . $item->proceso . '</span>';
@@ -241,7 +253,7 @@
                                 echo '              </div>';
                                 echo '              <button type="submit" class="btn fw-bold btn-dark fs-5 p-0" style="height: 35px; width: 35px">-</button>';
                                 echo '          </form>';
-                                echo '          <span class="mx-2 p-1">' . $item->cantidad . '</span>';
+                                echo '          <span class="mx-1 p-1">' . $item->cantidad . '</span>';
                                 echo '          <form action="../../scripts/actualizar_carrito.php" method="POST" style="display: inline;">';
                                 echo '              <div class="d-none">';
                                 echo '              <input type="hidden" name="id_cliente" value="' . $cliente[0]->id_cliente . '">';
@@ -253,13 +265,16 @@
                                 echo '              </div>';
                                 echo '              <button type="submit" class="btn fw-bold btn-dark fs-5 p-0" style="height: 35px; width: 35px">+</button>';
                                 echo '          </form>';
+                                echo '          <div class="text-center mt-2 d-md-none">';  // Mostrar en resoluciones medianas hacia abajo
+                                echo '             <h6 class="mb-0 fw-bold">subtotal</h6>';
+                                echo '             <p class="mb-0 ">$' . $item->subtotal . '</p>';
+                                echo '          </div>';
                                 echo '      </div>';
-                                echo '          <div class="ms-5 m-0 p-1 text-center">';
+                                echo '          <div class="text-center w-25 mt-1 p-lg-4 d-none d-lg-block">';  // Mostrar solo en resoluciones grandes
                                 echo '             <h6 class="mb-0 fw-bold">subtotal</h6>';
                                 echo '             <p class="mb-0 ">$' . $item->subtotal . '</p>';
                                 echo '          </div>';
                                 echo '  </div>';
-
                                 echo '  <form action="../../scripts/eliminar_producto.php" method="POST" style="display:inline;">
                                                 <div class="d-none">
                                                     <input type="hidden" name="item_id" value="' . $item->id_dbc . '">
@@ -305,19 +320,14 @@
                                 </div>
                                 <p class="small text-muted">* No incluye los gastos de envío.</p>
                                 <button type="submit" class="btn btn-dark w-100">Realizar pedido</button>
-                        </form>
-
-                            <script>
-                            function confirmarPedido() {
-                                return confirm("¿Realmente desea realizar el pedido?");
-                            }
-                            </script>';
+                        </form>';
                         echo '</div>';
                         ?>
 
                     </div>
 
                 </div>
+                
                 <!-- Script para actualizar el campo oculto con el ID del domicilio -->
                 <script>
                     document.getElementById('direccion').addEventListener('change', function(event) {
@@ -355,28 +365,30 @@
                     });
                 </script>
                 <!-- script para habilitar el botón de envío cuando se seleccione un domicilio -->
-                <script>
-                    function confirmarPedido() {
-                        // Obtén el valor del domicilio
-                        var domicilio = document.getElementById('hiddenIdDomicilio').value;
+                
+<script>
+function confirmarPedido() {
+    // Obtén el valor del domicilio
+    var domicilio = document.getElementById('hiddenIdDomicilio').value;
 
-                        // Si no hay domicilio seleccionado, muestra un mensaje y previene el envío
-                        if (!domicilio) {
-                            alert('Por favor, selecciona o crea un domicilio antes de realizar el pedido.');
-                            return false; // Previene el envío del formulario
-                        }
+    // Si no hay domicilio seleccionado, muestra un mensaje y previene el envío
+    if (!domicilio) {
+        alert('Por favor, selecciona o crea un domicilio antes de realizar el pedido.');
+        return false; // Previene el envío del formulario
+    }
 
-                        return true; // Permite el envío del formulario si el domicilio está seleccionado
-                    }
+    // Muestra la confirmación de pedido
+    return confirm("¿Realmente desea realizar el pedido?");
+}
 
-                    // Función para habilitar el botón de envío cuando se seleccione un domicilio
-                    function seleccionarDomicilio(idDomicilio) {
-                        document.getElementById('hiddenIdDomicilio').value = idDomicilio;
-                        document.getElementById('submitButton').disabled = false; // Habilita el botón
-                    }
+// Función para habilitar el botón de envío cuando se seleccione un domicilio
+function seleccionarDomicilio(idDomicilio) {
+    document.getElementById('hiddenIdDomicilio').value = idDomicilio;
+    document.getElementById('submitButton').disabled = false; // Habilita el botón
+}
 
-                    // Puedes tener un evento o lógica para llamar a seleccionarDomicilio con el id del domicilio
-                </script>
+// Puedes tener un evento o lógica para llamar a seleccionarDomicilio con el id del domicilio
+</script>
 
         <?php
             } else {

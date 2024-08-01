@@ -8,16 +8,16 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="shortcut icon" href="../img/Sinfonía-Café-y-Cultura.webp">
     <?php
-        session_start();
-        require_once '../class/database.php';
-        include_once ("../scripts/funciones/funciones.php");
-        $db = new database();
-        $db->conectarDB();
+    session_start();
+    require_once '../class/database.php';
+    include_once("../scripts/funciones/funciones.php");
+    $db = new database();
+    $db->conectarDB();
 
-        if (isset($_SESSION['usuario'])) {
-            $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE p.usuario = '$_SESSION[usuario]'";
-            $rol = $db->select($rolUsuario);
-        }
+    if (isset($_SESSION['usuario'])) {
+        $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE p.usuario = '$_SESSION[usuario]'";
+        $rol = $db->select($rolUsuario);
+    }
     ?>
 </head>
 
@@ -30,8 +30,7 @@
                 <a class="navbar-brand" href="../index.php">
                     <img src="../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
                 </a>
-                <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1"
-                    id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                     <div class="offcanvas-header">
                         <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura
                         </h5>
@@ -82,10 +81,10 @@
                 <?php
                 }
                 ?>
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
         </nav>
         <!-- NavBar End -->
 
@@ -102,45 +101,50 @@
             </div>
             <h2>Conoce Recetas, Secretos y Más Sobre el Café!</h2>
 
-            <div class="row mb-3">
-                <div class="col-lg-6">
-                    <a href="publicaciones/blog.php">
-                    <div class="card mb-3">
-                        <img src="../img/cafes/cafe17.webp" class="card-img" alt="...">
-                        <div class="card-body">
-                            <h3 class="card-title fw-bold">Descubre el Maravilloso Mundo del Café en Nuestro Blog</h3>
-                            <p class="card-text">
-                                Bienvenidos a nuestro blog dedicado a la bebida que despierta pasiones y 
-                                energiza nuestros días: el café. Desde los rituales matutinos hasta las 
-                                pausas necesarias en la jornada laboral, el café se ha convertido en una 
-                                parte esencial de nuestras vidas. En este espacio, exploraremos todo lo 
-                                relacionado con esta fascinante bebida, desde su rica historia y los diversos 
-                                métodos de preparación, hasta las mejores variedades de granos y las últimas tendencias en el mundo cafetero.
+            <div class="row mb-1 d-flex justify-content-center">
+                
+                <div class="col-lg-6 p-3 d-flex justify-content-center">
+                    <div class="cardss">
+                        <img src="../img/cafes/cafe13.webp" alt="" >
+                        <div class="card-content">
+                            <h2>
+                                Descubre el Maravilloso Mundo del Café en Nuestro Blog
+                            </h2>
+                            <p>
+                                Bienvenidos a nuestro blog dedicado a la bebida que despierta pasiones y
+                                energiza nuestros días: el café. Desde los rituales matutinos hasta las
+                                pausas necesarias en la jornada laboral, el café se ha convertido en una
+                                parte esencial de nuestras vidas. En este espacio, exploraremos todo lo
+                                relacionado con esta fascinante bebida, desde su rica historia y los diversos
+                                métodos de preparación.
                             </p>
                             <a href='publicaciones/blog.php' class='blog-card-link p-3'>Mas detalles <i class='fa-solid fa-arrow-right'></i></a>
+
                         </div>
                     </div>
-                    </a>
                 </div>
-                <div class="col-lg-6">
-                    <a href="publicaciones/difusion.php">
-                    <div class="card mb-3">
-                        <img src="../img/cafes/cafe17.webp" class="card-img" alt="...">
-                        <div class="card-body">
-                            <h3 class="card-title fw-bold">Bienvenidos a SifoníaCafé&Cultura, Nuestro Canal de Difusión</h3>
-                            <p class="card-text">
-                                Hola amantes del café y curiosos del buen sabor, ¡bienvenidos a SifoníaCafé&Cultura! 
-                                Este es el lugar perfecto para todos aquellos que comparten nuestra pasión por esta 
-                                increíble bebida que nos acompaña en tantos momentos de nuestras vidas. Desde los orígenes 
-                                del café y sus fascinantes historias, hasta los métodos más innovadores de preparación y 
-                                las últimas tendencias en el mundo cafetero, aquí encontrarás contenido para todos los gustos.
+                <div class="col-lg-6 p-3 d-flex justify-content-center">
+                    <div class="cardss">
+                        <img src="../img/cafes/lugar1.webp" alt="">
+                        <div class="card-content">
+                            <h2>
+                                Bienvenidos a SifoníaCafé&Cultura, Nuestro Canal de Difusión
+                            </h2>
+                            <p>
+                                Hola amantes del café y curiosos del buen sabor, ¡bienvenidos a SifoníaCafé&Cultura!
+                                Este es el lugar perfecto para todos aquellos que comparten nuestra pasión por esta
+                                increíble bebida que nos acompaña en tantos momentos de nuestras vidas. Desde los orígenes
+                                del café y sus fascinantes historias, hasta los métodos más innovadores de preparación y
+                                las últimas tendencias en el mundo cafetero.
                             </p>
                             <a href='publicaciones/difusion.php' class='blog-card-link p-3'>Mas detalles <i class='fa-solid fa-arrow-right'></i></a>
+
                         </div>
                     </div>
-                    </a>
                 </div>
             </div>
+
+
         </div>
     </div>
 
