@@ -1,10 +1,15 @@
 <?php
 session_start();
-include_once ("../../class/database.php");
+include_once("../../class/database.php");
 
 $db = new Database();
 $db->conectarDB();
-
+if (isset($_SESSION["usuario"])) {
+    $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE p.usuario = '$_SESSION[usuario]'";
+    $rol = $db->select($rolUsuario);
+} else {
+    $rol = null;
+}
 $id_reserva = $_GET['id'];
 
 // Obtener el ID del cliente autenticado
@@ -27,7 +32,7 @@ if (is_array($cliente_result) && count($cliente_result) > 0) {
 
         if ($id_cliente_autenticado == $id_cliente_reserva) {
             // El pedido pertenece al cliente autenticado, mostrar el folio
-            ?>
+?>
 
             <!DOCTYPE html>
             <html lang="es">
@@ -40,7 +45,7 @@ if (is_array($cliente_result) && count($cliente_result) > 0) {
                 <link rel="stylesheet" href="../../css/style.css">
                 <link rel="shortcut icon" href="../../img/Sinfonía-Café-y-Cultura.webp">
                 <?php
-                include_once ("../../scripts/funciones/funciones.php");
+                include_once("../../scripts/funciones/funciones.php");
 
                 if (isset($_SESSION['usuario'])) {
                     $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE p.usuario = '$_SESSION[usuario]'";
@@ -81,6 +86,14 @@ if (is_array($cliente_result) && count($cliente_result) > 0) {
                     /* Makes sure the gradient overlay is on top of the image */
                 }
 
+
+                /* Media query para resoluciones medias y pequeñas */
+                @media (max-width: 992px) {
+                    .gradient-overlay {
+                        background: linear-gradient(to top, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 1) 100%);
+                    }
+                }
+
                 .card-no-border {
                     border: none;
                 }
@@ -97,8 +110,7 @@ if (is_array($cliente_result) && count($cliente_result) > 0) {
                         <a class="navbar-brand" href="../../index.php">
                             <img src="../../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
                         </a>
-                        <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar"
-                            aria-labelledby="offcanvasNavbarLabel">
+                        <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                             <div class="offcanvas-header">
                                 <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -128,30 +140,27 @@ if (is_array($cliente_result) && count($cliente_result) > 0) {
                         </div>
                         <?php
                         if (isset($_SESSION["usuario"])) {
-                            ?>
+                        ?>
                             <!-- Navbar con dropdown -->
-                            <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
-                                style="left: auto; right: 30px; top: 60px">
-                                <a class="dropdown-item" href="../../views/perfil.php">Mi perfil</a>
-                                <?php if ($_SESSION['usuario'] == 'Administrador') { ?>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
+                                <a class="dropdown-item" href="../perfil.php">Mi perfil</a>
+                                <?php if ($rol[0]->rol === 'administrador') { ?>
                                     <a class="dropdown-item" href="../../views/adminInicio.php">Administrar</a>
                                     <div class="dropdown-divider"></div>
                                 <?php } ?>
                                 <a class="dropdown-item" href="../../scripts/login/cerrarsesion.php">Cerrar sesión</a>
                             </div>
-                            <?php
+                        <?php
                         } else {
-                            ?>
-                            <a href="../../views/login.php" class="login-button ms-auto">Iniciar Sesión</a>
-                            <?php
+                        ?>
+                            <a href="../login.php" class="login-button ms-auto">Iniciar Sesión</a>
+                        <?php
                         }
                         ?>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-                            aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
                     </div>
@@ -169,37 +178,42 @@ if (is_array($cliente_result) && count($cliente_result) > 0) {
                     <div class="fw-bold">
                         <h1 class="h1contact">Mi reserva</h1>
                     </div>
-                </div>
 
-                <!-- Contenido -->
-                <?php
-                if (isset($_SESSION["usuario"])) {
-                    $id_reserva = htmlspecialchars($id_reserva);
-                    echo '
-<div class="container m-5">
+                    <!-- Contenido -->
+                    <?php
+                    if (isset($_SESSION["usuario"])) {
+                        $id_reserva = htmlspecialchars($id_reserva);
+                        echo '
+<div class="p-4 m-0">
     <div class="card card-no-border card-custom-shadow">
         <div class="row g-0">
-            <div class="col-md-6">
+            <div class="col-md-12 col-lg-6">
                 <div class="card-body">
-                    <h5 class="card-title">¡Gracias por su reserva!</h5>
+                <div class="d-flex flex-column align-items-center text-center">
+                    <h5 class="card-title fw-bold">¡Gracias por su reserva!</h5>
+                    <i class="fa-solid fa-champagne-glasses fa-2x"></i>
                     <p class="card-text">Su folio es: <strong>' . htmlspecialchars($id_reserva) . '</strong></p>
-                    <p class="card-text">Para completar su reserva, deberá realizar un depósito o transferencia a la siguiente cuenta:</p>
-                    <ul class="list-unstyled">
+                    <span class="card-text">Para completar su reserva, deberá realizar un depósito o transferencia a la siguiente cuenta:</s>
+
+                </div>
+                    <ul class="list-unstyled p-2 p-lg-4">
                         <li><strong>Banco:</strong> Bancomer</li>
                         <li><strong>Cuenta:</strong> 1234567890 </li>
                         <li><strong>CLABE:</strong> 012345678901234567</li>
                         <li><strong>Nombre del Titular:</strong> Héctor Armando Caballero Serna</li>
                     </ul>
-                    <p class="card-text">Después de realizar el pago, por favor suba el comprobante de pago a través de su perfil en "Reservas":</p>
-                    <div class="mt-4">
-                        <a href="../reservas.php" class="btn btn-secondary">Ir a mis reservas</a>
-                        <a href="../eventos.php" class="btn btn-secondary ms-2">Volver a Eventos</a>
+                    <div class="d-flex justify-content-center text-center p-1">
+                                            <span class="card-text">Después de realizar el pago, por favor suba el comprobante de pago a través de su perfil en "Reservas":</s>
+</div>
+                    <div class="mt-4 justify-content-center d-flex">
+                        <a href="../reservas.php" class="btn btn-categorias">Ir a mis reservas</a>
+                        <a href="../eventos.php" class="btn btn-categorias ms-2">Volver a Eventos</a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 position-relative">
-                <div class="image-wrapper">
-                    <img src="../../img/background_reservas.jpg" class="img-fluid rounded-start" alt="Imagen de Reserva">
+            <div class="col-md-12 col-lg-6 position-relative ">
+                <div class="image-wrapper w-100 h-100">
+                    <img src="../../img/background_reservas.jpg" class="img-fluid rounded-start coffee-image " alt="Imagen de Reserva">
                     <div class="gradient-overlay"></div>
                 </div>
             </div>
@@ -207,8 +221,11 @@ if (is_array($cliente_result) && count($cliente_result) > 0) {
     </div>
 </div>
 ';
-                }
-                ?>
+                    }
+                    ?>
+                </div>
+
+
                 <!-- Footer -->
                 <footer>
                     <div class="container-fluid p-5 " style="background: var(--negroclaro);">
@@ -242,13 +259,17 @@ if (is_array($cliente_result) && count($cliente_result) > 0) {
                         </div>
                     </div>
                 </footer>
+                <!-- jQuery -->
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                <!-- Bootstrap JS -->
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
                 <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
                 <script src="https://kit.fontawesome.com/45ef8dbe96.js" crossorigin="anonymous"></script>
                 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
             </body>
 
             </html>
-            <?php
+<?php
         } else {
             echo "<p>La reserva no pertenece al cliente autenticado.</p>";
         }
