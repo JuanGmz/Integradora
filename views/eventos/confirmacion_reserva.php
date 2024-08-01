@@ -5,11 +5,8 @@ include_once ("../../class/database.php");
 $db = new Database();
 $db->conectarDB();
 
-if (!isset($_GET['id'])) {
-    die("No se ha proporcionado un ID reserva.");
-} else {
-    $id_reserva = $_GET['id'];
-}
+$id_reserva = $_GET['id'];
+
 // Obtener el ID del cliente autenticado
 $cliente_query = "SELECT c.id_cliente 
                   FROM clientes AS c 
