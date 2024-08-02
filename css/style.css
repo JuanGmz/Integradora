@@ -918,16 +918,22 @@ a:hover {
   }
 
 }
-/*whatsapp*/
+
+/* Estilos de WhatsApp Button */
 #whatsappButton {
   background-color: #25D366;
   border: none;
   border-radius: 50%;
   color: white;
-  width: 60px;
-  height: 60px;
+  width: 80px; /* Ajusta el tamaño del botón */
+  height: 80px; /* Ajusta el tamaño del botón */
+  z-index: 1051; /* Asegúrate de que el z-index sea mayor que el off-canvas */
 }
 
 #whatsappButton:hover {
   background-color: #1ebe57;
+}
+
+#whatsappButton i {
+  font-size: 2.5rem; /* Ajusta el tamaño del icono */
 }

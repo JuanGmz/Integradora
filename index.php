@@ -26,7 +26,7 @@
 
 <body>
     <!-- Botón de WhatsApp -->
-    <button id="whatsappButton" class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3" type="button" onclick="window.open('https://wa.me/5218716764502?text=%C2%A1Hola!%20Escribo%20desde%20https%3A%2F%2Fcofeedepot.com.mx%2F%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
+    <button id="whatsappButton" class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3" type="button" onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
         <i class="fa-brands fa-whatsapp fa-2x"></i>
     </button>
     <!-- NavBar -->
