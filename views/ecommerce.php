@@ -165,8 +165,15 @@ if (isset($_SESSION["usuario"])) {
 
             if ($consulta) {
                 $total_productos = $consulta[0]->total_productos;
+                if ($total_productos == null) {
+                    $total_productos = 0;
+                }
+            }else{
+                $total_productos = 0;
             }
         }
+    }else{
+        $total_productos = 0;
     }
 
     // Desconectar de la base de datos
