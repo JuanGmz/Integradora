@@ -39,6 +39,10 @@
 </head>
 
 <body>
+     <!-- Botón de WhatsApp -->
+     <button id="whatsappButton" class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3" type="button" onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
+        <i class="fa-brands fa-whatsapp fa-2x"></i>
+    </button>
 
     <!-- NavBar -->
     <nav class="navbar navbar-expand-lg shadow-lg mb-lg-4">
@@ -153,8 +157,19 @@
                                                         ?>
                                                         <span class="badge bg-warning">Pendiente</span>
                                                         <?php
-                                                    }
-                                                ?>
+                                                            $queryComprobante = "SELECT * FROM comprobantes WHERE id_reserva = $reserva->folio";
+                                                            $comprobantes = $db->select($queryComprobante);
+
+                                                            if(empty($comprobantes)) {
+                                                                ?>
+                                                                <span class="badge bg-secondary">Sin comprobante</span>
+                                                                <?php
+                                                            } else {
+                                                                ?>
+                                                                <span class="badge bg-secondary">En revisión</span>
+                                                                <?php  
+                                                            } 
+                                                    } ?>
                                             </h4>
                                             <p class="card-text m-2">Evento: <?= $reserva->evento ?></p>
                                         </div>

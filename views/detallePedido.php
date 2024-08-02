@@ -11,7 +11,7 @@
     <?php
     session_start();
     require_once '../class/database.php';
-    include_once ("../scripts/funciones/funciones.php");
+    include_once("../scripts/funciones/funciones.php");
     $db = new database();
     $db->conectarDB();
 
@@ -38,15 +38,17 @@
 </head>
 
 <body>
-
+    <!-- Botón de WhatsApp -->
+    <button id="whatsappButton" class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3" type="button" onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
+        <i class="fa-brands fa-whatsapp fa-2x"></i>
+    </button>
     <!-- NavBar -->
     <nav class="navbar navbar-expand-lg shadow-lg mb-lg-4">
         <div class="container-fluid">
             <a class="navbar-brand" href="../index.php">
                 <img src="../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
             </a>
-            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar"
-                aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -76,14 +78,12 @@
             </div>
             <?php
             if (isset($_SESSION["usuario"])) {
-                ?>
+            ?>
                 <!-- Navbar con dropdown -->
-                <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
-                    style="left: auto; right: 30px; top: 60px">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
                     <a class="dropdown-item" href="../perfil.php">Mi perfil</a>
                     <?php if ($rol[0]->rol === 'administrador') { ?>
                         <a class="dropdown-item" href="adminInicio.php">Administrar</a>
@@ -91,15 +91,14 @@
                     <?php } ?>
                     <a class="dropdown-item" href="../scripts/login/cerrarsesion.php">Cerrar sesión</a>
                 </div>
-                <?php
+            <?php
             } else {
-                ?>
+            ?>
                 <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
-                <?php
+            <?php
             }
             ?>
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-                aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
@@ -121,7 +120,7 @@
             <div class="col-12 col-lg-7 me-5">
                 <?php
                 foreach ($productos as $producto) {
-                    ?>
+                ?>
                     <div class="row p-3 mb-3 bg-body rounded shadow-lg d-lg-flex justify-content-center align-items-center">
                         <div class="col-8">
                             <p>Producto: <?= $producto->nombre ?> (<?= $producto->proceso ?>)</p>
@@ -130,11 +129,10 @@
                             <p>Costo: $<?= $producto->monto ?></p>
                         </div>
                         <div class="col-4 text-end">
-                            <img src="../img/bolsas/<?php echo $producto->img_url; ?>" class="img-fluid rounded"
-                                alt="Producto" style="width: 100px; height: 100px;">
+                            <img src="../img/bolsas/<?php echo $producto->img_url; ?>" class="img-fluid rounded" alt="Producto" style="width: 100px; height: 100px;">
                         </div>
                     </div>
-                    <?php
+                <?php
                 }
                 ?>
             </div>
@@ -148,17 +146,17 @@
                             <div class="col-5 text-end">
                                 <?php
                                 if ($pedido[0]->estatus === 'Cancelado') {
-                                    ?>
+                                ?>
                                     <span class="badge bg-danger fs-6 fw-bold">Cancelado</span>
-                                    <?php
+                                <?php
                                 } else if ($pedido[0]->estatus === 'Finalizado') {
-                                    ?>
-                                        <span class="badge bg-success fs-6 fw-bold">Finalizado</span>
-                                    <?php
+                                ?>
+                                    <span class="badge bg-success fs-6 fw-bold">Finalizado</span>
+                                <?php
                                 } else {
-                                    ?>
-                                        <span class="badge bg-warning fs-6 fw-bold">Pendiente</span>
-                                    <?php
+                                ?>
+                                    <span class="badge bg-warning fs-6 fw-bold">Pendiente</span>
+                                <?php
 
                                 }
                                 ?>
@@ -179,15 +177,15 @@
                             <div class="col-12">
                                 <p>Productos: $<?= $pedido[0]->monto_total ?></p>
                                 <?php
-                                    if ($pedido[0]->costo_envio > 0) {
-                                        ?>
-                                        <p>Envío: $<?= $pedido[0]->costo_envio ?></p>
-                                        <?php   
-                                    } else {
-                                        ?>
-                                        <p>Envío: Aún no se registra el costo de envío</p>
-                                        <?php
-                                    }
+                                if ($pedido[0]->costo_envio > 0) {
+                                ?>
+                                    <p>Envío: $<?= $pedido[0]->costo_envio ?></p>
+                                <?php
+                                } else {
+                                ?>
+                                    <p>Envío: Aún no se registra el costo de envío</p>
+                                <?php
+                                }
                                 ?>
                                 <?php
                                 $total = $pedido[0]->monto_total + $pedido[0]->costo_envio;
@@ -204,28 +202,28 @@
                         <div class="row mt-3">
                             <div class="col-12">
                                 <?php
-                                    if ($pedido[0]->guia_de_envio === null) {
-                                        ?>
-                                        <p>Guía de Envío: Aún no se registra la guía de envío</p>
-                                        <?php
-                                    } else {
-                                        ?>
-                                        <p>Guía de Envío: <?= $pedido[0]->guia_de_envio ?></p>
-                                        <?php
-                                    }
+                                if ($pedido[0]->guia_de_envio === null) {
+                                ?>
+                                    <p>Guía de Envío: Aún no se registra la guía de envío</p>
+                                <?php
+                                } else {
+                                ?>
+                                    <p>Guía de Envío: <?= $pedido[0]->guia_de_envio ?></p>
+                                <?php
+                                }
                                 ?>
                             </div>
                             <div class="col-12">
                                 <?php
-                                    if ($pedido[0]->documento_url === null) {
-                                        ?>
-                                        <p>Archivo de Envío: Aún no se registra el archivo de envío</p>
-                                        <?php
-                                    } else {
-                                        ?>
-                                        <p>Archivo de Envío: <?= $pedido[0]->documento_url ?></p>
-                                        <?php
-                                    }
+                                if ($pedido[0]->documento_url === null) {
+                                ?>
+                                    <p>Archivo de Envío: Aún no se registra el archivo de envío</p>
+                                <?php
+                                } else {
+                                ?>
+                                    <p>Archivo de Envío: <?= $pedido[0]->documento_url ?></p>
+                                <?php
+                                }
                                 ?>
                             </div>
                         </div>

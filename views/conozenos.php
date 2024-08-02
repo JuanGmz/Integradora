@@ -17,6 +17,7 @@
             text-align: center;
             padding: 100px 0;
         }
+
         .header-section2 {
             position: relative;
             background: url('../img/publicaciones/sinfo.webp') no-repeat center center;
@@ -41,7 +42,7 @@
         }
 
         .header-section .container,
-        .header-section2 .container{
+        .header-section2 .container {
             position: relative;
             z-index: 2;
         }
@@ -80,6 +81,10 @@
 </head>
 
 <body>
+    <!-- Botón de WhatsApp -->
+    <button id="whatsappButton" class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3" type="button" onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
+        <i class="fa-brands fa-whatsapp fa-2x"></i>
+    </button>
     <!-- NavBar -->
     <nav class="navbar navbar-expand-lg shadow-lg ">
         <div class="container-fluid">
@@ -192,7 +197,7 @@
                 <div class="col-md-6 p-3">
                     <h1 class="fw-bold p-3">Nuestros expendios de café</h1>
                     <p class="p-3 fs-4">En todas nuestras cafeterías podrás encontrar los expendios de café, donde podrás escoger el grano de café de tu preferencia o hasta crear tus propias mezclas para así solicitar el molido ideal para tu método de extracción favorito.
-                    Llevarás hasta tu casa un café recién molido y fresco.</p>
+                        Llevarás hasta tu casa un café recién molido y fresco.</p>
                 </div>
                 <div class="col-md-6">
                     <img src="../img/atiende.webp" alt="Café">

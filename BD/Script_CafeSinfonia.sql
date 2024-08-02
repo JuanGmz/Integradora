@@ -1212,6 +1212,7 @@ CREATE VIEW vw_comprobante_reserva AS
 SELECT 
 	c.concepto,
     c.folio_operacion,
+    er.id_reserva,
     c.fecha,
     c.monto,
     c.banco_origen,
@@ -1481,7 +1482,7 @@ INSERT INTO productos_menu (id_categoria, nombre, descripcion, img_url) VALUES
 call SP_Registrar_usuariosAdministradores('Noe Abel','Vargas','Lopez','noah','noelopez191119@gmail.com','123pass123','8715083731');
 call SP_Registrar_usuariosAdministradores('Tobias Gabriel','Rodriguez','Lujan','tlujan','totilotegabriel@gmail.com','miperro123','8716764502');
 call SP_Registrar_usuariosAdministradores('Iker Jesus','Flores','Luna','iker','iker@gmail.com','elgato123','8713923040');
-call SP_Registrar_usuariosClientes('Juan Alfredo','Gomez','Gonzalez','juangmz','juan@gmail.com','123juanita123','8718451815');
+call SP_Registrar_usuariosAdministradores('Juan Alfredo','Gomez','Gonzalez','juangmz','imjuantrc@gmail.com','123juanita123','8718451815');
 call SP_Registrar_usuariosAdministradores('Dante Raziel','Basurto','Saucedo','bune','dantin@gmail.com','123456','8714307468');
 call SP_Registrar_usuariosAdministradores('Hector Armando','Caballero','Serna','hector','hector@gmail.com','123sinfonia123','8715066618');
 
@@ -1759,3 +1760,50 @@ BEGIN
 END //
 
 DELIMITER ;
+
+DROP VIEW IF EXISTS vw_reservas;
+CREATE VIEW vw_reservas AS
+SELECT
+	e.nombre AS evento,
+	e.fecha_evento,
+	er.id_reserva AS folio,
+    er.estatus,
+    er.fecha_hora_reserva,
+    p.usuario
+FROM
+	eventos e 
+JOIN
+	eventos_reservas er ON e.id_evento = er.id_evento
+JOIN
+	clientes cli ON er.id_cliente = cli.id_cliente
+JOIN
+	personas p ON cli.id_persona = p.id_persona;
+    
+DROP VIEW IF EXISTS vw_detalle_reservas;
+CREATE VIEW vw_detalle_reservas AS
+SELECT
+	e.img_url,
+    e.descripcion,
+	e.fecha_evento,
+    er.id_reserva AS folio,
+	er.c_boletos,
+    er.estatus,
+    er.monto_total,
+    ul.nombre AS lugar,
+    ul.ciudad,
+    ul.estado,
+    ul.colonia,
+    ul.codigo_postal,
+    ul.calle,
+    p.usuario
+FROM
+	eventos e 
+JOIN
+	ubicacion_lugares ul ON e.id_lugar = ul.id_lugar
+JOIN
+	eventos_reservas er ON e.id_evento = er.id_evento
+JOIN
+	clientes cli ON er.id_cliente = cli.id_cliente
+JOIN
+	personas p ON cli.id_persona = p.id_persona;
+    

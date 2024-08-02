@@ -24,7 +24,10 @@ if (isset($_SESSION["usuario"])) {
 </head>
 
 <body>
-
+    <!-- Botón de WhatsApp -->
+    <button id="whatsappButton" class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3" type="button" onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
+        <i class="fa-brands fa-whatsapp fa-2x"></i>
+    </button>
     <!-- NavBar -->
     <nav class="navbar navbar-expand-lg shadow-lg ">
         <div class="container-fluid">
@@ -60,7 +63,7 @@ if (isset($_SESSION["usuario"])) {
                 </div>
             </div>
             <?php
-                if (isset($_SESSION["usuario"])) {
+            if (isset($_SESSION["usuario"])) {
             ?>
                 <!-- Navbar con dropdown -->
                 <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -180,7 +183,7 @@ if (isset($_SESSION["usuario"])) {
                     echo '      <div class="overlay">';
                     echo '      <h4 class="medida text-white">' . $item->medida . '</h4>';
                     echo '      </div>';
-                    echo '  </div>';                    
+                    echo '  </div>';
                     echo '      <div class="ms-1 w-25">';
                     echo '          <h6 class="mb-0 fw-bold">' . $item->producto . '</h6>';
                     echo '          <span>$' . $item->precio . '</span>';

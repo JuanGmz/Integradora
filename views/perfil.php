@@ -11,7 +11,7 @@
     <?php
     session_start();
     require_once '../class/database.php';
-    include_once ("../scripts/funciones/funciones.php");
+    include_once("../scripts/funciones/funciones.php");
     $db = new database();
     $db->conectarDB();
 
@@ -26,15 +26,17 @@
 </head>
 
 <body>
-
+    <!-- Botón de WhatsApp -->
+    <button id="whatsappButton" class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3" type="button" onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
+        <i class="fa-brands fa-whatsapp fa-2x"></i>
+    </button>
     <!-- NavBar -->
     <nav class="navbar navbar-expand-lg shadow-lg mb-lg-5">
         <div class="container-fluid">
             <a class="navbar-brand" href="../index.php">
                 <img src="../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
             </a>
-            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar"
-                aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -64,14 +66,12 @@
             </div>
             <?php
             if (isset($_SESSION["usuario"])) {
-                ?>
+            ?>
                 <!-- Navbar con dropdown -->
-                <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
-                    style="left: auto; right: 30px; top: 60px">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
                     <a class="dropdown-item" href="perfil.php">Mi perfil</a>
                     <?php if ($rol[0]->rol === 'administrador') { ?>
                         <a class="dropdown-item" href="../views/adminInicio.php">Administrar</a>
@@ -79,15 +79,14 @@
                     <?php } ?>
                     <a class="dropdown-item" href="../scripts/login/cerrarsesion.php">Cerrar sesión</a>
                 </div>
-                <?php
+            <?php
             } else {
-                ?>
+            ?>
                 <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
-                <?php
+            <?php
             }
             ?>
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-                aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
@@ -123,8 +122,7 @@
                             <div class="cblog-card">
                                 <h4 class="card-title fw-bold">Datos Personales</h4>
                                 <p class="card-text">Ver y actualizar información personal.</p>
-                                <a href="datosPersonales.php" class="blog-card-link">Datos Personales <i
-                                        class="fa-solid fa-arrow-right"></i></a>
+                                <a href="datosPersonales.php" class="blog-card-link">Datos Personales <i class="fa-solid fa-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -140,8 +138,7 @@
                             <div class="cblog-card">
                                 <h4 class="card-title fw-bold">Pedidos</h4>
                                 <p class="card-text">Ver historial de compras.</p>
-                                <a href="pedidos.php" class="blog-card-link">Pedidos <i
-                                        class="fa-solid fa-arrow-right"></i></a>
+                                <a href="pedidos.php" class="blog-card-link">Pedidos <i class="fa-solid fa-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -159,8 +156,7 @@
                             <div class="cblog-card">
                                 <h4 class="card-title fw-bold">Agregar Direcciones</h4>
                                 <p class="card-text">Agrega otra dirección para recibir tus pedidos.</p>
-                                <a href="direcciones.php" class="blog-card-link">Direcciones <i
-                                        class="fa-solid fa-arrow-right"></i></a>
+                                <a href="direcciones.php" class="blog-card-link">Direcciones <i class="fa-solid fa-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -176,8 +172,7 @@
                             <div class="cblog-card">
                                 <h4 class="card-title fw-bold">Reservas</h4>
                                 <p class="card-text">Ver el historial de reservas de boletos para los eventos.</p>
-                                <a href="reservas.php" class="blog-card-link">Reservas <i
-                                        class="fa-solid fa-arrow-right"></i></a>
+                                <a href="reservas.php" class="blog-card-link">Reservas <i class="fa-solid fa-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>

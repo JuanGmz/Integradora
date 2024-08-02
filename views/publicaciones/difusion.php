@@ -8,22 +8,25 @@
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="shortcut icon" href="../../img/Sinfonía-Café-y-Cultura.webp">
     <?php
-        session_start();
-        include_once("../../class/database.php");
+    session_start();
+    include_once("../../class/database.php");
 
-        // Conectar a la base de datos
-        $conexion = new Database();
-        $conexion->conectarDB();
-    
-        if (isset($_SESSION['usuario'])) {
-            $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE p.usuario = '$_SESSION[usuario]'";
-            $rol = $conexion->select($rolUsuario);
-        }
+    // Conectar a la base de datos
+    $conexion = new Database();
+    $conexion->conectarDB();
+
+    if (isset($_SESSION['usuario'])) {
+        $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE p.usuario = '$_SESSION[usuario]'";
+        $rol = $conexion->select($rolUsuario);
+    }
     ?>
 </head>
 
 <body>
-
+    <!-- Botón de WhatsApp -->
+    <button id="whatsappButton" class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3" type="button" onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
+        <i class="fa-brands fa-whatsapp fa-2x"></i>
+    </button>
 
     <div class="content">
         <!-- NavBar -->
@@ -136,20 +139,20 @@
                 <div class="container mb-3">
                     <div class="row">
                         <?php foreach ($publicaciones as $publicacion) : ?>
-                            <div class="col-12 mb-4"> 
+                            <div class="col-12 mb-4">
                                 <div class="card shadow-lg">
                                     <div class="row no-gutters">
                                         <div class="col-md-4">
-                                         <img src='../../img/publicaciones/<?php echo $publicacion->img_url; ?>' class='img-fluid' alt='<?php echo $publicacion->titulo ?>' style="height: 100%; width: 100%; object-fit: cover;">
-                                         </div>
+                                            <img src='../../img/publicaciones/<?php echo $publicacion->img_url; ?>' class='img-fluid' alt='<?php echo $publicacion->titulo ?>' style="height: 100%; width: 100%; object-fit: cover;">
+                                        </div>
                                         <div class="col-md-8 d-flex flex-column justify-content-center p-3">
                                             <h5 class='card-title'><?php echo $publicacion->titulo; ?></h5>
-                                        <p class='card-text ' style="color:black;"><?php echo $publicacion->descripcion; ?></p>
-                                        <h6 class='blog-card-subtitle mb-2 text-muted'><?php echo $publicacion->fecha; ?></h6>
+                                            <p class='card-text ' style="color:black;"><?php echo $publicacion->descripcion; ?></p>
+                                            <h6 class='blog-card-subtitle mb-2 text-muted'><?php echo $publicacion->fecha; ?></h6>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         <?php endforeach; ?>
                     </div>
                 </div>
