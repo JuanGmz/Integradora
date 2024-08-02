@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-include ("../../class/database.php");
-include ("../../scripts/funciones/funciones.php");
+include("../../class/database.php");
+include("../../scripts/funciones/funciones.php");
 // Crear una nueva instancia de la clase Database y conectar a la base de datos
 $conexion = new Database();
 $conexion->conectarDB();
@@ -66,7 +66,7 @@ if (isset($_POST["btnReservar"])) {
 if ($result) {
     // Si se encontró el evento, mostrar sus detalles
     $evento = $result[0]; // Asumimos que select devuelve una matriz de resultados
-    ?>
+?>
     <!DOCTYPE html>
     <html lang="en">
 
@@ -126,14 +126,17 @@ if ($result) {
     </head>
 
     <body>
+        <!-- Botón de WhatsApp -->
+        <button id="whatsappButton" class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3" type="button" onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
+            <i class="fa-brands fa-whatsapp fa-2x"></i>
+        </button>
         <!-- NavBar -->
         <nav class="navbar navbar-expand-lg shadow-lg ">
             <div class="container-fluid">
                 <a class="navbar-brand" href="../../index.php">
                     <img src="../../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
                 </a>
-                <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar"
-                    aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                     <div class="offcanvas-header">
                         <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -163,14 +166,12 @@ if ($result) {
                 </div>
                 <?php
                 if (isset($_SESSION["usuario"])) {
-                    ?>
+                ?>
                     <!-- Navbar con dropdown -->
-                    <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
-                        style="left: auto; right: 30px; top: 60px">
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
                         <a class="dropdown-item" href="../../views/perfil.php">Mi perfil</a>
                         <?php if ($_SESSION['usuario'] == 'ADMIN') { ?>
                             <a class="dropdown-item" href="../../views/adminInicio.php">Administrar</a>
@@ -178,15 +179,14 @@ if ($result) {
                         <?php } ?>
                         <a class="dropdown-item" href="../../scripts/login/cerrarsesion.php">Cerrar sesión</a>
                     </div>
-                    <?php
+                <?php
                 } else {
-                    ?>
+                ?>
                     <a href="../../views/login.php" class="login-button ms-auto">Iniciar Sesión</a>
-                    <?php
+                <?php
                 }
                 ?>
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-                    aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
             </div>
@@ -199,7 +199,7 @@ if ($result) {
                     <li class="breadcrumb-item fw-bold"><a href="../../views/eventos.php">Eventos</a></li>
                     <?php
                     echo "  <li class='breadcrumb-item active' aria-current='page'>" . $evento->nombre . "</li>"
-                        ?>
+                    ?>
                 </ol>
             </nav>
             <?php
@@ -271,8 +271,7 @@ if ($result) {
             <!-- Imagen -->
             <div class="row">
                 <div class="col mb-lg-0 text-center empty-side">
-                    <img src="../../img/eventos/<?php echo $evento->img_url; ?>" class="img-fluid w-50"
-                        alt="Imagen del evento.">
+                    <img src="../../img/eventos/<?php echo $evento->img_url; ?>" class="img-fluid w-50" alt="Imagen del evento.">
                 </div>
             </div>
             <!-- Nombre y descripción -->
@@ -390,7 +389,7 @@ if ($result) {
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
+            document.addEventListener('DOMContentLoaded', function() {
                 var map = L.map('map').setView([<?php echo $evento->lat; ?>, <?php echo $evento->lng; ?>], 13);
 
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -410,7 +409,7 @@ if ($result) {
             });
         </script>
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
+            document.addEventListener('DOMContentLoaded', function() {
                 var precioBoleto = <?php echo $precio_boleto; ?>; // Asegúrate de que esto sea un número
                 // Obtener elementos del DOM
                 var cantidadSelect = document.getElementById('cantidad');
@@ -435,7 +434,7 @@ if ($result) {
     </body>
 
     </html>
-    <?php
+<?php
 } else {
     echo "Producto no encontrado.";
 }

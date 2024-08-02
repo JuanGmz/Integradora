@@ -921,17 +921,19 @@ a:hover {
 
 /* Estilos de WhatsApp Button */
 #whatsappButton {
-  background-color: #25D366;
+  background-color: var(--color1);
   border: none;
   border-radius: 50%;
-  color: white;
+  color: rgb(0, 0, 0);
   width: 80px; /* Ajusta el tamaño del botón */
   height: 80px; /* Ajusta el tamaño del botón */
   z-index: 1051; /* Asegúrate de que el z-index sea mayor que el off-canvas */
 }
 
 #whatsappButton:hover {
-  background-color: #1ebe57;
+  background-color: var(--obscuro);
+  color: var(--blanco);
+  
 }
 
 #whatsappButton i {
