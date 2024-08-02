@@ -918,3 +918,16 @@ a:hover {
   }
 
 }
+/*whatsapp*/
+#whatsappButton {
+  background-color: #25D366;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  width: 60px;
+  height: 60px;
+}
+
+#whatsappButton:hover {
+  background-color: #1ebe57;
+}

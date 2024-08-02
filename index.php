@@ -11,7 +11,7 @@
     <?php
     session_start();
     require_once 'class/database.php';
-    include_once ("scripts/funciones/funciones.php");
+    include_once("scripts/funciones/funciones.php");
     $db = new database();
     $db->conectarDB();
 
@@ -25,6 +25,10 @@
 </head>
 
 <body>
+    <!-- Botón de WhatsApp -->
+    <button id="whatsappButton" class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3" type="button" onclick="window.open('https://wa.me/5218716764502?text=%C2%A1Hola!%20Escribo%20desde%20https%3A%2F%2Fcofeedepot.com.mx%2F%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
+        <i class="fa-brands fa-whatsapp fa-2x"></i>
+    </button>
     <!-- NavBar -->
     <nav class="navbar navbar-expand-lg shadow-lg">
         <div class="container-fluid">
@@ -60,7 +64,7 @@
                 </div>
             </div>
             <?php
-                if (isset($_SESSION["usuario"])) {
+            if (isset($_SESSION["usuario"])) {
             ?>
                 <!-- Navbar con dropdown -->
                 <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -595,7 +599,6 @@
             </div>
         </div>
     </div>
-
 
     <footer>
         <div class="container-fluid p-5 " style="background: var(--negroclaro);">
