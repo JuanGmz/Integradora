@@ -149,9 +149,9 @@
     <!-- NavBar End -->
 
 
-    <header class="header-section justify-content-center d-flex">
-        <div class="container col-6  text-center m-5 ">
-            <h1>El Legado del Buen Café</h1>
+    <header class="header-section justify-content-center d-flex text-sm-center">
+        <div class="container col-lg-6 col-12 text-center m-5 ">
+            <h1 class="fw-bold p-1 text-small">El Legado del Buen Café</h1>
             <p class="p-3 fs-4">Nuestro legado del buen café comenzó en 2014 en la ciudad de Torreon, en donde se sirvieron nuestras primeras tazas de Café La Flor de Córdoba®. Nos hemos especializado en la selección de los mejores granos verdes mexicanos para llevarlos a un perfecto proceso de tueste para entregar a nuestros clientes el mejor café de altura con nuestro inconfundible sabor.</p>
         </div>
     </header>
@@ -160,7 +160,7 @@
         <div class="container-fluid container">
             <div class="row p-3">
                 <div class="col-md-6 p-3">
-                    <h1 class="fw-bold">Nuestro Café</h1>
+                    <h1 class="fw-bold text-sm-center">Nuestro Café</h1>
                     <ul class="p-3 m-4">
                         <li class="p-1 fs-4">Café 100% de altura.</li>
                         <li class="p-1 fs-4">Grano arábico orgullosamente mexicano proveniente de las altas regiones de Veracruz y Chiapas.</li>
@@ -169,12 +169,12 @@
                     </ul>
                 </div>
                 <div class="col-md-6">
-                    <img src="../img/charla.jpg" alt="Café">
+                    <img src="../img/eventos/charla.jpg" alt="Café">
                 </div>
             </div>
         </div>
     </header>
-    <header class="content-section header-section2">
+    <header class="content-section header-section2 text-sm-center">
         <div class="container-fluid container">
             <div class="row p-1">
                 <div class="col-md-6">
@@ -191,7 +191,7 @@
             </div>
         </div>
     </header>
-    <section class="content-section">
+    <section class="content-section text-sm-center">
         <div class="container-fluid container">
             <div class="row p-3">
                 <div class="col-md-6 p-3">

@@ -939,3 +939,16 @@ a:hover {
 #whatsappButton i {
   font-size: 2.5rem; /* Ajusta el tamaño del icono */
 }
+/*carrito*/
+
+#cartCount {
+  background-color: var(--obscuro); /* Fondo blanco para el contador */
+  color: var(--blanco); /* Color del texto del contador (rojo) */
+  border: 1px solid var(--blanco); /* Borde rojo */
+  width: 30px; /* Ancho del contador */
+  height: 30px; /* Alto del contador */
+  border-radius: 50%; /* Hacer el contador circular */
+  text-align: center; /* Centrar el texto */
+  line-height: 30px; /* Centrar verticalmente el texto */
+  font-size: 14px; /* Tamaño de fuente */
+}

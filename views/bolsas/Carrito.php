@@ -244,6 +244,8 @@ if (isset($_SESSION["usuario"])) {
                                 echo '          <h6 class="mb-0 fw-bold">' . $item->producto . '</h6>';
                                 echo '          <span>$' . $item->precio . '</span>';
                                 echo '          <span class="text-muted d-block">' . $item->proceso . '</span>';
+                                echo '          <span class="text-muted d-block">' . $item->sabor . '</span>';
+                                echo '          <span class="text-muted d-block">' . $item->variedad . '</span>';
                                 echo '      </div>';
                                 echo '      <div class="ms-3">';
                                 echo '          <form action="../../scripts/actualizar_carrito.php" method="POST" style="display: inline;">';

@@ -1183,7 +1183,7 @@ where r.estatus = 'Activa';
     
 -- Vista del carrito
 create view view_carrito as
-select c.id_cliente as cliente,bc.id_bolsa as id_dbc,c.id_carrito as id_carrito,bc.img_url,bc.nombre as producto, dbc.medida,bc.proceso, dbc.precio, c.cantidad, c.monto as subtotal 
+select c.id_cliente as cliente,bc.id_bolsa as id_dbc,c.id_carrito as id_carrito,bc.img_url,bc.nombre as producto,bc.variedad,bc.sabor, dbc.medida,bc.proceso, dbc.precio, c.cantidad, c.monto as subtotal 
 from carrito c
 join detalle_bc dbc on dbc.id_dbc = c.id_dbc
 join bolsas_cafe bc on bc.id_bolsa = dbc.id_bolsa;
