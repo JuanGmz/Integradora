@@ -124,7 +124,7 @@
                     ?>
                     <div class="row p-3 mb-3 bg-body rounded shadow-lg d-lg-flex justify-content-center align-items-center">
                         <div class="col-8">
-                            <p><?= $producto->nombre ?> (<?= $producto->proceso ?>)</p>
+                            <p>Producto: <?= $producto->nombre ?> (<?= $producto->proceso ?>)</p>
                             <p>Cantidad: <?= $producto->cantidad ?></p>
                             <p>Medida: <?= $producto->medida ?></p>
                             <p>Costo: $<?= $producto->monto ?></p>
@@ -164,11 +164,11 @@
                                 ?>
                             </div>
                             <div class="row mb-0">
-                                <div class="col-10">
-                                    <p>Fecha del pedido: <?= $pedido[0]->fecha_hora_pedido ?></p>
+                                <div class="col-9">
+                                    <p>Fecha Pedido: <?= $pedido[0]->fecha_hora_pedido ?></p>
                                 </div>
-                                <div class="col-2 mb-0">
-                                    <p>#<?= $pedido[0]->folio ?></p>
+                                <div class="col-3 mb-0">
+                                    <p>Folio <?= $pedido[0]->folio ?></p>
                                 </div>
                             </div>
                         </div>
@@ -247,13 +247,13 @@
                                 <p>Estado: <?= $pedido[0]->estado ?></p>
                             </div>
                             <div class="col-12">
-                                <p>Colonia: <?= $pedido[0]->codigo_postal ?></p>
+                                <p>Colonia: <?= $pedido[0]->colonia ?></p>
                             </div>
                             <div class="col-12">
-                                <p>C.P: <?= $pedido[0]->colonia ?></p>
+                                <p>C.P: <?= $pedido[0]->codigo_postal ?></p>
                             </div>
                             <div class="col-12">
-                                <p>Pais: <?= $pedido[0]->calle ?></p>
+                                <p>Calle: <?= $pedido[0]->calle ?></p>
                             </div>
                         </div>
                     </div>

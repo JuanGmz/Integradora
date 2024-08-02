@@ -205,7 +205,7 @@
                                                 </form>
                                                 <form action="detallePedido.php" method="post" enctype="multipart/form-data" class="m-1">
                                                     <input type="hidden" name="id_pedido" value="<?= $pedido->folio ?>"/>
-                                                    <button type="submit" class="btn btn-primary m-2 mt-0 mb-0 w-100" name="verDetalles">
+                                                    <button type="submit" class="btn btn-cafe m-2 mt-0 mb-0 w-100" name="verDetalles">
                                                         Ver Detalles
                                                     </button>
                                                 </form>
