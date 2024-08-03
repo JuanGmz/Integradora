@@ -669,7 +669,7 @@ if (isset($_POST['btnactualizar'])) {
                                                                             <button type='button' class='btn btn-secondary mt-3' data-bs-dismiss='modal'>Cancelar</button>
                                                                             ";
                                             ?>
-                                            <button type='submit' class='btn btn-primary mt-3' name='btnactualizar' <?php echo $disabled; ?>>GuardarCambios</button>
+                                            <button type='submit' class='btn btn-primary mt-3' name='btnactualizar' <?php echo $disabled; ?>>Guardar Cambios</button>
                                         </div>
                                     </div>
                                     </form>

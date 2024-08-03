@@ -129,7 +129,7 @@
                 </div>
                 <div class="col-lg-6 p-3 d-flex justify-content-center">
                     <div class="cardss">
-                        <img src="../img/cafes/lugar1.webp" alt="">
+                        <img src="../img/cafes/cafe18.webp" alt="">
                         <div class="card-content">
                             <h2>
                                 Bienvenidos a SifoníaCafé&Cultura, Nuestro Canal de Difusión
