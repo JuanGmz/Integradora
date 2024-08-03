@@ -825,7 +825,7 @@ a:hover {
   height: 46rem;
   border-radius: 10px;
   position: relative;
-  color: var(--color6);
+  color: var(--color2);
   box-shadow: 0 10px 30px 5px rgba(0, 0, 0, 0.2);
   /* Se puede eliminar el color de fondo si no es necesario */
 }
@@ -855,6 +855,7 @@ a:hover {
   opacity: 0;
   max-width: 80%;
   transition: opacity .3s ease-out;
+
 }
 
 .cardss p {
@@ -883,6 +884,10 @@ a:hover {
 }
 
 /* Nuevo CSS para el efecto de superposición más oscuro */
+.cardss {
+  position: relative;
+  overflow: hidden;
+}
 .cardss::before {
   content: '';
   position: absolute;
@@ -898,7 +903,9 @@ a:hover {
 .cardss:hover::before {
   opacity: 1;
 }
-
+.cardss:hover img {
+  filter: blur(10px);
+}
 .material-symbols-outlined {
   vertical-align: middle;
 }
