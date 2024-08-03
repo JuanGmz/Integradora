@@ -586,9 +586,16 @@ if ($_POST) {
                                     <!-- Fecha Inicio -->
                                     <div class="col-12 col-lg-4 mb-3">
                                         <label for="fechaInicio" class="form-label">Fecha Inicio</label>
-                                        <input class="form-control" type="date" name="fechaInicio" id="fechaInicio"
-                                            required <?php if (isset($_POST['btnBuscar'])) { ?>
-                                                value="<?= $_POST['fechaInicio'] ?>" <?php } ?>>
+                                        <div class="input-group">
+                                            <input class="form-control" type="date" name="fechaInicio" id="fechaInicio"
+                                                required <?php if (isset($_POST['btnBuscar'])) { ?>
+                                                    value="<?= $_POST['fechaInicio'] ?>" <?php } ?>>
+                                            <button type="button" class="btn btn-info" data-bs-toggle="popover"
+                                                title='Información'
+                                                data-bs-content="Una vez que se establezca la fecha, no podrá ser cambiada. Asegúrese de que la fecha sea correcta antes de enviar.">
+                                                <i class="fa-solid fa-info"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                     <!-- Fecha Expiración -->
                                     <div class="col-12 col-lg-4 mb-3">

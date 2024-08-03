@@ -906,7 +906,7 @@ a:hover {
 @media (max-width: 767.98px) {
 
   .cardss:hover h2 {
-    inset: auto auto 323px 20px; /* Ajuste para pantallas pequeñas */
+    inset: auto auto 50% 20px; /* Ajuste para pantallas pequeñas */
   }
 }
 /* Responsivo para pantallas medianas */

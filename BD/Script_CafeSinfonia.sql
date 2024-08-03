@@ -1094,7 +1094,7 @@ in p_telefono char(10)
 begin 
 INSERT INTO domicilios(id_cliente, referencia, estado, ciudad, codigo_postal, colonia, calle, telefono)
 VALUES
-(p_id_cliente,p_referencia, p_estado, p_estado, p_codigo_postal, p_colonia, p_calle, p_telefono);
+(p_id_cliente,p_referencia, p_estado, p_ciudad, p_codigo_postal, p_colonia, p_calle, p_telefono);
 end //
 delimiter ;
 
@@ -1228,7 +1228,12 @@ JOIN
 	personas AS p ON cli.id_persona = p.id_persona
 ;
     
-INSERT INTO metodos_pago (metodo_pago) VALUES ('Transferencia');
+INSERT INTO metodos_pago (metodo_pago) VALUES 
+('Transferencia Bancaria'),
+('Depósito Bancario'),
+('PayPal'),
+('Pago en establecimiento'),
+('Otro');
 
 INSERT INTO publicaciones (titulo, descripcion, img_url, tipo)
 VALUES
@@ -1621,19 +1626,30 @@ BEGIN
     SELECT distinct p.id_pedido,
            CONCAT(pe.nombres, ' ', pe.apellido_paterno, ' ', pe.apellido_materno) AS cliente,
            CONCAT(dom.calle, ' ', dom.colonia, ' ', dom.ciudad, ' ', dom.estado, ' ', dom.codigo_postal) AS domicilio,
+           dom.calle,
+           dom.colonia,
+           dom.referencia,
+           dom.ciudad,
+           dom.estado,
+           dom.codigo_postal,
            dom.telefono AS telefono, 
            p.estatus AS estatus,
            pe.usuario AS usuario,
            mp.metodo_pago AS metodo_pago,
            bc.nombre AS bolsa,
+           bc.proceso,
            dbc.medida AS medida,
+           dbc.precio,
            dp.cantidad AS cantidad,
            p.fecha_hora_pedido,
+           bc.sabor,
+           bc.variedad,
            p.monto_total,
            p.envio,
            p.costo_envio,
            p.guia_de_envio,
-           p.documento_url
+           p.documento_url,
+           dp.monto as subtotal
     FROM pedidos AS p
     JOIN clientes ON p.id_cliente = clientes.id_cliente
     JOIN personas AS pe ON clientes.id_persona = pe.id_persona
