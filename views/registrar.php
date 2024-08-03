@@ -1,28 +1,54 @@
 <?php
-$alerta = "";
-if ($_POST) {
-    include '../class/database.php';
-    $db = new Database();
-    $db->conectarDB();
+include '../class/database.php';
+include '../scripts/funciones/funciones.php';
 
-    extract($_POST);
+$db = new Database();
+$db->conectarDB();
 
-    $usuarioExistente = "select count(*) as count from personas where usuario = '$usuario'";
-    $resultado = $db->select($usuarioExistente);
+extract($_POST);
+
+$usuarioExistente = "select count(*) as count from personas where usuario = '$usuario'";
+$resultado = $db->select($usuarioExistente);
+
+if (isset($_POST['registrar'])) {
     if (!$resultado[0]->count > 0) {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $query = "call SP_Registrar_usuariosClientes('$nombres','$aPaterno','$aMaterno','$usuario','$email','$hashedPassword','$telefono')";
-        $db->execute($query);
-        $alerta = "<div class='alert alert-success' role='alert'>¡Usuario registrado!</div>";
-        header('refresh:3;url=./login.php');
+
+        $telefonoExistente = "SELECT telefono FROM personas WHERE telefono = '$telefono'";
+        $telefonoExists = $db->select($telefonoExistente);
+
+        $correoExistente = "SELECT correo FROM personas WHERE correo = '$email'";
+        $emailExists = $db->select($correoExistente);
+
+        // Validar si el teléfono ya existe
+        if (!empty($telefonoExists) && $telefono === $telefonoExists[0]->telefono) {
+            showAlert("Este número de teléfono está en uso!", "error");
+        } 
+        // Validar si el correo electrónico ya existe
+        else if (!empty($emailExists) && $email === $emailExists[0]->correo) {
+            showAlert("Este correo ya está registrado!", "error");
+        } 
+        // Validar si las contraseñas coinciden
+        else if ($password !== $password2) {
+            showAlert("Las contraseñas no coinciden", "error");
+        } 
+        // Proceder con el registro si todas las validaciones pasan
+        else {
+            $query = "call SP_Registrar_usuariosClientes('$nombres','$aPaterno','$aMaterno','$usuario','$email','$hashedPassword','$telefono')";
+            $db->execute($query);
+            showAlert("¡Cuenta creada con éxito!", "success");
+            header('refresh:2;url=./login.php');
+        }
     } else {
-        $alerta = "<div class='alert alert-danger' role='alert'>¡El usuario ya existe!</div>";
+        showAlert("El usuario ya existe", "error");
     }
-    $db->desconectarDB();
 }
+
+$db->desconectarDB();
+
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -88,24 +114,21 @@ if ($_POST) {
 
             <!-- Formulario -->
             <div class="col-lg-6 col-md-6 col-md-6 p-5 d-flex justify-content-center">
-                <form action="#" method="post" class="p-0 p-lg-5" onsubmit="return validarPassword()">
+                <form action="#" method="post" class="p-0 p-lg-5">
                     <legend class="fw-bold fs-1">Crear Cuenta</legend>
                     <div class="row p-2">
                         <div class="col-12 mb-2">
                             <label for="nombres" class="form-label fs-5">Nombres</label>
-                            <input type="text" class="form-control form-control-bb" id="nombres" name="nombres"
-                                required>
+                            <input type="text" class="form-control form-control-bb" id="nombres" name="nombres" required maxlength="50">
                         </div>
-                        <div class="row m-0 p-0">
-                            <div class="col-6 mb-2">
+                        <div class="row p-0 m-0">
+                            <div class="col-12 mb-2">
                                 <label for="aPaterno" class="form-label fs-5">Apellido Paterno</label>
-                                <input type="text" class="form-control form-control-bb" id="aPaterno" name="aPaterno"
-                                    required>
+                                <input type="text" class="form-control form-control-bb" id="aPaterno" name="aPaterno" required maxlength="50">
                             </div>
-                            <div class="col-6 mb-2">
+                            <div class="col-12 mb-2">
                                 <label for="aMaterno" class="form-label fs-5">Apellido Materno</label>
-                                <input type="text" class="form-control form-control-bb" id="aMaterno" name="aMaterno"
-                                    required>
+                                <input type="text" class="form-control form-control-bb" id="aMaterno" name="aMaterno" required maxlength="50">
                             </div>
                         </div>
                         <div class="col-12 mb-2">
@@ -114,24 +137,21 @@ if ($_POST) {
                         </div>
                         <div class="col-12 mb-3">
                             <label for="email" class="form-label fs-5">Telefono</label>
-                            <input type="te" class="form-control form-control-bb" id="telefono" name="telefono"
-                                pattern="[0-9]{10}" required>
+                            <input type="te" class="form-control form-control-bb" id="telefono" name="telefono" pattern="[0-9]{10}" required maxlength="10">
                         </div>
                         <hr>
                         <div class="col-12 mb-2">
                             <label for="nombres" class="form-label fs-5">Usuario</label>
-                            <input type="text" class="form-control form-control-bb" id="usuario" name="usuario"
-                                required>
+                            <input type="text" class="form-control form-control-bb" id="usuario" name="usuario" required maxlength="25">
                         </div>
 
                         <div class="col-12 mb-2">
                             <label for="password" class="form-label fs-5">Crear Contraseña</label>
-                            <input type="password" class="form-control form-control-bb" id="password" name="password"
-                                required>
+                            <input type="password" class="form-control form-control-bb" id="password" name="password" required maxlength="25">
                         </div>
                         <div class="col-12 mb-3">
                             <label for="password2" class="form-label fs-5">Repetir Contraseña</label>
-                            <input type="password" class="form-control form-control-bb" id="password2" name="password2" " required>
+                            <input type="password" class="form-control form-control-bb" id="password2" name="password2" required maxlength="25">
                         </div>
                         <div class=" col-12 mb-3 ">
                             <a href=" ./login.php">
@@ -139,12 +159,9 @@ if ($_POST) {
                             </a>
 
                         </div>
-                        <?php
-                        echo $alerta;
-                        ?>
                         <div class="col-12 mb-2 text-end d-flex justify-content-cente text-center">
                             <button type="submit"
-                                class="btn btn-cafe w-100 text-light fw-bold fs-5 m-5">Registrarse</button>
+                                class="btn btn-cafe w-100 text-light fw-bold fs-5" name="registrar">Registrarse</button>
                         </div>
                     </div>
                 </form>
@@ -155,17 +172,9 @@ if ($_POST) {
             </div>
         </div>
     </div>
-    <script>
-        function validarPassword() {
-            var password = document.getElementById("password").value;
-            var password2 = document.getElementById("password2").value;
-            if (password != password2) {
-                alert("Las contraseñas no coinciden");
-                return false;
-            }
-            return true;
-        }
-    </script>
+    <div class="alert floating-alert" id="floatingAlert">
+            <span id="alertMessage">Mensaje de la alerta.</span>
+        </div>
     
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/45ef8dbe96.js" crossorigin="anonymous"></script>
@@ -174,6 +183,7 @@ if ($_POST) {
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="../js/alertas.js"></script>
 </body>
 
 </html>

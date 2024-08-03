@@ -136,7 +136,7 @@
                                 La primera barra y expendio de café de especialidad en la laguna.
                                 Café 100% Mexicano seleccionado por nuestro maestro catador y tostador. ☕️♥️
                             </p>
-                            <a href="views/conozenos.php" class="btn btn-cafe ">Ver mas</a>
+                            <a href="views/conócenos.php" class="btn btn-cafe ">Ver mas</a>
                         </div>
                     </div>
                 </div>

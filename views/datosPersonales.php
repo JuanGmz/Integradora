@@ -122,9 +122,9 @@
     </nav>
     <!-- NavBar End -->
 
-    <div class="container rounded-3 mt-4 mt-lg-0 mb-4">
+    <div class="container rounded-3 mt-lg-4 mt-lg-0 mb-lg-4">
         <div class="row d-lg-flex flex-column align-items-center">
-            <div class="col-12 col-lg-6 p-5 rounded shadow-lg" style="background: var(--color5);">
+            <div class="col-12 col-lg-6 p-5 rounded shadow-lg bg-body">
                 <!-- Breadcrumbs -->
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mt-4">
@@ -157,9 +157,9 @@
                         <h3>Teléfono</h3>
                         <h5><?php echo $datos[0]->telefono; ?></h5>
                     </div>
-                    <div class="col-4 d-flex justify-content-center align-items-center flex-column">
+                    <div class="col-4 d-flex align-items-center justify-content-start">
                         <!-- Botón para abrir el modal de editar el telefono -->
-                        <button data-bs-toggle="modal" data-bs-target="#modalEditarTel" class="btn btn-primary">Editar</button>
+                        <button data-bs-toggle="modal" data-bs-target="#modalEditarTel" class="btn btn-cafe">Editar</button>
                         <!-- Modal para editar el telefono -->
                         <div class="modal fade" id="modalEditarTel" tabindex="-1" aria-labelledby="modalEditarTelLabel" aria-hidden="true">
                             <div class="modal-dialog">
@@ -168,7 +168,7 @@
                                         <h5 class="modal-title" id="modalEditarTelLabel">Editar Número de Télefono</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modal-body text-start">
                                         <form method="post" enctype="multipart/form-data">
                                             <input type="hidden" name="id" value="<?php echo $datos[0]->id_persona; ?>">
                                             <div class="mb-3">
@@ -191,9 +191,9 @@
                         <h3>Contraseña</h3>
                         <h5>*************</h5>
                     </div>
-                    <div class="col-4 d-flex justify-content-center align-items-center flex-column">
+                    <div class="col-4 d-flex justify-content-start align-items-center">
                         <!-- Botón para abrir el modal de editar el password -->
-                        <button data-bs-toggle="modal" data-bs-target="#modalEditarPass" class="btn btn-primary">Cambiar</button>
+                        <button data-bs-toggle="modal" data-bs-target="#modalEditarPass" class="btn btn-cafe">Editar</button>
                         <!-- Modal para editar el password -->
                         <div class="modal fade" id="modalEditarPass" tabindex="-1" aria-labelledby="editarPass" aria-hidden="true">
                             <div class="modal-dialog">
@@ -202,7 +202,7 @@
                                         <h5 class="modal-title" id="editarPass">Cambiar contraseña</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modal-body text-start">
                                         <form method="post" enctype="multipart/form-data">
                                             <input type="hidden" name="id" value="<?php echo $datos[0]->id_persona; ?>">
                                             <div class="mb-3">
