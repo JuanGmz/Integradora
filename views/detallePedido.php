@@ -179,15 +179,15 @@
                             <div class="col-12">
                                 <p>Productos: $<?= $pedido[0]->monto_total ?></p>
                                 <?php
-                                    if ($pedido[0]->costo_envio > 0) {
-                                        ?>
-                                        <p>Envío: $<?= $pedido[0]->costo_envio ?></p>
-                                        <?php   
-                                    } else {
-                                        ?>
-                                        <p>Envío: Aún no se registra el costo de envío</p>
-                                        <?php
-                                    }
+                                if ($pedido[0]->costo_envio > 0) {
+                                    ?>
+                                    <p>Envío: $<?= $pedido[0]->costo_envio ?></p>
+                                    <?php
+                                } else {
+                                    ?>
+                                    <p>Envío: Aún no se registra el costo de envío</p>
+                                    <?php
+                                }
                                 ?>
                                 <?php
                                 $total = $pedido[0]->monto_total + $pedido[0]->costo_envio;
@@ -204,28 +204,29 @@
                         <div class="row mt-3">
                             <div class="col-12">
                                 <?php
-                                    if ($pedido[0]->guia_de_envio === null) {
-                                        ?>
-                                        <p>Guía de Envío: Aún no se registra la guía de envío</p>
-                                        <?php
-                                    } else {
-                                        ?>
-                                        <p>Guía de Envío: <?= $pedido[0]->guia_de_envio ?></p>
-                                        <?php
-                                    }
+                                if ($pedido[0]->guia_de_envio === null) {
+                                    ?>
+                                    <p>Guía de Envío: Aún no se registra la guía de envío</p>
+                                    <?php
+                                } else {
+                                    ?>
+                                    <p>Guía de Envío: <?= $pedido[0]->guia_de_envio ?></p>
+                                    <?php
+                                }
                                 ?>
                             </div>
                             <div class="col-12">
                                 <?php
-                                    if ($pedido[0]->documento_url === null) {
-                                        ?>
-                                        <p>Archivo de Envío: Aún no se registra el archivo de envío</p>
-                                        <?php
-                                    } else {
-                                        ?>
-                                        <p>Archivo de Envío: <?= $pedido[0]->documento_url ?></p>
-                                        <?php
-                                    }
+                                if ($pedido[0]->documento_url === null) {
+                                    ?>
+                                    <p>Archivo de Envío: Aún no se registra el archivo de envío</p>
+                                    <?php
+                                } else {
+                                    ?>
+                                    <p>Archivo de Envío: <a href='../pdf/<?php echo $pedido[0]->documento_url; ?>'
+                                            download='<?php echo $pedido[0]->documento_url; ?>'>Descargar PDF</a></p>
+                                    <?php
+                                }
                                 ?>
                             </div>
                         </div>
