@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conozcanos</title>
+    <title>conócenos</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="shortcut icon" href="../img/Sinfonía-Café-y-Cultura.webp">
@@ -17,6 +17,7 @@
             text-align: center;
             padding: 100px 0;
         }
+
         .header-section2 {
             position: relative;
             background: url('../img/publicaciones/sinfo.webp') no-repeat center center;
@@ -41,7 +42,7 @@
         }
 
         .header-section .container,
-        .header-section2 .container{
+        .header-section2 .container {
             position: relative;
             z-index: 2;
         }
@@ -80,6 +81,10 @@
 </head>
 
 <body>
+    <!-- Botón de WhatsApp -->
+    <button id="whatsappButton" class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3" type="button" onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
+        <i class="fa-brands fa-whatsapp fa-2x"></i>
+    </button>
     <!-- NavBar -->
     <nav class="navbar navbar-expand-lg shadow-lg ">
         <div class="container-fluid">
@@ -144,9 +149,9 @@
     <!-- NavBar End -->
 
 
-    <header class="header-section justify-content-center d-flex">
-        <div class="container col-6  text-center m-5 ">
-            <h1>El Legado del Buen Café</h1>
+    <header class="header-section justify-content-center d-flex text-sm-center">
+        <div class="container col-lg-6 col-12 text-center m-5 ">
+            <h1 class="fw-bold p-1 text-small">El Legado del Buen Café</h1>
             <p class="p-3 fs-4">Nuestro legado del buen café comenzó en 2014 en la ciudad de Torreon, en donde se sirvieron nuestras primeras tazas de Café La Flor de Córdoba®. Nos hemos especializado en la selección de los mejores granos verdes mexicanos para llevarlos a un perfecto proceso de tueste para entregar a nuestros clientes el mejor café de altura con nuestro inconfundible sabor.</p>
         </div>
     </header>
@@ -155,7 +160,7 @@
         <div class="container-fluid container">
             <div class="row p-3">
                 <div class="col-md-6 p-3">
-                    <h1 class="fw-bold">Nuestro Café</h1>
+                    <h1 class="fw-bold text-sm-center">Nuestro Café</h1>
                     <ul class="p-3 m-4">
                         <li class="p-1 fs-4">Café 100% de altura.</li>
                         <li class="p-1 fs-4">Grano arábico orgullosamente mexicano proveniente de las altas regiones de Veracruz y Chiapas.</li>
@@ -164,12 +169,12 @@
                     </ul>
                 </div>
                 <div class="col-md-6">
-                    <img src="../img/charla.jpg" alt="Café">
+                    <img src="../img/eventos/charla.jpg" alt="Café">
                 </div>
             </div>
         </div>
     </header>
-    <header class="content-section header-section2">
+    <header class="content-section header-section2 text-sm-center">
         <div class="container-fluid container">
             <div class="row p-1">
                 <div class="col-md-6">
@@ -186,13 +191,13 @@
             </div>
         </div>
     </header>
-    <section class="content-section">
+    <section class="content-section text-sm-center">
         <div class="container-fluid container">
             <div class="row p-3">
                 <div class="col-md-6 p-3">
                     <h1 class="fw-bold p-3">Nuestros expendios de café</h1>
                     <p class="p-3 fs-4">En todas nuestras cafeterías podrás encontrar los expendios de café, donde podrás escoger el grano de café de tu preferencia o hasta crear tus propias mezclas para así solicitar el molido ideal para tu método de extracción favorito.
-                    Llevarás hasta tu casa un café recién molido y fresco.</p>
+                        Llevarás hasta tu casa un café recién molido y fresco.</p>
                 </div>
                 <div class="col-md-6">
                     <img src="../img/atiende.webp" alt="Café">

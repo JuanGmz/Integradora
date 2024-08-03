@@ -426,19 +426,19 @@ if ($rol[0]->rol !== 'administrador') {
                                                                 <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                                                             </div>
                                                             <div class='modal-body text-start'>";
-                                $queryComprobante = "SELECT * FROM vw_comprobante_reserva WHERE id_cliente = $reserva->folio";
+                                $queryComprobante = "SELECT * FROM vw_comprobante_reserva WHERE id_reserva = $reserva->folio";
                                 $comprobantes = $db->select($queryComprobante);
                                 if (empty($comprobantes)) {
-                                    echo "<div class='alert alert-danger mb-4' role='alert'>Aún no se envía el comprobante</div>";
+                                    echo "<div class='badge bg-danger mb-3'><h5 class='text-center m-0 p-0'>Aún no se envía el comprobante</h5></div>";
                                 } else {
                                     foreach ($comprobantes as $comprobante) {
                                         echo "<h4 class='fw-bold'>Folio de la reserva: <span class='fw-normal fs-5'>{$reserva->folio}</span></h5>";
-                                        echo "<h4 class='fw-bold'>Referencia: <span class='fw-normal fs-5'>{$comprobante->referencia}</span></h5>";
+                                        echo "<h4 class='fw-bold'>Concepto de pago: <span class='fw-normal fs-5'>{$comprobante->concepto}</span></h5>";
                                         echo "<h4 class='fw-bold'>Folio de operación: <span class='fw-normal fs-5'>{$comprobante->folio_operacion}</span></h5>";
                                         echo "<h4 class='fw-bold'>Fecha de la reserva: <span class='fw-normal fs-5'>{$comprobante->fecha}</span></h5>";
                                         echo "<h4 class='fw-bold'>Cantidad de boletos: <span class='fw-normal fs-5'>{$reserva->boletos}</span></h5>";
-                                        echo "<h4 class='fw-bold'>Precio por boleto: <span class='fw-normal fs-5'>{$reserva->precio_boleto}</span></h5>";
-                                        echo "<h4 class='fw-bold'>Monto total: <span class='fw-normal fs-5'>$$comprobante->monto</span></h5>";
+                                        echo "<h4 class='fw-bold'>Precio por boleto: <span class='fw-normal fs-5'>$$reserva->precio_boleto</span></h5>";
+                                        echo "<h4 class='fw-bold'>Monto de transferencia: <span class='fw-normal fs-5'>$$comprobante->monto</span></h5>";
                                         echo "<h4 class='fw-bold'>Banco de origen: <span class='fw-normal fs-5'>{$comprobante->banco_origen}</span></h5>";
                                         echo "<img src='../img/comprobantes/$comprobante->imagen_comprobante' class='img-fluid'>";
                                     }

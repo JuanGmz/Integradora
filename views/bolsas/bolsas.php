@@ -38,6 +38,10 @@ if ($result) {
     </head>
 
     <body class="bagr-cafe3">
+        <!-- Botón de WhatsApp -->
+        <button id="whatsappButton" class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3" type="button" onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
+            <i class="fa-brands fa-whatsapp fa-2x"></i>
+        </button>
         <!-- NavBar -->
         <nav class="navbar navbar-expand-lg shadow-lg ">
             <div class="container-fluid">
@@ -261,10 +265,51 @@ if ($result) {
 
                 </div>
             </div>
+            <?php
+            // Conectar a la base de datos
+            $conexion->conectarDB();
 
+            // Inicializar la variable para la cantidad de productos
+            $total_productos = 0;
+
+            if (isset($_SESSION["usuario"])) {
+                // Obtener ID del cliente
+                $cliente_query = "SELECT 
+                        c.id_cliente 
+                      FROM 
+                        clientes AS c 
+                      JOIN
+                        personas AS p ON c.id_persona = p.id_persona 
+                      WHERE p.usuario = '" . $_SESSION["usuario"] . "'";
+                $cliente = $conexion->select($cliente_query);
+
+                if ($cliente) {
+                    // Obtener la cantidad total de productos en el carrito
+                    $query = "SELECT sum(cantidad) AS total_productos FROM view_carrito WHERE cliente = '" . $cliente[0]->id_cliente . "'";
+                    $consulta = $conexion->select($query);
+
+                    if ($consulta) {
+                        $total_productos = $consulta[0]->total_productos;
+                        if ($total_productos == null) {
+                            $total_productos = 0;
+                        }
+                    }else{
+                        $total_productos = 0;
+                    }
+                }
+            }else{
+                $total_productos = 0;
+            }
+
+            // Desconectar de la base de datos
+            $conexion->desconectarDB();
+            ?>
             <!-- Botón de Carrito -->
             <button id="floatingButton" class="btn btn-cafe position-fixed bottom-0 end-0 m-3 d-flex p-3 z-3 text-light fw-bold" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
                 <i class="fa-solid fa-cart-shopping fa-2x"></i>
+                <span id="cartCount" class="position-absolute top-0 start-0 translate-middle badge rounded-circle d-flex align-items-center justify-content-center">
+                    <?php echo $total_productos; ?>
+                </span>
             </button>
 
             <!-- Offcanvas del Carrito -->
@@ -315,7 +360,7 @@ if ($result) {
                             echo '          <span>$' . $item->precio . '</span>';
                             echo '          <span class="text-muted d-block">' . $item->proceso . '</span>';
                             echo '      </div>';
-                            echo '      <div class="ms-3 ">';
+                            echo '      <div class="ms-md-3 ">';
                             echo '          <form action="../../scripts/actualizar_carrito.php" method="POST" style="display: inline;">';
                             echo '              <div class="d-none">';
                             echo '              <input type="hidden" name="id_cliente" value="' . $cliente[0]->id_cliente  . '">';
@@ -339,12 +384,16 @@ if ($result) {
                             echo '              </div>';
                             echo '              <button type="submit" class="btn fw-bold btn-dark fs-5 p-0" style="height: 35px; width: 35px">+</button>';
                             echo '          </form>';
+                            echo '          <div class="text-center mt-2 d-md-none">';  // Mostrar en resoluciones medianas hacia abajo
+                            echo '             <h6 class="mb-0 fw-bold">subtotal</h6>';
+                            echo '             <p class="mb-0 ">$' . $item->subtotal . '</p>';
+                            echo '          </div>';
                             echo '      </div>';
-                            echo '    </div>';
-                            echo '    <div class="text-center mt-2">';
-                            echo '        <h6 class="mb-0 fw-bold">Subtotal</h6>';
-                            echo '        <span class="mb-0">$' . $item->subtotal . '</>';
-                            echo '    </div>';
+                            echo '  </div>';
+                            echo '          <div class="ms-0 m-0 text-centerd-none d-none d-lg-block">';  // Mostrar solo en resoluciones grandes
+                            echo '             <h6 class="mb-0 fw-bold">subtotal</h6>';
+                            echo '             <p class="mb-0 ">$' . $item->subtotal . '</p>';
+                            echo '          </div>';
                             echo '   <form action="../../scripts/eliminar_producto.php" method="POST" style="display:inline;">
                                 <div class="d-none">
                                     <input type="hidden" name="item_id" value="' . $item->id_dbc . '">

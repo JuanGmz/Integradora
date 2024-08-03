@@ -8,21 +8,26 @@
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="shortcut icon" href="../../img/Sinfonía-Café-y-Cultura.webp">
     <?php
-        session_start();
-        require_once '../../class/database.php';
-        include_once ("../../scripts/funciones/funciones.php");
-        $db = new database();
-        $db->conectarDB();
+    session_start();
+    require_once '../../class/database.php';
+    include_once("../../scripts/funciones/funciones.php");
+    $db = new database();
+    $db->conectarDB();
 
-        if (isset($_SESSION['usuario'])) {
-            $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE p.usuario = '$_SESSION[usuario]'";
-            $rol = $db->select($rolUsuario);
-        }
+    if (isset($_SESSION['usuario'])) {
+        $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE p.usuario = '$_SESSION[usuario]'";
+        $rol = $db->select($rolUsuario);
+    }
     ?>
 </head>
-<body>
 
+<body>
+    <!-- Botón de WhatsApp -->
+    <button id="whatsappButton" class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3" type="button" onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
+        <i class="fa-brands fa-whatsapp fa-2x"></i>
+    </button>
     <div class="content">
+
         <!-- NavBar -->
         <nav class="navbar navbar-expand-lg shadow-lg">
             <div class="container-fluid">

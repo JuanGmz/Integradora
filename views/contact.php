@@ -9,21 +9,25 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="shortcut icon" href="../img/Sinfonía-Café-y-Cultura.webp">
     <?php
-        include_once ("../class/database.php");
-        $db = new Database();
-        $db->conectarDB();
-        session_start();
-        if (isset($_SESSION["usuario"])) {
-            $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE p.usuario = '$_SESSION[usuario]'";
-            $rol = $db->select($rolUsuario);
-        } else {
-            $rol = null;
-        }
+    include_once("../class/database.php");
+    $db = new Database();
+    $db->conectarDB();
+    session_start();
+    if (isset($_SESSION["usuario"])) {
+        $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE p.usuario = '$_SESSION[usuario]'";
+        $rol = $db->select($rolUsuario);
+    } else {
+        $rol = null;
+    }
     ?>
 </head>
 
 <body>
     <div class="content">
+        <!-- Botón de WhatsApp -->
+        <button id="whatsappButton" class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3" type="button" onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
+            <i class="fa-brands fa-whatsapp fa-2x"></i>
+        </button>
         <!-- NavBar -->
         <nav class="navbar navbar-expand-lg shadow-lg mb-lg-5">
             <div class="container-fluid">
@@ -80,10 +84,10 @@
                 <?php
                 }
                 ?>
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
         </nav>
         <!-- NavBar End -->
         <div class="container mb-5">
@@ -143,7 +147,7 @@
                                         <button class="accordion-button collapsed btn-categorias" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="border-radius: 0;">
                                             Horario
                                         </button>
-                                    </h2> 
+                                    </h2>
 
                                     <div id="collapseOne" class="accordion-collapse collapse bagr-cafe1 container" data-bs-parent="#accordionExample">
                                         <div class="card-body">

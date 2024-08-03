@@ -1183,7 +1183,7 @@ where r.estatus = 'Activa';
     
 -- Vista del carrito
 create view view_carrito as
-select c.id_cliente as cliente,bc.id_bolsa as id_dbc,c.id_carrito as id_carrito,bc.img_url,bc.nombre as producto, dbc.medida,bc.proceso, dbc.precio, c.cantidad, c.monto as subtotal 
+select c.id_cliente as cliente,bc.id_bolsa as id_dbc,c.id_carrito as id_carrito,bc.img_url,bc.nombre as producto,bc.variedad,bc.sabor, dbc.medida,bc.proceso, dbc.precio, c.cantidad, c.monto as subtotal 
 from carrito c
 join detalle_bc dbc on dbc.id_dbc = c.id_dbc
 join bolsas_cafe bc on bc.id_bolsa = dbc.id_bolsa;
@@ -1212,6 +1212,7 @@ CREATE VIEW vw_comprobante_reserva AS
 SELECT 
 	c.concepto,
     c.folio_operacion,
+    er.id_reserva,
     c.fecha,
     c.monto,
     c.banco_origen,
@@ -1775,3 +1776,50 @@ BEGIN
 END //
 
 DELIMITER ;
+
+DROP VIEW IF EXISTS vw_reservas;
+CREATE VIEW vw_reservas AS
+SELECT
+	e.nombre AS evento,
+	e.fecha_evento,
+	er.id_reserva AS folio,
+    er.estatus,
+    er.fecha_hora_reserva,
+    p.usuario
+FROM
+	eventos e 
+JOIN
+	eventos_reservas er ON e.id_evento = er.id_evento
+JOIN
+	clientes cli ON er.id_cliente = cli.id_cliente
+JOIN
+	personas p ON cli.id_persona = p.id_persona;
+    
+DROP VIEW IF EXISTS vw_detalle_reservas;
+CREATE VIEW vw_detalle_reservas AS
+SELECT
+	e.img_url,
+    e.descripcion,
+	e.fecha_evento,
+    er.id_reserva AS folio,
+	er.c_boletos,
+    er.estatus,
+    er.monto_total,
+    ul.nombre AS lugar,
+    ul.ciudad,
+    ul.estado,
+    ul.colonia,
+    ul.codigo_postal,
+    ul.calle,
+    p.usuario
+FROM
+	eventos e 
+JOIN
+	ubicacion_lugares ul ON e.id_lugar = ul.id_lugar
+JOIN
+	eventos_reservas er ON e.id_evento = er.id_evento
+JOIN
+	clientes cli ON er.id_cliente = cli.id_cliente
+JOIN
+	personas p ON cli.id_persona = p.id_persona;
+    

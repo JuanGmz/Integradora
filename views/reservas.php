@@ -15,18 +15,23 @@
     $db = new database();
     $db->conectarDB();
 
+    extract($_POST);
+
     if (isset($_SESSION["usuario"])) {
         $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE p.usuario = '$_SESSION[usuario]'";
         $rol = $db->select($rolUsuario);
-        if (isset($_POST['cancelarPedido'])) {
-            $id_pedido = $_POST['id_pedido'];
-            $cancelar = "UPDATE eventos_reservas SET estatus = 'Cancelado' WHERE id_reserva = '$id_reserva'";
-            $db->execute($cancelar);
-            showAlert("El pedido ha sido cancelado con éxito!", "success");
-        }
-        $queryReservas = "SELECT * FROM eventos_reservas where usuario = '$_SESSION[usuario]' ORDER BY fecha_hora_reserva DESC";
+        
+        $queryReservas = "SELECT * FROM vw_reservas WHERE usuario = '$_SESSION[usuario]' ORDER BY fecha_hora_reserva DESC";
         $reservas = $db->select($queryReservas);
 
+        if (isset($_POST['cancelarReserva'])) {
+            $cancelarReserva = "UPDATE eventos_reservas SET estatus = 'Cancelada' WHERE id_reserva = $folio";
+            $db->execute($cancelarReserva);
+            showAlert("La reserva ha sido cancelada con éxito!", "success");
+            header("refresh:2;reservas.php");
+        }
+
+        // SP_comprobante_reserva
     } else {
         header("location: ../index.php");
     }
@@ -34,6 +39,10 @@
 </head>
 
 <body>
+     <!-- Botón de WhatsApp -->
+     <button id="whatsappButton" class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3" type="button" onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
+        <i class="fa-brands fa-whatsapp fa-2x"></i>
+    </button>
 
     <!-- NavBar -->
     <nav class="navbar navbar-expand-lg shadow-lg mb-lg-4">
@@ -108,96 +117,112 @@
             <ol class="breadcrumb mt-4">
                 <li class="breadcrumb-item"><a href="../index.php">Inicio</a></li>
                 <li class="breadcrumb-item" aria-current="page"><a href="perfil.php">Perfil</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Pedidos</li>
+                <li class="breadcrumb-item active" aria-current="page">Reservas</li>
             </ol>
         </nav>
 
-        <h1>Mis Pedidos</h1>
+        <h1>Mis Reservas</h1>
         <hr>
 
         <div class="row">
             <?php
-            if (empty($pedidos)) {
-                echo "<h3>Aún no se ha realizado ningún pedido</h3>";
+            if (empty($reservas)) {
+                echo "<h3>Aún no se ha realizado ninguna reserva</h3>";
             } else {
-                foreach ($pedidos as $pedido) {
-                    ?>
-                    <div class="col-12 col-lg-6 mb-4">
-                        <div class="card shadow">
-                            <div class="card-body">
-                                <div class="row p-3">
-                                    <div class="col-12 d-flex flex-column">
-                                        <h1 class="card-title m-2">Folio de Pedido: <?= $pedido->folio ?></h1>
-                                        <h3 class="card-subtitle m-2 text-muted">Fecha y Hora: <?= $pedido->fecha_hora_pedido ?>
-                                        </h3>
-                                        <h4 class="card-subtitle m-2 text-muted">Estatus: <?= $pedido->estatus ?></h4>
-                                        <h4 class="card-subtitle m-2 mb-3 text-muted">Monto Total: $<?= $pedido->monto_total ?>
-                                        </h4>
-                                        <!-- Button trigger modal -->
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <form method="post" enctype="multipart/form-data">
-                                                    <?php
-                                                    if ($pedido->estatus === "Cancelado" or $pedido->estatus === "Finalizado") {
+                foreach ($reservas as $reserva) {
+            ?>
+                <div class="col-12 mb-4">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <div class="row p-3 d-flex flex-column justify-content-between">
+                                <div class="col-12 d-flex flex-column">
+                                    <div class="card-title d-flex justify-content-between">
+                                        <p class="card-title m-0 p-0">Fecha: <?= $reserva->fecha_hora_reserva ?></p>
+                                        <p class="card-title m-0 p-0">Folio de reserva: <?= $reserva->folio ?></p>
+                                    </div>
+                                    <hr>
+                                    <div class="row d-block d-lg-flex flex-row justify-content-between">
+                                        <div class="col-12 col-lg-10 m-0 ps-1">
+                                            <h4 class="card-subtitle m-2 text-muted">
+                                                <?php 
+                                                    if ($reserva->estatus === "Cancelada") {
                                                         ?>
-                                                        <button disabled type="submit"
-                                                            class="btn btn-secondary btn-block m-2 mt-0 mb-0 w-100 p-2">Cancelar</button>
+                                                        <span class="badge bg-danger">Cancelada</span>
+                                                        <?php
+                                                    } else if ($reserva->estatus === "Apartada") {
+                                                        ?>
+                                                        <span class="badge bg-success">Apartada</span>
                                                         <?php
                                                     } else {
                                                         ?>
-                                                        <input type="hidden" name="id_pedido" value="<?= $pedido->folio ?>" />
-                                                        <!-- boton que activa modal de prevencion -->
-                                                        <button type="button"
-                                                            class="btn btn-danger btn-block m-2 mt-0 mb-0 w-100 p-2"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#cancelarPedido<?= $pedido->folio ?>">
-                                                            Cancelar Pedido
-                                                        </button>
-                                                        <!-- Modal de prevencion -->
-                                                        <div class="modal fade" id="cancelarPedido<?= $pedido->folio ?>"
-                                                            tabindex="-1" aria-labelledby="cancelarModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h1 class="modal-title fs-5" id="cancelarModalLabel">
-                                                                            Cancelar pedido</h1>
-                                                                        <button type="button" class="btn-close"
-                                                                            data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <h5 class="mb-3">¿Estas seguro de que deseas cancelar este
-                                                                            pedido?</h5>
-                                                                        <div class="text-end">
-                                                                            <button class="btn btn-secondary btn-block"
-                                                                                data-bs-dismiss="modal">Cerrar</button></button>
-                                                                            <button type="submit" class="btn btn-danger"
-                                                                                name="cancelarPedido">Cancelar Pedido</button>
+                                                        <span class="badge bg-warning">Pendiente</span>
+                                                        <?php
+                                                            $queryComprobante = "SELECT * FROM comprobantes WHERE id_reserva = $reserva->folio";
+                                                            $comprobantes = $db->select($queryComprobante);
+
+                                                            if(empty($comprobantes)) {
+                                                                ?>
+                                                                <span class="badge bg-secondary">Sin comprobante</span>
+                                                                <?php
+                                                            } else {
+                                                                ?>
+                                                                <span class="badge bg-secondary">En revisión</span>
+                                                                <?php  
+                                                            } 
+                                                    } ?>
+                                            </h4>
+                                            <p class="card-text m-2">Evento: <?= $reserva->evento ?></p>
+                                        </div>
+                                        <div class="col-lg-2 m-0 p-0 pe-3">
+                                                <form method="post" enctype="multipart/form-data" class="m-1">
+                                                    <?php
+                                                        if($reserva->estatus === "Cancelada" OR $reserva->estatus === "Apartada") {
+                                                            ?>
+                                                            <button disabled type="submit" class="btn btn-secondary btn-block m-2 mt-0 mb-0 w-100">Cancelar</button>
+                                                            <?php
+                                                        } else {
+                                                            ?>
+                                                            <input type="hidden" name="folio" value="<?= $reserva->folio ?>"/>
+                                                            <!-- boton que activa modal de prevencion -->
+                                                            <button type="button" class="btn btn-danger btn-block m-2 mt-0 mb-0 w-100" data-bs-toggle="modal" data-bs-target="#cancelarReserva<?= $reserva->folio ?>">
+                                                                Cancelar Reserva
+                                                            </button>
+                                                            <!-- Modal de prevencion -->
+                                                            <div class="modal fade" id="cancelarReserva<?= $reserva->folio ?>" tabindex="-1" aria-labelledby="cancelarModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h1 class="modal-title fs-5" id="cancelarModalLabel">Cancelar Reserva</h1>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <h5 class="mb-3">¿Estas seguro de que deseas cancelar esta reserva?</h5>
+                                                                            <div class="text-end">
+                                                                            <button class="btn btn-secondary btn-block" data-bs-dismiss="modal">Cerrar</button></button>
+                                                                            <button type="submit" class="btn btn-danger" name="cancelarReserva">Cancelar Reserva</button>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <?php
-                                                    }
+                                                            <?php
+                                                        }
                                                     ?>
                                                 </form>
-                                            </div>
-                                            <div class="col-6">
-                                                <form action="detallePedido.php" method="post" enctype="multipart/form-data">
-                                                    <input type="hidden" name="id_pedido" value="<?= $pedido->folio ?>" />
-                                                    <button type="submit" class="btn btn-primary m-2 mt-0 mb-0 w-100 p-2"
-                                                        name="verDetalles">
+                                                <form action="detalleReserva.php" method="post" enctype="multipart/form-data" class="m-1">
+                                                    <input type="hidden" name="folio" value="<?= $reserva->folio ?>"/>
+                                                    <button type="submit" class="btn btn-cafe m-2 mt-0 mb-0 w-100" name="verDetalles">
                                                         Ver Detalles
                                                     </button>
                                                 </form>
                                             </div>
                                         </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <?php
+                </div>
+            <?php
                 }
             }
             ?>

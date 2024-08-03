@@ -906,7 +906,7 @@ a:hover {
 @media (max-width: 767.98px) {
 
   .cardss:hover h2 {
-    inset: auto auto 323px 20px; /* Ajuste para pantallas pequeñas */
+    inset: auto auto 50% 20px; /* Ajuste para pantallas pequeñas */
   }
 }
 /* Responsivo para pantallas medianas */
@@ -918,16 +918,37 @@ a:hover {
   }
 
 }
-/*whatsapp*/
+
+/* Estilos de WhatsApp Button */
 #whatsappButton {
-  background-color: #25D366;
+  background-color: var(--color1);
   border: none;
   border-radius: 50%;
-  color: white;
-  width: 60px;
-  height: 60px;
+  color: rgb(0, 0, 0);
+  width: 80px; /* Ajusta el tamaño del botón */
+  height: 80px; /* Ajusta el tamaño del botón */
+  z-index: 1051; /* Asegúrate de que el z-index sea mayor que el off-canvas */
 }
 
 #whatsappButton:hover {
-  background-color: #1ebe57;
+  background-color: var(--obscuro);
+  color: var(--blanco);
+  
+}
+
+#whatsappButton i {
+  font-size: 2.5rem; /* Ajusta el tamaño del icono */
+}
+/*carrito*/
+
+#cartCount {
+  background-color: var(--obscuro); /* Fondo blanco para el contador */
+  color: var(--blanco); /* Color del texto del contador (rojo) */
+  border: 1px solid var(--blanco); /* Borde rojo */
+  width: 30px; /* Ancho del contador */
+  height: 30px; /* Alto del contador */
+  border-radius: 50%; /* Hacer el contador circular */
+  text-align: center; /* Centrar el texto */
+  line-height: 30px; /* Centrar verticalmente el texto */
+  font-size: 14px; /* Tamaño de fuente */
 }
