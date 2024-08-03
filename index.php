@@ -262,7 +262,7 @@
                                         <i class="fa-solid fa-truck"></i>
                                     </div>
                                     <div class="col-12">
-                                        <span class="fw-bold">Envios a tu Servicio</span>
+                                        <span class="fw-bold">Envíos a tu Servicio</span>
                                         <p>En pedido superior a $150</p>
                                     </div>
                                 </div>
@@ -277,7 +277,7 @@
                                             <i class="fa-solid fa-gift"></i>
                                         </div>
                                         <div class="">
-                                            <span class="fw-bold">Recompensas especial</span>
+                                            <span class="fw-bold">Recompensas especiales</span>
                                             <p>Ofrece bonos especiales</p>
                                         </div>
                                     </div>
@@ -306,7 +306,7 @@
             <!-- E-Commerce-->
             <div class="container-fluid bagr-cafe3 p-3">
                 <div class="col-12 text-center p-2">
-                    <h1 class="fw-bold text-center" style="letter-spacing: 1px;">E-Commerce</h1>
+                    <h1 class="fw-bold text-center" style="letter-spacing: 1px;">Nuestras bolsas de café</h1>
                 </div>
                 <div class="row justify-content-center d-flex ">
 
@@ -353,10 +353,10 @@
             <!-- Recompensas-->
             <section class="subscription-section d-flex align-items-center justify-content-center p-2">
                 <div class="subscription-content text-center">
-                    <h1 class="display-4">Recibe grandes <span style="color: #d4a373;">RECOMPENSAS</span> fácilmente
+                    <h1 class="display-4">Obtén <span style="color: #d4a373;">RECOMPENSAS</span> increíbles
                     </h1>
-                    <p class="lead">Mediante asistencias recibe grandes recompensas</p>
-                    <a href="views/recompensas.php" class="btn subscription-btn">Echar un vistazo</a>
+                    <p class="lead">Para nuestros más fieles clientes</p>
+                    <a href="views/recompensas.php" class="btn subscription-btn">Empezar a ganar</a>
                 </div>
             </section>
 
