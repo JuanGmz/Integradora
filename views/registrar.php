@@ -173,8 +173,8 @@ $db->desconectarDB();
         </div>
     </div>
     <div class="alert floating-alert" id="floatingAlert">
-            <span id="alertMessage">Mensaje de la alerta.</span>
-        </div>
+        <span id="alertMessage">Mensaje de la alerta.</span>
+    </div>
     
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/45ef8dbe96.js" crossorigin="anonymous"></script>

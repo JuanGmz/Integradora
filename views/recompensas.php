@@ -26,7 +26,7 @@ if (isset($_SESSION["usuario"])) {
 </head>
 
 <body>
-     <!-- Botón de WhatsApp -->
+    <!-- Botón de WhatsApp -->
      <button id="whatsappButton" class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3" type="button" onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
         <i class="fa-brands fa-whatsapp fa-2x"></i>
     </button>
@@ -147,21 +147,21 @@ if (isset($_SESSION["usuario"])) {
                             WHERE p.usuario = '" . $_SESSION["usuario"] . "'";
                 $cliente = $db->select($cliente);
                 ?>
-                <h3>Tu ID de cliente es: <?php echo $cliente[0]->id_cliente ?></h3>
+                <h4>Tu ID de cliente es: <?php echo $cliente[0]->id_cliente ?></h4>
                 <p>Muestra este ID para registrar asistencias con cada compra que realices</p>
                 <?php
                 $recompensas = $db->select($query);
                 foreach ($recompensas as $recompensa) {
                     ?>
-                    <div class="col-12 col-md-6 col-lg-3 mt-3">
+                    <div class="col-12 col-md-6 col-lg-4 mt-3">
                         <div class="card">
-                            <div class="card-body p-0">
-                                <img src="../img/recompensas/<?php echo $recompensa->img_url ?>" class="card-img-top rounded-0 p-0" alt="recompensa">
+                            <div class="card-img p-0">
+                                <img src="../img/recompensas/<?= $recompensa->img_url ?>" alt="recompensa" class="coffee-image">
                                 <h3 class="card-title fw-bold text-center mt-2"><?php echo $recompensa->recompensa ?></h3>
-                                <h5 class="card-text text-center mt-3">Asistencias completadas:
-                                    <?php echo $recompensa->asistencias_completadas ?>
-                                </h5>
-                                <h5 class="card-text text-center">Periodo: <?php echo $recompensa->periodo ?></h5>
+                                <h5 class="card-text text-center">Asistencias completadas</h5>
+                                <h5 class="card-text text-center"><?php echo $recompensa->asistencias_completadas ?></h5>
+                                <h5 class="card-text text-center">Duración</h5>
+                                <h5 class="card-text text-center"><?php echo $recompensa->periodo ?></h5>
                                 <?php
                                 if ($recompensa->progreso >= $recompensa->condicion) {
                                     if ($recompensa->canje == 0) {
@@ -246,15 +246,15 @@ if (isset($_SESSION["usuario"])) {
                         <div class="col-12 m-0 p-0">
                             <h1 class="text-center fw-bold shadow rounded p-2 mb-5" style="background: var(--color8);">Como funciona nuestro sistema de recompensas</h1>
                             <div class="row m-0 p-0">
-                                <div class="col-4 m-0 p-0">
+                                <div class="col-12 col-lg-4 m-0 p-0">
                                     <img src="../img/cafes/telefono-inteligente.png" alt="telefono" style="height: 100px; width: 100px;">
                                     <p>Registrate o inicia sesión para comenzar a ganar.</p>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-12 col-lg-4">
                                     <img src="../img/cafes/puesto-de-comida.png" alt="local" style="height: 100px; width: 100px;">
                                     <p>Visita nuestro local, realiza una compra y solicita que sea registrada para obtener una asistencia.</p>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-12 col-lg-4">
                                     <img src="../img/cafes/compras.png" alt="compra" style="height: 100px; width: 100px;">
                                     <p>Reclama tus recompensas cuando tengas las asistencias necesarias.</p>
                                 </div>

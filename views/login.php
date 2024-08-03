@@ -3,19 +3,21 @@ session_start();
 $alerta = "";
 if ($_POST) {
     include '../class/database.php';
+    include '../scripts/funciones/funciones.php';
     $db = new Database();
     $db->conectarDB();
 
     extract($_POST);
     $db->verifica($usuario, $password);
+
     if (!isset($_SESSION["usuario"])) {
-        $alerta = "<div class='alert alert-danger' role='alert'>¡Usuario o contraseña incorrectos!</div>";
+        showAlert("Usuario o contraseña incorrectos.", "error");
     }
     $db->desconectarDB();
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -100,9 +102,7 @@ if ($_POST) {
                                     Registrar cuenta</p>
                             </a>
                         </div>
-                        <?php
-                        echo $alerta;
-                        ?>
+
                         <div class="col-12 mb-2 text-end d-flex justify-content-cente text-center">
                             <button type="submit" class="btn btn-cafe w-100 text-light fw-bold fs-5">Iniciar
                                 Sesión</button>
@@ -116,10 +116,14 @@ if ($_POST) {
             </div>
         </div>
     </div>
+    <div class="alert floating-alert" id="floatingAlert">
+            <span id="alertMessage">Mensaje de la alerta.</span>
+        </div>
 
 
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/45ef8dbe96.js" crossorigin="anonymous"></script>
+    <script src="../js/alertas.js"></script>
 
 </body>
 
