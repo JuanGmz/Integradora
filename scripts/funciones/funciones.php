@@ -30,7 +30,11 @@ function formatFecha($fecha)
 function formatPrecio($precio)
 {
     // Convierte el precio a un formato con dos decimales y separador de miles
-    return number_format($precio, 2, '.', ',');
+    if ($precio == 0) {
+        return '0.00';
+    } else {
+        return number_format($precio, 2, '.', ',');
+    }
 }
 function convertTo24Hour($time12)
 {
