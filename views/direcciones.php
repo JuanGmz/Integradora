@@ -200,7 +200,7 @@ if (isset($_SESSION["usuario"])) {
                                 <div class="col-5 m-0 p-0">
                                     <div class="d-flex align-items-center">
                                         <div class="input-group">
-                                            <button type='button' class='btn btn-info' data-bs-toggle='popover' title='Información' data-bs-content='No se podrá eliminar si la dirección está registrada en un pedido.'>
+                                            <button type='button' class='btn btn-secondary' data-bs-toggle='popover' title='Información' data-bs-content='No se podrá eliminar si la dirección está registrada en un pedido.'>
                                                 <i class='fa-solid fa-info'></i>
                                             </button>
                                             <button type="button" class="btn btn-danger <?php echo $direccionEnUso ? 'disabled' : ''; ?>"
