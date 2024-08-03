@@ -33,13 +33,13 @@
             } else if (strlen($telefono) !== 10) {
                 showAlert("El teléfono debe tener exactamente 10 caracteres", "error");
             } else {
-                $queryDir = "INSERT INTO domicilios VALUES (NULL,". $id_cliente[0]->id_cliente . ", '$referencia', '$estado', '$ciudad', '$codigo_postal', '$colonia', '$calle', $telefono)";
+                $queryDir = "INSERT INTO domicilios VALUES (NULL, ". $id_cliente[0]->id_cliente .", '$referencia', '$estado', '$ciudad', '$codigo_postal', '$colonia', '$calle', $telefono)";
                 $db->execute($queryDir);
-                showAlert("¡Dirección registrada con éxito!", "success");
+                showAlert("¡Dirección registrada con éxito!", "success");
                 header("refresh:2;direcciones.php");
             }
         }
-    
+
         if (isset($_POST["editDir"])) {
             if (strlen($cp) === 5 && strlen($telefono) === 10) {
                 $query = "UPDATE domicilios SET 
@@ -52,36 +52,40 @@
                         telefono = $telefono
                         WHERE id_domicilio = $id_domicilio";
                 $db->execute($query);
-                showAlert("¡Dirección actualizada con éxito!", "success");
+                showAlert("¡Dirección actualizada con éxito!", "success");
                 header("refresh:2;direcciones.php");
             } else if (strlen($cp) < 5) {
-                showAlert("El código postal no puede tener menos de 5 caracteres", "error");
+                showAlert("El código postal no puede tener menos de 5 caracteres", "error");
             } else if (strlen($cp) > 5) {
-                showAlert("El código postal no puede tener más de 5 caracteres", "error");
+                showAlert("El código postal no puede tener más de 5 caracteres", "error");
             } else if (strlen($telefono) > 10) {
-                showAlert("El teléfono no puede tener más de 10 caracteres", "error");
+                showAlert("El teléfono no puede tener más de 10 caracteres", "error");
             } else if (strlen($telefono) < 10) {
-                showAlert("El teléfono no puede tener menos de 10 caracteres", "error");
+                showAlert("El teléfono no puede tener menos de 10 caracteres", "error");
             } else {
                 showAlert("Error al actualizar el domicilio", "error");
             }
         }
-    
+
         if (isset($_POST["deleteDir"])) {
-            if ("SELECT id_domicilio FROM pedidos EXISTS IN (SELECT id_domicilio FROM pedidos WHERE id_domicilio = $id_domicilio") {
+            $queryCheck = "SELECT id_domicilio FROM pedidos WHERE id_domicilio = $id_domicilio";
+            $result = $db->select($queryCheck);
+
+            if ($result) {
                 showAlert("No se puede eliminar una dirección en uso", "error");
             } else {
                 $query = "DELETE FROM domicilios WHERE id_domicilio = $id_domicilio";
                 $db->execute($query);
-                showAlert("¡Dirección eliminada con éxito!", "success");
+                showAlert("¡Dirección eliminada con éxito!", "success");
                 header("refresh:2;direcciones.php");
             }
-        } 
+        }
     } else {
         header("location: ../index.php");
     }
     ?>
 </head>
+
 
 <body>
  <!-- Botón de WhatsApp -->

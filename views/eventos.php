@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="../img/Sinfonía-Café-y-Cultura.webp">
 
     <?php
-    include_once ("../class/database.php");
+    include_once("../class/database.php");
     $db = new Database();
     $db->conectarDB();
     session_start();
@@ -25,18 +25,17 @@
 
 <body>
     <div class="">
-         <!-- Botón de WhatsApp -->
-    <button id="whatsappButton" class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3" type="button" onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
-        <i class="fa-brands fa-whatsapp fa-2x"></i>
-    </button>
+        <!-- Botón de WhatsApp -->
+        <button id="whatsappButton" class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3" type="button" onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
+            <i class="fa-brands fa-whatsapp fa-2x"></i>
+        </button>
         <!-- NavBar -->
         <nav class="navbar navbar-expand-lg shadow-lg">
             <div class="container-fluid">
                 <a class="navbar-brand" href="../index.php">
                     <img src="../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
                 </a>
-                <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1"
-                    id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                     <div class="offcanvas-header">
                         <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura
                         </h5>
@@ -67,14 +66,12 @@
                 </div>
                 <?php
                 if (isset($_SESSION["usuario"])) {
-                    ?>
+                ?>
                     <!-- Navbar con dropdown -->
-                    <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
-                        style="left: auto; right: 30px; top: 60px">
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
                         <a class="dropdown-item" href="perfil.php">Mi perfil</a>
                         <?php if ($rol[0]->rol === 'administrador') { ?>
                             <a class="dropdown-item" href="../views/adminInicio.php">Administrar</a>
@@ -82,15 +79,14 @@
                         <?php } ?>
                         <a class="dropdown-item" href="../scripts/login/cerrarsesion.php">Cerrar sesión</a>
                     </div>
-                    <?php
+                <?php
                 } else {
-                    ?>
+                ?>
                     <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
-                    <?php
+                <?php
                 }
                 ?>
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
             </div>
@@ -117,10 +113,9 @@
                 </div>
                 <!-- Botones de categorías -->
                 <div class="d-flex justify-content-center">
-                    <ul class="nav nav-tabs justify-content-center" id="ex1" role="tablist"
-                        style="border-bottom: none;">
+                    <ul class="nav nav-tabs justify-content-center" id="ex1" role="tablist" style="border-bottom: none;">
                         <?php
-                        include_once ("../class/database.php");
+                        include_once("../class/database.php");
                         $conexion = new Database();
                         $conexion->conectarDB();
                         $query = 'SELECT categorias.id_categoria, categorias.nombre FROM categorias WHERE categorias.tipo = "Evento"';
@@ -139,12 +134,21 @@
                         ?>
                     </ul>
                 </div>
+                <!-- Contenedor para la advertencia -->
+                <div id="category-warning" class="alert text-center p-5 m-4" role="alert" style="display: none;">
+                    <div> <i class="fa-solid fa-mug-hot fa-4x text-muted"></i></div>
+                    <div class='text-center mt-3'><h5>Por favor, seleccione una categoría para ver los eventos.</h5> </div>
+                </div>
 
                 <!-- Contenido de las categorías -->
                 <div class="tab-content col-12 p-1" id="ex1-content" style="min-height: 400px;">
                     <?php
                     $conexion->conectarDB();
                     $eventosPorCategoria = [];
+
+                    // Verificar si se ha seleccionado una categoría
+                    $categoriaSeleccionada = isset($_GET['categoria']) ? (int) $_GET['categoria'] : null;
+
                     foreach ($categorias as $categoria) {
                         $categoria_id = $categoria->id_categoria;
                         $page = isset($_GET['page_' . $categoria_id]) ? (int) $_GET['page_' . $categoria_id] : 1;
@@ -152,13 +156,13 @@
                         $offset = ($page - 1) * $perPage;
 
                         $query = "SELECT 
-                    SQL_CALC_FOUND_ROWS 
-                    eventos.id_evento, eventos.nombre, eventos.descripcion, eventos.img_url, eventos.fecha_evento, eventos.hora_inicio, eventos.hora_fin,eventos.boletos, eventos.fecha_publicacion
-                    FROM 
-                    eventos 
-                    WHERE 
-                    eventos.id_categoria = $categoria_id AND eventos.fecha_publicacion <= NOW() 
-                    LIMIT $perPage OFFSET $offset";
+                        SQL_CALC_FOUND_ROWS 
+                        eventos.id_evento, eventos.nombre, eventos.descripcion, eventos.img_url, eventos.fecha_evento, eventos.hora_inicio, eventos.hora_fin,eventos.boletos, eventos.fecha_publicacion
+                        FROM 
+                        eventos 
+                        WHERE 
+                        eventos.id_categoria = $categoria_id AND eventos.fecha_publicacion <= NOW() 
+                        LIMIT $perPage OFFSET $offset";
                         $eventos = $conexion->select($query);
                         $eventosPorCategoria[$categoria_id] = $eventos;
 
@@ -169,7 +173,7 @@
                         $totalPages = ceil($totalEventos / $perPage);
 
                         // Establecer la pestaña activa
-                        $active = (isset($_GET['categoria']) && $_GET['categoria'] == $categoria_id) ? 'active show' : '';
+                        $active = ($categoriaSeleccionada == $categoria_id) ? 'active show' : '';
 
                         echo "<div class='tab-pane fade $active' id='ex1-tabs-{$categoria_id}' role='tabpanel' aria-labelledby='ex1-tab-{$categoria_id}'>";
 
@@ -224,9 +228,27 @@
 
                         echo "</div>";
                     }
+
                     $conexion->desconectarDB();
                     ?>
                 </div>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const warningElement = document.getElementById('category-warning');
+                        const tabLinks = document.querySelectorAll('.btn-categorias');
+
+                        if (!window.location.search.includes('categoria')) {
+                            warningElement.style.display = 'block';
+                        }
+
+                        tabLinks.forEach(link => {
+                            link.addEventListener('click', function() {
+                                warningElement.style.display = 'none';
+                            });
+                        });
+                    });
+                </script>
 
             </div>
 
