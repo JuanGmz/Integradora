@@ -522,10 +522,10 @@ if (isset($_POST['btnactualizar'])) {
                                                                     <h4 class='text-start fw-bolder mb-3'>Estatus: <span class='fw-normal fs-4'>{$pedido->estatus}</span></h4>
                                                                  </div>
                                                                  <div class='col-lg-6 mb-3'>
-                                                                    <h4 class='text-start fw-bolder mb-3'>Total productos: <span class='fw-normal fs-4'>{$total_productos}$</span></h4>
+                                                                    <h4 class='text-start fw-bolder mb-3'>Total productos: <span class='fw-normal fs-4'>$$total_productos</span></h4>
                                                                  </div>
                                                                  <div class='col-lg-6'>
-                                                                     <h4 class='text-start fw-bolder mb-3'>Monto total: <span class='fw-normal fs-4'>{$monto_total}$</span></h4>
+                                                                     <h4 class='text-start fw-bolder mb-3'>Monto total: <span class='fw-normal fs-4'>$$monto_total</span></h4>
                                                                  </div>
                                                                   <div class='col-12 mb-3'>
                                                                     <hr class='my-4'>
@@ -536,7 +536,7 @@ if (isset($_POST['btnactualizar'])) {
                                                                      <h4 class='text-start fw-bolder mb-3'>Envío: <span class='fw-normal fs-4'>{$pedido->envio}</span></h4>
                                                                  </div>
                                                                  <div class='col-lg-6 mb-3'>
-                                                                    <h4 class='text-start fw-bolder mb-3'>Costo envío: <span class='fw-normal fs-4'>{$costo_envio}$</span></h4>
+                                                                    <h4 class='text-start fw-bolder mb-3'>Costo envío: <span class='fw-normal fs-4'>$$costo_envio</span></h4>
                                                                  </div>
                                                                  <div class='col-12 mb-3'>
                                                                     <h4 class='text-start fw-bolder mb-3'>Guía de envío: <span class='fw-normal fs-4'>{$pedido->guia_de_envio}</span></h4>
@@ -583,9 +583,9 @@ if (isset($_POST['btnactualizar'])) {
                                                                                         <td>{$detalle->variedad}</td>
                                                                                         <td>{$detalle->sabor}</td>
                                                                                         <td>{$detalle->medida}</td>
-                                                                                        <td>{$precio}$</td>
+                                                                                        <td>$$precio</td>
                                                                                         <td>{$detalle->cantidad}</td>
-                                                                                        <td>{$subotal}$</td>
+                                                                                        <td>$$subotal</td>
                                                                                     </tr>";
                                             }
                                         }
@@ -646,7 +646,7 @@ if (isset($_POST['btnactualizar'])) {
                                                 }
                                                 echo "</select>";
                                             }
-                                            echo "<button type='button' class='btn btn-info' data-bs-toggle='popover' title='Información' data-bs-content='Solo podrás actualizar el estatus del pedido una vez.'>
+                                            echo "<button type='button' class='btn btn-info' data-bs-toggle='popover' title='Información' data-bs-content='Solo podrás actualizar el estatus del pedido a Finalizado o Cancelado una vez.'>
                     <i class='fa-solid fa-info'></i>
                 </button>";
                                             echo "</div>
@@ -663,6 +663,10 @@ if (isset($_POST['btnactualizar'])) {
                                                                     <div class='mb-3'>
                                                                         <label for='fecha' class='form-label'>Documento de envío</label>
                                                                         <input type='file' class='form-control' id='pdf' name='pdf' accept='.pdf' required/>
+                                                                    </div>
+                                                                    <div class='d-flex justify-content-center align-items-center'>
+                                                                    <i class='fa-solid fa-circle-info me-2'></i>
+                                                                    <p class='mb-0 fs-6'>Solo se puede modificar el pedido mientras esté Pendiente.</p>
                                                                     </div>
                                                                     <div class='row'>
                                                                         <div class='col-12 text-end'>

@@ -12,6 +12,10 @@ $rol = $db->select($rolUsuario);
 if ($rol[0]->rol !== 'administrador') {
     header('Location: ../index.php');
 }
+
+if (isset($_POST['btn_editarstock'])) {
+    echo "btn_editarstock";
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -584,17 +588,28 @@ if ($rol[0]->rol !== 'administrador') {
                                             <div class='modal-dialog'>
                                                 <div class='modal-content'>
                                                     <div class='modal-header'>
-                                                        <h1 class='modal-title fs-5' id='exampleModalLabel'>Detalles del bolsita</h1>
+                                                        <h1 class='modal-title fs-5' id='exampleModalLabel'>Información de Bolsa de Café y Medidas</h1>
                                                         <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                                                     </div>
                                                     <!-- Aquí va el contenido del modal -->
                                                     <div class='modal-body'>
                                                         <h4 class='text-start fw-bold mb-3'>Nombre: <span class='fw-normal fs-5'>$bolsita->nombre</span></h4>
-                                                        <h4 class='text-start fw-bold mb-3'>Proceso: <span class='fw-normal fs-5'>$bolsita->proceso</span></h4>
                                                         <h4 class='text-start fw-bold mb-3'>Año de Cosecha: <span class='fw-normal fs-5'>{$bolsita->años_cosecha}</span></h4>
+                                                        <h4 class='text-start fw-bold mb-3'>Productor y/o Finca: <span class='fw-normal fs-5'>$bolsita->productor_finca</span></h4>
+                                                        <h4 class='text-start fw-bold mb-3'>Proceso: <span class='fw-normal fs-5'>$bolsita->proceso</span></h4>
+                                                        <h4 class='text-start fw-bold mb-3'>Variedad: <span class='fw-normal fs-5'>$bolsita->variedad</span></h4>
+                                                        <h4 class='text-start fw-bold mb-3'>Altura: <span class='fw-normal fs-5'>$bolsita->altura</span></h4>
+                                                        <hr class='my-4'>
+                                                         <h4 class='text-start fw-bold mb-3'>Aroma: <span class='fw-normal fs-5'>$bolsita->aroma</span></h4>
+                                                         <h4 class='text-start fw-bold mb-3'>Acidez: <span class='fw-normal fs-5'>$bolsita->acidez</span></h4>
+                                                          <h4 class='text-start fw-bold mb-3'>Sabor: <span class='fw-normal fs-5'>$bolsita->sabor</span></h4>
+                                                          <h4 class='text-start fw-bold mb-3'>Cuerpo: <span class='fw-normal fs-5'>$bolsita->cuerpo</span></h4>
+                                                          <h4 class='text-start fw-bold mb-3'>Puntaje de Catación: <span class='fw-normal fs-5'>$bolsita->puntaje_catacion pts</span></h4>
+                                                           <hr class='my-4'>
+                                                           
                                                         <!-- Tabla de medidas de la bolsa -->
                                                         ";
-                                $queryMedidas = "SELECT medida, precio FROM detalle_bc WHERE id_bolsa = $bolsita->id_bolsa";
+                                $queryMedidas = "SELECT id_dbc,medida, precio,stock FROM detalle_bc WHERE id_bolsa = $bolsita->id_bolsa";
                                 $medidas = $db->select($queryMedidas);
                                 if (empty($medidas)) {
                                     echo "<h4 class='text-center'>No hay medidas registradas</h4>";
@@ -602,31 +617,64 @@ if ($rol[0]->rol !== 'administrador') {
                                     echo "
                                                         <table class='table table-light border-3 border-black border-bottom border-start border-end table-striped text-center mt-4 table-hover'>
                                                             <thead class='table-dark'>
+                                                            <th>id</th>
                                                                 <th>Medida</th>
                                                                 <th>Precio</th>
+                                                                <th>Stock</th>
                                                                 <th>Acciones</th>
                                                             </thead>
                                                             <tbody class='table-group-divider'>";
                                     foreach ($medidas as $medida_precio) {
+                                        $stock = $medida_precio->stock;
+                                        $precio = formatPrecio($medida_precio->precio);
                                         echo "
                                                                 <tr>
+                                                                    <td>$medida_precio->id_dbc</td>
                                                                     <td>$medida_precio->medida</td>
-                                                                    <td>$medida_precio->precio</td>
-                                                                    <td>
+                                                                    <td>$$precio</td>
+                                                                    <td>$medida_precio->stock</td>
+                                                                    <td class='d-flex flex-row align-items-center justify-content-center gap-1'>
                                                                         <form action='../scripts/adminecomerce/eliminarMedida.php' method='POST' onsubmit='return confirmDelete()'>
                                                                             <input type='hidden' name='id_bolsa' value='$bolsita->id_bolsa'>
                                                                             <input type='hidden' name='medida' value='$medida_precio->medida'>
                                                                             <input type='hidden' name='precio' value='$medida_precio->precio'>
+                                                                            <input type='hidden' name='stock' value='$medida_precio->stock'>
                                                                             <button type='submit' class='btn btn-danger'><i class='fa-solid fa-trash'></i></button>
+                                                                             <div class='modal fade' id='editarStockModal' tabindex='-1' aria-labelledby='editarStockModalLabel_$medida_precio->id_dbc' aria-hidden='true'>
+        <div class='modal-dialog'>
+            <div class='modal-content'>
+                <div class='modal-header'>
+                    <h1 class='modal-title fs-5' id='editarStockModalLabel_$medida_precio->id_dbc'>Editar Stock</h1>
+                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                </div>
+                <div class='modal-body'>
+                    <form method='POST'>
+                        <input type='hidden' name='id_bolsa' value='$medida_precio->id_dbc'>
+                        <div class='mb-3'>
+                            <label for='stock_$medida_precio->id_dbc' class='form-label'>Stock</label>
+                            <input type='number' name='stock' class='form-control' id='stock_$medida_precio->stock' value='$medida_precio->stock'>
+                        </div>
+                        <div class='modal-footer'>
+                            <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cerrar</button>
+                            <button type='submit' class='btn btn-primary' name='btn_editar_stock'>Guardar cambios</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
                                                                         </form>
-                                                                    </td>
-                                                                </tr>
+                                                                       <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#editarStockModal'>
+                <i class='fa-solid fa-pen-to-square'></i>
+            </button>
+        </td>
+    </tr>
+    
                                                                 <script>
 function confirmDelete() {
     return confirm('¿Está seguro que quiere eliminar esta medida? Esto también eliminará la medida de los carritos de los usuarios.');
 }
 </script>";
-                                                                
                                     }
                                     echo "
                                                             </tbody>
@@ -771,6 +819,41 @@ function confirmDelete() {
                                         </td>
                                     </td>
                                 </tr>";
+
+                                $querystock = "SELECT id_dbc,stock FROM detalle_bc WHERE id_bolsa = $bolsita->id_bolsa";
+                                $stock = $db->select($querystock);
+                                foreach ($stock as $dbc_stock) {
+                                    echo "                                                                         <!-- Modal Editar Stock-->
+                                                                 <!-- Modal Editar Stock -->
+                                    <div class='modal fade' id='editarStockModal' tabindex='-1' aria-labelledby='editarStockModalLabel_$medida_precio->id_dbc' aria-hidden='true'>
+                                        <div class='modal-dialog'>
+                                            <div class='modal-content'>
+                                                <div class='modal-header'>
+                                                    <h1 class='modal-title fs-5' id='editarStockModalLabel_$medida_precio->id_dbc'>Editar Stock</h1>
+                                                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                                </div>
+                                                <div class='modal-body'>
+                                                    <form method='POST'>
+                                                        <input type='hidden' name='id_bolsa' value='$medida_precio->id_dbc'>
+                                                        <input type='hidden' name='medida' value='$medida_precio->medida'>
+                                                        <div class='mb-3'>
+                                                            <label for='stock_$medida_precio->id_dbc' class='form-label'>Stock</label>
+                                                            <input type='number' name='stock' class='form-control' id='stock_$bolsita->id_bolsa' value='$dbc_stock->id_dbc'>
+                                                        </div>
+                                                        <p>";
+                                    echo $medida_precio->stock;
+                                    echo "</p>
+                                                        <div class='modal-footer'>
+                                                            <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cerrar</button>
+                                                            <button type='submit' class='btn btn-primary' name='btn_editar_stock'>Guardar cambios</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        ";
+                                }
                             }
                         }
                     } else {

@@ -485,6 +485,15 @@ if ($_POST) {
                                                 required>
                                         </div>
                                     </div>
+                                    <div class="row mb-3">
+                                        <div class='d-flex justify-content-center align-items-center'>
+                                            <i class='fa-solid fa-circle-info me-2'></i>
+                                            <p class='mb-0'>El periodo de tiempo no
+                                                podrá modificarse
+                                                posteriormente.
+                                            </p>
+                                        </div>
+                                    </div>
                                     <div class="mb-3">
                                         <label for="imagen" class="form-label">Imagen</label>
                                         <input type="file" class="form-control" id="imagen" name="imagen"
@@ -586,16 +595,9 @@ if ($_POST) {
                                     <!-- Fecha Inicio -->
                                     <div class="col-12 col-lg-4 mb-3">
                                         <label for="fechaInicio" class="form-label">Fecha Inicio</label>
-                                        <div class="input-group">
-                                            <input class="form-control" type="date" name="fechaInicio" id="fechaInicio"
-                                                required <?php if (isset($_POST['btnBuscar'])) { ?>
-                                                    value="<?= $_POST['fechaInicio'] ?>" <?php } ?>>
-                                            <button type="button" class="btn btn-info" data-bs-toggle="popover"
-                                                title='Información'
-                                                data-bs-content="Una vez que se establezca la fecha, no podrá ser cambiada. Asegúrese de que la fecha sea correcta antes de enviar.">
-                                                <i class="fa-solid fa-info"></i>
-                                            </button>
-                                        </div>
+                                        <input class="form-control" type="date" name="fechaInicio" id="fechaInicio"
+                                            required <?php if (isset($_POST['btnBuscar'])) { ?>
+                                                value="<?= $_POST['fechaInicio'] ?>" <?php } ?>>
                                     </div>
                                     <!-- Fecha Expiración -->
                                     <div class="col-12 col-lg-4 mb-3">
