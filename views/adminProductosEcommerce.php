@@ -13,8 +13,17 @@ if ($rol[0]->rol !== 'administrador') {
     header('Location: ../index.php');
 }
 
-if (isset($_POST['btn_editarstock'])) {
-    echo "btn_editarstock";
+if (isset($_POST['btneditarstock'])) {
+
+    extract($_POST);
+
+    $query = "UPDATE detalle_bc SET stock = $stock WHERE id_dbc = '$id_dbc'";
+
+    $db->execute($query);
+
+    showAlert("Se actualizo el stock correctamente", "success");
+
+
 }
 ?>
 <!DOCTYPE html>
@@ -640,36 +649,13 @@ if (isset($_POST['btn_editarstock'])) {
                                                                             <input type='hidden' name='precio' value='$medida_precio->precio'>
                                                                             <input type='hidden' name='stock' value='$medida_precio->stock'>
                                                                             <button type='submit' class='btn btn-danger'><i class='fa-solid fa-trash'></i></button>
-                                                                             <div class='modal fade' id='editarStockModal' tabindex='-1' aria-labelledby='editarStockModalLabel_$medida_precio->id_dbc' aria-hidden='true'>
-        <div class='modal-dialog'>
-            <div class='modal-content'>
-                <div class='modal-header'>
-                    <h1 class='modal-title fs-5' id='editarStockModalLabel_$medida_precio->id_dbc'>Editar Stock</h1>
-                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                </div>
-                <div class='modal-body'>
-                    <form method='POST'>
-                        <input type='hidden' name='id_bolsa' value='$medida_precio->id_dbc'>
-                        <div class='mb-3'>
-                            <label for='stock_$medida_precio->id_dbc' class='form-label'>Stock</label>
-                            <input type='number' name='stock' class='form-control' id='stock_$medida_precio->stock' value='$medida_precio->stock'>
-                        </div>
-                        <div class='modal-footer'>
-                            <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cerrar</button>
-                            <button type='submit' class='btn btn-primary' name='btn_editar_stock'>Guardar cambios</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
                                                                         </form>
-                                                                       <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#editarStockModal'>
-                <i class='fa-solid fa-pen-to-square'></i>
-            </button>
+                                                                       <!-- Botón para abrir el modal de editar stock -->
+                                <button type='button' class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#editarStockModal_$medida_precio->id_dbc'>
+                                    <i class='fa-solid fa-edit'></i>
+                                </button>
         </td>
     </tr>
-    
                                                                 <script>
 function confirmDelete() {
     return confirm('¿Está seguro que quiere eliminar esta medida? Esto también eliminará la medida de los carritos de los usuarios.');
@@ -695,7 +681,36 @@ function confirmDelete() {
                                             </div>
                                         </div>";
 
-                                // Modal para agregar nueva medida
+                                foreach ($medidas as $medida_precio) {
+                                    echo "
+                                            <!-- Modal para editar stock -->
+                                            <div class='modal fade' id='editarStockModal_$medida_precio->id_dbc' tabindex='-1' aria-labelledby='editarStockModalLabel_$medida_precio->id_dbc' aria-hidden='true'>
+                                                <div class='modal-dialog'>
+                                                    <div class='modal-content'>
+                                                        <div class='modal-header'>
+                                                            <h5 class='modal-title' id='editarStockModalLabel_$medida_precio->id_dbc'>Editar Stock</h5>
+                                                            <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                                        </div>
+                                                        <div class='modal-body'>
+                                                            <form  method='post'>
+                                                                <input type='hidden' name='id_dbc' value='$medida_precio->id_dbc'>
+                                                                <div class='mb-3'>
+                                                                    <label for='stock_$medida_precio->id_dbc' class='form-label'>Stock</label>
+                                                                    <input type='number' name='stock' class='form-control' id='stock_$medida_precio->id_dbc' value='$medida_precio->stock' min='10' max='1000' required >
+                                                                </div>
+                                                                <div class='modal-footer'>
+                                                                    <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cerrar</button>
+                                                                    <button type='submit' class='btn btn-primary' name='btneditarstock'>Guardar cambios</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            ";
+                                }
+
+                                // Modal para agregar nueva medida  
                                 if (!empty($medidasDisponibles)) {
                                     echo "
                                         <div class='modal fade' id='agregarMedidaModal_$bolsita->id_bolsa' tabindex='-1' aria-labelledby='agregarMedidaLabel' aria-hidden='true'>
@@ -819,41 +834,6 @@ function confirmDelete() {
                                         </td>
                                     </td>
                                 </tr>";
-
-                                $querystock = "SELECT id_dbc,stock FROM detalle_bc WHERE id_bolsa = $bolsita->id_bolsa";
-                                $stock = $db->select($querystock);
-                                foreach ($stock as $dbc_stock) {
-                                    echo "                                                                         <!-- Modal Editar Stock-->
-                                                                 <!-- Modal Editar Stock -->
-                                    <div class='modal fade' id='editarStockModal' tabindex='-1' aria-labelledby='editarStockModalLabel_$medida_precio->id_dbc' aria-hidden='true'>
-                                        <div class='modal-dialog'>
-                                            <div class='modal-content'>
-                                                <div class='modal-header'>
-                                                    <h1 class='modal-title fs-5' id='editarStockModalLabel_$medida_precio->id_dbc'>Editar Stock</h1>
-                                                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                                                </div>
-                                                <div class='modal-body'>
-                                                    <form method='POST'>
-                                                        <input type='hidden' name='id_bolsa' value='$medida_precio->id_dbc'>
-                                                        <input type='hidden' name='medida' value='$medida_precio->medida'>
-                                                        <div class='mb-3'>
-                                                            <label for='stock_$medida_precio->id_dbc' class='form-label'>Stock</label>
-                                                            <input type='number' name='stock' class='form-control' id='stock_$bolsita->id_bolsa' value='$dbc_stock->id_dbc'>
-                                                        </div>
-                                                        <p>";
-                                    echo $medida_precio->stock;
-                                    echo "</p>
-                                                        <div class='modal-footer'>
-                                                            <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cerrar</button>
-                                                            <button type='submit' class='btn btn-primary' name='btn_editar_stock'>Guardar cambios</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                        ";
-                                }
                             }
                         }
                     } else {
@@ -865,9 +845,12 @@ function confirmDelete() {
             </div>
         </div>
     </div>
+    <!-- Alerta -->
+    <div class="alert floating-alert" id="floatingAlert"></div>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/b820f07375.js" crossorigin="anonymous"></script>
     <script src="../script/script.js"></script>
+    <script src="../js/alertas.js"></script>
 </body>
 
 </html>
