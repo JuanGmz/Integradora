@@ -41,12 +41,12 @@ if (isset($_SESSION["usuario"])) {
     }
 
     if (isset($_POST["editDir"])) {
-        if (strlen($cp) === 5 && strlen($telefono) === 10) {
+        if (strlen($codigo_postal) === 5 && strlen($telefono) === 10) {
             $query = "UPDATE domicilios SET 
                     referencia = '$referencia',
                     estado = '$estado',
                     ciudad = '$ciudad',
-                    codigo_postal = '$cp',
+                    codigo_postal = '$codigo_postal',
                     colonia = '$colonia',
                     calle = '$calle',
                     telefono = $telefono
@@ -54,9 +54,9 @@ if (isset($_SESSION["usuario"])) {
             $db->execute($query);
             showAlert("¡Dirección actualizada con éxito!", "success");
             header("refresh:2;direcciones.php");
-        } else if (strlen($cp) < 5) {
+        } else if (strlen($codigo_postal) < 5) {
             showAlert("El código postal no puede tener menos de 5 caracteres", "error");
-        } else if (strlen($cp) > 5) {
+        } else if (strlen($codigo_postal) > 5) {
             showAlert("El código postal no puede tener más de 5 caracteres", "error");
         } else if (strlen($telefono) > 10) {
             showAlert("El teléfono no puede tener más de 10 caracteres", "error");
@@ -420,6 +420,12 @@ if (isset($_SESSION["usuario"])) {
             return new bootstrap.Popover(popoverTriggerEl)
         })
     </script>
+    <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://kit.fontawesome.com/45ef8dbe96.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 </body>
 
