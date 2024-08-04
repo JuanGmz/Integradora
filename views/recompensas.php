@@ -345,10 +345,10 @@ if (isset($_SESSION["usuario"])) {
                     }
                 }
                 ?>
-                <div class='container mt-4'>
+                <div class='subscription-section container mt-4'>
                     <div class='row'>
                         <div class='col-12 text-center'>
-                            <div class='thank-you-section p-4 rounded-lg shadow-sm'>
+                            <div class=' p-4 rounded-lg shadow-sm'>
                                 <div class='thank-you-content'>
                                     <h3 class='mb-3'>
                                         Gracias por formar parte de la familia SínfoniaCafé&Cultura,
