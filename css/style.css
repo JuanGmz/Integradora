@@ -1015,3 +1015,124 @@ a:hover {
 .crd:hover svg {
   scale: 0;
 }
+/*---------------------- Recompensas card -------------------*/
+.ag-courses_box {
+  padding: 50px 0;
+}
+
+.ag-courses-item_image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity .5s ease;
+  border-radius: 28px;
+  /* Asegura que la imagen tenga los mismos bordes redondeados */
+  overflow: hidden;
+  /* Asegura que la imagen no desborde */
+  z-index: 1;
+}
+
+.ag-courses-item_image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(1px);
+}
+
+.ag-courses-item_link:hover .ag-courses-item_image {
+  opacity: 1;
+}
+
+
+.ag-courses_item {
+  -ms-flex-preferred-size: calc(33.33333% - 30px);
+  flex-basis: calc(33.33333% - 30px);
+  margin: 0 15px 30px;
+  overflow: hidden;
+  border-radius: 28px;
+}
+
+/* Este selector define cada ítem del curso con un ancho calculado del 33.33% menos 30px, agrega márgenes y bordes redondeados, y oculta el desbordamiento */
+
+.ag-courses-item_link {
+  display: block;
+  padding: 30px 20px;
+  background-color: var(--blanco);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Este selector define el enlace de cada ítem del curso como un bloque, con relleno, fondo oscuro y posición relativa para contener elementos posicionales hijos */
+
+.ag-courses-item_link:hover,
+.ag-courses-item_link:hover .ag-courses-item_date {
+  text-decoration: none;
+  color: #FFF;
+}
+
+.ag-courses-item_link:hover,
+.ag-courses-item_link:hover .ag-courses-item_title,
+.ag-courses-item_link:hover .ag-courses-item_date-box {
+  text-decoration: none;
+  color: #FFF;
+}
+
+/* Este selector elimina la decoración del texto y cambia el color del enlace y la fecha al pasar el mouse */
+
+.ag-courses-item_link:hover .ag-courses-item_bg {
+  -webkit-transform: scale(10);
+  -ms-transform: scale(10);
+  transform: scale(10);
+}
+
+/* Este selector escala el fondo del ítem del curso al pasar el mouse */
+
+.ag-courses-item_title {
+  min-height: 30px;
+  margin: 0;
+  overflow: hidden;
+  font-weight: bold;
+  font-size: 10px;
+  color: var(--negro);
+  z-index: 2;
+  position: relative;
+}
+
+/* Este selector define el título del ítem del curso con un alto mínimo, márgenes, fuente en negrita y tamaño grande, color blanco y posición relativa con un z-index para estar sobre otros elementos */
+
+.ag-courses-item_date-box {
+  font-size: 18px;
+  color: var(--negro);
+  z-index: 2;
+  position: relative;
+}
+
+/* Este selector define el contenedor de la fecha del ítem del curso con un tamaño de fuente y color específico, y posición relativa */
+
+.ag-courses-item_date {
+  font-weight: bold;
+  color: var( --color1);
+  -webkit-transition: color .5s ease;
+  -o-transition: color .5s ease;
+  transition: color .5s ease;
+}
+
+/* Este selector define la fecha del ítem del curso con fuente en negrita y un color específico, y una transición suave al cambiar el color */
+
+.ag-courses-item_bg {
+  height: 150px;
+  width: 150px;
+  background-color: #f9b234;
+  z-index: 1;
+  position: absolute;
+  top: -75px;
+  right: -75px;
+  border-radius: 50%;
+  -webkit-transition: all .5s ease;
+  -o-transition: all .5s ease;
+  transition: all .5s ease;
+}
+

@@ -1,5 +1,5 @@
 <?php
-include_once ("../class/database.php");
+include_once("../class/database.php");
 $db = new Database();
 $db->conectarDB();
 session_start();
@@ -27,7 +27,7 @@ if (isset($_SESSION["usuario"])) {
 
 <body>
     <!-- Botón de WhatsApp -->
-     <button id="whatsappButton" class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3" type="button" onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
+    <button id="whatsappButton" class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3" type="button" onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
         <i class="fa-brands fa-whatsapp fa-2x"></i>
     </button>
     <!-- NavBar -->
@@ -36,8 +36,7 @@ if (isset($_SESSION["usuario"])) {
             <a class="navbar-brand" href="../index.php">
                 <img src="../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
             </a>
-            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar"
-                aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -67,14 +66,12 @@ if (isset($_SESSION["usuario"])) {
             </div>
             <?php
             if (isset($_SESSION["usuario"])) {
-                ?>
+            ?>
                 <!-- Navbar con dropdown -->
-                <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
-                    style="left: auto; right: 30px; top: 60px">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
                     <a class="dropdown-item" href="perfil.php">Mi perfil</a>
                     <?php if ($rol[0]->rol === 'administrador') { ?>
                         <a class="dropdown-item" href="../views/adminInicio.php">Administrar</a>
@@ -82,15 +79,14 @@ if (isset($_SESSION["usuario"])) {
                     <?php } ?>
                     <a class="dropdown-item" href="../scripts/login/cerrarsesion.php">Cerrar sesión</a>
                 </div>
-                <?php
+            <?php
             } else {
-                ?>
+            ?>
                 <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
-                <?php
+            <?php
             }
             ?>
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-                aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
@@ -101,18 +97,18 @@ if (isset($_SESSION["usuario"])) {
     <section class="subscription-section d-flex align-items-center justify-content-center m-0 p-0">
         <div class="subscription-content text-center m-0 p-0">
             <?php
-                if (!isset($_SESSION["usuario"])) {
-                    ?>
-                    <h1 class="display-4 fw-bold "><span style="color: #fff;">SínfoniaCafé&Cultura</span></h1>
-                    <h2 class=" fw-bold "><span style="color: #fff;">Obtén recompensas íncreibles</span></h>
-                    <?php
-                } else {
-                    ?>
+            if (!isset($_SESSION["usuario"])) {
+            ?>
+                <h1 class="display-4 fw-bold "><span style="color: #fff;">SínfoniaCafé&Cultura</span></h1>
+                <h2 class=" fw-bold "><span style="color: #fff;">Obtén recompensas íncreibles</span></h>
+                <?php
+            } else {
+                ?>
                     <h1 class="display-4 fw-bold "><span style="color: #fff;">Hola <?php echo $nombre[0]->nombre ?></span></h1>
                     <h3>Comienza a ganar</h3>
-                    <?php
-                }
-            ?>
+                <?php
+            }
+                ?>
         </div>
     </section>
 
@@ -146,78 +142,92 @@ if (isset($_SESSION["usuario"])) {
                                 personas AS p ON c.id_persona = p.id_persona 
                             WHERE p.usuario = '" . $_SESSION["usuario"] . "'";
                 $cliente = $db->select($cliente);
-                ?>
+            ?>
                 <h4>Tu ID de cliente es: <?php echo $cliente[0]->id_cliente ?></h4>
                 <p>Muestra este ID para registrar asistencias con cada compra que realices</p>
                 <?php
                 $recompensas = $db->select($query);
                 foreach ($recompensas as $recompensa) {
-                    ?>
-                    <div class="col-12 col-md-6 col-lg-4 mt-3">
-                        <div class="card">
-                            <div class="card-img p-0">
-                                <img src="../img/recompensas/<?= $recompensa->img_url ?>" alt="recompensa" class="coffee-image">
-                                <h3 class="card-title fw-bold text-center mt-2"><?php echo $recompensa->recompensa ?></h3>
-                                <h5 class="card-text text-center">Asistencias completadas</h5>
-                                <h5 class="card-text text-center"><?php echo $recompensa->asistencias_completadas ?></h5>
-                                <h5 class="card-text text-center">Duración</h5>
-                                <h5 class="card-text text-center"><?php echo $recompensa->periodo ?></h5>
-                                <?php
-                                if ($recompensa->progreso >= $recompensa->condicion) {
-                                    if ($recompensa->canje == 0) {
-                                        ?>
-                                        <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-cafe p-2 m-2" data-bs-toggle="modal"
-                                            data-bs-target="#recompensa_<?php echo $recompensa->id_recompensa ?>">
-                                            Canjear
-                                        </button>
+
+                $colors = ['#a18263', '#835d38', '#343434', '#bf9d60', '#e4ccb4', '#1c2338'];
+                ?>
+
+                    <div class="ag-courses_box col-12 col-md-6 col-lg-4">
+                        <div class="ag-courses_item">
+                            <a href="#" class="ag-courses-item_link">
+                                <?php $random_color = $colors[array_rand($colors)]; ?>
+                                <div class="ag-courses-item_bg" style="background-color: <?php echo $random_color; ?>;"></div>
+
+                                <div class="ag-courses-item_image">
+                                    <img src="../img/recompensas/<?= $recompensa->img_url ?>" alt="Descripción de la imagen">
+                                </div>
+                                <div class="ag-courses-item_title">
+                                    <h3 class="card-title fw-bold text-center mt-2"><?php echo $recompensa->recompensa ?></h3>
+                                </div>
+                                <div class="ag-courses-item_date-box">
+                                    <h5 class="card-text text-center">Asistencias completadas</h5>
+                                    <h5 class="card-text text-center"><?php echo $recompensa->asistencias_completadas ?></h5>
+                                    <h5 class="card-text text-center">Duración</h5>
+                                    <span class="ag-courses-item_date">
+                                        <h5 class="card-text text-center"><?php echo $recompensa->periodo ?></h5>
+                                    </span>
+                                    <div class="d-flex justify-content-center p-2">
                                         <?php
-                                    } else {
+                                        if ($recompensa->progreso >= $recompensa->condicion) {
+                                            if ($recompensa->canje == 0) {
                                         ?>
-                                        <button disabled class="btn btn-secondary m-2 p-2">Recompensa Canjeada</button>
-                                        <?php
-                                    }
-                                    ?>
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="recompensa_<?php echo $recompensa->id_recompensa ?>" tabindex="-1"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Cupón para canjeo</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <h5 class="text-center m-2">Índica al cajero que este es tu cupón de canjeo</h5>
-                                                    <h5 class="text-center fw-bold m-2"><?php echo $recompensa->canje_id ?></h5>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Cerrar</button>
+                                                <!-- Button trigger modal -->
+                                                <button type="button" class="btn btn-cafe p-2 m-2" data-bs-toggle="modal" data-bs-target="#recompensa_<?php echo $recompensa->id_recompensa ?>">
+                                                    Canjear
+                                                </button>
+                                            <?php
+                                            } else {
+                                            ?>
+                                                <button disabled class="btn btn-secondary m-2 p-2">Recompensa Canjeada</button>
+                                            <?php
+                                            }
+                                            ?>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="recompensa_<?php echo $recompensa->id_recompensa ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Cupón para canjeo</h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <h5 class="text-center m-2">Índica al cajero que este es tu cupón de canjeo</h5>
+                                                            <h5 class="text-center fw-bold m-2"><?php echo $recompensa->canje_id ?></h5>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        <?php
+                                        } else {
+                                        ?>
+                                            <button disabled class="btn btn-secondary m-2 p-2">Canjear recompensa</button>
+                                        <?php
+                                        }
+                                        ?>
                                     </div>
-                                    <?php
-                                } else {
-                                    ?>
-                                    <button disabled class="btn btn-secondary m-2 p-2">Canjear recompensa</button>
-                                    <?php
-                                }
-                                ?>
-                            </div>
+                                </div>
+                            </a>
                         </div>
                     </div>
-                    <?php
+
+
+                <?php
                 }
                 ?>
-                    <div class="col-12 mt-5">
-                        <h3>Gracias por formar parte de la familia SínfoniaCafé&Cultura, <?php echo $nombre[0]->nombre ?></h3>
-                    </div>
-                <?php
+                <div class="col-12 mt-5">
+                    <h3>Gracias por formar parte de la familia SínfoniaCafé&Cultura, <?php echo $nombre[0]->nombre ?></h3>
+                </div>
+            <?php
             } else {
-                ?>
+            ?>
                 <div class="text-center fw-bold mt-3">
 
                     <div class="row m-0 p-0">
@@ -225,8 +235,8 @@ if (isset($_SESSION["usuario"])) {
                             <h1>Únete a SínfoniaCafé&Cultura y desbloquea recompensas increíbles por ser cliente</h1>
                         </div>
                         <div class="col-6 col-lg-3 m-0 p-0">
-                                <img src="../img/cafes/coffee-cups.png" alt="cafe" style="height: 100px; width: 100px;">
-                                <p>El mejor café gratis.</p>
+                            <img src="../img/cafes/coffee-cups.png" alt="cafe" style="height: 100px; width: 100px;">
+                            <p>El mejor café gratis.</p>
                         </div>
                         <div class="col-6 col-lg-3 m-0 p-0">
                             <img src="../img/cafes/pastel.png" alt="pasteles" style="height: 100px; width: 100px;">
@@ -262,7 +272,7 @@ if (isset($_SESSION["usuario"])) {
                         </div>
                     </div>
                 </div>
-                <?php
+            <?php
             }
             ?>
         </div>

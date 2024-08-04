@@ -30,7 +30,7 @@ if ($stmt === false) {
             <!DOCTYPE html>
             <html>
             <head>
-                <title>Mensaje</title>
+                <title>Pedido Realizado</title>
                 <link rel="stylesheet" href="../../css/style.css">
                 <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
                 <style>

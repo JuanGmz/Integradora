@@ -137,7 +137,7 @@ if (isset($_POST['btnactualizar'])) {
                                 <a href="adminReservas.php" class="text-light fw-bold fs-5 text-decoration-none ms-5">
                                     Administar Reservas
                                 </a><br><br>
-                                <a href="adminLugares.php" class="text-light fw-bold fs-5 text-decoration-none ms-5">
+                                <a href="adminlugares.php" class="text-light fw-bold fs-5 text-decoration-none ms-5">
                                     Administar Lugares
                                 </a>
                             </div>
@@ -299,7 +299,7 @@ if (isset($_POST['btnactualizar'])) {
                                 <a href="adminReservas.php" class="text-light fw-bold fs-6 text-decoration-none ms-5">
                                     Administar Reservas
                                 </a><br><br>
-                                <a href="adminLugares.php" class="text-light fw-bold fs-6 text-decoration-none ms-5">
+                                <a href="adminlugares.php" class="text-light fw-bold fs-6 text-decoration-none ms-5">
                                     Administar Lugares
                                 </a>
                             </div>
