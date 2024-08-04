@@ -16,12 +16,10 @@ if (isset($_SESSION["usuario"])) {
     $rol = $conexion->select($rolUsuario);
 
     if (isset($_POST["realizarPedido"])) {
-
         if (empty($id_domicilio)) {
             showAlert("Por favor, ingrese un domicilio", "error");
         } else {
             $sql = "CALL SP_Realizar_Pedido($id_cliente, $id_domicilio, $id_mp)";
-
             if ($stmt = $conexion->select($sql)) {
                 showAlert("Error al realizar el pedido", "error");
             } else {
@@ -32,7 +30,8 @@ if (isset($_SESSION["usuario"])) {
 
                     if ($id_pedido) {
                         // Redirigir a la página Folio.php con el ID del pedido
-                        showAlert("¡El pedido ha sido realizado con éxito!", "success");
+                        header("Location:Folio.php?id_pedido=" . $id_pedido);
+                        exit;
                     }
                 }
             }
@@ -329,16 +328,36 @@ if (isset($_SESSION["usuario"])) {
                                 <div class="col-12">
                                     <?php
                                     echo '
-                                    <form method="POST"">
-                                        <div class="d-none">
-                                            <input type="hidden" name="id_mp" value="' . $mp->id_mp . '">
-                                            <input type="hidden" id="hiddenIdDomicilio" name="id_domicilio" value="' . $DOMICIOLIO . '">
-                                            <input type="hidden" name="id_cliente" value="' . $cliente[0]->id_cliente . '">
-                                            <p>Total: <span class="float-end fw-bold">$' . $total . '</span></p>
-                                        </div>
                                         <p class="small text-muted">* No incluye los gastos de envío.</p>
-                                        <button type="submit" class="btn btn-cafe w-100" name="realizarPedido">Realizar pedido</button>
-                                    </form>';
+                                        <!-- Boton para abrir modal de confirmación -->
+                                        <button type="button" class="btn btn-cafe w-100" data-bs-toggle="modal" data-bs-target="#confirmarModal">Realizar Pedido</button>
+                                        <!-- Modal de confirmación -->
+                                        <div class="modal fade" id="confirmarModal" tabindex="-1" aria-labelledby="confirmarModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="confirmarModalLabel">Confirmar pedido</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <h5 class="mb-3">¿Estas seguro de que deseas realizar este pedido?</h5>
+                                                        <form method="POST" action="../../scripts/ecommerce/pedido.php">
+                                                            <div class="d-none">
+                                                                <input type="hidden" name="id_mp" value="' . $mp->id_mp . '">
+                                                                <input type="hidden" id="hiddenIdDomicilio" name="id_domicilio" value="' . $DOMICIOLIO . '">
+                                                                <input type="hidden" name="id_cliente" value="' . $cliente[0]->id_cliente . '">
+                                                                <p>Total: <span class="float-end fw-bold">$' . $total . '</span></p>
+                                                            </div>
+                                                            
+                                                            <div class="text-end">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                                <button type="submit" class="btn btn-cafe" name="realizarPedido">Realizar pedido</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>';
                                     ?>
                                 </div>
                             </div>
