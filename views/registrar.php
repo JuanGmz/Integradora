@@ -7,12 +7,12 @@ $db->conectarDB();
 
 extract($_POST);
 
-$usuarioExistente = "select count(*) as count from personas where usuario = '$usuario'";
-$resultado = $db->select($usuarioExistente);
-
 if (isset($_POST['registrar'])) {
+    $usuarioExistente = "select count(*) as count from personas where usuario = '$usuario'";
+    $resultado = $db->select($usuarioExistente);
     if (!$resultado[0]->count > 0) {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
 
         $telefonoExistente = "SELECT telefono FROM personas WHERE telefono = '$telefono'";
         $telefonoExists = $db->select($telefonoExistente);
