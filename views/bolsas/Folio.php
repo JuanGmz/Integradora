@@ -52,10 +52,59 @@ if (is_array($cliente_result) && count($cliente_result) > 0) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Folio</title>
+    <title>Pedido Realizado</title>
     <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="shortcut icon" href="../../img/Sinfonía-Café-y-Cultura.webp">
+    <style>
+                .card {
+                    border-radius: 10px;
+                }
+
+                .card img {
+                    width: 100%;
+                    height: auto;
+                    border-radius: 10px;
+                }
+
+                .position-relative {
+                    position: relative;
+                }
+
+                .image-wrapper {
+                    position: relative;
+                    overflow: hidden;
+                }
+
+                .gradient-overlay {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: linear-gradient(to left, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 1) 100%);
+                    pointer-events: none;
+                    /* Ensures the overlay doesn't interfere with any interactions */
+                    z-index: 1;
+                    /* Makes sure the gradient overlay is on top of the image */
+                }
+
+
+                /* Media query para resoluciones medias y pequeñas */
+                @media (max-width: 992px) {
+                    .gradient-overlay {
+                        background: linear-gradient(to top, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 1) 100%);
+                    }
+                }
+
+                .card-no-border {
+                    border: none;
+                }
+
+                .card-custom-shadow {
+                    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
+                }
+            </style>
     <?php
 
     include_once("../../scripts/funciones/funciones.php");
@@ -67,7 +116,7 @@ if (is_array($cliente_result) && count($cliente_result) > 0) {
     ?>
 </head>
 
-<body>
+<div>
      <!-- Botón de WhatsApp -->
      <button id="whatsappButton" class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3" type="button" onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
         <i class="fa-brands fa-whatsapp fa-2x"></i>
@@ -134,20 +183,19 @@ if (is_array($cliente_result) && count($cliente_result) > 0) {
         </div>
     </nav>
     <!-- NavBar End -->
-    <div class="container mt-5">
+    <div class="container mt-lg-5">
         <nav aria-label="breadcrumb" class='col-12 d-flex'>
-            <ol class="breadcrumb mt-4">
+            <ol class="breadcrumb">
                 <li class="breadcrumb-item fw-bold"><a href="../../index.php">Inicio</a></li>
                 <li class="breadcrumb-item fw-bold"><a href="../../views/ecommerce.php">E-Commerce</a></li>
                 <li class="breadcrumb-item fw-bold"><a href="../../views/bolsas/Carrito.php">Mi Carrito</a></li>
-                <li class="breadcrumb-item active" aria-current="page"></li>Folio</li>
+                <li class="breadcrumb-item active" aria-current="page"></li>Pedido Realizado</li>
             </ol>
         </nav>
         <!-- Título -->
         <div class="fw-bold ">
-            <h1 class="h1contact">Folio</h1>
+            <h1 class="h1contact">Pedido Realizado</h1>
         </div>
-    </div>
     <!--Contenido-->
     <?php
 
@@ -161,25 +209,60 @@ if (is_array($cliente_result) && count($cliente_result) > 0) {
                             WHERE p.usuario = '" . $_SESSION["usuario"] . "'";
         $cliente = $db->select($cliente);
         $id_pedido=htmlspecialchars($id_pedido);
-        echo '<div class="container text-center mt-3">
-
-        <h4 class="fw-bold p-2">Pedido realizado, ¡Gracias por tu pedido!</h4>
-        <h1 class="mt-4 p-3">Su Folio es: <strong>' . $id_pedido . '</strong></h1>
-        <p class="mt-4">Para realizar el pago de la compra contacte con nuestro siguiente número entre las 9:00AM y 8:00PM para acordar el método de pago</p>
-        <div class="d-flex justify-content-center align-items-center my-4 p-2">
-            <i class="fa-solid fa-phone fs-3 me-3"></i>
-            <span class="fs-3 ">871-641-32147</span>
+        echo '<div class="row text-center mt-3 shadow-lg bg-body mb-3  m-0 p-0 shadow-lg mb-5">
+        <div class="p-0 m-0">
+            <div class="card card-no-border card-custom-shadow">
+                <div class="row g-0">
+                    <div class="col-md-12 col-lg-6 d-flex flex-row align-items-center justify-content-center">
+                        <div class="card-body  text-center m-0 p-0">
+                        <div class="">
+                            <h5 class="card-title fw-bold">¡Gracias por tu compra!</h5>
+                            <i class="fa-solid fa-champagne-glasses fa-2x"></i>
+                            <p class="card-text">Tu folio es: <strong>' . htmlspecialchars($id_pedido) . '</strong></p>
+                            <h4 class="mt-3">Contáctanos para finalizar tu pedido.</h4>
+                            <p>Para realizar el pago contactános entre las 9:00AM y 8:00PM.</p>
+                            <i class="fa-solid fa-phone fs-3 me-3" aria-hidden="true"></i>
+                            <span class="fs-3 ">871-641-32147</span>
+                        </div>
+                        <div class="d-flex justify-content-center align-items-center flex-column">
+                            <div class="container-fluid d-flex justify-content-center align-items-center flex-column">
+                                <div class="row m-3 mb-0 text-center">
+                                    <div class="col-4">
+                                        <a href="https://www.facebook.com/SinfoniaCoffee">
+                                            <i class="fa-brands fa-facebook text-dark fa-2x text-center"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="https://x.com/SinfoniaCoffee">
+                                            <i class="fa-brands fa-twitter text-dark fa-2x text-center"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="https://www.instagram.com/sinfoniacoffee/">
+                                            <i class="fa-brands fa-instagram text-dark fa-2x text-center"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <h4 class="mt-3">Nuestro correo</h4>
+                            <p>SinfoniaCR@gmail.com</p>
+                        </div>
+                            <div class="mt-3 mb-4 justify-content-center d-flex">
+                                <a href="../pedidos.php" class="btn btn-categorias">Ir a mis pedidos</a>
+                                <a href="../ecommerce.php" class="btn btn-categorias ms-2">Volver a comprar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-6 position-relative ">
+                        <div class="image-wrapper w-100 h-100">
+                            <img src="../../img/background_reservas.jpg" class="img-fluid rounded-0 coffee-image " alt="Imagen de compra">
+                            <div class="gradient-overlay"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <p>También nos puede contactar por los siguientes medios</p>
-        <div class="d-flex justify-content-center p-2">
-            <a href="https://www.facebook.com/SinfoniaCoffee" class="text-decoration-none mx-2 blog-card-link">
-                <i class="fa-brands fa-facebook m-3"></i> Sinfonia@facebook.com
-            </a>
-            <a href="mailto:Sinfonia@gmail.com" class="text-decoration-none mx-2 blog-card-link">
-                <i class="fa-solid fa-envelope m-3"></i>Sinfonia@gmail.com
-            </a>
-        </div>
-    </div>';
+        ';
     } else {
         echo '<div class="container text-center mt-3 p-5">
             <h4 class="fw-bold p-2">Para realizar el pedido primero debe iniciar sesión</h4>
@@ -187,7 +270,8 @@ if (is_array($cliente_result) && count($cliente_result) > 0) {
         </div>';
     }
     ?>
-
+    </div>
+    </div>
 
     <!-- Footer -->
     <footer>
@@ -220,6 +304,7 @@ if (is_array($cliente_result) && count($cliente_result) > 0) {
                 </div>
             </div>
         </div>
+
     </footer>
 
     <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

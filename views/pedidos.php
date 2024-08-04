@@ -120,7 +120,21 @@
         <div class="row">
             <?php
             if (empty($pedidos)) {
-                echo "<h3>Aún no se ha realizado ningún pedido</h3>";
+                ?>
+                <div class="row p-0 m-0 d-flex justify-content-center align-items-center">
+                    <div id="category-warning" class="alert text-center p-5 mt-4 mx-4" role="alert">
+                        <div> 
+                            <i class="fa-solid fa-mug-hot fa-4x text-muted"></i>
+                        </div>
+                        <div class='text-center mt-3'>
+                            <h5>Aún no haz realizado ninguna compra.</h5> 
+                        </div>
+                    </div>
+                    <div class="container text-center mb-5">
+                        <a href="ecommerce.php" class="btn btn-cafe">Ver productos</a>
+                    </div>
+                 </div>
+                <?php
             } else {
                 foreach ($pedidos as $pedido) {
                     $id = $pedido->folio;

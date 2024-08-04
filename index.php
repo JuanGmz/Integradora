@@ -136,7 +136,7 @@
                                 La primera barra y expendio de café de especialidad en la laguna.
                                 Café 100% Mexicano seleccionado por nuestro maestro catador y tostador. ☕️♥️
                             </p>
-                            <a href="views/conócenos.php" class="btn btn-cafe ">Ver mas</a>
+                            <a href="views/conocenos.php" class="btn btn-cafe ">Ver Más</a>
                         </div>
                     </div>
                 </div>
@@ -229,7 +229,7 @@
                         echo "<div class='col-9 col-sm-9  col-md-6 p-2 d-flex flex-column justify-content-cente p-lg-2'>";
                         echo "<h5 class='fw-bold mb-3' style='letter-spacing: 1px;'>{$categoria->nombre}</h5>";
                         echo "<p class='text-dark-emphasis mb-4 '>{$categoria->descripcion}</p>";
-                        echo "<a href='views/menu/" . str_replace(' ', '', $categoria->nombre) . ".php' class='btn text-light shadow-lg align-self-start col-12 col-sm-12 col-md-6 col-lg-6 ' style='background: var(--primario);'>Ver Menú</a>";
+                        echo "<a href='views/menu/" . str_replace(' ', '', strtolower($categoria->nombre)) . ".php' class='btn text-light shadow-lg align-self-start col-12 col-sm-12 col-md-6 col-lg-6 ' style='background: var(--primario);'>Ver Menú</a>";
                         echo "</div>";
                         echo "</div>";
                         echo "</div>";

@@ -28,7 +28,7 @@ if (isset($_SESSION["usuario"])) {
     extract($_POST);
 
     if (isset($_POST["addDir"])) {
-        if (strlen($codigo_postal) !== 5) {
+        if (strlen($codigo_postal) != 5) {
             showAlert("El código postal debe tener exactamente 5 caracteres", "error");
         } else if (strlen($telefono) !== 10) {
             showAlert("El teléfono debe tener exactamente 10 caracteres", "error");
@@ -41,12 +41,12 @@ if (isset($_SESSION["usuario"])) {
     }
 
     if (isset($_POST["editDir"])) {
-        if (strlen($cp) === 5 && strlen($telefono) === 10) {
+        if (strlen($codigo_postal) === 5 && strlen($telefono) === 10) {
             $query = "UPDATE domicilios SET 
                     referencia = '$referencia',
                     estado = '$estado',
                     ciudad = '$ciudad',
-                    codigo_postal = '$cp',
+                    codigo_postal = '$codigo_postal',
                     colonia = '$colonia',
                     calle = '$calle',
                     telefono = $telefono
@@ -54,9 +54,9 @@ if (isset($_SESSION["usuario"])) {
             $db->execute($query);
             showAlert("¡Dirección actualizada con éxito!", "success");
             header("refresh:2;direcciones.php");
-        } else if (strlen($cp) < 5) {
+        } else if (strlen($codigo_postal) < 5) {
             showAlert("El código postal no puede tener menos de 5 caracteres", "error");
-        } else if (strlen($cp) > 5) {
+        } else if (strlen($codigo_postal) > 5) {
             showAlert("El código postal no puede tener más de 5 caracteres", "error");
         } else if (strlen($telefono) > 10) {
             showAlert("El teléfono no puede tener más de 10 caracteres", "error");
@@ -200,14 +200,14 @@ if (isset($_SESSION["usuario"])) {
                                 <div class="col-5 m-0 p-0">
                                     <div class="d-flex align-items-center">
                                         <div class="input-group">
-                                            <button type='button' class='btn btn-secondary' data-bs-toggle='popover' title='Información' data-bs-content='No se podrá eliminar si la dirección está registrada en un pedido.'>
-                                                <i class='fa-solid fa-info'></i>
-                                            </button>
                                             <button type="button" class="btn btn-danger <?php echo $direccionEnUso ? 'disabled' : ''; ?>"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#eliminarDireccion<?php echo $domicilio->id_domicilio; ?>"
                                                 <?php echo $direccionEnUso ? 'aria-disabled="true"' : ''; ?>>
                                                 Eliminar
+                                            </button>
+                                            <button type='button' class='btn btn-secondary' data-bs-toggle='popover' title='Información' data-bs-content='No se podrá eliminar si la dirección se encuentra en uso.'>
+                                                <i class='fa-solid fa-info'></i>
                                             </button>
                                         </div>
                                     </div>
@@ -259,7 +259,7 @@ if (isset($_SESSION["usuario"])) {
                                                 <div class="mb-3">
                                                     <label for="cp" class="form-label">Código Postal</label>
                                                     <input type="text" class="form-control" id="cp"
-                                                        value="<?php echo $domicilio->codigo_postal; ?>" name="cp">
+                                                        value="<?php echo $domicilio->codigo_postal; ?>" name="codigo_postal">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="referencia" class="form-label">Referencia</label>
@@ -351,7 +351,7 @@ if (isset($_SESSION["usuario"])) {
                                     </div>
                                     <div class="mb-3">
                                         <label for="cp" class="form-label">Código Postal</label>
-                                        <input type="text" class="form-control" id="cp" name="cp" required>
+                                        <input type="text" class="form-control" id="cp" name="codigo_postal" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="referencia" class="form-label">Referencia</label>
@@ -406,20 +406,26 @@ if (isset($_SESSION["usuario"])) {
             </div>
         </div>
     </footer>
-    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script> 
-    <script src="https://kit.fontawesome.com/45ef8dbe96.js" crossorigin="anonymous"></script> 
-    <script src="../js/alertas.js"></script> 
+    <div class="alert floating-alert" id="floatingAlert">
+        <span id="alertMessage">Mensaje de la alerta.</span>
+    </div>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/b820f07375.js" crossorigin="anonymous"></script>
+    <script src="../script/script.js"></script>
+    <script src="../js/alertas.js"></script>
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Inicializa los popovers
-        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
         var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-            return new bootstrap.Popover(popoverTriggerEl, {
-                container: 'body'
-            });
-        });
-    });
-</script>
+            return new bootstrap.Popover(popoverTriggerEl)
+        })
+    </script>
+    <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://kit.fontawesome.com/45ef8dbe96.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 </body>
 

@@ -117,7 +117,21 @@
                 $sItalianas = $db->select($query);
 
                 if (empty($sItalianas)) {
-                    echo "<h3 class='text-center'>No hay productos en esta categoria</h3>";
+                    ?>
+                    <div class="row p-0 m-0 d-flex justify-content-center align-items-center">
+                        <div id="category-warning" class="alert text-center p-5 mt-4 mx-4" role="alert">
+                            <div>
+                                <i class="fa-solid fa-mug-hot fa-4x text-muted"></i>
+                            </div>
+                            <div class='text-center mt-3'>
+                                <h5>Proximamente...</h5>
+                            </div>
+                        </div>
+                        <div class="container text-center mb-5">
+                            <a href="../menu.php" class="btn btn-cafe">Ver más productos</a>
+                        </div>
+                    </div>
+                    <?php
                 } else {
                     foreach ($sItalianas as $sItaliana) {
                         echo "
