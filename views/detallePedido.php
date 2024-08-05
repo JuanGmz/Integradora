@@ -188,7 +188,7 @@
                                 if ($pedido[0]->costo_envio > 0) {
                                     ?>
                                     <p>Envío: $<?= $pedido[0]->costo_envio ?></p>
-                                <?php
+                                    <?php
                                 } else {
                                     ?>
                                     <p>Envío: Aún no se registra el costo de envío</p>
@@ -229,7 +229,8 @@
                                     <?php
                                 } else {
                                     ?>
-                                    <p>Archivo de Envío: <?= $pedido[0]->documento_url ?></p>
+                                    <p>Documento de envió: <a href='../pdf/<?php echo $pedido[0]->documento_url; ?>'
+                                            download='<?php echo $pedido[0]->documento_url ?>'>Descargar PDF</a></p>
                                     <?php
                                 }
                                 ?>
