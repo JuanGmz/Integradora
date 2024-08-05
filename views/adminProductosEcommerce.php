@@ -41,15 +41,15 @@ if (isset($_POST['btneditarstock'])) {
 <body class="bg-light">
     <div class="container-fluid m-0 h-100">
         <!-- navbar mobile -->
-        <div class="row bg-dark d-block d-lg-none">
+        <div class="row bagr-cafe4 d-block d-lg-none">
             <div class="collapse m-0 p-0" id="navbarToggleExternalContent" data-bs-theme="dark">
-                <div class="bg-dark p-4 pb-1">
+                <div class="bagr-cafe4 p-4 pb-1">
                     <h5 class="text-body-emphasis h4">Administrar</h5>
                 </div>
                 <div class="accordion accordion-flush" id="accordionMobile">
                     <div class="accordion-item m-0 p-0 row">
                         <h2 class="accordion-header">
-                            <button class="row accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
+                            <button class="row accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-inicio" aria-expanded="false"
                                 aria-controls="flush-inicio">
                                 <div class="col-6">
@@ -63,7 +63,7 @@ if (isset($_POST['btneditarstock'])) {
                     </div>
                     <div class="accordion-item row m-0 p-0">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-menu" aria-expanded="false"
                                 aria-controls="flush-menu">
                                 <div class="col-8">
@@ -76,7 +76,7 @@ if (isset($_POST['btneditarstock'])) {
                             </button>
                         </h2>
                         <div id="flush-menu" class="accordion-collapse collapse" data-bs-parent="#accordionMobile">
-                            <div class="accordion-body bg-dark">
+                            <div class="accordion-body bagr-cafe4">
                                 <a href="adminMenu.php" class="ms-5 text-light fw-bold fs-5 text-decoration-none"
                                     aria-current="true">
                                     Administrar Menú
@@ -86,7 +86,7 @@ if (isset($_POST['btneditarstock'])) {
                     </div>
                     <div class="accordion-item row m-0 p-0">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-events" aria-expanded="false"
                                 aria-controls="flush-events">
                                 <div class="col-8">
@@ -99,7 +99,7 @@ if (isset($_POST['btneditarstock'])) {
                             </button>
                         </h2>
                         <div id="flush-events" class="accordion-collapse collapse" data-bs-parent="#accordionMobile">
-                            <div class="accordion-body bg-dark">
+                            <div class="accordion-body bagr-cafe4">
                                 <a href="adminEventos.php" class="text-light fw-bold fs-5 text-decoration-none ms-5"
                                     aria-current="true">
                                     Administrar Eventos
@@ -115,7 +115,7 @@ if (isset($_POST['btneditarstock'])) {
                     </div>
                     <div class="accordion-item row m-0 p-0">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-ecommerce" aria-expanded="false"
                                 aria-controls="flush-ecommerce">
                                 <div class="col-8">
@@ -128,7 +128,7 @@ if (isset($_POST['btneditarstock'])) {
                             </button>
                         </h2>
                         <div id="flush-ecommerce" class="accordion-collapse collapse" data-bs-parent="#accordionMobile">
-                            <div class="accordion-body bg-dark">
+                            <div class="accordion-body bagr-cafe4">
                                 <a href="adminPedidos.php" class="fw-bold fs-5 ms-5 text-light text-decoration-none"
                                     aria-current="true">
                                     Administrar Pedidos
@@ -142,7 +142,7 @@ if (isset($_POST['btneditarstock'])) {
                     </div>
                     <div class="accordion-item row m-0 p-0">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-blog" aria-expanded="false"
                                 aria-controls="flush-blog">
                                 <div class="col-8">
@@ -155,7 +155,7 @@ if (isset($_POST['btneditarstock'])) {
                             </button>
                         </h2>
                         <div id="flush-blog" class="accordion-collapse collapse" data-bs-parent="#accordionMobile">
-                            <div class="accordion-body bg-dark">
+                            <div class="accordion-body bagr-cafe4">
                                 <a href="adminPublicaciones.php"
                                     class="fw-bold fs-5 ms-5 text-light text-decoration-none" aria-current="true">
                                     Administrar Publicaciones
@@ -165,7 +165,7 @@ if (isset($_POST['btneditarstock'])) {
                     </div>
                     <div class="accordion-item row m-0 p-0">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-rewards" aria-expanded="false"
                                 aria-controls="flush-rewards">
                                 <div class="col-8">
@@ -178,7 +178,7 @@ if (isset($_POST['btneditarstock'])) {
                             </button>
                         </h2>
                         <div id="flush-rewards" class="accordion-collapse collapse" data-bs-parent="#accordionMobile">
-                            <div class="accordion-body bg-dark">
+                            <div class="accordion-body bagr-cafe4">
                                 <a href="adminRecompensas.php" class="fw-bold fs-5 ms-5 text-light text-decoration-none"
                                     aria-current="true">
                                     Administrar Recompensas
@@ -188,7 +188,7 @@ if (isset($_POST['btneditarstock'])) {
                     </div>
                 </div>
             </div>
-            <nav class="navbar navbar-dark bg-dark">
+            <nav class="navbar navbar-dark bagr-cafe4">
                 <div class="container-fluid">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
@@ -197,7 +197,7 @@ if (isset($_POST['btneditarstock'])) {
                     </button>
                     <h1 class="fw-bold text-light pt-2 me-auto">Productos</h1>
                     <!-- Botón para volver atras -->
-                    <button class="btn btn-dark">
+                    <button class="btn bagr-cafe4">
                         <a href="../index.php" class="text-decoration-none">
                             <i class="fa-solid fa-house text-light fa-2x"></i>
                         </a>
@@ -208,7 +208,7 @@ if (isset($_POST['btneditarstock'])) {
 
         <div class="row">
             <!-- navbar pc -->
-            <div class="col-lg-3 bg-dark h-100 position-fixed d-none d-lg-block">
+            <div class="col-lg-3 bagr-cafe4 h-100 position-fixed d-none d-lg-block shadow">
                 <h4 class="text-center text-light m-3 fs-2 fw-bold">Administrar</h4>
                 <div class="row">
                     <div class="col-12 text-center">
@@ -217,7 +217,7 @@ if (isset($_POST['btneditarstock'])) {
                 </div>
                 <div class="accordion accordion-flush" id="accordionPc">
                     <div class=" ms-2 fs-3 mt-4 mb-3">
-                        <a class="fw-bold bg-dark text-light text-decoration-none" href="adminInicio.php"
+                        <a class="fw-bold bagr-cafe4 text-light text-decoration-none" href="adminInicio.php"
                             aria-expanded="false">
                             <i class="fa-solid fa-house-laptop"></i>
                             Inicio
@@ -225,7 +225,7 @@ if (isset($_POST['btneditarstock'])) {
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-menu" aria-expanded="false"
                                 aria-controls="flush-menu">
                                 <div class="col-6">
@@ -238,7 +238,7 @@ if (isset($_POST['btneditarstock'])) {
                             </button>
                         </h2>
                         <div id="flush-menu" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
-                            <div class="accordion-body bg-dark">
+                            <div class="accordion-body bagr-cafe4">
                                 <a href="adminMenu.php" class="ms-5 text-light fw-bold fs-6 text-decoration-none"
                                     aria-current="true">
                                     Administrar Menú
@@ -248,7 +248,7 @@ if (isset($_POST['btneditarstock'])) {
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-events" aria-expanded="false"
                                 aria-controls="flush-events">
                                 <div class="col-6">
@@ -261,7 +261,7 @@ if (isset($_POST['btneditarstock'])) {
                             </button>
                         </h2>
                         <div id="flush-events" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
-                            <div class="accordion-body bg-dark">
+                            <div class="accordion-body bagr-cafe4">
                                 <a href="adminEventos.php" class="text-light fw-bold fs-6 text-decoration-none ms-5"
                                     aria-current="true">
                                     Administrar Eventos
@@ -277,7 +277,7 @@ if (isset($_POST['btneditarstock'])) {
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-ecommerce" aria-expanded="false"
                                 aria-controls="flush-ecommerce">
                                 <div class="col-8">
@@ -290,7 +290,7 @@ if (isset($_POST['btneditarstock'])) {
                             </button>
                         </h2>
                         <div id="flush-ecommerce" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
-                            <div class="accordion-body bg-dark">
+                            <div class="accordion-body bagr-cafe4">
                                 <a href="adminPedidos.php" class="fw-bold fs-6 ms-5 text-light text-decoration-none"
                                     aria-current="true">
                                     Administrar Pedidos
@@ -304,7 +304,7 @@ if (isset($_POST['btneditarstock'])) {
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-blog" aria-expanded="false"
                                 aria-controls="flush-blog">
                                 <div class="col-8">
@@ -317,7 +317,7 @@ if (isset($_POST['btneditarstock'])) {
                             </button>
                         </h2>
                         <div id="flush-blog" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
-                            <div class="accordion-body bg-dark">
+                            <div class="accordion-body bagr-cafe4">
                                 <a href="adminPublicaciones.php"
                                     class="fw-bold fs-6 ms-5 text-light text-decoration-none" aria-current="true">
                                     Administrar Publicaciones
@@ -327,7 +327,7 @@ if (isset($_POST['btneditarstock'])) {
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bg-dark text-light" type="button"
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-rewards" aria-expanded="false"
                                 aria-controls="flush-rewards">
                                 <div class="col-8">
@@ -340,7 +340,7 @@ if (isset($_POST['btneditarstock'])) {
                             </button>
                         </h2>
                         <div id="flush-rewards" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
-                            <div class="accordion-body bg-dark">
+                            <div class="accordion-body bagr-cafe4">
                                 <a href="adminRecompensas.php" class="fw-bold fs-6 ms-5 text-light text-decoration-none"
                                     aria-current="true">
                                     Administrar Recompensa
@@ -353,8 +353,8 @@ if (isset($_POST['btneditarstock'])) {
 
             <div class="col-lg-9 offset-lg-3 p-0">
                 <!-- AQUI VA EL CONTENIDO DE LA PAGINAAAAAAAAAAAA -->
-                <div class="row p-0 m-0 bg-dark">
-                    <div class="row p-3 m-0 shadow-lg bg-dark d-none d-lg-flex">
+                <div class="row p-0 m-0 bagr-cafe4">
+                    <div class="row p-3 m-0 shadow-lg bagr-cafe4 d-none d-lg-flex">
                         <div class="col-3">
                             <h1 class="fw-bold text-light d-none d-lg-block">Productos</h1>
                         </div>
