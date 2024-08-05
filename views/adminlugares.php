@@ -343,13 +343,13 @@ if ($rol[0]->rol !== 'administrador') {
                 <div class="row p-0 m-0 bg-dark">
                     <div class="row p-3 m-0 shadow-lg">
                         <div class="col-3 d-flex align-items-center">
-                            <h1 class="text-light fw-bold mb-0">Ubicaciones</h1>
+                            <h1 class="text-light fw-bold mb-0 d-none d-lg-block">Ubicaciones</h1>
                         </div>
                         <div class="col-9 d-flex justify-content-end align-items-center gap-3">
                             <!-- Botón que activa el modal de agregar -->
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#agregarProducto">
-                                Agregar nueva ubicación
+                                Agregar ubicación
                             </button>
                             <!-- Modal de agregar -->
                             <div class="modal fade" id="agregarProducto" tabindex="-1"
