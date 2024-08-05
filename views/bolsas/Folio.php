@@ -217,6 +217,7 @@ if (is_array($cliente_result) && count($cliente_result) > 0) {
                         <div class="card-body  text-center m-0 p-0">
                         <div class="">
                             <h5 class="card-title fw-bold">¡Gracias por tu compra!</h5>
+                            <h5>Tienes 48 horas para realizar el pago.</h5>
                             <i class="fa-solid fa-champagne-glasses fa-2x"></i>
                             <p class="card-text">Tu folio es: <strong>' . htmlspecialchars($id_pedido) . '</strong></p>
                             <h4 class="mt-3">Contáctanos para finalizar tu pedido.</h4>
