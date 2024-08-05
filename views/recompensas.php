@@ -1,5 +1,5 @@
 <?php
-include_once ("../class/database.php");
+include_once("../class/database.php");
 $db = new Database();
 $db->conectarDB();
 session_start();
@@ -71,10 +71,7 @@ if (isset($_SESSION["usuario"])) {
 
 <body>
     <!-- Botón de WhatsApp -->
-    <button id="whatsappButton"
-        class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3"
-        type="button"
-        onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
+    <button id="whatsappButton" class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3" type="button" onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
         <i class="fa-brands fa-whatsapp fa-2x"></i>
     </button>
     <!-- NavBar -->
@@ -83,8 +80,7 @@ if (isset($_SESSION["usuario"])) {
             <a class="navbar-brand" href="../index.php">
                 <img src="../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
             </a>
-            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar"
-                aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -114,14 +110,12 @@ if (isset($_SESSION["usuario"])) {
             </div>
             <?php
             if (isset($_SESSION["usuario"])) {
-                ?>
+            ?>
                 <!-- Navbar con dropdown -->
-                <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
-                    style="left: auto; right: 30px; top: 60px">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
                     <a class="dropdown-item" href="perfil.php">Mi perfil</a>
                     <?php if ($rol[0]->rol === 'administrador') { ?>
                         <a class="dropdown-item" href="../views/adminInicio.php">Administrar</a>
@@ -129,15 +123,14 @@ if (isset($_SESSION["usuario"])) {
                     <?php } ?>
                     <a class="dropdown-item" href="../scripts/login/cerrarsesion.php">Cerrar sesión</a>
                 </div>
-                <?php
+            <?php
             } else {
-                ?>
+            ?>
                 <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
-                <?php
+            <?php
             }
             ?>
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-                aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
@@ -149,18 +142,18 @@ if (isset($_SESSION["usuario"])) {
         <div class="subscription-content text-center m-0 p-0">
             <?php
             if (!isset($_SESSION["usuario"])) {
-                ?>
+            ?>
                 <h1 class="display-4 fw-bold "><span style="color: #fff;">SínfoniaCafé&Cultura</span></h1>
                 <h2 class=" fw-bold "><span style="color: #fff;">Obtén recompensas íncreibles</span></h>
-                    <?php
+                <?php
             } else {
                 ?>
                     <h1 class="display-4 fw-bold "><span style="color: #fff;">Hola <?php echo $nombre[0]->nombre ?></span>
                     </h1>
                     <h3>Comienza a ganar</h3>
-                    <?php
+                <?php
             }
-            ?>
+                ?>
         </div>
     </section>
 
@@ -259,13 +252,132 @@ if (isset($_SESSION["usuario"])) {
             </div>
         </div>
     </div>";
-
                 } else {
                     foreach ($recompensas as $recompensa) {
 
                         $colors = ['#a18263', '#835d38', '#343434', '#bf9d60', '#e4ccb4', '#1c2338'];
-                        ?>
+            ?>
+                        <style>
+                            .ag-courses_box {
+                                padding: 50px 0;
+                            }
 
+                            .ag-courses-item_image {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 100%;
+                                opacity: 0;
+                                transition: opacity .5s ease;
+                                border-radius: 28px;
+                                /* Asegura que la imagen tenga los mismos bordes redondeados */
+                                overflow: hidden;
+                                /* Asegura que la imagen no desborde */
+                                z-index: 1;
+                            }
+
+                            .ag-courses-item_image img {
+                                width: 100%;
+                                height: 100%;
+                                object-fit: cover;
+                                filter: blur(1px);
+                            }
+
+                            .ag-courses-item_link:hover .ag-courses-item_image {
+                                opacity: 1;
+                            }
+
+
+                            .ag-courses_item {
+                                -ms-flex-preferred-size: calc(33.33333% - 30px);
+                                flex-basis: calc(33.33333% - 30px);
+                                margin: 0 15px 30px;
+                                overflow: hidden;
+                                border-radius: 28px;
+                            }
+
+                            /* Este selector define cada ítem del curso con un ancho calculado del 33.33% menos 30px, agrega márgenes y bordes redondeados, y oculta el desbordamiento */
+
+                            .ag-courses-item_link {
+                                display: block;
+                                padding: 30px 20px;
+                                background-color: var(--blanco);
+                                overflow: hidden;
+                                position: relative;
+                            }
+
+                            /* Este selector define el enlace de cada ítem del curso como un bloque, con relleno, fondo oscuro y posición relativa para contener elementos posicionales hijos */
+
+                            .ag-courses-item_link:hover,
+                            .ag-courses-item_link:hover .ag-courses-item_date {
+                                text-decoration: none;
+                                color: #FFF;
+                            }
+
+                            .ag-courses-item_link:hover,
+                            .ag-courses-item_link:hover .ag-courses-item_title,
+                            .ag-courses-item_link:hover .ag-courses-item_date-box {
+                                text-decoration: none;
+                                color: #FFF;
+                            }
+
+                            /* Este selector elimina la decoración del texto y cambia el color del enlace y la fecha al pasar el mouse */
+
+                            .ag-courses-item_link:hover .ag-courses-item_bg {
+                                -webkit-transform: scale(10);
+                                -ms-transform: scale(10);
+                                transform: scale(10);
+                            }
+
+                            /* Este selector escala el fondo del ítem del curso al pasar el mouse */
+
+                            .ag-courses-item_title {
+                                min-height: 30px;
+                                margin: 0;
+                                overflow: hidden;
+                                font-weight: bold;
+                                font-size: 10px;
+                                color: var(--negro);
+                                z-index: 2;
+                                position: relative;
+                            }
+
+                            /* Este selector define el título del ítem del curso con un alto mínimo, márgenes, fuente en negrita y tamaño grande, color blanco y posición relativa con un z-index para estar sobre otros elementos */
+
+                            .ag-courses-item_date-box {
+                                font-size: 18px;
+                                color: var(--negro);
+                                z-index: 2;
+                                position: relative;
+                            }
+
+                            /* Este selector define el contenedor de la fecha del ítem del curso con un tamaño de fuente y color específico, y posición relativa */
+
+                            .ag-courses-item_date {
+                                font-weight: bold;
+                                color: var(--color1);
+                                -webkit-transition: color .5s ease;
+                                -o-transition: color .5s ease;
+                                transition: color .5s ease;
+                            }
+
+                            /* Este selector define la fecha del ítem del curso con fuente en negrita y un color específico, y una transición suave al cambiar el color */
+
+                            .ag-courses-item_bg {
+                                height: 150px;
+                                width: 150px;
+                                background-color: #f9b234;
+                                z-index: 1;
+                                position: absolute;
+                                top: -75px;
+                                right: -75px;
+                                border-radius: 50%;
+                                -webkit-transition: all .5s ease;
+                                -o-transition: all .5s ease;
+                                transition: all .5s ease;
+                            }
+                        </style>
                         <div class="ag-courses_box col-12 col-md-6 col-lg-4">
                             <div class="ag-courses_item">
                                 <a href="#" class="ag-courses-item_link">
@@ -289,29 +401,26 @@ if (isset($_SESSION["usuario"])) {
                                             <?php
                                             if ($recompensa->progreso >= $recompensa->condicion) {
                                                 if ($recompensa->canje == 0) {
-                                                    ?>
+                                            ?>
                                                     <!-- Button trigger modal -->
-                                                    <button type="button" class="btn btn-cafe p-2 m-2" data-bs-toggle="modal"
-                                                        data-bs-target="#recompensa_<?php echo $recompensa->id_recompensa ?>">
+                                                    <button type="button" class="btn btn-cafe p-2 m-2" data-bs-toggle="modal" data-bs-target="#recompensa_<?php echo $recompensa->id_recompensa ?>">
                                                         Canjear
                                                     </button>
-                                                    <?php
+                                                <?php
                                                 } else {
-                                                    ?>
+                                                ?>
                                                     <button disabled class="btn btn-secondary m-2 p-2">Recompensa Canjeada</button>
-                                                    <?php
+                                                <?php
                                                 }
                                                 ?>
                                                 <!-- Modal -->
-                                                <div class="modal fade" id="recompensa_<?php echo $recompensa->id_recompensa ?>"
-                                                    tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="recompensa_<?php echo $recompensa->id_recompensa ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h1 class="modal-title fs-5" id="exampleModalLabel">Cupón para canjeo
                                                                 </h1>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                                    aria-label="Close"></button>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
                                                                 <h5 class="text-center m-2">Índica al cajero que este es tu cupón de
@@ -320,17 +429,16 @@ if (isset($_SESSION["usuario"])) {
                                                                 </h5>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    data-bs-dismiss="modal">Cerrar</button>
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <?php
+                                            <?php
                                             } else {
-                                                ?>
+                                            ?>
                                                 <button disabled class="btn btn-secondary m-2 p-2">Canjear recompensa</button>
-                                                <?php
+                                            <?php
                                             }
                                             ?>
                                         </div>
@@ -340,7 +448,7 @@ if (isset($_SESSION["usuario"])) {
                         </div>
 
 
-                        <?php
+                <?php
 
                     }
                 }
@@ -352,8 +460,7 @@ if (isset($_SESSION["usuario"])) {
                                 <div class='thank-you-content'>
                                     <h3 class='mb-3'>
                                         Gracias por formar parte de la familia SínfoniaCafé&Cultura,
-                                        <span
-                                            style="color: #a18263;"><?php echo htmlspecialchars($nombre[0]->nombre); ?></span>
+                                        <span style="color: #a18263;"><?php echo htmlspecialchars($nombre[0]->nombre); ?></span>
                                     </h3>
                                     <p class='lead'>
                                         Nos alegra tenerte con nosotros. ¡Estamos emocionados por las experiencias y
@@ -366,9 +473,9 @@ if (isset($_SESSION["usuario"])) {
                         </div>
                     </div>
                 </div>
-                <?php
+            <?php
             } else {
-                ?>
+            ?>
                 <div class=" text-center fw-bold mt-3">
 
                     <div class="row m-0 p-0">
@@ -400,13 +507,11 @@ if (isset($_SESSION["usuario"])) {
                                 funciona nuestro sistema de recompensas</h1>
                             <div class="row m-0 p-0">
                                 <div class="col-12 col-lg-4 m-0 p-0">
-                                    <img src="../img/cafes/telefono-inteligente.png" alt="telefono"
-                                        style="height: 100px; width: 100px;">
+                                    <img src="../img/cafes/telefono-inteligente.png" alt="telefono" style="height: 100px; width: 100px;">
                                     <p>Registrate o inicia sesión para comenzar a ganar.</p>
                                 </div>
                                 <div class="col-12 col-lg-4">
-                                    <img src="../img/cafes/puesto-de-comida.png" alt="local"
-                                        style="height: 100px; width: 100px;">
+                                    <img src="../img/cafes/puesto-de-comida.png" alt="local" style="height: 100px; width: 100px;">
                                     <p>Visita nuestro local, realiza una compra y solicita que sea
                                         registrada para obtener
                                         una asistencia.</p>
@@ -420,7 +525,7 @@ if (isset($_SESSION["usuario"])) {
                         </div>
                     </div>
                 </div>
-                <?php
+            <?php
             }
             ?>
         </div>

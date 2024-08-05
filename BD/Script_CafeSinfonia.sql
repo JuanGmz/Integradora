@@ -836,46 +836,49 @@ CREATE PROCEDURE SP_Realizar_Pedido(
     IN p_id_domicilio INT,
     IN p_id_mp INT
 )
-BEGIN 
+BEGIN
     DECLARE v_monto_total DOUBLE;
     DECLARE v_count INT;
     DECLARE v_pedidos_pendientes INT;
     DECLARE v_id_pedido INT;
     DECLARE v_mensaje VARCHAR(255);
 
-    -- Contar los pedidos pendientes del cliente
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        SET v_mensaje = 'No hay suficiente stock para realizar el pedido.';
+        SELECT NULL AS id_pedido, v_mensaje AS mensaje;
+    END;
+
+    START TRANSACTION;
+
     SELECT COUNT(*) INTO v_pedidos_pendientes
     FROM pedidos
     WHERE id_cliente = p_id_cliente AND estatus = 'Pendiente';
 
-    -- Verificar si el cliente ya tiene 5 pedidos pendientes
     IF v_pedidos_pendientes >= 5 THEN
         SET v_mensaje = 'Ya tienes 5 pedidos pendientes. No puedes realizar más pedidos hasta que se cancele o finalice alguno.';
         SELECT NULL AS id_pedido, v_mensaje AS mensaje;
     ELSE
-        -- Verifica si el carrito tiene artículos para el cliente especificado
         SELECT COUNT(*) INTO v_count FROM carrito WHERE id_cliente = p_id_cliente;
 
         IF v_count > 0 THEN
-            -- Calcula el monto total del carrito
             SELECT SUM(monto) INTO v_monto_total FROM carrito WHERE id_cliente = p_id_cliente;
 
-            -- Inserta el pedido en la tabla pedidos
             INSERT INTO pedidos(id_cliente, id_domicilio, id_mp, monto_total)
             VALUES (p_id_cliente, p_id_domicilio, p_id_mp, v_monto_total);
 
-            -- Obtiene el ID del pedido recién creado
             SET v_id_pedido = LAST_INSERT_ID();
 
-            -- Devuelve el ID del pedido y un mensaje
             SET v_mensaje = 'Pedido realizado con éxito';
             SELECT v_id_pedido AS id_pedido, v_mensaje AS mensaje;
         ELSE
-            -- Devuelve un mensaje si el carrito está vacío
             SET v_mensaje = 'El carrito está vacío';
             SELECT NULL AS id_pedido, v_mensaje AS mensaje;
         END IF;
     END IF;
+
+    COMMIT;
 END //
 
 DELIMITER ;
