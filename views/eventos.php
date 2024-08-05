@@ -180,17 +180,10 @@
 
                         if (!empty($eventos)) {
                             foreach ($eventos as $evento) {
-<<<<<<< HEAD
-                                echo "  <div class='row justify-content-center mb-4 p-2 text-center'>";
-                                echo "      <div class='col-12 col-md-8 d-flex align-items-center'>";
-                                echo "          <div class='d-flex flex-wrap w-100 d-flex justify-content-center'>";
-                                echo "              <div class='col-12 col-md-11 p-2 col-sm-10 col-lg-6'>";
-=======
                                 echo "  <div class='row justify-content-center mb-4 p-2'>";
                                 echo "      <div class='col-12 col-md-8 d-flex align-items-center bg-body shadow-lg rounded m-0 p-0'>";
                                 echo "          <div class='d-flex flex-wrap w-100 d-flex justify-content-center p-0 m-0'>";
                                 echo "              <div class='col-12 col-md-11 col-sm-10 col-lg-6'>";
->>>>>>> c810a6198d30940a36ea69c10965181a8a69d241
                                 echo "                  <img src='../img/eventos/{$evento->img_url}' class='card-img-top img-fluid' alt='...' style='height: 300px; object-fit: cover;'>";
                                 echo "              </div>";
                                 echo "              <div class='col-12 col-sm-9 col-md-11 col-lg-6 p-2 d-flex flex-column justify-content-center align-items-center p-lg-2'>";
