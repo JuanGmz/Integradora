@@ -130,13 +130,14 @@
             <div class="col-12 col-lg-7 me-5">
                 <?php
                 foreach ($productos as $producto) {
+                    $v_monto = formatPrecio($producto->monto);
                     ?>
                     <div class="row p-3 mb-3 bg-body rounded shadow-lg d-lg-flex justify-content-center align-items-center">
                         <div class="col-8">
                             <p>Producto: <?= $producto->nombre ?> (<?= $producto->proceso ?>)</p>
                             <p>Cantidad: <?= $producto->cantidad ?></p>
                             <p>Medida: <?= $producto->medida ?></p>
-                            <p>Costo: $<?= $producto->monto ?></p>
+                            <p>Costo: $<?= $v_monto ?></p>
                         </div>
                         <div class="col-4 text-end">
                             <img src="../img/bolsas/<?php echo $producto->img_url; ?>" class="img-fluid rounded"
@@ -183,14 +184,16 @@
                         </div>
                         <hr class="m-0">
                         <?php
+                        $v_monto_total = formatPrecio($pedido[0]->monto_total);
+                        $v_costo_envio = formatPrecio($pedido[0]->costo_envio);
                         ?>
                         <div class="row mt-3">
                             <div class="col-12">
-                                <p>Productos: $<?= $pedido[0]->monto_total ?></p>
+                                <p>Productos: $<?= $v_monto_total ?></p>
                                 <?php
                                 if ($pedido[0]->costo_envio > 0) {
                                     ?>
-                                    <p>Envío: $<?= $pedido[0]->costo_envio ?></p>
+                                    <p>Envío: $<?= $v_costo_envio ?></p>
                                     <?php
                                 } else {
                                     ?>
@@ -200,13 +203,14 @@
                                 ?>
                                 <?php
                                 $total = $pedido[0]->monto_total + $pedido[0]->costo_envio;
+                                $v_total = formatPrecio($total);
                                 ?>
                             </div>
                         </div>
                         <hr class="m-0">
                         <div class="row mt-3">
                             <div class="col-12">
-                                <p>Total: $<?= $total ?></p>
+                                <p>Total: $<?= $v_total ?></p>
                             </div>
                         </div>
                         <hr class="m-0">
