@@ -335,7 +335,7 @@ id_categoria int not null,
 nombre nvarchar(150) not null,
 descripcion nvarchar (300) not null,
 img_url nvarchar(255)not null,
-estatus boolean,
+estatus boolean default true,
 primary key(id_pm),
 foreign key (id_categoria) references categorias(id_categoria)
 );
@@ -1158,7 +1158,7 @@ BEGIN
 	JOIN
 		categorias AS c ON pm.id_categoria = c.id_categoria
 	WHERE
-		c.nombre = categoria
+		c.nombre = categoria and pm.estatus = true
 	ORDER BY 
 		pm.nombre ASC;
 END//
@@ -1198,7 +1198,7 @@ select
     er.c_boletos AS boletos,
     er.monto_total AS montoTotal,
     er.fecha_hora_reserva as fechaHoraReserva,
-    e.nombre as EVENTO,
+    e.nombre as evento,
     e.id_evento,
     e.precio_boleto,
     e.fecha_evento as fechaEvento
