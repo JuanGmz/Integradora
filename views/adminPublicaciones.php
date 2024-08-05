@@ -24,6 +24,7 @@ if ($rol[0]->rol !== 'administrador') {
     <link rel="shortcut icon" href="../img/Sinfonía-Café-y-Cultura.webp">
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/scrollbar.css">
 </head>
 
 <body style="background: var(--color6);">
