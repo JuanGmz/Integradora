@@ -105,7 +105,7 @@ if ($_POST) {
     <link rel="stylesheet" href="../css/scrollbar.css">
 </head>
 
-<body class="bg-light">
+<body style="background: var(--color6);">
     <div class="container-fluid m-0 h-100">
         <!-- navbar mobile -->
         <div class="row bg-dark d-block d-lg-none">
@@ -428,19 +428,19 @@ if ($_POST) {
                         <div class="col-9 d-flex justify-content-end align-items-center gap-1 gap-lg-3">
                             <!-- Aquí va el botón del modal para registrar asistencias -->
                             <!-- Botón para registrar -->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-cafe" data-bs-toggle="modal"
                                 data-bs-target="#canjearRecompensa">
                                 Canjear recompensa
                             </button>
                             <!-- Aquí va el botón del modal para registrar asistencias -->
                             <!-- Botón para registrar -->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-cafe" data-bs-toggle="modal"
                                 data-bs-target="#registrarAsistencias">
                                 Registrar Asistencia
                             </button>
                             <!-- Aquí va el botón del modal para registrar recompensas -->
                             <!-- Botón para agregar -->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-cafe" data-bs-toggle="modal"
                                 data-bs-target="#agregarRecompensa">
                                 Agregar Recompensa
                             </button>
@@ -503,7 +503,7 @@ if ($_POST) {
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Cancelar</button>
                                         <!-- Botón para agregar -->
-                                        <button type="submit" class="btn btn-primary" name="agRecompensa">Agregar
+                                        <button type="submit" class="btn btn-cafe" name="agRecompensa">Agregar
                                             Recompensa</button>
                                     </div>
                                 </form>
@@ -532,7 +532,7 @@ if ($_POST) {
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Cancelar</button>
                                         <!-- Botón para agregar -->
-                                        <button type="submit" class="btn btn-primary" name="regAsistencia">Registrar
+                                        <button type="submit" class="btn btn-cafe" name="regAsistencia">Registrar
                                             Asistencia</button>
                                     </div>
                                 </form>
@@ -561,7 +561,7 @@ if ($_POST) {
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Cancelar</button>
                                         <!-- Botón para agregar -->
-                                        <button type="submit" class="btn btn-primary" name="canjebtn">Canjear
+                                        <button type="submit" class="btn btn-cafe" name="canjebtn">Canjear
                                             Recompensa</button>
                                     </div>
                                 </form>
@@ -573,7 +573,7 @@ if ($_POST) {
                     <div class="col-6 text-center">
                         <!-- Aquí va el botón del modal para registrar asistencias -->
                         <!-- Botón para registrar -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        <button type="button" class="btn btn-cafe" data-bs-toggle="modal"
                             data-bs-target="#canjearRecompensa">
                             Canjear recompensa
                         </button>
@@ -581,13 +581,13 @@ if ($_POST) {
                     <div class="col-6 text-center">
                         <!-- Aquí va el botón del modal para registrar asistencias -->
                         <!-- Botón para registrar -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        <button type="button" class="btn btn-cafe" data-bs-toggle="modal"
                             data-bs-target="#registrarAsistencias">
                             Registrar Asistencia
                         </button>
                     </div>
                 </div>
-                <div class="shadow-lg bg-light row p-0 m-0 p-2">
+                <div class="shadow-lg row p-0 m-0 p-2" style="background: var(--color6);">
                     <div class="row m-1">
                         <div class="col-12">
                             <form method="post">
@@ -609,7 +609,7 @@ if ($_POST) {
                                     <!-- Botón Buscar -->
                                     <div
                                         class="col-12 col-lg-4 mb-2 d-flex justify-content-center align-items-center mt-4">
-                                        <input type="submit" class="btn btn-primary w-100" value="Buscar"
+                                        <input type="submit" class="btn btn-cafe w-100" value="Buscar"
                                             name="btnBuscar">
                                     </div>
                                 </div>
@@ -626,7 +626,7 @@ if ($_POST) {
                     </div>
                 </div>
                 <div class="d-lg-none mb-3 m-3 m-0 p-0">
-                    <button type="button" class="btn w-100 btn-primary shadow-lg" data-bs-toggle="modal"
+                    <button type="button" class="btn w-100 btn-cafe shadow-lg" data-bs-toggle="modal"
                         data-bs-target="#agregarRecompensa">
                         <i class="fa-solid fa-plus fa-2x"></i>
                     </button>
@@ -667,7 +667,7 @@ if ($_POST) {
                                                 <td><?= $recompensa->estatus ?></td>
                                                 <td>
                                                     <!-- Botón para detalle recompensa -->
-                                                    <button type="button" class="btn btn-primary d-table-cell d-lg-none"
+                                                    <button type="button" class="btn btn-cafe d-table-cell d-lg-none"
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#detalleRecompensa<?= $recompensa->id_recompensa ?>">
                                                         <i class="fa-solid fa-bars"></i>
@@ -714,7 +714,7 @@ if ($_POST) {
                                                         </div>
                                                     </div>
                                                     <!-- Botón para editar imagen -->
-                                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                    <button type="button" class="btn btn-cafe" data-bs-toggle="modal"
                                                         data-bs-target="#editarRecompensa<?= $recompensa->id_recompensa ?>">
                                                         <i class="fa-solid fa-image"></i>
                                                     </button>
@@ -753,7 +753,7 @@ if ($_POST) {
                                                                         <div class='col-12 mb-3 text-end'>
                                                                             <button type='button' class='btn btn-secondary'
                                                                                 data-bs-dismiss='modal'>Cancelar</button>
-                                                                            <button type='submit' class='btn btn-primary'
+                                                                            <button type='submit' class='btn btn-cafe'
                                                                                 name='actRecompensa'>Actualizar</button>
                                                                         </div>
                                                                 </div>

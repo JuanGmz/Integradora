@@ -100,7 +100,7 @@ if (isset($_POST['btnactualizar'])) {
     </script>
 </head>
 
-<body class="bg-light">
+<body style="background: var(--color6);">
     <div class="container-fluid m-0 h-100">
         <!-- navbar mobile -->
         <div class="row bg-dark d-block d-lg-none">
@@ -558,9 +558,9 @@ if (isset($_POST['btnactualizar'])) {
                         </div>
                     </div>
                 </div>
-                <div class="shadow-lg bg-light row p-0 m-0 p-3">
+                <div class="shadow-lg row p-0 m-0 p-3" style="background: var(--color6);">
                     <div class="row m-1">
-                        <div class="col-12">
+                        <div class="col-lg-5 col-12">
                             <form method="post">
                                 <div class="row">
                                     <?php

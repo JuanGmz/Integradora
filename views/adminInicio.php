@@ -25,7 +25,7 @@ if ($rol[0]->rol !== 'administrador') {
     <link rel="stylesheet" href="../css/style.css">
 </head>
 
-<body class="bg-light">
+<body style="background: var(--color6);">
     <div class="container-fluid m-0 h-100">
         <!-- navbar mobile -->
         <div class="row bg-dark d-block d-lg-none">
@@ -338,7 +338,7 @@ if ($rol[0]->rol !== 'administrador') {
                 </div>
             </div>
 
-            <div class="col-lg-9 offset-lg-3 p-0">
+            <div class="col-lg-9 offset-lg-3 p-0" style="background: var(--color6);">
                 <!-- AQUI VA EL CONTENIDO DE LA PAGINAAAAAAAAAAAA -->
                 <div class="container p-0 m-0 bg-dark d-none d-lg-block">
                     <div class="row p-3 m-0 shadow-lg">
@@ -353,37 +353,37 @@ if ($rol[0]->rol !== 'administrador') {
                         </div>
                     </div>
                 </div>
-                <div class="row p-4 m-0 bg-light shadow-none">
+                <div class="row p-4 m-0 shadow-none" style="background: var(--color6);">
                     <div class="">
                         <div class="p-3">
                             <div class="container">
-                                <div class="d-flex flex-column align-items-center bg-dark-subtle p-3 rounded">
+                                <div class="d-flex flex-column align-items-center shadow-lg p-3 rounded" style="background: var(--color6);">
                                     <i class="fa-solid fa-user-tie fa-5x"></i>
                                     <h1 class="fw-bold">Bienvenido</h1>
                                 </div>
                             </div>
                         </div>
                         <!-- Accesos Rápidos -->
-                        <div class="container text-center">
+                        <div class="container text-center mt-4">
                             <p class="border shadow rounded p-2 fs-4">
                                 Accesos Rápidos
                             </p>
                         </div>
                     </div>
                     <!-- Tabla -->
-                    <div class="table-responsive container bg-light shadow-none">
-                        <table class="table table-borderless">
+                    <div class="table-responsive container mt-4 mb-4" style="background: var(--color6);">
+                        <table class="table table-borderless" style="background: var(--color6);">
                             <tbody>
                                 <!--Contenido-->
-                                <tr class="row">
+                                <tr class="row" style="background: var(--color6);">
                                     <!--1-->
-                                    <td class="col col-lg-4 col-md-4 ">
+                                    <td class="col col-lg-4 col-md-4 border-0" style="background: var(--color6);">
                                         <!--Accesos rapidos 1 lugares -->
                                         <div class="container mt-2 d-flex justify-content-center align-items-center">
                                             <div class="" style="width: 18rem;">
                                                 <div class="card mb-3">
                                                     <a href="adminlugares.php"
-                                                        class="btn btn-secondary d-flex align-items-center justify-content-center align-items-center justify-content-center"
+                                                        class="btn btn-cafe border-0 d-flex align-items-center justify-content-center align-items-center justify-content-center"
                                                         style="height: 180px;">
                                                         <i class="fa-solid fa-location-dot fa-4x text-dark"></i>
                                                     </a>
@@ -395,13 +395,13 @@ if ($rol[0]->rol !== 'administrador') {
                                         </div>
                                     </td>
                                     <!--2-->
-                                    <td class="col col-lg-4 col-md-4 ">
+                                    <td class="col col-lg-4 col-md-4 " style="background: var(--color6);">
                                         <!--Accesos rapidos 2 usuarios -->
                                         <div class="container mt-2 d-flex justify-content-center align-items-center">
                                             <div class="" style="width: 18rem;">
                                                 <div class="card mb-3">
                                                     <a href="adminUsuarios.php"
-                                                        class="btn btn-secondary d-flex align-items-center justify-content-center align-items-center justify-content-center"
+                                                        class="btn btn-cafe d-flex align-items-center justify-content-center align-items-center justify-content-center"
                                                         style="height: 180px;">
                                                         <i class="fa-solid fa-users text-dark fa-4x"></i>
                                                     </a>
@@ -413,13 +413,13 @@ if ($rol[0]->rol !== 'administrador') {
                                         </div>
                                     </td>
                                     <!--4-->
-                                    <td class="col col-lg-4 col-md-4 ">
+                                    <td class="col col-lg-4 col-md-4 " style="background: var(--color6);">
                                         <!--Accesos rapidos 4 pedidos -->
                                         <div class="container mt-2 d-flex justify-content-center align-items-center">
                                             <div class="" style="width: 18rem;">
                                                 <div class="card mb-3">
                                                     <a href="adminPedidos.php"
-                                                        class="btn btn-secondary d-flex align-items-center justify-content-center align-items-center justify-content-center"
+                                                        class="btn btn-cafe d-flex align-items-center justify-content-center align-items-center justify-content-center"
                                                         style="height: 180px;">
                                                         <i class="fa-solid fa-basket-shopping fa-4x text-dark"></i>
                                                     </a>
@@ -431,13 +431,13 @@ if ($rol[0]->rol !== 'administrador') {
                                         </div>
                                     </td>
                                     <!--6-->
-                                    <td class="col col-lg-4 col-md-4 ">
+                                    <td class="col col-lg-4 col-md-4 " style="background: var(--color6);">
                                         <!--Accesos rapidos 4 eventos -->
                                         <div class="container mt-2 d-flex justify-content-center align-items-center">
                                             <div class="" style="width: 18rem;">
                                                 <div class="card mb-3">
                                                     <a href="adminEventos.php"
-                                                        class="btn btn-secondary d-flex align-items-center justify-content-center align-items-center justify-content-center"
+                                                        class="btn btn-cafe d-flex align-items-center justify-content-center align-items-center justify-content-center"
                                                         style="height: 180px;">
                                                         <i class="fa-solid fa-bell fa-4x text-dark"></i>
                                                     </a>
@@ -449,13 +449,13 @@ if ($rol[0]->rol !== 'administrador') {
                                         </div>
                                     </td>
                                     <!--8-->
-                                    <td class="col col-lg-4 col-md-4 ">
+                                    <td class="col col-lg-4 col-md-4 " style="background: var(--color6);">
                                         <!--Accesos rapidos 8 menu -->
                                         <div class="container mt-2 d-flex justify-content-center align-items-center">
                                             <div class="" style="width: 18rem;">
                                                 <div class="card mb-3">
                                                     <a href="adminMenu.php"
-                                                        class="btn btn-secondary d-flex align-items-center justify-content-center align-items-center justify-content-center"
+                                                        class="btn btn-cafe d-flex align-items-center justify-content-center align-items-center justify-content-center"
                                                         style="height: 180px;">
                                                         <i class="fa-solid fa-store fa-4x text-dark"></i>
                                                     </a>
@@ -467,13 +467,13 @@ if ($rol[0]->rol !== 'administrador') {
                                         </div>
                                     </td>
                                     <!--9-->
-                                    <td class="col col-lg-4 col-md-4 ">
+                                    <td class="col col-lg-4 col-md-4 " style="background: var(--color6);">
                                         <!--Accesos rapidos 8 Recompensas -->
                                         <div class="container mt-2 d-flex justify-content-center align-items-center">
                                             <div class="" style="width: 18rem;">
                                                 <div class="card mb-3">
                                                     <a href="adminRecompensas.php"
-                                                        class="btn btn-secondary d-flex align-items-center justify-content-center align-items-center justify-content-center"
+                                                        class="btn btn-cafe d-flex align-items-center justify-content-center align-items-center justify-content-center"
                                                         style="height: 180px;">
                                                         <i class="fa-solid fa-gift fa-4x text-dark"></i>
                                                     </a>

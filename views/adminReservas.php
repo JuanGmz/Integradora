@@ -25,7 +25,7 @@ if ($rol[0]->rol !== 'administrador') {
     <link rel="shortcut icon" href="../img/Sinfonía-Café-y-Cultura.webp">
 </head>
 
-<body class="bg-light">
+<body style="background: var(--color6);">
     <div class="container-fluid m-0 h-100">
         <!-- navbar mobile -->
         <div class="row bg-dark d-block d-lg-none">
@@ -353,9 +353,9 @@ if ($rol[0]->rol !== 'administrador') {
                         </div>
                     </div>
                 </div>
-                <div class="shadow-lg bg-light row p-3 m-0">
+                <div class="shadow-lg row p-3 m-0" style="background: var(--color6);">
                     <div class="row m-1">
-                        <div class="col-12">
+                        <div class="col-lg-5 col-12">
                             <form method="post">
                                 <div class="row">
                                     <div class="col-8">
@@ -373,7 +373,7 @@ if ($rol[0]->rol !== 'administrador') {
                                         </select>
                                     </div>
                                     <div class="col-4">
-                                        <input type="submit" class="btn btn-primary w-100" value="Buscar">
+                                        <input type="submit" class="btn btn-cafe w-100" value="Buscar">
                                     </div>
                                 </div>
                             </form>
@@ -418,7 +418,7 @@ if ($rol[0]->rol !== 'administrador') {
                                             </td>
                                             <td>
                                                 <!-- Modal para ver detalles de la reserva -->
-                                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#detalles$reserva->folio'>
+                                                <button type='button' class='btn btn-cafe' data-bs-toggle='modal' data-bs-target='#detalles$reserva->folio'>
                                                     <i class='fa-solid fa-list'></i>
                                                 </button>
                                                 <div class='modal fade' id='detalles$reserva->folio' tabindex='-1' aria-labelledby='detalles$reserva->folio' aria-hidden='true'>
@@ -469,7 +469,7 @@ if ($rol[0]->rol !== 'administrador') {
                                                                         </select>
                                                                         <div class='text-end mt-4'>
                                                                             <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
-                                                                            <input type='submit' class='btn btn-primary' value='Guardar Cambios'>
+                                                                            <input type='submit' class='btn btn-cafe' value='Guardar Cambios'>
                                                                         </div>
                                                                     </div>
                                                                 </form>
