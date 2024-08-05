@@ -24,9 +24,10 @@ if ($rol[0]->rol !== 'administrador') {
     <link rel="shortcut icon" href="../img/Sinfonía-Café-y-Cultura.webp">
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/scrollbar.css">
 </head>
 
-<body class="bg-light">
+<body style="background: var(--color6);">
     <div class="container-fluid m-0 h-100">
         <!-- navbar mobile -->
         <div class="row bagr-cafe4 d-block d-lg-none">
@@ -349,7 +350,7 @@ if ($rol[0]->rol !== 'administrador') {
                         <div class="col-9 d-flex justify-content-end align-items-center gap-1 gap-lg-3">
                             <!-- Aquí va el botón del modal para registrar publicaciones -->
                             <!-- Botón para agregar -->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-cafe" data-bs-toggle="modal"
                                 data-bs-target="#agregarPublicacion">
                                 Agregar Publicación
                             </button>
@@ -406,16 +407,16 @@ if ($rol[0]->rol !== 'administrador') {
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Cancelar</button>
                                         <!-- Botón para agregar -->
-                                        <button type="submit" class="btn btn-primary">Agregar Publicación</button>
+                                        <button type="submit" class="btn btn-cafe">Agregar Publicación</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="shadow-lg bg-light row p-0 m-0 p-3">
+                <div class="shadow-lg row p-0 m-0 p-3" style="background: var(--color6);">
                     <div class="row m-1">
-                        <div class="col-12">
+                        <div class="col-12 col-lg-5">
                             <form method="post">
                                 <div class="row">
                                     <div class="col-8">
@@ -431,7 +432,7 @@ if ($rol[0]->rol !== 'administrador') {
                                         </select>
                                     </div>
                                     <div class="col-4">
-                                        <input type="submit" class="btn btn-primary w-100" value="Buscar">
+                                        <input type="submit" class="btn btn-cafe w-100" value="Buscar">
                                     </div>
                                 </div>
                             </form>
@@ -440,7 +441,7 @@ if ($rol[0]->rol !== 'administrador') {
                 </div>
                 <div class="row mt-lg-3 p-3 p-lg-4 m-0">
                     <div class="d-lg-none w-100 mb-3 m-0 p-0">
-                        <button type="button" class="btn w-100 btn-primary shadow-lg" data-bs-toggle="modal"
+                        <button type="button" class="btn w-100 btn-cafe shadow-lg" data-bs-toggle="modal"
                             data-bs-target="#agregarPublicacion">
                             <i class="fa-solid fa-plus fa-2x"></i>
                         </button>
@@ -466,7 +467,7 @@ if ($rol[0]->rol !== 'administrador') {
                                             <td>{$publicacion->titulo}</td>
                                             <td class='d-flex justify-content-center gap-2'>
                                                 <!-- Botón para ver y editar imágen -->
-                                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#imgPublicacion{$publicacion->id_publicacion}'>
+                                                <button type='button' class='btn btn-cafe' data-bs-toggle='modal' data-bs-target='#imgPublicacion{$publicacion->id_publicacion}'>
                                                     <i class='fa-solid fa-image'></i>
                                                 </button>
                                                 <!-- Modal para ver y editar imágen -->
@@ -492,7 +493,7 @@ if ($rol[0]->rol !== 'administrador') {
                                                                         <input type='hidden' name='id_publicacion' value='$publicacion->id_publicacion'>
                                                                         <div class='col-12 mt-3 text-end'>
                                                                             <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
-                                                                            <button type='submit' class='btn btn-primary'>Actualizar</button>
+                                                                            <button type='submit' class='btn btn-cafe'>Actualizar</button>
                                                                         </div>
                                                                     </div>
                                                                 </form>
@@ -501,7 +502,7 @@ if ($rol[0]->rol !== 'administrador') {
                                                     </div>
                                                 </div>
                                                 <!-- Botón de ver detalles -->
-                                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#detallePublicacion{$publicacion->id_publicacion}'>
+                                                <button type='button' class='btn btn-cafe' data-bs-toggle='modal' data-bs-target='#detallePublicacion{$publicacion->id_publicacion}'>
                                                     <i class='fa-solid fa-bars'></i>
                                                 </button>
                                                 <!-- Modal para ver detalles -->
@@ -525,7 +526,7 @@ if ($rol[0]->rol !== 'administrador') {
                                                     </div>
                                                 </div>
                                                 <!-- Botón de editar -->
-                                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#editarPublicacion{$publicacion->id_publicacion}'>
+                                                <button type='button' class='btn btn-cafe' data-bs-toggle='modal' data-bs-target='#editarPublicacion{$publicacion->id_publicacion}'>
                                                     <i class='fa-solid fa-pen-to-square'></i>
                                                 </button>
                                                 <!-- Modal para editar -->
@@ -562,7 +563,7 @@ if ($rol[0]->rol !== 'administrador') {
                                                                     <input type='hidden' name='id_publicacion' value='$publicacion->id_publicacion'>
                                                                     <div class='col-12 mt-3 text-end'>
                                                                         <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
-                                                                        <button type='submit' class='btn btn-primary'>Guardar Cambios</button>
+                                                                        <button type='submit' class='btn btn-cafe'>Guardar Cambios</button>
                                                                     </div>
                                                                 </form>
                                                             </div>

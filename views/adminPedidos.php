@@ -66,9 +66,10 @@ if (isset($_POST['btnactualizar'])) {
     <link rel="shortcut icon" href="../img/Sinfonía-Café-y-Cultura.webp">
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/scrollbar.css">
 </head>
 
-<body class="bg-light">
+<body style="background: var(--color6);">
     <div class="container-fluid m-0 h-100">
         <!-- navbar mobile -->
         <div class="row bagr-cafe4 d-block d-lg-none">
@@ -396,7 +397,7 @@ if (isset($_POST['btnactualizar'])) {
                         </div>
                     </div>
                 </div>
-                <div class="shadow-lg bg-light row p-0 m-0 p-3">
+                <div class="shadow-lg row p-0 m-0 p-3" style="background: var(--color6);">
                     <div class="row m-1">
                         <div class="col-12">
                             <form method="post">
@@ -406,7 +407,7 @@ if (isset($_POST['btnactualizar'])) {
                                             placeholder="Ingresa Folio, Usuario o Teléfono">
                                     </div>
                                     <div class="col-4 col-lg-2">
-                                        <input type="submit" class="btn btn-primary w-100" value="Buscar"
+                                        <input type="submit" class="btn btn-cafe w-100" value="Buscar"
                                             name="btnBuscar">
                                     </div>
                                 </div>
@@ -469,7 +470,7 @@ if (isset($_POST['btnactualizar'])) {
                                             <td class='d-none d-md-table-cell'>{$pedido->estatus}</td>
                                             <td class='d-flex flex-row align-items-center justify-content-center gap-1'>
                                                 <!-- Botón para ver detalles del pedido -->
-                                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#detalleProducto_{$pedido->id_pedido}'>
+                                                <button type='button' class='btn btn-cafe' data-bs-toggle='modal' data-bs-target='#detalleProducto_{$pedido->id_pedido}'>
                                                     <i class='fa-solid fa-bars'></i>
                                                 </button>
                                                 <!-- Modal para mostrar los detalles del pedido -->
@@ -606,7 +607,7 @@ if (isset($_POST['btnactualizar'])) {
                                         } else {
                                             echo "
                                                 <!-- Botón para editar el pedido -->
-                                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#editarProducto_{$pedido->id_pedido}'>
+                                                <button type='button' class='btn btn-cafe' data-bs-toggle='modal' data-bs-target='#editarProducto_{$pedido->id_pedido}'>
                                                     <i class='fa-solid fa-pen-to-square'></i>
                                                 </button>
                                                 <!-- Modal para editar el pedido -->
@@ -673,7 +674,7 @@ if (isset($_POST['btnactualizar'])) {
                                                                             <button type='button' class='btn btn-secondary mt-3' data-bs-dismiss='modal'>Cancelar</button>
                                                                             ";
                                             ?>
-                                            <button type='submit' class='btn btn-primary mt-3' name='btnactualizar' <?php echo $disabled; ?>>Guardar Cambios</button>
+                                            <button type='submit' class='btn btn-cafe mt-3' name='btnactualizar' <?php echo $disabled; ?>>Guardar Cambios</button>
                                         </div>
                                     </div>
                                     </form>
