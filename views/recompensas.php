@@ -160,8 +160,7 @@ if (isset($_SESSION["usuario"])) {
                 ?>
                 <h1 class="display-4 fw-bold">
                     <span>¡Bienvenido, </span>
-                    <span style="color: #c29b50;"><?php echo htmlspecialchars($nombre[0]->nombre); ?></span>
-                    <span>!</span>
+                    <span style="color: #c29b50;"><?php echo htmlspecialchars($nombre[0]->nombre); ?><span class="text-light">!</span></span>
                 </h1>
                 <h3>Empieza a disfrutar de nuestras exclusivas recompensas</h3>
                 <?php
@@ -392,8 +391,8 @@ if (isset($_SESSION["usuario"])) {
                                 transition: all .5s ease;
                             }
                         </style>
-                        <div class="ag-courses_box col-12 col-md-6 col-lg-4">
-                            <div class="ag-courses_item">
+                        <div class="ag-courses_box col-12 col-md-6 col-lg-4 p-3">
+                            <div class="ag-courses_item m-0 p-0">
                                 <a href="#" class="ag-courses-item_link">
                                     <?php $random_color = $colors[array_rand($colors)]; ?>
                                     <div class="ag-courses-item_bg" style="background-color: <?php echo $random_color; ?>;"></div>
