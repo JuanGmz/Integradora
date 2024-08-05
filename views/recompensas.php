@@ -209,7 +209,7 @@ if (isset($_SESSION["usuario"])) {
                         <span style='color: #ca3f42'>" . htmlspecialchars($cliente[0]->id_cliente) . "</span>
                     </h4>
                     <p class='text-muted'>
-                        Muestra este ID para registrar asistencias con cada compra que realices. 
+                        Muestra este ID para registrar tu asistencia a nuestra cafetería. 
                         <br>Recuerda que para registrar una asistencia es necesario realizar una compra mínima en nuestra cafetería. <br>¡Gracias por ser parte de nuestra comunidad!
                     </p>
                 </div>
@@ -271,8 +271,8 @@ if (isset($_SESSION["usuario"])) {
 
                         $colors = ['#a18263', '#835d38', '#343434', '#bf9d60', '#e4ccb4', '#1c2338'];
                         ?>
-<style>
-    .ag-courses_box {
+                        <style>
+                            .ag-courses_box {
                                 padding: 50px 0;
                             }
 
@@ -391,7 +391,7 @@ if (isset($_SESSION["usuario"])) {
                                 -o-transition: all .5s ease;
                                 transition: all .5s ease;
                             }
-</style>
+                        </style>
                         <div class="ag-courses_box col-12 col-md-6 col-lg-4">
                             <div class="ag-courses_item">
                                 <a href="#" class="ag-courses-item_link">
