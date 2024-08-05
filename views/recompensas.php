@@ -1,5 +1,5 @@
 <?php
-include_once("../class/database.php");
+include_once ("../class/database.php");
 $db = new Database();
 $db->conectarDB();
 session_start();
@@ -74,7 +74,10 @@ if (isset($_SESSION["usuario"])) {
 
 <body>
     <!-- Botón de WhatsApp -->
-    <button id="whatsappButton" class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3" type="button" onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
+    <button id="whatsappButton"
+        class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3"
+        type="button"
+        onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
         <i class="fa-brands fa-whatsapp fa-2x"></i>
     </button>
     <!-- NavBar -->
@@ -83,7 +86,8 @@ if (isset($_SESSION["usuario"])) {
             <a class="navbar-brand" href="../index.php">
                 <img src="../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
             </a>
-            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -113,12 +117,14 @@ if (isset($_SESSION["usuario"])) {
             </div>
             <?php
             if (isset($_SESSION["usuario"])) {
-            ?>
+                ?>
                 <!-- Navbar con dropdown -->
-                <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
+                    style="left: auto; right: 30px; top: 60px">
                     <a class="dropdown-item" href="perfil.php">Mi perfil</a>
                     <?php if ($rol[0]->rol === 'administrador') { ?>
                         <a class="dropdown-item" href="../views/adminInicio.php">Administrar</a>
@@ -126,14 +132,15 @@ if (isset($_SESSION["usuario"])) {
                     <?php } ?>
                     <a class="dropdown-item" href="../scripts/login/cerrarsesion.php">Cerrar sesión</a>
                 </div>
-            <?php
+                <?php
             } else {
-            ?>
+                ?>
                 <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
-            <?php
+                <?php
             }
             ?>
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
@@ -145,18 +152,21 @@ if (isset($_SESSION["usuario"])) {
         <div class="subscription-content text-center m-0 p-0">
             <?php
             if (!isset($_SESSION["usuario"])) {
-            ?>
-                <h1 class="display-4 fw-bold "><span style="color: #fff;">SínfoniaCafé&Cultura</span></h1>
-                <h2 class=" fw-bold "><span style="color: #fff;">Obtén recompensas íncreibles</span></h>
+                ?>
+                <h1 class="display-4 fw-bold"><span style="color: #fff;">Descubre SínfoniaCafé&Cultura</span></h1>
+                <h2><span style="color: #fff;">¡Recompensas y experiencias únicas te esperan!</span></h2>
                 <?php
             } else {
                 ?>
-                    <h1 class="display-4 fw-bold "><span style="color: #fff;">Hola <?php echo $nombre[0]->nombre ?></span>
-                    </h1>
-                    <h3>Comienza a ganar</h3>
+                <h1 class="display-4 fw-bold">
+                    <span>¡Bienvenido, </span>
+                    <span style="color: #c29b50;"><?php echo htmlspecialchars($nombre[0]->nombre); ?></span>
+                    <span>!</span>
+                </h1>
+                <h3>Empieza a disfrutar de nuestras exclusivas recompensas</h3>
                 <?php
             }
-                ?>
+            ?>
         </div>
     </section>
 
@@ -254,15 +264,15 @@ if (isset($_SESSION["usuario"])) {
                     <a href='eventos.php' class='btn btn-primary' style='background-color: #c29b50; border-color: #c29b50;'>Explorar Eventos</a>
                 </div>
             </div>
-        </div>
-    </div>";
+        </div>";
+
                 } else {
                     foreach ($recompensas as $recompensa) {
 
                         $colors = ['#a18263', '#835d38', '#343434', '#bf9d60', '#e4ccb4', '#1c2338'];
-            ?>
-                        <style>
-                            .ag-courses_box {
+                        ?>
+<style>
+    .ag-courses_box {
                                 padding: 50px 0;
                             }
 
@@ -381,7 +391,7 @@ if (isset($_SESSION["usuario"])) {
                                 -o-transition: all .5s ease;
                                 transition: all .5s ease;
                             }
-                        </style>
+</style>
                         <div class="ag-courses_box col-12 col-md-6 col-lg-4">
                             <div class="ag-courses_item">
                                 <a href="#" class="ag-courses-item_link">
@@ -405,26 +415,29 @@ if (isset($_SESSION["usuario"])) {
                                             <?php
                                             if ($recompensa->progreso >= $recompensa->condicion) {
                                                 if ($recompensa->canje == 0) {
-                                            ?>
+                                                    ?>
                                                     <!-- Button trigger modal -->
-                                                    <button type="button" class="btn btn-cafe p-2 m-2" data-bs-toggle="modal" data-bs-target="#recompensa_<?php echo $recompensa->id_recompensa ?>">
+                                                    <button type="button" class="btn btn-cafe p-2 m-2" data-bs-toggle="modal"
+                                                        data-bs-target="#recompensa_<?php echo $recompensa->id_recompensa ?>">
                                                         Canjear
                                                     </button>
-                                                <?php
+                                                    <?php
                                                 } else {
-                                                ?>
+                                                    ?>
                                                     <button disabled class="btn btn-secondary m-2 p-2">Recompensa Canjeada</button>
-                                                <?php
+                                                    <?php
                                                 }
                                                 ?>
                                                 <!-- Modal -->
-                                                <div class="modal fade" id="recompensa_<?php echo $recompensa->id_recompensa ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="recompensa_<?php echo $recompensa->id_recompensa ?>"
+                                                    tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h1 class="modal-title fs-5" id="exampleModalLabel">Cupón para canjeo
                                                                 </h1>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                    aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
                                                                 <h5 class="text-center m-2">Índica al cajero que este es tu cupón de
@@ -433,16 +446,17 @@ if (isset($_SESSION["usuario"])) {
                                                                 </h5>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">Cerrar</button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            <?php
+                                                <?php
                                             } else {
-                                            ?>
+                                                ?>
                                                 <button disabled class="btn btn-secondary m-2 p-2">Canjear recompensa</button>
-                                            <?php
+                                                <?php
                                             }
                                             ?>
                                         </div>
@@ -452,7 +466,7 @@ if (isset($_SESSION["usuario"])) {
                         </div>
 
 
-                <?php
+                        <?php
 
                     }
                 }
@@ -464,7 +478,8 @@ if (isset($_SESSION["usuario"])) {
                                 <div class='thank-you-content'>
                                     <h3 class='mb-3'>
                                         Gracias por formar parte de la familia SínfoniaCafé&Cultura,
-                                        <span style="color: #a18263;"><?php echo htmlspecialchars($nombre[0]->nombre); ?></span>
+                                        <span
+                                            style="color:   burlywood;"><?php echo htmlspecialchars($nombre[0]->nombre); ?></span>
                                     </h3>
                                     <p class='lead'>
                                         Nos alegra tenerte con nosotros. ¡Estamos emocionados por las experiencias y
@@ -476,59 +491,81 @@ if (isset($_SESSION["usuario"])) {
                         </div>
                     </div>
                 </div>
-            <?php
-            } else {
-            ?>
-                <div class=" text-center fw-bold mt-3">
 
-                    <div class="row m-0 p-0">
-                        <div class="col-12 mb-3">
-                            <h1>Únete a SínfoniaCafé&Cultura y desbloquea recompensas increíbles por
-                                ser cliente</h1>
-                        </div>
-                        <div class="col-6 col-lg-3 m-0 p-0">
-                            <img src="../img/cafes/coffee-cups.png" alt="cafe" style="height: 100px; width: 100px;">
-                            <p>El mejor café gratis.</p>
-                        </div>
-                        <div class="col-6 col-lg-3 m-0 p-0">
-                            <img src="../img/cafes/pastel.png" alt="pasteles" style="height: 100px; width: 100px;">
-                            <p>Prueba nuestros deliciosos pasteles.</p>
-                        </div>
-                        <div class="col-6 col-lg-3 m-0 p-0">
-                            <img src="../img/cafes/entradas.png" alt="boletos" style="height: 100px; width: 100px;">
-                            <p>Asiste a nuestros eventos, una experiencia inolvidable.</p>
-                        </div>
-                        <div class="col-6 col-lg-3 m-0 p-0">
-                            <img src="../img/cafes/cupones.png" alt="descuentos" style="height: 100px; width: 100px;">
-                            <p>Tendrás descuentos exclusivos.</p>
+                <?php
+            } else {
+                ?>
+                <div class="row m-0">
+                    <!-- Recompensas -->
+                    <div class='col-12 text-center my-3'>
+                        <h3 class='mb-3'>¡Únete a SínfoniaCafé&Cultura y desbloquea recompensas increíbles por ser cliente
+                            frecuente!</h3>
+                        <div style='
+                    display: inline-block;
+                    border-bottom: 4px solid #252525;
+                    width: 120px; 
+                    border-radius: 10px;
+                    margin-top: 10px;'>
                         </div>
                     </div>
-
-                    <div class="row m-0 p-0">
-                        <div class="col-12 m-0 p-0">
-                            <h1 class="text-center fw-bold shadow rounded p-2 mb-5" style="background: var(--color8);">Como
-                                funciona nuestro sistema de recompensas</h1>
-                            <div class="row m-0 p-0">
-                                <div class="col-12 col-lg-4 m-0 p-0">
-                                    <img src="../img/cafes/telefono-inteligente.png" alt="telefono" style="height: 100px; width: 100px;">
-                                    <p>Registrate o inicia sesión para comenzar a ganar.</p>
-                                </div>
-                                <div class="col-12 col-lg-4">
-                                    <img src="../img/cafes/puesto-de-comida.png" alt="local" style="height: 100px; width: 100px;">
-                                    <p>Visita nuestro local, realiza una compra y solicita que sea
-                                        registrada para obtener
-                                        una asistencia.</p>
-                                </div>
-                                <div class="col-12 col-lg-4">
-                                    <img src="../img/cafes/compras.png" alt="compra" style="height: 100px; width: 100px;">
-                                    <p>Reclama tus recompensas cuando tengas las asistencias
-                                        necesarias.</p>
-                                </div>
-                            </div>
+                    <div class="col-lg-3 d-flex flex-column text-center gap-3 mt-3">
+                        <div class='bg-white rounded-3 p-3 shadow-sm h-100'>
+                            <i class="fa-solid fa-mug-saucer fa-3x mb-2" style="color: #c29b50;"></i>
+                            <h4 class='mb-2'>Café Delicioso.</h4>
+                            <p>El mejor café de la región, preparado para ti.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 d-flex flex-column text-center gap-3 mt-3">
+                        <div class='bg-white rounded-3 p-3 shadow-sm h-100'>
+                            <i class="fa-solid fa-cake-candles fa-3x mb-2" style="color: #c29b50;"></i>
+                            <h4 class='mb-2'>Postres Deliciosos</h4>
+                            <p>Prueba nuestros deliciosos postres.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 d-flex flex-column text-center gap-3 mt-3">
+                        <div class='bg-white rounded-3 p-3 shadow-sm h-100'>
+                            <i class="fa-solid fa-ticket fa-3x" style="color: #c29b50;"></i>
+                            <h4 class='mb-2'>Eventos Inolvidables</h4>
+                            <p>Asiste a nuestros eventos, una experiencia inolvidable.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 d-flex flex-column text-center gap-3 mt-3">
+                        <div class='bg-white rounded-3 p-3 shadow-sm  h-100'>
+                            <i class="fa-solid fa-tag fa-3x mb-2" style="color: #c29b50;"></i>
+                            <h4 class='mb-2'>Descuentos Exclusivos</h4>
+                            <p>Tendrás descuentos exclusivos en tus compras.</p>
+                        </div>
+                    </div>
+                    <!-- Cómo funciona -->
+                    <div class="col-12 text-center thank-you-section mt-5 mb-4">
+                        <div class="thank-you-content">
+                            <h1 class="color-white fw-bold">Cómo funciona nuestro sistema de recompensas?</h1>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 d-flex flex-column text-center gap-3 mt-3">
+                        <div class='bg-white rounded-3 p-3 shadow-sm h-100'>
+                            <i class="fa-solid fa-user-plus fa-3x mb-2" style="color: #c29b50;"></i>
+                            <h4 class='mb-2'>Regístrate</h4>
+                            <p>Regístrate o inicia sesión para comenzar a ganar increíbles recompensas.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 d-flex flex-column text-center gap-3 mt-3">
+                        <div class='bg-white rounded-3 p-3 shadow-sm h-100'>
+                            <i class="fa-solid fa-store fa-3x mb-2" style="color: #c29b50;"></i>
+                            <h4 class='mb-2'>Visitanos, compra y registra.</h4>
+                            <p>Visita nuestro local, realiza una compra y solicita que tu asistencia sea registrada para que
+                                puedas obtener tus recompensas.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 d-flex flex-column text-center gap-3 mt-3">
+                        <div class='bg-white rounded-3 p-3 shadow-sm h-100'>
+                            <i class="fa-solid fa-award fa-3x mb-2" style="color: #c29b50;"></i>
+                            <h4 class='mb-2'>Reclama tus Recompensas</h4>
+                            <p>Reclama tus recompensas cuando tengas las asistencias necesarias.</p>
                         </div>
                     </div>
                 </div>
-            <?php
+                <?php
             }
             ?>
         </div>
