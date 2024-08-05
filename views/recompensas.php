@@ -145,17 +145,6 @@ if (isset($_SESSION["usuario"])) {
         <div class="subscription-content text-center m-0 p-0">
             <?php
             if (!isset($_SESSION["usuario"])) {
-<<<<<<< HEAD
-            ?>
-                <h1 class="display-4 fw-bold "><span style="color: #fff;">SínfoniaCafé&Cultura</span></h1>
-                <h2 class=" fw-bold "><span style="color: #fff;">Obtén recompensas íncreibles</span></h>
-                <?php
-            } else {
-                ?>
-                    <h1 class="display-4 fw-bold "><span style="color: #fff;">Hola <?php echo $nombre[0]->nombre ?></span>
-                    </h1>
-                    <h3>Comienza a ganar</h3>
-=======
                 ?>
                 <h1 class="display-4 fw-bold"><span style="color: #fff;">Descubre SínfoniaCafé&Cultura</span></h1>
                 <h2><span style="color: #fff;">¡Recompensas y experiencias únicas te esperan!</span></h2>
@@ -168,7 +157,6 @@ if (isset($_SESSION["usuario"])) {
                     <span>!</span>
                 </h1>
                 <h3>Empieza a disfrutar de nuestras exclusivas recompensas</h3>
->>>>>>> 917009f809c91dcf600c6384146eded89303a85a
                 <?php
             }
                 ?>
@@ -269,13 +257,8 @@ if (isset($_SESSION["usuario"])) {
                     <a href='eventos.php' class='btn btn-primary' style='background-color: #c29b50; border-color: #c29b50;'>Explorar Eventos</a>
                 </div>
             </div>
-<<<<<<< HEAD
-        </div>
-    </div>";
-=======
         </div>";
 
->>>>>>> 917009f809c91dcf600c6384146eded89303a85a
                 } else {
                     foreach ($recompensas as $recompensa) {
 
@@ -484,12 +467,8 @@ if (isset($_SESSION["usuario"])) {
                                 <div class='thank-you-content'>
                                     <h3 class='mb-3'>
                                         Gracias por formar parte de la familia SínfoniaCafé&Cultura,
-<<<<<<< HEAD
-                                        <span style="color: #a18263;"><?php echo htmlspecialchars($nombre[0]->nombre); ?></span>
-=======
                                         <span
                                             style="color:   burlywood;"><?php echo htmlspecialchars($nombre[0]->nombre); ?></span>
->>>>>>> 917009f809c91dcf600c6384146eded89303a85a
                                     </h3>
                                     <p class='lead'>
                                         Nos alegra tenerte con nosotros. ¡Estamos emocionados por las experiencias y
@@ -501,57 +480,6 @@ if (isset($_SESSION["usuario"])) {
                         </div>
                     </div>
                 </div>
-<<<<<<< HEAD
-            <?php
-            } else {
-            ?>
-                <div class=" text-center fw-bold mt-3">
-
-                    <div class="row m-0 p-0">
-                        <div class="col-12 mb-3">
-                            <h1>Únete a SínfoniaCafé&Cultura y desbloquea recompensas increíbles por
-                                ser cliente</h1>
-                        </div>
-                        <div class="col-6 col-lg-3 m-0 p-0">
-                            <img src="../img/cafes/coffee-cups.png" alt="cafe" style="height: 100px; width: 100px;">
-                            <p>El mejor café gratis.</p>
-                        </div>
-                        <div class="col-6 col-lg-3 m-0 p-0">
-                            <img src="../img/cafes/pastel.png" alt="pasteles" style="height: 100px; width: 100px;">
-                            <p>Prueba nuestros deliciosos pasteles.</p>
-                        </div>
-                        <div class="col-6 col-lg-3 m-0 p-0">
-                            <img src="../img/cafes/entradas.png" alt="boletos" style="height: 100px; width: 100px;">
-                            <p>Asiste a nuestros eventos, una experiencia inolvidable.</p>
-                        </div>
-                        <div class="col-6 col-lg-3 m-0 p-0">
-                            <img src="../img/cafes/cupones.png" alt="descuentos" style="height: 100px; width: 100px;">
-                            <p>Tendrás descuentos exclusivos.</p>
-                        </div>
-                    </div>
-
-                    <div class="row m-0 p-0">
-                        <div class="col-12 m-0 p-0">
-                            <h1 class="text-center fw-bold shadow rounded p-2 mb-5" style="background: var(--color8);">Como
-                                funciona nuestro sistema de recompensas</h1>
-                            <div class="row m-0 p-0">
-                                <div class="col-12 col-lg-4 m-0 p-0">
-                                    <img src="../img/cafes/telefono-inteligente.png" alt="telefono" style="height: 100px; width: 100px;">
-                                    <p>Registrate o inicia sesión para comenzar a ganar.</p>
-                                </div>
-                                <div class="col-12 col-lg-4">
-                                    <img src="../img/cafes/puesto-de-comida.png" alt="local" style="height: 100px; width: 100px;">
-                                    <p>Visita nuestro local, realiza una compra y solicita que sea
-                                        registrada para obtener
-                                        una asistencia.</p>
-                                </div>
-                                <div class="col-12 col-lg-4">
-                                    <img src="../img/cafes/compras.png" alt="compra" style="height: 100px; width: 100px;">
-                                    <p>Reclama tus recompensas cuando tengas las asistencias
-                                        necesarias.</p>
-                                </div>
-                            </div>
-=======
 
                 <?php
             } else {
@@ -623,7 +551,6 @@ if (isset($_SESSION["usuario"])) {
                             <i class="fa-solid fa-award fa-3x mb-2" style="color: #c29b50;"></i>
                             <h4 class='mb-2'>Reclama tus Recompensas</h4>
                             <p>Reclama tus recompensas cuando tengas las asistencias necesarias.</p>
->>>>>>> 917009f809c91dcf600c6384146eded89303a85a
                         </div>
                     </div>
                 </div>
