@@ -24,10 +24,10 @@
 <body>
 
     <div class="content">
-         <!-- Botón de WhatsApp -->
-    <button id="whatsappButton" class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3" type="button" onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
-        <i class="fa-brands fa-whatsapp fa-2x"></i>
-    </button>
+        <!-- Botón de WhatsApp -->
+        <button id="whatsappButton" class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3" type="button" onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
+            <i class="fa-brands fa-whatsapp fa-2x"></i>
+        </button>
         <!-- NavBar -->
         <nav class="navbar navbar-expand-lg shadow-lg">
             <div class="container-fluid">
@@ -72,6 +72,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
                         <a class="dropdown-item" href="perfil.php">Mi perfil</a>
+                        <a class="dropdown-item" href="bolsas/Carrito.php">Mi carrito</a>
                         <?php if ($rol[0]->rol === 'administrador') { ?>
                             <a class="dropdown-item" href="../views/adminInicio.php">Administrar</a>
                             <div class="dropdown-divider"></div>
@@ -89,6 +90,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
             </div>
+
         </nav>
         <!-- NavBar End -->
 
@@ -106,10 +108,10 @@
             <h2>Conoce Recetas, Secretos y Más Sobre el Café!</h2>
 
             <div class="row mb-1 d-flex justify-content-center">
-                
+
                 <div class="col-lg-6 p-3 d-flex justify-content-center">
                     <div class="cardss">
-                        <img src="../img/cafes/cafe13.webp" alt="" >
+                        <img src="../img/cafes/cafe13.webp" alt="">
                         <div class="card-content">
                             <h2>
                                 Descubre el Maravilloso Mundo del Café en Nuestro Blog

@@ -107,6 +107,8 @@ if (isset($_SESSION["usuario"])) {
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
                     style="left: auto; right: 30px; top: 60px">
                     <a class="dropdown-item" href="../perfil.php">Mi perfil</a>
+                    <a class="dropdown-item" href="../bolsas/Carrito.php">Mi carrito</a>
+
                     <?php if ($rol[0]->rol === 'administrador') { ?>
                         <a class="dropdown-item" href="../../views/adminInicio.php">Administrar</a>
                         <div class="dropdown-divider"></div>
@@ -418,13 +420,13 @@ if (isset($_SESSION["usuario"])) {
 
                 <?php
             } else {
-                echo '<div class="d-flex flex-column justify-content-center align-items-center vh-100">';
+                echo '<div class="d-flex flex-column justify-content-center align-items-center my-5">';
                 echo '<h3 class="text-center">Tu carrito está vacío</h3>';
                 echo '<div class="d-flex justify-content-center col-12">';
                 echo '<i class="fa-solid fa-mug-hot fa-4x text-dark-emphasis"></i>';
                 echo '</div>';
-                echo '<div class="d-flex justify-content-center col-12">';
-                echo ' <a href="../ecommerce.php" class="btn w-50 mt-3 fs-5 m-1 btn-dark p-1">Ver Tienda</a>';
+                echo '<div class="d-flex justify-content-center col-12 col-md-3">';
+                echo ' <a href="../ecommerce.php" class="btn w-100 mt-3 fs-5 m-1 btn-dark p-1">Ver Tienda</a>';
                 echo '</div>';
                 echo '</div>';
                 echo '</div>';

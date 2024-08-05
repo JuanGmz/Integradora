@@ -24,73 +24,74 @@
 </head>
 
 <body>
-    <div class="">
-        <!-- Botón de WhatsApp -->
-        <button id="whatsappButton" class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3" type="button" onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
-            <i class="fa-brands fa-whatsapp fa-2x"></i>
-        </button>
-        <!-- NavBar -->
-        <nav class="navbar navbar-expand-lg shadow-lg">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="../index.php">
-                    <img src="../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
-                </a>
-                <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                    <div class="offcanvas-header">
-                        <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura
-                        </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-body">
-                        <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="menu.php">Menú</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link mx-lg-2" href="ecommerce.php">Comprar</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link mx-lg-2" href="recompensas.php">Recompensas</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link mx-lg-2" href="eventos.php">Eventos</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link mx-lg-2" href="publicaciones.php">Publicaciones</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link mx-lg-2" href="contact.php">Contacto</a>
-                            </li>
-                        </ul>
-                    </div>
+
+    <!-- Botón de WhatsApp -->
+    <button id="whatsappButton" class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3" type="button" onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
+        <i class="fa-brands fa-whatsapp fa-2x"></i>
+    </button>
+    <!-- NavBar -->
+    <nav class="navbar navbar-expand-lg shadow-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../index.php">
+                <img src="../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
+            </a>
+            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
-                <?php
-                if (isset($_SESSION["usuario"])) {
-                ?>
-                    <!-- Navbar con dropdown -->
-                    <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
-                        <a class="dropdown-item" href="perfil.php">Mi perfil</a>
-                        <?php if ($rol[0]->rol === 'administrador') { ?>
-                            <a class="dropdown-item" href="../views/adminInicio.php">Administrar</a>
-                            <div class="dropdown-divider"></div>
-                        <?php } ?>
-                        <a class="dropdown-item" href="../scripts/login/cerrarsesion.php">Cerrar sesión</a>
-                    </div>
-                <?php
-                } else {
-                ?>
-                    <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
-                <?php
-                }
-                ?>
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="menu.php">Menú</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-lg-2" href="ecommerce.php">Comprar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-lg-2" href="recompensas.php">Recompensas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-lg-2" href="eventos.php">Eventos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-lg-2" href="publicaciones.php">Publicaciones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-lg-2" href="contact.php">Contacto</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-    </div>
+            <?php
+            if (isset($_SESSION["usuario"])) {
+            ?>
+                <!-- Navbar con dropdown -->
+                <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
+                    <a class="dropdown-item" href="perfil.php">Mi perfil</a>
+                    <a class="dropdown-item" href="bolsas/Carrito.php">Mi carrito</a>
+                    <?php if ($rol[0]->rol === 'administrador') { ?>
+                        <a class="dropdown-item" href="../views/adminInicio.php">Administrar</a>
+                        <div class="dropdown-divider"></div>
+                    <?php } ?>
+                    <a class="dropdown-item" href="../scripts/login/cerrarsesion.php">Cerrar sesión</a>
+                </div>
+            <?php
+            } else {
+            ?>
+                <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
+            <?php
+            }
+            ?>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+
     </nav>
     <!-- NavBar End -->
 
@@ -137,7 +138,9 @@
                 <!-- Contenedor para la advertencia -->
                 <div id="category-warning" class="alert text-center p-5 m-4" role="alert" style="display: none;">
                     <div> <i class="fa-solid fa-mug-hot fa-4x text-muted"></i></div>
-                    <div class='text-center mt-3'><h5>Por favor, seleccione una categoría para ver los eventos.</h5> </div>
+                    <div class='text-center mt-3'>
+                        <h5>Por favor, seleccione una categoría para ver los eventos.</h5>
+                    </div>
                 </div>
 
                 <!-- Contenido de las categorías -->
