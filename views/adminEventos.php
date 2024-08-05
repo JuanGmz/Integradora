@@ -423,7 +423,7 @@ if (isset($_POST['btnactualizar'])) {
                         <div class="col-9 d-flex justify-content-end align-items-center gap-3">
                             <!-- Botón que activa el modal de agregar -->
                             <div class="ms-auto text-end col">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                <button type="button" class="btn btn-cafe" data-bs-toggle="modal"
                                     data-bs-target="#agregarEvento">
                                     Agregar Evento
                                 </button>
@@ -551,7 +551,7 @@ if (isset($_POST['btnactualizar'])) {
                                     <div class='mt-3 text-end'>
                                         <button type='button' class='btn btn-secondary'
                                             data-bs-dismiss='modal'>Cancelar</button>
-                                        <button type='submit' class='btn btn-primary'>Agregar</button>
+                                        <button type='submit' class='btn btn-cafe'>Agregar</button>
                                     </div>
                                 </form>
                             </div>
@@ -582,7 +582,7 @@ if (isset($_POST['btnactualizar'])) {
                                     </div>
 
                                     <div class="col-4">
-                                        <button type="submit" class="btn btn-primary w-100"
+                                        <button type="submit" class="btn btn-cafe w-100"
                                             value="Buscar">Buscar</button>
                                     </div>
                                 </div>
@@ -592,7 +592,7 @@ if (isset($_POST['btnactualizar'])) {
                 </div>
                 <div class="row mt-lg-3 p-3 p-lg-4 m-0">
                     <div class="d-lg-none w-100 mb-3 m-0 p-0">
-                        <button type="button" class="btn w-100 btn-primary shadow-lg" data-bs-toggle="modal"
+                        <button type="button" class="btn w-100 btn-cafe shadow-lg" data-bs-toggle="modal"
                             data-bs-target="#agregarEvento">
                             <i class="fa-solid fa-plus fa-2x"></i>
                         </button>
@@ -628,7 +628,7 @@ if (isset($_POST['btnactualizar'])) {
                                             <td class='d-flex flex-row align-items-center justify-content-center gap-1'>
                                                 <!-- Imagen -->
                                                 <!-- Botón que activa el modal de ver la imagen  -->
-                                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#modalImagen_$evento->id_evento'>
+                                                <button type='button' class='btn btn-cafe' data-bs-toggle='modal' data-bs-target='#modalImagen_$evento->id_evento'>
                                                     <i class='fa-solid fa-image'></i>
                                                 </button>
                                                 <!-- Modal de ver imagen -->
@@ -653,7 +653,7 @@ if (isset($_POST['btnactualizar'])) {
                                                                         <input type='hidden' name='id_evento' value='$evento->id_evento'>
                                                                         <div class='col-12 mb-3 text-end'>
                                                                             <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
-                                                                            <button type='submit' class='btn btn-primary'>Actualizar</button>
+                                                                            <button type='submit' class='btn btn-cafe'>Actualizar</button>
                                                                         </div>
                                                                     </div>
                                                                 </form>
@@ -662,7 +662,7 @@ if (isset($_POST['btnactualizar'])) {
                                                     </div>
                                                 </div>
                                                 <!-- Botón que activa el modal de ver detalles del producto -->
-                                                <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#detalleProducto_$evento->id_evento'>
+                                                <button type='button' class='btn btn-cafe' data-bs-toggle='modal' data-bs-target='#detalleProducto_$evento->id_evento'>
                                                     <i class='fa-solid fa-bars'></i>
                                                 </button>
                                                 <div class='modal fade' id='detalleProducto_$evento->id_evento' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
@@ -727,7 +727,7 @@ if (isset($_POST['btnactualizar'])) {
                         </div>
                     </div>
                     <!-- Botón que activa el modal de editar producto -->
-                    <button type='button' class='btn btn-primary' data-bs-toggle='modal'
+                    <button type='button' class='btn btn-cafe' data-bs-toggle='modal'
                         data-bs-target='#editarProducto_$evento->id_evento'>
                         <i class='fa-solid fa-pen-to-square'></i>
                     </button>
@@ -816,7 +816,7 @@ if (isset($_POST['btnactualizar'])) {
                                 </div>
                         <div class='mt-3 text-end'>
                             <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
-                            <button type='submit' class='btn btn-primary' name='btnactualizar'
+                            <button type='submit' class='btn btn-cafe' name='btnactualizar'
                                 id='btnactualizar'>Actualizar</button>
                         </div>
                         </form>

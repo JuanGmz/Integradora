@@ -648,6 +648,17 @@ if (isset($_SESSION["usuario"])) {
                                                         </div>
                                                     </div>
                                                 </div>
+                                                ";
+                                                if ($producto->estatus == false) {
+                                                    ?>
+                                                    <button class="btn btn-danger"><i class="fa-solid fa-eye-slash"></i></button>
+                                                    <?php
+                                                } else {
+                                                    ?>
+                                                    <button class="btn btn-success"><i class="fa-solid fa-eye"></i></button>
+                                                    <?php
+                                                }
+                                                echo "
                                             </td>
                                         </tr>";
                             }
