@@ -674,10 +674,9 @@ if (isset($_POST['btnactualizar'])) {
                                                             </div>
                                                             <!-- Aquí va el contenido del modal -->
                                                             ";
-                                $hora_inicio_24 = convertTo24Hour($evento->hora_inicio);
-                                $hora_fin_24 = convertTo24Hour($evento->hora_fin);
-                                $horaInicio = formatHora($hora_inicio_24);
-                                $horaFin = formatHora($hora_fin_24);
+                                $horaInicio = formatHora($evento->hora_inicio);
+                                $horaFin = formatHora($evento->hora_fin);
+
                                 $fechaEvento = formatFecha($evento->fecha_evento);
                                 $precio_boleto = formatPrecio($evento->precio_boleto);
                                 if ($evento->tipo == "De Pago") {
@@ -708,8 +707,8 @@ if (isset($_POST['btnactualizar'])) {
                                             <hr class='my-4'>
                                             <h4 class='text-start fw-bold mb-3'>Fecha evento: <span
                                                     class='fw-normal fs-5'> $fechaEvento</span></h5>
-                                                <h4 class='text-start fw-bold mb-3'>Hora: <span class='fw-normal fs-5'><?php echo $horaInicio
-                                                    . ' - ' . $horaFin ?></span></h5>
+                                                <h4 class='text-start fw-bold mb-3'>Hora: <span class='fw-normal fs-5'>$horaInicio
+                                                     " . " - " . " $horaFin</span></h5>
                                                     <hr class='my-4'>
                                                     <div class='row'>
                                                         <div class='col-6'>
