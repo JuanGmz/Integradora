@@ -203,6 +203,7 @@ a:hover {
   text-decoration: none;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
+  border: 0;
 }
 
 .btn-cafe:hover {
@@ -260,9 +261,7 @@ a:hover {
   background: var(--primario);
 }
 
-.accordion-item {
-  border: none;
-}
+
 
 .accordion-button {
   border: none;
@@ -429,9 +428,17 @@ a:hover {
   background-color: var(--color5);
 }
 
+
 .bagr-cafe3 {
   background-color: var(--color4);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+.bagr-cafe4{
+  background-color: var(--primario);
+}
+.accordion-item {
+  border: none;
+  background: var(--primario);
 }
 
 /* apartado de recompensa */
