@@ -912,7 +912,7 @@ BEGIN
     
     -- Obtener el precio del boleto del evento
     SELECT precio_boleto INTO precio 
-    FROM EVENTOS 
+    FROM eventos
     WHERE id_evento = NEW.id_evento;
     
     -- Calcular el monto total
@@ -1254,8 +1254,7 @@ VALUES
 
 INSERT INTO roles (rol, descripcion) VALUES 
 ('administrador', 'Encargado de cafe sinfonia y cultura'),
-('cliente', 'Cliente del café sinfonía'),
-('empleado','Empleado del café sinfonía');
+('cliente', 'Cliente del café sinfonía');
 
 -- Insertar registros en la tabla categorias.
 	INSERT INTO categorias (nombre, descripcion, tipo,img_url ) VALUES
