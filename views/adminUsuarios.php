@@ -359,7 +359,9 @@
                             <form method="post">
                                 <div class="row">
                                     <div class="col-8 col-lg-4">
-                                        <input type="text" required class="form-control" name="busqueda" placeholder="Ingresa ID, Usuario o Teléfono" value="<?php echo isset($_POST['busqueda']) ? htmlspecialchars($_POST['busqueda']) : ''; ?>">
+                                        <input type="text" required class="form-control" name="busqueda"
+                                            placeholder="Ingresa ID, Usuario o Teléfono"
+                                            value="<?php echo isset($_POST['busqueda']) ? htmlspecialchars($_POST['busqueda']) : ''; ?>">
                                     </div>
                                     <div class="col-4 col-lg-2">
                                         <input type="submit" class="btn btn-primary w-100" value="Buscar">
@@ -450,6 +452,10 @@
                                                             <div class='mb-3'>
                                                                 <label for='nombre' class='form-label'>Nombre: </label>
                                                                 <input type='text' class='form-control' id='nombre' name='nombres' value='{$usuario->nombres} {$usuario->apellido_paterno} {$usuario->apellido_materno}' readonly>
+                                                            </div>
+                                                            <hr class='my-4'>
+                                                            <div class='mb-3'>
+                                                                <label class='form-label'>Roles: </label>
                                                             </div>";
 
                                 // Mostrar roles actuales y permitir eliminar si hay más de uno
@@ -458,7 +464,6 @@
                                     $rol_actual = $roles[$i];
                                     echo "
                                     <div class='mt-2 d-flex align-items-center'>
-                                        <label for='rol_$i' class='form-label me-2'>Rol " . ($i + 1) . "</label>
                                         <input type='text' class='form-control' value='$rol_actual' readonly>
                                         ";
                                     if (count($roles) === 1 || $rol_actual === 'cliente') {
@@ -469,7 +474,7 @@
                                     echo "
                                     </div>";
                                 }
-
+                                echo "<hr class='my-4'>";
                                 // Mostrar roles disponibles para agregar solo si tiene menos de 3 roles
                                 if (count($roles) < 3) {
                                     echo "

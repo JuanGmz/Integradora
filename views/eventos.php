@@ -96,7 +96,7 @@
 
     <!-- Contenido -->
 
-    <div class="container mb-5">
+    <div class="container">
         <div class="row p-0 m-0">
             <!--NavBar EventosCategorias-->
             <div class="p-2">
@@ -113,7 +113,7 @@
                 </div>
                 <!-- Botones de categorías -->
                 <div class="d-flex justify-content-center">
-                    <ul class="nav nav-tabs justify-content-center" id="ex1" role="tablist" style="border-bottom: none;">
+                    <ul class="nav nav-tabs justify-content-center gap-2 m-0 p-0" id="ex1" role="tablist" style="border-bottom: none;">
                         <?php
                         include_once("../class/database.php");
                         $conexion = new Database();
@@ -124,8 +124,8 @@
                         $active = "active";
                         foreach ($categorias as $categoria) {
                             $isActive = (isset($_GET['categoria']) && $_GET['categoria'] == $categoria->id_categoria) ? 'active' : '';
-                            echo "<li class='row nav-item col-5 col-sm-5 col-md-3 col-lg-auto mb-2 mb-lg-0 me-0 text-center justify-content-center d-flex m-2 p-0 p-md-1 me-md-2' role='presentation'>";
-                            echo "<a data-mdb-tab-init class='btn-categorias w-100 h-100' id='ex1-tabs-{$categoria->id_categoria}' href='#ex1-tabs-{$categoria->id_categoria}' role='tab' aria-controls='ex1-tabs-{$categoria->id_categoria}' aria-selected='$tru'>{$categoria->nombre}</a>";
+                            echo "<li class='rounded row nav-item col-5 col-sm-5 col-md-3 col-lg-auto mb-2 mb-lg-0 me-0 text-center justify-content-center d-flex m-0 p-0 p-md-1 me-md-2' role='presentation'>";
+                            echo "<a data-mdb-tab-init class='rounded btn-categorias w-100 h-100' id='ex1-tabs-{$categoria->id_categoria}' href='#ex1-tabs-{$categoria->id_categoria}' role='tab' aria-controls='ex1-tabs-{$categoria->id_categoria}' aria-selected='$tru'>{$categoria->nombre}</a>";
                             echo "</li>";
                             $tru = "false";
                             $active = "";
@@ -148,6 +148,7 @@
 
                     // Verificar si se ha seleccionado una categoría
                     $categoriaSeleccionada = isset($_GET['categoria']) ? (int) $_GET['categoria'] : null;
+
 
                     foreach ($categorias as $categoria) {
                         $categoria_id = $categoria->id_categoria;
@@ -179,19 +180,26 @@
 
                         if (!empty($eventos)) {
                             foreach ($eventos as $evento) {
+<<<<<<< HEAD
                                 echo "  <div class='row justify-content-center mb-4 p-2 text-center'>";
                                 echo "      <div class='col-12 col-md-8 d-flex align-items-center'>";
                                 echo "          <div class='d-flex flex-wrap w-100 d-flex justify-content-center'>";
                                 echo "              <div class='col-12 col-md-11 p-2 col-sm-10 col-lg-6'>";
+=======
+                                echo "  <div class='row justify-content-center mb-4 p-2'>";
+                                echo "      <div class='col-12 col-md-8 d-flex align-items-center bg-body shadow-lg rounded m-0 p-0'>";
+                                echo "          <div class='d-flex flex-wrap w-100 d-flex justify-content-center p-0 m-0'>";
+                                echo "              <div class='col-12 col-md-11 col-sm-10 col-lg-6'>";
+>>>>>>> c810a6198d30940a36ea69c10965181a8a69d241
                                 echo "                  <img src='../img/eventos/{$evento->img_url}' class='card-img-top img-fluid' alt='...' style='height: 300px; object-fit: cover;'>";
                                 echo "              </div>";
-                                echo "              <div class='col-12 col-sm-9 col-md-11 col-lg-6 p-2 d-flex flex-column justify-content-cente p-lg-2'>";
-                                echo "                  <h5 class='fw-bold mb-3' style='letter-spacing: 1px;'>{$evento->nombre}</h5>";
+                                echo "              <div class='col-12 col-sm-9 col-md-11 col-lg-6 p-2 d-flex flex-column justify-content-center align-items-center p-lg-2'>";
+                                echo "                  <h3 class='fw-bold mb-3 text-center'>{$evento->nombre}</h3>";
                                 echo "                  <p class='text-dark-emphasis mb-4 '>{$evento->fecha_publicacion}</p>";
-                                echo "                  <span class='text-dark-emphasis mb-4 '>{$evento->descripcion}</span>";
+                                echo "                  <span class='text-dark-emphasis mb-4 text-center'>{$evento->descripcion}</span>";
                                 echo "                  <form action='../views/eventos/detalle_eventos.php?id={$evento->id_evento}' method='post'>";
                                 echo "                      <input type='hidden' name='id_evento' value='{$evento->id_evento}'>";
-                                echo "                      <input type='submit' class='btn btn-cafe w-75' value='Ver Detalles'>";
+                                echo "                      <input type='submit' class='btn btn-cafe w-100' value='Ver Detalles'>";
                                 echo "                  </form>";
                                 echo "              </div>";
                                 echo "          </div>";

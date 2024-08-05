@@ -100,8 +100,7 @@
             <div class="col-lg-4 d-flex flex-column justify-content-center align-items-center p-5" style="background: var(--color3);">
                 <div class="row ">
                     <div class="col-12">
-                        <h1 class="text-light text-center" style="letter-spacing: 1px;">Prueba el mejor café de la
-                            ciudad</h1>
+                        <h1 class="text-light text-center" style="letter-spacing: 1px;">Prueba el mejor café de la ciudad</h1>
                     </div>
                 </div>
                 <div class="row mb-3 p-2 ">
@@ -124,10 +123,10 @@
         <div class="row p-0 m-0">
             <!--Introducción-->
             <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center">
-                <div class="container-fluid p-5 ">
+                <div class="container-fluid p-lg-5">
                     <div class="row">
                         <div class="col-12 d-flex justify-content-center">
-                            <h1 class="fw-bold text-center">SinfoníaCafé&Cultura</h1>
+                            <h1 class="fw-bold text-center mt-5 mt-lg-0">SinfoníaCafé&Cultura</h1>
                         </div>
                     </div>
                     <div class="row ">
@@ -255,7 +254,7 @@
                     <section class="col-12 row justify-content-center p-2">
 
                         <!-- Envio a tu Servicio-->
-                        <div class="col-8 col-sm-6 col-sm-5 col-lg-4 m-0 p-0 text-center justify-content-center d-flex card-feature p-1">
+                        <div class="col-4 col-sm-6 col-sm-5 col-lg-4 m-0 p-0 text-center justify-content-center d-flex card-feature p-1">
                             <div class="">
                                 <div class="row">
                                     <div class="col-12">
@@ -269,7 +268,7 @@
                             </div>
                         </div>
                         <!-- Tarjeta regalo especial-->
-                        <div class="col-8 col-sm-6 col-sm-5 col-lg-4 m-0 p-0 text-center justify-content-center d-flex card-feature p-1">
+                        <div class="col-4 col-sm-6 col-sm-5 col-lg-4 m-0 p-0 text-center justify-content-center d-flex card-feature p-1">
                             <a href="./views/recompensas.php">
                                 <div class="">
                                     <div class="col-12">
@@ -285,7 +284,7 @@
                             </a>
                         </div>
                         <!-- Servicio al cliente-->
-                        <div class="col-8 col-sm-6 col-sm-5 col-lg-4 m-0 p-0 text-center justify-content-center d-flex card-feature p-1">
+                        <div class="col-4 col-sm-6 col-sm-5 col-lg-4 m-0 p-0 text-center justify-content-center d-flex card-feature p-1">
                             <a href="./views/contact.php">
                                 <div class="">
                                     <div class="col-12">
@@ -329,7 +328,7 @@
                         // Debugging
                         echo "<!-- Counter: $counter, Class: $additionalClass -->";
 
-                        echo "<div class='col-md-6 p-2 col-6 col-sm-6 col-lg-4 p-md-4 p-0 m-0 {$additionalClass} {$additionalClass2}'>";
+                        echo "<div class='col-md-6 p-2 col-12 col-sm-6 col-lg-4 p-md-4 p-0 m-0 {$additionalClass} {$additionalClass2}'>";
                         echo "<div class='card m-0 blog-card shadow-lg' style='border-radius: 5% 5% 0% 0%;'>";
                         echo "<img src='img/bolsas/{$bolsa->img_url}' class='coffee-image align-card-img-top' alt='{$bolsa->id_bolsa}'>";
                         echo "<div class='card-body product-card-body'>";

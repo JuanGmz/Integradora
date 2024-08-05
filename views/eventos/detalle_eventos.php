@@ -136,7 +136,7 @@ if ($result) {
             <i class="fa-brands fa-whatsapp fa-2x"></i>
         </button>
         <!-- NavBar -->
-        <nav class="navbar navbar-expand-lg shadow-lg ">
+        <nav class="navbar navbar-expand-lg shadow-lg">
             <div class="container-fluid">
                 <a class="navbar-brand" href="../../index.php">
                     <img src="../../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
@@ -197,7 +197,7 @@ if ($result) {
             </div>
         </nav>
         <!-- NavBar End -->
-        <div class="container my-5">
+        <div class="container mb-4">
             <nav aria-label="breadcrumb" class='col-12 d-flex'>
                 <ol class="breadcrumb mt-4">
                     <li class="breadcrumb-item fw-bold"><a href="../../index.php">Inicio</a></li>
@@ -216,7 +216,7 @@ if ($result) {
             if ($evento->tipo == "De Pago" && $evento->boletos > 0) {
                 if (isset($_SESSION["usuario"])) {
                     $labelText_precio = " <h4>Precio por boleto: {$precio_boleto} $</h4>";
-                    $labelText_botonreservar = "<button type='button' class='btn btn-cafe fs-4 col-12' data-bs-toggle='modal'
+                    $labelText_botonreservar = "<button type='button' class='btn btn-cafe fs-4 col-6' data-bs-toggle='modal'
                             data-bs-target='#exampleModal'>
                             Reservar Boletos
                         </button>
@@ -292,31 +292,6 @@ if ($result) {
             <hr class="my-4">
             <!-- Ubicación -->
             <div class="row ">
-                <!-- Mapa -->
-                <div class="col-lg-6">
-                    <!-- Ubicación -->
-                    <div class="d-flex align-items-center mb-3 justify-content-center">
-                        <i class="fa-solid fa-location-dot fa-2x me-2"></i>
-                        <h2 class="mb-0">Ubicación</h2>
-                    </div>
-                    <!-- Mapa -->
-                    <div class="d-flex justify-content-center">
-                        <div class="text-center">
-                            <h5 class="text-center mb-3 p-1">
-                                <?php
-                                echo "{$evento->lugar}, {$evento->calle}, {$evento->colonia}, {$evento->ciudad}, {$evento->estado}, C.P. {$evento->codigo_postal}";
-                                ?>
-                            </h5>
-                            <!-- Insertar el mapa aquí -->
-                            <?php
-                            $lat = $evento->lat; // Reemplaza con la latitud de la dirección
-                            $lng = $evento->lng; // Reemplaza con la longitud de la dirección
-                            ?>
-                            <div class="map-container" id="map"></div>
-                        </div>
-                    </div>
-                </div>
-                <hr class="my-4 d-block d-md-none">
                 <!-- Horario y Detalles -->
                 <div class="col-12 col-md-5 col-lg-6">
                     <!-- Horario -->
@@ -345,6 +320,31 @@ if ($result) {
                         </div>
                         <div class="d-flex justify-content-center col-12">
                             <?php echo $labelText_botonreservar; ?>
+                        </div>
+                    </div>
+                </div>
+                <hr class="my-4 d-block d-md-none">
+                <!-- Mapa -->
+                <div class="col-lg-6">
+                    <!-- Ubicación -->
+                    <div class="d-flex align-items-center mb-3 justify-content-center">
+                        <i class="fa-solid fa-location-dot fa-2x me-2"></i>
+                        <h2 class="mb-0">Ubicación</h2>
+                    </div>
+                    <!-- Mapa -->
+                    <div class="d-flex justify-content-center">
+                        <div class="text-center">
+                            <h5 class="text-center mb-3 p-1">
+                                <?php
+                                echo "{$evento->lugar}, {$evento->calle}, {$evento->colonia}, {$evento->ciudad}, {$evento->estado}, C.P. {$evento->codigo_postal}";
+                                ?>
+                            </h5>
+                            <!-- Insertar el mapa aquí -->
+                            <?php
+                            $lat = $evento->lat; // Reemplaza con la latitud de la dirección
+                            $lng = $evento->lng; // Reemplaza con la longitud de la dirección
+                            ?>
+                            <div class="map-container" id="map"></div>
                         </div>
                     </div>
                 </div>

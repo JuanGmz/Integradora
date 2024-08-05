@@ -27,7 +27,7 @@ $query = "SELECT
 
 $producto = $db->select($query);
 
-$queryMedidas = "SELECT medida, precio FROM detalle_productos_menu WHERE id_pm = $id_pm ORDER BY medida ASC LIMIT 4"; 
+$queryMedidas = "SELECT medida, precio FROM detalle_productos_menu WHERE id_pm = $id_pm ORDER BY medida ASC LIMIT 4";
 
 $medidas = $db->select($queryMedidas);
 
@@ -46,12 +46,15 @@ $medidas = $db->select($queryMedidas);
 </head>
 
 <body>
-     <!-- Botón de WhatsApp -->
-     <button id="whatsappButton" class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3" type="button" onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
+    <!-- Botón de WhatsApp -->
+    <button id="whatsappButton"
+        class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3"
+        type="button"
+        onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
         <i class="fa-brands fa-whatsapp fa-2x"></i>
     </button>
     <!-- NavBar -->
-    <nav class="navbar navbar-expand-lg shadow-lg mb-lg-5">
+    <nav class="navbar navbar-expand-lg shadow-lg">
         <div class="container-fluid">
             <a class="navbar-brand" href="../../../index.php">
                 <img src="../../../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
@@ -118,8 +121,7 @@ $medidas = $db->select($queryMedidas);
     </nav>
     <!-- NavBar End -->
 
-    <div class="container mb-0">
-
+    <div class="container mb-4">
         <!-- Breadcrumbs -->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb mt-4">
@@ -131,39 +133,40 @@ $medidas = $db->select($queryMedidas);
                 <li class="breadcrumb-item active" aria-current="page"><?php echo $producto[0]->nombre ?></li>
             </ol>
         </nav>
-    </div>
 
-    <div class="row m-0 p-0 mb-lg-5 rounded d-flex justify-content-center" >
-        <!-- Imagen -->
-        <div class="col-lg-6 rounded m-0 p-3">
-            <img src="../../../img/menu/<?php echo $producto[0]->img_url ?>" alt="Imagen del producto" class="img-fluid rounded">
-        </div>
-        <div class="col-lg-6 m-0 p-3 d-flex flex-column justify-content-center align-items-center">
-            <!-- Nombre -->
-            <h1 class="text-center my-2"><?php echo $producto[0]->nombre ?></h1>
-            <h3 class="text-center my-2"><?php echo $producto[0]->descripcion ?></h3>
-            <table class="my-2">
-                <tbody>
-                    <!-- medidas -->
-                    <?php
-                    if (empty($medidas[0]->medida and $medidas[0]->precio)) {
-                        ?>
-                        <tr>
-                            <td class="fs-4 text-center">Este producto no cuenta con medidas para mostrar.</td>
-                        </tr>
+        <div class="row shadow-lg bg-body m-0 p-0 mb-lg-5 rounded d-flex justify-content-center">
+            <!-- Imagen -->
+            <div class="col-lg-6 rounded m-0 p-0">
+                <img src="../../../img/menu/<?php echo $producto[0]->img_url ?>" alt="Imagen del producto"
+                    class="img-fluid rounded">
+            </div>
+            <div class="col-lg-6 m-0 d-flex flex-column justify-content-center align-items-center">
+                <!-- Nombre -->
+                <h1 class="text-center my-2"><?php echo $producto[0]->nombre ?></h1>
+                <h3 class="text-center my-2"><?php echo $producto[0]->descripcion ?></h3>
+                <table class="my-2">
+                    <tbody>
+                        <!-- medidas -->
                         <?php
-                    } else {
-                        foreach ($medidas as $medida) {
-                            echo "<tr class='text-center'>
+                        if (empty($medidas[0]->medida and $medidas[0]->precio)) {
+                            ?>
+                            <tr>
+                                <td class="fs-4 text-center">Este producto no cuenta con medidas para mostrar.</td>
+                            </tr>
+                            <?php
+                        } else {
+                            foreach ($medidas as $medida) {
+                                echo "<tr class='text-center'>
                                     <td class='fs-4'>$medida->medida</td>
                                     <td class='fs-4 px-3'>-</td>
                                     <td class='fs-4'>$$medida->precio</td>
                                 </tr>";
+                            }
                         }
-                    }
-                    ?>
-                </tbody>
-            </table>
+                        ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 

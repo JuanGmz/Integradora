@@ -29,7 +29,7 @@ if (isset($_SESSION["usuario"])) {
         <i class="fa-brands fa-whatsapp fa-2x"></i>
     </button>
     <!-- NavBar -->
-    <nav class="navbar navbar-expand-lg shadow-lg ">
+    <nav class="navbar navbar-expand-lg shadow-lg">
         <div class="container-fluid">
             <a class="navbar-brand" href="../index.php">
                 <img src="../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
@@ -95,8 +95,8 @@ if (isset($_SESSION["usuario"])) {
     <div class="container mb-5">
         <div class="row p-0 m-0">
             <!-- E-Commerce-->
-            <div class="container-fluid p-3">
-                <nav aria-label="breadcrumb" class='col-12 '>
+            <div class="container-fluid m-0 p-0">
+                <nav aria-label="breadcrumb" class='col-12'>
                     <ol class="breadcrumb mt-4">
                         <li class="breadcrumb-item fw-bold"><a href="../index.php">Inicio</a></li>
                         <li class="breadcrumb-item active" aria-current="page"></li>E-Commerce</li>
@@ -107,7 +107,7 @@ if (isset($_SESSION["usuario"])) {
                     <h1 class="h1contact">E-Commerce</h1>
                 </div>
                 <!-- contenedor de productos -->
-                <div class="row  d-flex justify-content-center">
+                <div class="row d-lg-flex justify-content-center d-block">
                     <?php
                     $conexion = new Database();
                     $conexion->conectarDB();
@@ -119,7 +119,7 @@ if (isset($_SESSION["usuario"])) {
                     $bolsas = $conexion->select($query);
                     foreach ($bolsas as $bolsa) {
 
-                        echo "<div class='col-10 col-sm-6 col-md-6 col-lg-4 p-4 m-0'>";
+                        echo "<div class='col-12 col-sm-6 col-md-6 col-lg-4 p-lg-2 m-0 px-3 mb-3 mb-lg-0'>";
                         echo "<div class='card m-0 blog-card shadow-lg' style='border-radius: 5% 5% 0% 0%;'>";;
                         echo "<img src='../img/bolsas/{$bolsa->img_url}' class='coffee-image align-card-img-top' alt='{$bolsa->id_bolsa}'>";
                         echo "<div class='card-body product-card-body'>";
