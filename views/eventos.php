@@ -141,7 +141,7 @@
                 </div>
 
                 <!-- Contenido de las categorías -->
-                <div class="tab-content col-12 p-1" id="ex1-content" style="min-height: 400px;">
+                <div class="tab-content col-12 p-1" id="ex1-content">
                     <?php
                     $conexion->conectarDB();
                     $eventosPorCategoria = [];
@@ -179,7 +179,7 @@
 
                         if (!empty($eventos)) {
                             foreach ($eventos as $evento) {
-                                echo "  <div class='row justify-content-center mb-4 p-2'>";
+                                echo "  <div class='row justify-content-center mb-4 p-2 text-center'>";
                                 echo "      <div class='col-12 col-md-8 d-flex align-items-center'>";
                                 echo "          <div class='d-flex flex-wrap w-100 d-flex justify-content-center'>";
                                 echo "              <div class='col-12 col-md-11 p-2 col-sm-10 col-lg-6'>";
