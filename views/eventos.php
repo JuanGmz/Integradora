@@ -141,7 +141,7 @@
                 </div>
 
                 <!-- Contenido de las categorías -->
-                <div class="tab-content col-12 p-1" id="ex1-content" style="min-height: 400px;">
+                <div class="tab-content col-12 p-1" id="ex1-content">
                     <?php
                     $conexion->conectarDB();
                     $eventosPorCategoria = [];
