@@ -13,6 +13,13 @@ if (isset($_SESSION["usuario"])) {
         header('Location: ../index.php');
     }
 }
+
+if (isset($_POST['btnestatus'])) {
+    extract($_POST);
+    $consulta = "UPDATE productos_menu SET estatus = $estatus WHERE id_pm = $id_pm";
+    $db->execute($consulta);
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -628,15 +635,7 @@ if (isset($_SESSION["usuario"])) {
                                     $selected = (isset($_POST['categoria']) && $_POST['categoria'] == $categoria->id_categoria) ? 'selected' : '';
                                     echo "<option value='" . htmlspecialchars($categoria->id_categoria) . "' $selected>" . htmlspecialchars($categoria->nombre) . "</option>";
                                 }
-                                $checked = ($producto->estatus == 1) ? 'checked' : '';
-                                $labelText = ($producto->estatus == 1) ? 'Activo' : 'Inactivo';
                                 echo /*html*/ "</select>
-                                                                            </div>
-                                                                            <div class='col-12 mb-3'>
-                                                                            <div class='form-check form-switch'>
-                                                                                <input class='form-check-input' type='checkbox' role='switch' name='estatus' id='estatus' value='1' {$checked}>
-                                                                                <label for='estatus' class='form-check-label'>{$labelText}</label>
-                                                                            </div>
                                                                             </div>
                                                                             <div class='col-12 mt-3 text-end'>
                                                                                 <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
@@ -648,17 +647,26 @@ if (isset($_SESSION["usuario"])) {
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <form  method='POST'>
+                                                
                                                 ";
-                                                if ($producto->estatus == false) {
-                                                    ?>
-                                                    <button class="btn btn-danger"><i class="fa-solid fa-eye-slash"></i></button>
-                                                    <?php
-                                                } else {
-                                                    ?>
-                                                    <button class="btn btn-success"><i class="fa-solid fa-eye"></i></button>
-                                                    <?php
-                                                }
-                                                echo "
+
+                                if ($producto->estatus == false) {
+                                    ?>
+                                    <input type="hidden" name="estatus" value="true" required>
+                                    <button type="submit" name="btnestatus" class="btn btn-danger"><i
+                                            class="fa-solid fa-eye-slash"></i></button>
+                                    <?php
+                                } else {
+                                    ?>
+                                    <input type="hidden" name="estatus" value="false" required>
+                                    <button type="submit" name="btnestatus" class="btn btn-success"><i
+                                            class="fa-solid fa-eye"></i></button>
+                                    <?php
+                                }
+                                echo "
+                                <input type='hidden' name='id_pm' value='$producto->id_pm' required>
+                                                </form>
                                             </td>
                                         </tr>";
                             }
