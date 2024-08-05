@@ -335,6 +335,7 @@ id_categoria int not null,
 nombre nvarchar(150) not null,
 descripcion nvarchar (300) not null,
 img_url nvarchar(255)not null,
+estatus boolean,
 primary key(id_pm),
 foreign key (id_categoria) references categorias(id_categoria)
 );
