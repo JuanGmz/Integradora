@@ -102,7 +102,6 @@ if ($_POST) {
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="shortcut icon" href="../img/Sinfonía-Café-y-Cultura.webp">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/scrollbar.css">
 </head>
 
 <body style="background: var(--color6);">
@@ -275,7 +274,7 @@ if ($_POST) {
 
         <div class="row">
             <!-- navbar pc -->
-            <div class="col-lg-3 bagr-cafe4 h-100 position-fixed d-none d-lg-block shadow">
+            <div class="col-lg-3 bagr-cafe4 h-100 position-fixed d-none d-lg-block shadow contenedor">
                 <h4 class="text-center text-light m-3 fs-2 fw-bold">Administrar</h4>
                 <div class="row">
                     <div class="col-12 text-center">

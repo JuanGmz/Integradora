@@ -76,7 +76,6 @@ if (isset($_POST['btnactualizar'])) {
     <link rel="shortcut icon" href="../img/Sinfonía-Café-y-Cultura.webp">
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/scrollbar.css">
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const tipoSelect = document.getElementById('tipo');
@@ -271,7 +270,7 @@ if (isset($_POST['btnactualizar'])) {
 
         <div class="row">
             <!-- navbar pc -->
-            <div class="col-lg-3 bagr-cafe4 shadow h-100 position-fixed d-none d-lg-block ">
+            <div class="col-lg-3 bagr-cafe4 shadow h-100 position-fixed d-none d-lg-block contenedor">
                 <h4 class="text-center text-light m-3 fs-2 fw-bold">Administrar</h4>
                 <div class="row">
                     <div class="col-12 text-center">
