@@ -418,13 +418,13 @@ if (isset($_SESSION["usuario"])) {
 
                 <?php
             } else {
-                echo '<div class="d-flex flex-column justify-content-center align-items-center vh-100">';
+                echo '<div class="d-flex flex-column justify-content-center align-items-center my-5">';
                 echo '<h3 class="text-center">Tu carrito está vacío</h3>';
                 echo '<div class="d-flex justify-content-center col-12">';
                 echo '<i class="fa-solid fa-mug-hot fa-4x text-dark-emphasis"></i>';
                 echo '</div>';
-                echo '<div class="d-flex justify-content-center col-12">';
-                echo ' <a href="../ecommerce.php" class="btn w-50 mt-3 fs-5 m-1 btn-dark p-1">Ver Tienda</a>';
+                echo '<div class="d-flex justify-content-center col-12 col-md-3">';
+                echo ' <a href="../ecommerce.php" class="btn w-100 mt-3 fs-5 m-1 btn-dark p-1">Ver Tienda</a>';
                 echo '</div>';
                 echo '</div>';
                 echo '</div>';
