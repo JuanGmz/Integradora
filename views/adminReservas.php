@@ -353,7 +353,7 @@ if ($rol[0]->rol !== 'administrador') {
                         </div>
                     </div>
                 </div>
-                <div class="shadow-lg bg-light row p-3">
+                <div class="shadow-lg bg-light row p-3 m-0">
                     <div class="row m-1">
                         <div class="col-12">
                             <form method="post">
@@ -363,7 +363,7 @@ if ($rol[0]->rol !== 'administrador') {
                                             <option selected disabled value="">Seleccionar Evento</option>
                                             <!-- Aqui va el select del filtrado -->
                                             <?php
-                                            $queryFiltrar = "SELECT id_evento, nombre FROM eventos WHERE tipo = 'De Pago'";
+                                            $queryFiltrar = "SELECT id_evento, nombre, fecha_evento FROM eventos WHERE tipo = 'De Pago'";
                                             $eventos = $db->select($queryFiltrar);
                                             foreach ($eventos as $evento) {
                                                 $selected = (isset($_POST['evento']) && $_POST['evento'] == $evento->id_evento) ? 'selected' : '';
@@ -412,7 +412,10 @@ if ($rol[0]->rol !== 'administrador') {
                                             <th scope='row'>$reserva->cliente</th>
                                             <td class='d-none d-lg-table-cell'>$reserva->boletos</td>
                                             <td class='d-none d-lg-table-cell'>$$reserva->montoTotal</td>
-                                            <td>$reserva->estatus</td>
+                                            <td>$reserva->estatus"; 
+                                                
+                                echo "  
+                                            </td>
                                             <td>
                                                 <!-- Modal para ver detalles de la reserva -->
                                                 <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#detalles$reserva->folio'>
@@ -474,6 +477,19 @@ if ($rol[0]->rol !== 'administrador') {
                                                         </div>
                                                     </div>
                                                 </div>
+                                                ";
+                                                $comprobante = "SELECT * FROM comprobantes WHERE id_reserva = $reserva->folio";
+                                                $comprobante = $db->select($comprobante);
+                                                if ($comprobante == null) {
+                                                    ?>
+                                                    <button class="btn btn-danger"><i class="fa-regular fa-file"></i></button>
+                                                    <?php
+                                                } else {
+                                                    ?>
+                                                    <button class="btn btn-success"><i class="fa-regular fa-file"></i></button>
+                                                    <?php
+                                                }
+                                                echo "
                                             </td>
                                         </tr>";
                             }

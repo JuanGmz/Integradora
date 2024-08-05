@@ -370,38 +370,34 @@ if ($result) {
             <span id="alertMessage">Mensaje de la alerta.</span>
         </div>
         <!-- Footer -->
-        <footer>
-            <div class="container-fluid p-5 " style="background: var(--negroclaro);">
-                <h2 class="text-center text-light mb-5">SinfoníaCafé&Cultura</h2>
-                <hr class="text-light">
-                <div class="container-fluid d-flex justify-content-center align-items-center flex-column p-4">
-                    <div class="row m-3 text-center">
-                        <div class="col-3">
-                            <a href="https://www.facebook.com/SinfoniaCoffee">
-                                <i class="fa-brands fa-facebook text-light fa-2x text-center"></i>
-                            </a>
-                        </div>
-                        <div class="col-3">
-                            <a href="https://x.com/SinfoniaCoffee">
-                                <i class="fa-brands fa-twitter text-light fa-2x text-center"></i>
-                            </a>
-                        </div>
-                        <div class="col-3">
-                            <a href="https://www.instagram.com/sinfoniacoffee/">
-                                <i class="fa-brands fa-instagram text-light fa-2x text-center"></i>
-                            </a>
-                        </div>
-                        <div class="col-3">
-                            <i class="fa-brands fa-youtube text-light fa-2x text-center"></i>
-                        </div>
+        <footer class="mt-auto">
+        <div class="container-fluid p-5" style="background: var(--negroclaro);">
+            <h2 class="text-center text-light mb-5">SinfoníaCafé&Cultura</h2>
+            <hr class="text-light">
+            <div class="container-fluid d-flex justify-content-center align-items-center flex-column p-4">
+                <div class="row m-3 text-center">
+                    <div class="col-4">
+                        <a href="https://www.facebook.com/SinfoniaCoffee">
+                            <i class="fa-brands fa-facebook text-light fa-2x text-center"></i>
+                        </a>
                     </div>
-                    <div class="row m-3">
-                        <p class="text-center fw-bold text-light">Copyright © 2024
-                            SinfoníaCafé&Cultura</p>
+                    <div class="col-4">
+                        <a href="https://x.com/SinfoniaCoffee">
+                            <i class="fa-brands fa-twitter text-light fa-2x text-center"></i>
+                        </a>
+                    </div>
+                    <div class="col-4">
+                        <a href="https://www.instagram.com/sinfoniacoffee/">
+                            <i class="fa-brands fa-instagram text-light fa-2x text-center"></i>
+                        </a>
                     </div>
                 </div>
+                <div class="row m-3">
+                    <p class="text-center fw-bold text-light">Copyright © 2024 SinfoníaCafé&Cultura</p>
+                </div>
             </div>
-        </footer>
+        </div>
+    </footer>
         <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://kit.fontawesome.com/45ef8dbe96.js" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
