@@ -270,130 +270,10 @@ if (isset($_SESSION["usuario"])) {
 
                         $colors = ['#a18263', '#835d38', '#343434', '#bf9d60', '#e4ccb4', '#1c2338'];
                         ?>
-                        <style>
-                            .ag-courses_box {
-                                padding: 50px 0;
-                            }
-
-                            .ag-courses-item_image {
-                                position: absolute;
-                                top: 0;
-                                left: 0;
-                                width: 100%;
-                                height: 100%;
-                                opacity: 0;
-                                transition: opacity .5s ease;
-                                border-radius: 28px;
-                                /* Asegura que la imagen tenga los mismos bordes redondeados */
-                                overflow: hidden;
-                                /* Asegura que la imagen no desborde */
-                                z-index: 1;
-                            }
-
-                            .ag-courses-item_image img {
-                                width: 100%;
-                                height: 100%;
-                                object-fit: cover;
-                                filter: blur(1px);
-                            }
-
-                            .ag-courses-item_link:hover .ag-courses-item_image {
-                                opacity: 1;
-                            }
-
-
-                            .ag-courses_item {
-                                -ms-flex-preferred-size: calc(33.33333% - 30px);
-                                flex-basis: calc(33.33333% - 30px);
-                                margin: 0 15px 30px;
-                                overflow: hidden;
-                                border-radius: 28px;
-                            }
-
-                            /* Este selector define cada ítem del curso con un ancho calculado del 33.33% menos 30px, agrega márgenes y bordes redondeados, y oculta el desbordamiento */
-
-                            .ag-courses-item_link {
-                                display: block;
-                                padding: 30px 20px;
-                                background-color: var(--blanco);
-                                overflow: hidden;
-                                position: relative;
-                            }
-
-                            /* Este selector define el enlace de cada ítem del curso como un bloque, con relleno, fondo oscuro y posición relativa para contener elementos posicionales hijos */
-
-                            .ag-courses-item_link:hover,
-                            .ag-courses-item_link:hover .ag-courses-item_date {
-                                text-decoration: none;
-                                color: #FFF;
-                            }
-
-                            .ag-courses-item_link:hover,
-                            .ag-courses-item_link:hover .ag-courses-item_title,
-                            .ag-courses-item_link:hover .ag-courses-item_date-box {
-                                text-decoration: none;
-                                color: #FFF;
-                            }
-
-                            /* Este selector elimina la decoración del texto y cambia el color del enlace y la fecha al pasar el mouse */
-
-                            .ag-courses-item_link:hover .ag-courses-item_bg {
-                                -webkit-transform: scale(10);
-                                -ms-transform: scale(10);
-                                transform: scale(10);
-                            }
-
-                            /* Este selector escala el fondo del ítem del curso al pasar el mouse */
-
-                            .ag-courses-item_title {
-                                min-height: 30px;
-                                margin: 0;
-                                overflow: hidden;
-                                font-weight: bold;
-                                font-size: 10px;
-                                color: var(--negro);
-                                z-index: 2;
-                                position: relative;
-                            }
-
-                            /* Este selector define el título del ítem del curso con un alto mínimo, márgenes, fuente en negrita y tamaño grande, color blanco y posición relativa con un z-index para estar sobre otros elementos */
-
-                            .ag-courses-item_date-box {
-                                font-size: 18px;
-                                color: var(--negro);
-                                z-index: 2;
-                                position: relative;
-                            }
-
-                            /* Este selector define el contenedor de la fecha del ítem del curso con un tamaño de fuente y color específico, y posición relativa */
-
-                            .ag-courses-item_date {
-                                font-weight: bold;
-                                color: var(--color1);
-                                -webkit-transition: color .5s ease;
-                                -o-transition: color .5s ease;
-                                transition: color .5s ease;
-                            }
-
-                            /* Este selector define la fecha del ítem del curso con fuente en negrita y un color específico, y una transición suave al cambiar el color */
-
-                            .ag-courses-item_bg {
-                                height: 150px;
-                                width: 150px;
-                                background-color: #f9b234;
-                                z-index: 1;
-                                position: absolute;
-                                top: -75px;
-                                right: -75px;
-                                border-radius: 50%;
-                                -webkit-transition: all .5s ease;
-                                -o-transition: all .5s ease;
-                                transition: all .5s ease;
-                            }
-                        </style>
+                        
                         <div class="ag-courses_box col-12 col-md-6 col-lg-4 p-3">
                             <div class="ag-courses_item m-0 p-0">
-                                <a href="#" class="ag-courses-item_link">
+                                <a class="ag-courses-item_link">
                                     <?php $random_color = $colors[array_rand($colors)]; ?>
                                     <div class="ag-courses-item_bg" style="background-color: <?php echo $random_color; ?>;"></div>
 
@@ -411,56 +291,55 @@ if (isset($_SESSION["usuario"])) {
                                             <h5 class="card-text text-center"><?php echo $recompensa->periodo ?></h5>
                                         </span>
                                         <div class="d-flex justify-content-center p-2">
-                                            <?php
-                                            if ($recompensa->progreso >= $recompensa->condicion) {
-                                                if ($recompensa->canje == 0) {
-                                                    ?>
-                                                    <!-- Button trigger modal -->
-                                                    <button type="button" class="btn btn-cafe p-2 m-2" data-bs-toggle="modal"
-                                                        data-bs-target="#recompensa_<?php echo $recompensa->id_recompensa ?>">
-                                                        Canjear
-                                                    </button>
-                                                    <?php
-                                                } else {
-                                                    ?>
-                                                    <button disabled class="btn btn-secondary m-2 p-2">Recompensa Canjeada</button>
-                                                    <?php
-                                                }
-                                                ?>
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="recompensa_<?php echo $recompensa->id_recompensa ?>"
-                                                    tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Cupón para canjeo
-                                                                </h1>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                                    aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <h5 class="text-center m-2">Índica al cajero que este es tu cupón de
-                                                                    canjeo</h5>
-                                                                <h5 class="text-center fw-bold m-2"><?php echo $recompensa->canje_id ?>
-                                                                </h5>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    data-bs-dismiss="modal">Cerrar</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <?php
-                                            } else {
-                                                ?>
-                                                <button disabled class="btn btn-secondary m-2 p-2">Canjear recompensa</button>
-                                                <?php
-                                            }
-                                            ?>
+                                        <?php
+                                    if ($recompensa->progreso >= $recompensa->condicion) {
+                                        if ($recompensa->canje == 0) {
+                                    ?>
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-cafe p-2 m-2" data-bs-toggle="modal" data-bs-target="#recompensa_<?php echo $recompensa->id_recompensa ?>">
+                                                Canjear
+                                            </button>
+                                        <?php
+                                        } else {
+                                        ?>
+                                            <button disabled class="btn btn-secondary m-2 p-2">Recompensa Canjeada</button>
+                                        <?php
+                                        }
+                                        ?>
+                                        
+                                    <?php
+                                    } else {
+                                    ?>
+                                        <button disabled class="btn btn-secondary m-2 p-2">Canjear recompensa</button>
+                                    <?php
+                                    }
+                                    ?>
                                         </div>
                                     </div>
                                 </a>
+                              
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="recompensa_<?php echo $recompensa->id_recompensa ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Cupón para canjeo
+                                                        </h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <h5 class="text-center m-2">Índica al cajero que este es tu cupón de
+                                                            canjeo</h5>
+                                                        <h5 class="text-center fw-bold m-2"><?php echo $recompensa->canje_id ?>
+                                                        </h5>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
                             </div>
                         </div>
 
