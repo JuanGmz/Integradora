@@ -364,7 +364,7 @@
                                             value="<?php echo isset($_POST['busqueda']) ? htmlspecialchars($_POST['busqueda']) : ''; ?>">
                                     </div>
                                     <div class="col-4 col-lg-2">
-                                        <input type="submit" class="btn btn-cafe w-100" value="Buscar">
+                                        <input type="submit" class="btn btn-dark w-100" value="Buscar">
                                     </div>
                                 </div>
                             </form>
@@ -412,7 +412,7 @@
                                     <td class='d-none d-md-table-cell'>{$usuario->roles}</td>
                                     <td>
                                         <!-- Botón para ver detalles del usuario -->
-                                        <button type='button' class='btn btn-cafe' data-bs-toggle='modal' data-bs-target='#detalleUsuario_{$usuario->id_usuario}'>
+                                        <button type='button' class='btn btn-dark' data-bs-toggle='modal' data-bs-target='#detalleUsuario_{$usuario->id_usuario}'>
                                             <i class='fa-solid fa-bars'></i>
                                         </button>
                                         <!-- Modal para mostrar los detalles del usuario -->
@@ -435,7 +435,7 @@
                                             </div>
                                         </div>
                                         <!-- Botón para editar el usuario -->
-                                        <button type='button' class='btn btn-cafe' data-bs-toggle='modal' data-bs-target='#editarUsuario_{$usuario->id_usuario}'>
+                                        <button type='button' class='btn btn-dark' data-bs-toggle='modal' data-bs-target='#editarUsuario_{$usuario->id_usuario}'>
                                             <i class='fa-solid fa-pen-to-square'></i>
                                         </button>
                                         <!-- Modal para editar el usuario -->
@@ -495,7 +495,7 @@
                                 echo "
                                                             <div class='modal-footer'>
                                                                 <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cerrar</button>
-                                                                <button type='submit' class='btn btn-cafe'>Guardar cambios</button>
+                                                                <button type='submit' class='btn btn-dark'>Guardar cambios</button>
                                                             </div>
                                                         </form>
                                                     </div>

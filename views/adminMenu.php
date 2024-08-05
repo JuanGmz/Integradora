@@ -349,7 +349,7 @@ if (isset($_SESSION["usuario"])) {
                         </div>
                         <div class="col-9 d-flex justify-content-end align-items-center gap-3">
                             <!-- Botón que activa el modal de agregar -->
-                            <button type="button" class="btn btn-cafe" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-dark" data-bs-toggle="modal"
                                 data-bs-target="#agregarProducto">
                                 Agregar Producto
                             </button>
@@ -419,7 +419,7 @@ if (isset($_SESSION["usuario"])) {
                                     <div class="mt-3 text-end">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="submit" class="btn btn-cafe">Agregar Producto</button>
+                                        <button type="submit" class="btn btn-dark">Agregar Producto</button>
                                     </div>
                                 </form>
                             </div>
@@ -446,7 +446,7 @@ if (isset($_SESSION["usuario"])) {
                                         </select>
                                     </div>
                                     <div class="col-4 col-lg-2">
-                                        <input type="submit" class="btn btn-cafe w-100" value="Buscar">
+                                        <input type="submit" class="btn btn-dark w-100" value="Buscar">
                                     </div>
                                 </div>
                             </form>
@@ -456,7 +456,7 @@ if (isset($_SESSION["usuario"])) {
                 <div class="row mt-3 p-4 m-0">
                     <!-- Botón para agregar -->
                     <div class="d-lg-none w-100 mb-3 m-0 p-0">
-                        <button type="button" class="btn w-100 btn-cafe shadow-lg" data-bs-toggle="modal"
+                        <button type="button" class="btn w-100 btn-dark shadow-lg" data-bs-toggle="modal"
                             data-bs-target="#agregarProducto">
                             <i class="fa-solid fa-plus fa-2x"></i>
                         </button>
@@ -497,7 +497,7 @@ if (isset($_SESSION["usuario"])) {
                                             <td class='d-flex flex-row align-items-center justify-content-center gap-1'>
                                                 <!-- Imagen -->
                                                 <!-- Botón que activa el modal de ver la imagen  -->
-                                                <button type='button' class='btn btn-cafe' data-bs-toggle='modal' data-bs-target='#modalImagen_$producto->id_pm'>
+                                                <button type='button' class='btn btn-dark' data-bs-toggle='modal' data-bs-target='#modalImagen_$producto->id_pm'>
                                                     <i class='fa-solid fa-image'></i>
                                                 </button>
                                                 <!-- Modal de ver imagen -->
@@ -522,7 +522,7 @@ if (isset($_SESSION["usuario"])) {
                                                                         <input type='hidden' name='id_pm' value='$producto->id_pm'>
                                                                         <div class='col-12 mb-3 text-end'>
                                                                             <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
-                                                                            <button type='submit' class='btn btn-cafe'>Actualizar</button>
+                                                                            <button type='submit' class='btn btn-dark'>Actualizar</button>
                                                                         </div>
                                                                     </div>
                                                                 </form>
@@ -531,7 +531,7 @@ if (isset($_SESSION["usuario"])) {
                                                     </div>
                                                 </div>
                                                 <!-- Botón que activa el modal de ver detalles del producto -->
-                                                <button type='button' class='btn btn-cafe' data-bs-toggle='modal' data-bs-target='#detalleProducto_$producto->id_pm'>
+                                                <button type='button' class='btn btn-dark' data-bs-toggle='modal' data-bs-target='#detalleProducto_$producto->id_pm'>
                                                     <i class='fa-solid fa-bars'></i>
                                                 </button>
                                                 <div class='modal fade' id='detalleProducto_$producto->id_pm' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
@@ -588,7 +588,7 @@ if (isset($_SESSION["usuario"])) {
                                                                                 </div>
                                                                                 <div class='col-12 text-end mt-3'>
                                                                                     <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cerrar</button>
-                                                                                    <button type='submit' class='btn btn-cafe'>Agregar</button>
+                                                                                    <button type='submit' class='btn btn-dark'>Agregar</button>
                                                                                 </div>
                                                                             </div>
                                                                         </form>  
@@ -599,7 +599,7 @@ if (isset($_SESSION["usuario"])) {
                                                     </div>
                                                 </div>
                                                 <!-- Botón que activa el modal de editar producto -->
-                                                <button type='button' class='btn btn-cafe' data-bs-toggle='modal' data-bs-target='#editarProducto_$producto->id_pm'>
+                                                <button type='button' class='btn btn-dark' data-bs-toggle='modal' data-bs-target='#editarProducto_$producto->id_pm'>
                                                     <i class='fa-solid fa-pen-to-square'></i>
                                                 </button>
                                                 <div class='modal fade' id='editarProducto_$producto->id_pm' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
@@ -641,7 +641,7 @@ if (isset($_SESSION["usuario"])) {
                                                                             </div>
                                                                             <div class='col-12 mt-3 text-end'>
                                                                                 <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
-                                                                                <button type='submit' class='btn btn-cafe'>Guardar Cambios</button>
+                                                                                <button type='submit' class='btn btn-dark'>Guardar Cambios</button>
                                                                             </div>
                                                                         </div>
                                                                     </form>

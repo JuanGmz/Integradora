@@ -386,7 +386,7 @@ if ($rol[0]->rol !== 'administrador') {
                                                     <a href="adminlugares.php"
                                                         class="btn btn-cafe border-0 d-flex align-items-center justify-content-center align-items-center justify-content-center"
                                                         style="height: 180px;">
-                                                        <i class="fa-solid fa-location-dot fa-4x text-dark"></i>
+                                                        <i class="fa-solid fa-location-dot fa-4x"></i>
                                                     </a>
                                                 </div>
                                                 <div class="card-body text-center">
@@ -404,7 +404,7 @@ if ($rol[0]->rol !== 'administrador') {
                                                     <a href="adminUsuarios.php"
                                                         class="btn btn-cafe d-flex align-items-center justify-content-center align-items-center justify-content-center"
                                                         style="height: 180px;">
-                                                        <i class="fa-solid fa-users text-dark fa-4x"></i>
+                                                        <i class="fa-solid fa-users fa-4x"></i>
                                                     </a>
                                                 </div>
                                                 <div class="card-body text-center">
@@ -422,7 +422,7 @@ if ($rol[0]->rol !== 'administrador') {
                                                     <a href="adminPedidos.php"
                                                         class="btn btn-cafe d-flex align-items-center justify-content-center align-items-center justify-content-center"
                                                         style="height: 180px;">
-                                                        <i class="fa-solid fa-basket-shopping fa-4x text-dark"></i>
+                                                        <i class="fa-solid fa-basket-shopping fa-4x"></i>
                                                     </a>
                                                 </div>
                                                 <div class="card-body text-center">
@@ -440,7 +440,7 @@ if ($rol[0]->rol !== 'administrador') {
                                                     <a href="adminEventos.php"
                                                         class="btn btn-cafe d-flex align-items-center justify-content-center align-items-center justify-content-center"
                                                         style="height: 180px;">
-                                                        <i class="fa-solid fa-bell fa-4x text-dark"></i>
+                                                        <i class="fa-solid fa-bell fa-4x"></i>
                                                     </a>
                                                 </div>
                                                 <div class="card-body text-center">
@@ -458,7 +458,7 @@ if ($rol[0]->rol !== 'administrador') {
                                                     <a href="adminMenu.php"
                                                         class="btn btn-cafe d-flex align-items-center justify-content-center align-items-center justify-content-center"
                                                         style="height: 180px;">
-                                                        <i class="fa-solid fa-store fa-4x text-dark"></i>
+                                                        <i class="fa-solid fa-store fa-4x"></i>
                                                     </a>
                                                 </div>
                                                 <div class="card-body text-center">
@@ -476,7 +476,7 @@ if ($rol[0]->rol !== 'administrador') {
                                                     <a href="adminRecompensas.php"
                                                         class="btn btn-cafe d-flex align-items-center justify-content-center align-items-center justify-content-center"
                                                         style="height: 180px;">
-                                                        <i class="fa-solid fa-gift fa-4x text-dark"></i>
+                                                        <i class="fa-solid fa-gift fa-4x"></i>
                                                     </a>
                                                 </div>
                                                 <div class="card-body text-center">

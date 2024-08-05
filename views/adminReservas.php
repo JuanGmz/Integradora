@@ -373,7 +373,7 @@ if ($rol[0]->rol !== 'administrador') {
                                         </select>
                                     </div>
                                     <div class="col-4">
-                                        <input type="submit" class="btn btn-cafe w-100" value="Buscar">
+                                        <input type="submit" class="btn btn-dark w-100" value="Buscar">
                                     </div>
                                 </div>
                             </form>
@@ -418,7 +418,7 @@ if ($rol[0]->rol !== 'administrador') {
                                             </td>
                                             <td>
                                                 <!-- Modal para ver detalles de la reserva -->
-                                                <button type='button' class='btn btn-cafe' data-bs-toggle='modal' data-bs-target='#detalles$reserva->folio'>
+                                                <button type='button' class='btn btn-dark' data-bs-toggle='modal' data-bs-target='#detalles$reserva->folio'>
                                                     <i class='fa-solid fa-list'></i>
                                                 </button>
                                                 <div class='modal fade' id='detalles$reserva->folio' tabindex='-1' aria-labelledby='detalles$reserva->folio' aria-hidden='true'>
@@ -469,7 +469,7 @@ if ($rol[0]->rol !== 'administrador') {
                                                                         </select>
                                                                         <div class='text-end mt-4'>
                                                                             <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
-                                                                            <input type='submit' class='btn btn-cafe' value='Guardar Cambios'>
+                                                                            <input type='submit' class='btn btn-dark' value='Guardar Cambios'>
                                                                         </div>
                                                                     </div>
                                                                 </form>

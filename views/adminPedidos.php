@@ -407,7 +407,7 @@ if (isset($_POST['btnactualizar'])) {
                                             placeholder="Ingresa Folio, Usuario o Teléfono">
                                     </div>
                                     <div class="col-4 col-lg-2">
-                                        <input type="submit" class="btn btn-cafe w-100" value="Buscar"
+                                        <input type="submit" class="btn btn-dark w-100" value="Buscar"
                                             name="btnBuscar">
                                     </div>
                                 </div>
@@ -470,7 +470,7 @@ if (isset($_POST['btnactualizar'])) {
                                             <td class='d-none d-md-table-cell'>{$pedido->estatus}</td>
                                             <td class='d-flex flex-row align-items-center justify-content-center gap-1'>
                                                 <!-- Botón para ver detalles del pedido -->
-                                                <button type='button' class='btn btn-cafe' data-bs-toggle='modal' data-bs-target='#detalleProducto_{$pedido->id_pedido}'>
+                                                <button type='button' class='btn btn-dark' data-bs-toggle='modal' data-bs-target='#detalleProducto_{$pedido->id_pedido}'>
                                                     <i class='fa-solid fa-bars'></i>
                                                 </button>
                                                 <!-- Modal para mostrar los detalles del pedido -->
@@ -607,7 +607,7 @@ if (isset($_POST['btnactualizar'])) {
                                         } else {
                                             echo "
                                                 <!-- Botón para editar el pedido -->
-                                                <button type='button' class='btn btn-cafe' data-bs-toggle='modal' data-bs-target='#editarProducto_{$pedido->id_pedido}'>
+                                                <button type='button' class='btn btn-dark' data-bs-toggle='modal' data-bs-target='#editarProducto_{$pedido->id_pedido}'>
                                                     <i class='fa-solid fa-pen-to-square'></i>
                                                 </button>
                                                 <!-- Modal para editar el pedido -->
@@ -674,7 +674,7 @@ if (isset($_POST['btnactualizar'])) {
                                                                             <button type='button' class='btn btn-secondary mt-3' data-bs-dismiss='modal'>Cancelar</button>
                                                                             ";
                                             ?>
-                                            <button type='submit' class='btn btn-cafe mt-3' name='btnactualizar' <?php echo $disabled; ?>>Guardar Cambios</button>
+                                            <button type='submit' class='btn btn-dark mt-3' name='btnactualizar' <?php echo $disabled; ?>>Guardar Cambios</button>
                                         </div>
                                     </div>
                                     </form>

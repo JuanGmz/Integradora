@@ -361,7 +361,7 @@ if (isset($_POST['btneditarstock'])) {
                         </div>
                         <div class="col-6 col-lg-9 d-flex justify-content-end align-items-center gap-3">
                             <!-- Aquí va el botón del modal para registrar productos -->
-                            <div class="btn btn-cafe" data-bs-toggle="modal" data-bs-target="#agregarProducto">
+                            <div class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#agregarProducto">
                                 Agregar Producto
                             </div>
                             <!-- Botón para volver atras -->
@@ -473,7 +473,7 @@ if (isset($_POST['btneditarstock'])) {
                                     <div class="mt-3 text-end">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="submit" class="btn btn-cafe">Agregar Producto</button>
+                                        <button type="submit" class="btn btn-dark">Agregar Producto</button>
                                     </div>
                                 </form>
                             </div>
@@ -501,7 +501,7 @@ if (isset($_POST['btneditarstock'])) {
                                         </select>
                                     </div>
                                     <div class="col-4">
-                                        <input type="submit" class="btn btn-cafe w-100" value="Buscar">
+                                        <input type="submit" class="btn btn-dark w-100" value="Buscar">
                                     </div>
                                 </div>
                             </form>
@@ -510,7 +510,7 @@ if (isset($_POST['btneditarstock'])) {
                 </div>
                 <div class="row mt-3 p-4 m-0">
                     <div class="d-lg-none w-100 mb-3 m-0 p-0">
-                        <button type="button" class="btn w-100 btn-cafe shadow-lg" data-bs-toggle="modal"
+                        <button type="button" class="btn w-100 btn-dark shadow-lg" data-bs-toggle="modal"
                             data-bs-target="#agregarProducto">
                             <i class="fa-solid fa-plus fa-2x"></i>
                         </button>
@@ -542,7 +542,7 @@ if (isset($_POST['btneditarstock'])) {
                                     <td class='d-flex flex-row align-items-center justify-content-center gap-1'>
                                                 <!-- Imagen -->
                                                 <!-- Botón que activa el modal de ver la imagen  -->
-                                                <button type='button' class='btn btn-cafe' data-bs-toggle='modal' data-bs-target='#modalImagen_$bolsita->id_bolsa'>
+                                                <button type='button' class='btn btn-dark' data-bs-toggle='modal' data-bs-target='#modalImagen_$bolsita->id_bolsa'>
                                                     <i class='fa-solid fa-image'></i>
                                                 </button>
                                                 <!-- Modal de ver imagen -->
@@ -567,7 +567,7 @@ if (isset($_POST['btneditarstock'])) {
                                                                     <input type='hidden' name='id_bolsa' value='$bolsita->id_bolsa'>
                                                                     <div class='col-12 mb-3 text-end'>
                                                                         <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
-                                                                        <button type='submit' class='btn btn-cafe'>Actualizar</button>
+                                                                        <button type='submit' class='btn btn-dark'>Actualizar</button>
                                                                     </div>
                                                                 </form>
                                                             </div>
@@ -575,7 +575,7 @@ if (isset($_POST['btneditarstock'])) {
                                                     </div>
                                                 </div>
                                                 <!-- Botón que activa el modal de ver detalles del bolsita -->
-                                                <button type='button' class='btn btn-cafe' data-bs-toggle='modal' data-bs-target='#detallebolsita_$bolsita->id_bolsa'>
+                                                <button type='button' class='btn btn-dark' data-bs-toggle='modal' data-bs-target='#detallebolsita_$bolsita->id_bolsa'>
                                                     <i class='fa-solid fa-bars'></i>
                                                 </button>";
 
@@ -671,7 +671,7 @@ function confirmDelete() {
                                 if (!empty($medidasDisponibles)) {
                                     echo "
                         <!-- Botón para abrir el modal de agregar medida -->
-                        <button type='button' class='btn btn-cafe mt-3' data-bs-toggle='modal' data-bs-target='#agregarMedidaModal_$bolsita->id_bolsa'>
+                        <button type='button' class='btn btn-dark mt-3' data-bs-toggle='modal' data-bs-target='#agregarMedidaModal_$bolsita->id_bolsa'>
                             Agregar Medida
                         </button>";
                                 }
@@ -701,7 +701,7 @@ function confirmDelete() {
                                                                 </div>
                                                                 <div class='modal-footer'>
                                                                     <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cerrar</button>
-                                                                    <button type='submit' class='btn btn-cafe' name='btneditarstock'>Guardar cambios</button>
+                                                                    <button type='submit' class='btn btn-dark' name='btneditarstock'>Guardar cambios</button>
                                                                 </div>
                                                             </form>
                                                         </div>
@@ -744,7 +744,7 @@ function confirmDelete() {
                                                             </div>
                                                             <div class='mt-3 text-end'>
                                                                 <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
-                                                                <button type='submit' class='btn btn-cafe'>Agregar Medida</button>
+                                                                <button type='submit' class='btn btn-dark'>Agregar Medida</button>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -756,7 +756,7 @@ function confirmDelete() {
 
                                 echo "
                                                 <!-- Botón que activa el modal de editar bolsita -->
-                                                <button type='button' class='btn btn-cafe' data-bs-toggle='modal' data-bs-target='#editarbolsita_$bolsita->id_bolsa'>
+                                                <button type='button' class='btn btn-dark' data-bs-toggle='modal' data-bs-target='#editarbolsita_$bolsita->id_bolsa'>
                                                     <i class='fa-solid fa-pen-to-square'></i>
                                                 </button>
                                                <div class='modal fade' id='editarbolsita_$bolsita->id_bolsa' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
@@ -822,7 +822,7 @@ function confirmDelete() {
                                                                     
                                                                     <div class=' mt-2 text-end'>
                                                                         <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
-                                                                        <button type='submit' class='btn btn-cafe'>Guardar Cambios</button>
+                                                                        <button type='submit' class='btn btn-dark'>Guardar Cambios</button>
                                                                     </div>
                                                                 </div>
                                                         </form>

@@ -348,7 +348,7 @@ if ($rol[0]->rol !== 'administrador') {
                         </div>
                         <div class="col-9 d-flex justify-content-end align-items-center gap-3">
                             <!-- Botón que activa el modal de agregar -->
-                            <button type="button" class="btn btn-cafe" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-dark" data-bs-toggle="modal"
                                 data-bs-target="#agregarProducto">
                                 Agregar ubicación
                             </button>
@@ -420,7 +420,7 @@ if ($rol[0]->rol !== 'administrador') {
                                                 <div class="text-end">
                                                     <button type="button" class="btn btn-secondary"
                                                         data-bs-dismiss="modal">Cancelar</button>
-                                                    <button type="submit" class="btn btn-cafe">Agregar
+                                                    <button type="submit" class="btn btn-dark">Agregar
                                                         Ubicación</button>
                                                 </div>
                                             </form>
@@ -454,7 +454,7 @@ if ($rol[0]->rol !== 'administrador') {
                                         <td>$producto->nombre</td>
                                         <td>
                                                 <!-- Botón que activa el modal de ver detalles del producto -->
-                                                <button type='button' class='btn btn-cafe' data-bs-toggle='modal' data-bs-target='#detalleProducto_$producto->id_lugar'>
+                                                <button type='button' class='btn btn-dark' data-bs-toggle='modal' data-bs-target='#detalleProducto_$producto->id_lugar'>
                                                     <i class='fa-solid fa-bars'></i>
                                                 </button>
                                                 <div class='modal fade' id='detalleProducto_$producto->id_lugar' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
@@ -479,7 +479,7 @@ if ($rol[0]->rol !== 'administrador') {
                                                     </div>
                                                 </div>
                                                 <!-- Botón que activa el modal de editar producto -->
-                                                <button type='button' class='btn btn-cafe' data-bs-toggle='modal' data-bs-target='#editarProducto_$producto->id_lugar'>
+                                                <button type='button' class='btn btn-dark' data-bs-toggle='modal' data-bs-target='#editarProducto_$producto->id_lugar'>
                                                     <i class='fa-solid fa-pen-to-square'></i>
                                                 </button>
                                                 <div class='modal fade' id='editarProducto_$producto->id_lugar' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
@@ -536,7 +536,7 @@ if ($rol[0]->rol !== 'administrador') {
                                                                         </div>
                                                                         <div class='col-12 mt-3 text-end'>
                                                                             <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
-                                                                            <button type='submit' class='btn btn-cafe'>Guardar Cambios</button>
+                                                                            <button type='submit' class='btn btn-dark'>Guardar Cambios</button>
                                                                         </div>
                                                                     </div>
                                                                 </form>
