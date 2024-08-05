@@ -27,13 +27,12 @@ if (isset($_SESSION["usuario"])) {
         .thank-you-section {
             position: relative;
             padding: 20px;
-            background: url('../img/cafes/cafe14.webp') no-repeat center center;
+            background: url('../img/cafes/cafe14.webp') no-repeat center center fixed;
             background-size: cover;
             color: #fff;
             border-radius: 10px;
             text-align: center;
             overflow: hidden;
-            /* Para asegurar que el borde redondeado se aplique correctamente */
         }
 
         .thank-you-section::before {
@@ -51,6 +50,7 @@ if (isset($_SESSION["usuario"])) {
         .thank-you-content {
             position: relative;
             z-index: 1;
+            color: #fff;
         }
 
         .thank-you-section h3 {
@@ -65,8 +65,11 @@ if (isset($_SESSION["usuario"])) {
 
         .thank-you-section .btn {
             margin-top: 1rem;
+            background-color: #c29b50;
+            border-color: #c29b50;
         }
     </style>
+
 </head>
 
 <body>
@@ -150,15 +153,18 @@ if (isset($_SESSION["usuario"])) {
             <?php
             if (!isset($_SESSION["usuario"])) {
                 ?>
-                <h1 class="display-4 fw-bold "><span style="color: #fff;">SínfoniaCafé&Cultura</span></h1>
-                <h2 class=" fw-bold "><span style="color: #fff;">Obtén recompensas íncreibles</span></h>
-                    <?php
+                <h1 class="display-4 fw-bold"><span style="color: #fff;">Descubre SínfoniaCafé&Cultura</span></h1>
+                <h2><span style="color: #fff;">¡Recompensas y experiencias únicas te esperan!</span></h2>
+                <?php
             } else {
                 ?>
-                    <h1 class="display-4 fw-bold "><span style="color: #fff;">Hola <?php echo $nombre[0]->nombre ?></span>
-                    </h1>
-                    <h3>Comienza a ganar</h3>
-                    <?php
+                <h1 class="display-4 fw-bold">
+                    <span>¡Bienvenido, </span>
+                    <span style="color: #c29b50;"><?php echo htmlspecialchars($nombre[0]->nombre); ?></span>
+                    <span>!</span>
+                </h1>
+                <h3>Empieza a disfrutar de nuestras exclusivas recompensas</h3>
+                <?php
             }
             ?>
         </div>
@@ -198,7 +204,7 @@ if (isset($_SESSION["usuario"])) {
     <div class='container my-1'>
         <div class='row'>
             <div class='col-12 text-center'>
-                <div class='bg-light p-4 rounded-lg shadow-sm'>
+                <div class='bg-light p-4 rounded-3 shadow-sm'>
                     <h4 class='mb-2' style='font-size: 1.25rem; color: #333;'>Tu ID de cliente es: 
                         <span style='color: #ca3f42'>" . htmlspecialchars($cliente[0]->id_cliente) . "</span>
                     </h4>
@@ -215,50 +221,50 @@ if (isset($_SESSION["usuario"])) {
                 if ($recompensas == null) {
 
                     echo "
-    <div class='row my-3 justify-content-center'>
-        <div class='col-12 text-center my-3'>
-            <h3 class='mb-3'>¡Actualmente no tienes recompensas disponibles!</h3>
-            <div class='mb-3' style='
-                display: inline-block;
-                border-bottom: 4px solid #252525;
-                width: 120px; 
-                border-radius: 10px;
-                margin-top: 10px;'>
+        <div class='row my-3 justify-content-center m-0'>
+            <div class='col-12 text-center my-3'>
+                <h3 class='mb-3'>¡Actualmente no tienes recompensas disponibles!</h3>
+                <div  style='
+                    display: inline-block;
+                    border-bottom: 4px solid #252525;
+                    width: 120px; 
+                    border-radius: 10px;
+                    margin-top: 10px;'>
+                </div>
             </div>
-        </div>
-        <div class='col-lg-3 d-flex flex-column text-center gap-3'>
-            <div class='bg-white rounded-3 p-3 shadow-sm'>
-                <i class='fa-solid fa-mug-saucer fa-3x mb-2' style='color: #c29b50;'></i>
-                <h4 class='mb-2'>Conoce nuestras ofertas</h4>
-                <p>Visita nuestra cafetería para descubrir las últimas ofertas y promociones. Siempre hay algo nuevo que explorar y disfrutar.</p>
-                <a href='#' class='btn btn-primary mt-2' style='background-color: #c29b50; border-color: #c29b50;'>Explorar</a>
+            <div class='col-lg-3 d-flex flex-column text-center gap-3 mt-3'>
+                <div class='bg-white rounded-3 p-3 shadow-sm'>
+                    <i class='fa-solid fa-mug-saucer fa-3x mb-2' style='color: #c29b50;'></i>
+                    <h4 class='mb-2'>Conoce Nuestras Bebidas</h4>
+                    <p>Descubre el extenso catálogo de bebidas para ti. Siempre hay algo nuevo y emocionante para explorar y disfrutar.</p>
+                    <a href='menu.php' class='btn btn-primary' style='background-color: #c29b50; border-color: #c29b50;'>Explorar Menú</a>
+                </div>
             </div>
-        </div>
-        <div class='col-lg-3 d-flex flex-column text-center gap-3'>
-            <div class='bg-white rounded-3 p-3 shadow-sm'>
-                <i class='fa-solid fa-heart fa-3x mb-2' style='color: #c29b50;'></i>
-                <h4 class='mb-2'>Próximamente</h4>
-                <p>Estamos preparando nuevas recompensas para ti. ¡Mantente atento a nuestras actualizaciones!</p>
-                <a href='#' class='btn btn-primary mt-2' style='background-color: #c29b50; border-color: #c29b50;'>Más Info</a>
+            <div class='col-lg-3 d-flex flex-column text-center gap-3 mt-3'>
+                <div class='bg-white rounded-3 p-3 shadow-sm'>
+                    <i class='fa-solid fa-heart fa-3x mb-2' style='color: #c29b50;'></i>
+                    <h4 class='mb-2'>¡Novedades a la Vista!</h4>
+                    <p>Estamos preparando emocionantes novedades y recompensas para ti. ¡No te pierdas nuestras próximas actualizaciones!</p>
+                    <a href='publicaciones.php' class='btn btn-primary' style='background-color: #c29b50; border-color: #c29b50;'>Explorar Publicaciones</a>
+                </div>
             </div>
-        </div>
-        <div class='col-lg-3 d-flex flex-column text-center gap-3'>
-            <div class='bg-white rounded-3 p-3 shadow-sm'>
-                <i class='fa-solid fa-hand-holding-heart fa-3x mb-2' style='color: #c29b50;'></i>
-                <h4 class='mb-2'>Próximamente</h4>
-                <p>Estamos trabajando en nuevas recompensas para ti. Mantente atento a nuestras ofertas especiales.</p>
-                <a href='#' class='btn btn-primary mt-2' style='background-color: #c29b50; border-color: #c29b50;'>Mantente Alerta</a>
+            <div class='col-lg-3 d-flex flex-column text-center gap-3 mt-3'>
+                <div class='bg-white rounded-3 p-3 shadow-sm'>
+                    <i class='fa-solid fa-hand-holding-heart fa-3x mb-2' style='color: #c29b50;'></i>
+                    <h4 class='mb-2'>Próximamente</h4>
+                    <p>Estamos trabajando en nuevas recompensas especiales para ti. Mantente atento a nuestras actualizaciones.</p>
+                    <a href='ecommerce.php' class='btn btn-primary' style='background-color: #c29b50; border-color: #c29b50;'>Explorar Comprar</a>
+                </div>
             </div>
-        </div>
-        <div class='col-lg-3 d-flex flex-column text-center gap-3'>
-            <div class='bg-white rounded-3 p-3 shadow-sm'>
-                <i class='fa-solid fa-award fa-3x mb-2' style='color: #c29b50;'></i>
-                <h4 class='mb-2'>Premios Disponibles</h4>
-                <p>Explora nuestros premios actuales y aprende cómo puedes ganarlos. ¡Visita nuestra cafetería para más detalles!</p>
-                <a href='#' class='btn btn-primary mt-2' style='background-color: #c29b50; border-color: #c29b50;'>Ver Premios</a>
+            <div class='col-lg-3 d-flex flex-column text-center gap-3 mt-3'>
+                <div class='bg-white rounded-3 p-3 shadow-sm'>
+                    <i class='fa-solid fa-award fa-3x mb-2' style='color: #c29b50;'></i>
+                    <h4 class='mb-2'>Recompensas en camino</h4>
+                    <p>Explora nuestros premios actuales y aprende cómo puedes ganarlos. ¡Visita nuestra cafetería para más detalles!</p>
+                    <a href='eventos.php' class='btn btn-primary' style='background-color: #c29b50; border-color: #c29b50;'>Explorar Eventos</a>
+                </div>
             </div>
-        </div>
-    </div>";
+        </div>";
 
                 } else {
                     foreach ($recompensas as $recompensa) {
@@ -345,78 +351,97 @@ if (isset($_SESSION["usuario"])) {
                     }
                 }
                 ?>
-                <div class='subscription-section container mt-4'>
+                <div class='container mt-3'>
                     <div class='row'>
                         <div class='col-12 text-center'>
-                            <div class=' p-4 rounded-lg shadow-sm'>
+                            <div class='thank-you-section p-4 rounded-3 shadow-sm'>
                                 <div class='thank-you-content'>
                                     <h3 class='mb-3'>
                                         Gracias por formar parte de la familia SínfoniaCafé&Cultura,
                                         <span
-                                            style="color: #a18263;"><?php echo htmlspecialchars($nombre[0]->nombre); ?></span>
+                                            style="color:   burlywood;"><?php echo htmlspecialchars($nombre[0]->nombre); ?></span>
                                     </h3>
                                     <p class='lead'>
                                         Nos alegra tenerte con nosotros. ¡Estamos emocionados por las experiencias y
                                         momentos increíbles que compartiremos!
                                     </p>
-                                    <a href='../index.php' class='btn btn-primary mt-3' style=" background-color: #c29b50;
-                                            border-color: #c29b50;">Explorar Inicio</a>
+                                    <a href='../index.php' class='btn btn-primary mt-3'>Explorar Inicio</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <?php
             } else {
                 ?>
-                <div class=" text-center fw-bold mt-3">
-
-                    <div class="row m-0 p-0">
-                        <div class="col-12 mb-3">
-                            <h1>Únete a SínfoniaCafé&Cultura y desbloquea recompensas increíbles por
-                                ser cliente</h1>
-                        </div>
-                        <div class="col-6 col-lg-3 m-0 p-0">
-                            <img src="../img/cafes/coffee-cups.png" alt="cafe" style="height: 100px; width: 100px;">
-                            <p>El mejor café gratis.</p>
-                        </div>
-                        <div class="col-6 col-lg-3 m-0 p-0">
-                            <img src="../img/cafes/pastel.png" alt="pasteles" style="height: 100px; width: 100px;">
-                            <p>Prueba nuestros deliciosos pasteles.</p>
-                        </div>
-                        <div class="col-6 col-lg-3 m-0 p-0">
-                            <img src="../img/cafes/entradas.png" alt="boletos" style="height: 100px; width: 100px;">
-                            <p>Asiste a nuestros eventos, una experiencia inolvidable.</p>
-                        </div>
-                        <div class="col-6 col-lg-3 m-0 p-0">
-                            <img src="../img/cafes/cupones.png" alt="descuentos" style="height: 100px; width: 100px;">
-                            <p>Tendrás descuentos exclusivos.</p>
+                <div class="row m-0">
+                    <!-- Recompensas -->
+                    <div class='col-12 text-center my-3'>
+                        <h3 class='mb-3'>¡Únete a SínfoniaCafé&Cultura y desbloquea recompensas increíbles por ser cliente
+                            frecuente!</h3>
+                        <div style='
+                    display: inline-block;
+                    border-bottom: 4px solid #252525;
+                    width: 120px; 
+                    border-radius: 10px;
+                    margin-top: 10px;'>
                         </div>
                     </div>
-
-                    <div class="row m-0 p-0">
-                        <div class="col-12 m-0 p-0">
-                            <h1 class="text-center fw-bold shadow rounded p-2 mb-5" style="background: var(--color8);">Como
-                                funciona nuestro sistema de recompensas</h1>
-                            <div class="row m-0 p-0">
-                                <div class="col-12 col-lg-4 m-0 p-0">
-                                    <img src="../img/cafes/telefono-inteligente.png" alt="telefono"
-                                        style="height: 100px; width: 100px;">
-                                    <p>Registrate o inicia sesión para comenzar a ganar.</p>
-                                </div>
-                                <div class="col-12 col-lg-4">
-                                    <img src="../img/cafes/puesto-de-comida.png" alt="local"
-                                        style="height: 100px; width: 100px;">
-                                    <p>Visita nuestro local, realiza una compra y solicita que sea
-                                        registrada para obtener
-                                        una asistencia.</p>
-                                </div>
-                                <div class="col-12 col-lg-4">
-                                    <img src="../img/cafes/compras.png" alt="compra" style="height: 100px; width: 100px;">
-                                    <p>Reclama tus recompensas cuando tengas las asistencias
-                                        necesarias.</p>
-                                </div>
-                            </div>
+                    <div class="col-lg-3 d-flex flex-column text-center gap-3 mt-3">
+                        <div class='bg-white rounded-3 p-3 shadow-sm h-100'>
+                            <i class="fa-solid fa-mug-saucer fa-3x mb-2" style="color: #c29b50;"></i>
+                            <h4 class='mb-2'>Café Delicioso.</h4>
+                            <p>El mejor café de la región, preparado para ti.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 d-flex flex-column text-center gap-3 mt-3">
+                        <div class='bg-white rounded-3 p-3 shadow-sm h-100'>
+                            <i class="fa-solid fa-cake-candles fa-3x mb-2" style="color: #c29b50;"></i>
+                            <h4 class='mb-2'>Postres Deliciosos</h4>
+                            <p>Prueba nuestros deliciosos postres.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 d-flex flex-column text-center gap-3 mt-3">
+                        <div class='bg-white rounded-3 p-3 shadow-sm h-100'>
+                            <i class="fa-solid fa-ticket fa-3x" style="color: #c29b50;"></i>
+                            <h4 class='mb-2'>Eventos Inolvidables</h4>
+                            <p>Asiste a nuestros eventos, una experiencia inolvidable.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 d-flex flex-column text-center gap-3 mt-3">
+                        <div class='bg-white rounded-3 p-3 shadow-sm  h-100'>
+                            <i class="fa-solid fa-tag fa-3x mb-2" style="color: #c29b50;"></i>
+                            <h4 class='mb-2'>Descuentos Exclusivos</h4>
+                            <p>Tendrás descuentos exclusivos en tus compras.</p>
+                        </div>
+                    </div>
+                    <!-- Cómo funciona -->
+                    <div class="col-12 text-center thank-you-section mt-5 mb-4">
+                        <div class="thank-you-content">
+                            <h1 class="color-white fw-bold">Cómo funciona nuestro sistema de recompensas?</h1>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 d-flex flex-column text-center gap-3 mt-3">
+                        <div class='bg-white rounded-3 p-3 shadow-sm h-100'>
+                            <i class="fa-solid fa-user-plus fa-3x mb-2" style="color: #c29b50;"></i>
+                            <h4 class='mb-2'>Regístrate</h4>
+                            <p>Regístrate o inicia sesión para comenzar a ganar increíbles recompensas.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 d-flex flex-column text-center gap-3 mt-3">
+                        <div class='bg-white rounded-3 p-3 shadow-sm h-100'>
+                            <i class="fa-solid fa-store fa-3x mb-2" style="color: #c29b50;"></i>
+                            <h4 class='mb-2'>Visitanos, compra y registra.</h4>
+                            <p>Visita nuestro local, realiza una compra y solicita que tu asistencia sea registrada para que
+                                puedas obtener tus recompensas.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 d-flex flex-column text-center gap-3 mt-3">
+                        <div class='bg-white rounded-3 p-3 shadow-sm h-100'>
+                            <i class="fa-solid fa-award fa-3x mb-2" style="color: #c29b50;"></i>
+                            <h4 class='mb-2'>Reclama tus Recompensas</h4>
+                            <p>Reclama tus recompensas cuando tengas las asistencias necesarias.</p>
                         </div>
                     </div>
                 </div>
