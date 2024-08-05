@@ -9,85 +9,87 @@
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="shortcut icon" href="../../img/Sinfonía-Café-y-Cultura.webp">
     <?php
-        session_start();
-        require_once '../../class/database.php';
-        include_once ("../../scripts/funciones/funciones.php");
-        $db = new database();
-        $db->conectarDB();
-        
-        if (isset($_SESSION['usuario'])) {
-            $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE p.usuario = '$_SESSION[usuario]'";
-            $rol = $db->select($rolUsuario);
-        }
+    session_start();
+    require_once '../../class/database.php';
+    include_once("../../scripts/funciones/funciones.php");
+    $db = new database();
+    $db->conectarDB();
+
+    if (isset($_SESSION['usuario'])) {
+        $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE p.usuario = '$_SESSION[usuario]'";
+        $rol = $db->select($rolUsuario);
+    }
     ?>
 </head>
 
 <body>
-     <!-- Botón de WhatsApp -->
-     <button id="whatsappButton" class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3" type="button" onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
+    <!-- Botón de WhatsApp -->
+    <button id="whatsappButton" class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3" type="button" onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
         <i class="fa-brands fa-whatsapp fa-2x"></i>
     </button>
     <!-- NavBar -->
     <nav class="navbar navbar-expand-lg shadow-lg">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="../../index.php">
-                    <img src="../../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
-                </a>
-                <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="tituloOffcanvas">
-                    <div class="offcanvas-header">
-                        <h5 class="offcanvas-title text-light" id="tituloOffcanvas">SinfoníaCafé&Cultura</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-body">
-                        <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="../../views/menu.php">Menú</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link mx-lg-2" href="../../views/ecommerce.php">Comprar</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link mx-lg-2" href="../../views/recompensas.php">Recompensas</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link mx-lg-2" href="../../views/eventos.php">Eventos</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link mx-lg-2" href="../../views/publicaciones.php">Publicaciones</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link mx-lg-2" href="../../views/contact.php">Contacto</a>
-                            </li>
-                        </ul>
-                    </div>
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../../index.php">
+                <img src="../../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
+            </a>
+            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="tituloOffcanvas">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title text-light" id="tituloOffcanvas">SinfoníaCafé&Cultura</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
-                <?php
-                if (isset($_SESSION["usuario"])) {
-                ?>
-                    <!-- Navbar con dropdown -->
-                    <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
-                        <a class="dropdown-item" href="../perfil.php">Mi perfil</a>
-                        <?php if ($rol[0]->rol === 'administrador') { ?>
-                            <a class="dropdown-item" href="../adminInicio.php">Administrar</a>
-                            <div class="dropdown-divider"></div>
-                        <?php } ?>
-                        <a class="dropdown-item" href="../../scripts/login/cerrarsesion.php">Cerrar sesión</a>
-                    </div>
-                <?php
-                } else {
-                ?>
-                    <a href="../login.php" class="login-button ms-auto">Iniciar Sesión</a>
-                <?php
-                }
-                ?>
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="../../views/menu.php">Menú</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-lg-2" href="../../views/ecommerce.php">Comprar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-lg-2" href="../../views/recompensas.php">Recompensas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-lg-2" href="../../views/eventos.php">Eventos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-lg-2" href="../../views/publicaciones.php">Publicaciones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-lg-2" href="../../views/contact.php">Contacto</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </nav>
+            <?php
+            if (isset($_SESSION["usuario"])) {
+            ?>
+                <!-- Navbar con dropdown -->
+                <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
+                    <a class="dropdown-item" href="../perfil.php">Mi perfil</a>
+                    <a class="dropdown-item" href="../bolsas/Carrito.php">Mi carrito</a>
+
+                    <?php if ($rol[0]->rol === 'administrador') { ?>
+                        <a class="dropdown-item" href="../adminInicio.php">Administrar</a>
+                        <div class="dropdown-divider"></div>
+                    <?php } ?>
+                    <a class="dropdown-item" href="../../scripts/login/cerrarsesion.php">Cerrar sesión</a>
+                </div>
+            <?php
+            } else {
+            ?>
+                <a href="../login.php" class="login-button ms-auto">Iniciar Sesión</a>
+            <?php
+            }
+            ?>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
     <!-- NavBar End -->
 
     <div class="container mb-5">
@@ -108,33 +110,33 @@
 
         <div class="row mb-3">
             <?php
-                include_once("../../class/database.php");
-                $db = new Database();
-                $db->conectarDB();
+            include_once("../../class/database.php");
+            $db = new Database();
+            $db->conectarDB();
 
-                $query = "CALL listar_productos_menu('Cold Brew')";
+            $query = "CALL listar_productos_menu('Cold Brew')";
 
-                $coldbrews = $db->select($query);
+            $coldbrews = $db->select($query);
 
-                if (empty($coldbrews)) {
-                    ?>
-                    <div class="row p-0 m-0 d-flex justify-content-center align-items-center">
-                        <div id="category-warning" class="alert text-center p-5 mt-4 mx-4" role="alert">
-                            <div>
-                                <i class="fa-solid fa-mug-hot fa-4x text-muted"></i>
-                            </div>
-                            <div class='text-center mt-3'>
-                                <h5>Proximamente...</h5>
-                            </div>
+            if (empty($coldbrews)) {
+            ?>
+                <div class="row p-0 m-0 d-flex justify-content-center align-items-center">
+                    <div id="category-warning" class="alert text-center p-5 mt-4 mx-4" role="alert">
+                        <div>
+                            <i class="fa-solid fa-mug-hot fa-4x text-muted"></i>
                         </div>
-                        <div class="container text-center mb-5">
-                            <a href="../menu.php" class="btn btn-cafe">Ver más productos</a>
+                        <div class='text-center mt-3'>
+                            <h5>Proximamente...</h5>
                         </div>
                     </div>
-                    <?php
-                } else {
-                    foreach ($coldbrews as $coldbrew) {
-                        echo "
+                    <div class="container text-center mb-5">
+                        <a href="../menu.php" class="btn btn-cafe">Ver más productos</a>
+                    </div>
+                </div>
+            <?php
+            } else {
+                foreach ($coldbrews as $coldbrew) {
+                    echo "
                             <div class='col-6 col-lg-3 mb-3' style='background: var(--color6);'>
                                 <div class='card border-0' style='background: var(--color6);'> 
                                 <form action='detalle_producto/detalles.php' method='post'>
@@ -149,8 +151,8 @@
                                 </div>
                             </div>
                         ";
-                    }
                 }
+            }
             ?>
 
         </div>
