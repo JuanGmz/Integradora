@@ -63,7 +63,7 @@ if ($stmt === false) {
                     <p class="fw-bold"><?php echo htmlspecialchars($mensaje); ?></p>
                     <div class="p-3">
                         <a class="btn-cafe" href='javascript:history.back()'>Regresar</a>
-                        <a href="../pedidos.php" class="btn-cafe">Mis pedidos</a>
+                        <a href="../../views/pedidos.php" class="btn-cafe">Mis pedidos</a>
 
                     </div>
                 </div>
