@@ -39,9 +39,9 @@
                     $stmt->bindParam(':telefono', $tel, PDO::PARAM_STR);
                     $stmt->execute();
                     $result = $stmt->fetchColumn();
-                    // si ek numero se encuentra en la base de datos no se puede actualizar
+                    // si el numero se encuentra en la base de datos no se puede actualizar
                     if ($result > 0) {
-                        showAlert("Teléfono duplicado. no se puede actualizar", "error");
+                        showAlert("Este telefono ya está en uno!", "error");
                     } else {
                         $query = "UPDATE personas SET telefono = :telefono WHERE id_persona = :id";
                         $stmt = $db->prepare($query);
@@ -198,7 +198,7 @@
                                             </div>
                                             <div class="text-end">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                <button type="submit" class="btn btn-primary" name="actTelefono">Guardar</button>
+                                                <button type="submit" class="btn btn-primary" name="actTelefono">Cambiar</button>
                                             </div>
                                         </form>
                                     </div>
@@ -236,7 +236,7 @@
                                             </div>
                                             <div class="text-end">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                <button type="submit" class="btn btn-primary" name="actPassword">Guardar</button>
+                                                <button type="submit" class="btn btn-cafe" name="actPassword">Cambiar</button>
                                             </div>
                                         </form>
                                     </div>
