@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,12 +11,15 @@
 </head>
 
 <body style="background: var(--color5)">
-     <!-- Botón de WhatsApp -->
-     <button id="whatsappButton" class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3" type="button" onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
+    <!-- Botón de WhatsApp -->
+    <button id="whatsappButton"
+        class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3"
+        type="button"
+        onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
         <i class="fa-brands fa-whatsapp fa-2x"></i>
     </button>
     <!-- NavBar -->
-    <nav class="navbar navbar-expand-lg shadow-lg mb-lg-5">
+    <nav class="navbar navbar-expand-lg shadow-lg">
         <div class="container-fluid">
             <a class="navbar-brand" href="../index.php">
                 <img src="../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
@@ -26,7 +27,8 @@
             <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar"
                 aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura</h5>
+                    <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura
+                    </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
@@ -52,12 +54,37 @@
                     </ul>
                 </div>
             </div>
-            <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
-            <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <?php
+            if (isset($_SESSION["usuario"])) {
+                ?>
+                <!-- Navbar con dropdown -->
+                <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
+                    style="left: auto; right: 30px; top: 60px">
+                    <a class="dropdown-item" href="perfil.php">Mi perfil</a>
+                    <a class="dropdown-item" href="bolsas/Carrito.php">Mi carrito</a>
+                    <?php if ($rol[0]->rol === 'administrador') { ?>
+                        <a class="dropdown-item" href="../views/adminInicio.php">Administrar</a>
+                        <div class="dropdown-divider"></div>
+                    <?php } ?>
+                    <a class="dropdown-item" href="../scripts/login/cerrarsesion.php">Cerrar sesión</a>
+                </div>
+                <?php
+            } else {
+                ?>
+                <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
+                <?php
+            }
+            ?>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
+
     </nav>
     <!-- NavBar End -->
 
@@ -84,28 +111,56 @@
         </form>
     </div>-->
     <!-- Recuperar Contraseña -->
-<div class="container-fluid mt-5 d-flex flex-column justify-content-center align-items-center">
-    <form action="../scripts/login/send_code.php" method="post" class="bg-light p-5 rounded shadow-lg">
-        <legend class="text-center fw-bold mb-4">Recuperar Contraseña</legend>
-        <div class="row text-center mb-4">
-            <div class="col-12">
-                <i class="fa-solid fa-lock fa-6x"></i>
+    <div class="container-fluid my-5 d-flex flex-column justify-content-center align-items-center">
+        <form action="../scripts/login/send_code.php" method="post" class="bg-light p-5 rounded shadow-lg">
+            <legend class="text-center fw-bold mb-4">Recuperar Contraseña</legend>
+            <div class="row text-center mb-4">
+                <div class="col-12">
+                    <i class="fa-solid fa-lock fa-6x"></i>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 mb-3">
+                    <label for="telefono" class="form-label">Número de Teléfono</label>
+                    <input type="tel" class="form-control form-control-bb" id="telefono" name="telefono" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <button type="submit" class="btn btn-cafe w-100 text-light fw-bold fs-5">Enviar Código</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <footer class="mt-auto">
+        <div class="container-fluid p-5" style="background: var(--negroclaro);">
+            <h2 class="text-center text-light mb-5">SinfoníaCafé&Cultura</h2>
+            <hr class="text-light">
+            <div class="container-fluid d-flex justify-content-center align-items-center flex-column p-4">
+                <div class="row m-3 text-center">
+                    <div class="col-4">
+                        <a href="https://www.facebook.com/SinfoniaCoffee">
+                            <i class="fa-brands fa-facebook text-light fa-2x text-center"></i>
+                        </a>
+                    </div>
+                    <div class="col-4">
+                        <a href="https://x.com/SinfoniaCoffee">
+                            <i class="fa-brands fa-twitter text-light fa-2x text-center"></i>
+                        </a>
+                    </div>
+                    <div class="col-4">
+                        <a href="https://www.instagram.com/sinfoniacoffee/">
+                            <i class="fa-brands fa-instagram text-light fa-2x text-center"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="row m-3">
+                    <p class="text-center fw-bold text-light">Copyright © 2024 SinfoníaCafé&Cultura</p>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-12 mb-3">
-                <label for="telefono" class="form-label">Número de Teléfono</label>
-                <input type="tel" class="form-control form-control-bb" id="telefono" name="telefono" required>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <button type="submit" class="btn btn-cafe w-100 text-light fw-bold fs-5">Enviar Código</button>
-            </div>
-        </div>
-    </form>
-</div>
-    
+    </footer>
 
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/b820f07375.js" crossorigin="anonymous"></script>

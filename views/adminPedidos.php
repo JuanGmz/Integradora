@@ -66,7 +66,6 @@ if (isset($_POST['btnactualizar'])) {
     <link rel="shortcut icon" href="../img/Sinfonía-Café-y-Cultura.webp">
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/scrollbar.css">
 </head>
 
 <body style="background: var(--color6);">
@@ -80,9 +79,9 @@ if (isset($_POST['btnactualizar'])) {
                 <div class="accordion accordion-flush" id="accordionMobile">
                     <div class="accordion-item m-0 p-0 row">
                         <h2 class="accordion-header">
-                            <button class="row accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-inicio" aria-expanded="false"
-                                aria-controls="flush-inicio">
+                            <button class="row accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light"
+                                type="button" data-bs-toggle="collapse" data-bs-target="#flush-inicio"
+                                aria-expanded="false" aria-controls="flush-inicio">
                                 <div class="col-6">
                                     <a href="adminInicio.php" class="text-light fw-bold text-decoration-none">
                                         <i class="fa-solid fa-house-laptop me-1"></i>
@@ -239,7 +238,7 @@ if (isset($_POST['btnactualizar'])) {
 
         <div class="row">
             <!-- navbar pc -->
-            <div class="col-lg-3 bagr-cafe4 h-100 position-fixed d-none d-lg-block shadow">
+            <div class="col-lg-3 bagr-cafe4 h-100 position-fixed d-none d-lg-block shadow contenedor">
                 <h4 class="text-center text-light m-3 fs-2 fw-bold">Administrar</h4>
                 <div class="row">
                     <div class="col-12 text-center">
@@ -407,8 +406,7 @@ if (isset($_POST['btnactualizar'])) {
                                             placeholder="Ingresa Folio, Usuario o Teléfono">
                                     </div>
                                     <div class="col-4 col-lg-2">
-                                        <input type="submit" class="btn btn-dark w-100" value="Buscar"
-                                            name="btnBuscar">
+                                        <input type="submit" class="btn btn-dark w-100" value="Buscar" name="btnBuscar">
                                     </div>
                                 </div>
                             </form>
@@ -647,7 +645,7 @@ if (isset($_POST['btnactualizar'])) {
                                                 }
                                                 echo "</select>";
                                             }
-                                            echo "<button type='button' class='btn btn-info' data-bs-toggle='popover' title='Información' data-bs-content='Solo podrás actualizar el estatus del pedido a Finalizado o Cancelado una vez.'>
+                                            echo "<button type='button' class='btn btn-secondary' data-bs-toggle='popover' title='Información' data-bs-content='Solo podrás actualizar el estatus del pedido a Finalizado o Cancelado una vez.'>
                     <i class='fa-solid fa-info'></i>
                 </button>";
                                             echo "</div>

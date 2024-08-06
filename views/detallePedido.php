@@ -46,7 +46,7 @@
         <i class="fa-brands fa-whatsapp fa-2x"></i>
     </button>
     <!-- NavBar -->
-    <nav class="navbar navbar-expand-lg shadow-lg mb-lg-4">
+    <nav class="navbar navbar-expand-lg shadow-lg">
         <div class="container-fluid">
             <a class="navbar-brand" href="../index.php">
                 <img src="../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
@@ -54,7 +54,8 @@
             <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar"
                 aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura</h5>
+                    <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura
+                    </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
@@ -90,9 +91,10 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
                     style="left: auto; right: 30px; top: 60px">
-                    <a class="dropdown-item" href="../perfil.php">Mi perfil</a>
+                    <a class="dropdown-item" href="perfil.php">Mi perfil</a>
+                    <a class="dropdown-item" href="bolsas/Carrito.php">Mi carrito</a>
                     <?php if ($rol[0]->rol === 'administrador') { ?>
-                        <a class="dropdown-item" href="adminInicio.php">Administrar</a>
+                        <a class="dropdown-item" href="../views/adminInicio.php">Administrar</a>
                         <div class="dropdown-divider"></div>
                     <?php } ?>
                     <a class="dropdown-item" href="../scripts/login/cerrarsesion.php">Cerrar sesión</a>
@@ -109,6 +111,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
+
     </nav>
     <!-- NavBar End -->
 
@@ -127,13 +130,14 @@
             <div class="col-12 col-lg-7 me-5">
                 <?php
                 foreach ($productos as $producto) {
+                    $v_monto = formatPrecio($producto->monto);
                     ?>
                     <div class="row p-3 mb-3 bg-body rounded shadow-lg d-lg-flex justify-content-center align-items-center">
                         <div class="col-8">
                             <p>Producto: <?= $producto->nombre ?> (<?= $producto->proceso ?>)</p>
                             <p>Cantidad: <?= $producto->cantidad ?></p>
                             <p>Medida: <?= $producto->medida ?></p>
-                            <p>Costo: $<?= $producto->monto ?></p>
+                            <p>Costo: $<?= $v_monto ?></p>
                         </div>
                         <div class="col-4 text-end">
                             <img src="../img/bolsas/<?php echo $producto->img_url; ?>" class="img-fluid rounded"
@@ -180,14 +184,16 @@
                         </div>
                         <hr class="m-0">
                         <?php
+                        $v_monto_total = formatPrecio($pedido[0]->monto_total);
+                        $v_costo_envio = formatPrecio($pedido[0]->costo_envio);
                         ?>
                         <div class="row mt-3">
                             <div class="col-12">
-                                <p>Productos: $<?= $pedido[0]->monto_total ?></p>
+                                <p>Productos: $<?= $v_monto_total ?></p>
                                 <?php
                                 if ($pedido[0]->costo_envio > 0) {
                                     ?>
-                                    <p>Envío: $<?= $pedido[0]->costo_envio ?></p>
+                                    <p>Envío: $<?= $v_costo_envio ?></p>
                                     <?php
                                 } else {
                                     ?>
@@ -197,17 +203,31 @@
                                 ?>
                                 <?php
                                 $total = $pedido[0]->monto_total + $pedido[0]->costo_envio;
+                                $v_total = formatPrecio($total);
                                 ?>
                             </div>
                         </div>
                         <hr class="m-0">
                         <div class="row mt-3">
                             <div class="col-12">
-                                <p>Total: $<?= $total ?></p>
+                                <p>Total: $<?= $v_total ?></p>
                             </div>
                         </div>
                         <hr class="m-0">
                         <div class="row mt-3">
+                            <div class="col-12">
+                                <?php
+                                if ($pedido[0]->envio === null) {
+                                    ?>
+                                    <p>Paquetería de envío: Aún no se registra la paquetería de envío.</p>
+                                    <?php
+                                } else {
+                                    ?>
+                                    <p>Paquetería de envío: <?= $pedido[0]->envio ?></p>
+                                    <?php
+                                }
+                                ?>
+                            </div>
                             <div class="col-12">
                                 <?php
                                 if ($pedido[0]->guia_de_envio === null) {
@@ -230,7 +250,9 @@
                                 } else {
                                     ?>
                                     <p>Documento de envió: <a href='../pdf/<?php echo $pedido[0]->documento_url; ?>'
-                                            download='<?php echo $pedido[0]->documento_url ?>'>Descargar PDF</a></p>
+                                            download='<?php echo $pedido[0]->documento_url ?>'
+                                            class="text-decoration-none text-info fw-bold fs-5 p-2    rounded">Descargar
+                                            PDF</a></p>
                                     <?php
                                 }
                                 ?>

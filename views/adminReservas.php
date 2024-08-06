@@ -195,7 +195,7 @@ if ($rol[0]->rol !== 'administrador') {
 
         <div class="row">
             <!-- navbar pc -->
-            <div class="col-lg-3 bagr-cafe4 h-100 position-fixed d-none d-lg-block shadow" >
+            <div class="col-lg-3 bagr-cafe4 h-100 position-fixed d-none d-lg-block shadow contenedor" >
                 <h4 class="text-center text-light m-3 fs-2 fw-bold">Administrar</h4>
                 <div class="row">
                     <div class="col-12 text-center">

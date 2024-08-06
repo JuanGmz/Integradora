@@ -101,15 +101,15 @@ if (isset($_SESSION["usuario"])) {
         <i class="fa-brands fa-whatsapp fa-2x"></i>
     </button>
     <!-- NavBar -->
-    <nav class="navbar navbar-expand-lg shadow-lg mb-lg-4">
+    <nav class="navbar navbar-expand-lg shadow-lg">
         <div class="container-fluid">
             <a class="navbar-brand" href="../index.php">
                 <img src="../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
             </a>
-            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar"
-                aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura</h5>
+                    <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura
+                    </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
@@ -136,7 +136,7 @@ if (isset($_SESSION["usuario"])) {
                 </div>
             </div>
             <?php
-                if (isset($_SESSION["usuario"])) {
+            if (isset($_SESSION["usuario"])) {
             ?>
                 <!-- Navbar con dropdown -->
                 <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -144,6 +144,7 @@ if (isset($_SESSION["usuario"])) {
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
                     <a class="dropdown-item" href="perfil.php">Mi perfil</a>
+                    <a class="dropdown-item" href="bolsas/Carrito.php">Mi carrito</a>
                     <?php if ($rol[0]->rol === 'administrador') { ?>
                         <a class="dropdown-item" href="../views/adminInicio.php">Administrar</a>
                         <div class="dropdown-divider"></div>
@@ -161,6 +162,7 @@ if (isset($_SESSION["usuario"])) {
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
+
     </nav>
     <!-- NavBar End -->
 
@@ -268,8 +270,8 @@ if (isset($_SESSION["usuario"])) {
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="telefono" class="form-label">Teléfono</label>
-                                                    <input type="text" class="form-control" id="telefono"
-                                                        value="<?php echo $domicilio->telefono; ?>" name="telefono">
+                                                    <input type="tel" class="form-control" id="telefono"
+                                                        value="<?php echo $domicilio->telefono; ?>" name="telefono" pattern="[0-9]{10}" required maxlength="10">
                                                 </div>
                                                 <div class="text-end">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -335,31 +337,31 @@ if (isset($_SESSION["usuario"])) {
                                 <form method="post" enctype="multipart/form-data">
                                     <div class="mb-3">
                                         <label for="estado" class="form-label">Estado</label>
-                                        <input type="text" class="form-control" id="estado" name="estado" required>
+                                        <input type="text" class="form-control" id="estado" name="estado" maxlength="50" pattern="[A-Za-z\s]+" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="ciudad" class="form-label">Ciudad</label>
-                                        <input type="text" class="form-control" id="ciudad" name="ciudad" required>
+                                        <input type="text" class="form-control" id="ciudad" name="ciudad" pattern="[A-Za-z\s]+" maxlength="100" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="calle" class="form-label">Calle</label>
-                                        <input type="text" class="form-control" id="calle" name="calle" required>
+                                        <input type="text" class="form-control" id="calle" name="calle" maxlength="100" pattern="[A-Za-z\s]+" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="colonia" class="form-label">Colonia</label>
-                                        <input type="text" class="form-control" id="colonia" name="colonia" required>
+                                        <input type="text" class="form-control" id="colonia" name="colonia" maxlength="100" pattern="[A-Za-z\s]+" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="cp" class="form-label">Código Postal</label>
-                                        <input type="text" class="form-control" id="cp" name="codigo_postal" required>
+                                        <input type="text" class="form-control" id="cp" name="codigo_postal" pattern="\d{5}" maxlength="5" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="referencia" class="form-label">Referencia</label>
-                                        <input type="text" class="form-control" id="referencia" name="referencia" required>
+                                        <input type="text" class="form-control" id="referencia" name="referencia" maxlength="100" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="telefono" class="form-label">Teléfono</label>
-                                        <input type="text" class="form-control" id="telefono" name="telefono" required>
+                                        <input type="text" class="form-control" id="telefono" name="telefono" pattern="[0-9]{10}" required maxlength="10" required>
                                     </div>
                                     <div class="text-end">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>

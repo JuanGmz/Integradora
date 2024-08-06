@@ -42,14 +42,15 @@
         <i class="fa-brands fa-whatsapp fa-2x"></i>
     </button>
     <!-- NavBar -->
-    <nav class="navbar navbar-expand-lg shadow-lg mb-lg-4">
+    <nav class="navbar navbar-expand-lg shadow-lg">
         <div class="container-fluid">
             <a class="navbar-brand" href="../index.php">
                 <img src="../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
             </a>
             <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura</h5>
+                    <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura
+                    </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
@@ -84,8 +85,9 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
                     <a class="dropdown-item" href="perfil.php">Mi perfil</a>
+                    <a class="dropdown-item" href="bolsas/Carrito.php">Mi carrito</a>
                     <?php if ($rol[0]->rol === 'administrador') { ?>
-                        <a class="dropdown-item" href="adminInicio.php">Administrar</a>
+                        <a class="dropdown-item" href="../views/adminInicio.php">Administrar</a>
                         <div class="dropdown-divider"></div>
                     <?php } ?>
                     <a class="dropdown-item" href="../scripts/login/cerrarsesion.php">Cerrar sesión</a>
@@ -93,7 +95,7 @@
             <?php
             } else {
             ?>
-                <a href="../login.php" class="login-button ms-auto">Iniciar Sesión</a>
+                <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
             <?php
             }
             ?>
@@ -101,6 +103,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
+
     </nav>
     <!-- NavBar End -->
 

@@ -102,7 +102,6 @@ if ($_POST) {
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="shortcut icon" href="../img/Sinfonía-Café-y-Cultura.webp">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/scrollbar.css">
 </head>
 
 <body style="background: var(--color6);">
@@ -275,7 +274,7 @@ if ($_POST) {
 
         <div class="row">
             <!-- navbar pc -->
-            <div class="col-lg-3 bagr-cafe4 h-100 position-fixed d-none d-lg-block shadow">
+            <div class="col-lg-3 bagr-cafe4 h-100 position-fixed d-none d-lg-block shadow contenedor">
                 <h4 class="text-center text-light m-3 fs-2 fw-bold">Administrar</h4>
                 <div class="row">
                     <div class="col-12 text-center">
@@ -476,12 +475,12 @@ if ($_POST) {
                                     <div class="mb-3 row">
                                         <div class="col-6">
                                             <label for="fechainicio" class="form-label">Fecha Inicio</label>
-                                            <input type="date" class="form-control" id="fechainicio" name="fechainicio"
+                                            <input type="date" class="form-control" id="fechainicio" name="fechainicio" min="<?= date('Y-m-d') ?>"
                                                 required>
                                         </div>
                                         <div class="col-6">
                                             <label for="fechafin" class="form-label">Fecha Expiracion</label>
-                                            <input type="date" class="form-control" id="fechafin" name="fechafin"
+                                            <input type="date" class="form-control" id="fechafin" name="fechafin" min="<?= date('Y-m-d') ?>"
                                                 required>
                                         </div>
                                     </div>

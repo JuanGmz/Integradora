@@ -164,6 +164,8 @@ if (is_array($cliente_result) && count($cliente_result) > 0) {
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
                     <a class="dropdown-item" href="../perfil.php">Mi perfil</a>
+                    <a class="dropdown-item" href="../bolsas/Carrito.php">Mi carrito</a>
+
                     <?php if ($rol[0]->rol === 'administrador') { ?>
                         <a class="dropdown-item" href="../adminInicio.php">Administrar</a>
                         <div class="dropdown-divider"></div>
