@@ -37,7 +37,7 @@ if ($result) {
         <link rel="stylesheet" href="../../css/style.css">
     </head>
 
-    <body class="bagr-cafe3">
+    <body style="background: var(--color6);">
         <!-- Botón de WhatsApp -->
         <button id="whatsappButton" class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3" type="button" onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
             <i class="fa-brands fa-whatsapp fa-2x"></i>
@@ -106,7 +106,7 @@ if ($result) {
         <!-- NavBar End -->
 
         <!-- Contenido -->
-        <div class="container mb-5">
+        <div class="container mb-5" style="background: var(--color6);">
             <div class="row p-0 m-0">
                 <!-- E-Commerce-->
                 <div class='container-fluid p-3'>
