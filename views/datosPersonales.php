@@ -180,7 +180,7 @@
                     </div>
                     <div class="col-4 d-flex align-items-center justify-content-start">
                         <!-- Botón para abrir el modal de editar el telefono -->
-                        <button data-bs-toggle="modal" data-bs-target="#modalEditarTel" class="btn btn-cafe">Editar</button>
+                        <button data-bs-toggle="modal" data-bs-target="#modalEditarTel" class="btn btn-cafe">Cambiar</button>
                         <!-- Modal para editar el telefono -->
                         <div class="modal fade" id="modalEditarTel" tabindex="-1" aria-labelledby="modalEditarTelLabel" aria-hidden="true">
                             <div class="modal-dialog">
@@ -198,7 +198,7 @@
                                             </div>
                                             <div class="text-end">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                <button type="submit" class="btn btn-primary" name="actTelefono">Cambiar</button>
+                                                <button type="submit" class="btn btn-cafe" name="actTelefono">Actualizar</button>
                                             </div>
                                         </form>
                                     </div>
@@ -214,7 +214,7 @@
                     </div>
                     <div class="col-4 d-flex justify-content-start align-items-center">
                         <!-- Botón para abrir el modal de editar el password -->
-                        <button data-bs-toggle="modal" data-bs-target="#modalEditarPass" class="btn btn-cafe">Editar</button>
+                        <button data-bs-toggle="modal" data-bs-target="#modalEditarPass" class="btn btn-cafe">Cambiar</button>
                         <!-- Modal para editar el password -->
                         <div class="modal fade" id="modalEditarPass" tabindex="-1" aria-labelledby="editarPass" aria-hidden="true">
                             <div class="modal-dialog">
@@ -236,7 +236,7 @@
                                             </div>
                                             <div class="text-end">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                <button type="submit" class="btn btn-cafe" name="actPassword">Cambiar</button>
+                                                <button type="submit" class="btn btn-cafe" name="actPassword">Actualizar</button>
                                             </div>
                                         </form>
                                     </div>
