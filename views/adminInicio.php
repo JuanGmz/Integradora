@@ -199,7 +199,7 @@ if ($rol[0]->rol !== 'administrador') {
                 <h4 class="text-center text-light m-3 fs-2 fw-bold">Administrar</h4>
                 <div class="row">
                     <div class="col-12 text-center">
-                        <i class="fa-solid fa-user fa-10x text-light"></i>
+                    <img src="../img/Sinfonía-Café-y-Cultura blanco.webp" alt="" class="img-fluid" style="width: 300px;">
                     </div>
                 </div>
                 <div class="accordion accordion-flush" id="accordionPc">

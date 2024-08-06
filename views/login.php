@@ -122,11 +122,11 @@ if ($_POST) {
                             <input type="password" class="form-control form-control-bb" id="password" name="password"
                                 required>
                         </div>
-                        <div class="col-12 mb-3 text-center my-2">
+                        <!-- <div class="col-12 mb-3 text-center my-2">
                             <a href="recuperar.php" class="blog-card-link">
                                 <p class="m-0">Olvidaste tu contraseña?</p>
                             </a>
-                        </div>
+                        </div> -->
                         <div class="col-12 mb-3 text-center">
                             <a href="registrar.php" class="blog-card-link">
                                 <p class="m-0">Registrar cuenta</p>

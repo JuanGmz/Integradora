@@ -191,7 +191,7 @@ if (isset($_SESSION["usuario"])) {
     </button>
 
     <!-- Offcanvas del Carrito -->
-    <div class="offcanvas offcanvas-end text-light" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas offcanvas-end text-light custom-offcanvas" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
         <!--Titulo--->
         <div class="fw-bold d-flex justify-content-center align-content-center m-0" style="background: var(--primario);">
             <h5 class="offcanvas-title fs-3 mx-auto me-5" id="offcanvasRightLabel">Carrito <i class="fa-solid fa-bag-shopping m-3"></i></h5>
