@@ -1140,4 +1140,42 @@ a:hover {
   -o-transition: all .5s ease;
   transition: all .5s ease;
 }
+/*---------------------- Offcanva resolucion-------------------*/
+.custom-offcanvas {
+  width: 30% !important;
+  /* Ajusta el porcentaje según tus necesidades */
+  max-width: none !important;
+  /* Para que no haya un límite de tamaño máximo */
+}
 
+/* Responsivo para pantallas medianas altas */
+@media (min-width: 1080px) and (max-width: 1300px) {
+  .custom-offcanvas {
+      width: 36% !important;
+      /* Ajusta el porcentaje según tus necesidades */
+  }
+}
+
+/* Responsivo para pantallas medianas  */
+@media (min-width: 767.98px) and (max-width: 1130px) {
+  .custom-offcanvas {
+      width: 50% !important;
+      /* Ajusta el porcentaje según tus necesidades */
+  }
+}
+
+/* Responsivo para pantallas pequeñas */
+@media (max-width: 767.98px) {
+  .custom-offcanvas {
+      width: 70% !important;
+      /* Ajusta el porcentaje según tus necesidades */
+  }
+}
+
+/* Responsivo para pantallas pequeñitas */
+@media (max-width: 500px) {
+  .custom-offcanvas {
+      width: 100% !important;
+      /* Ajusta el porcentaje según tus necesidades */
+  }
+}

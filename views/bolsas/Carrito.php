@@ -420,7 +420,7 @@ if (isset($_SESSION["usuario"])) {
 
                 <?php
             } else {
-                echo '<div class="d-flex flex-column justify-content-center align-items-center my-5">';
+                echo '<div class="d-flex flex-column justify-content-center align-items-center my-5" style="height: 350px;">';
                 echo '<h3 class="text-center">Tu carrito está vacío</h3>';
                 echo '<div class="d-flex justify-content-center col-12">';
                 echo '<i class="fa-solid fa-mug-hot fa-4x text-dark-emphasis"></i>';

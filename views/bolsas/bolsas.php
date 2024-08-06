@@ -295,11 +295,11 @@ if ($result) {
                         if ($total_productos == null) {
                             $total_productos = 0;
                         }
-                    }else{
+                    } else {
                         $total_productos = 0;
                     }
                 }
-            }else{
+            } else {
                 $total_productos = 0;
             }
 
@@ -313,9 +313,8 @@ if ($result) {
                     <?php echo $total_productos; ?>
                 </span>
             </button>
-
             <!-- Offcanvas del Carrito -->
-            <div class="offcanvas offcanvas-end text-light" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+            <div class="offcanvas offcanvas-end text-light custom-offcanvas" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
                 <!--Titulo--->
                 <div class="fw-bold d-flex justify-content-center align-content-center m-0" style="background: var(--primario);">
                     <h5 class="offcanvas-title fs-3 mx-auto me-5" id="offcanvasRightLabel">Carrito <i class="fa-solid fa-bag-shopping m-3"></i></h5>
@@ -459,33 +458,33 @@ if ($result) {
 
             <!-- Footer -->
             <footer class="mt-auto">
-        <div class="container-fluid p-5" style="background: var(--negroclaro);">
-            <h2 class="text-center text-light mb-5">SinfoníaCafé&Cultura</h2>
-            <hr class="text-light">
-            <div class="container-fluid d-flex justify-content-center align-items-center flex-column p-4">
-                <div class="row m-3 text-center">
-                    <div class="col-4">
-                        <a href="https://www.facebook.com/SinfoniaCoffee">
-                            <i class="fa-brands fa-facebook text-light fa-2x text-center"></i>
-                        </a>
-                    </div>
-                    <div class="col-4">
-                        <a href="https://x.com/SinfoniaCoffee">
-                            <i class="fa-brands fa-twitter text-light fa-2x text-center"></i>
-                        </a>
-                    </div>
-                    <div class="col-4">
-                        <a href="https://www.instagram.com/sinfoniacoffee/">
-                            <i class="fa-brands fa-instagram text-light fa-2x text-center"></i>
-                        </a>
+                <div class="container-fluid p-5" style="background: var(--negroclaro);">
+                    <h2 class="text-center text-light mb-5">SinfoníaCafé&Cultura</h2>
+                    <hr class="text-light">
+                    <div class="container-fluid d-flex justify-content-center align-items-center flex-column p-4">
+                        <div class="row m-3 text-center">
+                            <div class="col-4">
+                                <a href="https://www.facebook.com/SinfoniaCoffee">
+                                    <i class="fa-brands fa-facebook text-light fa-2x text-center"></i>
+                                </a>
+                            </div>
+                            <div class="col-4">
+                                <a href="https://x.com/SinfoniaCoffee">
+                                    <i class="fa-brands fa-twitter text-light fa-2x text-center"></i>
+                                </a>
+                            </div>
+                            <div class="col-4">
+                                <a href="https://www.instagram.com/sinfoniacoffee/">
+                                    <i class="fa-brands fa-instagram text-light fa-2x text-center"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row m-3">
+                            <p class="text-center fw-bold text-light">Copyright © 2024 SinfoníaCafé&Cultura</p>
+                        </div>
                     </div>
                 </div>
-                <div class="row m-3">
-                    <p class="text-center fw-bold text-light">Copyright © 2024 SinfoníaCafé&Cultura</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+            </footer>
             <!-- jQuery -->
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
             <!-- Bootstrap JS -->
