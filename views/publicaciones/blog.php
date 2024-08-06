@@ -10,7 +10,7 @@
     <?php
     session_start();
     require_once '../../class/database.php';
-    include_once("../../scripts/funciones/funciones.php");
+    include_once ("../../scripts/funciones/funciones.php");
     $db = new database();
     $db->conectarDB();
 
@@ -23,7 +23,10 @@
 
 <body>
     <!-- Botón de WhatsApp -->
-    <button id="whatsappButton" class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3" type="button" onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
+    <button id="whatsappButton"
+        class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3"
+        type="button"
+        onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
         <i class="fa-brands fa-whatsapp fa-2x"></i>
     </button>
     <div class="content">
@@ -34,7 +37,8 @@
                 <a class="navbar-brand" href="../../index.php">
                     <img src="../../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
                 </a>
-                <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="tituloOffcanvas">
+                <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1"
+                    id="offcanvasNavbar" aria-labelledby="tituloOffcanvas">
                     <div class="offcanvas-header">
                         <h5 class="offcanvas-title text-light" id="tituloOffcanvas">SinfoníaCafé&Cultura</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -64,12 +68,14 @@
                 </div>
                 <?php
                 if (isset($_SESSION["usuario"])) {
-                ?>
+                    ?>
                     <!-- Navbar con dropdown -->
-                    <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
+                        style="left: auto; right: 30px; top: 60px">
                         <a class="dropdown-item" href="../perfil.php">Mi perfil</a>
                         <a class="dropdown-item" href="../bolsas/Carrito.php">Mi carrito</a>
                         <?php if ($rol[0]->rol === 'administrador') { ?>
@@ -78,14 +84,15 @@
                         <?php } ?>
                         <a class="dropdown-item" href="../../scripts/login/cerrarsesion.php">Cerrar sesión</a>
                     </div>
-                <?php
+                    <?php
                 } else {
-                ?>
+                    ?>
                     <a href="../login.php" class="login-button ms-auto">Iniciar Sesión</a>
-                <?php
+                    <?php
                 }
                 ?>
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
             </div>
@@ -106,7 +113,7 @@
             </div>
             <div class="row">
                 <?php
-                include_once("../../class/database.php");
+                include_once ("../../class/database.php");
 
                 // Conectar a la base de datos
                 $conexion = new Database();
@@ -114,9 +121,9 @@
 
                 // Configurar la paginación
                 $results_per_page = 9; // Número de resultados por página
-                $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
+                $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int) $_GET['page'] : 1;
                 $page = max($page, 1); // Asegurar que la página sea al menos 1
-
+                
                 // Contar el número total de publicaciones
                 $total_query = 'SELECT COUNT(*) AS total FROM publicaciones WHERE tipo = "Blog"';
                 $total_result = $conexion->select($total_query);
@@ -142,17 +149,21 @@
                 ?>
                 <div class="container mb-3">
                     <div class="row">
-                        <?php foreach ($publicaciones as $publicacion) : ?>
+                        <?php foreach ($publicaciones as $publicacion): ?>
                             <div class="col-12 mb-4">
                                 <div class="card shadow-lg">
                                     <div class="row no-gutters">
                                         <div class="col-md-4">
-                                            <img src='../../img/publicaciones/<?php echo $publicacion->img_url; ?>' class='img-fluid' alt='<?php echo $publicacion->titulo ?>' style="height: 100%; width: 100%; object-fit: cover;">
+                                            <img src='../../img/publicaciones/<?php echo $publicacion->img_url; ?>'
+                                                class='img-fluid' alt='<?php echo $publicacion->titulo ?>'
+                                                style="height: 100%; width: 100%; object-fit: cover;">
                                         </div>
                                         <div class="col-md-8 d-flex flex-column justify-content-center p-3">
                                             <h5 class='card-title'><?php echo $publicacion->titulo; ?></h5>
-                                            <p class='card-text' style="color:black;"><?php echo $publicacion->descripcion; ?></p>
-                                            <h6 class='card-subtitle mb-2 text-muted'><?php echo $publicacion->fecha; ?></h6>
+                                            <p class='card-text' style="color:black;">
+                                                <?php echo $publicacion->descripcion; ?></p>
+                                            <h6 class='card-subtitle mb-2 text-muted'><?php echo $publicacion->fecha; ?>
+                                            </h6>
                                         </div>
                                     </div>
                                 </div>
@@ -160,31 +171,34 @@
                         <?php endforeach; ?>
                     </div>
                 </div>
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination d-flex justify-content-center">
-                        <li class="page-item<?php if ($page <= 1) {
-                                                echo ' disabled';
-                                            } ?>">
-                            <a class="page-link custom-page-link" href="?page=<?php echo $page - 1; ?>" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
-                            <li class="page-item custom-page-item<?php if ($page == $i) {
-                                                                        echo ' active';
-                                                                    } ?>">
-                                <a class="page-link custom-page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                <div class="container mt-4">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination d-flex justify-content-center">
+                            <!-- Botón de "Anterior" -->
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
                             </li>
-                        <?php endfor; ?>
-                        <li class="page-item<?php if ($page >= $total_pages) {
-                                                echo ' disabled';
-                                            } ?>">
-                            <a class="page-link custom-page-link" href="?page=<?php echo $page + 1; ?>" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+                            <!-- Botones de páginas -->
+                            <li class="page-item active">
+                                <a class="page-link" href="#">1</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">2</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">3</a>
+                            </li>
+                            <!-- Botón de "Siguiente" -->
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
                 <?php
                 $conexion->desconectarDB();
                 ?>

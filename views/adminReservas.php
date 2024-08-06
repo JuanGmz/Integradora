@@ -12,6 +12,15 @@ $rol = $db->select($rolUsuario);
 if ($rol[0]->rol !== 'administrador') {
     header('Location: ../index.php');
 }
+
+// Datos de ejemplo (estos valores deberían provenir de tu consulta y lógica de paginación)
+$total_records = 50; // Total de registros
+$records_per_page = 10; // Registros por página
+$total_pages = ceil($total_records / $records_per_page); // Número total de páginas
+$current_page = isset($_GET['page']) ? (int) $_GET['page'] : 1; // Página actual
+
+// Asegúrate de que la página actual esté dentro del rango válido
+$current_page = max(1, min($current_page, $total_pages));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,9 +45,9 @@ if ($rol[0]->rol !== 'administrador') {
                 <div class="accordion accordion-flush" id="accordionMobile">
                     <div class="accordion-item m-0 p-0 row">
                         <h2 class="accordion-header">
-                            <button class="row accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-inicio" aria-expanded="false"
-                                aria-controls="flush-inicio">
+                            <button class="row accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light"
+                                type="button" data-bs-toggle="collapse" data-bs-target="#flush-inicio"
+                                aria-expanded="false" aria-controls="flush-inicio">
                                 <div class="col-6">
                                     <a href="adminInicio.php" class="text-light fw-bold text-decoration-none">
                                         <i class="fa-solid fa-house-laptop me-1"></i>
@@ -195,7 +204,7 @@ if ($rol[0]->rol !== 'administrador') {
 
         <div class="row">
             <!-- navbar pc -->
-            <div class="col-lg-3 bagr-cafe4 h-100 position-fixed d-none d-lg-block shadow contenedor" >
+            <div class="col-lg-3 bagr-cafe4 h-100 position-fixed d-none d-lg-block shadow contenedor">
                 <h4 class="text-center text-light m-3 fs-2 fw-bold">Administrar</h4>
                 <div class="row">
                     <div class="col-12 text-center">
@@ -363,10 +372,15 @@ if ($rol[0]->rol !== 'administrador') {
                                             <option selected disabled value="">Seleccionar Evento</option>
                                             <!-- Aqui va el select del filtrado -->
                                             <?php
-                                            $queryFiltrar = "SELECT id_evento, nombre, fecha_evento FROM eventos WHERE tipo = 'De Pago'";
+                                            $queryFiltrar = "SELECT id_evento, nombre, fecha_evento FROM eventos WHERE tipo = 'De Pago' and  CURDATE() <= fecha_evento";
                                             $eventos = $db->select($queryFiltrar);
+
+                                            // Verifica si hay un evento seleccionado
+                                            $selected_evento = isset($_POST['evento']) ? $_POST['evento'] : '';
+
+                                            // Genera las opciones para el select
                                             foreach ($eventos as $evento) {
-                                                $selected = (isset($_POST['evento']) && $_POST['evento'] == $evento->id_evento) ? 'selected' : '';
+                                                $selected = ($selected_evento == $evento->id_evento) ? 'selected' : '';
                                                 echo "<option value='{$evento->id_evento}' $selected>{$evento->nombre}</option>";
                                             }
                                             ?>
@@ -386,7 +400,22 @@ if ($rol[0]->rol !== 'administrador') {
                     if (isset($_POST['evento'])) {
                         $id_evento = intval($_POST['evento']);
 
-                        $queryReservas = "SELECT * FROM view_AdminReservas WHERE id_evento = $id_evento";
+                        // Datos de paginación
+                        $records_per_page = 10; // Número de registros por página
+                        $current_page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+                        $current_page = max(1, $current_page); // Asegurarse de que la página actual sea al menos 1
+                    
+                        // Contar el número total de registros
+                        $countQuery = "SELECT COUNT(*) AS total FROM view_AdminReservas WHERE id_evento = $id_evento";
+                        $total_records_result = $db->select($countQuery);
+
+                        $total_records = $total_records_result[0]->total;
+                        $total_pages = ceil($total_records / $records_per_page);
+
+                        // Limitar los resultados de la consulta
+                        $offset = ($current_page - 1) * $records_per_page;
+
+                        $queryReservas = "SELECT * FROM view_AdminReservas WHERE id_evento = $id_evento order by folio desc LIMIT $offset, $records_per_page";
                         $reservas = $db->select($queryReservas);
 
                         if (empty($reservas)) {
@@ -412,8 +441,8 @@ if ($rol[0]->rol !== 'administrador') {
                                             <th scope='row'>$reserva->cliente</th>
                                             <td class='d-none d-lg-table-cell'>$reserva->boletos</td>
                                             <td class='d-none d-lg-table-cell'>$$reserva->montoTotal</td>
-                                            <td>$reserva->estatus"; 
-                                                
+                                            <td>$reserva->estatus";
+
                                 echo "  
                                             </td>
                                             <td>
@@ -478,23 +507,45 @@ if ($rol[0]->rol !== 'administrador') {
                                                     </div>
                                                 </div>
                                                 ";
-                                                $comprobante = "SELECT * FROM comprobantes WHERE id_reserva = $reserva->folio";
-                                                $comprobante = $db->select($comprobante);
-                                                if ($comprobante == null) {
-                                                    ?>
-                                                    <button class="btn btn-danger"><i class="fa-regular fa-file"></i></button>
-                                                    <?php
-                                                } else {
-                                                    ?>
-                                                    <button class="btn btn-success"><i class="fa-regular fa-file"></i></button>
-                                                    <?php
-                                                }
-                                                echo "
+                                $comprobante = "SELECT * FROM comprobantes WHERE id_reserva = $reserva->folio";
+                                $comprobante = $db->select($comprobante);
+                                if ($comprobante == null) {
+                                    ?>
+                                    <button class="btn btn-danger"><i class="fa-regular fa-file"></i></button>
+                                    <?php
+                                } else {
+                                    ?>
+                                    <button class="btn btn-success"><i class="fa-regular fa-file"></i></button>
+                                    <?php
+                                }
+                                echo "
                                             </td>
                                         </tr>";
                             }
                             echo "</tbody>
                                     </table>";
+                            // Generar la paginación
+                            echo "<nav aria-label='Page navigation example'>
+        <ul class='pagination d-flex justify-content-center'>";
+
+                            echo "<li  class='page-item" . ($current_page <= 1 ? 'disabled' : '') . "'>
+                <a style=' color: var(--color4);' class='page-link' href='?page=" . ($current_page - 1) . "' aria-label='Previous'>
+                    <span aria-hidden='true'>&laquo;</span>
+                </a>
+            </li>";
+                            // Botones de páginas
+                            for ($i = 1; $i <= $total_pages; $i++) {
+                                echo "<li class='page-item " . ($current_page == $i ? 'active' : '') . "'>
+                    <a style=' background-color: var(--color4); border-color: #white;' class='page-link' href='?page=$i'>$i</a>
+                </li>";
+                            }
+                            // Botón de "Siguiente"
+                            echo "<li class='page-item " . ($current_page >= $total_pages ? 'disabled' : '') . "'>
+        <a style=' color: var(--color4);' class='page-link' href='?page=" . ($current_page + 1) . "' aria-label='Next'>
+            <span aria-hidden='true'>&raquo;</span>
+        </a>
+    </li>";
+                            echo "</ul></nav>";
                         }
                     } else {
                         echo "<div>
@@ -506,6 +557,7 @@ if ($rol[0]->rol !== 'administrador') {
             </div>
         </div>
     </div>
+
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/b820f07375.js" crossorigin="anonymous"></script>
     <script src="../script/script.js"></script>
