@@ -35,18 +35,18 @@ if ($rol[0]->rol !== 'administrador') {
                 </div>
                 <div class="accordion accordion-flush" id="accordionMobile">
                     <div class="accordion-item m-0 p-0 row">
-                        <h2 class="accordion-header">
+                        <a href="adminInicio.php">
+                            <h2 class="accordion-header">
                             <button class="row accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-inicio" aria-expanded="false"
                                 aria-controls="flush-inicio">
                                 <div class="col-6">
-                                    <a href="adminInicio.php" class="text-light fw-bold text-decoration-none">
-                                        <i class="fa-solid fa-house-laptop me-1"></i>
-                                        Inicio
-                                    </a>
+                                    <i class="fa-solid fa-house-laptop me-1"></i>
+                                    Inicio
                                 </div>
                             </button>
-                        </h2>
+                            </h2>
+                        </a>
                     </div>
                     <div class="accordion-item row m-0 p-0">
                         <h2 class="accordion-header row">
@@ -121,7 +121,7 @@ if ($rol[0]->rol !== 'administrador') {
                                     Administrar Pedidos
                                 </a><br><br>
                                 <a href="adminProductosEcommerce.php"
-                                    class="fw-bold fs-4 ms-5 text-light text-decoration-none">
+                                    class="fw-bold fs-5 ms-5 text-light text-decoration-none">
                                     Administrar Productos
                                 </a>
                             </div>
@@ -377,7 +377,7 @@ if ($rol[0]->rol !== 'administrador') {
                                 <!--Contenido-->
                                 <tr class="row" style="background: var(--color6);">
                                     <!--1-->
-                                    <td class="col col-lg-4 col-md-4 border-0" style="background: var(--color6);">
+                                    <td class="col-6 col-lg-4 col-md-4 border-0" style="background: var(--color6);">
                                         <!--Accesos rapidos 1 lugares -->
                                         <div class="container mt-2 d-flex justify-content-center align-items-center">
                                             <div class="" style="width: 18rem;">
@@ -395,7 +395,7 @@ if ($rol[0]->rol !== 'administrador') {
                                         </div>
                                     </td>
                                     <!--2-->
-                                    <td class="col col-lg-4 col-md-4 " style="background: var(--color6);">
+                                    <td class="col-6 col-lg-4 col-md-4" style="background: var(--color6);">
                                         <!--Accesos rapidos 2 usuarios -->
                                         <div class="container mt-2 d-flex justify-content-center align-items-center">
                                             <div class="" style="width: 18rem;">
@@ -413,7 +413,7 @@ if ($rol[0]->rol !== 'administrador') {
                                         </div>
                                     </td>
                                     <!--4-->
-                                    <td class="col col-lg-4 col-md-4 " style="background: var(--color6);">
+                                    <td class="col-6 col-lg-4 col-md-4" style="background: var(--color6);">
                                         <!--Accesos rapidos 4 pedidos -->
                                         <div class="container mt-2 d-flex justify-content-center align-items-center">
                                             <div class="" style="width: 18rem;">
@@ -431,7 +431,7 @@ if ($rol[0]->rol !== 'administrador') {
                                         </div>
                                     </td>
                                     <!--6-->
-                                    <td class="col col-lg-4 col-md-4 " style="background: var(--color6);">
+                                    <td class="col-6 col-lg-4 col-md-4" style="background: var(--color6);">
                                         <!--Accesos rapidos 4 eventos -->
                                         <div class="container mt-2 d-flex justify-content-center align-items-center">
                                             <div class="" style="width: 18rem;">
@@ -449,7 +449,7 @@ if ($rol[0]->rol !== 'administrador') {
                                         </div>
                                     </td>
                                     <!--8-->
-                                    <td class="col col-lg-4 col-md-4 " style="background: var(--color6);">
+                                    <td class="col-6 col-lg-4 col-md-4" style="background: var(--color6);">
                                         <!--Accesos rapidos 8 menu -->
                                         <div class="container mt-2 d-flex justify-content-center align-items-center">
                                             <div class="" style="width: 18rem;">
@@ -467,7 +467,7 @@ if ($rol[0]->rol !== 'administrador') {
                                         </div>
                                     </td>
                                     <!--9-->
-                                    <td class="col col-lg-4 col-md-4 " style="background: var(--color6);">
+                                    <td class="col-6 col-lg-4 col-md-4" style="background: var(--color6);">
                                         <!--Accesos rapidos 8 Recompensas -->
                                         <div class="container mt-2 d-flex justify-content-center align-items-center">
                                             <div class="" style="width: 18rem;">

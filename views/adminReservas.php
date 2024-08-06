@@ -35,18 +35,18 @@ if ($rol[0]->rol !== 'administrador') {
                 </div>
                 <div class="accordion accordion-flush" id="accordionMobile">
                     <div class="accordion-item m-0 p-0 row">
-                        <h2 class="accordion-header">
+                        <a href="adminInicio.php">
+                            <h2 class="accordion-header">
                             <button class="row accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-inicio" aria-expanded="false"
                                 aria-controls="flush-inicio">
                                 <div class="col-6">
-                                    <a href="adminInicio.php" class="text-light fw-bold text-decoration-none">
-                                        <i class="fa-solid fa-house-laptop me-1"></i>
-                                        Inicio
-                                    </a>
+                                    <i class="fa-solid fa-house-laptop me-1"></i>
+                                    Inicio
                                 </div>
                             </button>
-                        </h2>
+                            </h2>
+                        </a>
                     </div>
                     <div class="accordion-item row m-0 p-0">
                         <h2 class="accordion-header row">
@@ -121,7 +121,7 @@ if ($rol[0]->rol !== 'administrador') {
                                     Administrar Pedidos
                                 </a><br><br>
                                 <a href="adminProductosEcommerce.php"
-                                    class="fw-bold fs-4 ms-5 text-light text-decoration-none">
+                                    class="fw-bold fs-5 ms-5 text-light text-decoration-none">
                                     Administrar Productos
                                 </a>
                             </div>
@@ -422,31 +422,31 @@ if ($rol[0]->rol !== 'administrador') {
                                                     <i class='fa-solid fa-list'></i>
                                                 </button>
                                                 <div class='modal fade' id='detalles$reserva->folio' tabindex='-1' aria-labelledby='detalles$reserva->folio' aria-hidden='true'>
-                                                    <div class='modal-dialog' style='max-width: 30% !important;'>
+                                                    <div class='modal-dialog'>
                                                         <div class='modal-content'>
                                                             <div class='modal-header'>
                                                                 <h5 class='modal-title' id='detalles$reserva->folio'>Detalles de la reserva</h5>
                                                                 <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                                                             </div>
                                                             <div class='modal-body text-start'>";
-                                $queryComprobante = "SELECT * FROM vw_comprobante_reserva WHERE id_reserva = $reserva->folio";
-                                $comprobantes = $db->select($queryComprobante);
-                                if (empty($comprobantes)) {
-                                    echo "<div class='badge bg-danger mb-3'><h5 class='text-center m-0 p-0'>Aún no se envía el comprobante</h5></div>";
-                                } else {
-                                    foreach ($comprobantes as $comprobante) {
-                                        echo "<h4 class='fw-bold'>Folio de la reserva: <span class='fw-normal fs-5'>{$reserva->folio}</span></h5>";
-                                        echo "<h4 class='fw-bold'>Concepto de pago: <span class='fw-normal fs-5'>{$comprobante->concepto}</span></h5>";
-                                        echo "<h4 class='fw-bold'>Folio de operación: <span class='fw-normal fs-5'>{$comprobante->folio_operacion}</span></h5>";
-                                        echo "<h4 class='fw-bold'>Fecha de la reserva: <span class='fw-normal fs-5'>{$comprobante->fecha}</span></h5>";
-                                        echo "<h4 class='fw-bold'>Cantidad de boletos: <span class='fw-normal fs-5'>{$reserva->boletos}</span></h5>";
-                                        echo "<h4 class='fw-bold'>Precio por boleto: <span class='fw-normal fs-5'>$$reserva->precio_boleto</span></h5>";
-                                        echo "<h4 class='fw-bold'>Monto de transferencia: <span class='fw-normal fs-5'>$$comprobante->monto</span></h5>";
-                                        echo "<h4 class='fw-bold'>Banco de origen: <span class='fw-normal fs-5'>{$comprobante->banco_origen}</span></h5>";
-                                        echo "<img src='../img/comprobantes/$comprobante->imagen_comprobante' class='img-fluid'>";
-                                    }
-                                }
-                                echo "
+                                                                $queryComprobante = "SELECT * FROM vw_comprobante_reserva WHERE id_reserva = $reserva->folio";
+                                                                $comprobantes = $db->select($queryComprobante);
+                                                                if (empty($comprobantes)) {
+                                                                    echo "<div class='badge bg-danger mb-3'><h5 class='text-center m-0 p-0'>Aún no se envía el comprobante</h5></div>";
+                                                                } else {
+                                                                    foreach ($comprobantes as $comprobante) {
+                                                                        echo "<h4 class='fw-bold'>Folio de la reserva: <span class='fw-normal fs-5'>{$reserva->folio}</span></h5>";
+                                                                        echo "<h4 class='fw-bold'>Concepto de pago: <span class='fw-normal fs-5'>{$comprobante->concepto}</span></h5>";
+                                                                        echo "<h4 class='fw-bold'>Folio de operación: <span class='fw-normal fs-5'>{$comprobante->folio_operacion}</span></h5>";
+                                                                        echo "<h4 class='fw-bold'>Fecha de la reserva: <span class='fw-normal fs-5'>{$comprobante->fecha}</span></h5>";
+                                                                        echo "<h4 class='fw-bold'>Cantidad de boletos: <span class='fw-normal fs-5'>{$reserva->boletos}</span></h5>";
+                                                                        echo "<h4 class='fw-bold'>Precio por boleto: <span class='fw-normal fs-5'>$$reserva->precio_boleto</span></h5>";
+                                                                        echo "<h4 class='fw-bold'>Monto de transferencia: <span class='fw-normal fs-5'>$$comprobante->monto</span></h5>";
+                                                                        echo "<h4 class='fw-bold'>Banco de origen: <span class='fw-normal fs-5'>{$comprobante->banco_origen}</span></h5>";
+                                                                        echo "<img src='../img/comprobantes/$comprobante->imagen_comprobante' class='img-fluid'>";
+                                                                    }
+                                                                }
+                                                                echo "
                                                                 <form method='post' action='../scripts/adminreservas/estatusReserva.php'>
                                                                     <input type='hidden' name='id_reserva' value='$reserva->folio'>
                                                                     <div class='mb-3'>

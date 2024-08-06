@@ -110,18 +110,20 @@ if (isset($_POST['btnactualizar'])) {
                 </div>
                 <div class="accordion accordion-flush" id="accordionMobile">
                     <div class="accordion-item m-0 p-0 row">
-                        <h2 class="accordion-header">
-                            <button class="row accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#flush-inicio"
-                                aria-expanded="false" aria-controls="flush-inicio">
-                                <div class="col-6">
-                                    <a href="adminInicio.php" class="text-light fw-bold text-decoration-none">
-                                        <i class="fa-solid fa-house-laptop me-1"></i>
-                                        Inicio
-                                    </a>
-                                </div>
-                            </button>
-                        </h2>
+                        <a href="adminInicio.php">
+                            <h2 class="accordion-header">
+                                <button class="row accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light"
+                                    type="button" data-bs-toggle="collapse" data-bs-target="#flush-inicio"
+                                    aria-expanded="false" aria-controls="flush-inicio">
+                                    <div class="col-6">
+                                        <a href="adminInicio.php" class="text-light fw-bold text-decoration-none">
+                                            <i class="fa-solid fa-house-laptop me-1"></i>
+                                            Inicio
+                                        </a>
+                                    </div>
+                                </button>
+                            </h2>
+                        </a>
                     </div>
                     <div class="accordion-item row m-0 p-0">
                         <h2 class="accordion-header row">
@@ -196,7 +198,7 @@ if (isset($_POST['btnactualizar'])) {
                                     Administrar Pedidos
                                 </a><br><br>
                                 <a href="adminProductosEcommerce.php"
-                                    class="fw-bold fs-4 ms-5 text-light text-decoration-none">
+                                    class="fw-bold fs-5 ms-5 text-light text-decoration-none">
                                     Administrar Productos
                                 </a>
                             </div>
@@ -241,7 +243,7 @@ if (isset($_POST['btnactualizar'])) {
                         </h2>
                         <div id="flush-rewards" class="accordion-collapse collapse" data-bs-parent="#accordionMobile">
                             <div class="accordion-body bagr-cafe4">
-                                <a href="adminrecompensas.php" class="fw-bold fs-5 ms-5 text-light text-decoration-none"
+                                <a href="adminRecompensas.php" class="fw-bold fs-5 ms-5 text-light text-decoration-none"
                                     aria-current="true">
                                     Administrar Recompensas
                                 </a>
