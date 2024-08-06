@@ -171,34 +171,33 @@
                         <?php endforeach; ?>
                     </div>
                 </div>
-                <div class="container mt-4">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination d-flex justify-content-center">
-                            <!-- Botón de "Anterior" -->
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination d-flex justify-content-center">
+                        <li class="page-item<?php if ($page <= 1) {
+                            echo ' disabled';
+                        } ?>">
+                            <a class="page-link custom-page-link" href="?page=<?php echo $page - 1; ?>"
+                                aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                            <li class="page-item custom-page-item<?php if ($page == $i) {
+                                echo ' active';
+                            } ?>">
+                                <a class="page-link custom-page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
                             </li>
-                            <!-- Botones de páginas -->
-                            <li class="page-item active">
-                                <a class="page-link" href="#">1</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">2</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">3</a>
-                            </li>
-                            <!-- Botón de "Siguiente" -->
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
+                        <?php endfor; ?>
+                        <li class="page-item<?php if ($page >= $total_pages) {
+                            echo ' disabled';
+                        } ?>">
+                            <a class="page-link custom-page-link" href="?page=<?php echo $page + 1; ?>"
+                                aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
                 <?php
                 $conexion->desconectarDB();
                 ?>
