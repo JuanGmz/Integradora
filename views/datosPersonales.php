@@ -23,19 +23,37 @@
         $rol = $db->select($rolUsuario);
 
         $queryCel = "SELECT telefono FROM personas";
+            $db = new database();
+            $db->conectarDB();
 
-        if (isset($_POST['actTelefono'])) {
-            if ($tel === '') {
-                showAlert("El teléfono no puede estar vacío", "error");
-            } else if (strlen($tel) > 10) {
-                showAlert("El teléfono no puede tener más de 10 caracteres", "error");
-            } else {
-                $query = "UPDATE personas SET telefono = $tel WHERE id_persona = $id";
-                $db->execute($query);
-                showAlert("¡Teléfono actualizado con éxito!", "success");
-                header("refresh:2;datosPersonales.php");
+            if (isset($_POST['actTelefono'])) {
+
+
+                if ($tel === '') {
+                    showAlert("El teléfono no puede estar vacío", "error");
+                } else if (strlen($tel) > 10) {
+                    showAlert("El teléfono no puede tener más de 10 caracteres", "error");
+                } else {
+                    $checkQuery = "SELECT COUNT(*) FROM personas WHERE telefono = :telefono";
+                    $stmt = $db->prepare($checkQuery);
+                    $stmt->bindParam(':telefono', $tel, PDO::PARAM_STR);
+                    $stmt->execute();
+                    $result = $stmt->fetchColumn();
+                    // si el numero se encuentra en la base de datos no se puede actualizar
+                    if ($result > 0) {
+                        showAlert("Este telefono ya está en uno!", "error");
+                    } else {
+                        $query = "UPDATE personas SET telefono = :telefono WHERE id_persona = :id";
+                        $stmt = $db->prepare($query);
+                        $stmt->bindParam(':telefono', $tel, PDO::PARAM_STR);
+                        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+                        $stmt->execute();
+                        showAlert("¡Teléfono actualizado con éxito!", "success");
+                        header("refresh:2;datosPersonales.php");
+                    }
+                }
             }
-        }
+
 
         // PENDIENTEEEEEEEEEEEEEE
         if (isset($_POST['actPassword'])) {
@@ -162,7 +180,7 @@
                     </div>
                     <div class="col-4 d-flex align-items-center justify-content-start">
                         <!-- Botón para abrir el modal de editar el telefono -->
-                        <button data-bs-toggle="modal" data-bs-target="#modalEditarTel" class="btn btn-cafe">Editar</button>
+                        <button data-bs-toggle="modal" data-bs-target="#modalEditarTel" class="btn btn-cafe">Cambiar</button>
                         <!-- Modal para editar el telefono -->
                         <div class="modal fade" id="modalEditarTel" tabindex="-1" aria-labelledby="modalEditarTelLabel" aria-hidden="true">
                             <div class="modal-dialog">
@@ -180,7 +198,7 @@
                                             </div>
                                             <div class="text-end">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                <button type="submit" class="btn btn-primary" name="actTelefono">Guardar</button>
+                                                <button type="submit" class="btn btn-cafe" name="actTelefono">Actualizar</button>
                                             </div>
                                         </form>
                                     </div>
@@ -196,7 +214,7 @@
                     </div>
                     <div class="col-4 d-flex justify-content-start align-items-center">
                         <!-- Botón para abrir el modal de editar el password -->
-                        <button data-bs-toggle="modal" data-bs-target="#modalEditarPass" class="btn btn-cafe">Editar</button>
+                        <button data-bs-toggle="modal" data-bs-target="#modalEditarPass" class="btn btn-cafe">Cambiar</button>
                         <!-- Modal para editar el password -->
                         <div class="modal fade" id="modalEditarPass" tabindex="-1" aria-labelledby="editarPass" aria-hidden="true">
                             <div class="modal-dialog">
@@ -218,7 +236,7 @@
                                             </div>
                                             <div class="text-end">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                <button type="submit" class="btn btn-primary" name="actPassword">Guardar</button>
+                                                <button type="submit" class="btn btn-cafe" name="actPassword">Actualizar</button>
                                             </div>
                                         </form>
                                     </div>

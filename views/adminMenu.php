@@ -13,13 +13,13 @@ if (isset($_SESSION["usuario"])) {
         header('Location: ../index.php');
     }
 }
-
+$categoria_p = "";
 if (isset($_POST['btnestatus'])) {
     extract($_POST);
     $consulta = "UPDATE productos_menu SET estatus = $estatus WHERE id_pm = $id_pm";
     $db->execute($consulta);
+    $categoria_p = $categoria;
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -44,9 +44,9 @@ if (isset($_POST['btnestatus'])) {
                 <div class="accordion accordion-flush" id="accordionMobile">
                     <div class="accordion-item m-0 p-0 row">
                         <h2 class="accordion-header">
-                            <button class="row accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-inicio" aria-expanded="false"
-                                aria-controls="flush-inicio">
+                            <button class="row accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light"
+                                type="button" data-bs-toggle="collapse" data-bs-target="#flush-inicio"
+                                aria-expanded="false" aria-controls="flush-inicio">
                                 <div class="col-6">
                                     <a href="adminInicio.php" class="text-light fw-bold text-decoration-none">
                                         <i class="fa-solid fa-house-laptop me-1"></i>
@@ -207,7 +207,7 @@ if (isset($_POST['btnestatus'])) {
                 <h4 class="text-center text-light m-3 fs-2 fw-bold">Administrar</h4>
                 <div class="row">
                     <div class="col-12 text-center">
-                        <i class="fa-solid fa-user fa-10x text-light"></i>
+                    <img src="../img/Sinfonía-Café-y-Cultura blanco.webp" alt="" class="img-fluid" style="width: 300px;">
                     </div>
                 </div>
                 <div class="accordion accordion-flush" id="accordionPc">
@@ -438,7 +438,8 @@ if (isset($_POST['btnestatus'])) {
                             <form method="post">
                                 <div class="row">
                                     <div class="col-8 col-lg-4">
-                                        <select name="categoria" id="categoria" class="form-select">
+                                        <select name="categoria" id="categoria" class="form-select"
+                                            vallue="<?php echo isset($_POST['categoria']) ? $_POST['categoria'] : ''; ?>">
                                             <option selected disabled value="">Seleccionar Categoria</option>
                                             <!-- Aqui va el select de categorías -->
                                             <?php
@@ -468,9 +469,10 @@ if (isset($_POST['btnestatus'])) {
                         </button>
                     </div>
                     <?php
+                    $v_id_categoria = null;
                     if (isset($_POST["categoria"])) {
                         extract($_POST);
-
+                        $categoria_p = $categoria;
                         $query = "SELECT 
                                         pm.id_pm, 
                                         pm.img_url, 
@@ -666,6 +668,7 @@ if (isset($_POST['btnestatus'])) {
                                 }
                                 echo "
                                 <input type='hidden' name='id_pm' value='$producto->id_pm' required>
+                                <input type='hidden' name='categoria' value='$categoria_p' required>
                                                 </form>
                                             </td>
                                         </tr>";

@@ -278,7 +278,7 @@ if ($_POST) {
                 <h4 class="text-center text-light m-3 fs-2 fw-bold">Administrar</h4>
                 <div class="row">
                     <div class="col-12 text-center">
-                        <i class="fa-solid fa-user fa-10x text-light"></i>
+                    <img src="../img/Sinfonía-Café-y-Cultura blanco.webp" alt="" class="img-fluid" style="width: 300px;">
                     </div>
                 </div>
                 <div class="accordion accordion-flush" id="accordionPc">
@@ -475,12 +475,12 @@ if ($_POST) {
                                     <div class="mb-3 row">
                                         <div class="col-6">
                                             <label for="fechainicio" class="form-label">Fecha Inicio</label>
-                                            <input type="date" class="form-control" id="fechainicio" name="fechainicio"
+                                            <input type="date" class="form-control" id="fechainicio" name="fechainicio" min="<?= date('Y-m-d') ?>"
                                                 required>
                                         </div>
                                         <div class="col-6">
                                             <label for="fechafin" class="form-label">Fecha Expiracion</label>
-                                            <input type="date" class="form-control" id="fechafin" name="fechafin"
+                                            <input type="date" class="form-control" id="fechafin" name="fechafin" min="<?= date('Y-m-d') ?>"
                                                 required>
                                         </div>
                                     </div>
