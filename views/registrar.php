@@ -23,15 +23,15 @@ if (isset($_POST['registrar'])) {
         // Validar si el teléfono ya existe
         if (!empty($telefonoExists) && $telefono === $telefonoExists[0]->telefono) {
             showAlert("Este número de teléfono está en uso!", "error");
-        } 
+        }
         // Validar si el correo electrónico ya existe
         else if (!empty($emailExists) && $email === $emailExists[0]->correo) {
             showAlert("Este correo ya está registrado!", "error");
-        } 
+        }
         // Validar si las contraseñas coinciden
         else if ($password !== $password2) {
             showAlert("Las contraseñas no coinciden", "error");
-        } 
+        }
         // Proceder con el registro si todas las validaciones pasan
         else {
             $query = "call SP_Registrar_usuariosClientes('$nombres','$aPaterno','$aMaterno','$usuario','$email','$hashedPassword','$telefono')";
@@ -60,8 +60,11 @@ $db->desconectarDB();
 </head>
 
 <body style="background: var(--color5)">
-     <!-- Botón de WhatsApp -->
-     <button id="whatsappButton" class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3" type="button" onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
+    <!-- Botón de WhatsApp -->
+    <button id="whatsappButton"
+        class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3"
+        type="button"
+        onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
         <i class="fa-brands fa-whatsapp fa-2x"></i>
     </button>
     <!-- NavBar -->
@@ -70,7 +73,8 @@ $db->desconectarDB();
             <a class="navbar-brand" href="../index.php">
                 <img src="../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
             </a>
-            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura
                     </h5>
@@ -101,12 +105,14 @@ $db->desconectarDB();
             </div>
             <?php
             if (isset($_SESSION["usuario"])) {
-            ?>
+                ?>
                 <!-- Navbar con dropdown -->
-                <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
+                    style="left: auto; right: 30px; top: 60px">
                     <a class="dropdown-item" href="perfil.php">Mi perfil</a>
                     <a class="dropdown-item" href="bolsas/Carrito.php">Mi carrito</a>
                     <?php if ($rol[0]->rol === 'administrador') { ?>
@@ -115,14 +121,15 @@ $db->desconectarDB();
                     <?php } ?>
                     <a class="dropdown-item" href="../scripts/login/cerrarsesion.php">Cerrar sesión</a>
                 </div>
-            <?php
+                <?php
             } else {
-            ?>
+                ?>
                 <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
-            <?php
+                <?php
             }
             ?>
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
@@ -131,26 +138,28 @@ $db->desconectarDB();
     <!-- NavBar End -->
 
     <!-- Registrar -->
-    <div class="container bg-light rounded-3 lg lg-0 lg-0">
+    <div class="container bg-light rounded-3 lg lg-0 my-5">
         <div class="row">
-
             <!-- Formulario -->
             <div class="col-lg-6 col-md-6 col-md-6 p-5 d-flex justify-content-center">
                 <form action="#" method="post" class="p-0 p-lg-5">
-                    <legend class="fw-bold fs-1">Crear Cuenta</legend>
+                    <legend class="fw-bold fs-1 text-center">Crear Cuenta</legend>
                     <div class="row p-2">
                         <div class="col-12 mb-2">
                             <label for="nombres" class="form-label fs-5">Nombres</label>
-                            <input type="text" class="form-control form-control-bb" id="nombres" name="nombres" required maxlength="50">
+                            <input type="text" class="form-control form-control-bb" id="nombres" name="nombres" required
+                                maxlength="50">
                         </div>
                         <div class="row p-0 m-0">
                             <div class="col-12 mb-2">
                                 <label for="aPaterno" class="form-label fs-5">Apellido Paterno</label>
-                                <input type="text" class="form-control form-control-bb" id="aPaterno" name="aPaterno" required maxlength="50">
+                                <input type="text" class="form-control form-control-bb" id="aPaterno" name="aPaterno"
+                                    required maxlength="50">
                             </div>
                             <div class="col-12 mb-2">
                                 <label for="aMaterno" class="form-label fs-5">Apellido Materno</label>
-                                <input type="text" class="form-control form-control-bb" id="aMaterno" name="aMaterno" required maxlength="50">
+                                <input type="text" class="form-control form-control-bb" id="aMaterno" name="aMaterno"
+                                    required maxlength="50">
                             </div>
                         </div>
                         <div class="col-12 mb-2">
@@ -158,37 +167,39 @@ $db->desconectarDB();
                             <input type="email" class="form-control form-control-bb" id="email" name="email" required>
                         </div>
                         <div class="col-12 mb-3">
-                            <label for="email" class="form-label fs-5">Telefono</label>
-                            <input type="te" class="form-control form-control-bb" id="telefono" name="telefono" pattern="[0-9]{10}" required maxlength="10">
+                            <label for="email" class="form-label fs-5">Teléfono</label>
+                            <input type="tel" class="form-control form-control-bb" id="telefono" name="telefono"
+                                pattern="[0-9]{10}" required maxlength="10">
                         </div>
-                        <hr>
+                        <hr class="my-4">
                         <div class="col-12 mb-2">
                             <label for="nombres" class="form-label fs-5">Usuario</label>
-                            <input type="text" class="form-control form-control-bb" id="usuario" name="usuario" required maxlength="25">
+                            <input type="text" class="form-control form-control-bb" id="usuario" name="usuario" required
+                                maxlength="25">
                         </div>
-
                         <div class="col-12 mb-2">
                             <label for="password" class="form-label fs-5">Crear Contraseña</label>
-                            <input type="password" class="form-control form-control-bb" id="password" name="password" required maxlength="25">
+                            <input type="password" class="form-control form-control-bb" id="password" name="password"
+                                required maxlength="25">
                         </div>
                         <div class="col-12 mb-3">
                             <label for="password2" class="form-label fs-5">Repetir Contraseña</label>
-                            <input type="password" class="form-control form-control-bb" id="password2" name="password2" required maxlength="25">
+                            <input type="password" class="form-control form-control-bb" id="password2" name="password2"
+                                required maxlength="25">
                         </div>
-                        <div class=" col-12 mb-3 ">
+                        <div class=" col-12 mb-3 my-3">
                             <a href=" ./login.php">
-                            <p for="password2" class="blog-card-link ">¿Ya tienes cuenta? Click aqui</p>
+                                <p for="password2" class="blog-card-link text-center">Ya tienes cuenta? Haz clic aquí
+                                </p>
                             </a>
-
                         </div>
                         <div class="col-12 mb-2 text-end d-flex justify-content-cente text-center">
-                            <button type="submit"
-                                class="btn btn-cafe w-100 text-light fw-bold fs-5" name="registrar">Registrarse</button>
+                            <button type="submit" class="btn btn-cafe w-100 text-light fw-bold fs-5"
+                                name="registrar">Registrarse</button>
                         </div>
                     </div>
                 </form>
             </div>
-            <!-- Imagen -->
             <div class="col-lg-6 col-6  p-0 m-0 d-none d-md-block">
                 <img src="../img/cafes/cafe16.webp" class="img-fluid h-100 rounded coffee-image" alt="">
             </div>
@@ -197,7 +208,34 @@ $db->desconectarDB();
     <div class="alert floating-alert" id="floatingAlert">
         <span id="alertMessage">Mensaje de la alerta.</span>
     </div>
-    
+    <footer class="mt-auto">
+        <div class="container-fluid p-5" style="background: var(--negroclaro);">
+            <h2 class="text-center text-light mb-5">SinfoníaCafé&Cultura</h2>
+            <hr class="text-light">
+            <div class="container-fluid d-flex justify-content-center align-items-center flex-column p-4">
+                <div class="row m-3 text-center">
+                    <div class="col-4">
+                        <a href="https://www.facebook.com/SinfoniaCoffee">
+                            <i class="fa-brands fa-facebook text-light fa-2x text-center"></i>
+                        </a>
+                    </div>
+                    <div class="col-4">
+                        <a href="https://x.com/SinfoniaCoffee">
+                            <i class="fa-brands fa-twitter text-light fa-2x text-center"></i>
+                        </a>
+                    </div>
+                    <div class="col-4">
+                        <a href="https://www.instagram.com/sinfoniacoffee/">
+                            <i class="fa-brands fa-instagram text-light fa-2x text-center"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="row m-3">
+                    <p class="text-center fw-bold text-light">Copyright © 2024 SinfoníaCafé&Cultura</p>
+                </div>
+            </div>
+        </div>
+    </footer>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/45ef8dbe96.js" crossorigin="anonymous"></script>
 
