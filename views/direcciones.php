@@ -270,8 +270,8 @@ if (isset($_SESSION["usuario"])) {
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="telefono" class="form-label">Teléfono</label>
-                                                    <input type="text" class="form-control" id="telefono"
-                                                        value="<?php echo $domicilio->telefono; ?>" name="telefono">
+                                                    <input type="tel" class="form-control" id="telefono"
+                                                        value="<?php echo $domicilio->telefono; ?>" name="telefono" pattern="[0-9]{10}" required maxlength="10">
                                                 </div>
                                                 <div class="text-end">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -337,31 +337,31 @@ if (isset($_SESSION["usuario"])) {
                                 <form method="post" enctype="multipart/form-data">
                                     <div class="mb-3">
                                         <label for="estado" class="form-label">Estado</label>
-                                        <input type="text" class="form-control" id="estado" name="estado" required>
+                                        <input type="text" class="form-control" id="estado" name="estado" maxlength="50" pattern="[A-Za-z\s]+" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="ciudad" class="form-label">Ciudad</label>
-                                        <input type="text" class="form-control" id="ciudad" name="ciudad" required>
+                                        <input type="text" class="form-control" id="ciudad" name="ciudad" pattern="[A-Za-z\s]+" maxlength="100" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="calle" class="form-label">Calle</label>
-                                        <input type="text" class="form-control" id="calle" name="calle" required>
+                                        <input type="text" class="form-control" id="calle" name="calle" maxlength="100" pattern="[A-Za-z\s]+" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="colonia" class="form-label">Colonia</label>
-                                        <input type="text" class="form-control" id="colonia" name="colonia" required>
+                                        <input type="text" class="form-control" id="colonia" name="colonia" maxlength="100" pattern="[A-Za-z\s]+" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="cp" class="form-label">Código Postal</label>
-                                        <input type="text" class="form-control" id="cp" name="codigo_postal" required>
+                                        <input type="text" class="form-control" id="cp" name="codigo_postal" pattern="\d{5}" maxlength="5" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="referencia" class="form-label">Referencia</label>
-                                        <input type="text" class="form-control" id="referencia" name="referencia" required>
+                                        <input type="text" class="form-control" id="referencia" name="referencia" maxlength="100" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="telefono" class="form-label">Teléfono</label>
-                                        <input type="text" class="form-control" id="telefono" name="telefono" required>
+                                        <input type="text" class="form-control" id="telefono" name="telefono" pattern="[0-9]{10}" required maxlength="10" required>
                                     </div>
                                     <div class="text-end">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>

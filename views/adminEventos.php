@@ -481,12 +481,12 @@ if (isset($_POST['btnactualizar'])) {
                                     <div class="row">
                                         <div class="col-6 mb-3">
                                             <label for="fechaEvento" class="form-label">Fecha del Evento</label>
-                                            <input type="date" class="form-control" id="fechaEvento" name="fechaEvento"
+                                            <input type="date" class="form-control" id="fechaEvento" name="fechaEvento" min="<?= date('Y-m-d') ?>"
                                                 required>
                                         </div>
                                         <div class="col-6 mb-3">
                                             <label for="fechaPub" class="form-label">Fecha de publicación</label>
-                                            <input type="date" class="form-control" id="fechaPub" name="fechaPub"
+                                            <input type="date" class="form-control" id="fechaPub" name="fechaPub" min="<?= date('Y-m-d') ?>"
                                                 required>
                                         </div>
                                     </div>

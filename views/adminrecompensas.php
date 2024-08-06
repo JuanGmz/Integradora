@@ -475,12 +475,12 @@ if ($_POST) {
                                     <div class="mb-3 row">
                                         <div class="col-6">
                                             <label for="fechainicio" class="form-label">Fecha Inicio</label>
-                                            <input type="date" class="form-control" id="fechainicio" name="fechainicio"
+                                            <input type="date" class="form-control" id="fechainicio" name="fechainicio" min="<?= date('Y-m-d') ?>"
                                                 required>
                                         </div>
                                         <div class="col-6">
                                             <label for="fechafin" class="form-label">Fecha Expiracion</label>
-                                            <input type="date" class="form-control" id="fechafin" name="fechafin"
+                                            <input type="date" class="form-control" id="fechafin" name="fechafin" min="<?= date('Y-m-d') ?>"
                                                 required>
                                         </div>
                                     </div>
