@@ -13,12 +13,6 @@ if ($rol[0]->rol !== 'administrador') {
     header('Location: ../index.php');
 }
 
-// Datos de ejemplo (estos valores deberían provenir de tu consulta y lógica de paginación)
-$total_records = 50; // Total de registros
-$records_per_page = 10; // Registros por página
-$total_pages = ceil($total_records / $records_per_page); // Número total de páginas
-$current_page = isset($_GET['page']) ? (int) $_GET['page'] : 1; // Página actual
-
 // Asegúrate de que la página actual esté dentro del rango válido
 $current_page = max(1, min($current_page, $total_pages));
 ?>
