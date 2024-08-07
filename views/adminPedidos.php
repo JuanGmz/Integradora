@@ -365,8 +365,8 @@ if (isset($_POST['btnactualizar'])) {
                             <form method="post">
                                 <div class="row">
                                 <div class="col-8 col-lg-4">
-    <input type="text" class="form-control" name="busqueda" pattern="[A-Za-z0-9\s]+" placeholder="Ingresa Folio, Usuario o Teléfono" required>
-</div>
+                                 <input type="text" class="form-control" name="busqueda" pattern="[A-Za-z0-9\s]+" placeholder="Ingresa Folio, Usuario o Teléfono" required>
+                                            </div>
 
                                     <div class="col-4 col-lg-2">
                                         <input type="submit" class="btn btn-dark w-100" value="Buscar" name="btnBuscar">
