@@ -458,11 +458,10 @@ if (isset($_POST['btnactualizar'])) {
                                     </div>
                                     <div class="col-12 mb-3">
                                         <label for="descripcion" class="form-label">Descripción</label>
-                                        <input type="text" class="form-control" id="descripcion" name="descripcion"
-                                            required>
+                                        <textarea type="text" class="form-control" id="descripcion" name="descripcion" required maxlength="255"></textarea>
                                     </div>
                                     <div class="col-12 mb-3">
-                                        <label for="categoria" class="form-label">CATEGORIA</label><br>
+                                        <label for="categoria" class="form-label">Categoria</label><br>
                                         <select name="categoria" id="categoria" class="form-select" required>
                                             <?php
                                             $consulta = "SELECT id_categoria, nombre FROM categorias WHERE tipo = 'evento'";
@@ -483,12 +482,12 @@ if (isset($_POST['btnactualizar'])) {
                                     <div class="row">
                                         <div class="col-6 mb-3">
                                             <label for="fechaEvento" class="form-label">Fecha del Evento</label>
-                                            <input type="date" class="form-control" id="fechaEvento" name="fechaEvento" min="<?= date('Y-m-d') ?>"
+                                            <input type="date" class="form-control" id="fechaEvento" name="fechaEvento"
                                                 required>
                                         </div>
                                         <div class="col-6 mb-3">
                                             <label for="fechaPub" class="form-label">Fecha de publicación</label>
-                                            <input type="date" class="form-control" id="fechaPub" name="fechaPub" min="<?= date('Y-m-d') ?>"
+                                            <input type="date" class="form-control" id="fechaPub" name="fechaPub"
                                                 required>
                                         </div>
                                     </div>
@@ -752,8 +751,7 @@ if (isset($_POST['btnactualizar'])) {
                                         </div>
                                         <div class='mb-3'>
                                             <label for='descripcion' class='form-label'>Descripcion</label>
-                                            <textarea name='descripcion' id='descripcion' name='descripcion'
-                                                class='form-control'>$evento->descripcion</textarea>
+                                            <textarea type='text' class='form-control' id='descripcion' name='descripcion' required maxlength='255'>$evento->descripcion</textarea>
                                         </div>
                                         <div class='row'>
                                             <div class='col-6 mb-3'>
