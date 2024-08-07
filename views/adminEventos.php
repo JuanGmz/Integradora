@@ -606,7 +606,7 @@ if (isset($_POST['btnactualizar'])) {
                         FROM eventos e
                         JOIN ubicacion_lugares l ON e.id_lugar = l.id_lugar
                         JOIN categorias c ON e.id_categoria = c.id_categoria
-                        WHERE e.id_categoria = '$categoria'";
+                        WHERE e.id_categoria = '$categoria' order by e.fecha_evento desc limit 10";
 
                         $eventos = $db->select($query);
 
@@ -618,14 +618,26 @@ if (isset($_POST['btnactualizar'])) {
                                         <thead>
                                             <tr>
                                                 <th scope='col'>Nombre</th>
+                                                <th scope='col' class='d-none d-lg-table-cell'>Fecha</th>
+                                                <th scope='col' class='d-none d-lg-table-cell'>Horario</th>
+                                                <th scope='col' class='d-none d-lg-table-cell'>Tipo</th>
+                                                <th scope='col' class='d-none d-lg-table-cell'>Capacidad</th>
                                                 <th scope='col'>Acciones</th>
                                             </tr>
                                     </thead>
                                     <tbody class='table-group-divider table-light'>";
                             foreach ($eventos as $evento) {
+                                $horaInicio = formatHora($evento->hora_inicio);
+                                $horaFin = formatHora($evento->hora_fin);
+                                $fechaEvento = formatFecha($evento->fecha_evento);
+                                $precio_boleto = formatPrecio($evento->precio_boleto);
                                 echo "
                                 <tr>
                                         <td>$evento->nombre</td>
+                                        <td class='d-none d-lg-table-cell'>$fechaEvento</td>
+                                        <td class='d-none d-lg-table-cell'>$horaInicio - $horaFin</td>
+                                        <td class='d-none d-lg-table-cell'>$evento->tipo</td>
+                                        <td class='d-none d-lg-table-cell'>$evento->capacidad</td>
                                             <td class='d-flex flex-row align-items-center justify-content-center gap-1'>
                                                 <!-- Imagen -->
                                                 <!-- Botón que activa el modal de ver la imagen  -->
@@ -675,11 +687,9 @@ if (isset($_POST['btnactualizar'])) {
                                                             </div>
                                                             <!-- Aquí va el contenido del modal -->
                                                             ";
-                                $horaInicio = formatHora($evento->hora_inicio);
-                                $horaFin = formatHora($evento->hora_fin);
+                                
 
-                                $fechaEvento = formatFecha($evento->fecha_evento);
-                                $precio_boleto = formatPrecio($evento->precio_boleto);
+                                
                                 if ($evento->tipo == "De Pago") {
 
                                     $labelText_precio = " <h4 class='text-start fw-bold mb-3'>Costo boleto: <span class='fw-normal fs-5'>" . htmlspecialchars($precio_boleto) . "$</span></h5>";

@@ -478,9 +478,16 @@ if ($_POST) {
                                             <input type="date" class="form-control" id="fechainicio" name="fechainicio" min="<?= date('Y-m-d') ?>"
                                                 required>
                                         </div>
+                                        <?php 
+                                        // Calcula la fecha de hoy
+                                        $today = date('Y-m-d');
+                                        
+                                        // Calcula la fecha del siguiente día
+                                        $next_day = date('Y-m-d', strtotime('+1 day', strtotime($today)));
+                                        ?>
                                         <div class="col-6">
                                             <label for="fechafin" class="form-label">Fecha Expiracion</label>
-                                            <input type="date" class="form-control" id="fechafin" name="fechafin" min="<?= date('Y-m-d') ?>"
+                                            <input type="date" class="form-control" id="fechafin" name="fechafin" min="<?= $next_day?>"
                                                 required>
                                         </div>
                                     </div>

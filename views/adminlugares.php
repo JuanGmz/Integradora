@@ -37,14 +37,14 @@ if ($rol[0]->rol !== 'administrador') {
                     <div class="accordion-item m-0 p-0 row">
                         <a href="adminInicio.php">
                             <h2 class="accordion-header">
-                            <button class="row accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-inicio" aria-expanded="false"
-                                aria-controls="flush-inicio">
-                                <div class="col-6">
-                                    <i class="fa-solid fa-house-laptop me-1"></i>
-                                    Inicio
-                                </div>
-                            </button>
+                                <button class="row accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light"
+                                    type="button" data-bs-toggle="collapse" data-bs-target="#flush-inicio"
+                                    aria-expanded="false" aria-controls="flush-inicio">
+                                    <div class="col-6">
+                                        <i class="fa-solid fa-house-laptop me-1"></i>
+                                        Inicio
+                                    </div>
+                                </button>
                             </h2>
                         </a>
                     </div>
@@ -199,7 +199,8 @@ if ($rol[0]->rol !== 'administrador') {
                 <h4 class="text-center text-light m-3 fs-2 fw-bold">Administrar</h4>
                 <div class="row">
                     <div class="col-12 text-center">
-                    <img src="../img/Sinfonía-Café-y-Cultura blanco.webp" alt="" class="img-fluid" style="width: 300px;">
+                        <img src="../img/Sinfonía-Café-y-Cultura blanco.webp" alt="" class="img-fluid"
+                            style="width: 300px;">
                     </div>
                 </div>
                 <div class="accordion accordion-flush" id="accordionPc">
@@ -443,6 +444,9 @@ if ($rol[0]->rol !== 'administrador') {
                                         <thead>
                                             <tr>
                                             <th scope='col'>Nombre</th>
+                                            <th scope='col' class='d-none d-lg-table-cell'>Calle</th>
+                                            <th scope='col' class='d-none d-lg-table-cell'>Ciudad</th>
+                                            <th scope='col' class='d-none d-lg-table-cell'>Codigo Postal</th>
                                             <th scope='col'>Acciones</th>
                                         </tr>
                                     </thead>
@@ -451,6 +455,10 @@ if ($rol[0]->rol !== 'administrador') {
                         echo "
                                         <tr>
                                         <td>$producto->nombre</td>
+                                        <td class='d-none d-lg-table-cell'>$producto->calle</td>
+                                        <td class='d-none d-lg-table-cell'>$producto->ciudad</td>
+                                        <td class='d-none d-lg-table-cell'>$producto->codigo_postal</td>
+
                                         <td>
                                                 <!-- Botón que activa el modal de ver detalles del producto -->
                                                 <button type='button' class='btn btn-dark' data-bs-toggle='modal' data-bs-target='#detalleProducto_$producto->id_lugar'>
@@ -469,6 +477,8 @@ if ($rol[0]->rol !== 'administrador') {
                                                                 <h4 class='text-start fw-bold mb-3'>Ciudad: <span class='fw-normal fs-5'>$producto->ciudad</span></h4>
                                                                 <h4 class='text-start fw-bold mb-3'>Estado: <span class='fw-normal fs-5'>{$producto->estado}</span></h5>
                                                                 <h4 class='text-start fw-bold mb-3'>Codigo Postal: <span class='fw-normal fs-5'>{$producto->codigo_postal}</span></h5>
+                                                                <h4 class='text-start fw-bold mb-3'>Latitud: <span class='fw-normal fs-5'>{$producto->lat}</span></h5>
+                                                                <h4 class='text-start fw-bold mb-3'>Longitud: <span class='fw-normal fs-5'>{$producto->lng}</span></h5>
                                                                 <h4 class='text-start fw-bold mb-3'>calle: <span class='fw-normal fs-5'>{$producto->calle}</span></h5>
                                                                 <h4 class='text-start fw-bold mb-3'>Colonia: <span class='fw-normal fs-5'>{$producto->colonia}</span></h5>
                                                                 <h4 class='text-start fw-bold mb-3'>Descripcion: <span class='fw-normal fs-5'>{$producto->descripcion}</span></h5>
