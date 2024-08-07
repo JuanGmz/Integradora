@@ -326,14 +326,14 @@
                                                                         name="monto" required placeholder="Monto del pago"
                                                                         value="<?= $comprobante[0]->monto ?>">
                                                                 </div>
-                                                                <div class="text-end m-3 me-0">
+                                                                <div class="text-end mt-3">
                                                                     <button class="btn btn-secondary"
                                                                         data-bs-target="#editarComprobante"
                                                                         data-bs-dismiss="modal">Cerrar</button>
                                                                     <button type="button" class="btn btn-cafe"
                                                                         data-bs-target="#exampleModalToggle2"
                                                                         data-bs-toggle="modal">Actualizar Imagen</button>
-                                                                    <button type="submit" class="btn btn-primary"
+                                                                    <button type="submit" class="btn btn-cafe"
                                                                         name="editarInfo">Guardar Cambios</button>
                                                                 </div>
                                                             </form>
@@ -372,7 +372,7 @@
                                                                 <div class='mb-3 text-end'>
                                                                     <button type='button' class='btn btn-secondary'
                                                                         data-bs-dismiss='modal'>Cancelar</button>
-                                                                    <button type='submit' class='btn btn-primary'>Guardar
+                                                                    <button type='submit' class='btn btn-cafe'>Guardar
                                                                         Cambios</button>
                                                                 </div>
                                                             </form>

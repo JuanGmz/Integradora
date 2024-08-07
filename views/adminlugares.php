@@ -35,18 +35,18 @@ if ($rol[0]->rol !== 'administrador') {
                 </div>
                 <div class="accordion accordion-flush" id="accordionMobile">
                     <div class="accordion-item m-0 p-0 row">
-                        <h2 class="accordion-header">
+                        <a href="adminInicio.php">
+                            <h2 class="accordion-header">
                             <button class="row accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-inicio" aria-expanded="false"
                                 aria-controls="flush-inicio">
                                 <div class="col-6">
-                                    <a href="adminInicio.php" class="text-light fw-bold text-decoration-none">
-                                        <i class="fa-solid fa-house-laptop me-1"></i>
-                                        Inicio
-                                    </a>
+                                    <i class="fa-solid fa-house-laptop me-1"></i>
+                                    Inicio
                                 </div>
                             </button>
-                        </h2>
+                            </h2>
+                        </a>
                     </div>
                     <div class="accordion-item row m-0 p-0">
                         <h2 class="accordion-header row">
@@ -121,7 +121,7 @@ if ($rol[0]->rol !== 'administrador') {
                                     Administrar Pedidos
                                 </a><br><br>
                                 <a href="adminProductosEcommerce.php"
-                                    class="fw-bold fs-4 ms-5 text-light text-decoration-none">
+                                    class="fw-bold fs-5 ms-5 text-light text-decoration-none">
                                     Administrar Productos
                                 </a>
                             </div>
@@ -354,7 +354,7 @@ if ($rol[0]->rol !== 'administrador') {
                             <!-- Modal de agregar -->
                             <div class="modal fade" id="agregarProducto" tabindex="-1"
                                 aria-labelledby="agregarProductoLabel" aria-hidden="true">
-                                <div class="modal-dialog">
+                                <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h1 class="modal-title fs-5" id="agregarProductoLabel">Agregar Ubicacion
@@ -457,7 +457,7 @@ if ($rol[0]->rol !== 'administrador') {
                                                     <i class='fa-solid fa-bars'></i>
                                                 </button>
                                                 <div class='modal fade' id='detalleProducto_$producto->id_lugar' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
-                                                    <div class='modal-dialog'>
+                                                    <div class='modal-dialog modal-dialog-centered'>
                                                         <div class='modal-content'>
                                                             <div class='modal-header'>
                                                                 <h1 class='modal-title fs-5' id='exampleModalLabel'>Detalles del Producto</h1>
@@ -482,7 +482,7 @@ if ($rol[0]->rol !== 'administrador') {
                                                     <i class='fa-solid fa-pen-to-square'></i>
                                                 </button>
                                                 <div class='modal fade' id='editarProducto_$producto->id_lugar' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
-                                                    <div class='modal-dialog'>
+                                                    <div class='modal-dialog modal-dialog-centered'>
                                                         <div class='modal-content'>
                                                             <div class='modal-header'>
                                                                 <h1 class='modal-title fs-5' id='exampleModalLabel'>Editar Lugar</h1>
