@@ -78,16 +78,8 @@ if (isset($_POST['btnactualizar'])) {
                 </div>
                 <div class="accordion accordion-flush" id="accordionMobile">
                     <div class="accordion-item m-0 p-0 row">
-<<<<<<< HEAD
                         <h2 class="accordion-header">
                             <button class="row accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-inicio" aria-expanded="false" aria-controls="flush-inicio">
-=======
-                        <a href="adminInicio.php">
-                            <h2 class="accordion-header">
-                            <button class="row accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-inicio" aria-expanded="false"
-                                aria-controls="flush-inicio">
->>>>>>> 0d843f9cda94f1dad9745fd867728b19debe453f
                                 <div class="col-6">
                                     <i class="fa-solid fa-house-laptop me-1"></i>
                                     Inicio
@@ -159,12 +151,7 @@ if (isset($_POST['btnactualizar'])) {
                                 <a href="adminPedidos.php" class="fw-bold fs-5 ms-5 text-light text-decoration-none" aria-current="true">
                                     Administrar Pedidos
                                 </a><br><br>
-<<<<<<< HEAD
                                 <a href="adminProductosEcommerce.php" class="fw-bold fs-4 ms-5 text-light text-decoration-none">
-=======
-                                <a href="adminProductosEcommerce.php"
-                                    class="fw-bold fs-5 ms-5 text-light text-decoration-none">
->>>>>>> 0d843f9cda94f1dad9745fd867728b19debe453f
                                     Administrar Productos
                                 </a>
                             </div>
