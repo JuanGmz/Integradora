@@ -208,7 +208,8 @@ $current_page = max(1, min($current_page, $total_pages));
                 <h4 class="text-center text-light m-3 fs-2 fw-bold">Administrar</h4>
                 <div class="row">
                     <div class="col-12 text-center">
-                    <img src="../img/Sinfonía-Café-y-Cultura blanco.webp" alt="" class="img-fluid" style="width: 300px;">
+                        <img src="../img/Sinfonía-Café-y-Cultura blanco.webp" alt="" class="img-fluid"
+                            style="width: 300px;">
                     </div>
                 </div>
                 <div class="accordion accordion-flush" id="accordionPc">
@@ -362,16 +363,22 @@ $current_page = max(1, min($current_page, $total_pages));
                         </div>
                     </div>
                 </div>
+                <?php
+                $v_evento = isset($_GET['v_evento']) ? $_GET['v_evento'] : '';
+
+                ?>
                 <div class="shadow-lg row p-3 m-0" style="background: var(--color6);">
                     <div class="row m-1">
-                        <div class="col-lg-5 col-12">
+                        <div class="col-lg-10 col-12">
                             <form method="post">
                                 <div class="row">
-                                    <div class="col-8">
-                                        <select name="evento" id="evento" class="form-select">
+                                    <div class="col-4">
+                                        <select id="evento" name="evento" class="form-select" required>
                                             <option selected disabled value="">Seleccionar Evento</option>
                                             <!-- Aqui va el select del filtrado -->
                                             <?php
+
+
                                             $queryFiltrar = "SELECT id_evento, nombre, fecha_evento FROM eventos WHERE tipo = 'De Pago' and  CURDATE() <= fecha_evento";
                                             $eventos = $db->select($queryFiltrar);
 
@@ -386,8 +393,43 @@ $current_page = max(1, min($current_page, $total_pages));
                                             ?>
                                         </select>
                                     </div>
+                                    <?php
+                                    $select_estatus = isset($_POST['estatus']) ? $_POST['estatus'] : 'Pendiente';
+
+                                    if ($select_estatus == 'Pendiente') {
+                                        ?>
+                                        <div class="col-4">
+                                            <select name="estatus" id="" class="form-select">
+                                                <option value="Pendiente" selected>Pendiente</option>
+                                                <option value="Apartada">Apartada</option>
+                                                <option value="Cancelada">Cancelada</option>
+                                            </select>
+                                        </div>
+                                        <?php
+                                    } elseif ($select_estatus == 'Apartada') {
+                                        ?>
+                                        <div class="col-4">
+                                            <select name="estatus" id="" class="form-select">
+                                                <option value="Pendiente">Pendiente</option>
+                                                <option value="Apartada" selected>Apartada</option>
+                                                <option value="Cancelada">Cancelada</option>
+                                            </select>
+                                        </div>
+                                        <?php
+                                    } elseif ($select_estatus == 'Cancelada') {
+                                        ?>
+                                        <div class="col-4">
+                                            <select name="estatus" id="" class="form-select">
+                                                <option value="Pendiente">Pendiente</option>
+                                                <option value="Apartada">Apartada</option>
+                                                <option value="Cancelada" selected>Cancelada</option>
+                                            </select>
+                                        </div>
+                                        <?php
+                                    }
+                                    ?>
                                     <div class="col-4">
-                                        <input type="submit" class="btn btn-dark w-100" value="Buscar">
+                                        <input type="submit" class="btn btn-dark w-100" value="Buscar" name="Buscar">
                                     </div>
                                 </div>
                             </form>
@@ -397,8 +439,12 @@ $current_page = max(1, min($current_page, $total_pages));
                 <div class="row mt-3 p-4 m-0">
                     <!-- Tabla de reservas AQUI -->
                     <?php
-                    if (isset($_POST['evento'])) {
-                        $id_evento = intval($_POST['evento']);
+
+                    if (isset($_POST['Buscar'])) {
+
+
+                        $estatus = $_POST['estatus'];
+                        $id_evento = $_POST['evento'];
 
                         // Datos de paginación
                         $records_per_page = 10; // Número de registros por página
@@ -415,7 +461,8 @@ $current_page = max(1, min($current_page, $total_pages));
                         // Limitar los resultados de la consulta
                         $offset = ($current_page - 1) * $records_per_page;
 
-                        $queryReservas = "SELECT * FROM view_AdminReservas WHERE id_evento = $id_evento order by folio desc LIMIT $offset, $records_per_page";
+
+                        $queryReservas = "SELECT * FROM view_AdminReservas WHERE id_evento = $id_evento and estatus = '$estatus' order by estatus asc,id_comprobante desc, folio desc LIMIT $offset, $records_per_page";
                         $reservas = $db->select($queryReservas);
 
                         if (empty($reservas)) {
@@ -475,30 +522,37 @@ $current_page = max(1, min($current_page, $total_pages));
                                         echo "<img src='../img/comprobantes/$comprobante->imagen_comprobante' class='img-fluid'>";
                                     }
                                 }
+                                $disabled = isset($disabled) ? $disabled : '';
                                 echo "
                                                                 <form method='post' action='../scripts/adminreservas/estatusReserva.php'>
                                                                     <input type='hidden' name='id_reserva' value='$reserva->folio'>
                                                                     <div class='mb-3'>
                                                                         <label for='estatus' class='form-label'>Estatus</label>
-                                                                        <select name='estatus' id='estatus' class='form-select' required>";
+                                                                        <select name='estatus' id='estatus' class='form-select' $disabled required>";
                                 if ($reserva->estatus == 'Pendiente') {
+                                    $disabled = '';
                                     echo "<option value='Pendiente' selected>Pendiente</option>
                                                                                         <option value='Apartada'>Apartada</option>
                                                                                         <option value='Cancelada'>Cancelada</option>";
                                 } else if ($reserva->estatus == 'Apartada') {
+                                    $disabled = 'disabled';
                                     echo "<option value='Pendiente'>Pendiente</option>
                                                                                         <option value='Apartada' selected>Apartada</option>
                                                                                         <option value='Cancelada'>Cancelada</option>";
                                 } else {
+                                    $disabled = 'disabled';
                                     echo "<option value='Pendiente'>Pendiente</option>
                                                                                         <option value='Apartada'>Apartada</option>
                                                                                         <option value='Cancelada' selected>Cancelada</option>";
                                 }
                                 echo "
                                                                         </select>
+                                                                        <i class='fa-solid fa-circle-info me-2'></i>
+                                                                    <p class='mb-0 fs-6'>Si el estatus es Cancelada o Apartada no se podará cambiar.</p>
+                                                                    </div>
                                                                         <div class='text-end mt-4'>
                                                                             <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
-                                                                            <input type='submit' class='btn btn-dark' value='Guardar Cambios'>
+                                                                            <input type='submit' class='btn btn-dark' value='Guardar Cambios' $disabled>
                                                                         </div>
                                                                     </div>
                                                                 </form>
@@ -524,28 +578,6 @@ $current_page = max(1, min($current_page, $total_pages));
                             }
                             echo "</tbody>
                                     </table>";
-                            // Generar la paginación
-                            echo "<nav aria-label='Page navigation example'>
-        <ul class='pagination d-flex justify-content-center'>";
-
-                            echo "<li  class='page-item" . ($current_page <= 1 ? 'disabled' : '') . "'>
-                <a style=' color: var(--color4);' class='page-link' href='?page=" . ($current_page - 1) . "' aria-label='Previous'>
-                    <span aria-hidden='true'>&laquo;</span>
-                </a>
-            </li>";
-                            // Botones de páginas
-                            for ($i = 1; $i <= $total_pages; $i++) {
-                                echo "<li class='page-item " . ($current_page == $i ? 'active' : '') . "'>
-                    <a style=' background-color: var(--color4); border-color: #white;' class='page-link' href='?page=$i'>$i</a>
-                </li>";
-                            }
-                            // Botón de "Siguiente"
-                            echo "<li class='page-item " . ($current_page >= $total_pages ? 'disabled' : '') . "'>
-        <a style=' color: var(--color4);' class='page-link' href='?page=" . ($current_page + 1) . "' aria-label='Next'>
-            <span aria-hidden='true'>&raquo;</span>
-        </a>
-    </li>";
-                            echo "</ul></nav>";
                         }
                     } else {
                         echo "<div>
