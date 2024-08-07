@@ -162,7 +162,7 @@ if ($result) {
                     </nav>
                     <div class='col-12 text-center'>
                             <h1 class='product-title mb-0'>{$bolsacafe[0]->nombre}</h1>
-                            <h2 class='product-subtitle'>CH I A P A S</h2>
+                            <h2 class='product-subtitle'>{$bolsacafe[0]->años_cosecha}</h2>
                     </div>
                     <div class='container mt-5'>
                         <div class='row d-flex justify-content-center'>
