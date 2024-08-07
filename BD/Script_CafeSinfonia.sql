@@ -1875,6 +1875,7 @@ BEGIN
         bc.cuerpo,
         bc.puntaje_catacion,
         bc.img_url,
+        bc.estatus,
         GROUP_CONCAT(CONCAT(dbc.medida, ': $', dbc.precio, ' (Stock: ', dbc.stock, ')') SEPARATOR '; ') AS detalles_medidas
     FROM 
         bolsas_cafe bc
