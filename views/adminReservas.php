@@ -49,12 +49,13 @@ $current_page = max(1, min($current_page, $total_pages));
                                 type="button" data-bs-toggle="collapse" data-bs-target="#flush-inicio"
                                 aria-expanded="false" aria-controls="flush-inicio">
                                 <div class="col-6">
-                                    <i class="fa-solid fa-house-laptop me-1"></i>
-                                    Inicio
+                                    <a href="adminInicio.php" class="text-light fw-bold text-decoration-none">
+                                        <i class="fa-solid fa-house-laptop me-1"></i>
+                                        Inicio
+                                    </a>
                                 </div>
                             </button>
                         </h2>
-                        </a>
                     </div>
                     <div class="accordion-item row m-0 p-0">
                         <h2 class="accordion-header row">
@@ -129,7 +130,7 @@ $current_page = max(1, min($current_page, $total_pages));
                                     Administrar Pedidos
                                 </a><br><br>
                                 <a href="adminProductosEcommerce.php"
-                                    class="fw-bold fs-5 ms-5 text-light text-decoration-none">
+                                    class="fw-bold fs-4 ms-5 text-light text-decoration-none">
                                     Administrar Productos
                                 </a>
                             </div>
@@ -445,7 +446,7 @@ $current_page = max(1, min($current_page, $total_pages));
                         $estatus = $_POST['estatus'];
                         $id_evento = $_POST['evento'];
 
-                        $queryReservas = "SELECT * FROM view_AdminReservas WHERE id_evento = $id_evento and estatus = '$estatus' order by estatus asc,id_comprobante desc, folio desc LIMIT $offset, $records_per_page";
+                        $queryReservas = "SELECT * FROM view_AdminReservas WHERE id_evento = $id_evento and estatus = '$estatus' order by estatus asc,id_comprobante desc, folio desc LIMIT 10";
                         $reservas = $db->select($queryReservas);
 
                         if (empty($reservas)) {
@@ -481,7 +482,7 @@ $current_page = max(1, min($current_page, $total_pages));
                                                     <i class='fa-solid fa-list'></i>
                                                 </button>
                                                 <div class='modal fade' id='detalles$reserva->folio' tabindex='-1' aria-labelledby='detalles$reserva->folio' aria-hidden='true'>
-                                                    <div class='modal-dialog modal-dialog-centered'>
+                                                    <div class='modal-dialog' style='max-width: 30% !important;'>
                                                         <div class='modal-content'>
                                                             <div class='modal-header'>
                                                                 <h5 class='modal-title' id='detalles$reserva->folio'>Detalles de la reserva</h5>
@@ -505,6 +506,7 @@ $current_page = max(1, min($current_page, $total_pages));
                                         echo "<img src='../img/comprobantes/$comprobante->imagen_comprobante' class='img-fluid'>";
                                     }
                                 }
+                                $disabled = isset($disabled) ? $disabled : '';
                                 echo "
                                                                 <form method='post' action='../scripts/adminreservas/estatusReserva.php'>
                                                                     <input type='hidden' name='id_reserva' value='$reserva->folio'>
