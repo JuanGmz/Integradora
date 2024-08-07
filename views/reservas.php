@@ -260,31 +260,7 @@
             <span id="alertMessage">Mensaje de la alerta.</span>
         </div>
     </div>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination d-flex justify-content-center">
-            <li class="page-item<?php if ($page <= 1) {
-                echo ' disabled';
-            } ?>">
-                <a class="page-link custom-page-link" href="?page=<?php echo $page - 1; ?>" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-                <li class="page-item custom-page-item<?php if ($page == $i) {
-                    echo ' active';
-                } ?>">
-                    <a class="page-link custom-page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                </li>
-            <?php endfor; ?>
-            <li class="page-item<?php if ($page >= $total_pages) {
-                echo ' disabled';
-            } ?>">
-                <a class="page-link custom-page-link" href="?page=<?php echo $page + 1; ?>" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
+
     <!-- Footer -->
     <footer class="mt-auto">
         <div class="container-fluid p-5" style="background: var(--negroclaro);">
