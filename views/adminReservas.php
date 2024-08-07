@@ -13,8 +13,6 @@ if ($rol[0]->rol !== 'administrador') {
     header('Location: ../index.php');
 }
 
-// Asegúrate de que la página actual esté dentro del rango válido
-$current_page = max(1, min($current_page, $total_pages));
 ?>
 <!DOCTYPE html>
 <html lang="en">
