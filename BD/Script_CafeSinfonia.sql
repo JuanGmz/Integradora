@@ -1622,53 +1622,93 @@ CREATE INDEX idx_asistencias_id_cliente ON asistencias(id_cliente);
 -- Tabla clientes_recompensas
 CREATE INDEX idx_clientes_recompensas_id_cliente ON clientes_recompensas(id_cliente);
 CREATE INDEX idx_clientes_recompensas_id_recompensa ON clientes_recompensas(id_recompensa);
-DROP PROCEDURE IF EXISTS SP_buscar_pedidos;
-DELIMITER $$
-create PROCEDURE SP_buscar_pedidos(
 
+DELIMITER //
+
+CREATE PROCEDURE SP_buscar_pedidos(
     IN busqueda VARCHAR(50)
 )
 BEGIN
-    SELECT distinct p.id_pedido,
-           CONCAT(pe.nombres, ' ', pe.apellido_paterno, ' ', pe.apellido_materno) AS cliente,
-           CONCAT(dom.calle, ' ', dom.colonia, ' ', dom.ciudad, ' ', dom.estado, ' ', dom.codigo_postal) AS domicilio,
-           dom.calle,
-           dom.colonia,
-           dom.referencia,
-           dom.ciudad,
-           dom.estado,
-           dom.codigo_postal,
-           dom.telefono AS telefono, 
-           p.estatus AS estatus,
-           pe.usuario AS usuario,
-           mp.metodo_pago AS metodo_pago,
-           bc.nombre AS bolsa,
-           bc.proceso,
-           dbc.medida AS medida,
-           dbc.precio,
-           dp.cantidad AS cantidad,
-           p.fecha_hora_pedido,
-           bc.sabor,
-           bc.variedad,
-           p.monto_total,
-           p.envio,
-           p.costo_envio,
-           p.guia_de_envio,
-           p.documento_url,
-           dp.monto as subtotal
-    FROM pedidos AS p
-    JOIN clientes ON p.id_cliente = clientes.id_cliente
-    JOIN personas AS pe ON clientes.id_persona = pe.id_persona
-    JOIN domicilios AS dom ON p.id_domicilio = dom.id_domicilio
-    JOIN metodos_pago AS mp ON p.id_mp = mp.id_mp
-    JOIN detalle_pedidos AS dp ON dp.id_pedido = p.id_pedido
-    JOIN detalle_bc AS dbc ON dbc.id_dbc = dp.id_dbc
-    JOIN bolsas_cafe AS bc ON dbc.id_bolsa = bc.id_bolsa
-    WHERE p.id_pedido = busqueda
-    OR pe.usuario = busqueda
-    OR pe.telefono = busqueda;
-END $$
+    DECLARE busqueda_int INT;
+    DECLARE busqueda_str VARCHAR(50);
+
+    -- Intentar convertir la búsqueda a un número
+    SET busqueda_int = CAST(busqueda AS UNSIGNED);
+    SET busqueda_str = busqueda;
+    
+    -- Validar si la búsqueda es un número
+    IF busqueda_str REGEXP '^[0-9]+$' THEN
+        SELECT DISTINCT p.id_pedido,
+               CONCAT(pe.nombres, ' ', pe.apellido_paterno, ' ', pe.apellido_materno) AS cliente,
+               CONCAT(dom.calle, ' ', dom.colonia, ' ', dom.ciudad, ' ', dom.estado, ' ', dom.codigo_postal) AS domicilio,
+               dom.calle,
+               dom.colonia, 
+               dom.ciudad,
+               dom.estado, 
+               dom.codigo_postal,
+               dom.referencia AS referencia,
+               dom.telefono AS telefono, 
+               p.estatus AS estatus,
+               pe.usuario AS usuario,
+               mp.metodo_pago AS metodo_pago,
+               bc.nombre AS bolsa,
+               dbc.medida AS medida,
+               dp.cantidad AS cantidad,
+               p.fecha_hora_pedido,
+               p.monto_total,
+               p.envio,
+               p.costo_envio,
+               p.guia_de_envio,
+               p.documento_url
+        FROM pedidos AS p
+        JOIN clientes ON p.id_cliente = clientes.id_cliente
+        JOIN personas AS pe ON clientes.id_persona = pe.id_persona
+        JOIN domicilios AS dom ON p.id_domicilio = dom.id_domicilio
+        JOIN metodos_pago AS mp ON p.id_mp = mp.id_mp
+        JOIN detalle_pedidos AS dp ON dp.id_pedido = p.id_pedido
+        JOIN detalle_bc AS dbc ON dbc.id_dbc = dp.id_dbc
+        JOIN bolsas_cafe AS bc ON dbc.id_bolsa = bc.id_bolsa
+        WHERE p.id_pedido = busqueda_int;
+    ELSE
+        SELECT DISTINCT p.id_pedido,
+               CONCAT(pe.nombres, ' ', pe.apellido_paterno, ' ', pe.apellido_materno) AS cliente,
+               CONCAT(dom.calle, ' ', dom.colonia, ' ', dom.ciudad, ' ', dom.estado, ' ', dom.codigo_postal) AS domicilio,
+               dom.telefono AS telefono, 
+               dom.calle,
+               dom.colonia, 
+               dom.ciudad,
+               dom.estado, 
+               dom.codigo_postal,
+               dom.referencia AS referencia,
+               p.estatus AS estatus,
+               pe.usuario AS usuario,
+               mp.metodo_pago AS metodo_pago,
+               bc.nombre AS bolsa,
+               dbc.medida AS medida,
+               dp.cantidad AS cantidad,
+               p.fecha_hora_pedido,
+               p.monto_total,
+               p.envio,
+               p.costo_envio,
+               p.guia_de_envio,
+               p.documento_url
+        FROM pedidos AS p
+        JOIN clientes ON p.id_cliente = clientes.id_cliente
+        JOIN personas AS pe ON clientes.id_persona = pe.id_persona
+        JOIN domicilios AS dom ON p.id_domicilio = dom.id_domicilio
+        JOIN metodos_pago AS mp ON p.id_mp = mp.id_mp
+        JOIN detalle_pedidos AS dp ON dp.id_pedido = p.id_pedido
+        JOIN detalle_bc AS dbc ON dbc.id_dbc = dp.id_dbc
+        JOIN bolsas_cafe AS bc ON dbc.id_bolsa = bc.id_bolsa
+        WHERE pe.usuario = busqueda_str;
+    END IF;
+END //
+
 DELIMITER ;
+
+
+DELIMITER ;
+
 
 -- Procedimiento para filtar pdido por fecha y estatus
 DROP PROCEDURE IF EXISTS SP_filtrar_pedidos;

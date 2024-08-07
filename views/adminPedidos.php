@@ -362,11 +362,12 @@ if (isset($_POST['btnactualizar'])) {
                     <div class="row m-1">
                         <div class="col-12">
                             <!-- Formulario para buscar por folio, usuario o teléfono -->
-                            <form method="post" action="">
+                            <form method="post">
                                 <div class="row">
-                                    <div class="col-8 col-lg-4">
-                                        <input type="text" class="form-control" name="busqueda" placeholder="Ingresa Folio, Usuario o Teléfono">
-                                    </div>
+<div class="col-8 col-lg-4">
+    <input type="text" class="form-control" name="busqueda" pattern="[A-Za-z0-9\s]+" placeholder="Ingresa Folio, Usuario o Teléfono" required>
+</div>
+
                                     <div class="col-4 col-lg-2">
                                         <input type="submit" class="btn btn-dark w-100" value="Buscar" name="btnBuscar">
                                     </div>
@@ -427,10 +428,8 @@ if (isset($_POST['btnactualizar'])) {
                             $busqueda = !empty($_POST['busqueda']) ? $_POST['busqueda'] : NULL;
 
                             if ($busqueda) {
-                                // Conexión a la base de datos
-
                                 // Lógica para manejar la búsqueda por folio, usuario o teléfono
-                                $stmt = "CALL SP_buscar_pedidos($busqueda)";
+                                $stmt =  "CALL SP_buscar_pedidos('$busqueda')";
                                 $result = $db->select($stmt);
 
                                 // Mostrar los resultados

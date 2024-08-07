@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="shortcut icon" href="../img/Sinfonía-Café-y-Cultura.webp">
     <?php
-    include_once("../class/database.php");
-    include_once("../scripts/funciones/funciones.php");
+    include_once ("../class/database.php");
+    include_once ("../scripts/funciones/funciones.php");
     $db = new database();
     $db->conectarDB();
     session_start();
@@ -23,43 +23,44 @@
         $rol = $db->select($rolUsuario);
 
         $queryCel = "SELECT telefono FROM personas";
-            $db = new database();
-            $db->conectarDB();
+        $db = new database();
+        $db->conectarDB();
 
-            if (isset($_POST['actTelefono'])) {
+        if (isset($_POST['actTelefono'])) {
 
 
-                if ($tel === '') {
-                    showAlert("El teléfono no puede estar vacío", "error");
-                } else if (strlen($tel) > 10) {
-                    showAlert("El teléfono no puede tener más de 10 caracteres", "error");
+            if ($tel === '') {
+                showAlert("El teléfono no puede estar vacío", "error");
+            } else if (strlen($tel) > 10) {
+                showAlert("El teléfono no puede tener más de 10 caracteres", "error");
+            } else {
+                $checkQuery = "SELECT COUNT(*) FROM personas WHERE telefono = :telefono";
+                $stmt = $db->prepare($checkQuery);
+                $stmt->bindParam(':telefono', $tel, PDO::PARAM_STR);
+                $stmt->execute();
+                $result = $stmt->fetchColumn();
+                // si el numero se encuentra en la base de datos no se puede actualizar
+                if ($result > 0) {
+                    showAlert("¡Este teléfono ya está en uso!", "error");
                 } else {
-                    $checkQuery = "SELECT COUNT(*) FROM personas WHERE telefono = :telefono";
-                    $stmt = $db->prepare($checkQuery);
+                    $query = "UPDATE personas SET telefono = :telefono WHERE id_persona = :id";
+                    $stmt = $db->prepare($query);
                     $stmt->bindParam(':telefono', $tel, PDO::PARAM_STR);
+                    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
                     $stmt->execute();
-                    $result = $stmt->fetchColumn();
-                    // si el numero se encuentra en la base de datos no se puede actualizar
-                    if ($result > 0) {
-                        showAlert("Este telefono ya está en uno!", "error");
-                    } else {
-                        $query = "UPDATE personas SET telefono = :telefono WHERE id_persona = :id";
-                        $stmt = $db->prepare($query);
-                        $stmt->bindParam(':telefono', $tel, PDO::PARAM_STR);
-                        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-                        $stmt->execute();
-                        showAlert("¡Teléfono actualizado con éxito!", "success");
-                        header("refresh:2;datosPersonales.php");
-                    }
+                    showAlert("¡Teléfono actualizado con éxito!", "success");
+                    header("refresh:2;datosPersonales.php");
                 }
             }
+        }
 
-
-        // PENDIENTEEEEEEEEEEEEEE
         if (isset($_POST['actPassword'])) {
             if ($password != $password2) {
                 showAlert("Las contraseñas no coinciden", "error");
-            } else {
+            } else if (empty($password)|| empty($password2)) {
+                showAlert("¡La contraseña no puede estar vacía!", "error");
+            }
+             else {
                 $query = "UPDATE personas SET contrasena = '$password' WHERE id_persona = $id";
                 $db->execute($query);
                 showAlert("¡Contraseña actualizada con éxito!", "success");
@@ -74,7 +75,10 @@
 
 <body>
     <!-- Botón de WhatsApp -->
-    <button id="whatsappButton" class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3" type="button" onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
+    <button id="whatsappButton"
+        class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3"
+        type="button"
+        onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
         <i class="fa-brands fa-whatsapp fa-2x"></i>
     </button>
     <!-- NavBar -->
@@ -83,7 +87,8 @@
             <a class="navbar-brand" href="../index.php">
                 <img src="../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
             </a>
-            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura
                     </h5>
@@ -114,12 +119,14 @@
             </div>
             <?php
             if (isset($_SESSION["usuario"])) {
-            ?>
+                ?>
                 <!-- Navbar con dropdown -->
-                <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
+                    style="left: auto; right: 30px; top: 60px">
                     <a class="dropdown-item" href="perfil.php">Mi perfil</a>
                     <a class="dropdown-item" href="bolsas/Carrito.php">Mi carrito</a>
                     <?php if ($rol[0]->rol === 'administrador') { ?>
@@ -128,14 +135,15 @@
                     <?php } ?>
                     <a class="dropdown-item" href="../scripts/login/cerrarsesion.php">Cerrar sesión</a>
                 </div>
-            <?php
+                <?php
             } else {
-            ?>
+                ?>
                 <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
-            <?php
+                <?php
             }
             ?>
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
@@ -180,25 +188,31 @@
                     </div>
                     <div class="col-4 d-flex align-items-center justify-content-start">
                         <!-- Botón para abrir el modal de editar el telefono -->
-                        <button data-bs-toggle="modal" data-bs-target="#modalEditarTel" class="btn btn-cafe">Cambiar</button>
+                        <button data-bs-toggle="modal" data-bs-target="#modalEditarTel"
+                            class="btn btn-cafe">Cambiar</button>
                         <!-- Modal para editar el telefono -->
-                        <div class="modal fade" id="modalEditarTel" tabindex="-1" aria-labelledby="modalEditarTelLabel" aria-hidden="true">
-                            <div class="modal-dialog">
+                        <div class="modal fade" id="modalEditarTel" tabindex="-1" aria-labelledby="modalEditarTelLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="modalEditarTelLabel">Editar Número de Télefono</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body text-start">
                                         <form method="post" enctype="multipart/form-data">
                                             <input type="hidden" name="id" value="<?php echo $datos[0]->id_persona; ?>">
                                             <div class="mb-3">
                                                 <label for="tel" class="form-label">Teléfono</label>
-                                                <input type="number" class="form-control" id="tel" name="tel" value="<?php echo $datos[0]->telefono; ?>" required>
+                                                <input type="number" class="form-control" id="tel" name="tel"
+                                                    value="<?php echo $datos[0]->telefono; ?>" required>
                                             </div>
                                             <div class="text-end">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                <button type="submit" class="btn btn-cafe" name="actTelefono">Actualizar</button>
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Cancelar</button>
+                                                <button type="submit" class="btn btn-cafe"
+                                                    name="actTelefono">Actualizar</button>
                                             </div>
                                         </form>
                                     </div>
@@ -214,35 +228,55 @@
                     </div>
                     <div class="col-4 d-flex justify-content-start align-items-center">
                         <!-- Botón para abrir el modal de editar el password -->
-                        <button data-bs-toggle="modal" data-bs-target="#modalEditarPass" class="btn btn-cafe">Cambiar</button>
-                        <!-- Modal para editar el password -->
-                        <div class="modal fade" id="modalEditarPass" tabindex="-1" aria-labelledby="editarPass" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="editarPass">Cambiar contraseña</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body text-start">
-                                        <form method="post" enctype="multipart/form-data">
+                        <form method="post" enctype="multipart/form-data">
+                            <div class="modal fade" id="modalEditarPass" aria-hidden="true"
+                                aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Cambiar contraseña
+                                            </h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
                                             <input type="hidden" name="id" value="<?php echo $datos[0]->id_persona; ?>">
                                             <div class="mb-3">
                                                 <label for="pass" class="form-label">Ingresar Nueva Contraseña</label>
-                                                <input type="password" class="form-control" id="pass" name="password" required>
+                                                <input type="password" class="form-control" id="pass" name="password">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="pass" class="form-label">Confirmar Contraseña</label>
-                                                <input type="password" class="form-control" id="pass" name="password2" required>
+                                                <input type="password" class="form-control" id="pass" name="password2">
                                             </div>
                                             <div class="text-end">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                <button type="submit" class="btn btn-cafe" name="actPassword">Actualizar</button>
+                                                <button type="button" class="btn btn-cafe" data-bs-target="#confirmar" data-bs-toggle="modal">Actualizar</button>
                                             </div>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                            <div class="modal fade" id="confirmar" aria-hidden="true"
+                                aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Actualizar Contraseña</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Seguro que quieres actualizar tu contraseña?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-secondary" data-bs-target="#modalEditarPass" data-bs-toggle="modal">Cancelar</button>
+                                            <button type="submit" class="btn btn-cafe" name="actPassword">Actualizar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <button class="btn btn-cafe" data-bs-target="#modalEditarPass" data-bs-toggle="modal">Cambiar</button>
                     </div>
                 </div>
             </div>

@@ -144,7 +144,7 @@
                 </div>
 
                 <!-- Contenido de las categorías -->
-                <div class="tab-content col-12 p-1" id="ex1-content">
+                <div class="tab-content col-12 p-1 mt-4" id="ex1-content">
                     <?php
                     $conexion->conectarDB();
                     $eventosPorCategoria = [];
@@ -161,7 +161,7 @@
 
                         $query = "SELECT 
                         SQL_CALC_FOUND_ROWS 
-                        eventos.id_evento, eventos.nombre, eventos.descripcion, eventos.img_url, eventos.fecha_evento, eventos.hora_inicio, eventos.hora_fin,eventos.boletos, eventos.fecha_publicacion
+                        eventos.id_evento, eventos.nombre, eventos.descripcion, eventos.img_url, eventos.fecha_evento, eventos.hora_inicio, eventos.hora_fin,eventos.boletos, eventos.fecha_publicacion, eventos.tipo
                         FROM 
                         eventos 
                         WHERE 
@@ -189,10 +189,17 @@
                                 echo "              <div class='col-12 col-md-11 col-sm-10 col-lg-6'>";
                                 echo "                  <img src='../img/eventos/{$evento->img_url}' class='card-img-top img-fluid' alt='...' style='height: 300px; object-fit: cover;'>";
                                 echo "              </div>";
-                                echo "              <div class='col-12 col-sm-9 col-md-11 col-lg-6 p-2 d-flex flex-column justify-content-center align-items-center p-lg-2'>";
+                                echo "              <div class='col-12 col-sm-9 col-md-11 col-lg-6 p-2 p-lg-2 d-flex justify-content-center align-items-center  flex-column'>";
                                 echo "                  <h3 class='fw-bold mb-3 text-center'>{$evento->nombre}</h3>";
                                 echo "                  <p class='text-dark-emphasis mb-4 '>{$evento->fecha_publicacion}</p>";
-                                echo "                  <span class='text-dark-emphasis mb-4 text-center'>{$evento->descripcion}</span>";
+                                                        $descripcion = $evento->descripcion;
+                                                        $maximo = 55;
+
+                                                        if (strlen($descripcion) > $maximo) {
+                                                            $descripcion = substr($descripcion, 0, $maximo) . '...';
+                                                        }
+                                echo "                      <p class='text-center text-dark-emphasis mb-4'>{$descripcion}</p>";
+                                echo "                  <p class='text-center'>{$evento->tipo}</p>";
                                 echo "                  <form action='../views/eventos/detalle_eventos.php?id={$evento->id_evento}' method='post'>";
                                 echo "                      <input type='hidden' name='id_evento' value='{$evento->id_evento}'>";
                                 echo "                      <input type='submit' class='btn btn-cafe w-100' value='Ver Detalles'>";

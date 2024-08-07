@@ -234,14 +234,14 @@ if ($result) {
             if ($evento->tipo == "De Pago" && $evento->boletos > 0 && $result_reservas[0]->reservas_pedientes < 5) {
                 if (isset($_SESSION["usuario"])) {
                     $labelText_precio = " <h4>Precio por boleto: {$precio_boleto} $</h4>";
-                    $labelText_botonreservar = "<button type='button' class='btn btn-cafe fs-4 col-6' data-bs-toggle='modal'
+                    $labelText_botonreservar = "<button type='button' class='btn btn-cafe fs-4 col-12 col-lg-6' data-bs-toggle='modal'
                             data-bs-target='#exampleModal'>
                             Reservar Boletos
                         </button>
                         <!-- Modal -->
                         <div class='modal fade' id='exampleModal' tabindex='-1' aria-labelledby='exampleModalLabel'
                             aria-hidden='true'>
-                            <div class='modal-dialog'>
+                            <div class='modal-dialog modal-dialog-centered'>
                                 <div class='modal-content'>
                                     <form action='' method='POST'>
                                     <div class='modal-header'>
@@ -251,7 +251,7 @@ if ($result) {
                                     </div>
                                     <div class='modal-body'>
                                         <div class='row'>
-                                            <div class='col-6'>
+                                            <div class='col-12'>
                                                 <label for='' class='form-label'>Cantidad de boletos</label>
                                                 <select class='form-select' id='cantidad' name='cantidad'>
                                                     <option value='1' selected>1</option>
@@ -266,10 +266,15 @@ if ($result) {
                                                     <option value='10'>10</option>
                                                 </select>
                                             </div>
-                                            <div class='col-6 text-center'>
-                                                <h6>Precio por boleto: {$precio_boleto}$</h6>
-                                                <h6>Total: <span id='total'>$0</span>$</h6>
+                                            <div class='row mt-3'>
+                                                <div class='col-6 border-end border-1 border-black'>
+                                                    <p>Costo boleto: {$precio_boleto}$</p>
+                                                </div>
+                                                <div class='col-6 text-center'>
+                                                    <p>Total: <span id='total'>$0</span>$</p>
+                                                </div>
                                             </div>
+
                                         </div>
                                     </div>
                                     <div class='modal-footer'>
@@ -297,7 +302,7 @@ if ($result) {
             }
             ?>
             <!-- Imagen -->
-            <div class="col-lg-12">
+            <div class="col-lg-12 mb-4">
                 <div class="col mb-lg-0 text-center empty-side">
                     <img src="../../img/eventos/<?php echo $evento->img_url; ?>" class="img-fluid w-50"
                         alt="Imagen del evento.">
@@ -306,20 +311,18 @@ if ($result) {
             <!-- Nombre y descripción -->
             <div class="col-lg-12 justify-content-center ">
                 <div class="text-center">
-                    <div>
+                    <div class="bg-body shadow-lg rounded p-1 mb-3">
                         <h1 class="fw-bold mt-3"><?php echo $evento->nombre; ?></h1>
                         <p class="lead my-4 text-center"><?php echo $evento->descripcion; ?></p>
                     </div>
                 </div>
             </div>
-
-            <hr class="my-4">
             <!-- Ubicación -->
-            <div class="row ">
+            <div class="row mt-4 m-0 p-0">
                 <!-- Horario y Detalles -->
-                <div class="col-12 col-md-5 col-lg-6">
+                <div class="col-12 col-md-5 col-lg-6 me-auto p-0 pe-lg-3">
                     <!-- Horario -->
-                    <div class="row">
+                    <div class="row bg-body shadow-lg rounded pt-4 p-0 m-0">
                         <div class="d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-calendar-days fa-2x me-2"></i>
                             <h2 class="mb-0">Horario </h2>
@@ -329,9 +332,8 @@ if ($result) {
                             <h4 class=" m-4"><?php echo "De " . $horaInicio . " a " . $horaFin; ?></h4>
                         </div>
                     </div>
-                    <hr class=" my-4">
                     <!-- Detalles -->
-                    <div class="row justify-content-center gap-md-5 gap-2 ">
+                    <div class="row shadow-lg rounded bg-body m-0 p-0 mt-4 py-5 justify-content-center gap-md-5 gap-2 mb-4 mb-lg-0">
                         <div class="d-flex align-items-center justify-content-center">
                             <i class="fa-solid fa-circle-info fa-2x me-2"></i>
                             <h2 class="mb-0">Detalles</h2>
@@ -339,24 +341,25 @@ if ($result) {
                         <div class="text-center">
                             <h4>Tipo de evento: <?php echo $evento->tipo; ?></h4>
                         </div>
+                        <?php if ($evento->tipo == "De Pago") { ?>
                         <div class="text-center">
                             <?php echo $labelText_precio; ?>
                         </div>
                         <div class="d-flex justify-content-center col-12">
                             <?php echo $labelText_botonreservar; ?>
                         </div>
+                        <?php } ?>
                     </div>
                 </div>
-                <hr class="my-4 d-block d-md-none">
                 <!-- Mapa -->
-                <div class="col-lg-6">
+                <div class="col-lg-6 bg-body d-flex align-items-center mb-3 justify-content-center flex-column py-4 rounded shadow-lg">
                     <!-- Ubicación -->
                     <div class="d-flex align-items-center mb-3 justify-content-center">
                         <i class="fa-solid fa-location-dot fa-2x me-2"></i>
                         <h2 class="mb-0">Ubicación</h2>
                     </div>
                     <!-- Mapa -->
-                    <div class="d-flex justify-content-center">
+                    <div class="d-flex justify-content-center mt-3">
                         <div class="text-center">
                             <h5 class="text-center mb-3 p-1">
                                 <?php
@@ -368,7 +371,7 @@ if ($result) {
                             $lat = $evento->lat; // Reemplaza con la latitud de la dirección
                             $lng = $evento->lng; // Reemplaza con la longitud de la dirección
                             ?>
-                            <div class="map-container" id="map"></div>
+                            <div class="map-container mb-1" id="map"></div>
                         </div>
                     </div>
                 </div>
