@@ -114,18 +114,18 @@ if ($_POST) {
                 </div>
                 <div class="accordion accordion-flush" id="accordionMobile">
                     <div class="accordion-item m-0 p-0 row">
-                        <h2 class="accordion-header">
+                        <a href="adminInicio.php">
+                            <h2 class="accordion-header">
                             <button class="row accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-inicio" aria-expanded="false"
                                 aria-controls="flush-inicio">
                                 <div class="col-6">
-                                    <a href="adminInicio.php" class="text-light fw-bold text-decoration-none">
-                                        <i class="fa-solid fa-house-laptop me-1"></i>
-                                        Inicio
-                                    </a>
+                                    <i class="fa-solid fa-house-laptop me-1"></i>
+                                    Inicio
                                 </div>
                             </button>
-                        </h2>
+                            </h2>
+                        </a>
                     </div>
                     <div class="accordion-item row m-0 p-0">
                         <h2 class="accordion-header row">
@@ -200,7 +200,7 @@ if ($_POST) {
                                     Administrar Pedidos
                                 </a><br><br>
                                 <a href="adminProductosEcommerce.php"
-                                    class="fw-bold fs-4 ms-5 text-light text-decoration-none">
+                                    class="fw-bold fs-5 ms-5 text-light text-decoration-none">
                                     Administrar Productos
                                 </a>
                             </div>
@@ -453,7 +453,7 @@ if ($_POST) {
                 <!-- Modal para agregar recompensa -->
                 <div class="modal fade" id="agregarRecompensa" tabindex="-1" aria-labelledby="agregarRecompensaLabel"
                     aria-hidden="true">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="agregarRecompensaLabel">Agregar Recompensa</h1>
@@ -513,7 +513,7 @@ if ($_POST) {
                 <!-- Modal para registrar asistencias -->
                 <div class="modal fade" id="registrarAsistencias" tabindex="-1"
                     aria-labelledby="registrarAsistenciasLabel" aria-hidden="true">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="registrarAsistenciasLabel">Registrar Asistencias</h1>
@@ -542,7 +542,7 @@ if ($_POST) {
                 <!-- Modal para canjear recompensas -->
                 <div class="modal fade" id="canjearRecompensa" tabindex="-1" aria-labelledby="canjearRecompensasLabel"
                     aria-hidden="true">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="canjearRecompensasLabel">Canjear Recompensa</h1>
@@ -674,7 +674,7 @@ if ($_POST) {
                                                     <!-- modal de recompensa -->
                                                     <div class="modal fade" id="detalleRecompensa<?= $recompensa->id_recompensa ?>"
                                                         tabindex="-1" aria-labelledby="detalleRecompensaLabel" aria-hidden="true">
-                                                        <div class="modal-dialog">
+                                                        <div class="modal-dialog modal-dialog-centered">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
                                                                     <h5 class="modal-title" id="detalleRecompensaLabel">Recompensa
@@ -720,7 +720,7 @@ if ($_POST) {
                                                     <!-- Modal de editar recompensa -->
                                                     <div class="modal fade" id="editarRecompensa<?= $recompensa->id_recompensa ?>"
                                                         tabindex="-1" aria-labelledby="editarRecompensaLabel" aria-hidden="true">
-                                                        <div class="modal-dialog">
+                                                        <div class="modal-dialog modal-dialog-centered">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
                                                                     <h5 class="modal-title" id="editarRecompensaLabel">

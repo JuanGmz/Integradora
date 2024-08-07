@@ -1204,11 +1204,13 @@ select
     e.nombre as evento,
     e.id_evento,
     e.precio_boleto,
-    e.fecha_evento as fechaEvento
+    e.fecha_evento as fechaEvento,
+    cm.id_comprobante 
 from eventos_reservas er
-	join clientes c on c.id_cliente = er.id_cliente
-	join personas p on p.id_persona = c.id_persona
-	join eventos e on e.id_evento = er.id_evento
+	left join clientes c on c.id_cliente = er.id_cliente
+	left join personas p on p.id_persona = c.id_persona
+	left join eventos e on e.id_evento = er.id_evento
+    left join comprobantes cm on cm.id_reserva = er.id_reserva
 WHERE e.tipo = 'De Pago';
 
 -- Vista para mostrar la informacion del comprobante de la reserva
