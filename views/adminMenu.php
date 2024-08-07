@@ -45,14 +45,14 @@ if (isset($_POST['btnestatus'])) {
                     <div class="accordion-item m-0 p-0 row">
                         <a href="adminInicio.php">
                             <h2 class="accordion-header">
-                            <button class="row accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-inicio" aria-expanded="false"
-                                aria-controls="flush-inicio">
-                                <div class="col-6">
-                                    <i class="fa-solid fa-house-laptop me-1"></i>
-                                    Inicio
-                                </div>
-                            </button>
+                                <button class="row accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light"
+                                    type="button" data-bs-toggle="collapse" data-bs-target="#flush-inicio"
+                                    aria-expanded="false" aria-controls="flush-inicio">
+                                    <div class="col-6">
+                                        <i class="fa-solid fa-house-laptop me-1"></i>
+                                        Inicio
+                                    </div>
+                                </button>
                             </h2>
                         </a>
                     </div>
@@ -207,7 +207,8 @@ if (isset($_POST['btnestatus'])) {
                 <h4 class="text-center text-light m-3 fs-2 fw-bold">Administrar</h4>
                 <div class="row">
                     <div class="col-12 text-center">
-                    <img src="../img/Sinfonía-Café-y-Cultura blanco.webp" alt="" class="img-fluid" style="width: 300px;">
+                        <img src="../img/Sinfonía-Café-y-Cultura blanco.webp" alt="" class="img-fluid"
+                            style="width: 300px;">
                     </div>
                 </div>
                 <div class="accordion accordion-flush" id="accordionPc">
@@ -483,7 +484,7 @@ if (isset($_POST['btnestatus'])) {
                                       FROM 
                                         productos_menu AS pm 
                                       JOIN 
-                                        categorias AS c ON pm.id_categoria = c.id_categoria WHERE c.id_categoria = $categoria";
+                                        categorias AS c ON pm.id_categoria = c.id_categoria WHERE c.id_categoria = $categoria order by pm.nombre asc";
                         $productos = $db->select($query);
 
                         if (empty($productos)) {
