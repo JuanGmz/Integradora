@@ -18,14 +18,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $imagen = $subirDir . $nombreImagen;
 
     if (move_uploaded_file($_FILES['imgEvento']['tmp_name'], $imagen)) {
-        $consulta = "INSERT INTO EVENTOS (id_lugar, id_categoria, nombre, tipo, descripcion, fecha_evento, hora_inicio, hora_fin, capacidad, precio_boleto, boletos, img_url, fecha_publicacion)
-        VALUES ('$lugar', '$categoria', '$evento', '$tipo', '$descripcion', '$fechaEvento', '$horaIni', '$horaFin', '$capacidad', '$costo', '$cantidadBoletos', '$nombreImagen', '$fechaPub')";
-
-        if ($db->execute($consulta)) {
-            echo "Inserción exitosa.";
-        } else {
-            echo "Error al insertar evento.";
+        if ($tipo == "Gratuito") {
+            $costo = 0;
+            $cantidadBoletos = 0;
         }
+        $consulta = "INSERT INTO EVENTOS (id_lugar, id_categoria, nombre, tipo, descripcion, fecha_evento, hora_inicio, hora_fin, capacidad, precio_boleto, boletos, img_url, fecha_publicacion)
+        VALUES ($lugar, $categoria, '$evento', '$tipo', '$descripcion', '$fechaEvento', '$horaIni', '$horaFin', $capacidad, $costo, $cantidadBoletos, '$nombreImagen', '$fechaPub')";
+        $db->execute($consulta);
 
     } else {
         echo "Error al subir la imagen.";
@@ -33,5 +32,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 $db->desconectarDB();
-header("location: ../../views/adminEventos.php");
+header("Location: ../../views/adminEventos.php");
 exit;

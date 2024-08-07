@@ -229,7 +229,7 @@ if (isset($_SESSION["usuario"])) {
                             <div class="modal fade" id="editarDireccion<?php echo $domicilio->id_domicilio; ?>"
                                 data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div class="modal-dialog">
+                                <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="staticBackdropLabel">Editar Dirección</h5>
@@ -265,8 +265,12 @@ if (isset($_SESSION["usuario"])) {
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="referencia" class="form-label">Referencia</label>
-                                                    <input type="text" class="form-control" id="referencia"
-                                                        value="<?php echo $domicilio->referencia; ?>" name="referencia">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" id="referencia" value="<?php echo $domicilio->referencia; ?>" name="referencia">
+                                                        <button type='button' class='btn btn-secondary' data-bs-toggle='popover' title='Información' data-bs-content='Específica el nombre del propietario del domicilio'>
+                                                            <i class='fa-solid fa-info'></i>
+                                                        </button>
+                                                    </div>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="telefono" class="form-label">Teléfono</label>
@@ -286,7 +290,7 @@ if (isset($_SESSION["usuario"])) {
                             <div class="modal fade" id="eliminarDireccion<?php echo $domicilio->id_domicilio; ?>"
                                 data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div class="modal-dialog">
+                                <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="staticBackdropLabel">Eliminar Dirección</h5>
@@ -300,8 +304,7 @@ if (isset($_SESSION["usuario"])) {
                                                 </div>
                                                 <div class="text-end">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                    <button type="submit" class="btn btn-danger <?php echo $direccionEnUso ? 'disabled' : ''; ?>"
-                                                        name="deleteDir" <?php echo $direccionEnUso ? 'aria-disabled="true"' : ''; ?>>
+                                                    <button type="submit" class="btn btn-danger <?php echo $direccionEnUso ? 'disabled' : ''; ?>" name="deleteDir" <?php echo $direccionEnUso ? 'aria-disabled="true"' : ''; ?>>
                                                         Eliminar
                                                     </button>
                                                 </div>
@@ -327,7 +330,7 @@ if (isset($_SESSION["usuario"])) {
                 <!-- Modal para agregar dirección -->
                 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
                     tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="staticBackdropLabel">Añadir nueva dirección</h5>
@@ -345,7 +348,7 @@ if (isset($_SESSION["usuario"])) {
                                     </div>
                                     <div class="mb-3">
                                         <label for="calle" class="form-label">Calle</label>
-                                        <input type="text" class="form-control" id="calle" name="calle" maxlength="100" pattern="[A-Za-z\s]+" required>
+                                        <input type="text" class="form-control" id="calle" name="calle" maxlength="100" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="colonia" class="form-label">Colonia</label>
@@ -357,7 +360,13 @@ if (isset($_SESSION["usuario"])) {
                                     </div>
                                     <div class="mb-3">
                                         <label for="referencia" class="form-label">Referencia</label>
-                                        <input type="text" class="form-control" id="referencia" name="referencia" maxlength="100" required>
+                                        
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="referencia" name="referencia" maxlength="100" required>
+                                            <button type='button' class='btn btn-secondary' data-bs-toggle='popover' title='Información' data-bs-content='Específica el nombre del propietario del domicilio'>
+                                                <i class='fa-solid fa-info'></i>
+                                            </button>
+                                        </div>
                                     </div>
                                     <div class="mb-3">
                                         <label for="telefono" class="form-label">Teléfono</label>

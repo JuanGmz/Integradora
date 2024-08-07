@@ -327,7 +327,7 @@ if (isset($_SESSION["usuario"])) {
                                         <button type="button" class="btn btn-cafe w-100" data-bs-toggle="modal" data-bs-target="#confirmarModal">Realizar Pedido</button>
                                         <!-- Modal de confirmación -->
                                         <div class="modal fade" id="confirmarModal" tabindex="-1" aria-labelledby="confirmarModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
+                                            <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="confirmarModalLabel">Confirmar pedido</h5>
