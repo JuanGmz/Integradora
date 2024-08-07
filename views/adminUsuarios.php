@@ -459,14 +459,17 @@
                                                             </div>";
 
                                 // Mostrar roles actuales y permitir eliminar si hay más de uno
+                                // Roles actuales separados por comas
                                 $roles = explode(', ', $usuario->roles);
+                                // esta función se encarga de mostrar los roles actuales y permitir eliminar si hay más de uno
+                                // excepto el rol 'cliente'
                                 for ($i = 0; $i < count($roles); $i++) {
                                     $rol_actual = $roles[$i];
                                     echo "
                                     <div class='mt-2 d-flex align-items-center'>
                                         <input type='text' class='form-control' value='$rol_actual' readonly>
                                         ";
-                                    if (count($roles) === 1 || $rol_actual === 'cliente') {
+                                    if ( $rol_actual === 'cliente') {
                                         echo "<button type='submit' name='eliminar_rol' value='$rol_actual' class='btn btn-danger ms-2' disabled>Eliminar</button>";
                                     } else {
                                         echo "<button type='submit' name='eliminar_rol' value='$rol_actual' class='btn btn-danger ms-2'>Eliminar</button>";
@@ -475,15 +478,18 @@
                                     </div>";
                                 }
                                 echo "<hr class='my-4'>";
-                                // Mostrar roles disponibles para agregar solo si tiene menos de 3 roles
-                                if (count($roles) < 3) {
+                                // Mostrar roles disponibles para agregar solo si tiene menos de 2 roles
+                                if (count($roles) < 2) {
                                     echo "
                                     <div class='mt-3'>
                                         <label for='rol_nuevo' class='form-label'>Agregar Rol</label>
                                         <select name='rol_nuevo' id='rol_nuevo' class='form-select'>
                                             <option value=''>Selecciona un rol</option>";
+                                            // Mostrar roles disponibles para agregar
                                     $roles_actuales = array_map('trim', explode(',', $usuario->roles));
+                                    // se estan separando los roles con ', '
                                     foreach ($roles_result as $rol) {
+                                        // se estan recorriendo todos los roles y buscando los que no estan en los roles actuales
                                         if (!in_array($rol->rol, $roles_actuales)) {
                                             echo "<option value='{$rol->id_rol}'>{$rol->rol}</option>";
                                         }
