@@ -139,6 +139,7 @@ sabor nvarchar(150) not null,
 cuerpo nvarchar(100) not null,
 puntaje_catacion double not null,
 img_url nvarchar(255)not null,
+estatus boolean default true,
 primary key(id_bolsa)
 );
 

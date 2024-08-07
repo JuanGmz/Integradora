@@ -317,7 +317,7 @@
                     $query = 'SELECT bolsas_cafe.id_bolsa,bolsas_cafe.nombre, bolsas_cafe.productor_finca ,bolsas_cafe.proceso,
                         bolsas_cafe.variedad,bolsas_cafe.altura,bolsas_cafe.aroma,bolsas_cafe.acidez,bolsas_cafe.sabor,
                         bolsas_cafe.cuerpo,bolsas_cafe.img_url
-                        FROM bolsas_cafe limit 3; ';
+                        FROM bolsas_cafe where bolsas_cafe.estatus = true limit 3; ';
 
                     $bolsas = $conexion->select($query);
                     $counter = 1;
