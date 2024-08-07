@@ -38,14 +38,14 @@ if ($rol[0]->rol !== 'administrador') {
                     <div class="accordion-item m-0 p-0 row">
                         <a href="adminInicio.php">
                             <h2 class="accordion-header">
-                            <button class="row accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-inicio" aria-expanded="false"
-                                aria-controls="flush-inicio">
-                                <div class="col-6">
-                                    <i class="fa-solid fa-house-laptop me-1"></i>
-                                    Inicio
-                                </div>
-                            </button>
+                                <button class="row accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light"
+                                    type="button" data-bs-toggle="collapse" data-bs-target="#flush-inicio"
+                                    aria-expanded="false" aria-controls="flush-inicio">
+                                    <div class="col-6">
+                                        <i class="fa-solid fa-house-laptop me-1"></i>
+                                        Inicio
+                                    </div>
+                                </button>
                             </h2>
                         </a>
                     </div>
@@ -200,7 +200,8 @@ if ($rol[0]->rol !== 'administrador') {
                 <h4 class="text-center text-light m-3 fs-2 fw-bold">Administrar</h4>
                 <div class="row">
                     <div class="col-12 text-center">
-                    <img src="../img/Sinfonía-Café-y-Cultura blanco.webp" alt="" class="img-fluid" style="width: 300px;">
+                        <img src="../img/Sinfonía-Café-y-Cultura blanco.webp" alt="" class="img-fluid"
+                            style="width: 300px;">
                     </div>
                 </div>
                 <div class="accordion accordion-flush" id="accordionPc">
@@ -448,7 +449,7 @@ if ($rol[0]->rol !== 'administrador') {
                     <!-- Tabla de publicaciones AQUI -->
                     <?php
                     if (isset($_POST['tipo'])) {
-                        $query = "SELECT * FROM publicaciones WHERE tipo = '{$_POST['tipo']}'";
+                        $query = "SELECT * FROM publicaciones WHERE tipo = '{$_POST['tipo']}' ORDER BY id_publicacion DESC";
                         $publicaciones = $db->select($query);
                         if (empty($publicaciones)) {
                             echo "<div>No hay publicaciones registradas en este tipo de publicación.</div>";
