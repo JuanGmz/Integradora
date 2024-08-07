@@ -19,22 +19,15 @@ if (isset($_SESSION["usuario"])) {
         if (empty($id_domicilio)) {
             showAlert("Por favor, ingrese un domicilio", "error");
         } else {
-            $sql = "CALL SP_Realizar_Pedido($id_cliente, $id_domicilio, $id_mp)";
-            if ($stmt = $conexion->select($sql)) {
-                showAlert("Error al realizar el pedido", "error");
-            } else {
-                if (is_array($stmt) && count($stmt) > 0) {
-                    $pedido = $stmt[0];
-                    $id_pedido = $pedido->id_pedido;
-                    $mensaje = $pedido->mensaje;
 
-                    if ($id_pedido) {
-                        // Redirigir a la página Folio.php con el ID del pedido
-                        header("Location:Folio.php?id_pedido=" . $id_pedido);
-                        exit;
-                    }
-                }
-            }
+            $sql = "CALL SP_Realizar_Pedido($id_cliente, $id_domicilio, $id_mp)";
+
+            $stmt = $conexion->select($sql);
+
+            $id_pedido = $stmt[0]->id_pedido;
+            // Redirigir a la página Folio.php con el ID del pedido
+            header("Location:Folio.php?id_pedido=" . $id_pedido);
+            exit;
         }
     }
 } else {
@@ -267,8 +260,7 @@ if (isset($_SESSION["usuario"])) {
                                     echo '<p>Productos: <span class="float-end fw-bold">$' . $subtotal[0]->subtotal . '</span></p>';
                                     echo '<p>Envío: <span class="float-end">----</span></p>';
                                     echo '<hr>';
-                                    $iva = $subtotal[0]->subtotal * 0.16;
-                                    $total = $subtotal[0]->subtotal + $iva;
+                                    $total = $subtotal[0]->subtotal;
                                     ?>
 
                                 </div>
@@ -343,14 +335,13 @@ if (isset($_SESSION["usuario"])) {
                                                     </div>
                                                     <div class="modal-body">
                                                         <h5 class="mb-3">¿Estas seguro de que deseas realizar este pedido?</h5>
-                                                        <form method="POST" action="../../scripts/ecommerce/pedido.php">
+                                                        <form method="POST" >
                                                             <div class="d-none">
                                                                 <input type="hidden" name="id_mp" value="' . $mp->id_mp . '">
                                                                 <input type="hidden" id="hiddenIdDomicilio" name="id_domicilio" value="' . $DOMICIOLIO . '">
                                                                 <input type="hidden" name="id_cliente" value="' . $cliente[0]->id_cliente . '">
                                                                 <p>Total: <span class="float-end fw-bold">$' . $total . '</span></p>
                                                             </div>
-                                                            
                                                             <div class="text-end">
                                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                                                                 <button type="submit" class="btn btn-cafe" name="realizarPedido">Realizar pedido</button>

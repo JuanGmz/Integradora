@@ -1204,11 +1204,13 @@ select
     e.nombre as evento,
     e.id_evento,
     e.precio_boleto,
-    e.fecha_evento as fechaEvento
+    e.fecha_evento as fechaEvento,
+    cm.id_comprobante 
 from eventos_reservas er
-	join clientes c on c.id_cliente = er.id_cliente
-	join personas p on p.id_persona = c.id_persona
-	join eventos e on e.id_evento = er.id_evento
+	left join clientes c on c.id_cliente = er.id_cliente
+	left join personas p on p.id_persona = c.id_persona
+	left join eventos e on e.id_evento = er.id_evento
+    left join comprobantes cm on cm.id_reserva = er.id_reserva
 WHERE e.tipo = 'De Pago';
 
 -- Vista para mostrar la informacion del comprobante de la reserva
@@ -1619,9 +1621,9 @@ CREATE INDEX idx_asistencias_id_cliente ON asistencias(id_cliente);
 -- Tabla clientes_recompensas
 CREATE INDEX idx_clientes_recompensas_id_cliente ON clientes_recompensas(id_cliente);
 CREATE INDEX idx_clientes_recompensas_id_recompensa ON clientes_recompensas(id_recompensa);
-DROP PROCEDURE IF EXISTS SP_filtrar_pedidos;
+DROP PROCEDURE IF EXISTS SP_buscar_pedidos;
 DELIMITER $$
-create PROCEDURE SP_filtrar_pedidos(
+create PROCEDURE SP_buscar_pedidos(
 
     IN busqueda VARCHAR(50)
 )
@@ -1665,6 +1667,73 @@ BEGIN
     OR pe.usuario = busqueda
     OR pe.telefono = busqueda;
 END $$
+DELIMITER ;
+
+-- Procedimiento para filtar pdido por fecha y estatus
+DROP PROCEDURE IF EXISTS SP_filtrar_pedidos;
+DELIMITER $$
+
+CREATE PROCEDURE SP_filtrar_pedidos(
+    IN estatus VARCHAR(255),
+    IN intervalo_tiempo VARCHAR(255)
+)
+BEGIN
+    DECLARE fecha_inicio DATETIME;
+    
+    -- Determinar la fecha de inicio en base al intervalo de tiempo
+    IF intervalo_tiempo = 'UltimoDia' THEN
+        SET fecha_inicio = NOW() - INTERVAL 1 DAY;
+    ELSEIF intervalo_tiempo = 'UltimaSemana' THEN
+        SET fecha_inicio = NOW() - INTERVAL 1 WEEK;
+    ELSEIF intervalo_tiempo = 'UltimoMes' THEN
+        SET fecha_inicio = NOW() - INTERVAL 1 MONTH;
+    ELSEIF intervalo_tiempo = 'UltimoAño' THEN
+        SET fecha_inicio = NOW() - INTERVAL 1 YEAR;
+    ELSE
+        SET fecha_inicio = '1970-01-01 00:00:00'; -- Representa todo el tiempo
+    END IF;
+
+    -- Consulta para obtener los pedidos según los filtros proporcionados
+    SELECT DISTINCT p.id_pedido,
+           CONCAT(pe.nombres, ' ', pe.apellido_paterno, ' ', pe.apellido_materno) AS cliente,
+           CONCAT(dom.calle, ' ', dom.colonia, ' ', dom.ciudad, ' ', dom.estado, ' ', dom.codigo_postal) AS domicilio,
+           dom.calle,
+           dom.colonia,
+           dom.referencia,
+           dom.ciudad,
+           dom.estado,
+           dom.codigo_postal,
+           dom.telefono AS telefono, 
+           p.estatus AS estatus,
+           pe.usuario AS usuario,
+           mp.metodo_pago AS metodo_pago,
+           bc.nombre AS bolsa,
+           bc.proceso,
+           dbc.medida AS medida,
+           dbc.precio,
+           dp.cantidad AS cantidad,
+           p.fecha_hora_pedido,
+           bc.sabor,
+           bc.variedad,
+           p.monto_total,
+           p.envio,
+           p.costo_envio,
+           p.guia_de_envio,
+           p.documento_url,
+           dp.monto AS subtotal
+    FROM pedidos AS p
+    JOIN clientes ON p.id_cliente = clientes.id_cliente
+    JOIN personas AS pe ON clientes.id_persona = pe.id_persona
+    JOIN domicilios AS dom ON p.id_domicilio = dom.id_domicilio
+    JOIN metodos_pago AS mp ON p.id_mp = mp.id_mp
+    JOIN detalle_pedidos AS dp ON dp.id_pedido = p.id_pedido
+    JOIN detalle_bc AS dbc ON dbc.id_dbc = dp.id_dbc
+    JOIN bolsas_cafe AS bc ON dbc.id_bolsa = bc.id_bolsa
+    WHERE (estatus = 'Todos' OR p.estatus = estatus)
+      AND p.fecha_hora_pedido >= fecha_inicio
+    ORDER BY p.fecha_hora_pedido DESC;
+END $$
+
 DELIMITER ;
 
 -- VISTA PEDIDOS DE CLIENTES

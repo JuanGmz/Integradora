@@ -12,6 +12,15 @@ $rol = $db->select($rolUsuario);
 if ($rol[0]->rol !== 'administrador') {
     header('Location: ../index.php');
 }
+
+// Datos de ejemplo (estos valores deberían provenir de tu consulta y lógica de paginación)
+$total_records = 50; // Total de registros
+$records_per_page = 10; // Registros por página
+$total_pages = ceil($total_records / $records_per_page); // Número total de páginas
+$current_page = isset($_GET['page']) ? (int) $_GET['page'] : 1; // Página actual
+
+// Asegúrate de que la página actual esté dentro del rango válido
+$current_page = max(1, min($current_page, $total_pages));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,18 +44,18 @@ if ($rol[0]->rol !== 'administrador') {
                 </div>
                 <div class="accordion accordion-flush" id="accordionMobile">
                     <div class="accordion-item m-0 p-0 row">
-                        <a href="adminInicio.php">
-                            <h2 class="accordion-header">
-                            <button class="row accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-inicio" aria-expanded="false"
-                                aria-controls="flush-inicio">
+                        <h2 class="accordion-header">
+                            <button class="row accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light"
+                                type="button" data-bs-toggle="collapse" data-bs-target="#flush-inicio"
+                                aria-expanded="false" aria-controls="flush-inicio">
                                 <div class="col-6">
-                                    <i class="fa-solid fa-house-laptop me-1"></i>
-                                    Inicio
+                                    <a href="adminInicio.php" class="text-light fw-bold text-decoration-none">
+                                        <i class="fa-solid fa-house-laptop me-1"></i>
+                                        Inicio
+                                    </a>
                                 </div>
                             </button>
-                            </h2>
-                        </a>
+                        </h2>
                     </div>
                     <div class="accordion-item row m-0 p-0">
                         <h2 class="accordion-header row">
@@ -121,7 +130,7 @@ if ($rol[0]->rol !== 'administrador') {
                                     Administrar Pedidos
                                 </a><br><br>
                                 <a href="adminProductosEcommerce.php"
-                                    class="fw-bold fs-5 ms-5 text-light text-decoration-none">
+                                    class="fw-bold fs-4 ms-5 text-light text-decoration-none">
                                     Administrar Productos
                                 </a>
                             </div>
@@ -195,11 +204,12 @@ if ($rol[0]->rol !== 'administrador') {
 
         <div class="row">
             <!-- navbar pc -->
-            <div class="col-lg-3 bagr-cafe4 h-100 position-fixed d-none d-lg-block shadow contenedor" >
+            <div class="col-lg-3 bagr-cafe4 h-100 position-fixed d-none d-lg-block shadow contenedor">
                 <h4 class="text-center text-light m-3 fs-2 fw-bold">Administrar</h4>
                 <div class="row">
                     <div class="col-12 text-center">
-                    <img src="../img/Sinfonía-Café-y-Cultura blanco.webp" alt="" class="img-fluid" style="width: 300px;">
+                        <img src="../img/Sinfonía-Café-y-Cultura blanco.webp" alt="" class="img-fluid"
+                            style="width: 300px;">
                     </div>
                 </div>
                 <div class="accordion accordion-flush" id="accordionPc">
@@ -353,27 +363,73 @@ if ($rol[0]->rol !== 'administrador') {
                         </div>
                     </div>
                 </div>
+                <?php
+                $v_evento = isset($_GET['v_evento']) ? $_GET['v_evento'] : '';
+
+                ?>
                 <div class="shadow-lg row p-3 m-0" style="background: var(--color6);">
                     <div class="row m-1">
-                        <div class="col-lg-5 col-12">
+                        <div class="col-lg-10 col-12">
                             <form method="post">
                                 <div class="row">
-                                    <div class="col-8">
-                                        <select name="evento" id="evento" class="form-select">
+                                    <div class="col-4">
+                                        <select id="evento" name="evento" class="form-select" required>
                                             <option selected disabled value="">Seleccionar Evento</option>
                                             <!-- Aqui va el select del filtrado -->
                                             <?php
-                                            $queryFiltrar = "SELECT id_evento, nombre, fecha_evento FROM eventos WHERE tipo = 'De Pago'";
+
+
+                                            $queryFiltrar = "SELECT id_evento, nombre, fecha_evento FROM eventos WHERE tipo = 'De Pago' and  CURDATE() <= fecha_evento";
                                             $eventos = $db->select($queryFiltrar);
+
+                                            // Verifica si hay un evento seleccionado
+                                            $selected_evento = isset($_POST['evento']) ? $_POST['evento'] : '';
+
+                                            // Genera las opciones para el select
                                             foreach ($eventos as $evento) {
-                                                $selected = (isset($_POST['evento']) && $_POST['evento'] == $evento->id_evento) ? 'selected' : '';
+                                                $selected = ($selected_evento == $evento->id_evento) ? 'selected' : '';
                                                 echo "<option value='{$evento->id_evento}' $selected>{$evento->nombre}</option>";
                                             }
                                             ?>
                                         </select>
                                     </div>
+                                    <?php
+                                    $select_estatus = isset($_POST['estatus']) ? $_POST['estatus'] : 'Pendiente';
+
+                                    if ($select_estatus == 'Pendiente') {
+                                        ?>
+                                        <div class="col-4">
+                                            <select name="estatus" id="" class="form-select">
+                                                <option value="Pendiente" selected>Pendiente</option>
+                                                <option value="Apartada">Apartada</option>
+                                                <option value="Cancelada">Cancelada</option>
+                                            </select>
+                                        </div>
+                                        <?php
+                                    } elseif ($select_estatus == 'Apartada') {
+                                        ?>
+                                        <div class="col-4">
+                                            <select name="estatus" id="" class="form-select">
+                                                <option value="Pendiente">Pendiente</option>
+                                                <option value="Apartada" selected>Apartada</option>
+                                                <option value="Cancelada">Cancelada</option>
+                                            </select>
+                                        </div>
+                                        <?php
+                                    } elseif ($select_estatus == 'Cancelada') {
+                                        ?>
+                                        <div class="col-4">
+                                            <select name="estatus" id="" class="form-select">
+                                                <option value="Pendiente">Pendiente</option>
+                                                <option value="Apartada">Apartada</option>
+                                                <option value="Cancelada" selected>Cancelada</option>
+                                            </select>
+                                        </div>
+                                        <?php
+                                    }
+                                    ?>
                                     <div class="col-4">
-                                        <input type="submit" class="btn btn-dark w-100" value="Buscar">
+                                        <input type="submit" class="btn btn-dark w-100" value="Buscar" name="Buscar">
                                     </div>
                                 </div>
                             </form>
@@ -383,10 +439,14 @@ if ($rol[0]->rol !== 'administrador') {
                 <div class="row mt-3 p-4 m-0">
                     <!-- Tabla de reservas AQUI -->
                     <?php
-                    if (isset($_POST['evento'])) {
-                        $id_evento = intval($_POST['evento']);
 
-                        $queryReservas = "SELECT * FROM view_AdminReservas WHERE id_evento = $id_evento";
+                    if (isset($_POST['Buscar'])) {
+
+
+                        $estatus = $_POST['estatus'];
+                        $id_evento = $_POST['evento'];
+
+                        $queryReservas = "SELECT * FROM view_AdminReservas WHERE id_evento = $id_evento and estatus = '$estatus' order by estatus asc,id_comprobante desc, folio desc LIMIT 10";
                         $reservas = $db->select($queryReservas);
 
                         if (empty($reservas)) {
@@ -412,8 +472,8 @@ if ($rol[0]->rol !== 'administrador') {
                                             <th scope='row'>$reserva->cliente</th>
                                             <td class='d-none d-lg-table-cell'>$reserva->boletos</td>
                                             <td class='d-none d-lg-table-cell'>$$reserva->montoTotal</td>
-                                            <td>$reserva->estatus"; 
-                                                
+                                            <td>$reserva->estatus";
+
                                 echo "  
                                             </td>
                                             <td>
@@ -422,54 +482,61 @@ if ($rol[0]->rol !== 'administrador') {
                                                     <i class='fa-solid fa-list'></i>
                                                 </button>
                                                 <div class='modal fade' id='detalles$reserva->folio' tabindex='-1' aria-labelledby='detalles$reserva->folio' aria-hidden='true'>
-                                                    <div class='modal-dialog modal-dialog-centered'>
+                                                    <div class='modal-dialog' style='max-width: 30% !important;'>
                                                         <div class='modal-content'>
                                                             <div class='modal-header'>
                                                                 <h5 class='modal-title' id='detalles$reserva->folio'>Detalles de la reserva</h5>
                                                                 <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                                                             </div>
                                                             <div class='modal-body text-start'>";
-                                                                $queryComprobante = "SELECT * FROM vw_comprobante_reserva WHERE id_reserva = $reserva->folio";
-                                                                $comprobantes = $db->select($queryComprobante);
-                                                                if (empty($comprobantes)) {
-                                                                    echo "<div class='badge bg-danger mb-3'><h5 class='text-center m-0 p-0'>Aún no se envía el comprobante</h5></div>";
-                                                                } else {
-                                                                    foreach ($comprobantes as $comprobante) {
-                                                                        echo "<h4 class='fw-bold'>Folio de la reserva: <span class='fw-normal fs-5'>{$reserva->folio}</span></h5>";
-                                                                        echo "<h4 class='fw-bold'>Concepto de pago: <span class='fw-normal fs-5'>{$comprobante->concepto}</span></h5>";
-                                                                        echo "<h4 class='fw-bold'>Folio de operación: <span class='fw-normal fs-5'>{$comprobante->folio_operacion}</span></h5>";
-                                                                        echo "<h4 class='fw-bold'>Fecha de la reserva: <span class='fw-normal fs-5'>{$comprobante->fecha}</span></h5>";
-                                                                        echo "<h4 class='fw-bold'>Cantidad de boletos: <span class='fw-normal fs-5'>{$reserva->boletos}</span></h5>";
-                                                                        echo "<h4 class='fw-bold'>Precio por boleto: <span class='fw-normal fs-5'>$$reserva->precio_boleto</span></h5>";
-                                                                        echo "<h4 class='fw-bold'>Monto de transferencia: <span class='fw-normal fs-5'>$$comprobante->monto</span></h5>";
-                                                                        echo "<h4 class='fw-bold'>Banco de origen: <span class='fw-normal fs-5'>{$comprobante->banco_origen}</span></h5>";
-                                                                        echo "<img src='../img/comprobantes/$comprobante->imagen_comprobante' class='img-fluid'>";
-                                                                    }
-                                                                }
-                                                                echo "
+                                $queryComprobante = "SELECT * FROM vw_comprobante_reserva WHERE id_reserva = $reserva->folio";
+                                $comprobantes = $db->select($queryComprobante);
+                                if (empty($comprobantes)) {
+                                    echo "<div class='badge bg-danger mb-3'><h5 class='text-center m-0 p-0'>Aún no se envía el comprobante</h5></div>";
+                                } else {
+                                    foreach ($comprobantes as $comprobante) {
+                                        echo "<h4 class='fw-bold'>Folio de la reserva: <span class='fw-normal fs-5'>{$reserva->folio}</span></h5>";
+                                        echo "<h4 class='fw-bold'>Concepto de pago: <span class='fw-normal fs-5'>{$comprobante->concepto}</span></h5>";
+                                        echo "<h4 class='fw-bold'>Folio de operación: <span class='fw-normal fs-5'>{$comprobante->folio_operacion}</span></h5>";
+                                        echo "<h4 class='fw-bold'>Fecha de la reserva: <span class='fw-normal fs-5'>{$comprobante->fecha}</span></h5>";
+                                        echo "<h4 class='fw-bold'>Cantidad de boletos: <span class='fw-normal fs-5'>{$reserva->boletos}</span></h5>";
+                                        echo "<h4 class='fw-bold'>Precio por boleto: <span class='fw-normal fs-5'>$$reserva->precio_boleto</span></h5>";
+                                        echo "<h4 class='fw-bold'>Monto de transferencia: <span class='fw-normal fs-5'>$$comprobante->monto</span></h5>";
+                                        echo "<h4 class='fw-bold'>Banco de origen: <span class='fw-normal fs-5'>{$comprobante->banco_origen}</span></h5>";
+                                        echo "<img src='../img/comprobantes/$comprobante->imagen_comprobante' class='img-fluid'>";
+                                    }
+                                }
+                                $disabled = isset($disabled) ? $disabled : '';
+                                echo "
                                                                 <form method='post' action='../scripts/adminreservas/estatusReserva.php'>
                                                                     <input type='hidden' name='id_reserva' value='$reserva->folio'>
                                                                     <div class='mb-3'>
                                                                         <label for='estatus' class='form-label'>Estatus</label>
-                                                                        <select name='estatus' id='estatus' class='form-select' required>";
+                                                                        <select name='estatus' id='estatus' class='form-select' $disabled required>";
                                 if ($reserva->estatus == 'Pendiente') {
+                                    $disabled = '';
                                     echo "<option value='Pendiente' selected>Pendiente</option>
                                                                                         <option value='Apartada'>Apartada</option>
                                                                                         <option value='Cancelada'>Cancelada</option>";
                                 } else if ($reserva->estatus == 'Apartada') {
+                                    $disabled = 'disabled';
                                     echo "<option value='Pendiente'>Pendiente</option>
                                                                                         <option value='Apartada' selected>Apartada</option>
                                                                                         <option value='Cancelada'>Cancelada</option>";
                                 } else {
+                                    $disabled = 'disabled';
                                     echo "<option value='Pendiente'>Pendiente</option>
                                                                                         <option value='Apartada'>Apartada</option>
                                                                                         <option value='Cancelada' selected>Cancelada</option>";
                                 }
                                 echo "
                                                                         </select>
+                                                                        <i class='fa-solid fa-circle-info me-2'></i>
+                                                                    <p class='mb-0 fs-6'>Si el estatus es Cancelada o Apartada no se podará cambiar.</p>
+                                                                    </div>
                                                                         <div class='text-end mt-4'>
                                                                             <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
-                                                                            <input type='submit' class='btn btn-dark' value='Guardar Cambios'>
+                                                                            <input type='submit' class='btn btn-dark' value='Guardar Cambios' $disabled>
                                                                         </div>
                                                                     </div>
                                                                 </form>
@@ -478,18 +545,18 @@ if ($rol[0]->rol !== 'administrador') {
                                                     </div>
                                                 </div>
                                                 ";
-                                                $comprobante = "SELECT * FROM comprobantes WHERE id_reserva = $reserva->folio";
-                                                $comprobante = $db->select($comprobante);
-                                                if ($comprobante == null) {
-                                                    ?>
-                                                    <button class="btn btn-danger"><i class="fa-regular fa-file"></i></button>
-                                                    <?php
-                                                } else {
-                                                    ?>
-                                                    <button class="btn btn-success"><i class="fa-regular fa-file"></i></button>
-                                                    <?php
-                                                }
-                                                echo "
+                                $comprobante = "SELECT * FROM comprobantes WHERE id_reserva = $reserva->folio";
+                                $comprobante = $db->select($comprobante);
+                                if ($comprobante == null) {
+                                    ?>
+                                    <button class="btn btn-danger"><i class="fa-regular fa-file"></i></button>
+                                    <?php
+                                } else {
+                                    ?>
+                                    <button class="btn btn-success"><i class="fa-regular fa-file"></i></button>
+                                    <?php
+                                }
+                                echo "
                                             </td>
                                         </tr>";
                             }
@@ -506,6 +573,7 @@ if ($rol[0]->rol !== 'administrador') {
             </div>
         </div>
     </div>
+
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/b820f07375.js" crossorigin="anonymous"></script>
     <script src="../script/script.js"></script>

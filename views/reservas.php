@@ -20,7 +20,7 @@
     if (isset($_SESSION["usuario"])) {
         $rolUsuario = "SELECT r.rol FROM roles r JOIN roles_usuarios ru ON r.id_rol = ru.id_rol JOIN personas p ON ru.id_usuario = p.id_usuario WHERE p.usuario = '$_SESSION[usuario]'";
         $rol = $db->select($rolUsuario);
-        
+
         $queryReservas = "SELECT * FROM vw_reservas WHERE usuario = '$_SESSION[usuario]' ORDER BY fecha_hora_reserva DESC";
         $reservas = $db->select($queryReservas);
 
@@ -39,8 +39,11 @@
 </head>
 
 <body>
-     <!-- Botón de WhatsApp -->
-     <button id="whatsappButton" class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3" type="button" onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
+    <!-- Botón de WhatsApp -->
+    <button id="whatsappButton"
+        class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3"
+        type="button"
+        onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
         <i class="fa-brands fa-whatsapp fa-2x"></i>
     </button>
 
@@ -129,115 +132,126 @@
             <?php
             if (empty($reservas)) {
                 ?>
-                 <div class="row p-0 m-0 d-flex justify-content-center align-items-center">
+                <div class="row p-0 m-0 d-flex justify-content-center align-items-center">
                     <div id="category-warning" class="alert text-center p-5 mt-4 mx-4" role="alert">
-                        <div> 
+                        <div>
                             <i class="fa-solid fa-mug-hot fa-4x text-muted"></i>
                         </div>
                         <div class='text-center mt-3'>
-                            <h5>Aún no haz realizado ninguna reserva.</h5> 
+                            <h5>Aún no haz realizado ninguna reserva.</h5>
                         </div>
                     </div>
                     <div class="container text-center mb-5">
                         <a href="eventos.php" class="btn btn-cafe">Ir a Eventos</a>
                     </div>
-                 </div>
+                </div>
                 <?php
             } else {
                 foreach ($reservas as $reserva) {
-            ?>
-                <div class="col-12 mb-4">
-                    <div class="card shadow">
-                        <div class="card-body">
-                            <div class="row p-3 d-flex flex-column justify-content-between">
-                                <div class="col-12 d-flex flex-column">
-                                    <div class="card-title d-flex justify-content-between">
-                                        <p class="card-title m-0 p-0">Fecha: <?= $reserva->fecha_hora_reserva ?></p>
-                                        <p class="card-title m-0 p-0">Folio de reserva: <?= $reserva->folio ?></p>
-                                    </div>
-                                    <hr>
-                                    <div class="row d-block d-lg-flex flex-row justify-content-between">
-                                        <div class="col-12 col-lg-10 m-0 ps-1">
-                                            <h4 class="card-subtitle m-2 text-muted">
-                                                <?php 
+                    ?>
+                    <div class="col-12 mb-4">
+                        <div class="card shadow">
+                            <div class="card-body">
+                                <div class="row p-3 d-flex flex-column justify-content-between">
+                                    <div class="col-12 d-flex flex-column">
+                                        <div class="card-title d-flex justify-content-between">
+                                            <p class="card-title m-0 p-0">Fecha: <?= $reserva->fecha_hora_reserva ?></p>
+                                            <p class="card-title m-0 p-0">Folio de reserva: <?= $reserva->folio ?></p>
+                                        </div>
+                                        <hr>
+                                        <div class="row d-block d-lg-flex flex-row justify-content-between">
+                                            <div class="col-12 col-lg-10 m-0 ps-1">
+                                                <h4 class="card-subtitle m-2 text-muted">
+                                                    <?php
                                                     if ($reserva->estatus === "Cancelada") {
                                                         ?>
                                                         <span class="badge bg-danger">Cancelada</span>
                                                         <?php
                                                     } else if ($reserva->estatus === "Apartada") {
                                                         ?>
-                                                        <span class="badge bg-success">Apartada</span>
+                                                            <span class="badge bg-success">Apartada</span>
                                                         <?php
                                                     } else {
                                                         ?>
-                                                        <span class="badge bg-warning">Pendiente</span>
-                                                        <?php
+                                                            <span class="badge bg-warning">Pendiente</span>
+                                                            <?php
                                                             $queryComprobante = "SELECT * FROM comprobantes WHERE id_reserva = $reserva->folio";
                                                             $comprobantes = $db->select($queryComprobante);
 
-                                                            if(empty($comprobantes)) {
+                                                            if (empty($comprobantes)) {
                                                                 ?>
                                                                 <span class="badge bg-secondary">Sin comprobante</span>
-                                                                <?php
+                                                            <?php
                                                             } else {
                                                                 ?>
                                                                 <span class="badge bg-secondary">En revisión</span>
-                                                                <?php  
-                                                            } 
+                                                            <?php
+                                                            }
                                                     } ?>
-                                            </h4>
-                                            <p class="card-text m-2">Evento: <?= $reserva->evento ?></p>
-                                        </div>
-                                        <div class="col-lg-2 m-0 p-0 pe-3">
+                                                </h4>
+                                                <p class="card-text m-2">Evento: <?= $reserva->evento ?></p>
+                                            </div>
+                                            <div class="col-lg-2 m-0 p-0 pe-3">
                                                 <form method="post" enctype="multipart/form-data" class="m-1">
                                                     <?php
-                                                        if($reserva->estatus === "Cancelada" OR $reserva->estatus === "Apartada") {
-                                                            ?>
-                                                            <button disabled type="submit" class="btn btn-secondary btn-block m-2 mt-0 mb-0 w-100">Cancelar</button>
-                                                            <?php
-                                                        } else {
-                                                            ?>
-                                                            <input type="hidden" name="folio" value="<?= $reserva->folio ?>"/>
-                                                            <!-- boton que activa modal de prevencion -->
-                                                            <button type="button" class="btn btn-danger btn-block m-2 mt-0 mb-0 w-100" data-bs-toggle="modal" data-bs-target="#cancelarReserva<?= $reserva->folio ?>">
-                                                                Cancelar Reserva
-                                                            </button>
-                                                            <!-- Modal de prevencion -->
-                                                            <div class="modal fade" id="cancelarReserva<?= $reserva->folio ?>" tabindex="-1" aria-labelledby="cancelarModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h1 class="modal-title fs-5" id="cancelarModalLabel">Cancelar Reserva</h1>
-                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <h5 class="mb-3">¿Estas seguro de que deseas cancelar esta reserva?</h5>
-                                                                            <div class="text-end">
-                                                                            <button class="btn btn-secondary btn-block" data-bs-dismiss="modal">Cerrar</button></button>
-                                                                            <button type="submit" class="btn btn-danger" name="cancelarReserva">Cancelar Reserva</button>
-                                                                            </div>
+                                                    if ($reserva->estatus === "Cancelada" or $reserva->estatus === "Apartada") {
+                                                        ?>
+                                                        <button disabled type="submit"
+                                                            class="btn btn-secondary btn-block m-2 mt-0 mb-0 w-100">Cancelar</button>
+                                                        <?php
+                                                    } else {
+                                                        ?>
+                                                        <input type="hidden" name="folio" value="<?= $reserva->folio ?>" />
+                                                        <!-- boton que activa modal de prevencion -->
+                                                        <button type="button" class="btn btn-danger btn-block m-2 mt-0 mb-0 w-100"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#cancelarReserva<?= $reserva->folio ?>">
+                                                            Cancelar Reserva
+                                                        </button>
+                                                        <!-- Modal de prevencion -->
+                                                        <div class="modal fade" id="cancelarReserva<?= $reserva->folio ?>"
+                                                            tabindex="-1" aria-labelledby="cancelarModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h1 class="modal-title fs-5" id="cancelarModalLabel">
+                                                                            Cancelar Reserva</h1>
+                                                                        <button type="button" class="btn-close"
+                                                                            data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <h5 class="mb-3">¿Estas seguro de que deseas cancelar esta
+                                                                            reserva?</h5>
+                                                                        <div class="text-end">
+                                                                            <button class="btn btn-secondary btn-block"
+                                                                                data-bs-dismiss="modal">Cerrar</button></button>
+                                                                            <button type="submit" class="btn btn-danger"
+                                                                                name="cancelarReserva">Cancelar Reserva</button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <?php
-                                                        }
+                                                        </div>
+                                                        <?php
+                                                    }
                                                     ?>
                                                 </form>
-                                                <form action="detalleReserva.php" method="post" enctype="multipart/form-data" class="m-1">
-                                                    <input type="hidden" name="folio" value="<?= $reserva->folio ?>"/>
-                                                    <button type="submit" class="btn btn-cafe m-2 mt-0 mb-0 w-100" name="verDetalles">
+                                                <form action="detalleReserva.php" method="post" enctype="multipart/form-data"
+                                                    class="m-1">
+                                                    <input type="hidden" name="folio" value="<?= $reserva->folio ?>" />
+                                                    <button type="submit" class="btn btn-cafe m-2 mt-0 mb-0 w-100"
+                                                        name="verDetalles">
                                                         Ver Detalles
                                                     </button>
                                                 </form>
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            <?php
+                    <?php
                 }
             }
             ?>
@@ -246,7 +260,31 @@
             <span id="alertMessage">Mensaje de la alerta.</span>
         </div>
     </div>
-
+    <nav aria-label="Page navigation example">
+        <ul class="pagination d-flex justify-content-center">
+            <li class="page-item<?php if ($page <= 1) {
+                echo ' disabled';
+            } ?>">
+                <a class="page-link custom-page-link" href="?page=<?php echo $page - 1; ?>" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                <li class="page-item custom-page-item<?php if ($page == $i) {
+                    echo ' active';
+                } ?>">
+                    <a class="page-link custom-page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                </li>
+            <?php endfor; ?>
+            <li class="page-item<?php if ($page >= $total_pages) {
+                echo ' disabled';
+            } ?>">
+                <a class="page-link custom-page-link" href="?page=<?php echo $page + 1; ?>" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
     <!-- Footer -->
     <footer class="mt-auto">
         <div class="container-fluid p-5" style="background: var(--negroclaro);">
