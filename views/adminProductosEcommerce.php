@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once '../class/database.php';
-include_once ("../scripts/funciones/funciones.php");
+include_once("../scripts/funciones/funciones.php");
 $db = new database();
 $db->conectarDB();
 
@@ -22,8 +22,28 @@ if (isset($_POST['btneditarstock'])) {
     $db->execute($query);
 
     showAlert("Se actualizo el stock correctamente", "success");
+}
+if (isset($_POST['btnestatus'])) {
+    extract($_POST);
+    $consulta = "UPDATE bolsas_cafe SET estatus = $estatus WHERE id_bolsa = $id_pm;";
+
+    $db->select($consulta);
+    if ($estatus == 'false') { // Verifica si el estatus es 'falso'
+        // Consulta para eliminar elementos del carrito
+        $consulta2 = "
+            DELETE FROM carrito 
+            WHERE id_dbc IN (
+                SELECT id_dbc 
+                FROM detalle_bc 
+                WHERE id_bolsa = $id_pm
+            );
+        ";
+        $db->execute($consulta2);
+    }
 
 
+
+    showAlert("Se actualizo el estatus correctamente", "success");
 }
 ?>
 <!DOCTYPE html>
@@ -50,22 +70,18 @@ if (isset($_POST['btneditarstock'])) {
                     <div class="accordion-item m-0 p-0 row">
                         <a href="adminInicio.php">
                             <h2 class="accordion-header">
-                            <button class="row accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-inicio" aria-expanded="false"
-                                aria-controls="flush-inicio">
-                                <div class="col-6">
-                                    <i class="fa-solid fa-house-laptop me-1"></i>
-                                    Inicio
-                                </div>
-                            </button>
+                                <button class="row accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-inicio" aria-expanded="false" aria-controls="flush-inicio">
+                                    <div class="col-6">
+                                        <i class="fa-solid fa-house-laptop me-1"></i>
+                                        Inicio
+                                    </div>
+                                </button>
                             </h2>
                         </a>
                     </div>
                     <div class="accordion-item row m-0 p-0">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-menu" aria-expanded="false"
-                                aria-controls="flush-menu">
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-menu" aria-expanded="false" aria-controls="flush-menu">
                                 <div class="col-8">
                                     <i class="fa-solid fa-table me-3"></i>
                                     Menú
@@ -77,8 +93,7 @@ if (isset($_POST['btneditarstock'])) {
                         </h2>
                         <div id="flush-menu" class="accordion-collapse collapse" data-bs-parent="#accordionMobile">
                             <div class="accordion-body bagr-cafe4">
-                                <a href="adminMenu.php" class="ms-5 text-light fw-bold fs-5 text-decoration-none"
-                                    aria-current="true">
+                                <a href="adminMenu.php" class="ms-5 text-light fw-bold fs-5 text-decoration-none" aria-current="true">
                                     Administrar Menú
                                 </a>
                             </div>
@@ -86,9 +101,7 @@ if (isset($_POST['btneditarstock'])) {
                     </div>
                     <div class="accordion-item row m-0 p-0">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-events" aria-expanded="false"
-                                aria-controls="flush-events">
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-events" aria-expanded="false" aria-controls="flush-events">
                                 <div class="col-8">
                                     <i class="fa-solid fa-bullhorn me-3"></i>
                                     Eventos
@@ -100,8 +113,7 @@ if (isset($_POST['btneditarstock'])) {
                         </h2>
                         <div id="flush-events" class="accordion-collapse collapse" data-bs-parent="#accordionMobile">
                             <div class="accordion-body bagr-cafe4">
-                                <a href="adminEventos.php" class="text-light fw-bold fs-5 text-decoration-none ms-5"
-                                    aria-current="true">
+                                <a href="adminEventos.php" class="text-light fw-bold fs-5 text-decoration-none ms-5" aria-current="true">
                                     Administrar Eventos
                                 </a><br><br>
                                 <a href="adminReservas.php" class="text-light fw-bold fs-5 text-decoration-none ms-5">
@@ -115,9 +127,7 @@ if (isset($_POST['btneditarstock'])) {
                     </div>
                     <div class="accordion-item row m-0 p-0">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-ecommerce" aria-expanded="false"
-                                aria-controls="flush-ecommerce">
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-ecommerce" aria-expanded="false" aria-controls="flush-ecommerce">
                                 <div class="col-8">
                                     <i class="fa-solid fa-cart-arrow-down me-3"></i>
                                     E-Commerce
@@ -129,12 +139,10 @@ if (isset($_POST['btneditarstock'])) {
                         </h2>
                         <div id="flush-ecommerce" class="accordion-collapse collapse" data-bs-parent="#accordionMobile">
                             <div class="accordion-body bagr-cafe4">
-                                <a href="adminPedidos.php" class="fw-bold fs-5 ms-5 text-light text-decoration-none"
-                                    aria-current="true">
+                                <a href="adminPedidos.php" class="fw-bold fs-5 ms-5 text-light text-decoration-none" aria-current="true">
                                     Administrar Pedidos
                                 </a><br><br>
-                                <a href="adminProductosEcommerce.php"
-                                    class="fw-bold fs-5 ms-5 text-light text-decoration-none">
+                                <a href="adminProductosEcommerce.php" class="fw-bold fs-5 ms-5 text-light text-decoration-none">
                                     Administrar Productos
                                 </a>
                             </div>
@@ -142,9 +150,7 @@ if (isset($_POST['btneditarstock'])) {
                     </div>
                     <div class="accordion-item row m-0 p-0">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-blog" aria-expanded="false"
-                                aria-controls="flush-blog">
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-blog" aria-expanded="false" aria-controls="flush-blog">
                                 <div class="col-8">
                                     <i class="fa-solid fa-blog me-3"></i>
                                     Publicaciones
@@ -156,8 +162,7 @@ if (isset($_POST['btneditarstock'])) {
                         </h2>
                         <div id="flush-blog" class="accordion-collapse collapse" data-bs-parent="#accordionMobile">
                             <div class="accordion-body bagr-cafe4">
-                                <a href="adminPublicaciones.php"
-                                    class="fw-bold fs-5 ms-5 text-light text-decoration-none" aria-current="true">
+                                <a href="adminPublicaciones.php" class="fw-bold fs-5 ms-5 text-light text-decoration-none" aria-current="true">
                                     Administrar Publicaciones
                                 </a>
                             </div>
@@ -165,9 +170,7 @@ if (isset($_POST['btneditarstock'])) {
                     </div>
                     <div class="accordion-item row m-0 p-0">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-rewards" aria-expanded="false"
-                                aria-controls="flush-rewards">
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-rewards" aria-expanded="false" aria-controls="flush-rewards">
                                 <div class="col-8">
                                     <i class="fa-solid fa-medal me-3"></i>
                                     Recompensas
@@ -179,8 +182,7 @@ if (isset($_POST['btneditarstock'])) {
                         </h2>
                         <div id="flush-rewards" class="accordion-collapse collapse" data-bs-parent="#accordionMobile">
                             <div class="accordion-body bagr-cafe4">
-                                <a href="adminRecompensas.php" class="fw-bold fs-5 ms-5 text-light text-decoration-none"
-                                    aria-current="true">
+                                <a href="adminRecompensas.php" class="fw-bold fs-5 ms-5 text-light text-decoration-none" aria-current="true">
                                     Administrar Recompensas
                                 </a>
                             </div>
@@ -190,9 +192,7 @@ if (isset($_POST['btneditarstock'])) {
             </div>
             <nav class="navbar navbar-dark bagr-cafe4">
                 <div class="container-fluid">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <h1 class="fw-bold text-light pt-2 me-auto">Productos</h1>
@@ -212,22 +212,19 @@ if (isset($_POST['btneditarstock'])) {
                 <h4 class="text-center text-light m-3 fs-2 fw-bold">Administrar</h4>
                 <div class="row">
                     <div class="col-12 text-center">
-                    <img src="../img/Sinfonía-Café-y-Cultura blanco.webp" alt="" class="img-fluid" style="width: 300px;">
+                        <img src="../img/Sinfonía-Café-y-Cultura blanco.webp" alt="" class="img-fluid" style="width: 300px;">
                     </div>
                 </div>
                 <div class="accordion accordion-flush" id="accordionPc">
                     <div class=" ms-2 fs-3 mt-4 mb-3">
-                        <a class="fw-bold bagr-cafe4 text-light text-decoration-none" href="adminInicio.php"
-                            aria-expanded="false">
+                        <a class="fw-bold bagr-cafe4 text-light text-decoration-none" href="adminInicio.php" aria-expanded="false">
                             <i class="fa-solid fa-house-laptop"></i>
                             Inicio
                         </a>
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-menu" aria-expanded="false"
-                                aria-controls="flush-menu">
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-menu" aria-expanded="false" aria-controls="flush-menu">
                                 <div class="col-6">
                                     <i class="fa-solid fa-table me-1"></i>
                                     Menú
@@ -239,8 +236,7 @@ if (isset($_POST['btneditarstock'])) {
                         </h2>
                         <div id="flush-menu" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
                             <div class="accordion-body bagr-cafe4">
-                                <a href="adminMenu.php" class="ms-5 text-light fw-bold fs-6 text-decoration-none"
-                                    aria-current="true">
+                                <a href="adminMenu.php" class="ms-5 text-light fw-bold fs-6 text-decoration-none" aria-current="true">
                                     Administrar Menú
                                 </a>
                             </div>
@@ -248,9 +244,7 @@ if (isset($_POST['btneditarstock'])) {
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-events" aria-expanded="false"
-                                aria-controls="flush-events">
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-events" aria-expanded="false" aria-controls="flush-events">
                                 <div class="col-6">
                                     <i class="fa-solid fa-bullhorn me-1"></i>
                                     Eventos
@@ -262,8 +256,7 @@ if (isset($_POST['btneditarstock'])) {
                         </h2>
                         <div id="flush-events" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
                             <div class="accordion-body bagr-cafe4">
-                                <a href="adminEventos.php" class="text-light fw-bold fs-6 text-decoration-none ms-5"
-                                    aria-current="true">
+                                <a href="adminEventos.php" class="text-light fw-bold fs-6 text-decoration-none ms-5" aria-current="true">
                                     Administrar Eventos
                                 </a><br><br>
                                 <a href="adminReservas.php" class="text-light fw-bold fs-6 text-decoration-none ms-5">
@@ -277,9 +270,7 @@ if (isset($_POST['btneditarstock'])) {
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-ecommerce" aria-expanded="false"
-                                aria-controls="flush-ecommerce">
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-ecommerce" aria-expanded="false" aria-controls="flush-ecommerce">
                                 <div class="col-8">
                                     <i class="fa-solid fa-cart-arrow-down me-1"></i>
                                     E-Commerce
@@ -291,12 +282,10 @@ if (isset($_POST['btneditarstock'])) {
                         </h2>
                         <div id="flush-ecommerce" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
                             <div class="accordion-body bagr-cafe4">
-                                <a href="adminPedidos.php" class="fw-bold fs-6 ms-5 text-light text-decoration-none"
-                                    aria-current="true">
+                                <a href="adminPedidos.php" class="fw-bold fs-6 ms-5 text-light text-decoration-none" aria-current="true">
                                     Administrar Pedidos
                                 </a><br><br>
-                                <a href="adminProductosEcommerce.php"
-                                    class="fw-bold fs-6 ms-5 text-light text-decoration-none">
+                                <a href="adminProductosEcommerce.php" class="fw-bold fs-6 ms-5 text-light text-decoration-none">
                                     Administrar Productos
                                 </a>
                             </div>
@@ -304,9 +293,7 @@ if (isset($_POST['btneditarstock'])) {
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-blog" aria-expanded="false"
-                                aria-controls="flush-blog">
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-blog" aria-expanded="false" aria-controls="flush-blog">
                                 <div class="col-8">
                                     <i class="fa-solid fa-blog me-1"></i>
                                     Publicaciones
@@ -318,8 +305,7 @@ if (isset($_POST['btneditarstock'])) {
                         </h2>
                         <div id="flush-blog" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
                             <div class="accordion-body bagr-cafe4">
-                                <a href="adminPublicaciones.php"
-                                    class="fw-bold fs-6 ms-5 text-light text-decoration-none" aria-current="true">
+                                <a href="adminPublicaciones.php" class="fw-bold fs-6 ms-5 text-light text-decoration-none" aria-current="true">
                                     Administrar Publicaciones
                                 </a>
                             </div>
@@ -327,9 +313,7 @@ if (isset($_POST['btneditarstock'])) {
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-rewards" aria-expanded="false"
-                                aria-controls="flush-rewards">
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-rewards" aria-expanded="false" aria-controls="flush-rewards">
                                 <div class="col-8">
                                     <i class="fa-solid fa-medal me-1"></i>
                                     Recompensas
@@ -341,8 +325,7 @@ if (isset($_POST['btneditarstock'])) {
                         </h2>
                         <div id="flush-rewards" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
                             <div class="accordion-body bagr-cafe4">
-                                <a href="adminRecompensas.php" class="fw-bold fs-6 ms-5 text-light text-decoration-none"
-                                    aria-current="true">
+                                <a href="adminRecompensas.php" class="fw-bold fs-6 ms-5 text-light text-decoration-none" aria-current="true">
                                     Administrar Recompensa
                                 </a>
                             </div>
@@ -371,34 +354,28 @@ if (isset($_POST['btneditarstock'])) {
                     </div>
                 </div>
                 <!-- Modal para agregar publicación -->
-                <div class="modal fade" id="agregarProducto" tabindex="-1" aria-labelledby="agregarProducto"
-                    aria-hidden="true">
+                <div class="modal fade" id="agregarProducto" tabindex="-1" aria-labelledby="agregarProducto" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="agregarProducto">Agregar Producto</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <!-- Aquí va el contenido del modal -->
                             <div class="modal-body">
-                                <form action="../scripts/adminecomerce/agregarbolsa.php" method="POST"
-                                    enctype="multipart/form-data">
+                                <form action="../scripts/adminecomerce/agregarbolsa.php" method="POST" enctype="multipart/form-data">
                                     <!-- Aquí va el formulario -->
                                     <div class="mb-3">
                                         <label for="nombre" class="form-label">Nombre</label>
-                                        <input type="text" class="form-control" id="nombre" name="nombre"
-                                            maxlength="100" required>
+                                        <input type="text" class="form-control" id="nombre" name="nombre" maxlength="100" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="años_cosecha" class="form-label">Año de Cosecha</label>
-                                        <textarea class="form-control" id="años_cosecha" name="años_cosecha"
-                                            maxlength="255" required></textarea>
+                                        <textarea class="form-control" id="años_cosecha" name="años_cosecha" maxlength="255" required></textarea>
                                     </div>
                                     <div class="mb-3">
                                         <label for="productor_finca" class="form-label">Productor/Finca</label>
-                                        <input type="text" class="form-control" id="productor_finca"
-                                            name="productor_finca" maxlength="150" required>
+                                        <input type="text" class="form-control" id="productor_finca" name="productor_finca" maxlength="150" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="proceso" class="form-label">Proceso</label>
@@ -410,43 +387,35 @@ if (isset($_POST['btneditarstock'])) {
                                     </div>
                                     <div class="mb-3">
                                         <label for="variedad" class="form-label">Variedad</label>
-                                        <input type="text" class="form-control" id="variedad" name="variedad"
-                                            maxlength="200" required>
+                                        <input type="text" class="form-control" id="variedad" name="variedad" maxlength="200" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="altura" class="form-label">Altura</label>
-                                        <input type="text" class="form-control" id="altura" name="altura"
-                                            maxlength="100" required>
+                                        <input type="text" class="form-control" id="altura" name="altura" maxlength="100" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="aroma" class="form-label">Aroma</label>
-                                        <input type="text" class="form-control" id="aroma" name="aroma" maxlength="150"
-                                            required>
+                                        <input type="text" class="form-control" id="aroma" name="aroma" maxlength="150" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="acidez" class="form-label">Acidez</label>
-                                        <input type="text" class="form-control" id="acidez" name="acidez"
-                                            maxlength="150" required>
+                                        <input type="text" class="form-control" id="acidez" name="acidez" maxlength="150" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="sabor" class="form-label">Sabor</label>
-                                        <input type="text" class="form-control" id="sabor" name="sabor" maxlength="150"
-                                            required>
+                                        <input type="text" class="form-control" id="sabor" name="sabor" maxlength="150" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="cuerpo" class="form-label">Cuerpo</label>
-                                        <input type="text" class="form-control" id="cuerpo" name="cuerpo"
-                                            maxlength="100" required>
+                                        <input type="text" class="form-control" id="cuerpo" name="cuerpo" maxlength="100" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="puntaje_catacion" class="form-label">Puntaje de Catación</label>
-                                        <input type="number" step="0.1" min="0" class="form-control"
-                                            id="puntaje_catacion" name="puntaje_catacion" required>
+                                        <input type="number" step="0.1" min="0" class="form-control" id="puntaje_catacion" name="puntaje_catacion" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="imagen" class="form-label">Imagen</label>
-                                        <input type="file" class="form-control" id="imagen" name="imagen" required
-                                            accept="image/*">
+                                        <input type="file" class="form-control" id="imagen" name="imagen" required accept="image/*">
                                     </div>
                                     <div class="row">
                                         <div class="mb-3 col-6">
@@ -460,18 +429,15 @@ if (isset($_POST['btneditarstock'])) {
                                         </div>
                                         <div class="mb-3 col-6">
                                             <label for="precio" class="form-label">Precio</label>
-                                            <input type="number" step="0.01" min="0" class="form-control" id="precio"
-                                                name="precio" required>
+                                            <input type="number" step="0.01" min="0" class="form-control" id="precio" name="precio" required>
                                         </div>
                                         <div class="mb-3 col-6">
                                             <label for="stock" class="form-label">Stock</label>
-                                            <input type="number" min="0" class="form-control" id="stock" name="stock"
-                                                required>
+                                            <input type="number" min="0" class="form-control" id="stock" name="stock" required>
                                         </div>
                                     </div>
                                     <div class="mt-3 text-end">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                                         <button type="submit" class="btn btn-dark">Agregar Producto</button>
                                     </div>
                                 </form>
@@ -490,7 +456,7 @@ if (isset($_POST['btneditarstock'])) {
                                             <!-- Aquí va el select de procesos -->
                                             <?php
                                             // Define an array with the measures
-                                            $proceso = ['Natural', 'Lavado'];
+                                            $proceso = ['Todos', 'Natural', 'Lavado'];
 
                                             // Loop through the measures array and create an option for each
                                             foreach ($proceso as $procesos) {
@@ -509,20 +475,47 @@ if (isset($_POST['btneditarstock'])) {
                 </div>
                 <div class="row mt-3 p-4 m-0">
                     <div class="d-lg-none w-100 mb-3 m-0 p-0">
-                        <button type="button" class="btn w-100 btn-dark shadow-lg" data-bs-toggle="modal"
-                            data-bs-target="#agregarProducto">
+                        <button type="button" class="btn w-100 btn-dark shadow-lg" data-bs-toggle="modal" data-bs-target="#agregarProducto">
                             <i class="fa-solid fa-plus fa-2x"></i>
                         </button>
                     </div>
                     <!-- Tabla de productos AQUI -->
                     <?php
                     if (isset($_POST['proceso'])) {
+
                         extract($_POST);
-                        $proceso = $_POST['proceso'];
+                        if ($proceso == 'Todos') {
+                            $procesos = '    SELECT 
+        bc.id_bolsa,
+        bc.nombre,
+        bc.años_cosecha,
+        bc.productor_finca,
+        bc.proceso,
+        bc.variedad,
+        bc.altura,
+        bc.aroma,
+        bc.acidez,
+        bc.sabor,
+        bc.cuerpo,
+        bc.puntaje_catacion,
+        bc.img_url,
+        bc.estatus,
+        GROUP_CONCAT(CONCAT(dbc.medida, ": $", dbc.precio, " (Stock: ", dbc.stock, ")") SEPARATOR "; ") AS detalles_medidas
+        FROM 
+        bolsas_cafe bc
+        JOIN 
+        detalle_bc dbc
+        ON 
+        bc.id_bolsa = dbc.id_bolsa
+        GROUP BY
+        bc.id_bolsa;';
+                            $bolsa = $db->select($procesos);
+                        } else {
+                            $proceso = $_POST['proceso'];
 
-                        $consulta = "CALL ObtenerDetallesPorProceso('$proceso');";
-                        $bolsa = $db->select($consulta);
-
+                            $consulta = "CALL ObtenerDetallesPorProceso('$proceso');";
+                            $bolsa = $db->select($consulta);
+                        }
                         if (empty($procesos)) {
                             echo "<div>No hay productos registrados en esta categoría.</div>";
                         } else {
@@ -830,8 +823,28 @@ function confirmDelete() {
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>       
+                                            </div>
+                                            <form  method='POST'>
+                                                
+                                                ";
+
+                                if ($bolsita->estatus == false) {
+                    ?>
+                                    <input type="hidden" name="estatus" value="true" required>
+                                    <button type="submit" name="btnestatus" class="btn btn-danger"><i class="fa-solid fa-eye-slash"></i></button>
+                                <?php
+                                } else {
+                                ?>
+                                    <input type="hidden" name="estatus" value="false" required>
+                                    <button type="submit" name="btnestatus" class="btn btn-success"><i class="fa-solid fa-eye"></i></button>
+                    <?php
+                                }
+                                echo "
+                                <input type='hidden' name='id_pm' value='$bolsita->id_bolsa' required>
+                                                </form>       
+                                            
                                         </td>
+                                         
                                     </td>
                                 </tr>";
                             }

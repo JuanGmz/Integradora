@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once '../class/database.php';
-include_once ("../scripts/funciones/funciones.php");
+include_once("../scripts/funciones/funciones.php");
 $db = new database();
 $db->conectarDB();
 
@@ -37,22 +37,18 @@ if ($rol[0]->rol !== 'administrador') {
                     <div class="accordion-item m-0 p-0 row">
                         <a href="adminInicio.php">
                             <h2 class="accordion-header">
-                            <button class="row accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-inicio" aria-expanded="false"
-                                aria-controls="flush-inicio">
-                                <div class="col-6">
-                                    <i class="fa-solid fa-house-laptop me-1"></i>
-                                    Inicio
-                                </div>
-                            </button>
+                                <button class="row accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-inicio" aria-expanded="false" aria-controls="flush-inicio">
+                                    <div class="col-6">
+                                        <i class="fa-solid fa-house-laptop me-1"></i>
+                                        Inicio
+                                    </div>
+                                </button>
                             </h2>
                         </a>
                     </div>
                     <div class="accordion-item row m-0 p-0">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-menu" aria-expanded="false"
-                                aria-controls="flush-menu">
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-menu" aria-expanded="false" aria-controls="flush-menu">
                                 <div class="col-8">
                                     <i class="fa-solid fa-table me-3"></i>
                                     Menú
@@ -64,8 +60,7 @@ if ($rol[0]->rol !== 'administrador') {
                         </h2>
                         <div id="flush-menu" class="accordion-collapse collapse" data-bs-parent="#accordionMobile">
                             <div class="accordion-body bagr-cafe4">
-                                <a href="adminMenu.php" class="ms-5 text-light fw-bold fs-5 text-decoration-none"
-                                    aria-current="true">
+                                <a href="adminMenu.php" class="ms-5 text-light fw-bold fs-5 text-decoration-none" aria-current="true">
                                     Administrar Menú
                                 </a>
                             </div>
@@ -73,9 +68,7 @@ if ($rol[0]->rol !== 'administrador') {
                     </div>
                     <div class="accordion-item row m-0 p-0">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-events" aria-expanded="false"
-                                aria-controls="flush-events">
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-events" aria-expanded="false" aria-controls="flush-events">
                                 <div class="col-8">
                                     <i class="fa-solid fa-bullhorn me-3"></i>
                                     Eventos
@@ -87,8 +80,7 @@ if ($rol[0]->rol !== 'administrador') {
                         </h2>
                         <div id="flush-events" class="accordion-collapse collapse" data-bs-parent="#accordionMobile">
                             <div class="accordion-body bagr-cafe4">
-                                <a href="adminEventos.php" class="text-light fw-bold fs-5 text-decoration-none ms-5"
-                                    aria-current="true">
+                                <a href="adminEventos.php" class="text-light fw-bold fs-5 text-decoration-none ms-5" aria-current="true">
                                     Administrar Eventos
                                 </a><br><br>
                                 <a href="adminReservas.php" class="text-light fw-bold fs-5 text-decoration-none ms-5">
@@ -102,9 +94,7 @@ if ($rol[0]->rol !== 'administrador') {
                     </div>
                     <div class="accordion-item row m-0 p-0">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-ecommerce" aria-expanded="false"
-                                aria-controls="flush-ecommerce">
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-ecommerce" aria-expanded="false" aria-controls="flush-ecommerce">
                                 <div class="col-8">
                                     <i class="fa-solid fa-cart-arrow-down me-3"></i>
                                     E-Commerce
@@ -116,12 +106,10 @@ if ($rol[0]->rol !== 'administrador') {
                         </h2>
                         <div id="flush-ecommerce" class="accordion-collapse collapse" data-bs-parent="#accordionMobile">
                             <div class="accordion-body bagr-cafe4">
-                                <a href="adminPedidos.php" class="fw-bold fs-5 ms-5 text-light text-decoration-none"
-                                    aria-current="true">
+                                <a href="adminPedidos.php" class="fw-bold fs-5 ms-5 text-light text-decoration-none" aria-current="true">
                                     Administrar Pedidos
                                 </a><br><br>
-                                <a href="adminProductosEcommerce.php"
-                                    class="fw-bold fs-5 ms-5 text-light text-decoration-none">
+                                <a href="adminProductosEcommerce.php" class="fw-bold fs-5 ms-5 text-light text-decoration-none">
                                     Administrar Productos
                                 </a>
                             </div>
@@ -129,9 +117,7 @@ if ($rol[0]->rol !== 'administrador') {
                     </div>
                     <div class="accordion-item row m-0 p-0">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-blog" aria-expanded="false"
-                                aria-controls="flush-blog">
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-blog" aria-expanded="false" aria-controls="flush-blog">
                                 <div class="col-8">
                                     <i class="fa-solid fa-blog me-3"></i>
                                     Publicaciones
@@ -143,8 +129,7 @@ if ($rol[0]->rol !== 'administrador') {
                         </h2>
                         <div id="flush-blog" class="accordion-collapse collapse" data-bs-parent="#accordionMobile">
                             <div class="accordion-body bagr-cafe4">
-                                <a href="adminPublicaciones.php"
-                                    class="fw-bold fs-5 ms-5 text-light text-decoration-none" aria-current="true">
+                                <a href="adminPublicaciones.php" class="fw-bold fs-5 ms-5 text-light text-decoration-none" aria-current="true">
                                     Administrar Publicaciones
                                 </a>
                             </div>
@@ -152,9 +137,7 @@ if ($rol[0]->rol !== 'administrador') {
                     </div>
                     <div class="accordion-item row m-0 p-0">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-rewards" aria-expanded="false"
-                                aria-controls="flush-rewards">
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-rewards" aria-expanded="false" aria-controls="flush-rewards">
                                 <div class="col-8">
                                     <i class="fa-solid fa-medal me-3"></i>
                                     Recompensas
@@ -166,8 +149,7 @@ if ($rol[0]->rol !== 'administrador') {
                         </h2>
                         <div id="flush-rewards" class="accordion-collapse collapse" data-bs-parent="#accordionMobile">
                             <div class="accordion-body bagr-cafe4">
-                                <a href="adminRecompensas.php" class="fw-bold fs-5 ms-5 text-light text-decoration-none"
-                                    aria-current="true">
+                                <a href="adminRecompensas.php" class="fw-bold fs-5 ms-5 text-light text-decoration-none" aria-current="true">
                                     Administrar Recompensas
                                 </a>
                             </div>
@@ -177,9 +159,7 @@ if ($rol[0]->rol !== 'administrador') {
             </div>
             <nav class="navbar navbar-dark bagr-cafe4">
                 <div class="container-fluid">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <h1 class="fw-bold text-light pt-2 me-auto">Inicio</h1>
@@ -199,22 +179,21 @@ if ($rol[0]->rol !== 'administrador') {
                 <h4 class="text-center text-light m-3 fs-2 fw-bold">Administrar</h4>
                 <div class="row">
                     <div class="col-12 text-center">
-                    <img src="../img/Sinfonía-Café-y-Cultura blanco.webp" alt="" class="img-fluid" style="width: 300px;">
+                        <img src="../img/Sinfonía-Café-y-Cultura blanco.webp" alt="" class="img-fluid" style="width: 300px;">
                     </div>
                 </div>
+
                 <div class="accordion accordion-flush" id="accordionPc">
                     <div class=" ms-2 fs-3 mt-4 mb-3">
-                        <a class="fw-bold bagr-cafe4 text-light text-decoration-none" href="adminInicio.php"
-                            aria-expanded="false">
+                        <a class="fw-bold bagr-cafe4 text-light text-decoration-none" href="adminInicio.php" aria-expanded="false">
                             <i class="fa-solid fa-house-laptop"></i>
                             Inicio
                         </a>
                     </div>
+
                     <div class="accordion-item">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-menu" aria-expanded="false"
-                                aria-controls="flush-menu">
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-menu" aria-expanded="false" aria-controls="flush-menu">
                                 <div class="col-6">
                                     <i class="fa-solid fa-table me-1"></i>
                                     Menú
@@ -226,8 +205,7 @@ if ($rol[0]->rol !== 'administrador') {
                         </h2>
                         <div id="flush-menu" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
                             <div class="accordion-body bagr-cafe4">
-                                <a href="adminMenu.php" class="ms-5 text-light fw-bold fs-6 text-decoration-none"
-                                    aria-current="true">
+                                <a href="adminMenu.php" class="ms-5 text-light fw-bold fs-6 text-decoration-none" aria-current="true">
                                     Administrar Menú
                                 </a>
                             </div>
@@ -235,9 +213,7 @@ if ($rol[0]->rol !== 'administrador') {
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-events" aria-expanded="false"
-                                aria-controls="flush-events">
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-events" aria-expanded="false" aria-controls="flush-events">
                                 <div class="col-6">
                                     <i class="fa-solid fa-bullhorn me-1"></i>
                                     Eventos
@@ -249,8 +225,7 @@ if ($rol[0]->rol !== 'administrador') {
                         </h2>
                         <div id="flush-events" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
                             <div class="accordion-body bagr-cafe4">
-                                <a href="adminEventos.php" class="text-light fw-bold fs-6 text-decoration-none ms-5"
-                                    aria-current="true">
+                                <a href="adminEventos.php" class="text-light fw-bold fs-6 text-decoration-none ms-5" aria-current="true">
                                     Administrar Eventos
                                 </a><br><br>
                                 <a href="adminReservas.php" class="text-light fw-bold fs-6 text-decoration-none ms-5">
@@ -264,9 +239,7 @@ if ($rol[0]->rol !== 'administrador') {
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-ecommerce" aria-expanded="false"
-                                aria-controls="flush-ecommerce">
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-ecommerce" aria-expanded="false" aria-controls="flush-ecommerce">
                                 <div class="col-8">
                                     <i class="fa-solid fa-cart-arrow-down me-1"></i>
                                     E-Commerce
@@ -278,12 +251,10 @@ if ($rol[0]->rol !== 'administrador') {
                         </h2>
                         <div id="flush-ecommerce" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
                             <div class="accordion-body bagr-cafe4">
-                                <a href="adminPedidos.php" class="fw-bold fs-6 ms-5 text-light text-decoration-none"
-                                    aria-current="true">
+                                <a href="adminPedidos.php" class="fw-bold fs-6 ms-5 text-light text-decoration-none" aria-current="true">
                                     Administrar Pedidos
                                 </a><br><br>
-                                <a href="adminProductosEcommerce.php"
-                                    class="fw-bold fs-6 ms-5 text-light text-decoration-none">
+                                <a href="adminProductosEcommerce.php" class="fw-bold fs-6 ms-5 text-light text-decoration-none">
                                     Administrar Productos
                                 </a>
                             </div>
@@ -291,9 +262,7 @@ if ($rol[0]->rol !== 'administrador') {
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-blog" aria-expanded="false"
-                                aria-controls="flush-blog">
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-blog" aria-expanded="false" aria-controls="flush-blog">
                                 <div class="col-8">
                                     <i class="fa-solid fa-blog me-1"></i>
                                     Publicaciones
@@ -305,8 +274,7 @@ if ($rol[0]->rol !== 'administrador') {
                         </h2>
                         <div id="flush-blog" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
                             <div class="accordion-body bagr-cafe4">
-                                <a href="adminPublicaciones.php"
-                                    class="fw-bold fs-6 ms-5 text-light text-decoration-none" aria-current="true">
+                                <a href="adminPublicaciones.php" class="fw-bold fs-6 ms-5 text-light text-decoration-none" aria-current="true">
                                     Administrar Publicaciones
                                 </a>
                             </div>
@@ -314,9 +282,7 @@ if ($rol[0]->rol !== 'administrador') {
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-rewards" aria-expanded="false"
-                                aria-controls="flush-rewards">
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-rewards" aria-expanded="false" aria-controls="flush-rewards">
                                 <div class="col-8">
                                     <i class="fa-solid fa-medal me-1"></i>
                                     Recompensas
@@ -328,8 +294,7 @@ if ($rol[0]->rol !== 'administrador') {
                         </h2>
                         <div id="flush-rewards" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
                             <div class="accordion-body bagr-cafe4">
-                                <a href="adminRecompensas.php" class="fw-bold fs-6 ms-5 text-light text-decoration-none"
-                                    aria-current="true">
+                                <a href="adminRecompensas.php" class="fw-bold fs-6 ms-5 text-light text-decoration-none" aria-current="true">
                                     Administrar Recompensa
                                 </a>
                             </div>
@@ -340,8 +305,8 @@ if ($rol[0]->rol !== 'administrador') {
 
             <div class="col-lg-9 offset-lg-3 p-0" style="background: var(--color6);">
                 <!-- AQUI VA EL CONTENIDO DE LA PAGINAAAAAAAAAAAA -->
-                <div class="container p-0 m-0 bagr-cafe4 d-none d-lg-block">
-                    <div class="row p-3 m-0 shadow-lg bagr-cafe4">
+                <div class="row p-0 m-0 bagr-cafe4">
+                    <div class="row p-3 m-0 shadow-lg bagr-cafe4 d-none d-lg-flex">
                         <div class="col-3">
                             <h1 class="fw-bold text-light">Inicio</h1>
                         </div>
@@ -382,9 +347,7 @@ if ($rol[0]->rol !== 'administrador') {
                                         <div class="container mt-2 d-flex justify-content-center align-items-center">
                                             <div class="" style="width: 18rem;">
                                                 <div class="card mb-3">
-                                                    <a href="adminlugares.php"
-                                                        class="btn btn-cafe border-0 d-flex align-items-center justify-content-center align-items-center justify-content-center"
-                                                        style="height: 180px;">
+                                                    <a href="adminlugares.php" class="btn btn-cafe border-0 d-flex align-items-center justify-content-center align-items-center justify-content-center" style="height: 180px;">
                                                         <i class="fa-solid fa-location-dot fa-4x"></i>
                                                     </a>
                                                 </div>
@@ -400,9 +363,7 @@ if ($rol[0]->rol !== 'administrador') {
                                         <div class="container mt-2 d-flex justify-content-center align-items-center">
                                             <div class="" style="width: 18rem;">
                                                 <div class="card mb-3">
-                                                    <a href="adminUsuarios.php"
-                                                        class="btn btn-cafe d-flex align-items-center justify-content-center align-items-center justify-content-center"
-                                                        style="height: 180px;">
+                                                    <a href="adminUsuarios.php" class="btn btn-cafe d-flex align-items-center justify-content-center align-items-center justify-content-center" style="height: 180px;">
                                                         <i class="fa-solid fa-users fa-4x"></i>
                                                     </a>
                                                 </div>
@@ -418,9 +379,7 @@ if ($rol[0]->rol !== 'administrador') {
                                         <div class="container mt-2 d-flex justify-content-center align-items-center">
                                             <div class="" style="width: 18rem;">
                                                 <div class="card mb-3">
-                                                    <a href="adminPedidos.php"
-                                                        class="btn btn-cafe d-flex align-items-center justify-content-center align-items-center justify-content-center"
-                                                        style="height: 180px;">
+                                                    <a href="adminPedidos.php" class="btn btn-cafe d-flex align-items-center justify-content-center align-items-center justify-content-center" style="height: 180px;">
                                                         <i class="fa-solid fa-basket-shopping fa-4x"></i>
                                                     </a>
                                                 </div>
@@ -436,9 +395,7 @@ if ($rol[0]->rol !== 'administrador') {
                                         <div class="container mt-2 d-flex justify-content-center align-items-center">
                                             <div class="" style="width: 18rem;">
                                                 <div class="card mb-3">
-                                                    <a href="adminEventos.php"
-                                                        class="btn btn-cafe d-flex align-items-center justify-content-center align-items-center justify-content-center"
-                                                        style="height: 180px;">
+                                                    <a href="adminEventos.php" class="btn btn-cafe d-flex align-items-center justify-content-center align-items-center justify-content-center" style="height: 180px;">
                                                         <i class="fa-solid fa-bell fa-4x"></i>
                                                     </a>
                                                 </div>
@@ -454,9 +411,7 @@ if ($rol[0]->rol !== 'administrador') {
                                         <div class="container mt-2 d-flex justify-content-center align-items-center">
                                             <div class="" style="width: 18rem;">
                                                 <div class="card mb-3">
-                                                    <a href="adminMenu.php"
-                                                        class="btn btn-cafe d-flex align-items-center justify-content-center align-items-center justify-content-center"
-                                                        style="height: 180px;">
+                                                    <a href="adminMenu.php" class="btn btn-cafe d-flex align-items-center justify-content-center align-items-center justify-content-center" style="height: 180px;">
                                                         <i class="fa-solid fa-store fa-4x"></i>
                                                     </a>
                                                 </div>
@@ -472,9 +427,7 @@ if ($rol[0]->rol !== 'administrador') {
                                         <div class="container mt-2 d-flex justify-content-center align-items-center">
                                             <div class="" style="width: 18rem;">
                                                 <div class="card mb-3">
-                                                    <a href="adminRecompensas.php"
-                                                        class="btn btn-cafe d-flex align-items-center justify-content-center align-items-center justify-content-center"
-                                                        style="height: 180px;">
+                                                    <a href="adminRecompensas.php" class="btn btn-cafe d-flex align-items-center justify-content-center align-items-center justify-content-center" style="height: 180px;">
                                                         <i class="fa-solid fa-gift fa-4x"></i>
                                                     </a>
                                                 </div>
