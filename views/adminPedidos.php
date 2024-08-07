@@ -473,7 +473,7 @@ if (isset($_POST['btnactualizar'])) {
                                                 </button>
                                                 <!-- Modal para mostrar los detalles del pedido -->
                                                 <div class='modal fade' id='detalleProducto_{$pedido->id_pedido}' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
-                                                    <div class='modal-dialog modal-lg'>
+                                                    <div class='modal-dialog modal-lg modal-dialog-centered'>
                                                         <div class='modal-content '>
                                                             <div class='modal-header'>
                                                                 <h1 class='modal-title fs-5' id='exampleModalLabel'>Detalles del pedido</h1>
@@ -610,7 +610,7 @@ if (isset($_POST['btnactualizar'])) {
                                                 </button>
                                                 <!-- Modal para editar el pedido -->
                                                 <div class='modal fade' id='editarProducto_{$pedido->id_pedido}' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
-                                                    <div class='modal-dialog'>
+                                                    <div class='modal-dialog modal-dialog-centered'>
                                                         <div class='modal-content'>
                                                             <div class='modal-header'>
                                                                 <h1 class='modal-title fs-5' id='exampleModalLabel'>Editar Información de Envío y Pedido</h1>

@@ -422,7 +422,7 @@ if ($rol[0]->rol !== 'administrador') {
                                                     <i class='fa-solid fa-list'></i>
                                                 </button>
                                                 <div class='modal fade' id='detalles$reserva->folio' tabindex='-1' aria-labelledby='detalles$reserva->folio' aria-hidden='true'>
-                                                    <div class='modal-dialog'>
+                                                    <div class='modal-dialog modal-dialog-centered'>
                                                         <div class='modal-content'>
                                                             <div class='modal-header'>
                                                                 <h5 class='modal-title' id='detalles$reserva->folio'>Detalles de la reserva</h5>

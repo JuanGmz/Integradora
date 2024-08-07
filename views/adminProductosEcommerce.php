@@ -373,7 +373,7 @@ if (isset($_POST['btneditarstock'])) {
                 <!-- Modal para agregar publicación -->
                 <div class="modal fade" id="agregarProducto" tabindex="-1" aria-labelledby="agregarProducto"
                     aria-hidden="true">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="agregarProducto">Agregar Producto</h1>
@@ -546,7 +546,7 @@ if (isset($_POST['btneditarstock'])) {
                                                 </button>
                                                 <!-- Modal de ver imagen -->
                                                 <div class='modal fade' id='modalImagen_$bolsita->id_bolsa' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
-                                                    <div class='modal-dialog'>
+                                                    <div class='modal-dialog modal-dialog-centered'>
                                                         <div class='modal-content'>
                                                             <div class='modal-header'>
                                                                 <h1 class='modal-title fs-5' id='exampleModalLabel'>$bolsita->nombre</h1>
@@ -594,7 +594,7 @@ if (isset($_POST['btneditarstock'])) {
                                 // Código del modal para mostrar detalles de la bolsa
                                 echo "
                                         <div class='modal fade' id='detallebolsita_$bolsita->id_bolsa' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
-                                            <div class='modal-dialog'>
+                                            <div class='modal-dialog modal-dialog-centered'>
                                                 <div class='modal-content'>
                                                     <div class='modal-header'>
                                                         <h1 class='modal-title fs-5' id='exampleModalLabel'>Información de Bolsa de Café y Medidas</h1>
@@ -685,7 +685,7 @@ function confirmDelete() {
                                     echo "
                                             <!-- Modal para editar stock -->
                                             <div class='modal fade' id='editarStockModal_$medida_precio->id_dbc' tabindex='-1' aria-labelledby='editarStockModalLabel_$medida_precio->id_dbc' aria-hidden='true'>
-                                                <div class='modal-dialog'>
+                                                <div class='modal-dialog modal-dialog-centered'>
                                                     <div class='modal-content'>
                                                         <div class='modal-header'>
                                                             <h5 class='modal-title' id='editarStockModalLabel_$medida_precio->id_dbc'>Editar Stock</h5>
@@ -714,7 +714,7 @@ function confirmDelete() {
                                 if (!empty($medidasDisponibles)) {
                                     echo "
                                         <div class='modal fade' id='agregarMedidaModal_$bolsita->id_bolsa' tabindex='-1' aria-labelledby='agregarMedidaLabel' aria-hidden='true'>
-                                            <div class='modal-dialog'>
+                                            <div class='modal-dialog modal-dialog-centered'>
                                                 <div class='modal-content'>
                                                     <div class='modal-header'>
                                                         <h1 class='modal-title fs-5' id='agregarMedidaLabel'>Agregar Medida</h1>
@@ -759,7 +759,7 @@ function confirmDelete() {
                                                     <i class='fa-solid fa-pen-to-square'></i>
                                                 </button>
                                                <div class='modal fade' id='editarbolsita_$bolsita->id_bolsa' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
-                                                    <div class='modal-dialog'>
+                                                    <div class='modal-dialog modal-dialog-centered'>
                                                         <div class='modal-content'>
                                                         <div class='modal-header'>
                                                             <h1 class='modal-title fs-5' id='exampleModalLabel'>Editar bolsita</h1>

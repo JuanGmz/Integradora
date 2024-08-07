@@ -440,7 +440,7 @@ if (isset($_POST['btnactualizar'])) {
                 <!-- Modal -->
                 <div class="modal fade" id="agregarEvento" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5 w-3" id="exampleModalLabel">Agregar Evento</h1>
@@ -634,7 +634,7 @@ if (isset($_POST['btnactualizar'])) {
                                                 </button>
                                                 <!-- Modal de ver imagen -->
                                                 <div class='modal fade' id='modalImagen_$evento->id_evento' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
-                                                    <div class='modal-dialog'>
+                                                    <div class='modal-dialog modal-dialog-centered'>
                                                         <div class='modal-content'>
                                                             <div class='modal-header'>
                                                                 <h1 class='modal-title fs-5' id='exampleModalLabel'>$evento->nombre</h1>
@@ -667,7 +667,7 @@ if (isset($_POST['btnactualizar'])) {
                                                     <i class='fa-solid fa-bars'></i>
                                                 </button>
                                                 <div class='modal fade' id='detalleProducto_$evento->id_evento' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
-                                                    <div class='modal-dialog'>
+                                                    <div class='modal-dialog modal-dialog-centered'>
                                                         <div class='modal-content'>
                                                             <div class='modal-header'>
                                                                 <h1 class='modal-title fs-5' id='exampleModalLabel'>Detalles del evento</h1>
@@ -734,7 +734,7 @@ if (isset($_POST['btnactualizar'])) {
                     </button>
                     <div class='modal fade' id='editarProducto_$evento->id_evento' tabindex='-1' aria-labelledby='exampleModalLabel'
                         aria-hidden='true'>
-                        <div class='modal-dialog'>
+                        <div class='modal-dialog modal-dialog-centered'>
                             <div class='modal-content'>
                                 <div class='modal-header'>
                                     <h1 class='modal-title fs-5' id='exampleModalLabel'>Editar Evento</h1>

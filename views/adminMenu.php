@@ -369,7 +369,7 @@ if (isset($_POST['btnestatus'])) {
                 <!-- Modal de agregar -->
                 <div class="modal fade" id="agregarProducto" tabindex="-1" aria-labelledby="agregarProductoLabel"
                     aria-hidden="true">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="agregarProductoLabel">Agregar Producto</h1>
@@ -394,7 +394,7 @@ if (isset($_POST['btnestatus'])) {
                                     <div class="mb-3">
                                         <label for="medida" class="form-label">Categoria</label>
                                         <select name="categoria" id="categoria" class="form-select" required>
-                                            <option selected disabled value="">Seleccionar Categoría </option>
+                                            <option selected disabled value="">Seleccionar Categoría</option>
                                             <!-- Aqui va el select de categorías -->
                                             <?php
                                             $queryCate = "SELECT * FROM categorias WHERE tipo = 'Menu'";
@@ -510,7 +510,7 @@ if (isset($_POST['btnestatus'])) {
                                                 </button>
                                                 <!-- Modal de ver imagen -->
                                                 <div class='modal fade' id='modalImagen_$producto->id_pm' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
-                                                    <div class='modal-dialog'>
+                                                    <div class='modal-dialog modal-dialog-centered'>
                                                         <div class='modal-content'>
                                                             <div class='modal-header'>
                                                                 <h1 class='modal-title fs-5' id='exampleModalLabel'>$producto->nombre</h1>
@@ -543,7 +543,7 @@ if (isset($_POST['btnestatus'])) {
                                                     <i class='fa-solid fa-bars'></i>
                                                 </button>
                                                 <div class='modal fade' id='detalleProducto_$producto->id_pm' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
-                                                    <div class='modal-dialog'>
+                                                    <div class='modal-dialog modal-dialog-centered'>
                                                         <div class='modal-content'>
                                                             <div class='modal-header'>
                                                                 <h1 class='modal-title fs-5' id='exampleModalLabel'>Detalles del Producto</h1>
@@ -611,7 +611,7 @@ if (isset($_POST['btnestatus'])) {
                                                     <i class='fa-solid fa-pen-to-square'></i>
                                                 </button>
                                                 <div class='modal fade' id='editarProducto_$producto->id_pm' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
-                                                    <div class='modal-dialog'>
+                                                    <div class='modal-dialog modal-dialog-centered'>
                                                         <div class='modal-content'>
                                                             <div class='modal-header'>
                                                                 <h1 class='modal-title fs-5' id='exampleModalLabel'>Editar Producto</h1>
@@ -676,7 +676,7 @@ if (isset($_POST['btnestatus'])) {
                             echo "</tbody></table>";
                         }
                     } else {
-                        echo "<div>Seleccione una categoria</div>";
+                        echo "<div class='text-center text-lg-start'>Seleccione una categoria</div>";
                     }
                     ?>
 
