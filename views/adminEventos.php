@@ -476,7 +476,7 @@ if (isset($_POST['btnactualizar'])) {
                                     </div>
                                     <div class="col-12 mb-3">
                                         <label for="img" class="form-label">Imagen</label>
-                                        <input type="file" class="form-control" id="img" name="imgEvento" required>
+                                        <input type="file" class="form-control" id="img" name="imgEvento" required accept="image/*">
                                     </div>
                                     <div class="col-12 text-center">
                                         <h4 class="fw-bold">Fecha y Hora</h4>
