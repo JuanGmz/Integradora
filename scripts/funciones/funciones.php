@@ -41,3 +41,34 @@ function convertTo24Hour($time12)
     $time = DateTime::createFromFormat('h:i A', $time12);
     return $time ? $time->format('H:i') : $time12;
 }
+
+function validateImage($file)
+{
+    // Tipos de archivo permitidos
+    $allowedTypes = ['image/png', 'image/jpeg', 'image/webp', 'image/bmp', 'image/tiff'];
+    // Tamaño máximo permitido (en bytes)
+    $maxSize = 5 * 1024 * 1024; // 5 MB
+
+    if (isset($file)) {
+        // Verificar el tipo MIME
+        if (!in_array($file['type'], $allowedTypes)) {
+            return 'Tipo de archivo no permitido. Por favor, selecciona una imagen.';
+        }
+
+        // Verificar el tamaño del archivo
+        if ($file['size'] > $maxSize) {
+            return 'El archivo es demasiado grande. El tamaño máximo permitido es 5 MB.';
+        }
+
+        // Verificar si el archivo es una imagen válida
+        $check = getimagesize($file['tmp_name']);
+        if ($check === false) {
+            return 'El archivo no es una imagen válida.';
+        }
+
+        // Archivo válido
+        return 'Imagen válida.';
+    }
+
+    return 'No se ha enviado ningún archivo.';
+}
