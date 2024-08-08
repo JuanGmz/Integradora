@@ -392,6 +392,7 @@ fecha_inicio date not null,
 fecha_expiracion date not null,
 estatus enum('Activa','Inactiva'),
 img_url nvarchar(255) not null,
+mostrar boolean default true,
 primary key (id_recompensa)
 );
 CREATE TABLE password_resets (
@@ -1179,6 +1180,7 @@ select cr.id_cr as canje_id,
  r.condicion,
  cr.progreso,
  r.img_url,
+ r.mostrar,
  concat(cr.progreso,' | ', r.condicion) as asistencias_completadas,
  cr.canje,
 CONCAT(DATE_FORMAT(r.fecha_inicio, '%d/%m/%Y'), ' - ', DATE_FORMAT(r.fecha_expiracion, '%d/%m/%Y')) AS periodo
