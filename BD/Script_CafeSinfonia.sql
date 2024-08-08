@@ -1246,7 +1246,7 @@ INSERT INTO metodos_pago (metodo_pago) VALUES
 
 INSERT INTO publicaciones (titulo, descripcion, img_url, tipo)
 VALUES
-('¡Bienvenidos a Sinfonía Café y Cultura!', 'Estamos emocionados de abrir nuestras puertas y ofrecerles una experiencia única de café y cultura. ¡Visítanos hoy!', 'bienvenidos.jpg', 'Difusion'),
+('¡Bienvenidos a Sinfonía Café y Cultura!', 'Estamos emocionados de abrir nuestras puertas y ofrecerles una experiencia única de café y cultura. ¡Visítanos hoy!', 'Bienvenidos.jpg', 'Difusion'),
 ('Tarde de Jazz', 'Acompáñanos este viernes para una tarde de jazz en vivo con artistas locales. ¡No te lo pierdas!', 'tarde_de_jazz.jpg', 'Difusion'),
 ('Nueva Carta de Verano', 'Descubre nuestra nueva carta de verano con bebidas refrescantes y deliciosas. ¡Ven a probarlas!', 'carta_verano.jpg', 'Difusion'),
 ('Taller de Cata de Café', 'Aprende a distinguir los sabores y aromas del café en nuestro próximo taller de cata. ¡Inscríbete ya!', 'taller_cata.jpg', 'Blog'),
