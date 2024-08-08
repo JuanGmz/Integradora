@@ -65,6 +65,17 @@ if (isset($_POST['btnactualizar'])) {
     }
 }
 
+if (isset($_POST['btnactualizarimagen'])) {
+
+    $validationMessage = validateImage($_FILES['imagen_nueva']);
+    if ($validationMessage === 'Imagen válida.') {
+
+    } else {
+        showAlert("Error al mover el archivo. Detalles: " . error_get_last()['message'], "error");
+    }
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -476,7 +487,8 @@ if (isset($_POST['btnactualizar'])) {
                                     </div>
                                     <div class="col-12 mb-3">
                                         <label for="img" class="form-label">Imagen</label>
-                                        <input type="file" class="form-control" id="img" name="imgEvento" required accept="image/*">
+                                        <input type="file" class="form-control" id="img" name="imgEvento" required
+                                            accept="image/*">
                                     </div>
                                     <div class="col-12 text-center">
                                         <h4 class="fw-bold">Fecha y Hora</h4>
