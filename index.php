@@ -263,7 +263,7 @@
                                     </div>
                                     <div class="col-12">
                                         <span class="fw-bold">Envíos a tu Servicio</span>
-                                        <p>En pedido superior a $150</p>
+                                        <p>Envíos seguros a domicilio</p>
                                     </div>
                                 </div>
                             </div>
@@ -293,7 +293,7 @@
                                     </div>
                                     <div class="col-12">
                                         <span class="fw-bold">Servicio al cliente 24/7</span>
-                                        <p>Llamenos 24/7 al 871-454-7870</p>
+                                        <p>Llamenos 24/7 al 871-506-6618</p>
                                     </div>
                                 </div>
                             </a>
@@ -321,27 +321,31 @@
 
                     $bolsas = $conexion->select($query);
                     $counter = 1;
-                    foreach ($bolsas as $bolsa) {
-                        $counter++;
-                        $additionalClass = ($counter > 3) ? 'd-none' : ''; // Cambia la clase después del tercer ciclo
-                        $additionalClass2 = ($counter > 3) ? 'd-md-block' : ''; // Cambia la clase después del tercer ciclo
+                    if (count($bolsas) > 0) {
+                        foreach ($bolsas as $bolsa) {
+                            $counter++;
+                            $additionalClass = ($counter > 3) ? 'd-none' : ''; // Cambia la clase después del tercer ciclo
+                            $additionalClass2 = ($counter > 3) ? 'd-md-block' : ''; // Cambia la clase después del tercer ciclo
 
-                        // Debugging
-                        echo "<!-- Counter: $counter, Class: $additionalClass -->";
+                            // Debugging
+                            echo "<!-- Counter: $counter, Class: $additionalClass -->";
 
-                        echo "<div class='col-md-6 p-2 col-12 col-sm-6 col-lg-4 p-md-4 p-0 m-0 {$additionalClass} {$additionalClass2}'>";
-                        echo "<div class='card m-0 blog-card shadow-lg' style='border-radius: 5% 5% 0% 0%;'>";
-                        echo "<img src='img/bolsas/{$bolsa->img_url}' class='coffee-image align-card-img-top' alt='{$bolsa->id_bolsa}'>";
-                        echo "<div class='card-body product-card-body'>";
-                        echo "<h5 class='card-title fw-bold product-title' style='letter-spacing: 1px;'>{$bolsa->nombre}</h5>";
-                        echo "<p class='card-text product-subtitle'>{$bolsa->proceso}</p>";
-                        echo "<form action='views/bolsas/bolsas.php?id={$bolsa->id_bolsa}' method='post'>";
-                        echo "<input type='hidden' name='id_bolsa' value='{$bolsa->id_bolsa}'>";
-                        echo "<input type='submit' class='btn btn-cafe w-100' value='Ver Detalles'>";
-                        echo "</div>";
-                        echo "</a>";
-                        echo "</div>";
-                        echo "</div>";
+                            echo "<div class='col-md-6 p-2 col-6 col-sm-6 col-lg-4 p-md-4 p-0 m-0 {$additionalClass} {$additionalClass2}'>";
+                            echo "<div class='card m-0 blog-card shadow-lg' style='border-radius: 5% 5% 0% 0%;'>";
+                            echo "<img src='img/bolsas/{$bolsa->img_url}' class='coffee-image align-card-img-top' alt='{$bolsa->id_bolsa}'>";
+                            echo "<div class='card-body product-card-body'>";
+                            echo "<h5 class='card-title fw-bold product-title' style='letter-spacing: 1px;'>{$bolsa->nombre}</h5>";
+                            echo "<p class='card-text product-subtitle'>{$bolsa->proceso}</p>";
+                            echo "<form action='views/bolsas/bolsas.php?id={$bolsa->id_bolsa}' method='post'>";
+                            echo "<input type='hidden' name='id_bolsa' value='{$bolsa->id_bolsa}'>";
+                            echo "<input type='submit' class='btn btn-cafe w-100' value='Ver Detalles'>";
+                            echo "</div>";
+                            echo "</a>";
+                            echo "</div>";
+                            echo "</div>";
+                        }
+                    } else {
+                        echo "No hay registros";
                     }
                     $conexion->desconectarDB();
                     ?>
@@ -400,15 +404,16 @@
                                     <a href="views/publicaciones/blog.php">
                                         <div class='card blog-card shadow-lg' style="border-radius: 5% 5% 0% 0%;">
                                             <img src='img/publicaciones/<?php echo $publicacion->img_url; ?>' class='coffee-image' alt='<?php echo $publicacion->titulo ?>'>
-                                            <div class='cblog-card product-card-body'>
+                                            <div class='card-body product-card-body d-flex flex-column'>
                                                 <h5 class='blog-card-title'><?php echo $publicacion->titulo; ?></h5>
                                                 <h6 class='blog-card-subtitle mb-2 text-muted'>
                                                     <?php echo $publicacion->fecha; ?></h6>
-                                                <p class='blog-card-text  d-none d-md-block'>
+                                                <p class='blog-card-text d-none d-md-block'>
                                                     <?php echo $publicacion->descripcion; ?></p>
-                                                <a href='views/publicaciones.php' class='blog-card-link'>Mas detalles <i class="fa-solid fa-arrow-right"></i></a>
+                                                <div class="d-flex mt-auto">
+                                                    <a href='views/publicaciones.php' class='blog-card-link'>Mirar mas<i class="fa-solid fa-arrow-right"></i></a>
+                                                </div>
                                             </div>
-
                                         </div>
                                     </a>
                                 </div>

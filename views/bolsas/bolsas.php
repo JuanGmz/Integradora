@@ -162,11 +162,11 @@ if ($result) {
                     </nav>
                     <div class='col-12 text-center'>
                             <h1 class='product-title mb-0'>{$bolsacafe[0]->nombre}</h1>
-                            <h2 class='product-subtitle'>{$bolsacafe[0]->años_cosecha}</h2>
+                            <h2 class='product-subtitle p-2'>{$bolsacafe[0]->años_cosecha}</h2>
                     </div>
-                    <div class='container mt-5'>
+                    <div class='container mt-3'>
                         <div class='row d-flex justify-content-center'>
-                            <div class='col-9 col-sm-5 col-md-6 col-lg-4 text-sm-center'>
+                            <div class='col-9 col-sm-8 col-md-6 col-lg-4 text-sm-center'>
                                 <img src='../../img/bolsas/{$bolsacafe[0]->img_url}' class=' rounded coffee-image' alt='Producto'>
                                 <p class='mt-3'><strong>Puntaje de catacion:</strong>{$bolsacafe[0]->puntaje_catacion}<pts</p>
                                 <div class='col-12 text-center'>
