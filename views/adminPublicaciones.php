@@ -12,6 +12,46 @@ $rol = $db->select($rolUsuario);
 if ($rol[0]->rol !== 'administrador') {
     header('Location: ../index.php');
 }
+
+if (isset($_POST['btnagregar'])) {
+    extract($_POST);
+
+    $conexion = new Database();
+    $conexion->conectarDB();
+
+    // Directorio donde se guardarán las imágenes
+    $subirDir = "../img/publicaciones/";
+
+    if (!file_exists($subirDir)) {
+        mkdir($subirDir, 0777, true);
+    }
+
+    if (is_writable($subirDir)) {
+        // Validar imagen
+        $validationMessage = validateImage($_FILES['imagen']);
+        if ($validationMessage === 'Imagen válida.') {
+            $nombreImagen = basename($_FILES['imagen']['name']);
+            $imagen = $subirDir . $nombreImagen;
+            if (move_uploaded_file($_FILES['imagen']['tmp_name'], $imagen)) {
+                $query = "INSERT INTO publicaciones(titulo, descripcion, img_url, tipo) VALUES ('$titulo', '$descripcion', '$nombreImagen', '$tipo')";
+                $conexion->execute($query);
+                showAlert("¡Publicación registrada con éxito!", "success");
+            } else {
+                echo "Error al mover el archivo. Detalles: " . error_get_last()['message'];
+            }
+        } else {
+            showAlert($validationMessage, "error");
+        }
+    } else {
+        echo "El directorio $subirDir no tiene permisos de escritura.";
+        echo "Permisos actuales: " . substr(sprintf('%o', fileperms($subirDir)), -4);
+        echo "Usuario del script: " . get_current_user();
+    }
+
+    $conexion->desconectarDB();
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -372,8 +412,7 @@ if ($rol[0]->rol !== 'administrador') {
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form method="post" action="../scripts/adminpublicaciones/agregarPublicacion.php"
-                                    enctype="multipart/form-data">
+                                <form method="post" enctype="multipart/form-data">
                                     <div class="mb-3">
                                         <label for="titulo" class="form-label">Título</label>
                                         <input type="text" class="form-control" id="titulo" name="titulo" maxlength="60"
@@ -407,7 +446,8 @@ if ($rol[0]->rol !== 'administrador') {
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Cancelar</button>
                                         <!-- Botón para agregar -->
-                                        <button type="submit" class="btn btn-dark">Agregar Publicación</button>
+                                        <button type="submit" class="btn btn-dark" name="btnagregar">Agregar
+                                            Publicación</button>
                                     </div>
                                 </form>
                             </div>
@@ -586,9 +626,13 @@ if ($rol[0]->rol !== 'administrador') {
             </div>
         </div>
     </div>
+    <div class="alert floating-alert" id="floatingAlert">
+        <span id="alertMessage">Mensaje de la alerta.</span>
+    </div>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/b820f07375.js" crossorigin="anonymous"></script>
     <script src="../script/script.js"></script>
+    <script src="../js/alertas.js"></script>
 </body>
 
 </html>
