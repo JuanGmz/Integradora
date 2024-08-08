@@ -364,7 +364,7 @@ if ($rol[0]->rol !== 'administrador') {
                         <div class="col-lg-10 col-12">
                             <form method="post">
                                 <div class="row">
-                                    <div class="col-4">
+                                    <div class="col-lg-4">
                                         <select id="evento" name="evento" class="form-select" required>
                                             <option selected disabled value="">Seleccionar Evento</option>
                                             <!-- Aqui va el select del filtrado -->
@@ -390,7 +390,7 @@ if ($rol[0]->rol !== 'administrador') {
 
                                     if ($select_estatus == 'Pendiente') {
                                         ?>
-                                        <div class="col-4">
+                                        <div class="col-lg-4 my-3 my-lg-0">
                                             <select name="estatus" id="" class="form-select">
                                                 <option value="Pendiente" selected>Pendiente</option>
                                                 <option value="Apartada">Apartada</option>
@@ -400,7 +400,7 @@ if ($rol[0]->rol !== 'administrador') {
                                         <?php
                                     } elseif ($select_estatus == 'Apartada') {
                                         ?>
-                                        <div class="col-4">
+                                        <div class="col-lg-4 my-3 my-lg-0">
                                             <select name="estatus" id="" class="form-select">
                                                 <option value="Pendiente">Pendiente</option>
                                                 <option value="Apartada" selected>Apartada</option>
@@ -410,7 +410,7 @@ if ($rol[0]->rol !== 'administrador') {
                                         <?php
                                     } elseif ($select_estatus == 'Cancelada') {
                                         ?>
-                                        <div class="col-4">
+                                        <div class="col-lg-4 my-3 my-lg-0">
                                             <select name="estatus" id="" class="form-select">
                                                 <option value="Pendiente">Pendiente</option>
                                                 <option value="Apartada">Apartada</option>
@@ -420,7 +420,7 @@ if ($rol[0]->rol !== 'administrador') {
                                         <?php
                                     }
                                     ?>
-                                    <div class="col-4">
+                                    <div class="col-lg-4">
                                         <input type="submit" class="btn btn-dark w-100" value="Buscar" name="Buscar">
                                     </div>
                                 </div>
