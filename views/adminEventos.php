@@ -66,13 +66,42 @@ if (isset($_POST['btnactualizar'])) {
 }
 
 if (isset($_POST['btnactualizarimagen'])) {
+    $conexion = new Database();
+    $conexion->conectarDB();
 
+    extract($_POST);
+
+    // Asegúrate de que id_evento es un número entero
+    $id_evento = intval($id_evento);
+
+    // Directorio donde se guardarán las imágenes
+    $subirDir = "../img/eventos/";
+
+    // Validación de imagen
     $validationMessage = validateImage($_FILES['imagen_nueva']);
+
     if ($validationMessage === 'Imagen válida.') {
+        // Nombre del archivo subido
+        $nombreImagen = basename($_FILES['imagen_nueva']['name']);
+
+        // Ruta completa del archivo a ser guardado
+        $imagen = $subirDir . $nombreImagen;
+
+        // Mover el archivo subido a la carpeta de destino
+        if (move_uploaded_file($_FILES['imagen_nueva']['tmp_name'], $imagen)) {
+            // Construir la consulta de actualización
+            $consulta = "UPDATE EVENTOS SET img_url = '$nombreImagen' WHERE id_evento = '$id_evento'";
+            $conexion->execute($consulta);
+            showAlert("Actualización exitosa.", "success");
+        } else {
+            showAlert("Error al mover el archivo. Detalles: " . error_get_last()['message'], "error");
+        }
 
     } else {
-        showAlert("Error al mover el archivo. Detalles: " . error_get_last()['message'], "error");
+        showAlert("$validationMessage", "error");
     }
+
+    $conexion->desconectarDB();
 }
 
 
@@ -666,7 +695,7 @@ if (isset($_POST['btnactualizarimagen'])) {
                                                             </div>
                                                             <div class='modal-body mb-3'>
                                                                 <!-- Aquí se está mostrando la imagen -->
-                                                                <form action='../scripts/admineventos/editarimagen.php' method='POST' enctype='multipart/form-data'>
+                                                                <form method='POST' enctype='multipart/form-data'>
                                                                     <div class='col-12 mb-3'>
                                                                         <label for='imagen' class='form-label'>Imagen Actual</label><br>
                                                                         <img src='../img/eventos/$evento->img_url' class='img-fluid' alt='imagen$evento->nombre'><br>
@@ -679,7 +708,7 @@ if (isset($_POST['btnactualizarimagen'])) {
                                                                         <input type='hidden' name='id_evento' value='$evento->id_evento'>
                                                                         <div class='col-12 mb-3 text-end'>
                                                                             <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
-                                                                            <button type='submit' class='btn btn-dark'>Actualizar</button>
+                                                                            <button type='submit' class='btn btn-dark' name='btnactualizarimagen'>Actualizar</button>
                                                                         </div>
                                                                     </div>
                                                                 </form>
