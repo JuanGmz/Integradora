@@ -1753,7 +1753,7 @@ BEGIN
            bc.nombre AS bolsa,
            bc.proceso,
            dbc.medida AS medida,
-           dbc.precio,
+           dp.precio_unitario,
            dp.cantidad AS cantidad,
            p.fecha_hora_pedido,
            bc.sabor,

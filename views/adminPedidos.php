@@ -637,7 +637,7 @@ if (isset($_POST['btnactualizar'])) {
                                                                     <tbody>";
                                         foreach ($result as $detalle) {
                                             $subotal = formatPrecio($detalle->subtotal);
-                                            $precio = formatPrecio($detalle->precio);
+                                            $precio = formatPrecio($detalle->precio_unitario);
                                             if ($detalle->id_pedido == $pedido->id_pedido) {
                                                 echo "
                                                                                     <tr>

@@ -17,11 +17,11 @@ if (isset($_POST['btneditarstock'])) {
 
     extract($_POST);
 
-    $query = "UPDATE detalle_bc SET stock = $stock WHERE id_dbc = '$id_dbc'";
+    $query = "UPDATE detalle_bc SET stock = $stock , precio = $precio WHERE id_dbc = '$id_dbc'";
 
     $db->execute($query);
 
-    showAlert("Se actualizo el stock correctamente", "success");
+    showAlert("Se actualizo los datos correctamente", "success");
 }
 if (isset($_POST['btnestatus'])) {
     extract($_POST);
@@ -455,12 +455,13 @@ if (isset($_POST['btnestatus'])) {
                                             <option selected disabled value="">Seleccionar el Proceso</option>
                                             <!-- Aquí va el select de procesos -->
                                             <?php
-                                            // Define an array with the measures
+                                            // Define an array with the processes
                                             $proceso = ['Todos', 'Natural', 'Lavado'];
 
-                                            // Loop through the measures array and create an option for each
+                                            // Loop through the processes array and create an option for each
                                             foreach ($proceso as $procesos) {
-                                                echo "<option value=\"$procesos\">$procesos</option>";
+                                                $selected = isset($_SESSION['proceso']) && $_SESSION['proceso'] == $procesos ? 'selected' : '';
+                                                echo "<option value=\"$procesos\" $selected>$procesos</option>";
                                             }
                                             ?>
                                         </select>
@@ -484,6 +485,8 @@ if (isset($_POST['btnestatus'])) {
                     if (isset($_POST['proceso'])) {
 
                         extract($_POST);
+                        $_SESSION['proceso'] = $_POST['proceso'];
+
                         if ($proceso == 'Todos') {
                             $procesos = '    SELECT 
         bc.id_bolsa,
@@ -587,7 +590,7 @@ if (isset($_POST['btnestatus'])) {
                                 // Código del modal para mostrar detalles de la bolsa
                                 echo "
                                         <div class='modal fade' id='detallebolsita_$bolsita->id_bolsa' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
-                                            <div class='modal-dialog modal-dialog-centered'>
+                                            <div class='modal-dialog modal-dialog-centered modal-dialog-scrollable'>
                                                 <div class='modal-content'>
                                                     <div class='modal-header'>
                                                         <h1 class='modal-title fs-5' id='exampleModalLabel'>Información de Bolsa de Café y Medidas</h1>
@@ -636,24 +639,16 @@ if (isset($_POST['btnestatus'])) {
                                                                     <td>$$precio</td>
                                                                     <td>$medida_precio->stock</td>
                                                                     <td class='d-flex flex-row align-items-center justify-content-center gap-1'>
-                                                                        <form action='../scripts/adminecomerce/eliminarMedida.php' method='POST' onsubmit='return confirmDelete()'>
-                                                                            <input type='hidden' name='id_bolsa' value='$bolsita->id_bolsa'>
-                                                                            <input type='hidden' name='medida' value='$medida_precio->medida'>
-                                                                            <input type='hidden' name='precio' value='$medida_precio->precio'>
-                                                                            <input type='hidden' name='stock' value='$medida_precio->stock'>
-                                                                            <button type='submit' class='btn btn-danger'><i class='fa-solid fa-trash'></i></button>
-                                                                        </form>
+                                                                
+                                                                        
+
                                                                        <!-- Botón para abrir el modal de editar stock -->
                                 <button type='button' class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#editarStockModal_$medida_precio->id_dbc'>
                                     <i class='fa-solid fa-edit'></i>
                                 </button>
         </td>
-    </tr>
-                                                                <script>
-function confirmDelete() {
-    return confirm('¿Está seguro que quiere eliminar esta medida? Esto también eliminará la medida de los carritos de los usuarios.');
-}
-</script>";
+        
+    </tr>";
                                     }
                                     echo "
                                                             </tbody>
@@ -672,24 +667,31 @@ function confirmDelete() {
                                                     </div>
                                                 </div>
                                             </div>
+                                            
                                         </div>";
 
                                 foreach ($medidas as $medida_precio) {
-                                    echo "
+                                    echo "         
+                                                        
                                             <!-- Modal para editar stock -->
                                             <div class='modal fade' id='editarStockModal_$medida_precio->id_dbc' tabindex='-1' aria-labelledby='editarStockModalLabel_$medida_precio->id_dbc' aria-hidden='true'>
                                                 <div class='modal-dialog modal-dialog-centered'>
                                                     <div class='modal-content'>
                                                         <div class='modal-header'>
-                                                            <h5 class='modal-title' id='editarStockModalLabel_$medida_precio->id_dbc'>Editar Stock</h5>
+                                                            <h5 class='modal-title' id='editarStockModalLabel_$medida_precio->id_dbc'>Editar Detalle</h5>
                                                             <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                                                         </div>
-                                                        <div class='modal-body'>
+                                                        <div class='modal-body '>
                                                             <form  method='post'>
                                                                 <input type='hidden' name='id_dbc' value='$medida_precio->id_dbc'>
+                                                                <input type='hidden' name='precio' value='$medida_precio->precio'>
                                                                 <div class='mb-3'>
                                                                     <label for='stock_$medida_precio->id_dbc' class='form-label'>Stock</label>
                                                                     <input type='number' name='stock' class='form-control' id='stock_$medida_precio->id_dbc' value='$medida_precio->stock' min='10' max='1000' required >
+                                                                </div>
+                                                                <div class='mb-3'>
+                                                                    <label for='precio_$medida_precio->id_dbc' class='form-label'>Precio</label>
+                                                                    <input type='number' name='precio' class='form-control' id='precio_$medida_precio->id_dbc' value='$medida_precio->precio' min='10' max='1000' required >
                                                                 </div>
                                                                 <div class='modal-footer'>
                                                                     <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cerrar</button>
@@ -752,7 +754,7 @@ function confirmDelete() {
                                                     <i class='fa-solid fa-pen-to-square'></i>
                                                 </button>
                                                <div class='modal fade' id='editarbolsita_$bolsita->id_bolsa' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
-                                                    <div class='modal-dialog modal-dialog-centered'>
+                                                    <div class='modal-dialog modal-dialog-centered modal-dialog-scrollable'>
                                                         <div class='modal-content'>
                                                         <div class='modal-header'>
                                                             <h1 class='modal-title fs-5' id='exampleModalLabel'>Editar bolsita</h1>
