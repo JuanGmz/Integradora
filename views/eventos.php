@@ -126,7 +126,8 @@
                         foreach ($categorias as $categoria) {
                             $isActive = (isset($_GET['categoria']) && $_GET['categoria'] == $categoria->id_categoria) ? 'active' : '';
                             echo "<li class='rounded row nav-item col-5 col-sm-5 col-md-3 col-lg-auto mb-2 mb-lg-0 me-0 text-center justify-content-center d-flex m-0 p-0 p-md-1 me-md-2' role='presentation'>";
-                            echo "<a data-mdb-tab-init class='rounded btn-categorias w-100 h-100' id='ex1-tabs-{$categoria->id_categoria}' href='#ex1-tabs-{$categoria->id_categoria}' role='tab' aria-controls='ex1-tabs-{$categoria->id_categoria}' aria-selected='$tru'>{$categoria->nombre}</a>";
+                            echo "<a data-mdb-tab-init class='rounded btn-categorias w-100 h-100' id='ex1-tabs-{$categoria->id_categoria}' 
+                            href='#ex1-tabs-{$categoria->id_categoria}' role='tab' aria-controls='ex1-tabs-{$categoria->id_categoria}' aria-selected='$tru'>{$categoria->nombre}</a>";
                             echo "</li>";
                             $tru = "false";
                             $active = "";
@@ -189,9 +190,11 @@
                                 echo "              <div class='col-12 col-md-11 col-sm-10 col-lg-6'>";
                                 echo "                  <img src='../img/eventos/{$evento->img_url}' class='card-img-top img-fluid' alt='...' style='height: 300px; object-fit: cover;'>";
                                 echo "              </div>";
-                                echo "              <div class='col-12 col-sm-9 col-md-11 col-lg-6 p-2 p-lg-2 d-flex justify-content-center align-items-center  flex-column'>";
-                                echo "                  <h3 class='fw-bold mb-3 text-center'>{$evento->nombre}</h3>";
-                                echo "                  <p class='text-dark-emphasis mb-4 '>{$evento->fecha_publicacion}</p>";
+                                echo "              <div class='col-12 col-sm-9 col-md-11 col-lg-6 p-2 p-lg-2 d-flex justify-content-center flex-column'>";
+                                echo "                  <div><h3 class='fw-bold mb-3 text-center'>{$evento->nombre}</h3></div>";
+                                echo "                 <div class='d-flex justify-content-center'>
+                                                       <p class='text-dark-emphasis mb-4'>{$evento->fecha_publicacion}</p>
+                                                       </div>";
                                                         $descripcion = $evento->descripcion;
                                                         $maximo = 55;
 
