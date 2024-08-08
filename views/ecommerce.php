@@ -1,5 +1,5 @@
 <?php
-include_once ("../class/database.php");
+include_once("../class/database.php");
 $db = new Database();
 $db->conectarDB();
 session_start();
@@ -25,10 +25,7 @@ if (isset($_SESSION["usuario"])) {
 
 <body>
     <!-- Botón de WhatsApp -->
-    <button id="whatsappButton"
-        class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3"
-        type="button"
-        onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
+    <button id="whatsappButton" class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3" type="button" onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
         <i class="fa-brands fa-whatsapp fa-2x"></i>
     </button>
     <!-- NavBar -->
@@ -37,8 +34,7 @@ if (isset($_SESSION["usuario"])) {
             <a class="navbar-brand" href="../index.php">
                 <img src="../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
             </a>
-            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar"
-                aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura
                     </h5>
@@ -69,14 +65,12 @@ if (isset($_SESSION["usuario"])) {
             </div>
             <?php
             if (isset($_SESSION["usuario"])) {
-                ?>
+            ?>
                 <!-- Navbar con dropdown -->
-                <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
-                    style="left: auto; right: 30px; top: 60px">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
                     <a class="dropdown-item" href="perfil.php">Mi perfil</a>
                     <a class="dropdown-item" href="bolsas/Carrito.php">Mi carrito</a>
                     <?php if ($rol[0]->rol === 'administrador') { ?>
@@ -85,15 +79,14 @@ if (isset($_SESSION["usuario"])) {
                     <?php } ?>
                     <a class="dropdown-item" href="../scripts/login/cerrarsesion.php">Cerrar sesión</a>
                 </div>
-                <?php
+            <?php
             } else {
-                ?>
+            ?>
                 <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
-                <?php
+            <?php
             }
             ?>
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-                aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
@@ -117,34 +110,42 @@ if (isset($_SESSION["usuario"])) {
                     <h1 class="h1contact">E-Commerce</h1>
                 </div>
                 <!-- contenedor de productos -->
-                <div class="row d-lg-flex justify-content-center d-block">
+                <div class="row d-flex justify-content-center d-block">
                     <?php
                     $conexion = new Database();
                     $conexion->conectarDB();
                     $query = 'SELECT bolsas_cafe.id_bolsa,bolsas_cafe.nombre, bolsas_cafe.productor_finca ,bolsas_cafe.proceso,
                         bolsas_cafe.variedad,bolsas_cafe.altura,bolsas_cafe.aroma,bolsas_cafe.acidez,bolsas_cafe.sabor,
-                        bolsas_cafe.cuerpo,bolsas_cafe.img_url
+                        bolsas_cafe.cuerpo,bolsas_cafe.img_url,bolsas_cafe.estatus
                         FROM bolsas_cafe where bolsas_cafe.estatus = true;';
 
                     $bolsas = $conexion->select($query);
-                    foreach ($bolsas as $bolsa) {
+                    if (count($bolsas) > 0) {
+                        foreach ($bolsas as $bolsa) {
 
-                        echo "<div class='col-12 col-sm-6 col-md-6 col-lg-4 p-lg-2 m-0 px-3 mb-3 mb-lg-0'>";
-                        echo "<div class='card m-0 blog-card shadow-lg bg-white' style='border-radius: 5% 5% 0% 0%;'>";
-                        ;
-                        echo "<img src='../img/bolsas/{$bolsa->img_url}' class='coffee-image align-card-img-top' alt='{$bolsa->id_bolsa}'>";
-                        echo "<div class='card-body product-card-body'>";
-                        echo "<h5 class='card-title fw-bold product-title' style='letter-spacing: 1px;'>{$bolsa->nombre}</h5>";
-                        echo "<p class='card-text product-subtitle'>{$bolsa->proceso}</p>";
-                        echo "<form action='../views/bolsas/bolsas.php?id={$bolsa->id_bolsa}' method='post'>";
-                        echo "<input type='hidden' name='id_bolsa' value='{$bolsa->id_bolsa}'>";
-                        echo "<input type='submit' class='btn btn-cafe w-100' value='Ver Detalles'>";
-                        echo "</form>";
-                        echo "</div>";
-                        echo "</a>";
-                        echo "</div>";
+                            echo "<div class='col-10 col-sm-6 col-md-6 col-lg-4 p-lg-2 m-0 px-3 mb-3 mb-lg-0'>";
+                            echo "<div class='card m-0 blog-card shadow-lg' style='border-radius: 5% 5% 0% 0%;'>";;
+                            echo "<img src='../img/bolsas/{$bolsa->img_url}' class='coffee-image align-card-img-top' alt='{$bolsa->id_bolsa}'>";
+                            echo "<div class='card-body product-card-body'>";
+                            echo "<h5 class='card-title fw-bold product-title' style='letter-spacing: 1px;'>{$bolsa->nombre}</h5>";
+                            echo "<p class='card-text product-subtitle'>{$bolsa->proceso}</p>";
+                            echo "<form action='../views/bolsas/bolsas.php?id={$bolsa->id_bolsa}' method='post'>";
+                            echo "<input type='hidden' name='id_bolsa' value='{$bolsa->id_bolsa}'>";
+                            echo "<input type='submit' class='btn btn-cafe w-100' value='Ver Detalles'>";
+                            echo "</form>";
+                            echo "</div>";
+                            echo "</a>";
+                            echo "</div>";
+                            echo "</div>";
+                        }
+                    } else {
+                        echo "<div class='d-flex flex-column align-items-center justify-content-center' style='height: 300px;'>";
+                        echo "  <div><i class='fa-solid fa-mug-hot fa-4x text-muted'></i></div>";
+                        echo "  <div class='text-center mt-3'><h2>No hay productos disponibles en este momento</h2>
+                        <span class='text-muted'>Vuelve en otro momento</span></div>";
                         echo "</div>";
                     }
+
                     $conexion->desconectarDB();
                     ?>
                 </div>
@@ -191,26 +192,19 @@ if (isset($_SESSION["usuario"])) {
     $db->desconectarDB();
     ?>
     <!-- Botón de Carrito -->
-    <button id="floatingButton"
-        class="btn btn-cafe position-fixed bottom-0 end-0 m-3 d-flex p-3 z-3 text-light fw-bold position-relative"
-        type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+    <button id="floatingButton" class="btn btn-cafe position-fixed bottom-0 end-0 m-3 d-flex p-3 z-3 text-light fw-bold position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
         <i class="fa-solid fa-cart-shopping fa-2x"></i>
-        <span id="cartCount"
-            class="position-absolute top-0 start-0 translate-middle badge rounded-circle d-flex align-items-center justify-content-center">
+        <span id="cartCount" class="position-absolute top-0 start-0 translate-middle badge rounded-circle d-flex align-items-center justify-content-center">
             <?php echo $total_productos; ?>
         </span>
     </button>
 
     <!-- Offcanvas del Carrito -->
-    <div class="offcanvas offcanvas-end text-light custom-offcanvas" tabindex="-1" id="offcanvasRight"
-        aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas offcanvas-end text-light custom-offcanvas" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
         <!--Titulo--->
-        <div class="fw-bold d-flex justify-content-center align-content-center m-0"
-            style="background: var(--primario);">
-            <h5 class="offcanvas-title fs-3 mx-auto me-5" id="offcanvasRightLabel">Carrito <i
-                    class="fa-solid fa-bag-shopping m-3"></i></h5>
-            <button type="button" class="btn-close text-reset m-3" data-bs-dismiss="offcanvas"
-                aria-label="Close"></button>
+        <div class="fw-bold d-flex justify-content-center align-content-center m-0" style="background: var(--primario);">
+            <h5 class="offcanvas-title fs-3 mx-auto me-5" id="offcanvasRightLabel">Carrito <i class="fa-solid fa-bag-shopping m-3"></i></h5>
+            <button type="button" class="btn-close text-reset m-3" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <!--Contenido-->
 
@@ -229,7 +223,7 @@ if (isset($_SESSION["usuario"])) {
             $consulta = $db->select($query);
 
             // Aquí puedes agregar más código para mostrar los productos del carrito, por ejemplo:
-        
+
             echo ' <div class="offcanvas-body d-flex flex-column text-dark m-0 p-2" style="background: var(--color6);">';
             if (count($consulta) > 0) {
 
