@@ -276,7 +276,8 @@ if (isset($_POST['btnactualizar'])) {
                 <h4 class="text-center text-light m-3 fs-2 fw-bold">Administrar</h4>
                 <div class="row">
                     <div class="col-12 text-center">
-                        <img src="../img/Sinfonía-Café-y-Cultura blanco.webp" alt="" class="img-fluid" style="width: 300px;">
+                        <img src="../img/Sinfonía-Café-y-Cultura blanco.webp" alt="" class="img-fluid"
+                            style="width: 300px;">
                     </div>
                 </div>
                 <div class="accordion accordion-flush" id="accordionPc">
@@ -458,7 +459,8 @@ if (isset($_POST['btnactualizar'])) {
                                     </div>
                                     <div class="col-12 mb-3">
                                         <label for="descripcion" class="form-label">Descripción</label>
-                                        <textarea type="text" class="form-control" id="descripcion" name="descripcion" required maxlength="255"></textarea>
+                                        <textarea type="text" class="form-control" id="descripcion" name="descripcion"
+                                            required maxlength="255" required></textarea>
                                     </div>
                                     <div class="col-12 mb-3">
                                         <label for="categoria" class="form-label">Categoria</label><br>
@@ -474,7 +476,7 @@ if (isset($_POST['btnactualizar'])) {
                                     </div>
                                     <div class="col-12 mb-3">
                                         <label for="img" class="form-label">Imagen</label>
-                                        <input type="file" class="form-control" id="img" name="imgEvento">
+                                        <input type="file" class="form-control" id="img" name="imgEvento" required>
                                     </div>
                                     <div class="col-12 text-center">
                                         <h4 class="fw-bold">Fecha y Hora</h4>
@@ -686,9 +688,9 @@ if (isset($_POST['btnactualizar'])) {
                                                             </div>
                                                             <!-- Aquí va el contenido del modal -->
                                                             ";
-                                
 
-                                
+
+
                                 if ($evento->tipo == "De Pago") {
 
                                     $labelText_precio = " <h4 class='text-start fw-bold mb-3'>Costo boleto: <span class='fw-normal fs-5'>" . htmlspecialchars($precio_boleto) . "$</span></h5>";
