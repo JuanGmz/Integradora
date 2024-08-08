@@ -387,7 +387,7 @@ if ($rol[0]->rol !== 'administrador') {
                                     <div class="mb-3">
                                         <label for="imagen" class="form-label">Imagen</label>
                                         <input type="file" class="form-control" id="imagen" name="imagen"
-                                            accept="image/*" required>
+                                            accept="image/png, image/jpeg, image/webp, image/bmp, image/tiff" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="tipo" class="form-label">Tipo</label>
