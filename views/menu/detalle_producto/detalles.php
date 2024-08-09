@@ -139,7 +139,7 @@ $medidas = $db->select($queryMedidas);
         <div
             class="row shadow-lg bg-body m-0 p-0 mb-lg-5 rounded d-flex justify-content-center align-items-center text-center">
             <!-- Imagen -->
-            <div class="col-lg-6 rounded m-0 p-0 d-flex justify-content-center">
+            <div class="col-lg-6 rounded m-0 p-0 d-flex justify-content-left">
                 <img src="../../../img/menu/<?php echo $producto[0]->img_url ?>" alt="Imagen del producto"
                     class="img-fluid rounded">
             </div>

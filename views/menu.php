@@ -116,7 +116,7 @@
             <div class="col-6 col-lg-3">
                 <a href="menu/aroundtheworld.php">
                     <div class="card border-0" style="background: var(--color6)">
-                        <img src="../img/cafes/bolsa1.webp" class="card-img-top rounded-5" alt="aroundtheworld">
+                        <img src="../img/cafes/atheworld.jpg" class="card-img-top rounded-5" alt="aroundtheworld">
                         <div class="cblog-card p-2">
                             <h5 class="card-title fw-bold text-center">Around The World</h5>
                         </div>
@@ -168,7 +168,7 @@
             <div class="col-6 col-lg-3">
                 <a href="menu/losmetodosdejazzband.php">
                     <div class="card border-0" style="background: var(--color6)">
-                        <img src="../img/categorias/jazz.webp" class="card-img-top rounded-5" alt="jazzband">
+                        <img src="../img/cafes/jb.jpg" class="card-img-top rounded-5" alt="jazzband">
                         <div class="cblog-card p-2">
                             <h5 class="card-title fw-bold text-center">Jazz Band</h5>
                         </div>
@@ -201,7 +201,7 @@
             <div class="col-6 col-lg-3">
                 <a href="menu/teytisanas.php">
                     <div class="card border-0" style="background: var(--color6)">
-                        <img src="../img/cafes/bolsa1.webp" class="card-img-top rounded-5" alt="teytisanas">
+                        <img src="../img/cafes/tyt.jpg" class="card-img-top rounded-5" alt="teytisanas">
                         <div class="cblog-card p-2">
                             <h5 class="card-title fw-bold text-center">Té y Tisanas</h5>
                         </div>
