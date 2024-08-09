@@ -162,13 +162,13 @@ if (isset($_SESSION["usuario"])) {
                                 echo '<div class="row me-lg-3 mx-1 bg-body shadow-lg rounded p-0 mb-3">';
                                 echo '<div class="">';
                                 echo '  <div class="row">';
-                                echo '  <div class="col-lg-6 carousel-item-wrapper m-0 p-0">';
+                                echo '  <div class="col-lg-8 carousel-item-wrapper m-0 p-0">';
                                 echo '      <img src="../../img/bolsas/' . $item->img_url . '" class="coffee-image rounded-0" alt="Producto">';
                                 echo '      <div class="overlay">';
                                 echo '      <h4 class="medida text-white">' . $item->medida . '</h4>';
                                 echo '      </div>';
                                 echo '  </div>';
-                                echo '      <div class="col-lg-6 m-0 p-0 d-flex justify-content-center p-3 flex-column">';
+                                echo '      <div class="col-lg-4 m-0 p-0 d-flex justify-content-center p-3 flex-column">';
                                 echo '          <h2 class="mb-0 fw-bold d-inline">' . $item->producto . ' (' . $item->proceso . ')</h2>';
                                 echo '          <p class="text-muted m-0">Medida: ' . $item->medida . '</p>';
                                 echo '          <p class="text-muted m-0">Cantidad: ' . $item->cantidad . '</p>';
@@ -311,6 +311,8 @@ if (isset($_SESSION["usuario"])) {
                                         echo "<div>";
                                         echo "<p class='m-1 p-0 fw-bold d-inline'>Colonia:</p><p id='direccion_completa' class='m-1 p-0 d-inline'></p>";
                                         echo "</div>";
+                                        echo"   <p class='small text-muted'>* No incluye los gastos de envío.</p>
+                                                <p class='fw-bold'>Total: <span class='float-end'>$" . $total . "</span></p>";
                                         echo "</div>";
                                     } else {
                                         $DOMICIOLIO = '';
@@ -322,7 +324,7 @@ if (isset($_SESSION["usuario"])) {
                                 <div class="col-12">
                                     <?php
                                     echo '
-                                        <p class="small text-muted">* No incluye los gastos de envío.</p>
+                                        
                                         <!-- Boton para abrir modal de confirmación -->
                                         <button type="button" class="btn btn-cafe w-100" data-bs-toggle="modal" data-bs-target="#confirmarModal">Realizar Pedido</button>
                                         <!-- Modal de confirmación -->
@@ -340,8 +342,9 @@ if (isset($_SESSION["usuario"])) {
                                                                 <input type="hidden" name="id_mp" value="' . $mp->id_mp . '">
                                                                 <input type="hidden" id="hiddenIdDomicilio" name="id_domicilio" value="' . $DOMICIOLIO . '">
                                                                 <input type="hidden" name="id_cliente" value="' . $cliente[0]->id_cliente . '">
-                                                                <p>Total: <span class="float-end fw-bold">$' . $total . '</span></p>
+                                                                
                                                             </div>
+                                                            <p class="mb-3">Total: <span class="float-end fw-bold">$' . $total . '</span></p>
                                                             <div class="text-end">
                                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                                                                 <button type="submit" class="btn btn-cafe" name="realizarPedido">Realizar pedido</button>

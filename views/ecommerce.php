@@ -119,16 +119,34 @@ if (isset($_SESSION["usuario"])) {
                         bolsas_cafe.cuerpo,bolsas_cafe.img_url,bolsas_cafe.estatus
                         FROM bolsas_cafe where bolsas_cafe.estatus = true;';
 
+
                     $bolsas = $conexion->select($query);
+
+
+
+
                     if (count($bolsas) > 0) {
                         foreach ($bolsas as $bolsa) {
-
+                            $query2 = 'SELECT detalle_bc.id_dbc, bolsas_cafe.id_bolsa,bolsas_cafe.nombre, bolsas_cafe.productor_finca ,bolsas_cafe.proceso,
+            bolsas_cafe.variedad,bolsas_cafe.altura,bolsas_cafe.aroma,bolsas_cafe.acidez,bolsas_cafe.sabor,
+            bolsas_cafe.cuerpo,bolsas_cafe.img_url,detalle_bc.medida,detalle_bc.precio,detalle_bc.stock
+            FROM bolsas_cafe join detalle_bc on bolsas_cafe.id_bolsa=detalle_bc.id_bolsa
+            where bolsas_cafe.id_bolsa="' . $bolsa->id_bolsa . '";';
+                            $precio = $conexion->select($query2);
                             echo "<div class='col-10 col-sm-6 col-md-6 col-lg-4 p-lg-2 m-0 px-3 mb-3 mb-lg-0'>";
-                            echo "<div class='card m-0 blog-card shadow-lg' style='border-radius: 5% 5% 0% 0%;'>";;
-                            echo "<img src='../img/bolsas/{$bolsa->img_url}' class='coffee-image align-card-img-top' alt='{$bolsa->id_bolsa}'>";
+                            echo "<div class='card m-0 blog-card shadow-lg' style='border-radius: 5% 5% 0% 0%;'>";
+                            echo "<img src='../img/bolsas/{$bolsa->img_url}' class='align-card-img-top' alt='{$bolsa->id_bolsa}' style='border-radius: 5% 5% 0% 0%;'>";
                             echo "<div class='card-body product-card-body'>";
                             echo "<h5 class='card-title fw-bold product-title' style='letter-spacing: 1px;'>{$bolsa->nombre}</h5>";
                             echo "<p class='card-text product-subtitle'>{$bolsa->proceso}</p>";
+                            
+                            foreach ($precio as $precios) {
+                                echo "<p class='card-text product-subtitle d-flex justify-content-between'>";
+                                echo "<span class='card-text product-subtitle'>" . $precios->medida . "</span>";
+                                echo "<span class='card-text product-subtitle'>$" . $precios->precio . ".00</span>";
+                                echo "</p>";
+                            }
+                            
                             echo "<form action='../views/bolsas/bolsas.php?id={$bolsa->id_bolsa}' method='post'>";
                             echo "<input type='hidden' name='id_bolsa' value='{$bolsa->id_bolsa}'>";
                             echo "<input type='submit' class='btn btn-cafe w-100' value='Ver Detalles'>";

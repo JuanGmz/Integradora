@@ -166,14 +166,14 @@ if ($result) {
                     </div>
                     <div class='container mt-3'>
                         <div class='row d-flex justify-content-center'>
-                            <div class='col-9 col-sm-8 col-md-6 col-lg-4 text-sm-center'>
+                            <div class='col-12 col-sm-8 col-md-7 col-lg-5 text-center'>
                                 <img src='../../img/bolsas/{$bolsacafe[0]->img_url}' class=' rounded coffee-image' alt='Producto'>
                                 <p class='mt-3'><strong>Puntaje de catacion:</strong>{$bolsacafe[0]->puntaje_catacion}<pts</p>
                                 <div class='col-12 text-center'>
                                     <p class='product-price' id='productPrice'>$" . $peso[0]->precio . ".00</p>
                                 </div>
                             </div>
-                            <div class='col-12 col-md-6'>
+                            <div class='col-12 col-md-5 col-lg-6'>
                                 <div class='row text-center'>
                                     <div class='col-6'>
                                         <p class='product-detail m-0'>Productor y/o Finca:</p>
