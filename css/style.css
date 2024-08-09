@@ -1179,3 +1179,7 @@ a:hover {
       /* Ajusta el porcentaje según tus necesidades */
   }
 }
+
+div{
+  word-wrap: break-word;
+}
