@@ -404,7 +404,7 @@ if (isset($_POST['btnactualizar'])) {
                                 <div class="row">
                                     <div class="col-8 col-lg-4">
                                         <input type="text" class="form-control" name="busqueda" pattern="[A-Za-z0-9\s]+"
-                                            placeholder="Ingresa Folio, Usuario o Teléfono" required>
+                                            placeholder="Ingresa Folio o Usuario" required>
                                     </div>
 
                                     <div class="col-4 col-lg-2">

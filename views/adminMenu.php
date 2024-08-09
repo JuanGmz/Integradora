@@ -546,8 +546,10 @@ if (isset($_POST['btnactualizar'])) {
                                                 <div class='modal fade' id='modalImagen_$producto->id_pm' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
                                                     <div class='modal-dialog modal-dialog-centered'>
                                                         <div class='modal-content'>
-                                                            <div class='modal-header'>
-                                                                <h1 class='modal-title fs-5' id='exampleModalLabel'>$producto->nombre</h1>
+                                                            <div class='modal-header '>          
+                                                                <div style='overflow: hidden; '>                                                   
+                                                                <h1 class='modal-title fs-5' id='exampleModalLabel'>$producto->nombre</h1> 
+                                                                </div>
                                                             </div>
                                                             <div class='modal-body mb-3'>
                                                                 <!-- Aquí se está mostrando la imagen -->
@@ -689,16 +691,16 @@ if (isset($_POST['btnactualizar'])) {
 
                                 if ($producto->estatus == false) {
                                     ?>
-                                    <input type="hidden" name="estatus" value="true" required>
-                                    <button type="submit" name="btnestatus" class="btn btn-danger"><i
-                                            class="fa-solid fa-eye-slash"></i></button>
-                                    <?php
+                    <input type="hidden" name="estatus" value="true" required>
+                    <button type="submit" name="btnestatus" class="btn btn-danger"><i
+                            class="fa-solid fa-eye-slash"></i></button>
+                    <?php
                                 } else {
                                     ?>
-                                    <input type="hidden" name="estatus" value="false" required>
-                                    <button type="submit" name="btnestatus" class="btn btn-success"><i
-                                            class="fa-solid fa-eye"></i></button>
-                                    <?php
+                    <input type="hidden" name="estatus" value="false" required>
+                    <button type="submit" name="btnestatus" class="btn btn-success"><i
+                            class="fa-solid fa-eye"></i></button>
+                    <?php
                                 }
                                 echo "
                                 <input type='hidden' name='id_pm' value='$producto->id_pm' required>

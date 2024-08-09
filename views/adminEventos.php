@@ -691,7 +691,9 @@ if (isset($_POST['btnactualizarimagen'])) {
                                                     <div class='modal-dialog modal-dialog-centered'>
                                                         <div class='modal-content'>
                                                             <div class='modal-header'>
-                                                                <h1 class='modal-title fs-5' id='exampleModalLabel'>$evento->nombre</h1>
+                                                                <div style='overflow: hidden;'>
+                                                                    <h1 class='modal-title fs-5' id='exampleModalLabel'>$evento->nombre</h1>
+                                                                </div>
                                                             </div>
                                                             <div class='modal-body mb-3'>
                                                                 <!-- Aquí se está mostrando la imagen -->

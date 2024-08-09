@@ -1323,6 +1323,34 @@ INSERT INTO productos_menu (id_categoria, nombre, descripcion, img_url) VALUES
 (14, 'Cà Phê Sữa Nóng (Vietnam)', 'Café preparado en cafetera vietnamita "Phin", extracción intensa endulzada con leche condensada.', 'turkish-coffee-6402682_1920.jpg'),
 (14, 'Cà Phê Sữa Dá (Vietnam)', 'Versión fría de la preparación en cafetera Vietnamita "Phin".', 'turkish-coffee-1478976_1920.jpg'),
 (14, 'Mazagrán (Argelia)', 'Café americano preparado en clever, con jugo de limón y endulzado con azúcar morena.', 'coffee-3792145_1920.jpg'),
+(10, 'V60/Dripper', 'Método de goteo para preparar café.', 'v60.jpg'),
+(10, 'Aeropress', 'Método de preparación de café por presión.', '12.jpg'),
+(10, 'Clever', 'Método de preparación de café por inmersión y goteo.', 'clever.jpg'),
+(10, 'Prensa Francesa', 'Método de preparación de café por inmersión.', 'prensafrancesa.jpg'),
+(10, 'Chemex', 'Método de goteo para preparar café con filtro especial.', '15.jpg'),
+(10, 'Vandola', 'Método tradicional costarricense para preparar café.', '16.jpg'),
+(10, 'Sifón Japonés', 'Método de preparación de café con vacío y presión.', '17.jpg'),
+(12, 'SHAKERATTO', 'Bebida fría a base de espresso.', 'cocoa-4845909_1920.jpg'),
+(12, 'ICED LATTE', 'Bebida fría a base de espresso.', 'coffee-1117933_1920.jpg'),
+(12, 'ESPRESSO TONIC', 'Bebida fría a base de espresso.', 'latte-4058698_1920.jpg'),
+(12, 'ESPRESSO HONIC', 'Bebida fría a base de espresso.', 'coffee-7929785_1920.jpg'),
+(13, 'Cold B. EN LAS ROCAS', 'Cold Brew es una infusión de café en frío de 12 a 15 horas.', 'coffee-1958233_1920.jpg'),
+(13, 'Cold B. LATTE', 'Cold Brew es una infusión de café en frío de 12 a 15 horas.', 'coffee-5149151_1920.jpg'),
+(13, 'Cold B. MINERAL', 'Cold Brew es una infusión de café en frío de 12 a 15 horas.', 'coffee-896200_1920.jpg'),
+(13, 'Cold B. TONIC', 'Cold Brew es una infusión de café en frío de 12 a 15 horas.', 'drink-2060696_1920.jpg'),
+(14, 'Affogato', 'Una bola de nieve de vainilla servida en vaso y bañado en Espresso doble. Puedes comerlo a cucharadas o esperar a que se derrita para tomarlo. Dato curioso: Affogato significa “Ahogado” en Italiano.', '90.jpg'),
+(14, 'Marocchino', 'Espresso sencillo servido sobre chocolate, leche cremada y top de cocoa.', '91.jpg'),
+(14, 'Café Bombón', 'Espresso sencillo servido sobre leche condensada. Puedes pedirlo como “Bombón del tiempo” para que sea servido en frío!', '92.jpg'),
+(14, 'Café con Miel', 'Espresso sencillo con miel disuelta y leche cremada.', 'miel.jpg'),
+(14, 'Café Au Lait', 'Sencillamente un americano preparado en V60 al que añadimos leche cremada al final. Dato curioso: Literalmente significa “café con leche” en francés.', '93.jpg'),
+(14, 'Café de Olla', 'Porque no podía falta, nuestra tradicional forma de tomar café con un toque de especialidad. Café preparado en prensa francesa al que se le añade una infusión de piloncillo, canela y otras especias. Servida en taza de barro.', '94.jpg'),
+(14, 'Café Americano', 'Café americano preparado con granos de café 100% arábica.', '95.jpg'),
+(14, 'Yuanyang (China)', 'Mezcla de té negro y café americano, endulzado con leche condensada.', '96.jpg'),
+(14, 'Café Raf (Rusia)', 'Mezcla de espresso doble con piloncillo disuelto y leche, cremado todo junto.', '97.jpg'),
+(14, 'Flat White (Australia/Nueva Zelanda)', 'Preparado con Ristretto doble y leche cremada muy ligeramente.', '98.jpg'),
+(14, 'Cà Phê Sữa Nóng (Vietnam)', 'Café preparado en cafetera vietnamita "Phin", extracción intensa endulzada con leche condensada.', '99.jpg'),
+(14, 'Cà Phê Sữa Dá (Vietnam)', 'Versión fría de la preparación en cafetera Vietnamita "Phin".', '100.jpg'),
+(14, 'Mazagrán (Argelia)', 'Café americano preparado en clever, con jugo de limón y endulzado con azúcar morena.', '101.jpg'),
 (15, 'MORA AZUL', 'Soda italiana sabor mora azul', 'drink-6809939_1920.jpg'),
 (15, 'MANZANA VERDE', 'Soda italiana sabor manzana verde', 'drink-3492107_1920.jpg'),
 (15, 'ZARZAMORA', 'Soda italiana sabor zarzamora', 'drink-7156111_1920.jpg'),
@@ -1336,16 +1364,16 @@ INSERT INTO productos_menu (id_categoria, nombre, descripcion, img_url) VALUES
 (16, 'Muddy Matcha', 'Frappé con matcha, leche y hielo', 'drink-7156111_1920.jpg'),
 (16, 'Matcha', 'Frappé con matcha y leche', 'latte-art-3348729_1920.jpg'),
 (16, 'Chai', 'Frappé con té Chai y leche', 'coffee-5149151_1920.jpg'),
-(17, 'Té Verde Menta', 'Té verde con un toque refrescante de menta.', 'cocoa-4845909_1920.jpg'),
-(17, 'Té Negro', 'Té negro tradicional.', 'tea-7036402_1920.jpg'),
-(17, 'Earl Grey', 'Té negro aromatizado con aceite de bergamota.', 'coffee-4734164_1920.jpg'),
-(17, 'Chai Verde', 'Té verde con especias tradicionales de Chai.', 'coffee-5149151_1920.jpg'),
-(17, 'Rooibos', 'Té Rooibos con un toque dulce y afrutado.', 'cocoa-4845909_1920.jpg'),
-(17, 'TISANAS', 'Infusiones de Hierbas', 'coffee-2242215_1920.jpg'),
+(17, 'Té Verde Menta', 'Té verde con un toque refrescante de menta.', 'teverde-4845909_1920.jpg'),
+(17, 'Té Negro', 'Té negro tradicional.', 'te-negro-7036402_1920.jpg'),
+(17, 'Earl Grey', 'Té negro aromatizado con aceite de bergamota.', 'earl-grey-4734164_1920.jpg'),
+(17, 'Chai Verde', 'Té verde con especias tradicionales de Chai.', 'chai-5149151_1910.jpg'),
+(17, 'Rooibos', 'Té Rooibos con un toque dulce y afrutado.', 'rooibos-4845909_1920.jpg'),
+(17, 'TISANAS', 'Infusiones de Hierbas', 'tisanas-2242215_1921.jpg'),
 (17, 'Chai Latte', 'Bebida de Té Chai con Leche', 'coffee-4184598_1920.jpg'),
-(17, 'Matcha Latte', 'Bebida de Té Matcha con Leche', 'latte-1565931_1920.jpg'),
-(17, 'Chai Latte Roca', 'Chai Latte con Hielo', 'latte-art-3348729_1920.jpg'),
-(17, 'Matcha Latte Roca', 'Matcha Latte con Hielo', 'drink-2060696_1920.jpg'),
+(17, 'Matcha Latte', 'Bebida de Té Matcha con Leche', 'matcha-1565931_1920.jpg'),
+(17, 'Chai Latte Roca', 'Chai Latte con Hielo', 'latte-roca-3348729_1955.jpg'),
+(17, 'Matcha Latte Roca', 'Matcha Latte con Hielo', 'matcha-2060696_1920.jpg'),
 (17, 'Chocolate Caliente', 'Bebida de Chocolate Caliente', 'tea-7036402_1920.jpg'),
 (18, 'Flan Napolitano', 'Delicioso flan napolitano tradicional.', 'flannapolitano.jpg'),
 (18, 'Cheesecake Frutos Rojos', 'Cheesecake con una cobertura de frutos rojos.', 'frutos.jpg'),
@@ -1635,11 +1663,12 @@ BEGIN
     DECLARE busqueda_str VARCHAR(50);
 
     -- Intentar convertir la búsqueda a un número
-    SET busqueda_int = CAST(busqueda AS UNSIGNED);
     SET busqueda_str = busqueda;
     
     -- Validar si la búsqueda es un número
     IF busqueda_str REGEXP '^[0-9]+$' THEN
+        SET busqueda_int = CAST(busqueda AS UNSIGNED);
+        
         SELECT DISTINCT p.id_pedido,
                CONCAT(pe.nombres, ' ', pe.apellido_paterno, ' ', pe.apellido_materno) AS cliente,
                CONCAT(dom.calle, ' ', dom.colonia, ' ', dom.ciudad, ' ', dom.estado, ' ', dom.codigo_postal) AS domicilio,
@@ -1707,6 +1736,8 @@ BEGIN
 END //
 
 DELIMITER ;
+
+
 
 
 DELIMITER ;
