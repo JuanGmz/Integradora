@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="../img/Sinfonía-Café-y-Cultura.webp">
 
     <?php
-    include_once("../class/database.php");
+    include_once ("../class/database.php");
     $db = new Database();
     $db->conectarDB();
     session_start();
@@ -26,7 +26,10 @@
 <body>
 
     <!-- Botón de WhatsApp -->
-    <button id="whatsappButton" class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3" type="button" onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
+    <button id="whatsappButton"
+        class="btn btn-success position-fixed bottom-0 start-0 m-3 p-3 d-flex align-items-center justify-content-center z-3"
+        type="button"
+        onclick="window.open('https://wa.me/528711220994?text=%C2%A1Hola!%20Escribo%20desde%20la%20p%C3%A1gina%20web%20y%20quer%C3%ADa%20consultar%20por%3A', '_blank')">
         <i class="fa-brands fa-whatsapp fa-2x"></i>
     </button>
     <!-- NavBar -->
@@ -35,7 +38,8 @@
             <a class="navbar-brand" href="../index.php">
                 <img src="../img/Sinfonía-Café-y-Cultura.webp" alt="Logo" class="logo" loading="lazy">
             </a>
-            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas offcanvas-end" style="background: var(--primario);" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title text-light fw-bold" id="offcanvasNavbarLabel">SifoníaCafé&Cultura
                     </h5>
@@ -66,12 +70,14 @@
             </div>
             <?php
             if (isset($_SESSION["usuario"])) {
-            ?>
+                ?>
                 <!-- Navbar con dropdown -->
-                <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="left: auto; right: 30px; top: 60px">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
+                    style="left: auto; right: 30px; top: 60px">
                     <a class="dropdown-item" href="perfil.php">Mi perfil</a>
                     <a class="dropdown-item" href="bolsas/Carrito.php">Mi carrito</a>
                     <?php if ($rol[0]->rol === 'administrador') { ?>
@@ -80,14 +86,15 @@
                     <?php } ?>
                     <a class="dropdown-item" href="../scripts/login/cerrarsesion.php">Cerrar sesión</a>
                 </div>
-            <?php
+                <?php
             } else {
-            ?>
+                ?>
                 <a href="login.php" class="login-button ms-auto">Iniciar Sesión</a>
-            <?php
+                <?php
             }
             ?>
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
@@ -114,9 +121,10 @@
                 </div>
                 <!-- Botones de categorías -->
                 <div class="d-flex justify-content-center">
-                    <ul class="nav nav-tabs justify-content-center gap-2 m-0 p-0" id="ex1" role="tablist" style="border-bottom: none;">
+                    <ul class="nav nav-tabs justify-content-center gap-2 m-0 p-0" id="ex1" role="tablist"
+                        style="border-bottom: none;">
                         <?php
-                        include_once("../class/database.php");
+                        include_once ("../class/database.php");
                         $conexion = new Database();
                         $conexion->conectarDB();
                         $query = 'SELECT categorias.id_categoria, categorias.nombre FROM categorias WHERE categorias.tipo = "Evento"';
@@ -193,14 +201,14 @@
                                 echo "              <div class='col-12 col-sm-9 col-md-11 col-lg-6 p-2 p-lg-2 d-flex justify-content-center flex-column'>";
                                 echo "                  <div><h3 class='fw-bold mb-3 text-center'>{$evento->nombre}</h3></div>";
                                 echo "                 <div class='d-flex justify-content-center'>
-                                                       <p class='text-dark-emphasis mb-4'>{$evento->fecha_publicacion}</p>
+                                                       <p class='text-dark-emphasis mb-4'>{$evento->fecha_evento}</p>
                                                        </div>";
-                                                        $descripcion = $evento->descripcion;
-                                                        $maximo = 55;
+                                $descripcion = $evento->descripcion;
+                                $maximo = 55;
 
-                                                        if (strlen($descripcion) > $maximo) {
-                                                            $descripcion = substr($descripcion, 0, $maximo) . '...';
-                                                        }
+                                if (strlen($descripcion) > $maximo) {
+                                    $descripcion = substr($descripcion, 0, $maximo) . '...';
+                                }
                                 echo "                      <p class='text-center text-dark-emphasis mb-4'>{$descripcion}</p>";
                                 echo "                  <p class='text-center'>{$evento->tipo}</p>";
                                 echo "                  <form action='../views/eventos/detalle_eventos.php?id={$evento->id_evento}' method='post'>";
@@ -248,7 +256,7 @@
                 </div>
 
                 <script>
-                    document.addEventListener('DOMContentLoaded', function() {
+                    document.addEventListener('DOMContentLoaded', function () {
                         const warningElement = document.getElementById('category-warning');
                         const tabLinks = document.querySelectorAll('.btn-categorias');
 
@@ -257,7 +265,7 @@
                         }
 
                         tabLinks.forEach(link => {
-                            link.addEventListener('click', function() {
+                            link.addEventListener('click', function () {
                                 warningElement.style.display = 'none';
                             });
                         });
