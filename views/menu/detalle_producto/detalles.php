@@ -156,20 +156,28 @@ $medidas = $db->select($queryMedidas);
                         <tbody>
                             <!-- medidas -->
                             <?php
-                    if (empty($medidas[0]->medida and $medidas[0]->precio)) {
+                    if (empty($medidas[0]->precio) AND empty($medidas[0]->medida)) {
                     ?>
                             <tr>
-                                <td class="fs-4">Este producto no cuenta con medidas para mostrar.</td>
+                                <td class="fs-6">El producto no cuenta con precio disponible.</td>
                             </tr>
                             <?php
                     } else {
-                        foreach ($medidas as $medida) {
-                            echo "
-                            <tr>
-                                <td class='fs-4'>$medida->medida</td>
-                                <td class='fs-4 px-3'>-</td>
-                                <td class='fs-4 '>$$medida->precio</td>
-                            </tr>";
+                        if ($medidas[0]->medida == NULL) {
+                            ?>
+                                <tr>
+                                    <td class='fs-4'>$<?php echo $medidas[0]->precio ?></td>
+                                </tr>
+                            <?php
+                        } else {
+                            foreach ($medidas as $medida) {
+                                echo "
+                                <tr>
+                                    <td class='fs-4'>$medida->medida</td>
+                                    <td class='fs-4 px-3'>-</td>
+                                    <td class='fs-4 '>$$medida->precio</td>
+                                </tr>";
+                            }
                         }
                     }
                     ?>

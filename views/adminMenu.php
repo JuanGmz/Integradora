@@ -448,7 +448,7 @@ if (isset($_POST['btnactualizar'])) {
                                         <div class="mb-3 col-6">
                                             <label for="medida" class="form-label">Medida</label>
                                             <input type="text" class="form-control" id="medida" name="medida"
-                                                maxlength="15" required>
+                                                maxlength="15">
                                         </div>
                                         <div class="mb-3 col-6">
                                             <label for="precio" class="form-label">Precio</label>
