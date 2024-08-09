@@ -320,7 +320,7 @@ if ($result) {
             <!-- Ubicación -->
             <div class="row mt-4 m-0 p-0">
                 <!-- Horario y Detalles -->
-                <div class="col-6 offset-3 col-md-6 offset-lg-0 me-auto p-0 pe-lg-3">
+                <div class="col-12 col-md-12 offset-lg-0 col-lg-6 me-auto p-0 pe-lg-3 ">
                     <!-- Horario -->
                     <div class="row bg-body shadow-lg rounded pt-4 p-0 m-0">
                         <div class="d-flex align-items-center justify-content-center">

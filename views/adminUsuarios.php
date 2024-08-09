@@ -360,7 +360,7 @@
                                 <div class="row">
                                     <div class="col-8 col-lg-4">
                                         <input type="text" required class="form-control" name="busqueda"
-                                            placeholder="Ingresa ID, Usuario o Teléfono"
+                                            placeholder="Ingresa Usuario o Teléfono"
                                             value="<?php echo isset($_POST['busqueda']) ? htmlspecialchars($_POST['busqueda']) : ''; ?>">
                                     </div>
                                     <div class="col-4 col-lg-2">

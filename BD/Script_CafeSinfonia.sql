@@ -1553,9 +1553,9 @@ INSERT INTO bolsas_cafe(
     img_url
 )
 VALUES
-('Texin Veracruz','2023 - 2024','Eduardo Vital Díaz', 'Lavado', 'Marsellesa, San Román, Oro Azteca', '1,220 msnm', 'Cacao, Vainilla', 'Cítrica, brillante', 'Choc. Oscuro, Avellana', 'Alto - Denso',85, 'TEXINVER(LAV)T.webp'),
-('Jaltenango Chiapas','2023 - 2024','Finca Santa María', 'Lavado', 'Caturra', '1,300 - 1,500 msnm', 'Cítrico, Floral', 'Brillante, Equilibrada', 'Miel, Manzana Verde, Durazno', 'Medio - Denso',86.5, 'JALTCHIAP(MARAGO)T.webp'),
-('Jaltenango Chiapas','2023 - 2024','Finca Santa María', 'Natural', 'Marsellesa, Bourbon', '1,350 - 1,450 msnm', 'Dulce de Leche, Nuez', 'Frutal Intensa', 'Almíbar, Naranja', 'Ligero',84, 'JALTCHIAP(NAT)T.webp');
+('Texin Veracruz','2023 - 2024','Eduardo Vital Díaz', 'Lavado', 'Marsellesa, San Román, Oro Azteca', '1,220 msnm', 'Cacao, Vainilla', 'Cítrica, brillante', 'Choc. Oscuro, Avellana', 'Alto - Denso',85, '1.webp'),
+('Jaltenango Chiapas','2023 - 2024','Finca Santa María', 'Lavado', 'Caturra', '1,300 - 1,500 msnm', 'Cítrico, Floral', 'Brillante, Equilibrada', 'Miel, Manzana Verde, Durazno', 'Medio - Denso',86.5, '2.webp'),
+('Jaltenango Chiapas','2023 - 2024','Finca Santa María', 'Natural', 'Marsellesa, Bourbon', '1,350 - 1,450 msnm', 'Dulce de Leche, Nuez', 'Frutal Intensa', 'Almíbar, Naranja', 'Ligero',84, '3.webp');
 
 -- Insert 
 INSERT INTO detalle_bc (
@@ -1659,6 +1659,11 @@ BEGIN
                dp.cantidad AS cantidad,
                p.fecha_hora_pedido,
                p.monto_total,
+               bc.proceso,
+               bc.variedad,
+               bc.sabor,
+               dp.monto as subtotal,
+               dp.precio_unitario,
                p.envio,
                p.costo_envio,
                p.guia_de_envio,
@@ -1688,6 +1693,9 @@ BEGIN
                mp.metodo_pago AS metodo_pago,
                bc.nombre AS bolsa,
                dbc.medida AS medida,
+               bc.proceso,
+               bc.variedad,
+               bc.sabor,
                dp.cantidad AS cantidad,
                p.fecha_hora_pedido,
                p.monto_total,
@@ -1817,30 +1825,57 @@ JOIN
 DROP PROCEDURE IF EXISTS SP_filtrar_usuarios;
 DELIMITER $$
 create PROCEDURE SP_filtrar_usuarios(
-    IN p_busqueda NVARCHAR(100)
+IN p_busqueda NVARCHAR(100)
 )
 BEGIN
-    SELECT
-        p.id_persona,
-        p.id_usuario,
-        p.usuario,
-        p.correo,
-        p.telefono,
-        p.nombres,
-        p.apellido_paterno,
-        p.apellido_materno,
-        GROUP_CONCAT(r.rol ORDER BY r.id_rol SEPARATOR ', ') AS roles
-    FROM
-        personas p
-        JOIN usuarios u ON p.id_usuario = u.id_usuario
-        LEFT JOIN roles_usuarios ru ON u.id_usuario = ru.id_usuario
-        LEFT JOIN roles r ON ru.id_rol = r.id_rol
-    WHERE
-        p.id_usuario = p_busqueda OR
-        p.usuario = p_busqueda OR
-        p.telefono = p_busqueda
-    GROUP BY
-        p.id_persona, p.id_usuario, p.usuario, p.correo, p.telefono, p.nombres, p.apellido_paterno, p.apellido_materno;
+    DECLARE es_entero BOOLEAN;
+
+    -- Verificar si el parámetro de búsqueda es un número entero
+    SET es_entero = p_busqueda REGEXP '^[0-9]+$';
+
+    IF es_entero THEN
+        -- Búsqueda por id_usuario o telefono si es entero
+        SELECT
+            p.id_persona,
+            p.id_usuario,
+            p.usuario,
+            p.correo,
+            p.telefono,
+            p.nombres,
+            p.apellido_paterno,
+            p.apellido_materno,
+            GROUP_CONCAT(r.rol ORDER BY r.id_rol SEPARATOR ', ') AS roles
+        FROM
+            personas p
+            JOIN usuarios u ON p.id_usuario = u.id_usuario
+            LEFT JOIN roles_usuarios ru ON u.id_usuario = ru.id_usuario
+            LEFT JOIN roles r ON ru.id_rol = r.id_rol
+        WHERE
+            p.telefono = p_busqueda
+        GROUP BY
+            p.id_persona, p.id_usuario, p.usuario, p.correo, p.telefono, p.nombres, p.apellido_paterno, p.apellido_materno;
+    ELSE
+        -- Búsqueda por usuario si es cadena de texto
+        SELECT
+            p.id_persona,
+            p.id_usuario,
+            p.usuario,
+            p.correo,
+            p.telefono,
+            p.nombres,
+            p.apellido_paterno,
+            p.apellido_materno,
+            GROUP_CONCAT(r.rol ORDER BY r.id_rol SEPARATOR ', ') AS roles
+        FROM
+            personas p
+            JOIN usuarios u ON p.id_usuario = u.id_usuario
+            LEFT JOIN roles_usuarios ru ON u.id_usuario = ru.id_usuario
+            LEFT JOIN roles r ON ru.id_rol = r.id_rol
+        WHERE
+            p.usuario = p_busqueda
+        GROUP BY
+            p.id_persona, p.id_usuario, p.usuario, p.correo, p.telefono, p.nombres, p.apellido_paterno, p.apellido_materno;
+    END IF;
 END $$
 DELIMITER ;
 
