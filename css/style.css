@@ -58,6 +58,7 @@ a:hover {
 /* Estilos para las imágenes */
 .coffee-image {
   object-fit: cover;
+  border-radius: 5% 5% 0% 0%;
 }
 
 @media (min-width: 768px) {

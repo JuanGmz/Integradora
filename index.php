@@ -342,7 +342,7 @@
     
                                 echo "<div class='col-md-6 p-2 col-6 col-sm-6 col-lg-4 p-md-4 p-0 m-0 {$additionalClass} {$additionalClass2}'>";
                                 echo "<div class='card m-0 blog-card shadow-lg' style='border-radius: 5% 5% 0% 0%;'>";
-                                echo "<img src='img/bolsas/{$bolsa->img_url}' class='coffee-image align-card-img-top' alt='{$bolsa->id_bolsa}'>";
+                                echo "<img src='img/bolsas/{$bolsa->img_url}' class='coffee-image align-card-img-top' alt='{$bolsa->id_bolsa}' style='border-radius: 5% 5% 0% 0%;'>";
                                 echo "<div class='card-body product-card-body'>";
                                 echo "<h5 class='card-title fw-bold product-title' style='letter-spacing: 1px;'>{$bolsa->nombre}</h5>";
                                 echo "<p class='card-text product-subtitle'>{$bolsa->proceso}</p>";
@@ -350,7 +350,6 @@
                                 echo "<input type='hidden' name='id_bolsa' value='{$bolsa->id_bolsa}'>";
                                 echo "<input type='submit' class='btn btn-cafe w-100' value='Ver Detalles'>";
                                 echo "</div>";
-                                echo "</a>";
                                 echo "</div>";
                                 echo "</div>";
                             }
@@ -413,12 +412,11 @@
                                 $additionalClass = ($countes > 3) ? 'd-none' : ''; // Cambia la clase después del tercer ciclo
                                 $additionalClass2 = ($countes > 3) ? 'd-md-block' : ''; // Cambia la clase después del tercer ciclo
                             ?>
-                                <div class='col-md-6 p-2 col-6 col-sm-6 col-lg-4<?php echo ' ' . $additionalClass . ' ' . $additionalClass2 ?>'>
+                                <div class='col-md-6 p-2 col-6 col-sm-6 col-lg-4 p-md-4 p-0 m-0 <?php echo ' ' . $additionalClass . ' ' . $additionalClass2 ?>'>
 
-                                    <a href="views/publicaciones/blog.php">
-                                        <div class='card blog-card shadow-lg' style="border-radius: 5% 5% 0% 0%;">
-                                            <img src='img/publicaciones/<?php echo $publicacion->img_url; ?>' class='coffee-image' alt='<?php echo $publicacion->titulo ?>'>
-                                            <div class='card-body product-card-body d-flex flex-column'>
+                                        <div class='card m-0 blog-card shadow-lg' style="border-radius: 5% 5% 0% 0%;">
+                                            <img src='img/publicaciones/<?php echo $publicacion->img_url; ?>' class='coffee-image align-card-img-top' alt='<?php echo $publicacion->titulo ?>'>
+                                            <div class='card-body product-card-body'>
                                                 <h5 class='blog-card-title'><?php echo $publicacion->titulo; ?></h5>
                                                 <h6 class='blog-card-subtitle mb-2 text-muted'>
                                                     <?php echo $publicacion->fecha; ?></h6>
@@ -429,7 +427,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </a>
+                                    
                                 </div>
                             <?php endforeach; ?>
                         </div>
