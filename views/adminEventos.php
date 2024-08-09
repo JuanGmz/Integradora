@@ -525,7 +525,7 @@ if (isset($_POST['btnactualizarimagen'])) {
                                     <div class="row">
                                         <div class="col-6 mb-3">
                                             <label for="fechaEvento" class="form-label">Fecha del Evento</label>
-                                            <input type="date" class="form-control" id="fechaEvento" name="fechaEvento"
+                                            <input type="date" class="form-control" id="fechaEvento" name="fechaEvento" min="<?php echo date('Y-m-d'); ?>"
                                                 required>
                                         </div>
                                         <div class="col-6 mb-3">
