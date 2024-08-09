@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once ("../../../class/database.php");
+include_once("../../../class/database.php");
 $db = new Database();
 $db->conectarDB();
 
@@ -90,28 +90,28 @@ $medidas = $db->select($queryMedidas);
             </div>
             <?php
             if (isset($_SESSION["usuario"])) {
-                ?>
-                <!-- Navbar con dropdown -->
-                <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
-                    style="left: auto; right: 30px; top: 60px">
-                    <a class="dropdown-item" href="../../perfil.php">Mi perfil</a>
-                    <a class="dropdown-item" href="../../bolsas/Carrito.php">Mi carrito</a>
+            ?>
+            <!-- Navbar con dropdown -->
+            <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa-solid fa-user"></i> <?php echo $_SESSION['usuario']; ?>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
+                style="left: auto; right: 30px; top: 60px">
+                <a class="dropdown-item" href="../../perfil.php">Mi perfil</a>
+                <a class="dropdown-item" href="../../bolsas/Carrito.php">Mi carrito</a>
 
-                    <?php if ($rol[0]->rol === 'administrador') { ?>
-                        <a class="dropdown-item" href="../../adminInicio.php">Administrar</a>
-                        <div class="dropdown-divider"></div>
-                    <?php } ?>
-                    <a class="dropdown-item" href="../../../scripts/login/cerrarsesion.php">Cerrar sesión</a>
-                </div>
-                <?php
+                <?php if ($rol[0]->rol === 'administrador') { ?>
+                <a class="dropdown-item" href="../../adminInicio.php">Administrar</a>
+                <div class="dropdown-divider"></div>
+                <?php } ?>
+                <a class="dropdown-item" href="../../../scripts/login/cerrarsesion.php">Cerrar sesión</a>
+            </div>
+            <?php
             } else {
-                ?>
-                <a href="../../login.php" class="login-button ms-auto">Iniciar Sesión</a>
-                <?php
+            ?>
+            <a href="../../login.php" class="login-button ms-auto">Iniciar Sesión</a>
+            <?php
             }
             ?>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
@@ -136,38 +136,46 @@ $medidas = $db->select($queryMedidas);
             </ol>
         </nav>
 
-        <div class="row shadow-lg bg-body m-0 p-0 mb-lg-5 rounded d-flex justify-content-center">
+        <div
+            class="row shadow-lg bg-body m-0 p-0 mb-lg-5 rounded d-flex justify-content-center align-items-center text-center">
             <!-- Imagen -->
-            <div class="col-lg-6 rounded m-0 p-0">
+            <div class="col-lg-6 rounded m-0 p-0 d-flex justify-content-center">
                 <img src="../../../img/menu/<?php echo $producto[0]->img_url ?>" alt="Imagen del producto"
                     class="img-fluid rounded">
             </div>
-            <div class="col-lg-6 m-0 d-flex flex-column justify-content-center align-items-center">
+            <div class="col-lg-6 m-0 d-flex flex-column justify-content-center align-items-center text-center">
                 <!-- Nombre -->
-                <h1 class="text-center my-2"><?php echo $producto[0]->nombre ?></h1>
-                <h3 class="text-center my-2"><?php echo $producto[0]->descripcion ?></h3>
-                <table class="my-2">
-                    <tbody>
-                        <!-- medidas -->
-                        <?php
-                        if (empty($medidas[0]->medida and $medidas[0]->precio)) {
-                            ?>
+                <div class="w-100 my-2" style="word-wrap: break-word;" >
+                    <h1 class="my-2"><?php echo $producto[0]->nombre ?></h1>
+                </div>
+                <div class="w-100 my-2" style="word-wrap: break-word;" >
+                    <h3 class="my-2"><?php echo $producto[0]->descripcion ?></h3>
+                </div>
+                <div class="container d-flex justify-content-center text-center">
+                    <table class="my-2">
+                        <tbody>
+                            <!-- medidas -->
+                            <?php
+                    if (empty($medidas[0]->medida and $medidas[0]->precio)) {
+                    ?>
                             <tr>
-                                <td class="fs-4 text-center">Este producto no cuenta con medidas para mostrar.</td>
+                                <td class="fs-4">Este producto no cuenta con medidas para mostrar.</td>
                             </tr>
                             <?php
-                        } else {
-                            foreach ($medidas as $medida) {
-                                echo "<tr class='text-center'>
-                                    <td class='fs-4'>$medida->medida</td>
-                                    <td class='fs-4 px-3'>-</td>
-                                    <td class='fs-4'>$$medida->precio</td>
-                                </tr>";
-                            }
+                    } else {
+                        foreach ($medidas as $medida) {
+                            echo "
+                            <tr>
+                                <td class='fs-4'>$medida->medida</td>
+                                <td class='fs-4 px-3'>-</td>
+                                <td class='fs-4 '>$$medida->precio</td>
+                            </tr>";
                         }
-                        ?>
-                    </tbody>
-                </table>
+                    }
+                    ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

@@ -305,9 +305,7 @@
             </div>
             <!-- E-Commerce-->
             <div class="container-fluid bagr-cafe3 p-3">
-                <div class="col-12 text-center p-2">
-                    <h1 class="fw-bold text-center" style="letter-spacing: 1px;">Nuestras bolsas de café</h1>
-                </div>
+
                 <div class="row justify-content-center d-flex ">
 
                     <?php
@@ -320,32 +318,48 @@
                         FROM bolsas_cafe where bolsas_cafe.estatus = true limit 3; ';
 
                     $bolsas = $conexion->select($query);
-                    $counter = 1;
-                    if (count($bolsas) > 0) {
-                        foreach ($bolsas as $bolsa) {
-                            $counter++;
-                            $additionalClass = ($counter > 3) ? 'd-none' : ''; // Cambia la clase después del tercer ciclo
-                            $additionalClass2 = ($counter > 3) ? 'd-md-block' : ''; // Cambia la clase después del tercer ciclo
-
-                            // Debugging
-                            echo "<!-- Counter: $counter, Class: $additionalClass -->";
-
-                            echo "<div class='col-md-6 p-2 col-6 col-sm-6 col-lg-4 p-md-4 p-0 m-0 {$additionalClass} {$additionalClass2}'>";
-                            echo "<div class='card m-0 blog-card shadow-lg' style='border-radius: 5% 5% 0% 0%;'>";
-                            echo "<img src='img/bolsas/{$bolsa->img_url}' class='coffee-image align-card-img-top' alt='{$bolsa->id_bolsa}'>";
-                            echo "<div class='card-body product-card-body'>";
-                            echo "<h5 class='card-title fw-bold product-title' style='letter-spacing: 1px;'>{$bolsa->nombre}</h5>";
-                            echo "<p class='card-text product-subtitle'>{$bolsa->proceso}</p>";
-                            echo "<form action='views/bolsas/bolsas.php?id={$bolsa->id_bolsa}' method='post'>";
-                            echo "<input type='hidden' name='id_bolsa' value='{$bolsa->id_bolsa}'>";
-                            echo "<input type='submit' class='btn btn-cafe w-100' value='Ver Detalles'>";
-                            echo "</div>";
-                            echo "</a>";
-                            echo "</div>";
-                            echo "</div>";
-                        }
+                    if (empty($bolsas)) {
+                        ?>
+                        <div class='row m-0 p-0 d-none'>
+                        </div> 
+                        <?php
                     } else {
-                        echo "No hay registros";
+                        ?>
+                        <div class='row m-0 p-0 d-flex justify-content-center'>
+                            <div class="col-12 text-center p-2">
+                                <h1 class="fw-bold text-center" style="letter-spacing: 1px;">Nuestras bolsas de café</h1>
+                            </div>
+                        <?php
+                        $counter = 1;
+                        if (count($bolsas) > 0) {
+                            foreach ($bolsas as $bolsa) {
+                                $counter++;
+                                $additionalClass = ($counter > 3) ? 'd-none' : ''; // Cambia la clase después del tercer ciclo
+                                $additionalClass2 = ($counter > 3) ? 'd-md-block' : ''; // Cambia la clase después del tercer ciclo
+    
+                                // Debugging
+                                echo "<!-- Counter: $counter, Class: $additionalClass -->";
+    
+                                echo "<div class='col-md-6 p-2 col-6 col-sm-6 col-lg-4 p-md-4 p-0 m-0 {$additionalClass} {$additionalClass2}'>";
+                                echo "<div class='card m-0 blog-card shadow-lg' style='border-radius: 5% 5% 0% 0%;'>";
+                                echo "<img src='img/bolsas/{$bolsa->img_url}' class='coffee-image align-card-img-top' alt='{$bolsa->id_bolsa}'>";
+                                echo "<div class='card-body product-card-body'>";
+                                echo "<h5 class='card-title fw-bold product-title' style='letter-spacing: 1px;'>{$bolsa->nombre}</h5>";
+                                echo "<p class='card-text product-subtitle'>{$bolsa->proceso}</p>";
+                                echo "<form action='views/bolsas/bolsas.php?id={$bolsa->id_bolsa}' method='post'>";
+                                echo "<input type='hidden' name='id_bolsa' value='{$bolsa->id_bolsa}'>";
+                                echo "<input type='submit' class='btn btn-cafe w-100' value='Ver Detalles'>";
+                                echo "</div>";
+                                echo "</a>";
+                                echo "</div>";
+                                echo "</div>";
+                            }
+                        }
+                        ?>
+
+                        </div>  
+
+                        <?php
                     }
                     $conexion->desconectarDB();
                     ?>

@@ -188,7 +188,7 @@ if (isset($_SESSION["usuario"])) {
                         JOIN 
                             personas ON clientes.id_persona = personas.id_persona 
                         WHERE 
-                            usuario = '" . $_SESSION["usuario"] . "'";
+                            view_clientes_recompensas.mostrar=true and usuario = '" . $_SESSION["usuario"] . "'";
 
                 $cliente = "SELECT 
                                 c.id_cliente 

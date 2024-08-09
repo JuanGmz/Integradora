@@ -20,6 +20,39 @@ if (isset($_POST['btnestatus'])) {
     $db->execute($consulta);
     $categoria_p = $categoria;
 }
+
+if (isset($_POST['btnactualizar'])) {
+    $conexion = new Database();
+    $conexion->conectarDB();
+
+    extract($_POST);
+
+    // Directorio donde se guardarán las imágenes
+    $subirDir = "../img/menu/";
+
+    $validationMessage = validateImage($_FILES['imagen_nueva']);
+    if ($validationMessage === 'Imagen válida.') {
+        // Nombre del archivo subido
+        $nombreImagen = basename($_FILES['imagen_nueva']['name']);
+
+        // Ruta completa del archivo a ser guardado
+        $imagen_nueva = $subirDir . $nombreImagen;
+
+        // Mover el archivo subido a la carpeta de destino
+        if (move_uploaded_file($_FILES['imagen_nueva']['tmp_name'], $imagen_nueva)) {
+            $query = "UPDATE productos_menu SET img_url = '$nombreImagen' WHERE id_pm = $id_pm";
+            $conexion->execute($query);
+            showAlert("¡Imagen actualizada con éxito!", "success");
+
+        } else {
+            showAlert("Error al mover el archivo. Detalles: " . error_get_last()['message'], "error");
+        }
+
+        $conexion->desconectarDB();
+    } else {
+        showAlert($validationMessage, "error");
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -384,13 +417,13 @@ if (isset($_POST['btnestatus'])) {
                                     <!-- Aqui va el formulario -->
                                     <div class="mb-3">
                                         <label for="nombre" class="form-label">Nombre</label>
-                                        <input type="text" class="form-control" id="nombre" name="nombre" maxlength="45"
+                                        <input type="text" class="form-control" id="nombre" name="nombre" maxlength="75"
                                             required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="descripcion" class="form-label">Descripción</label>
                                         <textarea class="form-control" id="descripcion" name="descripcion"
-                                            maxlength="255" required></textarea>
+                                            maxlength="204" required></textarea>
                                     </div>
                                     <div class="mb-3">
                                         <label for="medida" class="form-label">Categoria</label>
@@ -518,7 +551,7 @@ if (isset($_POST['btnestatus'])) {
                                                             </div>
                                                             <div class='modal-body mb-3'>
                                                                 <!-- Aquí se está mostrando la imagen -->
-                                                                <form action='../scripts/adminmenu/editarImagen.php' method='POST' enctype='multipart/form-data'>
+                                                                <form  method='POST' enctype='multipart/form-data'>
                                                                     <div class='col-12 mb-3'>
                                                                         <label for='imagen' class='form-label'>Imagen Actual</label><br>
                                                                         <img src='../img/menu/$producto->img_url' class='img-fluid' alt='imagen$producto->nombre'><br>
@@ -531,7 +564,7 @@ if (isset($_POST['btnestatus'])) {
                                                                         <input type='hidden' name='id_pm' value='$producto->id_pm'>
                                                                         <div class='col-12 mb-3 text-end'>
                                                                             <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
-                                                                            <button type='submit' class='btn btn-dark'>Actualizar</button>
+                                                                            <button type='submit' class='btn btn-dark' name='btnactualizar'>Actualizar</button>
                                                                         </div>
                                                                     </div>
                                                                 </form>
@@ -629,7 +662,7 @@ if (isset($_POST['btnestatus'])) {
                                                                             </div>
                                                                             <div class='col-12 mb-3'>
                                                                                 <label class='form-label'>Descripción</label>
-                                                                                <textarea class='form-control' name='descripcion' maxlength='255' required>$producto->descripcion</textarea>
+                                                                                <textarea class='form-control' name='descripcion' maxlength='204' required>$producto->descripcion</textarea>
                                                                             </div>
                                                                             <div class='col-12 mb-3'>
                                                                                 <label class='form-label'>Categoría</label>
@@ -685,8 +718,12 @@ if (isset($_POST['btnestatus'])) {
             </div>
         </div>
     </div>
+    <div class="alert floating-alert" id="floatingAlert">
+        <span id="alertMessage">Mensaje de la alerta.</span>
+    </div>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/b820f07375.js" crossorigin="anonymous"></script>
+    <script src="../js/alertas.js"></script>
 </body>
 
 </html>

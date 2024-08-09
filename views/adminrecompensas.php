@@ -3,7 +3,7 @@ date_default_timezone_set('America/Monterrey');
 if ($_POST) {
     session_start();
     require_once '../class/database.php';
-    include_once ("../scripts/funciones/funciones.php");
+    include_once("../scripts/funciones/funciones.php");
     $db = new database();
     $db->conectarDB();
 
@@ -37,7 +37,6 @@ if ($_POST) {
 
                 $db->execute($consulta);
                 showAlert("¡Recompensa registrada con éxito!", "success");
-
             } else {
                 showAlert("Hubo un error al subir la imagen", "error");
             }
@@ -69,7 +68,6 @@ if ($_POST) {
             $resultado[0]->mensaje == "El cupón de canje no existe."
         ) {
             showAlert("¡{$resultado[0]->mensaje}!", "error");
-
         } else if ($resultado[0]->mensaje == "Recompensa canjeada correctamente.") {
             showAlert("¡{$resultado[0]->mensaje}!", "success");
         } else if ($resultado[0]->mensaje == "La recompensa ya ha sido canjeada previamente.") {
@@ -85,9 +83,15 @@ if ($_POST) {
             $queryAct = "UPDATE recompensas SET img_url = '$nombreImagen' WHERE id_recompensa = $id_recompensa";
             $db->execute($queryAct);
             showAlert("¡Imagen actualizada con éxito!", "success");
-
         } else
             showAlert("¡Hubo un error al subir la imagen!", "error");
+    } else if (isset($_POST['btnestatus'])) {
+        extract($_POST);
+        $consulta = "UPDATE recompensas SET mostrar = $estatus WHERE id_recompensa = $id;";
+
+        $db->select($consulta);
+
+        showAlert("Se actualizo el estatus correctamente", "success");
     }
 }
 
@@ -116,22 +120,18 @@ if ($_POST) {
                     <div class="accordion-item m-0 p-0 row">
                         <a href="adminInicio.php">
                             <h2 class="accordion-header">
-                            <button class="row accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-inicio" aria-expanded="false"
-                                aria-controls="flush-inicio">
-                                <div class="col-6">
-                                    <i class="fa-solid fa-house-laptop me-1"></i>
-                                    Inicio
-                                </div>
-                            </button>
+                                <button class="row accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-inicio" aria-expanded="false" aria-controls="flush-inicio">
+                                    <div class="col-6">
+                                        <i class="fa-solid fa-house-laptop me-1"></i>
+                                        Inicio
+                                    </div>
+                                </button>
                             </h2>
                         </a>
                     </div>
                     <div class="accordion-item row m-0 p-0">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-menu" aria-expanded="false"
-                                aria-controls="flush-menu">
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-menu" aria-expanded="false" aria-controls="flush-menu">
                                 <div class="col-8">
                                     <i class="fa-solid fa-table me-3"></i>
                                     Menú
@@ -143,8 +143,7 @@ if ($_POST) {
                         </h2>
                         <div id="flush-menu" class="accordion-collapse collapse" data-bs-parent="#accordionMobile">
                             <div class="accordion-body bagr-cafe4">
-                                <a href="adminMenu.php" class="ms-5 text-light fw-bold fs-5 text-decoration-none"
-                                    aria-current="true">
+                                <a href="adminMenu.php" class="ms-5 text-light fw-bold fs-5 text-decoration-none" aria-current="true">
                                     Administrar Menú
                                 </a>
                             </div>
@@ -152,9 +151,7 @@ if ($_POST) {
                     </div>
                     <div class="accordion-item row m-0 p-0">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-events" aria-expanded="false"
-                                aria-controls="flush-events">
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-events" aria-expanded="false" aria-controls="flush-events">
                                 <div class="col-8">
                                     <i class="fa-solid fa-bullhorn me-3"></i>
                                     Eventos
@@ -166,8 +163,7 @@ if ($_POST) {
                         </h2>
                         <div id="flush-events" class="accordion-collapse collapse" data-bs-parent="#accordionMobile">
                             <div class="accordion-body bagr-cafe4">
-                                <a href="adminEventos.php" class="text-light fw-bold fs-5 text-decoration-none ms-5"
-                                    aria-current="true">
+                                <a href="adminEventos.php" class="text-light fw-bold fs-5 text-decoration-none ms-5" aria-current="true">
                                     Administrar Eventos
                                 </a><br><br>
                                 <a href="adminReservas.php" class="text-light fw-bold fs-5 text-decoration-none ms-5">
@@ -181,9 +177,7 @@ if ($_POST) {
                     </div>
                     <div class="accordion-item row m-0 p-0">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-ecommerce" aria-expanded="false"
-                                aria-controls="flush-ecommerce">
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-ecommerce" aria-expanded="false" aria-controls="flush-ecommerce">
                                 <div class="col-8">
                                     <i class="fa-solid fa-cart-arrow-down me-3"></i>
                                     E-Commerce
@@ -195,12 +189,10 @@ if ($_POST) {
                         </h2>
                         <div id="flush-ecommerce" class="accordion-collapse collapse" data-bs-parent="#accordionMobile">
                             <div class="accordion-body bagr-cafe4">
-                                <a href="adminPedidos.php" class="fw-bold fs-5 ms-5 text-light text-decoration-none"
-                                    aria-current="true">
+                                <a href="adminPedidos.php" class="fw-bold fs-5 ms-5 text-light text-decoration-none" aria-current="true">
                                     Administrar Pedidos
                                 </a><br><br>
-                                <a href="adminProductosEcommerce.php"
-                                    class="fw-bold fs-5 ms-5 text-light text-decoration-none">
+                                <a href="adminProductosEcommerce.php" class="fw-bold fs-5 ms-5 text-light text-decoration-none">
                                     Administrar Productos
                                 </a>
                             </div>
@@ -208,9 +200,7 @@ if ($_POST) {
                     </div>
                     <div class="accordion-item row m-0 p-0">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-blog" aria-expanded="false"
-                                aria-controls="flush-blog">
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-blog" aria-expanded="false" aria-controls="flush-blog">
                                 <div class="col-8">
                                     <i class="fa-solid fa-blog me-3"></i>
                                     Publicaciones
@@ -222,8 +212,7 @@ if ($_POST) {
                         </h2>
                         <div id="flush-blog" class="accordion-collapse collapse" data-bs-parent="#accordionMobile">
                             <div class="accordion-body bagr-cafe4">
-                                <a href="adminPublicaciones.php"
-                                    class="fw-bold fs-5 ms-5 text-light text-decoration-none" aria-current="true">
+                                <a href="adminPublicaciones.php" class="fw-bold fs-5 ms-5 text-light text-decoration-none" aria-current="true">
                                     Administrar Publicaciones
                                 </a>
                             </div>
@@ -231,9 +220,7 @@ if ($_POST) {
                     </div>
                     <div class="accordion-item row m-0 p-0">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-rewards" aria-expanded="false"
-                                aria-controls="flush-rewards">
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-rewards" aria-expanded="false" aria-controls="flush-rewards">
                                 <div class="col-8">
                                     <i class="fa-solid fa-medal me-3"></i>
                                     Recompensas
@@ -245,8 +232,7 @@ if ($_POST) {
                         </h2>
                         <div id="flush-rewards" class="accordion-collapse collapse" data-bs-parent="#accordionMobile">
                             <div class="accordion-body bagr-cafe4">
-                                <a href="adminRecompensas.php" class="fw-bold fs-5 ms-5 text-light text-decoration-none"
-                                    aria-current="true">
+                                <a href="adminRecompensas.php" class="fw-bold fs-5 ms-5 text-light text-decoration-none" aria-current="true">
                                     Administrar Recompensas
                                 </a>
                             </div>
@@ -256,9 +242,7 @@ if ($_POST) {
             </div>
             <nav class="navbar navbar-dark bagr-cafe4">
                 <div class="container-fluid">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <h1 class="fw-bold text-light pt-2 me-auto">Recompensas</h1>
@@ -278,22 +262,19 @@ if ($_POST) {
                 <h4 class="text-center text-light m-3 fs-2 fw-bold">Administrar</h4>
                 <div class="row">
                     <div class="col-12 text-center">
-                    <img src="../img/Sinfonía-Café-y-Cultura blanco.webp" alt="" class="img-fluid" style="width: 300px;">
+                        <img src="../img/Sinfonía-Café-y-Cultura blanco.webp" alt="" class="img-fluid" style="width: 300px;">
                     </div>
                 </div>
                 <div class="accordion accordion-flush" id="accordionPc">
                     <div class=" ms-2 fs-3 mt-4 mb-3">
-                        <a class="fw-bold bagr-cafe4 text-light text-decoration-none" href="adminInicio.php"
-                            aria-expanded="false">
+                        <a class="fw-bold bagr-cafe4 text-light text-decoration-none" href="adminInicio.php" aria-expanded="false">
                             <i class="fa-solid fa-house-laptop"></i>
                             Inicio
                         </a>
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-menu" aria-expanded="false"
-                                aria-controls="flush-menu">
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-menu" aria-expanded="false" aria-controls="flush-menu">
                                 <div class="col-6">
                                     <i class="fa-solid fa-table me-1"></i>
                                     Menú
@@ -305,8 +286,7 @@ if ($_POST) {
                         </h2>
                         <div id="flush-menu" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
                             <div class="accordion-body bagr-cafe4">
-                                <a href="adminMenu.php" class="ms-5 text-light fw-bold fs-6 text-decoration-none"
-                                    aria-current="true">
+                                <a href="adminMenu.php" class="ms-5 text-light fw-bold fs-6 text-decoration-none" aria-current="true">
                                     Administrar Menú
                                 </a>
                             </div>
@@ -314,9 +294,7 @@ if ($_POST) {
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-events" aria-expanded="false"
-                                aria-controls="flush-events">
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-events" aria-expanded="false" aria-controls="flush-events">
                                 <div class="col-6">
                                     <i class="fa-solid fa-bullhorn me-1"></i>
                                     Eventos
@@ -328,8 +306,7 @@ if ($_POST) {
                         </h2>
                         <div id="flush-events" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
                             <div class="accordion-body bagr-cafe4">
-                                <a href="adminEventos.php" class="text-light fw-bold fs-6 text-decoration-none ms-5"
-                                    aria-current="true">
+                                <a href="adminEventos.php" class="text-light fw-bold fs-6 text-decoration-none ms-5" aria-current="true">
                                     Administrar Eventos
                                 </a><br><br>
                                 <a href="adminReservas.php" class="text-light fw-bold fs-6 text-decoration-none ms-5">
@@ -343,9 +320,7 @@ if ($_POST) {
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-ecommerce" aria-expanded="false"
-                                aria-controls="flush-ecommerce">
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-ecommerce" aria-expanded="false" aria-controls="flush-ecommerce">
                                 <div class="col-8">
                                     <i class="fa-solid fa-cart-arrow-down me-1"></i>
                                     E-Commerce
@@ -357,12 +332,10 @@ if ($_POST) {
                         </h2>
                         <div id="flush-ecommerce" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
                             <div class="accordion-body bagr-cafe4">
-                                <a href="adminPedidos.php" class="fw-bold fs-6 ms-5 text-light text-decoration-none"
-                                    aria-current="true">
+                                <a href="adminPedidos.php" class="fw-bold fs-6 ms-5 text-light text-decoration-none" aria-current="true">
                                     Administrar Pedidos
                                 </a><br><br>
-                                <a href="adminProductosEcommerce.php"
-                                    class="fw-bold fs-6 ms-5 text-light text-decoration-none">
+                                <a href="adminProductosEcommerce.php" class="fw-bold fs-6 ms-5 text-light text-decoration-none">
                                     Administrar Productos
                                 </a>
                             </div>
@@ -370,9 +343,7 @@ if ($_POST) {
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-blog" aria-expanded="false"
-                                aria-controls="flush-blog">
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-blog" aria-expanded="false" aria-controls="flush-blog">
                                 <div class="col-8">
                                     <i class="fa-solid fa-blog me-1"></i>
                                     Publicaciones
@@ -384,8 +355,7 @@ if ($_POST) {
                         </h2>
                         <div id="flush-blog" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
                             <div class="accordion-body bagr-cafe4">
-                                <a href="adminPublicaciones.php"
-                                    class="fw-bold fs-6 ms-5 text-light text-decoration-none" aria-current="true">
+                                <a href="adminPublicaciones.php" class="fw-bold fs-6 ms-5 text-light text-decoration-none" aria-current="true">
                                     Administrar Publicaciones
                                 </a>
                             </div>
@@ -393,9 +363,7 @@ if ($_POST) {
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header row">
-                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#flush-rewards" aria-expanded="false"
-                                aria-controls="flush-rewards">
+                            <button class="accordion-button collapsed fw-bold fs-4 bagr-cafe4 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-rewards" aria-expanded="false" aria-controls="flush-rewards">
                                 <div class="col-8">
                                     <i class="fa-solid fa-medal me-1"></i>
                                     Recompensas
@@ -407,8 +375,7 @@ if ($_POST) {
                         </h2>
                         <div id="flush-rewards" class="accordion-collapse collapse" data-bs-parent="#accordionPc">
                             <div class="accordion-body bagr-cafe4">
-                                <a href="adminRecompensas.php" class="fw-bold fs-6 ms-5 text-light text-decoration-none"
-                                    aria-current="true">
+                                <a href="adminRecompensas.php" class="fw-bold fs-6 ms-5 text-light text-decoration-none" aria-current="true">
                                     Administrar Recompensas
                                 </a>
                             </div>
@@ -427,20 +394,17 @@ if ($_POST) {
                         <div class="col-9 d-flex justify-content-end align-items-center gap-1 gap-lg-3">
                             <!-- Aquí va el botón del modal para registrar asistencias -->
                             <!-- Botón para registrar -->
-                            <button type="button" class="btn btn-dark" data-bs-toggle="modal"
-                                data-bs-target="#canjearRecompensa">
+                            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#canjearRecompensa">
                                 Canjear recompensa
                             </button>
                             <!-- Aquí va el botón del modal para registrar asistencias -->
                             <!-- Botón para registrar -->
-                            <button type="button" class="btn btn-dark" data-bs-toggle="modal"
-                                data-bs-target="#registrarAsistencias">
+                            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#registrarAsistencias">
                                 Registrar Asistencia
                             </button>
                             <!-- Aquí va el botón del modal para registrar recompensas -->
                             <!-- Botón para agregar -->
-                            <button type="button" class="btn btn-dark" data-bs-toggle="modal"
-                                data-bs-target="#agregarRecompensa">
+                            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#agregarRecompensa">
                                 Agregar Recompensa
                             </button>
                             <!-- Botón para volver atras -->
@@ -451,44 +415,38 @@ if ($_POST) {
                     </div>
                 </div>
                 <!-- Modal para agregar recompensa -->
-                <div class="modal fade" id="agregarRecompensa" tabindex="-1" aria-labelledby="agregarRecompensaLabel"
-                    aria-hidden="true">
+                <div class="modal fade" id="agregarRecompensa" tabindex="-1" aria-labelledby="agregarRecompensaLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="agregarRecompensaLabel">Agregar Recompensa</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <form method="post" action="" enctype="multipart/form-data">
                                     <div class="mb-3">
                                         <label for="recompensa" class="form-label">Recompensa</label>
-                                        <input type="text" class="form-control" id="titulo" name="recompensa"
-                                            maxlength="60" required>
+                                        <input type="text" class="form-control" id="titulo" name="recompensa" maxlength="60" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="condicion" class="form-label">Condicion</label>
-                                        <input type="number" class="form-control" id="condicion" name="condicion"
-                                            max="20" min="1" required>
+                                        <input type="number" class="form-control" id="condicion" name="condicion" max="20" min="1" required>
                                     </div>
                                     <div class="mb-3 row">
                                         <div class="col-6">
                                             <label for="fechainicio" class="form-label">Fecha Inicio</label>
-                                            <input type="date" class="form-control" id="fechainicio" name="fechainicio" min="<?= date('Y-m-d') ?>"
-                                                required>
+                                            <input type="date" class="form-control" id="fechainicio" name="fechainicio" min="<?= date('Y-m-d') ?>" required>
                                         </div>
-                                        <?php 
+                                        <?php
                                         // Calcula la fecha de hoy
                                         $today = date('Y-m-d');
-                                        
+
                                         // Calcula la fecha del siguiente día
                                         $next_day = date('Y-m-d', strtotime('+1 day', strtotime($today)));
                                         ?>
                                         <div class="col-6">
                                             <label for="fechafin" class="form-label">Fecha Expiracion</label>
-                                            <input type="date" class="form-control" id="fechafin" name="fechafin" min="<?= $next_day?>"
-                                                required>
+                                            <input type="date" class="form-control" id="fechafin" name="fechafin" min="<?= $next_day ?>" required>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -502,12 +460,10 @@ if ($_POST) {
                                     </div>
                                     <div class="mb-3">
                                         <label for="imagen" class="form-label">Imagen</label>
-                                        <input type="file" class="form-control" id="imagen" name="imagen"
-                                            accept="image/*" required>
+                                        <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*" required>
                                     </div>
                                     <div class="mt-3 text-end">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                                         <!-- Botón para agregar -->
                                         <button type="submit" class="btn btn-dark" name="agRecompensa">Agregar
                                             Recompensa</button>
@@ -518,25 +474,21 @@ if ($_POST) {
                     </div>
                 </div>
                 <!-- Modal para registrar asistencias -->
-                <div class="modal fade" id="registrarAsistencias" tabindex="-1"
-                    aria-labelledby="registrarAsistenciasLabel" aria-hidden="true">
+                <div class="modal fade" id="registrarAsistencias" tabindex="-1" aria-labelledby="registrarAsistenciasLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="registrarAsistenciasLabel">Registrar Asistencias</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <form method="post" action="" enctype="multipart/form-data">
                                     <div class="mb-3">
                                         <label for="userid" class="form-label">Id del cliente</label>
-                                        <input type="number" class="form-control" id="userid" name="userid" min="1"
-                                            required>
+                                        <input type="number" class="form-control" id="userid" name="userid" min="1" required>
                                     </div>
                                     <div class="mt-3 text-end">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                                         <!-- Botón para agregar -->
                                         <button type="submit" class="btn btn-dark" name="regAsistencia">Registrar
                                             Asistencia</button>
@@ -547,25 +499,21 @@ if ($_POST) {
                     </div>
                 </div>
                 <!-- Modal para canjear recompensas -->
-                <div class="modal fade" id="canjearRecompensa" tabindex="-1" aria-labelledby="canjearRecompensasLabel"
-                    aria-hidden="true">
+                <div class="modal fade" id="canjearRecompensa" tabindex="-1" aria-labelledby="canjearRecompensasLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="canjearRecompensasLabel">Canjear Recompensa</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <form method="post" action="" enctype="multipart/form-data">
                                     <div class="mb-3">
                                         <label for="userid" class="form-label">Cupón de Canjeo</label>
-                                        <input type="number" class="form-control" id="userid" name="canjeid" min="1"
-                                            required>
+                                        <input type="number" class="form-control" id="userid" name="canjeid" min="1" required>
                                     </div>
                                     <div class="mt-3 text-end">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                                         <!-- Botón para agregar -->
                                         <button type="submit" class="btn btn-dark" name="canjebtn">Canjear
                                             Recompensa</button>
@@ -579,16 +527,14 @@ if ($_POST) {
                     <div class="col-6 text-center">
                         <!-- Aquí va el botón del modal para registrar asistencias -->
                         <!-- Botón para registrar -->
-                        <button type="button" class="btn btn-dark" data-bs-toggle="modal"
-                            data-bs-target="#canjearRecompensa">
+                        <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#canjearRecompensa">
                             Canjear recompensa
                         </button>
                     </div>
                     <div class="col-6 text-center">
                         <!-- Aquí va el botón del modal para registrar asistencias -->
                         <!-- Botón para registrar -->
-                        <button type="button" class="btn btn-dark" data-bs-toggle="modal"
-                            data-bs-target="#registrarAsistencias">
+                        <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#registrarAsistencias">
                             Registrar Asistencia
                         </button>
                     </div>
@@ -601,29 +547,29 @@ if ($_POST) {
                                     <!-- Fecha Inicio -->
                                     <div class="col-12 col-lg-4 mb-3">
                                         <label for="fechaInicio" class="form-label">Fecha Inicio</label>
-                                        <input class="form-control" type="date" name="fechaInicio" id="fechaInicio"
-                                            required <?php if (isset($_POST['btnBuscar'])) { ?>
-                                                value="<?= $_POST['fechaInicio'] ?>" <?php } ?>>
+                                        <input class="form-control" type="date" name="fechaInicio" id="fechaInicio" required value="<?= isset($_SESSION['fechaInicio']) ? $_SESSION['fechaInicio'] : '' ?>">
                                     </div>
                                     <!-- Fecha Expiración -->
                                     <div class="col-12 col-lg-4 mb-3">
                                         <label for="fechaExpiracion" class="form-label">Fecha Expiración</label>
-                                        <input class="form-control" type="date" name="fechaExpiracion"
-                                            id="fechaExpiracion" required <?php if (isset($_POST['btnBuscar'])) { ?>
-                                                value="<?= $_POST['fechaExpiracion'] ?>" <?php } ?>>
+                                        <input class="form-control" type="date" name="fechaExpiracion" id="fechaExpiracion" required value="<?= isset($_SESSION['fechaExpiracion']) ? $_SESSION['fechaExpiracion'] : '' ?>">
                                     </div>
                                     <!-- Botón Buscar -->
-                                    <div
-                                        class="col-12 col-lg-4 mb-2 d-flex justify-content-center align-items-center mt-4">
-                                        <input type="submit" class="btn btn-dark w-100" value="Buscar"
-                                            name="btnBuscar">
+                                    <div class="col-12 col-lg-4 mb-2 d-flex justify-content-center align-items-center mt-4">
+                                        <input type="submit" class="btn btn-dark w-100" value="Buscar" name="btnBuscar">
                                     </div>
                                 </div>
                             </form>
                             <?php
                             if (isset($_POST['btnBuscar'])) {
                                 extract($_POST);
-                                $query = "SELECT * FROM recompensas WHERE fecha_inicio AND fecha_expiracion BETWEEN '$fechaInicio' AND '$fechaExpiracion' ORDER BY fecha_inicio ASC";
+                                $_SESSION['fechaInicio'] = $_POST['fechaInicio'];
+                                $_SESSION['fechaExpiracion'] = $_POST['fechaExpiracion'];
+                            
+                                $fechaInicio = $_SESSION['fechaInicio'];
+                                $fechaExpiracion = $_SESSION['fechaExpiracion'];
+                            
+                                $query = "SELECT * FROM recompensas WHERE (fecha_inicio BETWEEN '$fechaInicio' AND '$fechaExpiracion') OR (fecha_expiracion BETWEEN '$fechaInicio' AND '$fechaExpiracion') ORDER BY fecha_inicio ASC";
                                 $recompensas = $db->select($query);
                             }
                             ?>
@@ -632,8 +578,7 @@ if ($_POST) {
                     </div>
                 </div>
                 <div class="d-lg-none mb-3 m-3 m-0 p-0">
-                    <button type="button" class="btn w-100 btn-dark shadow-lg" data-bs-toggle="modal"
-                        data-bs-target="#agregarRecompensa">
+                    <button type="button" class="btn w-100 btn-dark shadow-lg" data-bs-toggle="modal" data-bs-target="#agregarRecompensa">
                         <i class="fa-solid fa-plus fa-2x"></i>
                     </button>
                 </div>
@@ -641,16 +586,14 @@ if ($_POST) {
                     <?php
                     if (isset($recompensas)) {
                         if (empty($recompensas)) {
-                            ?>
+                    ?>
                             <div class="text-center row m-0 p-0 p-2">No hay recompensas registradas en este periodo de tiempo.
                             </div>
-                            <table
-                                class="table table-dark table-striped table-hover text-center border-3 border-black border-bottom border-end border-start d-none">
-                                <?php
+                            <table class="table table-dark table-striped table-hover text-center border-3 border-black border-bottom border-end border-start d-none">
+                            <?php
                         } else {
                             ?>
-                                <table
-                                    class="table table-dark table-striped table-hover text-center border-3 border-black border-bottom border-end border-start">
+                                <table class="table table-dark table-striped table-hover text-center border-3 border-black border-bottom border-end border-start">
                                     <thead>
                                         <th>Recompensa</th>
                                         <th class="d-none d-lg-table-cell">Condición</th>
@@ -662,32 +605,28 @@ if ($_POST) {
                                     <tbody class="table-group-divider table-light">
                                         <?php
                                         foreach ($recompensas as $recompensa) {
-                                            ?>
+                                        ?>
                                             <tr>
                                                 <td><?= $recompensa->recompensa ?></td>
                                                 <td class="d-none d-lg-table-cell"><?= $recompensa->condicion ?></td>
-                                                <td class="d-none d-lg-table-cell""><?= $recompensa->fecha_inicio ?></td>
+                                                <td class="d-none d-lg-table-cell"><?= $recompensa->fecha_inicio ?></td>
                                                 <td class=" d-none d-lg-table-cell">
                                                     <?= $recompensa->fecha_expiracion ?>
                                                 </td>
                                                 <td><?= $recompensa->estatus ?></td>
-                                                <td>
+                                                <td class="d-flex flex-row align-items-center justify-content-center gap-1">
                                                     <!-- Botón para detalle recompensa -->
-                                                    <button type="button" class="btn btn-dark d-table-cell d-lg-none"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#detalleRecompensa<?= $recompensa->id_recompensa ?>">
+                                                    <button type="button" class="btn btn-dark d-table-cell d-lg-none" data-bs-toggle="modal" data-bs-target="#detalleRecompensa<?= $recompensa->id_recompensa ?>">
                                                         <i class="fa-solid fa-bars"></i>
                                                     </button>
                                                     <!-- modal de recompensa -->
-                                                    <div class="modal fade" id="detalleRecompensa<?= $recompensa->id_recompensa ?>"
-                                                        tabindex="-1" aria-labelledby="detalleRecompensaLabel" aria-hidden="true">
+                                                    <div class="modal fade" id="detalleRecompensa<?= $recompensa->id_recompensa ?>" tabindex="-1" aria-labelledby="detalleRecompensaLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
                                                                     <h5 class="modal-title" id="detalleRecompensaLabel">Recompensa
                                                                     </h5>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                                        aria-label="Close"></button>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body text-start">
                                                                     <h2 class="d-inline fw-bold my-3">Recompensa: <span>
@@ -720,69 +659,77 @@ if ($_POST) {
                                                         </div>
                                                     </div>
                                                     <!-- Botón para editar imagen -->
-                                                    <button type="button" class="btn btn-dark" data-bs-toggle="modal"
-                                                        data-bs-target="#editarRecompensa<?= $recompensa->id_recompensa ?>">
+                                                    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#editarRecompensa<?= $recompensa->id_recompensa ?>">
                                                         <i class="fa-solid fa-image"></i>
                                                     </button>
                                                     <!-- Modal de editar recompensa -->
-                                                    <div class="modal fade" id="editarRecompensa<?= $recompensa->id_recompensa ?>"
-                                                        tabindex="-1" aria-labelledby="editarRecompensaLabel" aria-hidden="true">
+                                                    <div class="modal fade" id="editarRecompensa<?= $recompensa->id_recompensa ?>" tabindex="-1" aria-labelledby="editarRecompensaLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
                                                                     <h5 class="modal-title" id="editarRecompensaLabel">
                                                                         <?= $recompensa->recompensa ?>
                                                                     </h5>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                                        aria-label="Close"></button>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body text-start">
                                                                     <form method="post" enctype="multipart/form-data">
                                                                         <div class='col-12 mb-3'>
                                                                             <label for='imagen' class='form-label'>Imagen
                                                                                 Actual</label><br>
-                                                                            <img src='../img/recompensas/<?= $recompensa->img_url ?>'
-                                                                                class='img-fluid'
-                                                                                alt='imagen<?= $recompensa->recompensa ?>'><br>
+                                                                            <img src='../img/recompensas/<?= $recompensa->img_url ?>' class='img-fluid' alt='imagen<?= $recompensa->recompensa ?>'><br>
                                                                             <small>Selecciona una nueva imagen para actualizar, si
                                                                                 es necesario.</small>
                                                                         </div>
                                                                         <div class='col-12 mb-3'>
                                                                             <label for='imagen_nueva' class='form-label'>Selecciona
                                                                                 una nueva imagen</label>
-                                                                            <input type='file' class='form-control'
-                                                                                id='imagen_nueva' name='imagen_nueva'
-                                                                                accept='image/*' required>
+                                                                            <input type='file' class='form-control' id='imagen_nueva' name='imagen_nueva' accept='image/*' required>
                                                                         </div>
-                                                                        <input type='hidden' name='id_recompensa'
-                                                                            value='<?= $recompensa->id_recompensa ?>'>
+                                                                        <input type='hidden' name='id_recompensa' value='<?= $recompensa->id_recompensa ?>'>
                                                                         <div class='col-12 mb-3 text-end'>
-                                                                            <button type='button' class='btn btn-secondary'
-                                                                                data-bs-dismiss='modal'>Cancelar</button>
-                                                                            <button type='submit' class='btn btn-dark'
-                                                                                name='actRecompensa'>Actualizar</button>
+                                                                            <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
+                                                                            <button type='submit' class='btn btn-dark' name='actRecompensa'>Actualizar</button>
                                                                         </div>
                                                                 </div>
                                                                 </form>
                                                             </div>
                                                         </div>
                                                     </div>
-                            </div>
-                            </td>
-                            </tr>
-                            <?php
+                                                    <form method='POST'>
+
+                                                        <?php
+
+                                                        if ($recompensa->mostrar == false) {
+                                                        ?>
+                                                            <input type="hidden" name="estatus" value="true" required>
+                                                            <button type="submit" name="btnestatus" class="btn btn-danger"><i class="fa-solid fa-eye-slash"></i></button>
+                                                        <?php
+                                                        } else {
+                                                        ?>
+                                                            <input type="hidden" name="estatus" value="false" required>
+                                                            <button type="submit" name="btnestatus" class="btn btn-success"><i class="fa-solid fa-eye"></i></button>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                        <input type='hidden' name='id' value='<?= $recompensa->id_recompensa ?>' required>
+                                                    </form>
+                </div>
+                </td>
+                </tr>
+            <?php
                                         }
-                                        ?>
-                        </tbody>
-                        </table>
-                        <?php
+            ?>
+            </tbody>
+            </table>
+        <?php
                         }
                     } else {
-                        ?>
-                    <div class="text-center row m-0 p-0 p-2">Selecciona un periodo de tiempo para ver las recompensas.</div>
-                    <?php
+        ?>
+        <div class="text-center row m-0 p-0 p-2">Selecciona un periodo de tiempo para ver las recompensas.</div>
+    <?php
                     }
-                    ?>
+    ?>
             </div>
             <div class="alert floating-alert" id="floatingAlert">
                 <span id="alertMessage">Mensaje de la alerta.</span>

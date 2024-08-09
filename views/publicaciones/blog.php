@@ -10,7 +10,7 @@
     <?php
     session_start();
     require_once '../../class/database.php';
-    include_once ("../../scripts/funciones/funciones.php");
+    include_once("../../scripts/funciones/funciones.php");
     $db = new database();
     $db->conectarDB();
 
@@ -68,7 +68,7 @@
                 </div>
                 <?php
                 if (isset($_SESSION["usuario"])) {
-                    ?>
+                ?>
                     <!-- Navbar con dropdown -->
                     <a class="nav-link dropdown-toggle ms-auto" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -84,11 +84,11 @@
                         <?php } ?>
                         <a class="dropdown-item" href="../../scripts/login/cerrarsesion.php">Cerrar sesión</a>
                     </div>
-                    <?php
+                <?php
                 } else {
-                    ?>
+                ?>
                     <a href="../login.php" class="login-button ms-auto">Iniciar Sesión</a>
-                    <?php
+                <?php
                 }
                 ?>
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
@@ -113,7 +113,7 @@
             </div>
             <div class="row">
                 <?php
-                include_once ("../../class/database.php");
+                include_once("../../class/database.php");
 
                 // Conectar a la base de datos
                 $conexion = new Database();
@@ -123,7 +123,7 @@
                 $results_per_page = 9; // Número de resultados por página
                 $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int) $_GET['page'] : 1;
                 $page = max($page, 1); // Asegurar que la página sea al menos 1
-                
+
                 // Contar el número total de publicaciones
                 $total_query = 'SELECT COUNT(*) AS total FROM publicaciones WHERE tipo = "Blog"';
                 $total_result = $conexion->select($total_query);
@@ -156,14 +156,13 @@
                                         <div class="col-md-4">
                                             <img src='../../img/publicaciones/<?php echo $publicacion->img_url; ?>'
                                                 class='img-fluid' alt='<?php echo $publicacion->titulo ?>'
-                                                style="height: 100%; width: 100%; object-fit: cover;">
+                                                style="width: 100%; height: 350px; object-fit: cover;">
                                         </div>
                                         <div class="col-md-8 d-flex flex-column justify-content-center p-3">
                                             <h5 class='card-title'><?php echo $publicacion->titulo; ?></h5>
                                             <p class='card-text' style="color:black;">
                                                 <?php echo $publicacion->descripcion; ?></p>
-                                            <h6 class='card-subtitle mb-2 text-muted'><?php echo $publicacion->fecha; ?>
-                                            </h6>
+                                            <h6 class='card-subtitle mb-2 text-muted'><?php echo $publicacion->fecha; ?></h6>
                                         </div>
                                     </div>
                                 </div>
@@ -174,8 +173,8 @@
                 <nav aria-label="Page navigation example">
                     <ul class="pagination d-flex justify-content-center">
                         <li class="page-item<?php if ($page <= 1) {
-                            echo ' disabled';
-                        } ?>">
+                                                echo ' disabled';
+                                            } ?>">
                             <a class="page-link custom-page-link" href="?page=<?php echo $page - 1; ?>"
                                 aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
@@ -183,14 +182,14 @@
                         </li>
                         <?php for ($i = 1; $i <= $total_pages; $i++): ?>
                             <li class="page-item custom-page-item<?php if ($page == $i) {
-                                echo ' active';
-                            } ?>">
+                                                                        echo ' active';
+                                                                    } ?>">
                                 <a class="page-link custom-page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
                             </li>
                         <?php endfor; ?>
                         <li class="page-item<?php if ($page >= $total_pages) {
-                            echo ' disabled';
-                        } ?>">
+                                                echo ' disabled';
+                                            } ?>">
                             <a class="page-link custom-page-link" href="?page=<?php echo $page + 1; ?>"
                                 aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>

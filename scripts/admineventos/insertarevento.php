@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $costo = 0;
             $cantidadBoletos = 0;
         }
-        $consulta = "INSERT INTO EVENTOS (id_lugar, id_categoria, nombre, tipo, descripcion, fecha_evento, hora_inicio, hora_fin, capacidad, precio_boleto, boletos, img_url, fecha_publicacion)
+        $consulta = "INSERT INTO eventos (id_lugar, id_categoria, nombre, tipo, descripcion, fecha_evento, hora_inicio, hora_fin, capacidad, precio_boleto, boletos, img_url, fecha_publicacion)
         VALUES ($lugar, $categoria, '$evento', '$tipo', '$descripcion', '$fechaEvento', '$horaIni', '$horaFin', $capacidad, $costo, $cantidadBoletos, '$nombreImagen', '$fechaPub')";
         $db->execute($consulta);
 
