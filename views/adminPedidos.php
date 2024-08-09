@@ -416,7 +416,7 @@ if (isset($_POST['btnactualizar'])) {
                         </div>
                     </div>
                 </div>
-                <div class="shadow-lg row p-0 m-0 p-3" style="background: var(--color6);">
+                <div class="shadow-lg row p-0 m-0 p-3" style="background: var(--color8);">
                     <div class="row m-1">
                         <div class="col-12">
 
