@@ -57,17 +57,13 @@ a:hover {
 
 /* Estilos para las imágenes */
 .coffee-image {
-  width: 100%;
-  /* Ancho del contenedor */
-  height: 23rem;
   object-fit: cover;
-  /* Ajuste para cubrir el contenedor manteniendo la relación de aspecto */
   border-radius: 5% 5% 0% 0%;
 }
 
 @media (min-width: 768px) {
   .coffee-image {
-    height: 30rem;
+    height: 22rem;
     /* Altura deseada para tamaños de pantalla medianos y grandes */
   }
 }
@@ -259,8 +255,6 @@ a:hover {
   background: var(--primario);
 }
 
-
-
 .accordion-button {
   border: none;
   box-shadow: none;
@@ -426,12 +420,11 @@ a:hover {
   background-color: var(--color5);
 }
 
-
 .bagr-cafe3 {
   background-color: var(--color4);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
-.bagr-cafe4{
+.bagr-cafe4 {
   background-color: var(--primario);
 }
 .accordion-item {
@@ -722,7 +715,6 @@ a:hover {
   position: relative;
   overflow: hidden;
   width: 100%;
-
 }
 
 .social-card img {
@@ -843,24 +835,24 @@ a:hover {
   top: 0;
   left: 0;
   opacity: 0.9;
-  transition: opacity .2s ease-out;
+  transition: opacity 0.2s ease-out;
 }
 
 .cardss h2 {
   position: absolute;
   inset: auto auto 50px 30px;
   margin: 0;
-  transition: inset .3s .3s ease-out;
+  transition: inset 0.3s 0.3s ease-out;
   font-weight: normal;
   text-transform: uppercase;
 }
 
-.cardss p, .cardss a {
+.cardss p,
+.cardss a {
   position: absolute;
   opacity: 0;
   max-width: 80%;
-  transition: opacity .3s ease-out;
-
+  transition: opacity 0.3s ease-out;
 }
 
 .cardss p {
@@ -875,16 +867,17 @@ a:hover {
 
 .cardss:hover h2 {
   inset: auto auto 260px 30px;
-  transition: inset .3s ease-out;
+  transition: inset 0.3s ease-out;
 }
 
-.cardss:hover p, .cardss:hover a {
+.cardss:hover p,
+.cardss:hover a {
   opacity: 1;
-  transition: opacity .5s .1s ease-in;
+  transition: opacity 0.5s 0.1s ease-in;
 }
 
 .cardss:hover img {
-  transition: opacity .3s ease-in;
+  transition: opacity 0.3s ease-in;
   opacity: 1;
 }
 
@@ -894,7 +887,7 @@ a:hover {
   overflow: hidden;
 }
 .cardss::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -902,7 +895,7 @@ a:hover {
   height: 100%;
   background: rgba(0, 0, 0, 0.7); /* Superposición más oscura */
   opacity: 0;
-  transition: opacity .3s ease-in;
+  transition: opacity 0.3s ease-in;
 }
 
 .cardss:hover::before {
@@ -916,19 +909,15 @@ a:hover {
 }
 /* Responsivo para pantallas pequeñas */
 @media (max-width: 767.98px) {
-
   .cardss:hover h2 {
     inset: auto auto 50% 20px; /* Ajuste para pantallas pequeñas */
   }
 }
 /* Responsivo para pantallas medianas */
 @media (min-width: 800px) and (max-width: 1300px) {
-  
-
   .cardss:hover h2 {
     inset: auto auto 310px 20px; /* Ajuste para pantallas medianas */
   }
-
 }
 
 /* Estilos de WhatsApp Button */
@@ -945,7 +934,6 @@ a:hover {
 #whatsappButton:hover {
   background-color: var(--obscuro);
   color: var(--blanco);
-  
 }
 
 #whatsappButton i {
@@ -964,7 +952,7 @@ a:hover {
   line-height: 30px; /* Centrar verticalmente el texto */
   font-size: 14px; /* Tamaño de fuente */
 }
-/* From Uiverse.io by yashlikescode */ 
+/* From Uiverse.io by yashlikescode */
 .crd {
   position: relative;
   background: linear-gradient(-45deg, #f89b29 0%, #ff0f7b 100%);
@@ -1032,7 +1020,7 @@ a:hover {
   width: 100%;
   height: 100%;
   opacity: 0;
-  transition: opacity .5s ease;
+  transition: opacity 0.5s ease;
   border-radius: 28px;
   /* Asegura que la imagen tenga los mismos bordes redondeados */
   overflow: hidden;
@@ -1050,7 +1038,6 @@ a:hover {
 .ag-courses-item_link:hover .ag-courses-item_image {
   opacity: 1;
 }
-
 
 .ag-courses_item {
   -ms-flex-preferred-size: calc(33.33333% - 30px);
@@ -1075,14 +1062,14 @@ a:hover {
 .ag-courses-item_link:hover,
 .ag-courses-item_link:hover .ag-courses-item_date {
   text-decoration: none;
-  color: #FFF;
+  color: #fff;
 }
 
 .ag-courses-item_link:hover,
 .ag-courses-item_link:hover .ag-courses-item_title,
 .ag-courses-item_link:hover .ag-courses-item_date-box {
   text-decoration: none;
-  color: #FFF;
+  color: #fff;
 }
 
 /* Este selector elimina la decoración del texto y cambia el color del enlace y la fecha al pasar el mouse */
@@ -1119,10 +1106,10 @@ a:hover {
 
 .ag-courses-item_date {
   font-weight: bold;
-  color: var( --color1);
-  -webkit-transition: color .5s ease;
-  -o-transition: color .5s ease;
-  transition: color .5s ease;
+  color: var(--color1);
+  -webkit-transition: color 0.5s ease;
+  -o-transition: color 0.5s ease;
+  transition: color 0.5s ease;
 }
 
 /* Este selector define la fecha del ítem del curso con fuente en negrita y un color específico, y una transición suave al cambiar el color */
@@ -1136,9 +1123,9 @@ a:hover {
   top: -75px;
   right: -75px;
   border-radius: 50%;
-  -webkit-transition: all .5s ease;
-  -o-transition: all .5s ease;
-  transition: all .5s ease;
+  -webkit-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
 /*---------------------- Offcanva resolucion-------------------*/
 .custom-offcanvas {
@@ -1151,35 +1138,35 @@ a:hover {
 /* Responsivo para pantallas medianas altas */
 @media (min-width: 1080px) and (max-width: 1300px) {
   .custom-offcanvas {
-      width: 36% !important;
-      /* Ajusta el porcentaje según tus necesidades */
+    width: 36% !important;
+    /* Ajusta el porcentaje según tus necesidades */
   }
 }
 
 /* Responsivo para pantallas medianas  */
 @media (min-width: 767.98px) and (max-width: 1130px) {
   .custom-offcanvas {
-      width: 50% !important;
-      /* Ajusta el porcentaje según tus necesidades */
+    width: 50% !important;
+    /* Ajusta el porcentaje según tus necesidades */
   }
 }
 
 /* Responsivo para pantallas pequeñas */
 @media (max-width: 767.98px) {
   .custom-offcanvas {
-      width: 70% !important;
-      /* Ajusta el porcentaje según tus necesidades */
+    width: 70% !important;
+    /* Ajusta el porcentaje según tus necesidades */
   }
 }
 
 /* Responsivo para pantallas pequeñitas */
 @media (max-width: 500px) {
   .custom-offcanvas {
-      width: 100% !important;
-      /* Ajusta el porcentaje según tus necesidades */
+    width: 100% !important;
+    /* Ajusta el porcentaje según tus necesidades */
   }
 }
 
-div{
+div {
   word-wrap: break-word;
 }
