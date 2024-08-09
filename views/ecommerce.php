@@ -135,7 +135,7 @@ if (isset($_SESSION["usuario"])) {
                             $precio = $conexion->select($query2);
                             echo "<div class='col-10 col-sm-6 col-md-6 col-lg-4 p-lg-2 m-0 px-3 mb-3 mb-lg-0'>";
                             echo "<div class='card m-0 blog-card shadow-lg' style='border-radius: 5% 5% 0% 0%;'>";
-                            echo "<img src='../img/bolsas/{$bolsa->img_url}' class='align-card-img-top' alt='{$bolsa->id_bolsa}' style='border-radius: 5% 5% 0% 0%;'>";
+                            echo "<img src='../img/bolsas/{$bolsa->img_url}' class='align-card-img-top coffee-image' alt='{$bolsa->id_bolsa}' style='border-radius: 5% 5% 0% 0%;'>";
                             echo "<div class='card-body product-card-body'>";
                             echo "<h5 class='card-title fw-bold product-title' style='letter-spacing: 1px;'>{$bolsa->nombre}</h5>";
                             echo "<p class='card-text product-subtitle'>{$bolsa->proceso}</p>";
