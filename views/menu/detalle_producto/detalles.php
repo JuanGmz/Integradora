@@ -166,7 +166,7 @@ $medidas = $db->select($queryMedidas);
                         if ($medidas[0]->medida == NULL) {
                             ?>
                                 <tr>
-                                    <td class='fs-4'>$<?php echo $medidas[0]->precio ?></td>
+                                    <td class='fs-4'>$?php echo $medidas[0]->precio ?></td>
                                 </tr>
                             <?php
                         } else {

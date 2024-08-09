@@ -442,7 +442,7 @@ if ($rol[0]->rol !== 'administrador') {
                         $reservas = $db->select($queryReservas);
 
                         if (empty($reservas)) {
-                            echo "<div>
+                            echo "<div class='text-center text-lg-start'>
                                             No hay reservas registradas para este evento.
                                         </div>";
                         } else {
@@ -556,8 +556,8 @@ if ($rol[0]->rol !== 'administrador') {
                                     </table>";
                         }
                     } else {
-                        echo "<div>
-                                    Seleccionde un evento
+                        echo "<div class='text-center text-lg-start'>
+                                    Seleccione un evento
                                  </div>";
                     }
                     ?>

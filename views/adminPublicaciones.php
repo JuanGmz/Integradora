@@ -527,7 +527,7 @@ if (isset($_POST['btnactualizar'])) {
                         $query = "SELECT * FROM publicaciones WHERE tipo = '{$_POST['tipo']}' ORDER BY id_publicacion DESC";
                         $publicaciones = $db->select($query);
                         if (empty($publicaciones)) {
-                            echo "<div>No hay publicaciones registradas en este tipo de publicación.</div>";
+                            echo "<div class='text-center text-lg-start'>No hay publicaciones registradas en este tipo de publicación.</div>";
                         } else {
                             echo "<table class='table table-striped table-hover table-dark text-center border-3 border-start border-bottom border-end border-black'>
                                         <thead>
@@ -652,8 +652,8 @@ if (isset($_POST['btnactualizar'])) {
                                     </table>";
                         }
                     } else {
-                        echo "<div>
-                                Seleccione un tipo de publicación
+                        echo "<div class='text-center text-lg-start'>
+                                Seleccione un tipo de publicación.
                             </div>";
                     }
                     ?>
