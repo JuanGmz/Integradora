@@ -653,7 +653,7 @@ if (isset($_POST['btnactualizarimagen'])) {
                         $eventos = $db->select($query);
 
                         if (empty($eventos)) {
-                            echo "<div role='alert'>No hay productos registrados en esta categoría.</div>";
+                            echo "<div class='text-center text-lg-start'>No hay eventos registrados en esta categoría.</div>";
                         } else {
                             echo "
                                     <table class='table table-striped table-hover table-dark text-center border-3 border-black border-bottom border-start border-end'>
@@ -885,7 +885,7 @@ if (isset($_POST['btnactualizarimagen'])) {
                             echo "</tbody></table>";
                         }
                     } else {
-                        echo "<div role='alert'>Seleccione una categoria</div>";
+                        echo "<div class='text-center text-lg-start'>Seleccione una categoria.</div>";
                     }
                     $db->desconectarDB()
                         ?>

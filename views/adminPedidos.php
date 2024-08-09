@@ -396,53 +396,45 @@ if (isset($_POST['btnactualizar'])) {
                         </div>
                     </div>
                 </div>
-                <div class="shadow-lg row p-0 m-0 p-3" style="background: var(--color8 );">
-                    <div class="row m-1">
-                        <div class="col-12">
+                <div class="shadow-lg row p-0 m-0 p-3" style="background: var(--color6);">
+                    <div class="row p-0 m-0">
+                        <div class="col-12 col-lg-5">
                             <!-- Formulario para buscar por folio, usuario o teléfono -->
                             <form method="post">
                                 <div class="row">
-                                    <div class="col-8 col-lg-4">
-                                        <input type="text" class="form-control" name="busqueda" pattern="[A-Za-z0-9\s]+"
-                                            placeholder="Ingresa Folio o Usuario" required>
+                                    <div class="col-12 col-lg-6">
+                                        <input type="text" class="form-control" name="busqueda" pattern="[A-Za-z0-9\s]+" placeholder="Ingresa Folio o Usuario" required>
                                     </div>
-
-                                    <div class="col-4 col-lg-2">
+                                    <div class="col-12 col-lg-6 mt-2 mt-lg-0">
                                         <input type="submit" class="btn btn-dark w-100" value="Buscar" name="btnBuscar">
                                     </div>
                                 </div>
                             </form>
-
                         </div>
-                    </div>
-                </div>
-                <div class="shadow-lg row p-0 m-0 p-3" style="background: var(--color8);">
-                    <div class="row m-1">
-                        <div class="col-12">
-
+                        <hr class="d-block d-lg-none my-4">
+                        <div class="col-12 col-lg-7">
                             <!-- Formulario para filtrar por estatus, método de pago e intervalo de tiempo -->
                             <form method="post" action="">
-
                                 <div class="row justify-content-center justify-content-sm-start">
-                                    <div class="col-12 col-sm-6 col-lg-3 mt-2 mt-lg-0">
+                                    <div class="col-12 col-sm-6 col-lg-4 mt-lg-0">
                                         <select class="form-control" name="estatus">
-                                            <option value="Todos">Todos los Estatus</option>
+                                            <option value="Todos" selected disabled>Todos los Estatus</option>
                                             <option value="Pendiente">Pendiente</option>
                                             <option value="Finalizado">Finalizado</option>
                                             <option value="Cancelado">Cancelado</option>
                                             <!-- Agrega más opciones según tus necesidades -->
                                         </select>
                                     </div>
-                                    <div class="col-12 col-sm-6 col-lg-3 mt-2 mt-lg-0">
+                                    <div class="col-12 col-sm-6 col-lg-4 mt-2 mt-lg-0">
                                         <select class="form-control" name="intervalo_tiempo">
-                                            <option value="TodoElTiempo">Todo el Tiempo</option>
+                                            <option value="TodoElTiempo" selected disabled>Todo el Tiempo</option>
                                             <option value="UltimoDia">Último Día</option>
                                             <option value="UltimaSemana">Última Semana</option>
                                             <option value="UltimoMes">Último Mes</option>
                                             <option value="UltimoAño">Último Año</option>
                                         </select>
                                     </div>
-                                    <div class="col-12 col-sm-6 col-lg-2 p-lg-0 p-2">
+                                    <div class="col-12 col-sm-6 col-lg-4 p-lg-0 p-2">
                                         <input type="submit" class="btn btn-dark w-100" value="Filtrar"
                                             name="btnFiltrar">
                                     </div>
@@ -459,7 +451,7 @@ if (isset($_POST['btnactualizar'])) {
                         $result = NULL;
 
                         if (!isset($_POST['busqueda']) && !isset($_POST['btnBuscar']) && !isset($_POST['btnFiltrar'])) {
-                            echo "<div class='p-3 pt-0'>Busca un usuario o filtra pedidos para poder ver pedidos.</div>";
+                            echo "<div class='p-3 pt-0 text-center text-lg-start'>Busca un usuario o filtra pedidos para poder ver pedidos.</div>";
                         }
 
                         // Manejo del formulario de búsqueda
@@ -491,7 +483,7 @@ if (isset($_POST['btnactualizar'])) {
                         function mostrarResultados($result)
                         {
                             if (empty($result)) {
-                                echo "<div>No hay pedidos registrados en este momento.</div>";
+                                echo "<div class='p-3 pt-0 text-center text-lg-start'>No hay pedidos registrados en este momento.</div>";
                             } else {
                                 echo "
                                     <table class='table table-striped table-hover table-dark text-center border-3 border-black border-bottom border-start border-end'>

@@ -521,7 +521,7 @@ if (isset($_POST['btnactualizar'])) {
                         $productos = $db->select($query);
 
                         if (empty($productos)) {
-                            echo "<div>No hay productos registrados en esta categoría.</div>";
+                            echo "<div class='text-center text-lg-start'>No hay productos registrados en esta categoría.</div>";
                         } else {
                             echo "
                                     <table class='table table-striped table-hover table-dark text-center border-3 border-black border-bottom border-start border-end'>

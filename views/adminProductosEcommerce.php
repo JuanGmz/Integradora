@@ -852,7 +852,7 @@ if (isset($_POST['btnestatus'])) {
                             }
                         }
                     } else {
-                        echo "<div>Seleccione una medida</div>";
+                        echo "<div class='text-center text-lg-start'>Seleccione un proceso.</div>";
                     }
 
                     ?>
