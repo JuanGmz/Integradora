@@ -405,7 +405,6 @@ a:hover {
 .carousel-control-prev,
 .carousel-control-next {
   z-index: 1;
-  /* Asegura que los botones estén por encima de las imágenes */
   width: 10%;
 }
 
@@ -621,7 +620,6 @@ a:hover {
 /*---------------------------- Perfil----------------------------------*/
 .section-divider {
   border-top: 2px solid var(--color3);
-  /* Light gray color */
   margin-top: 20px;
   margin-bottom: 20px;
 }
@@ -632,7 +630,6 @@ a:hover {
 
 .dropdown .fa-user:hover {
   color: var(--obscuro);
-  /* Change this color to whatever you prefer */
 }
 
 .dropdown-itemcolor {
@@ -952,7 +949,6 @@ a:hover {
   line-height: 30px; /* Centrar verticalmente el texto */
   font-size: 14px; /* Tamaño de fuente */
 }
-/* From Uiverse.io by yashlikescode */
 .crd {
   position: relative;
   background: linear-gradient(-45deg, #f89b29 0%, #ff0f7b 100%);
@@ -1166,7 +1162,7 @@ a:hover {
     /* Ajusta el porcentaje según tus necesidades */
   }
 }
-
+/*evita el devordamiento/
 div {
   word-wrap: break-word;
 }
