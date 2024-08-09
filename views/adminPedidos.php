@@ -456,8 +456,7 @@ if (isset($_POST['btnactualizar'])) {
                     <!-- Tabla de pedidos AQUI -->
                     <div class="row mt-lg-3 p-3 p-lg-4 m-0">
                         <?php
-
-
+                        $result = NULL;
 
                         if (!isset($_POST['busqueda']) && !isset($_POST['btnBuscar']) && !isset($_POST['btnFiltrar'])) {
                             echo "<div class='p-3 pt-0'>Busca un usuario o filtra pedidos para poder ver pedidos.</div>";
@@ -636,7 +635,7 @@ if (isset($_POST['btnactualizar'])) {
                                                                     </thead>
                                                                     <tbody>";
                                         foreach ($result as $detalle) {
-                                            $subotal = formatPrecio($detalle->subtotal);
+                                            $subtotal = formatPrecio($detalle->subtotal);
                                             $precio = formatPrecio($detalle->precio_unitario);
                                             if ($detalle->id_pedido == $pedido->id_pedido) {
                                                 echo "
@@ -648,7 +647,7 @@ if (isset($_POST['btnactualizar'])) {
                                                                                         <td>{$detalle->medida}</td>
                                                                                         <td>$$precio</td>
                                                                                         <td>{$detalle->cantidad}</td>
-                                                                                        <td>$$subotal</td>
+                                                                                        <td>$$subtotal</td>
                                                                                     </tr>";
                                             }
                                         }
