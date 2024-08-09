@@ -1633,11 +1633,12 @@ BEGIN
     DECLARE busqueda_str VARCHAR(50);
 
     -- Intentar convertir la búsqueda a un número
-    SET busqueda_int = CAST(busqueda AS UNSIGNED);
     SET busqueda_str = busqueda;
     
     -- Validar si la búsqueda es un número
     IF busqueda_str REGEXP '^[0-9]+$' THEN
+        SET busqueda_int = CAST(busqueda AS UNSIGNED);
+        
         SELECT DISTINCT p.id_pedido,
                CONCAT(pe.nombres, ' ', pe.apellido_paterno, ' ', pe.apellido_materno) AS cliente,
                CONCAT(dom.calle, ' ', dom.colonia, ' ', dom.ciudad, ' ', dom.estado, ' ', dom.codigo_postal) AS domicilio,
@@ -1705,6 +1706,8 @@ BEGIN
 END //
 
 DELIMITER ;
+
+
 
 
 DELIMITER ;
