@@ -1283,6 +1283,7 @@ INSERT INTO roles (rol, descripcion) VALUES
 ('Te y Tisanas', 'Categoría para el menú de tés y tisanas', 'Menu',''),
 ('Sweet Blues', 'Categoría para el menú de cafés dulces con un toque de blues', 'Menu','');
 
+
 -- Insertar productos_menu
 INSERT INTO productos_menu (id_categoria, nombre, descripcion, img_url) VALUES
 (9, 'Espresso', 'Café concentrado en una pequeña taza, ideal para los amantes del café fuerte.', 'cafe-4027396_1920.jpg'),
