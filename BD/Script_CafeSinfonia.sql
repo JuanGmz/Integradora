@@ -1246,7 +1246,7 @@ INSERT INTO metodos_pago (metodo_pago) VALUES
 
 INSERT INTO publicaciones (titulo, descripcion, img_url, tipo)
 VALUES
-('¡Bienvenidos a Sinfonía Café y Cultura!', 'Estamos emocionados de abrir nuestras puertas y ofrecerles una experiencia única de café y cultura. ¡Visítanos hoy!', 'bienvenidos.jpg', 'Difusion'),
+('¡Bienvenidos a Sinfonía Café y Cultura!', 'Estamos emocionados de abrir nuestras puertas y ofrecerles una experiencia única de café y cultura. ¡Visítanos hoy!', 'Bienvenidos.jpg', 'Difusion'),
 ('Tarde de Jazz', 'Acompáñanos este viernes para una tarde de jazz en vivo con artistas locales. ¡No te lo pierdas!', 'tarde_de_jazz.jpg', 'Difusion'),
 ('Nueva Carta de Verano', 'Descubre nuestra nueva carta de verano con bebidas refrescantes y deliciosas. ¡Ven a probarlas!', 'carta_verano.jpg', 'Difusion'),
 ('Taller de Cata de Café', 'Aprende a distinguir los sabores y aromas del café en nuestro próximo taller de cata. ¡Inscríbete ya!', 'taller_cata.jpg', 'Blog'),
@@ -1336,16 +1336,16 @@ INSERT INTO productos_menu (id_categoria, nombre, descripcion, img_url) VALUES
 (16, 'Muddy Matcha', 'Frappé con matcha, leche y hielo', 'drink-7156111_1920.jpg'),
 (16, 'Matcha', 'Frappé con matcha y leche', 'latte-art-3348729_1920.jpg'),
 (16, 'Chai', 'Frappé con té Chai y leche', 'coffee-5149151_1920.jpg'),
-(17, 'Té Verde Menta', 'Té verde con un toque refrescante de menta.', 'cocoa-4845909_1920.jpg'),
-(17, 'Té Negro', 'Té negro tradicional.', 'tea-7036402_1920.jpg'),
-(17, 'Earl Grey', 'Té negro aromatizado con aceite de bergamota.', 'coffee-4734164_1920.jpg'),
-(17, 'Chai Verde', 'Té verde con especias tradicionales de Chai.', 'coffee-5149151_1920.jpg'),
-(17, 'Rooibos', 'Té Rooibos con un toque dulce y afrutado.', 'cocoa-4845909_1920.jpg'),
-(17, 'TISANAS', 'Infusiones de Hierbas', 'coffee-2242215_1920.jpg'),
+(17, 'Té Verde Menta', 'Té verde con un toque refrescante de menta.', 'teverde-4845909_1920.jpg'),
+(17, 'Té Negro', 'Té negro tradicional.', 'te-negro-7036402_1920.jpg'),
+(17, 'Earl Grey', 'Té negro aromatizado con aceite de bergamota.', 'earl-grey-4734164_1920.jpg'),
+(17, 'Chai Verde', 'Té verde con especias tradicionales de Chai.', 'chai-5149151_1910.jpg'),
+(17, 'Rooibos', 'Té Rooibos con un toque dulce y afrutado.', 'rooibos-4845909_1920.jpg'),
+(17, 'TISANAS', 'Infusiones de Hierbas', 'tisanas-2242215_1921.jpg'),
 (17, 'Chai Latte', 'Bebida de Té Chai con Leche', 'coffee-4184598_1920.jpg'),
-(17, 'Matcha Latte', 'Bebida de Té Matcha con Leche', 'latte-1565931_1920.jpg'),
-(17, 'Chai Latte Roca', 'Chai Latte con Hielo', 'latte-art-3348729_1920.jpg'),
-(17, 'Matcha Latte Roca', 'Matcha Latte con Hielo', 'drink-2060696_1920.jpg'),
+(17, 'Matcha Latte', 'Bebida de Té Matcha con Leche', 'matcha-1565931_1920.jpg'),
+(17, 'Chai Latte Roca', 'Chai Latte con Hielo', 'latte-roca-3348729_1955.jpg'),
+(17, 'Matcha Latte Roca', 'Matcha Latte con Hielo', 'matcha-2060696_1920.jpg'),
 (17, 'Chocolate Caliente', 'Bebida de Chocolate Caliente', 'tea-7036402_1920.jpg'),
 (18, 'Flan Napolitano', 'Delicioso flan napolitano tradicional.', 'flannapolitano.jpg'),
 (18, 'Cheesecake Frutos Rojos', 'Cheesecake con una cobertura de frutos rojos.', 'frutos.jpg'),
@@ -1635,11 +1635,12 @@ BEGIN
     DECLARE busqueda_str VARCHAR(50);
 
     -- Intentar convertir la búsqueda a un número
-    SET busqueda_int = CAST(busqueda AS UNSIGNED);
     SET busqueda_str = busqueda;
     
     -- Validar si la búsqueda es un número
     IF busqueda_str REGEXP '^[0-9]+$' THEN
+        SET busqueda_int = CAST(busqueda AS UNSIGNED);
+        
         SELECT DISTINCT p.id_pedido,
                CONCAT(pe.nombres, ' ', pe.apellido_paterno, ' ', pe.apellido_materno) AS cliente,
                CONCAT(dom.calle, ' ', dom.colonia, ' ', dom.ciudad, ' ', dom.estado, ' ', dom.codigo_postal) AS domicilio,
@@ -1707,6 +1708,8 @@ BEGIN
 END //
 
 DELIMITER ;
+
+
 
 
 DELIMITER ;

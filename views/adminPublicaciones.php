@@ -51,6 +51,41 @@ if (isset($_POST['btnagregar'])) {
     $conexion->desconectarDB();
 }
 
+if (isset($_POST['btnactualizar'])) {
+    $conexion = new Database();
+    $conexion->conectarDB();
+
+    extract($_POST);
+
+    // Directorio donde se guardarán las imágenes
+    $subirDir = "../img/publicaciones/";
+
+    // Validar imagen
+    $validationMessage = validateImage($_FILES['imagen_nueva']);
+    if ($validationMessage === 'Imagen válida.') {
+        // Nombre del archivo subido
+        $nombreImagen = basename($_FILES['imagen_nueva']['name']);
+        // Ruta completa del archivo a ser guardado
+        $imagen_nueva = $subirDir . $nombreImagen;
+
+        // Mover el archivo subido a la carpeta de destino
+        if (move_uploaded_file($_FILES['imagen_nueva']['tmp_name'], $imagen_nueva)) {
+            $query = "UPDATE publicaciones SET img_url = '$nombreImagen' WHERE id_publicacion = $id_publicacion";
+            $conexion->execute($query);
+
+            showAlert("¡Imagen actualizada con éxito!", "success");
+
+        } else {
+            showAlert("Error al mover el archivo. Detalles: " . error_get_last()['message'], "error");
+        }
+    } else {
+        showAlert($validationMessage, "error");
+    }
+
+
+    $conexion->desconectarDB();
+
+}
 
 ?>
 
@@ -520,7 +555,7 @@ if (isset($_POST['btnagregar'])) {
                                                             </div>
                                                             <div class='modal-body mb-3'>
                                                                 <!-- Aquí se está mostrando la imagen -->
-                                                                <form action='../scripts/adminpublicaciones/editarImagen.php' method='POST' enctype='multipart/form-data'>
+                                                                <form  method='POST' enctype='multipart/form-data'>
                                                                     <div class='col-12 mb-3'>
                                                                         <label for='imagen' class='form-label'>Imagen Actual</label><br>
                                                                         <img src='../img/publicaciones/$publicacion->img_url' class='img-fluid rounded' alt='imagen$publicacion->titulo'><br>
@@ -533,7 +568,7 @@ if (isset($_POST['btnagregar'])) {
                                                                         <input type='hidden' name='id_publicacion' value='$publicacion->id_publicacion'>
                                                                         <div class='col-12 mt-3 text-end'>
                                                                             <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
-                                                                            <button type='submit' class='btn btn-dark'>Actualizar</button>
+                                                                            <button type='submit' class='btn btn-dark' name='btnactualizar'>Actualizar</button>
                                                                         </div>
                                                                     </div>
                                                                 </form>
