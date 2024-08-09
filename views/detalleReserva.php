@@ -198,7 +198,10 @@
                                                         <input type="hidden" name="folio" value="<?= $reserva[0]->folio ?>">
                                                         <p>Realiza una transferencía bancaria a este número de cuenta para
                                                             apartar tus boletos.</p>
-                                                        <p>Hector no sé que, 1234 1234 1234 1234</p>
+                                                        <p>Banco: Bancomer</p>
+                                                        <p>Titular: Héctor Armando Caballero Serna</p>
+                                                        <p>CLABE: 012345678901234567</p>
+                                                        <p>Cuenta: 1234567890</p>
                                                         <p>Monto a transferir: $<?= $detalle[0]->monto_total ?></p>
                                                         <p>Todos los campos deben de coincidir con la imagen del
                                                             comprobante.</p>
@@ -288,7 +291,10 @@
                                                                 <input type="hidden" name="folio" value="<?= $reserva[0]->folio ?>">
                                                                 <p>Realiza una transferencía bancaria a este número de cuenta para
                                                                     apartar tus boletos.</p>
-                                                                <p>Hector no sé que, 1234 1234 1234 1234</p>
+                                                                <p>Banco: Bancomer</p>
+                                                                <p>Titular: Héctor Armando Caballero Serna</p>
+                                                                <p>CLABE: 012345678901234567</p>
+                                                                <p>Cuenta: 1234567890</p>
                                                                 <p>Monto a transferir: $<?= $detalle[0]->monto_total ?></p>
                                                                 <p>Todos los campos deben de coincidir con la imagen del
                                                                     comprobante.</p>
