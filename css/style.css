@@ -1162,7 +1162,7 @@ a:hover {
     /* Ajusta el porcentaje según tus necesidades */
   }
 }
-/*evita el devordamiento*/
+/*evita el devordamiento */
 div {
   word-wrap: break-word;
 }
