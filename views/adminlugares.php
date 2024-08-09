@@ -404,12 +404,12 @@ if ($rol[0]->rol !== 'administrador') {
                                                     <div class="mb-3 col-6">
                                                         <label for="lat" class="form-label">Latitud</label>
                                                         <input type="number" class="form-control" id="lat" name="lat"
-                                                            required>
+                                                            step="any" required>
                                                     </div>
                                                     <div class="mb-3 col-6">
                                                         <label for="lng" class="form-label">Longitud</label>
                                                         <input type="number" class="form-control" id="lng" name="lng"
-                                                            required>
+                                                            step="any" required>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="descripcion" class="form-label">Descripción</label>
@@ -532,11 +532,11 @@ if ($rol[0]->rol !== 'administrador') {
                                                                         </div>
                                                                         <div class='mb-3 col-6'>
                                                                             <label for='lat' class='form-label'>Latitud</label>
-                                                                            <input type='number' class='form-control' id='lat' name='lat' value='$producto->lat' required>
+                                                                            <input type='number' class='form-control' id='lat' name='lat' value='$producto->lat' step='any' required>
                                                                         </div>
                                                                         <div class='mb-3 col-6'>
                                                                             <label for='lng' class='form-label'>Longitud</label>
-                                                                            <input type='number' class='form-control' id='lng' name='lng'  value='$producto->lng' required>
+                                                                            <input type='number' class='form-control' id='lng' name='lng'  value='$producto->lng' step='any' required>
                                                                         </div>
                                                                         </div>
                                                                         <div class='col-12 mb-3'>
